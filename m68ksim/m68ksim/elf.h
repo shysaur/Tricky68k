@@ -1,0 +1,16 @@
+//
+//  elf.h
+//  m68ksim
+//
+//  Created by Daniele Cattaneo on 28/12/14.
+//  Copyright (c) 2014 Daniele Cattaneo. All rights reserved.
+//
+
+#ifndef __m68ksim__elf__
+#define __m68ksim__elf__
+
+
+int elf_load(const char *fn);
+
+
+#endif

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:m68ksim/m68ksim.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Musashi/Musashi.xcodeproj">
+   </FileRef>
+</Workspace>
