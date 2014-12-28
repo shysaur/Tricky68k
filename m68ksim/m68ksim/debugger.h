@@ -1,16 +1,17 @@
 //
-//  m68ksim.h
+//  debugger.h
 //  m68ksim
 //
 //  Created by Daniele Cattaneo on 28/12/14.
 //  Copyright (c) 2014 Daniele Cattaneo. All rights reserved.
 //
 
-#ifndef m68ksim_m68ksim_h
-#define m68ksim_m68ksim_h
+#ifndef __m68ksim__debugger__
+#define __m68ksim__debugger__
 
 
-extern int sim_on, debug_on;
+void cpu_instrCallback(void);
+void debug_debugConsole(void);
 
 
 #endif

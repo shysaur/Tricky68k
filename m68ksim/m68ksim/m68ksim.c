@@ -10,39 +10,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <signal.h>
 #include "addrspace.h"
 #include "ram.h"
 #include "musashi/m68k.h"
 #include "elf.h"
+#include "debugger.h"
+#include "breakpoints.h"
 
 
-int sim_on;
+volatile int sim_on, debug_on;
 
 
-void make_hex(char* buff, unsigned int pc, unsigned int length) {
-  char* ptr = buff;
-  
-  for(;length>0;length -= 2) {
-    sprintf(ptr, "%04x", m68k_read_disassembler_16(pc));
-    pc += 2;
-    ptr += 4;
-    if(length > 2)
-      *ptr++ = ' ';
-  }
-}
-
-
-void cpu_instrCallback(void) {
-   static char buff[100];
-   static char buff2[100];
-   static unsigned int pc;
-   static unsigned int instr_size;
-   
-   pc = m68k_get_reg(NULL, M68K_REG_PC);
-   instr_size = m68k_disassemble(buff, pc, M68K_CPU_TYPE_68000);
-   make_hex(buff2, pc, instr_size);
-   printf("E %03x: %-20s: %s\n", pc, buff2, buff);
-   fflush(stdout);
+void signal_enterDebugger(int signo) {
+  debug_on = 1;
 }
 
 
@@ -51,6 +32,8 @@ int main(int argc, char *argv[]) {
   int c;
   
   sim_on = 0;
+  debug_on = 0;
+  signal(SIGINT, signal_enterDebugger);
   mem_init();
   
   stackTop = ADDRSPACE_SIZE;
@@ -58,7 +41,7 @@ int main(int argc, char *argv[]) {
   
   optind = 1;
   while (optind < argc) {
-    c = getopt(argc, argv, "m:l:");
+    c = getopt(argc, argv, "dm:l:");
     if (c != -1) {
       switch (c) {
         case 'm':
@@ -72,6 +55,10 @@ int main(int argc, char *argv[]) {
           if (!elf_load(optarg))
             printf("Failed to load %s.\n", optarg);
           break;
+        
+        case 'd':
+          debug_on = 1;
+          break;
       }
     } else
       printf("Ignored unknown option %s.\n", argv[optind++]);
@@ -82,6 +69,7 @@ int main(int argc, char *argv[]) {
   m68k_write_memory_32(0, stackTop);
   
   m68k_init();
+  sim_on = 1;
   m68k_set_cpu_type(M68K_CPU_TYPE_68000);
   m68k_set_instr_hook_callback(cpu_instrCallback);
   m68k_pulse_reset();

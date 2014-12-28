@@ -12,6 +12,7 @@
 #include "addrspace.h"
 #include "musashi/m68k.h"
 #include "m68ksim.h"
+#include "debugger.h"
 
 
 #define MAP_SIZE  (ADDRSPACE_SIZE / SEGM_GRANULARITY)
@@ -55,8 +56,8 @@ unsigned int m68k_read_memory_8(unsigned int address) {
   i = address / SEGM_GRANULARITY;
   this = addrSpace[i];
   if (!this) {
-    if (sim_on) m68k_end_timeslice();
     printf("Access to unmapped address %#010x\n", address);
+    if (sim_on) debug_debugConsole();
     exit(1);
   }
   return this->read_8bit(this, address - this->base);
@@ -70,8 +71,8 @@ unsigned int m68k_read_memory_16(unsigned int address) {
   i = address / SEGM_GRANULARITY;
   this = addrSpace[i];
   if (!this || address+2 > this->base+this->size) {
-    if (sim_on) m68k_end_timeslice();
     printf("Access to unmapped address %#010x\n", address);
+    if (sim_on) debug_debugConsole();
     exit(1);
   }
   return this->read_16bit(this, address - this->base);
@@ -85,8 +86,8 @@ unsigned int m68k_read_memory_32(unsigned int address) {
   i = address / SEGM_GRANULARITY;
   this = addrSpace[i];
   if (!this || address+4 > this->base+this->size) {
-    if (sim_on) m68k_end_timeslice();
     printf("Access to unmapped address %#010x\n", address);
+    if (sim_on) debug_debugConsole();
     exit(1);
   }
   return this->read_32bit(this, address - this->base);
@@ -136,8 +137,8 @@ void m68k_write_memory_8(unsigned int address, unsigned int value) {
   i = address / SEGM_GRANULARITY;
   this = addrSpace[i];
   if (!this) {
-    if (sim_on) m68k_end_timeslice();
     printf("Access to unmapped address %#010x\n", address);
+    if (sim_on) debug_debugConsole();
     exit(1);
   }
   return this->write_8bit(this, address - this->base, value);
@@ -151,8 +152,8 @@ void m68k_write_memory_16(unsigned int address, unsigned int value) {
   i = address / SEGM_GRANULARITY;
   this = addrSpace[i];
   if (!this || address+2 > this->base+this->size) {
-    if (sim_on) m68k_end_timeslice();
     printf("Access to unmapped address %#010x\n", address);
+    if (sim_on) debug_debugConsole();
     exit(1);
   }
   return this->write_16bit(this, address - this->base, value);
@@ -166,8 +167,8 @@ void m68k_write_memory_32(unsigned int address, unsigned int value) {
   i = address / SEGM_GRANULARITY;
   this = addrSpace[i];
   if (!this || address+4 > this->base+this->size) {
-    if (sim_on) m68k_end_timeslice();
     printf("Access to unmapped address %#010x\n", address);
+    if (sim_on) debug_debugConsole();
     exit(1);
   }
   return this->write_32bit(this, address - this->base, value);
