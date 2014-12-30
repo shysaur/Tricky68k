@@ -20,6 +20,7 @@
 
 
 volatile int sim_on, debug_on;
+int bufkill_on;
 
 
 void signal_enterDebugger(int signo) {
@@ -33,6 +34,7 @@ int main(int argc, char *argv[]) {
   
   sim_on = 0;
   debug_on = 0;
+  bufkill_on = 0;
   signal(SIGINT, signal_enterDebugger);
   mem_init();
   
@@ -41,7 +43,7 @@ int main(int argc, char *argv[]) {
   
   optind = 1;
   while (optind < argc) {
-    c = getopt(argc, argv, "dm:l:");
+    c = getopt(argc, argv, "Bdm:l:");
     if (c != -1) {
       switch (c) {
         case 'm':
@@ -58,6 +60,10 @@ int main(int argc, char *argv[]) {
         
         case 'd':
           debug_on = 1;
+          break;
+          
+        case 'B':
+          bufkill_on = 1;
           break;
       }
     } else

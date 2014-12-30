@@ -10,7 +10,8 @@
 #define m68ksim_m68ksim_h
 
 
-extern int sim_on, debug_on;
+extern volatile int sim_on, debug_on;
+extern int bufkill_on;
 
 
 #endif

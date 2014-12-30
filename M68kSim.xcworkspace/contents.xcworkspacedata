@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:M68kSimApp/M68kSimApp.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:m68ksim/m68ksim.xcodeproj">
    </FileRef>
    <FileRef

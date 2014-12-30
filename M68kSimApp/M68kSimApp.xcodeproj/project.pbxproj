@@ -1,0 +1,385 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01509B131A52191300724F29 /* NSFileHandle+Strings.m */; };
+		016CD13C1A51A10E00D64892 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13B1A51A10E00D64892 /* AppDelegate.m */; };
+		016CD13E1A51A10E00D64892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13D1A51A10E00D64892 /* main.m */; };
+		016CD1411A51A10E00D64892 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1401A51A10E00D64892 /* Document.m */; };
+		016CD1441A51A10F00D64892 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1421A51A10F00D64892 /* Document.xib */; };
+		016CD1461A51A10F00D64892 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1451A51A10F00D64892 /* Images.xcassets */; };
+		016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1471A51A10F00D64892 /* MainMenu.xib */; };
+		016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1601A51AC7600D64892 /* MOSExecutable.m */; };
+		016CD1631A51AC7600D64892 /* MOSExecutable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1611A51AC7600D64892 /* MOSExecutable.xib */; };
+		016CD1691A51B27900D64892 /* MOSSimulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */; };
+		016CD16A1A51B27900D64892 /* MOSSimulatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1681A51B27900D64892 /* MOSSimulatorView.xib */; };
+		01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */; };
+		01864B951A51CD23005B2B0D /* m68ksim in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01864B921A51CCF6005B2B0D /* m68ksim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		01864B911A51C863005B2B0D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				01864B951A51CD23005B2B0D /* m68ksim in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		01509B121A52191300724F29 /* NSFileHandle+Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+Strings.h"; sourceTree = "<group>"; };
+		01509B131A52191300724F29 /* NSFileHandle+Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+Strings.m"; sourceTree = "<group>"; };
+		016CD1351A51A10E00D64892 /* M68kSimApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M68kSimApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		016CD1391A51A10E00D64892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		016CD13A1A51A10E00D64892 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		016CD13B1A51A10E00D64892 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		016CD13D1A51A10E00D64892 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		016CD13F1A51A10E00D64892 /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
+		016CD1401A51A10E00D64892 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
+		016CD1431A51A10F00D64892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		016CD1451A51A10F00D64892 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		016CD1481A51A10F00D64892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		016CD15F1A51AC7600D64892 /* MOSExecutable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOSExecutable.h; path = M68kSimApp/MOSExecutable.h; sourceTree = "<group>"; };
+		016CD1601A51AC7600D64892 /* MOSExecutable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MOSExecutable.m; path = M68kSimApp/MOSExecutable.m; sourceTree = "<group>"; };
+		016CD1611A51AC7600D64892 /* MOSExecutable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MOSExecutable.xib; path = M68kSimApp/MOSExecutable.xib; sourceTree = "<group>"; };
+		016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorViewController.h; sourceTree = "<group>"; };
+		016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorViewController.m; sourceTree = "<group>"; };
+		016CD1681A51B27900D64892 /* MOSSimulatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MOSSimulatorView.xib; sourceTree = "<group>"; };
+		01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorProxy.h; sourceTree = "<group>"; };
+		01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorProxy.m; sourceTree = "<group>"; };
+		01864B921A51CCF6005B2B0D /* m68ksim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = m68ksim; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		016CD1321A51A10E00D64892 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		016CD12C1A51A10E00D64892 = {
+			isa = PBXGroup;
+			children = (
+				016CD1371A51A10E00D64892 /* M68kSimApp */,
+				01864B941A51CD10005B2B0D /* Dependencies */,
+				016CD1361A51A10E00D64892 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		016CD1361A51A10E00D64892 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				016CD1351A51A10E00D64892 /* M68kSimApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		016CD1371A51A10E00D64892 /* M68kSimApp */ = {
+			isa = PBXGroup;
+			children = (
+				016CD13A1A51A10E00D64892 /* AppDelegate.h */,
+				016CD13B1A51A10E00D64892 /* AppDelegate.m */,
+				016CD1471A51A10F00D64892 /* MainMenu.xib */,
+				016CD15E1A51A4EC00D64892 /* Source Editor */,
+				016CD1641A51AC7D00D64892 /* Standalone Simulator */,
+				016CD1651A51AF7A00D64892 /* Simulator View */,
+				016CD1381A51A10E00D64892 /* Supporting Files */,
+			);
+			path = M68kSimApp;
+			sourceTree = "<group>";
+		};
+		016CD1381A51A10E00D64892 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				016CD1451A51A10F00D64892 /* Images.xcassets */,
+				016CD1391A51A10E00D64892 /* Info.plist */,
+				016CD13D1A51A10E00D64892 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		016CD15E1A51A4EC00D64892 /* Source Editor */ = {
+			isa = PBXGroup;
+			children = (
+				016CD13F1A51A10E00D64892 /* Document.h */,
+				016CD1401A51A10E00D64892 /* Document.m */,
+				016CD1421A51A10F00D64892 /* Document.xib */,
+			);
+			name = "Source Editor";
+			sourceTree = "<group>";
+		};
+		016CD1641A51AC7D00D64892 /* Standalone Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				016CD15F1A51AC7600D64892 /* MOSExecutable.h */,
+				016CD1601A51AC7600D64892 /* MOSExecutable.m */,
+				016CD1611A51AC7600D64892 /* MOSExecutable.xib */,
+			);
+			name = "Standalone Simulator";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		016CD1651A51AF7A00D64892 /* Simulator View */ = {
+			isa = PBXGroup;
+			children = (
+				01509B121A52191300724F29 /* NSFileHandle+Strings.h */,
+				01509B131A52191300724F29 /* NSFileHandle+Strings.m */,
+				01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */,
+				01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */,
+				016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */,
+				016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */,
+				016CD1681A51B27900D64892 /* MOSSimulatorView.xib */,
+			);
+			name = "Simulator View";
+			sourceTree = "<group>";
+		};
+		01864B941A51CD10005B2B0D /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				01864B921A51CCF6005B2B0D /* m68ksim */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		016CD1341A51A10E00D64892 /* M68kSimApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 016CD1581A51A10F00D64892 /* Build configuration list for PBXNativeTarget "M68kSimApp" */;
+			buildPhases = (
+				016CD1311A51A10E00D64892 /* Sources */,
+				016CD1321A51A10E00D64892 /* Frameworks */,
+				016CD1331A51A10E00D64892 /* Resources */,
+				01864B911A51C863005B2B0D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = M68kSimApp;
+			productName = M68kSimApp;
+			productReference = 016CD1351A51A10E00D64892 /* M68kSimApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		016CD12D1A51A10E00D64892 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MOS;
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Daniele Cattaneo";
+				TargetAttributes = {
+					016CD1341A51A10E00D64892 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 016CD1301A51A10E00D64892 /* Build configuration list for PBXProject "M68kSimApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 016CD12C1A51A10E00D64892;
+			productRefGroup = 016CD1361A51A10E00D64892 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				016CD1341A51A10E00D64892 /* M68kSimApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		016CD1331A51A10E00D64892 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016CD1441A51A10F00D64892 /* Document.xib in Resources */,
+				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
+				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
+				016CD1631A51AC7600D64892 /* MOSExecutable.xib in Resources */,
+				016CD16A1A51B27900D64892 /* MOSSimulatorView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		016CD1311A51A10E00D64892 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016CD1411A51A10E00D64892 /* Document.m in Sources */,
+				016CD13E1A51A10E00D64892 /* main.m in Sources */,
+				016CD1691A51B27900D64892 /* MOSSimulatorViewController.m in Sources */,
+				01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */,
+				016CD13C1A51A10E00D64892 /* AppDelegate.m in Sources */,
+				016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */,
+				01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		016CD1421A51A10F00D64892 /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				016CD1431A51A10F00D64892 /* Base */,
+			);
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		016CD1471A51A10F00D64892 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				016CD1481A51A10F00D64892 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		016CD1561A51A10F00D64892 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		016CD1571A51A10F00D64892 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		016CD1591A51A10F00D64892 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = M68kSimApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		016CD15A1A51A10F00D64892 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = M68kSimApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		016CD1301A51A10E00D64892 /* Build configuration list for PBXProject "M68kSimApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				016CD1561A51A10F00D64892 /* Debug */,
+				016CD1571A51A10F00D64892 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		016CD1581A51A10F00D64892 /* Build configuration list for PBXNativeTarget "M68kSimApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				016CD1591A51A10F00D64892 /* Debug */,
+				016CD15A1A51A10F00D64892 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 016CD12D1A51A10E00D64892 /* Project object */;
+}
