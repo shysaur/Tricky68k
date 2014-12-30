@@ -16,5 +16,9 @@
 }
 
 - (void)setSimulatedExecutable:(NSURL*)url;
+- (IBAction)run:(id)sender;
+- (IBAction)stop:(id)sender;
+- (IBAction)stepIn:(id)sender;
+- (IBAction)stepOver:(id)sender;
 
 @end

@@ -64,51 +64,82 @@
 }
 
 
-- (BOOL)run {
-  if (curState != MOSSimulatorStatePaused) return 0;
-  if (![self sendCommandToSimulatorDebugger:@"c"]) {
-    curState = MOSSimulatorStateUnknown;
-    return 0;
-  }
-  curState = MOSSimulatorStateRunning;
-  return 1;
-}
-
-
-- (BOOL)stop {
-  if (curState != MOSSimulatorStateRunning) return 0;
-  [simTask interrupt];
-  curState = MOSSimulatorStatePaused;
-  return 1;
-}
-
-
-- (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc {
+- (NSArray*)getSimulatorResponseWithLength:(int)c {
   int i;
   NSString *tmp;
   NSMutableArray *res;
   
-  if (curState != MOSSimulatorStatePaused) return nil;
-  if (![self sendCommandToSimulatorDebugger:[NSString stringWithFormat:@"u %d %d", loc, cnt]]) {
-    curState = MOSSimulatorStateUnknown;
-    return nil;
-  }
   res = [NSMutableArray array];
-  for (i=0; i<cnt; i++) {
+  for (i=0; i<c; i++) {
     tmp = [[fromSim fileHandleForReading] readLine];
+    if ([tmp isEqual:@"debug? "]) {
+      if (i==1)
+        NSLog(@"Simulator error. %@", res);
+      else
+        NSLog(@"Simulator response not complete. %d lines expected. %@", c, res);
+      [[toSim fileHandleForWriting] writeString:@"\n"];
+      break;
+    }
     [res addObject:tmp];
   }
   return [res copy];
 }
 
 
-- (BOOL)stepIn {
+- (BOOL)runWithCommand:(NSString*)cmd {
+  if (curState != MOSSimulatorStatePaused) return NO;
+  if (![self sendCommandToSimulatorDebugger:cmd]) {
+    curState = MOSSimulatorStateUnknown;
+    return 0;
+  }
+  curState = MOSSimulatorStateRunning;
+  
+  dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+    NSString *temp;
+    do {
+      temp = [[fromSim fileHandleForReading] readLine];
+      if (isSimDead) break;
+      if (![temp isEqual:@"debug? "])
+        NSLog(@"Simulator error %@", temp);
+    } while (![temp isEqual:@"debug? "]);
+    if (!isSimDead) {
+      [[toSim fileHandleForWriting] writeString:@"\n"];
+      curState = MOSSimulatorStatePaused;
+    }
+  });
+  return YES;
+}
+
+
+- (BOOL)run {
+  return [self runWithCommand:@"c"];
+}
+
+
+- (BOOL)stop {
+  if (curState != MOSSimulatorStateRunning) return 0;
+  [simTask interrupt];
   return 1;
 }
 
 
+- (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc {
+  if (curState != MOSSimulatorStatePaused) return nil;
+  if (![self sendCommandToSimulatorDebugger:[NSString stringWithFormat:@"u %d %d", loc, cnt]]) {
+    curState = MOSSimulatorStateUnknown;
+    return nil;
+  }
+  return [self getSimulatorResponseWithLength:cnt];
+}
+
+
+- (BOOL)stepIn {
+  return [self runWithCommand:@"s"];
+}
+
+
 - (BOOL)stepOver {
-  return 1;
+  return [self runWithCommand:@"n"];
 }
 
 

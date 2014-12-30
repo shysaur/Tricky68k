@@ -37,6 +37,26 @@
 }
 
 
+- (IBAction)run:(id)sender {
+  [simProxy run];
+}
+
+
+- (IBAction)stop:(id)sender {
+  [simProxy stop];
+}
+
+
+- (IBAction)stepIn:(id)sender {
+  [simProxy stepIn];
+}
+
+
+- (IBAction)stepOver:(id)sender {
+  [simProxy stepOver];
+}
+
+
 - (void)dealloc {
   [simProxy kill];
 }

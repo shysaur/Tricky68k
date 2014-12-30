@@ -185,6 +185,9 @@ void debug_debugConsole(void) {
         exit(0);
         break;
         
+      case '\n':
+        break;
+        
       default:
         printf("Unrecognized command.\n");
     }
