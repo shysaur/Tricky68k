@@ -17,8 +17,8 @@ typedef enum {
 } MOSSimulatorState;
 
 
-@interface MOSSimulatorProxy : NSObject
-{
+@interface MOSSimulatorProxy : NSObject {
+  dispatch_queue_t simQueue;
   NSTask *simTask;
   NSURL *exec;
   NSPipe *toSim;
@@ -38,9 +38,10 @@ typedef enum {
 
 - (MOSSimulatorState)simulatorState;
 - (BOOL)isSimulatorRunning;
+- (BOOL)isSimulatorDead;
 
 - (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc;
-
+- (NSArray*)dump:(int)cnt linesFromLocation:(uint32_t)loc;
 
 
 @end

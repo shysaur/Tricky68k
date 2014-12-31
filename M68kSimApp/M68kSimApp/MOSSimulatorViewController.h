@@ -10,9 +10,14 @@
 
 
 @class MOSSimulatorProxy;
+@class MOSSimDumpDataSource;
 
 @interface MOSSimulatorViewController : NSViewController {
   MOSSimulatorProxy *simProxy;
+  NSURL *simExec;
+  BOOL simRunning;
+  IBOutlet MOSSimDumpDataSource *dumpDs;
+  IBOutlet NSTableView *dumpTv;
 }
 
 - (void)setSimulatedExecutable:(NSURL*)url;
@@ -22,5 +27,7 @@
 - (IBAction)stop:(id)sender;
 - (IBAction)stepIn:(id)sender;
 - (IBAction)stepOver:(id)sender;
+
+- (BOOL)isSimulatorRunning;
 
 @end

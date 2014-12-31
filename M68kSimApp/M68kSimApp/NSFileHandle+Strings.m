@@ -23,6 +23,14 @@
 }
 
 
+- (void)writeLine:(NSString*)str {
+  NSString *temp;
+  
+  temp = [NSString stringWithFormat:@"%@\n", str];
+  [self writeString:temp];
+}
+
+
 - (NSString*)readLine {
   int fildes;
   NSMutableString *str;
@@ -51,6 +59,8 @@
     readerr = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
     [NSException raise:@"File handler error" format:@"%@", [readerr localizedDescription]];
   }
+
+  if (bufp == buf && res == 0) return nil; /* eof */
   *bufp = '\0';
   [str appendFormat:@"%s", buf];
   return [str copy];

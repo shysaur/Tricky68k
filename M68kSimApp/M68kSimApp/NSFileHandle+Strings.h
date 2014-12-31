@@ -11,7 +11,8 @@
 
 @interface NSFileHandle (Strings)
 
-- (void)writeString:(NSString*)str;
-- (NSString*)readLine;
+- (void)writeString:(NSString*)str; /* atomic     */
+- (void)writeLine:(NSString*)str;   /* atomic     */
+- (NSString*)readLine;              /* non atomic */
 
 @end

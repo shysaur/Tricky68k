@@ -20,6 +20,7 @@
 		016CD16A1A51B27900D64892 /* MOSSimulatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1681A51B27900D64892 /* MOSSimulatorView.xib */; };
 		01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */; };
 		01864B951A51CD23005B2B0D /* m68ksim in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01864B921A51CCF6005B2B0D /* m68ksim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +58,8 @@
 		01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorProxy.h; sourceTree = "<group>"; };
 		01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorProxy.m; sourceTree = "<group>"; };
 		01864B921A51CCF6005B2B0D /* m68ksim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = m68ksim; sourceTree = BUILT_PRODUCTS_DIR; };
+		0196535A1A543A04002B3C39 /* MOSSimDumpDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimDumpDataSource.h; sourceTree = "<group>"; };
+		0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimDumpDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,8 @@
 				01509B131A52191300724F29 /* NSFileHandle+Strings.m */,
 				01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */,
 				01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */,
+				0196535A1A543A04002B3C39 /* MOSSimDumpDataSource.h */,
+				0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */,
 				016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */,
 				016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */,
 				016CD1681A51B27900D64892 /* MOSSimulatorView.xib */,
@@ -230,6 +235,7 @@
 			files = (
 				016CD1411A51A10E00D64892 /* Document.m in Sources */,
 				016CD13E1A51A10E00D64892 /* main.m in Sources */,
+				0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */,
 				016CD1691A51B27900D64892 /* MOSSimulatorViewController.m in Sources */,
 				01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */,
 				016CD13C1A51A10E00D64892 /* AppDelegate.m in Sources */,

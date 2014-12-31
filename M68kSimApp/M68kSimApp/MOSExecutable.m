@@ -28,6 +28,7 @@
 - (void)windowControllerWillLoadNib:(NSWindowController *)windowController {
   NSAssert(simVc, @"Simulator must exist at nib load");
   [simVc loadView];
+  [simVc viewDidLoad];
 }
 
 
