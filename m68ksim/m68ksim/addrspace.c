@@ -49,128 +49,104 @@ segment_desc *mem_peekSegment(uint32_t addr) {
 }
 
 
-unsigned int m68k_read_memory_8(unsigned int address) {
+static inline segment_desc *mem_getSegmentAndCheckSilent(uint32_t address, int as) {
   int i;
   segment_desc *this;
   
+  if (address > ADDRSPACE_SIZE)
+    return NULL;
   i = address / SEGM_GRANULARITY;
   this = addrSpace[i];
+  if (!this || address+as > this->base+this->size)
+    return NULL;
+  return this;
+}
+
+
+static inline segment_desc *mem_getSegmentAndCheck(uint32_t address, int as) {
+  segment_desc *this;
+  
+  this = mem_getSegmentAndCheckSilent(address, as);
   if (!this) {
     printf("Access to unmapped address %#010x\n", address);
     if (sim_on) debug_debugConsole();
     exit(1);
   }
+  return this;
+}
+
+
+unsigned int m68k_read_memory_8(unsigned int address) {
+  segment_desc *this;
+  
+  this = mem_getSegmentAndCheck(address, 1);
   return this->read_8bit(this, address - this->base);
 }
 
 
 unsigned int m68k_read_memory_16(unsigned int address) {
-  int i;
   segment_desc *this;
   
-  i = address / SEGM_GRANULARITY;
-  this = addrSpace[i];
-  if (!this || address+2 > this->base+this->size) {
-    printf("Access to unmapped address %#010x\n", address);
-    if (sim_on) debug_debugConsole();
-    exit(1);
-  }
+  this = mem_getSegmentAndCheck(address, 2);
   return this->read_16bit(this, address - this->base);
 }
 
 
 unsigned int m68k_read_memory_32(unsigned int address) {
-  int i;
   segment_desc *this;
   
-  i = address / SEGM_GRANULARITY;
-  this = addrSpace[i];
-  if (!this || address+4 > this->base+this->size) {
-    printf("Access to unmapped address %#010x\n", address);
-    if (sim_on) debug_debugConsole();
-    exit(1);
-  }
+  this = mem_getSegmentAndCheck(address, 4);
   return this->read_32bit(this, address - this->base);
 }
 
 
 unsigned int m68k_read_disassembler_8(unsigned int address) {
-  int i;
   segment_desc *this;
   
-  i = address / SEGM_GRANULARITY;
-  this = addrSpace[i];
+  this = mem_getSegmentAndCheckSilent(address, 1);
   if (!this) return 0;
-  if (this->action & ACTION_ONREAD) return 0;
   return this->read_8bit(this, address - this->base);
 }
 
 
 unsigned int m68k_read_disassembler_16(unsigned int address) {
-  int i;
   segment_desc *this;
   
-  i = address / SEGM_GRANULARITY;
-  this = addrSpace[i];
-  if (!this || address+2 > this->base+this->size) return 0;
-  if (this->action & ACTION_ONREAD) return 0;
+  this = mem_getSegmentAndCheckSilent(address, 2);
+  if (!this) return 0;
   return this->read_16bit(this, address - this->base);
 }
 
 
 unsigned int m68k_read_disassembler_32(unsigned int address) {
-  int i;
   segment_desc *this;
   
-  i = address / SEGM_GRANULARITY;
-  this = addrSpace[i];
-  if (!this || address+4 > this->base+this->size) return 0;
-  if (this->action & ACTION_ONREAD) return 0;
+  this = mem_getSegmentAndCheckSilent(address, 4);
+  if (!this) return 0;
   return this->read_32bit(this, address - this->base);
 }
 
 
 void m68k_write_memory_8(unsigned int address, unsigned int value) {
-  int i;
   segment_desc *this;
   
-  i = address / SEGM_GRANULARITY;
-  this = addrSpace[i];
-  if (!this) {
-    printf("Access to unmapped address %#010x\n", address);
-    if (sim_on) debug_debugConsole();
-    exit(1);
-  }
+  this = mem_getSegmentAndCheck(address, 1);
   return this->write_8bit(this, address - this->base, value);
 }
 
 
 void m68k_write_memory_16(unsigned int address, unsigned int value) {
-  int i;
   segment_desc *this;
   
-  i = address / SEGM_GRANULARITY;
-  this = addrSpace[i];
-  if (!this || address+2 > this->base+this->size) {
-    printf("Access to unmapped address %#010x\n", address);
-    if (sim_on) debug_debugConsole();
-    exit(1);
-  }
+  this = mem_getSegmentAndCheck(address, 2);
   return this->write_16bit(this, address - this->base, value);
 }
 
 
 void m68k_write_memory_32(unsigned int address, unsigned int value) {
-  int i;
   segment_desc *this;
   
-  i = address / SEGM_GRANULARITY;
-  this = addrSpace[i];
-  if (!this || address+4 > this->base+this->size) {
-    printf("Access to unmapped address %#010x\n", address);
-    if (sim_on) debug_debugConsole();
-    exit(1);
-  }
+  this = mem_getSegmentAndCheck(address, 4);
   return this->write_32bit(this, address - this->base, value);
 }
 
