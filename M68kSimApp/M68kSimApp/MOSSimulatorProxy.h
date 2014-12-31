@@ -29,12 +29,18 @@ typedef enum {
 
 
 - initWithExecutableURL:(NSURL*)url;
+
 - (BOOL)run;
 - (BOOL)stop;
 - (BOOL)stepIn;
 - (BOOL)stepOver;
-- (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc;
 - (void)kill;
+
+- (MOSSimulatorState)simulatorState;
+- (BOOL)isSimulatorRunning;
+
+- (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc;
+
 
 
 @end

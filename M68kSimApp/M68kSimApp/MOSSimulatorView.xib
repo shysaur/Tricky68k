@@ -55,13 +55,22 @@
                         <action selector="stepOver:" target="-2" id="jKZ-ab-VPx"/>
                     </connections>
                 </button>
+                <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="pKv-SC-lxe">
+                    <rect key="frame" x="591" y="383" width="16" height="16"/>
+                    <connections>
+                        <binding destination="-2" name="animate" keyPath="simulatorProxy.simulatorRunning" id="pZ6-zI-Zs2"/>
+                    </connections>
+                </progressIndicator>
             </subviews>
             <constraints>
+                <constraint firstItem="pKv-SC-lxe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6A4-mi-J19" secondAttribute="trailing" constant="18" id="2QS-jh-cIe"/>
                 <constraint firstItem="6A4-mi-J19" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="8q2-eI-Hye"/>
+                <constraint firstItem="pKv-SC-lxe" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="23" id="Diz-Th-xTS"/>
                 <constraint firstItem="27P-Wg-SmO" firstAttribute="leading" secondItem="TMq-DJ-jQt" secondAttribute="trailing" constant="12" id="FCn-zl-2of"/>
                 <constraint firstItem="TMq-DJ-jQt" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="FjY-jU-65P"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6A4-mi-J19" secondAttribute="trailing" constant="20" id="KlP-5v-HUe"/>
                 <constraint firstItem="27P-Wg-SmO" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="KzQ-hH-0GH"/>
+                <constraint firstAttribute="trailing" secondItem="pKv-SC-lxe" secondAttribute="trailing" constant="20" id="QAr-H8-R0o"/>
                 <constraint firstItem="P68-1E-1ly" firstAttribute="leading" secondItem="27P-Wg-SmO" secondAttribute="trailing" constant="12" id="UVM-VX-R98"/>
                 <constraint firstItem="TMq-DJ-jQt" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="hEv-ll-hNI"/>
                 <constraint firstItem="P68-1E-1ly" firstAttribute="leading" secondItem="27P-Wg-SmO" secondAttribute="trailing" constant="12" id="iln-Kt-KOn"/>

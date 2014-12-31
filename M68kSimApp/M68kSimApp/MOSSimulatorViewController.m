@@ -19,6 +19,11 @@
 }
 
 
+- (MOSSimulatorProxy*)simulatorProxy {
+  return simProxy;
+}
+
+
 - (void)viewDidLoad {
   NSOpenPanel *openexe;
   
