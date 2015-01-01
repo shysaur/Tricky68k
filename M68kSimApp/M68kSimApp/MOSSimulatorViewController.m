@@ -9,6 +9,7 @@
 #import "MOSSimulatorViewController.h"
 #import "MOSSimulatorProxy.h"
 #import "MOSSimDumpDataSource.h"
+#import "MOSSimDisasmDataSource.h"
 
 
 @implementation MOSSimulatorViewController
@@ -21,8 +22,9 @@
   } @finally {}
   simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
   [simProxy addObserver:self forKeyPath:@"simulatorState" options:0 context:NULL];
+  
   [dumpDs setSimulatorProxy:simProxy];
-  NSLog(@"%@",[simProxy disassemble:5 instructionsFromLocation:0x2000]);
+  [disasmDs setSimulatorProxy:simProxy];
 }
 
 
@@ -68,6 +70,7 @@
     }];
   }
   [dumpDs setSimulatorProxy:simProxy];
+  [disasmDs setSimulatorProxy:simProxy];
 }
 
 
@@ -87,6 +90,7 @@
       simRunning = (newstate == MOSSimulatorStateRunning);
       [self didChangeValueForKey:@"simulatorRunning"];
       [dumpTv reloadData];
+      [disasmTv reloadData];
       break;
       
     default:
