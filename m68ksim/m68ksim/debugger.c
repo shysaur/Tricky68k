@@ -57,17 +57,23 @@ int debug_printDisassemblyLine(uint32_t addr, char *instr2, int ilen, uint32_t m
 
 void debug_printDisassembly(uint32_t addr, int len, uint32_t mark) {
   int i, j, ilen;
-  char instr[80];
+  static char instr[80];
   
   if (len < 0) {
-    j = 0;
+    i = 0;
     do {
+      i += 2;
+      ilen = m68k_disassemble(instr, addr-i, M68K_CPU_TYPE_68000);
+    } while (i < ilen);
+    j = i;
+    do {
+      i = j;
       j += 2;
       ilen = m68k_disassemble(instr, addr-j, M68K_CPU_TYPE_68000);
-    } while (j < ilen);
-    addr -= ilen;
+    } while (ilen == j);
+    addr -= i;
     debug_printDisassembly(addr, len+1, mark);
-    debug_printDisassemblyLine(addr, instr, ilen, mark);
+    debug_printDisassemblyLine(addr, NULL, 0, mark);
   } else {
     for (i=0; i<len; i++) {
       ilen = debug_printDisassemblyLine(addr, NULL, 0, mark);
