@@ -10,6 +10,7 @@
 #import "MOSSimulatorProxy.h"
 #import "MOSSimDumpDataSource.h"
 #import "MOSSimDisasmDataSource.h"
+#import "MOSSimRegistersDataSource.h"
 
 
 @implementation MOSSimulatorViewController
@@ -25,6 +26,7 @@
   
   [dumpDs setSimulatorProxy:simProxy];
   [disasmDs setSimulatorProxy:simProxy];
+  [regdumpDs setSimulatorProxy:simProxy];
 }
 
 
@@ -71,6 +73,7 @@
   }
   [dumpDs setSimulatorProxy:simProxy];
   [disasmDs setSimulatorProxy:simProxy];
+  [regdumpDs setSimulatorProxy:simProxy];
 }
 
 
@@ -91,6 +94,7 @@
       [self didChangeValueForKey:@"simulatorRunning"];
       [dumpTv reloadData];
       [disasmTv reloadData];
+      [regdumpTv reloadData];
       break;
       
     default:

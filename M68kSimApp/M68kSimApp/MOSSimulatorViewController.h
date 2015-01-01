@@ -12,6 +12,7 @@
 @class MOSSimulatorProxy;
 @class MOSSimDumpDataSource;
 @class MOSSimDisasmDataSource;
+@class MOSSimRegistersDataSource;
 
 
 @interface MOSSimulatorViewController : NSViewController {
@@ -22,6 +23,8 @@
   IBOutlet NSTableView *dumpTv;
   IBOutlet MOSSimDisasmDataSource *disasmDs;
   IBOutlet NSTableView *disasmTv;
+  IBOutlet MOSSimRegistersDataSource *regdumpDs;
+  IBOutlet NSTableView *regdumpTv;
 }
 
 - (void)setSimulatedExecutable:(NSURL*)url;
