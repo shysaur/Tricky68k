@@ -88,12 +88,12 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="view" id="fvb-Zf-PwK">
-                                                <rect key="frame" x="1" y="1" width="585" height="17"/>
+                                            <tableCellView identifier="normalView" id="fvb-Zf-PwK">
+                                                <rect key="frame" x="1" y="1" width="582" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2o3-JP-YRq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="587" height="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="584" height="17"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Xya-h3-Vc1">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>

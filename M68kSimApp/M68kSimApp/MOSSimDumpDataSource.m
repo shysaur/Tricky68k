@@ -18,12 +18,6 @@
 }
 
 
-- (void)invalidateCache {
-  cachedBase = -1;
-  cache = nil;
-}
-
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
   return 0x1000000 / 16;
 }
@@ -32,12 +26,17 @@
 - (NSView *)tableView:(NSTableView *)tv viewForTableColumn:(NSTableColumn *)tc row:(NSInteger)row {
   uint32_t addr;
   NSArray *line;
-  NSTableCellView *result;
+  id result;
   
-  addr = (uint32_t)(row * 16);
-  line = [simProxy dump:1 linesFromLocation:addr];
-  if (line == nil) line = [NSArray arrayWithObject:@"Error"];
-  result = [tv makeViewWithIdentifier:@"view" owner:self];
+  if ([simProxy simulatorState] != MOSSimulatorStatePaused) {
+    line = [NSArray arrayWithObject:@""];
+  } else {
+    addr = (uint32_t)(row * 16);
+    line = [simProxy dump:1 linesFromLocation:addr];
+    if (line == nil)
+      line = [NSArray arrayWithObject:@"Error"];
+  }
+  result = [tv makeViewWithIdentifier:@"normalView" owner:self];
   [[result textField] setStringValue:[line firstObject]];
   return result;
 }

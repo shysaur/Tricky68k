@@ -13,12 +13,9 @@
 
 
 @interface MOSSimDumpDataSource : NSObject <NSTableViewDataSource> {
-  int64_t cachedBase;
-  NSArray *cache;
   MOSSimulatorProxy *simProxy;
 }
 
 - (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
-- (void)invalidateCache;
 
 @end
