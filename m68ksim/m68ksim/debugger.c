@@ -32,23 +32,47 @@ void cpu_instrCallback(void) {
 }
 
 
+int debug_printDisassemblyLine(uint32_t addr, char *instr2, int ilen, uint32_t mark) {
+  int j;
+  char instr[80];
+  
+  putchar(addr == mark ? '>' : ' ');
+  putchar(' ');
+  if (!ilen) {
+    ilen = m68k_disassemble(instr, addr, M68K_CPU_TYPE_68000);
+    instr2 = instr;
+  }
+  printf("%08X  ", addr);
+  for (j=0; j<8; j+=2) {
+    if (j < ilen)
+      printf("%04X ", m68k_read_disassembler_16(addr+j));
+    else
+      printf("     ");
+  }
+  printf(": %s\n", instr2);
+  
+  return ilen;
+}
+
+
 void debug_printDisassembly(uint32_t addr, int len, uint32_t mark) {
   int i, j, ilen;
   char instr[80];
   
-  for (i=0; i<len; i++) {
-    putchar(addr == mark ? '>' : ' ');
-    putchar(' ');
-    ilen = m68k_disassemble(instr, addr, M68K_CPU_TYPE_68000);
-    printf("%08X  ", addr);
-    for (j=0; j<8; j+=2) {
-      if (j < ilen)
-        printf("%04X ", m68k_read_disassembler_16(addr+j));
-      else
-        printf("     ");
+  if (len < 0) {
+    j = 0;
+    do {
+      j += 2;
+      ilen = m68k_disassemble(instr, addr-j, M68K_CPU_TYPE_68000);
+    } while (j < ilen);
+    addr -= ilen;
+    debug_printDisassembly(addr, len+1, mark);
+    debug_printDisassemblyLine(addr, instr, ilen, mark);
+  } else {
+    for (i=0; i<len; i++) {
+      ilen = debug_printDisassemblyLine(addr, NULL, 0, mark);
+      addr += ilen;
     }
-    printf(": %s\n", instr);
-    addr += ilen;
   }
 }
 
