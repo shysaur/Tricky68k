@@ -175,6 +175,7 @@
 				016CD1321A51A10E00D64892 /* Frameworks */,
 				016CD1331A51A10E00D64892 /* Resources */,
 				01864B911A51C863005B2B0D /* CopyFiles */,
+				0112028E1A55BA1100F61E42 /* Advance Build Number */,
 			);
 			buildRules = (
 			);
@@ -232,6 +233,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0112028E1A55BA1100F61E42 /* Advance Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Advance Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "VERNO=$(/usr/libexec/PlistBuddy -c \"Print :CFBundleVersion\" \"$INFOPLIST_FILE\")\necho $VERNO\nVERNO=$((VERNO+1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $VERNO\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		016CD1311A51A10E00D64892 /* Sources */ = {
