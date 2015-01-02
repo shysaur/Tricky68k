@@ -67,8 +67,10 @@
   const char *str;
   
   line = [lineCache firstObject];
-  str = [line UTF8String];
-  sscanf(str+2, "%X", &addrCacheStart);
+  if (line) {
+    str = [line UTF8String];
+    sscanf(str+2, "%X", &addrCacheStart);
+  }
 }
 
 
@@ -77,8 +79,10 @@
   const char *str;
   
   line = [lineCache lastObject];
-  str = [line UTF8String];
-  sscanf(str+2, "%X", &addrCacheEnd);
+  if (line) {
+    str = [line UTF8String];
+    sscanf(str+2, "%X", &addrCacheEnd);
+  }
 }
 
 

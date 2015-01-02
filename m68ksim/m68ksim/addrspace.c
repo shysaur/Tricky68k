@@ -53,7 +53,7 @@ static inline segment_desc *mem_getSegmentAndCheckSilent(uint32_t address, int a
   int i;
   segment_desc *this;
   
-  if (address > ADDRSPACE_SIZE)
+  if (address >= ADDRSPACE_SIZE)
     return NULL;
   i = address / SEGM_GRANULARITY;
   this = addrSpace[i];
