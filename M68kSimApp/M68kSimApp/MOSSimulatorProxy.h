@@ -70,6 +70,7 @@ typedef enum {
 
 - (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc;
 - (NSArray*)dump:(int)cnt linesFromLocation:(uint32_t)loc;
+- (NSData*)rawDumpFromLocation:(uint32_t)loc withSize:(uint32_t)size;
 - (NSDictionary*)registerDump;
 
 

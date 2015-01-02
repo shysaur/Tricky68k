@@ -241,6 +241,36 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
 
 
+- (NSData*)rawDumpFromLocation:(uint32_t)loc withSize:(uint32_t)size {
+  NSArray *lines;
+  NSMutableData *res;
+  const char *line, *linep;
+  int i, j, c, t;
+  uint8_t decLine[16];
+  
+  c = (size+15) / 16;
+  lines = [self dump:c linesFromLocation:loc];
+  res = [NSMutableData data];
+  for (i=0; i<c; i++) {
+    line = [[lines objectAtIndex:i] UTF8String];
+    linep = line + 10;
+    for (j=0; j<16; j++) {
+      t = *(linep++);
+      t = t > '9' ? t - 'A' + 10 : t - '0';
+      decLine[j] = t * 16;
+      t = *(linep++);
+      t = t > '9' ? t - 'A' + 10 : t - '0';
+      decLine[j] += t;
+      linep++;
+    }
+    [res appendBytes:decLine length:size>16 ? 16 : size];
+    size -= 16;
+  }
+  
+  return [res copy];
+}
+
+
 - (NSDictionary*)registerDump {
   NSMutableDictionary *res;
   NSArray __block *list;

@@ -23,6 +23,7 @@
 		01864B951A51CD23005B2B0D /* m68ksim in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01864B921A51CCF6005B2B0D /* m68ksim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */; };
 		0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */; };
+		01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +67,8 @@
 		0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimDumpDataSource.m; sourceTree = "<group>"; };
 		0196535D1A54D353002B3C39 /* MOSSimDisasmDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimDisasmDataSource.h; sourceTree = "<group>"; };
 		0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimDisasmDataSource.m; sourceTree = "<group>"; };
+		01A419431A57382900D9BD02 /* MOSSimStackDumpDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimStackDumpDataSource.h; sourceTree = "<group>"; };
+		01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimStackDumpDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,8 @@
 				011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */,
 				0196535D1A54D353002B3C39 /* MOSSimDisasmDataSource.h */,
 				0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */,
+				01A419431A57382900D9BD02 /* MOSSimStackDumpDataSource.h */,
+				01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */,
 				0196535A1A543A04002B3C39 /* MOSSimDumpDataSource.h */,
 				0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */,
 				016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */,
@@ -269,6 +274,7 @@
 				011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */,
 				016CD13C1A51A10E00D64892 /* AppDelegate.m in Sources */,
 				016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */,
+				01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */,
 				0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */,
 				01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */,
 			);
