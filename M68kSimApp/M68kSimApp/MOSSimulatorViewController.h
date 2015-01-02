@@ -36,5 +36,6 @@
 - (IBAction)stepOver:(id)sender;
 
 - (BOOL)isSimulatorRunning;
+- (NSString *)flagsStatus;
 
 @end

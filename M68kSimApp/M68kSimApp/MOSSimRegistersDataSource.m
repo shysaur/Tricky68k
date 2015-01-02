@@ -11,7 +11,7 @@
 
 
 const BOOL isRowHeader[] = {
-       NO,
+  YES, NO,
   YES, NO,NO,NO,NO,NO,NO,NO,NO,
   YES, NO,NO,NO,NO,NO,NO,NO,NO,NO
 };
@@ -23,7 +23,7 @@ const BOOL isRowHeader[] = {
 - init {
   self = [super init];
   rows = @[
-                          @"SR",
+    @"Status Register",   @"SR",
     @"Data Registers",    @"D0",@"D1",@"D2",@"D3",@"D4",@"D5",@"D6",@"D7",
     @"Address Registers", @"A0",@"A1",@"A2",@"A3",@"A4",@"A5",@"A6",@"SP",@"PC"];
   return self;
@@ -65,7 +65,10 @@ const BOOL isRowHeader[] = {
       } else {
         dump = [simProxy registerDump];
         value = [dump valueForKey:[rows objectAtIndex:row]];
-        line = [NSString stringWithFormat:@"%08X", [value intValue]];
+        if ([[rows objectAtIndex:row] isEqual:MOS68kRegisterSR])
+          line = [NSString stringWithFormat:@"%04X", [value intValue]];
+        else
+          line = [NSString stringWithFormat:@"%08X", [value intValue]];
       }
       [[result textField] setStringValue:line];
     }

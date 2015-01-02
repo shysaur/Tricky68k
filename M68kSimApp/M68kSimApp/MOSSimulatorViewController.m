@@ -89,8 +89,10 @@
       
     case MOSSimulatorStateRunning:
     case MOSSimulatorStatePaused:
+      [self willChangeValueForKey:@"flagsStatus"];
       [self willChangeValueForKey:@"simulatorRunning"];
       simRunning = (newstate == MOSSimulatorStateRunning);
+      [self didChangeValueForKey:@"flagsStatus"];
       [self didChangeValueForKey:@"simulatorRunning"];
       [dumpTv reloadData];
       [disasmTv reloadData];
@@ -125,6 +127,23 @@
 
 - (BOOL)isSimulatorRunning {
   return simRunning;
+}
+
+
+- (NSString *)flagsStatus {
+  NSDictionary *regdump;
+  uint32_t flags;
+  int x, n, z, v, c;
+  
+  if (simRunning) return @"";
+  regdump = [simProxy registerDump];
+  flags = (uint32_t)[[regdump objectForKey:MOS68kRegisterSR] integerValue];
+  x = (flags & 0b10000) >> 4;
+  n = (flags & 0b1000) >> 3;
+  z = (flags & 0b100) >> 2;
+  v = (flags & 0b10) >> 1;
+  c = (flags & 0b1);
+  return [NSString stringWithFormat:@"X:%d N:%d Z:%d V:%d C:%d", x, n, z, v, c];
 }
 
 
