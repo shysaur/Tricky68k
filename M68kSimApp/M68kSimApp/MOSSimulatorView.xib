@@ -64,6 +64,9 @@
                 </button>
                 <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="pKv-SC-lxe">
                     <rect key="frame" x="591" y="347" width="16" height="16"/>
+                    <connections>
+                        <binding destination="-2" name="animate" keyPath="simulatorRunning" id="jyy-08-htG"/>
+                    </connections>
                 </progressIndicator>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX8-yz-eRq">
                     <rect key="frame" x="174" y="160" width="297" height="162"/>
@@ -342,8 +345,8 @@
                                                 <rect key="frame" x="1" y="1" width="141" height="14"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kxL-UP-dE0">
-                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="14"/>
+                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kxL-UP-dE0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="143" height="14"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="IXu-jL-uzS">
                                                             <font key="font" metaFont="fixedUser"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
