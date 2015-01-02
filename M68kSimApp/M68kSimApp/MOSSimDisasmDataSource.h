@@ -20,5 +20,6 @@
 }
 
 - (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
+- (NSInteger)programCounterRow;
 
 @end

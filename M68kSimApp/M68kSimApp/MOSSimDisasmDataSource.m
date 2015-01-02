@@ -62,6 +62,11 @@
 }
 
 
+- (NSInteger)programCounterRow {
+  return (maxLines-1)/2+1;
+}
+
+
 - (void)updateCacheStartAddress {
   NSString *line;
   const char *str;

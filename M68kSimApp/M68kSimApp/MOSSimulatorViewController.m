@@ -59,6 +59,8 @@
 
 - (void)viewDidLoad {
   NSOpenPanel *openexe;
+  NSInteger rows;
+  NSRect visibleRect;
   
   [super viewDidLoad];
   
@@ -73,10 +75,15 @@
       }
     }];
   }
+  
   [dumpDs setSimulatorProxy:simProxy];
   [disasmDs setSimulatorProxy:simProxy];
   [regdumpDs setSimulatorProxy:simProxy];
   [stackDs setSimulatorProxy:simProxy];
+  
+  visibleRect = [disasmTv visibleRect];
+  rows = [disasmTv rowsInRect:visibleRect].length;
+  [disasmTv scrollRowToVisible:[disasmDs programCounterRow]+rows/2];
 }
 
 
