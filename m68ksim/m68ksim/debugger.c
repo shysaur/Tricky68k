@@ -16,6 +16,8 @@
 #include "musashi/m68k.h"
 
 
+#define MAX_INSTR_LEN   8 /*bytes*/
+
 int skip_on = 0;
 uint32_t skip_addr;
 
@@ -56,22 +58,16 @@ int debug_printDisassemblyLine(uint32_t addr, char *instr2, int ilen, uint32_t m
 
 
 void debug_printDisassembly(uint32_t addr, int len, uint32_t mark) {
-  int i, j, ilen;
+  int i, tilen, ilen;
   static char instr[80];
   
   if (len < 0) {
-    i = 0;
-    do {
-      i += 2;
-      ilen = m68k_disassemble(instr, addr-i, M68K_CPU_TYPE_68000);
-    } while (i < ilen);
-    j = i;
-    do {
-      i = j;
-      j += 2;
-      ilen = m68k_disassemble(instr, addr-j, M68K_CPU_TYPE_68000);
-    } while (ilen == j);
-    addr -= i;
+    ilen = 2;
+    for (i=4; i<MAX_INSTR_LEN; i+=2) {
+      tilen = m68k_disassemble(instr, addr-i, M68K_CPU_TYPE_68000);
+      if (tilen == i) ilen = tilen;
+    }
+    addr -= ilen;
     debug_printDisassembly(addr, len+1, mark);
     debug_printDisassemblyLine(addr, NULL, 0, mark);
   } else {

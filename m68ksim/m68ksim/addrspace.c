@@ -104,7 +104,7 @@ unsigned int m68k_read_disassembler_8(unsigned int address) {
   segment_desc *this;
   
   this = mem_getSegmentAndCheckSilent(address, 1);
-  if (!this) return 0;
+  if (!this) return 0xFF;
   return this->read_8bit(this, address - this->base);
 }
 
@@ -113,7 +113,7 @@ unsigned int m68k_read_disassembler_16(unsigned int address) {
   segment_desc *this;
   
   this = mem_getSegmentAndCheckSilent(address, 2);
-  if (!this) return 0;
+  if (!this) return 0xFFFF;
   return this->read_16bit(this, address - this->base);
 }
 
@@ -122,7 +122,7 @@ unsigned int m68k_read_disassembler_32(unsigned int address) {
   segment_desc *this;
   
   this = mem_getSegmentAndCheckSilent(address, 4);
-  if (!this) return 0;
+  if (!this) return 0xFFFFFFFF;
   return this->read_32bit(this, address - this->base);
 }
 
