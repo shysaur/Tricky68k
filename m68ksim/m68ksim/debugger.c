@@ -136,7 +136,6 @@ void debug_debugConsole(void) {
   pc = m68k_get_reg(NULL, M68K_REG_PC);
   
   while (!cont) {
-    fprintf(stderr, "indebug\n");
     printf("debug? ");
     if (bufkill_on) {
       putchar('\n');

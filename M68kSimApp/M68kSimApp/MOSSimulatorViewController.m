@@ -18,17 +18,28 @@
 
 
 - (void)setSimulatedExecutable:(NSURL*)url {
+  [self willChangeValueForKey:@"simulatorRunning"];
+  [self willChangeValueForKey:@"flagsStatus"];
+  
   simExec = url;
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
   simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
   [simProxy addObserver:self forKeyPath:@"simulatorState" options:0 context:NULL];
+  simRunning = ([simProxy simulatorState] == MOSSimulatorStateRunning);
+  
+  [self didChangeValueForKey:@"simulatorRunning"];
+  [self didChangeValueForKey:@"flagsStatus"];
   
   [dumpDs setSimulatorProxy:simProxy];
   [disasmDs setSimulatorProxy:simProxy];
   [regdumpDs setSimulatorProxy:simProxy];
   [stackDs setSimulatorProxy:simProxy];
+  [dumpTv reloadData];
+  [disasmTv reloadData];
+  [regdumpTv reloadData];
+  [stackTv reloadData];
 }
 
 
@@ -146,7 +157,7 @@
   uint32_t flags;
   int x, n, z, v, c;
   
-  if (simRunning) return @"";
+  if ([simProxy simulatorState] != MOSSimulatorStatePaused) return @"";
   regdump = [simProxy registerDump];
   flags = (uint32_t)[[regdump objectForKey:MOS68kRegisterSR] integerValue];
   x = (flags & 0b10000) >> 4;

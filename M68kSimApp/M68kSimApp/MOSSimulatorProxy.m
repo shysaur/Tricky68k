@@ -192,7 +192,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 
 - (void)changeSimulatorStatusTo:(MOSSimulatorState)news {
-  if (curState == news || isSimDead) return;
+  if (curState == news) return;
   [self willChangeValueForKey:@"simulatorState"];
   curState = news;
   [self didChangeValueForKey:@"simulatorState"];
