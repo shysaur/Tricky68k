@@ -17,6 +17,7 @@
 #include "elf.h"
 #include "debugger.h"
 #include "breakpoints.h"
+#include "tty.h"
 
 
 volatile int sim_on, debug_on;
@@ -30,7 +31,7 @@ void signal_enterDebugger(int signo) {
 
 int main(int argc, char *argv[]) {
   uint32_t availRam, stackTop, stackSize;
-  int c;
+  int c, special;
   
   sim_on = 0;
   debug_on = 0;
@@ -38,19 +39,31 @@ int main(int argc, char *argv[]) {
   signal(SIGINT, signal_enterDebugger);
   mem_init();
   
-  stackTop = ADDRSPACE_SIZE;
+  stackTop = ADDRSPACE_SIZE/2;
   stackSize = SEGM_GRANULARITY * 4;
   
   optind = 1;
   while (optind < argc) {
-    c = getopt(argc, argv, "Bdm:l:");
+    special = 0;
+    c = getopt(argc, argv, "Bdm:l:i:I:");
     if (c != -1) {
       switch (c) {
         case 'm':
           availRam = (unsigned int)strtoul(optarg, NULL, 0);
           if (availRam == 0)
-            availRam = 0x8000000;
+            availRam = 0x800000;
           ram_install(0, availRam);
+          break;
+          
+        case 'I':
+          special = 1;
+        case 'i':
+          if (strcasecmp(optarg, "tty") == 0)
+            tty_installCommand(special, argc, argv);
+          else {
+            fprintf(stderr, "Unknown device type %s.\n", optarg);
+            exit(1);
+          }
           break;
           
         case 'l':

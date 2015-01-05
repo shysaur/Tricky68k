@@ -9,6 +9,8 @@
 #ifndef __m68ksim__breakpoints__
 #define __m68ksim__breakpoints__
 
+#include <stdint.h>
+
 
 typedef struct breakp_s {
   struct breakp_s *next;
