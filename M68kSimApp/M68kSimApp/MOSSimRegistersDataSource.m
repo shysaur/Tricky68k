@@ -30,11 +30,6 @@ const BOOL isRowHeader[] = {
 }
 
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
-  simProxy = sp;
-}
-
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
   return [rows count];
 }

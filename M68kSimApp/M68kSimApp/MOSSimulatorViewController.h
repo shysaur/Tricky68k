@@ -21,13 +21,9 @@
   NSURL *simExec;
   BOOL simRunning;
   IBOutlet MOSSimDumpDataSource *dumpDs;
-  IBOutlet NSTableView *dumpTv;
   IBOutlet MOSSimDisasmDataSource *disasmDs;
-  IBOutlet NSTableView *disasmTv;
   IBOutlet MOSSimRegistersDataSource *regdumpDs;
-  IBOutlet NSTableView *regdumpTv;
   IBOutlet MOSSimStackDumpDataSource *stackDs;
-  IBOutlet NSTableView *stackTv;
 }
 
 - (void)setSimulatedExecutable:(NSURL*)url;

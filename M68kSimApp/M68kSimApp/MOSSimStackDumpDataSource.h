@@ -7,15 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOSSimTableViewDelegate.h"
 
 
-@class MOSSimulatorProxy;
-
-
-@interface MOSSimStackDumpDataSource : NSObject <NSTableViewDataSource> {
-  MOSSimulatorProxy *simProxy;
-}
-
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
+@interface MOSSimStackDumpDataSource : MOSSimTableViewDelegate <NSTableViewDataSource>
 
 @end

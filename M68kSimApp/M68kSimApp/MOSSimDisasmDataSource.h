@@ -7,19 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOSSimTableViewDelegate.h"
 
 
 @class MOSSimulatorProxy;
 
 
-@interface MOSSimDisasmDataSource : NSObject <NSTableViewDataSource> {
+@interface MOSSimDisasmDataSource : MOSSimTableViewDelegate <NSTableViewDataSource> {
   NSInteger maxLines, cacheStart;
   uint32_t addrCacheStart, addrCacheEnd, centerAddr;
   NSMutableArray *lineCache;
-  MOSSimulatorProxy *simProxy;
 }
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
 - (NSInteger)programCounterRow;
 
 @end

@@ -36,10 +36,6 @@
   [disasmDs setSimulatorProxy:simProxy];
   [regdumpDs setSimulatorProxy:simProxy];
   [stackDs setSimulatorProxy:simProxy];
-  [dumpTv reloadData];
-  [disasmTv reloadData];
-  [regdumpTv reloadData];
-  [stackTv reloadData];
 }
 
 
@@ -70,8 +66,6 @@
 
 - (void)viewDidLoad {
   NSOpenPanel *openexe;
-  NSInteger rows;
-  NSRect visibleRect;
   
   [super viewDidLoad];
   
@@ -85,16 +79,9 @@
         [[[self view] window] close];
       }
     }];
+  } else {
+    [self setSimulatedExecutable:simExec];
   }
-  
-  [dumpDs setSimulatorProxy:simProxy];
-  [disasmDs setSimulatorProxy:simProxy];
-  [regdumpDs setSimulatorProxy:simProxy];
-  [stackDs setSimulatorProxy:simProxy];
-  
-  visibleRect = [disasmTv visibleRect];
-  rows = [disasmTv rowsInRect:visibleRect].length;
-  [disasmTv scrollRowToVisible:[disasmDs programCounterRow]+rows/2];
 }
 
 
@@ -115,10 +102,6 @@
       simRunning = (newstate == MOSSimulatorStateRunning);
       [self didChangeValueForKey:@"flagsStatus"];
       [self didChangeValueForKey:@"simulatorRunning"];
-      [dumpTv reloadData];
-      [disasmTv reloadData];
-      [regdumpTv reloadData];
-      [stackTv reloadData];
       break;
       
     default:

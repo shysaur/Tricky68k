@@ -13,11 +13,6 @@
 @implementation MOSSimStackDumpDataSource
 
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
-  simProxy = sp;
-}
-
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
   return 0x1000000 / 16;
 }

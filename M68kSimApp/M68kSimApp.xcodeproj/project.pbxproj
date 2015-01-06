@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
 		01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01509B131A52191300724F29 /* NSFileHandle+Strings.m */; };
+		0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */; };
 		016CD13C1A51A10E00D64892 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13B1A51A10E00D64892 /* AppDelegate.m */; };
 		016CD13E1A51A10E00D64892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13D1A51A10E00D64892 /* main.m */; };
 		016CD1411A51A10E00D64892 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1401A51A10E00D64892 /* Document.m */; };
@@ -44,6 +45,8 @@
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		01509B121A52191300724F29 /* NSFileHandle+Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+Strings.h"; sourceTree = "<group>"; };
 		01509B131A52191300724F29 /* NSFileHandle+Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+Strings.m"; sourceTree = "<group>"; };
+		0161BB721A5AF7560007548E /* MOSSimTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimTableViewDelegate.h; sourceTree = "<group>"; };
+		0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimTableViewDelegate.m; sourceTree = "<group>"; };
 		016CD1351A51A10E00D64892 /* M68kSimApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M68kSimApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016CD1391A51A10E00D64892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016CD13A1A51A10E00D64892 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -151,6 +154,8 @@
 				01509B131A52191300724F29 /* NSFileHandle+Strings.m */,
 				01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */,
 				01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */,
+				0161BB721A5AF7560007548E /* MOSSimTableViewDelegate.h */,
+				0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */,
 				0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */,
 				011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */,
 				0196535D1A54D353002B3C39 /* MOSSimDisasmDataSource.h */,
@@ -272,6 +277,7 @@
 				016CD1691A51B27900D64892 /* MOSSimulatorViewController.m in Sources */,
 				01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */,
 				011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */,
+				0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */,
 				016CD13C1A51A10E00D64892 /* AppDelegate.m in Sources */,
 				016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */,
 				01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */,
