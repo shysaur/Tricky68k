@@ -20,6 +20,7 @@
   MOSSimulatorProxy *simProxy;
   NSURL *simExec;
   BOOL simRunning;
+  BOOL viewHasLoaded;
   IBOutlet MOSSimDumpDataSource *dumpDs;
   IBOutlet MOSSimDisasmDataSource *disasmDs;
   IBOutlet MOSSimRegistersDataSource *regdumpDs;

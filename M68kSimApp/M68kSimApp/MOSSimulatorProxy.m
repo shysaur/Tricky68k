@@ -63,8 +63,11 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 - initWithExecutableURL:(NSURL*)url {
   NSArray *args;
+  __weak MOSSimulatorProxy *weakSelf;
+  __strong NSTask *strongTask;
   
   self = [super init];
+  weakSelf = self;
   
   simQueue = dispatch_queue_create("com.danielecattaneo.m68ksimqueue", NULL);
   
@@ -84,13 +87,21 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   [self didChangeValueForKey:@"simulatorState"];
   [simTask launch];
   
+  strongTask = simTask;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    [simTask waitUntilExit];
-    isSimDead = YES;
+    __strong MOSSimulatorProxy *strongSelf;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self changeSimulatorStatusTo:MOSSimulatorStateDead];
-    });
+    [strongTask waitUntilExit];
+    /* We don't want this block to retain the proxy, otherwise we can't kill
+     * the simulator on dealloc. */
+    strongSelf = weakSelf;
+    
+    if (strongSelf) {
+      strongSelf->isSimDead = YES;
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [strongSelf changeSimulatorStatusTo:MOSSimulatorStateDead];
+      });
+    }
   });
   
   return self;
@@ -334,6 +345,11 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 - (BOOL)isSimulatorDead {
   return curState == MOSSimulatorStateDead;
+}
+
+
+- (void)dealloc {
+  [self kill];
 }
 
 

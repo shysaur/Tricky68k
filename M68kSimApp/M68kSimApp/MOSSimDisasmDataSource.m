@@ -130,8 +130,7 @@
       [newcache removeObjectAtIndex:0];
       [lineCache addObjectsFromArray:newcache];
       [self updateCacheEndAddress];
-    } else
-      linestodo = 0;
+    }
     
     line = [lineCache objectAtIndex:row - cacheStart];
   }

@@ -17,20 +17,23 @@
 @implementation MOSSimulatorViewController
 
 
+- init {
+  self = [super init];
+  viewHasLoaded = NO;
+  return self;
+}
+
+
 - (void)setSimulatedExecutable:(NSURL*)url {
-  [self willChangeValueForKey:@"simulatorRunning"];
-  [self willChangeValueForKey:@"flagsStatus"];
-  
   simExec = url;
+  if (!viewHasLoaded) return;
+  
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
   simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
-  [simProxy addObserver:self forKeyPath:@"simulatorState" options:0 context:NULL];
-  simRunning = ([simProxy simulatorState] == MOSSimulatorStateRunning);
-  
-  [self didChangeValueForKey:@"simulatorRunning"];
-  [self didChangeValueForKey:@"flagsStatus"];
+  [simProxy addObserver:self forKeyPath:@"simulatorState"
+                options:NSKeyValueObservingOptionInitial context:NULL];
   
   [dumpDs setSimulatorProxy:simProxy];
   [disasmDs setSimulatorProxy:simProxy];
@@ -65,22 +68,30 @@
 
 
 - (void)viewDidLoad {
+  [super viewDidLoad];
+  viewHasLoaded = YES;
+  
+  if (!simProxy && simExec) {
+    [self setSimulatedExecutable:simExec];
+  }
+}
+
+
+- (void)viewDidAppear {
   NSOpenPanel *openexe;
   
-  [super viewDidLoad];
-  
-  if (!simProxy) {
+  [super viewDidAppear];
+  if (!simProxy && !simExec) {
     openexe = [[NSOpenPanel alloc] init];
     [openexe setAllowedFileTypes:@[@"public.executable"]];
     [openexe beginSheetModalForWindow:[[self view] window] completionHandler:^(NSInteger result){
+      [openexe orderOut:nil];
       if (result == NSFileHandlingPanelOKButton) {
         [self setSimulatedExecutable:[[openexe URLs] firstObject]];
       } else {
         [[[self view] window] close];
       }
     }];
-  } else {
-    [self setSimulatedExecutable:simExec];
   }
 }
 
@@ -89,24 +100,27 @@
                         change:(NSDictionary*)change context:(void*)context {
   MOSSimulatorState newstate;
   
-  newstate = [object simulatorState];
-  switch (newstate) {
-    case MOSSimulatorStateDead:
-      [self simulatorIsDead];
-      break;
-      
-    case MOSSimulatorStateRunning:
-    case MOSSimulatorStatePaused:
-      [self willChangeValueForKey:@"flagsStatus"];
-      [self willChangeValueForKey:@"simulatorRunning"];
-      simRunning = (newstate == MOSSimulatorStateRunning);
-      [self didChangeValueForKey:@"flagsStatus"];
-      [self didChangeValueForKey:@"simulatorRunning"];
-      break;
-      
-    default:
-      break;
-  }
+  if (context == NULL) {
+    newstate = [object simulatorState];
+    switch (newstate) {
+      case MOSSimulatorStateDead:
+        [self simulatorIsDead];
+        break;
+        
+      case MOSSimulatorStateRunning:
+      case MOSSimulatorStatePaused:
+        [self willChangeValueForKey:@"flagsStatus"];
+        [self willChangeValueForKey:@"simulatorRunning"];
+        simRunning = (newstate == MOSSimulatorStateRunning);
+        [self didChangeValueForKey:@"flagsStatus"];
+        [self didChangeValueForKey:@"simulatorRunning"];
+        break;
+        
+      default:
+        break;
+    }
+  } else
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 
@@ -156,7 +170,6 @@
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
-  [simProxy kill];
 }
 
 
