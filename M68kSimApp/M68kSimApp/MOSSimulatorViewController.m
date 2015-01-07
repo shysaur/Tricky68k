@@ -12,6 +12,7 @@
 #import "MOSSimDisasmDataSource.h"
 #import "MOSSimRegistersDataSource.h"
 #import "MOSSimStackDumpDataSource.h"
+#import "MOSTeletypeViewDelegate.h"
 
 
 @implementation MOSSimulatorViewController
@@ -39,6 +40,7 @@
   [disasmDs setSimulatorProxy:simProxy];
   [regdumpDs setSimulatorProxy:simProxy];
   [stackDs setSimulatorProxy:simProxy];
+  [ttyDelegate setSimulatorProxy:simProxy];
 }
 
 
@@ -170,6 +172,7 @@
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
+  [simProxy kill];
 }
 
 

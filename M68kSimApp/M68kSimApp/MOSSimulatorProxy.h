@@ -45,12 +45,17 @@ typedef enum {
 } MOSSimulatorState;
 
 
+@class MOSNamedPipe;
+
+
 @interface MOSSimulatorProxy : NSObject {
   dispatch_queue_t simQueue;
   NSTask *simTask;
   NSURL *exec;
   NSPipe *toSim;
   NSPipe *fromSim;
+  MOSNamedPipe *toSimTty;
+  MOSNamedPipe *fromSimTty;
   MOSSimulatorState curState;
   BOOL isSimDead;
 }
@@ -72,6 +77,9 @@ typedef enum {
 - (NSArray*)dump:(int)cnt linesFromLocation:(uint32_t)loc;
 - (NSData*)rawDumpFromLocation:(uint32_t)loc withSize:(uint32_t)size;
 - (NSDictionary*)registerDump;
+
+- (NSFileHandle*)teletypeOutput;
+- (NSFileHandle*)teletypeInput;
 
 
 @end

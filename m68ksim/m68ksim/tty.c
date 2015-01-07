@@ -101,7 +101,7 @@ int tty_install(uint32_t base, int fildes_in, int fildes_out) {
 
 
 #define DIE(msg, ...) { \
-  fprintf(stderr, msg, ##__VA_ARGS__); \
+  fprintf(stderr, msg"\n", ##__VA_ARGS__); \
   exit(1); \
 }
 
@@ -121,10 +121,10 @@ void tty_installCommand(int special, int argc, char *argv[]) {
     if (optind >= argc) DIE("Missing parameters for tty device install.");
     outf = argv[optind++];
     
-    outfd = open(outf, O_WRONLY);
-    if (outfd < 0) DIE("Can't open output file %s.", outf);
     infd = open(inf, O_RDONLY);
     if (infd < 0) DIE("Can't open input file %s", inf);
+    outfd = open(outf, O_WRONLY);
+    if (outfd < 0) DIE("Can't open output file %s.", outf);
   } else {
     outfd = dup(STDOUT_FILENO);
     infd = dup(STDIN_FILENO);

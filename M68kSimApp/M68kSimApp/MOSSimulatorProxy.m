@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOSNamedPipe.h"
 #import "MOSSimulatorProxy.h"
 #import "NSFileHandle+Strings.h"
 
@@ -73,7 +74,10 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   toSim = [[NSPipe alloc] init];
   fromSim = [[NSPipe alloc] init];
-  args = @[@"-B", @"-d", @"-l", [url path]];
+  toSimTty = [[MOSNamedPipe alloc] init];
+  fromSimTty = [[MOSNamedPipe alloc] init];
+  args = @[@"-B", @"-d", @"-l", [url path],
+           @"-I", @"tty", @"0xFFE000", [[toSimTty pipeURL] path], [[fromSimTty pipeURL] path]];
   
   simTask = [[NSTask alloc] init];
   [simTask setLaunchPath:[[self simulatorURL] path]];
@@ -86,6 +90,9 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   curState = MOSSimulatorStatePaused;
   [self didChangeValueForKey:@"simulatorState"];
   [simTask launch];
+  
+  [toSimTty fileHandleForWriting];
+  [fromSimTty fileHandleForReading];
   
   strongTask = simTask;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -345,6 +352,16 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 - (BOOL)isSimulatorDead {
   return curState == MOSSimulatorStateDead;
+}
+
+
+- (NSFileHandle*)teletypeOutput {
+  return [toSimTty fileHandleForWriting];
+}
+
+
+- (NSFileHandle*)teletypeInput {
+  return [fromSimTty fileHandleForReading];
 }
 
 

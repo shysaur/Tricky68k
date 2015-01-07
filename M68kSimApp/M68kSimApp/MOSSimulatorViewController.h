@@ -14,6 +14,7 @@
 @class MOSSimDisasmDataSource;
 @class MOSSimRegistersDataSource;
 @class MOSSimStackDumpDataSource;
+@class MOSTeletypeViewDelegate;
 
 
 @interface MOSSimulatorViewController : NSViewController {
@@ -25,6 +26,7 @@
   IBOutlet MOSSimDisasmDataSource *disasmDs;
   IBOutlet MOSSimRegistersDataSource *regdumpDs;
   IBOutlet MOSSimStackDumpDataSource *stackDs;
+  IBOutlet MOSTeletypeViewDelegate *ttyDelegate;
 }
 
 - (void)setSimulatedExecutable:(NSURL*)url;
