@@ -1,0 +1,469 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		015527341A5F340300096023 /* syntax.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526741A5F2C3500096023 /* syntax.c */; };
+		0155273D1A5F444400096023 /* atom.c in Sources */ = {isa = PBXBuildFile; fileRef = 015525FC1A5F2C3400096023 /* atom.c */; };
+		0155273E1A5F444400096023 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526551A5F2C3400096023 /* error.c */; };
+		0155273F1A5F444400096023 /* expr.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526571A5F2C3400096023 /* expr.c */; };
+		015527401A5F444400096023 /* hugeint.c in Sources */ = {isa = PBXBuildFile; fileRef = 0155265A1A5F2C3400096023 /* hugeint.c */; };
+		015527411A5F444400096023 /* output_aout.c in Sources */ = {isa = PBXBuildFile; fileRef = 0155265C1A5F2C3400096023 /* output_aout.c */; };
+		015527421A5F444400096023 /* output_bin.c in Sources */ = {isa = PBXBuildFile; fileRef = 0155265E1A5F2C3400096023 /* output_bin.c */; };
+		015527431A5F444400096023 /* output_elf.c in Sources */ = {isa = PBXBuildFile; fileRef = 0155265F1A5F2C3400096023 /* output_elf.c */; };
+		015527441A5F444400096023 /* output_hunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526621A5F2C3500096023 /* output_hunk.c */; };
+		015527451A5F444400096023 /* output_test.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526641A5F2C3500096023 /* output_test.c */; };
+		015527461A5F444400096023 /* output_tos.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526651A5F2C3500096023 /* output_tos.c */; };
+		015527471A5F444400096023 /* output_vobj.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526671A5F2C3500096023 /* output_vobj.c */; };
+		015527481A5F444400096023 /* parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526681A5F2C3500096023 /* parse.c */; };
+		015527491A5F444400096023 /* reloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 0155266A1A5F2C3500096023 /* reloc.c */; };
+		0155274A1A5F444400096023 /* supp.c in Sources */ = {isa = PBXBuildFile; fileRef = 0155266C1A5F2C3500096023 /* supp.c */; };
+		0155274B1A5F444400096023 /* symbol.c in Sources */ = {isa = PBXBuildFile; fileRef = 0155266E1A5F2C3500096023 /* symbol.c */; };
+		0155274C1A5F444400096023 /* symtab.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526701A5F2C3500096023 /* symtab.c */; };
+		0155274D1A5F444400096023 /* vasm.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526841A5F2C3500096023 /* vasm.c */; };
+		015527501A5F4A0600096023 /* cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 015526191A5F2C3400096023 /* cpu.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		0155274F1A5F49A800096023 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = xpu.c;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/cpu-preprocessed.c",
+			);
+			script = "cc -E -I\"$SRCROOT/vasm\" -I\"$SRCROOT/vasm/syntax/mot/\" -I\"$SRCROOT/vasm/cpus/m68k/\"  \"$INPUT_FILE_PATH\" -o \"$DERIVED_FILE_DIR/cpu-preprocessed.c\"";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		015525FA1A5F2BD200096023 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = Makefile; path = vasm/Makefile; sourceTree = "<group>"; };
+		015525FC1A5F2C3400096023 /* atom.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = atom.c; path = vasm/atom.c; sourceTree = "<group>"; };
+		015525FD1A5F2C3400096023 /* atom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = atom.h; path = vasm/atom.h; sourceTree = "<group>"; };
+		015526191A5F2C3400096023 /* cpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cpu.c; sourceTree = "<group>"; };
+		0155261A1A5F2C3400096023 /* cpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu.h; sourceTree = "<group>"; };
+		0155261B1A5F2C3400096023 /* cpu_errors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu_errors.h; sourceTree = "<group>"; };
+		0155261C1A5F2C3400096023 /* cpu_models.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cpu_models.h; sourceTree = "<group>"; };
+		0155261D1A5F2C3400096023 /* opcodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opcodes.h; sourceTree = "<group>"; };
+		0155261E1A5F2C3400096023 /* operands.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = operands.h; sourceTree = "<group>"; };
+		0155261F1A5F2C3400096023 /* specregs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = specregs.h; sourceTree = "<group>"; };
+		0155263A1A5F2C3400096023 /* cpu_6502.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_6502.texi; sourceTree = "<group>"; };
+		0155263B1A5F2C3400096023 /* cpu_6800.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_6800.texi; sourceTree = "<group>"; };
+		0155263C1A5F2C3400096023 /* cpu_arm.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_arm.texi; sourceTree = "<group>"; };
+		0155263D1A5F2C3400096023 /* cpu_c16x.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_c16x.texi; sourceTree = "<group>"; };
+		0155263E1A5F2C3400096023 /* cpu_jagrisc.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_jagrisc.texi; sourceTree = "<group>"; };
+		0155263F1A5F2C3400096023 /* cpu_m68k.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_m68k.texi; sourceTree = "<group>"; };
+		015526401A5F2C3400096023 /* cpu_ppc.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_ppc.texi; sourceTree = "<group>"; };
+		015526411A5F2C3400096023 /* cpu_x86.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_x86.texi; sourceTree = "<group>"; };
+		015526421A5F2C3400096023 /* cpu_z80.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = cpu_z80.texi; sourceTree = "<group>"; };
+		015526431A5F2C3400096023 /* interface.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = interface.texi; sourceTree = "<group>"; };
+		015526441A5F2C3400096023 /* output_aout.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = output_aout.texi; sourceTree = "<group>"; };
+		015526451A5F2C3400096023 /* output_bin.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = output_bin.texi; sourceTree = "<group>"; };
+		015526461A5F2C3400096023 /* output_elf.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = output_elf.texi; sourceTree = "<group>"; };
+		015526471A5F2C3400096023 /* output_hunk.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = output_hunk.texi; sourceTree = "<group>"; };
+		015526481A5F2C3400096023 /* output_test.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = output_test.texi; sourceTree = "<group>"; };
+		015526491A5F2C3400096023 /* output_tos.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = output_tos.texi; sourceTree = "<group>"; };
+		0155264A1A5F2C3400096023 /* output_vobj.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = output_vobj.texi; sourceTree = "<group>"; };
+		0155264B1A5F2C3400096023 /* syntax_mot.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = syntax_mot.texi; sourceTree = "<group>"; };
+		0155264C1A5F2C3400096023 /* syntax_oldstyle.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = syntax_oldstyle.texi; sourceTree = "<group>"; };
+		0155264D1A5F2C3400096023 /* syntax_std.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = syntax_std.texi; sourceTree = "<group>"; };
+		0155264E1A5F2C3400096023 /* vasm.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = vasm.texi; sourceTree = "<group>"; };
+		0155264F1A5F2C3400096023 /* vasm_main.texi */ = {isa = PBXFileReference; lastKnownFileType = text; path = vasm_main.texi; sourceTree = "<group>"; };
+		015526501A5F2C3400096023 /* elf_reloc_68k.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elf_reloc_68k.h; path = vasm/elf_reloc_68k.h; sourceTree = "<group>"; };
+		015526511A5F2C3400096023 /* elf_reloc_386.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elf_reloc_386.h; path = vasm/elf_reloc_386.h; sourceTree = "<group>"; };
+		015526521A5F2C3400096023 /* elf_reloc_arm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elf_reloc_arm.h; path = vasm/elf_reloc_arm.h; sourceTree = "<group>"; };
+		015526531A5F2C3400096023 /* elf_reloc_ppc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elf_reloc_ppc.h; path = vasm/elf_reloc_ppc.h; sourceTree = "<group>"; };
+		015526541A5F2C3400096023 /* elf_reloc_x86_64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elf_reloc_x86_64.h; path = vasm/elf_reloc_x86_64.h; sourceTree = "<group>"; };
+		015526551A5F2C3400096023 /* error.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = error.c; path = vasm/error.c; sourceTree = "<group>"; };
+		015526561A5F2C3400096023 /* error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = error.h; path = vasm/error.h; sourceTree = "<group>"; };
+		015526571A5F2C3400096023 /* expr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = expr.c; path = vasm/expr.c; sourceTree = "<group>"; };
+		015526581A5F2C3400096023 /* expr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = expr.h; path = vasm/expr.h; sourceTree = "<group>"; };
+		015526591A5F2C3400096023 /* general_errors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = general_errors.h; path = vasm/general_errors.h; sourceTree = "<group>"; };
+		0155265A1A5F2C3400096023 /* hugeint.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = hugeint.c; path = vasm/hugeint.c; sourceTree = "<group>"; };
+		0155265B1A5F2C3400096023 /* hugeint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = hugeint.h; path = vasm/hugeint.h; sourceTree = "<group>"; };
+		0155265C1A5F2C3400096023 /* output_aout.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = output_aout.c; path = vasm/output_aout.c; sourceTree = "<group>"; };
+		0155265D1A5F2C3400096023 /* output_aout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = output_aout.h; path = vasm/output_aout.h; sourceTree = "<group>"; };
+		0155265E1A5F2C3400096023 /* output_bin.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = output_bin.c; path = vasm/output_bin.c; sourceTree = "<group>"; };
+		0155265F1A5F2C3400096023 /* output_elf.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = output_elf.c; path = vasm/output_elf.c; sourceTree = "<group>"; };
+		015526601A5F2C3400096023 /* output_elf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = output_elf.h; path = vasm/output_elf.h; sourceTree = "<group>"; };
+		015526611A5F2C3400096023 /* output_errors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = output_errors.h; path = vasm/output_errors.h; sourceTree = "<group>"; };
+		015526621A5F2C3500096023 /* output_hunk.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = output_hunk.c; path = vasm/output_hunk.c; sourceTree = "<group>"; };
+		015526631A5F2C3500096023 /* output_hunk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = output_hunk.h; path = vasm/output_hunk.h; sourceTree = "<group>"; };
+		015526641A5F2C3500096023 /* output_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = output_test.c; path = vasm/output_test.c; sourceTree = "<group>"; };
+		015526651A5F2C3500096023 /* output_tos.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = output_tos.c; path = vasm/output_tos.c; sourceTree = "<group>"; };
+		015526661A5F2C3500096023 /* output_tos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = output_tos.h; path = vasm/output_tos.h; sourceTree = "<group>"; };
+		015526671A5F2C3500096023 /* output_vobj.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = output_vobj.c; path = vasm/output_vobj.c; sourceTree = "<group>"; };
+		015526681A5F2C3500096023 /* parse.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = parse.c; path = vasm/parse.c; sourceTree = "<group>"; };
+		015526691A5F2C3500096023 /* parse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = parse.h; path = vasm/parse.h; sourceTree = "<group>"; };
+		0155266A1A5F2C3500096023 /* reloc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = reloc.c; path = vasm/reloc.c; sourceTree = "<group>"; };
+		0155266B1A5F2C3500096023 /* reloc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = reloc.h; path = vasm/reloc.h; sourceTree = "<group>"; };
+		0155266C1A5F2C3500096023 /* supp.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = supp.c; path = vasm/supp.c; sourceTree = "<group>"; };
+		0155266D1A5F2C3500096023 /* supp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = supp.h; path = vasm/supp.h; sourceTree = "<group>"; };
+		0155266E1A5F2C3500096023 /* symbol.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = symbol.c; path = vasm/symbol.c; sourceTree = "<group>"; };
+		0155266F1A5F2C3500096023 /* symbol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = symbol.h; path = vasm/symbol.h; sourceTree = "<group>"; };
+		015526701A5F2C3500096023 /* symtab.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = symtab.c; path = vasm/symtab.c; sourceTree = "<group>"; };
+		015526711A5F2C3500096023 /* symtab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = symtab.h; path = vasm/symtab.h; sourceTree = "<group>"; };
+		015526741A5F2C3500096023 /* syntax.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = syntax.c; sourceTree = "<group>"; };
+		015526751A5F2C3500096023 /* syntax.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = syntax.h; sourceTree = "<group>"; };
+		015526761A5F2C3500096023 /* syntax_errors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = syntax_errors.h; sourceTree = "<group>"; };
+		015526831A5F2C3500096023 /* tfloat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = tfloat.h; path = vasm/tfloat.h; sourceTree = "<group>"; };
+		015526841A5F2C3500096023 /* vasm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vasm.c; path = vasm/vasm.c; sourceTree = "<group>"; };
+		015526851A5F2C3500096023 /* vasm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vasm.h; path = vasm/vasm.h; sourceTree = "<group>"; };
+		015526861A5F2C3500096023 /* vobjdump.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vobjdump.c; path = vasm/vobjdump.c; sourceTree = "<group>"; };
+		015526871A5F2C3500096023 /* vobjdump.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vobjdump.h; path = vasm/vobjdump.h; sourceTree = "<group>"; };
+		015526881A5F2C5000096023 /* history */ = {isa = PBXFileReference; lastKnownFileType = text; name = history; path = vasm/history; sourceTree = "<group>"; };
+		015526A61A5F320D00096023 /* vasmm68k-mot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "vasmm68k-mot"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		015526A31A5F320D00096023 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		015525931A5F2A9000096023 = {
+			isa = PBXGroup;
+			children = (
+				015525FA1A5F2BD200096023 /* Makefile */,
+				015526881A5F2C5000096023 /* history */,
+				015526391A5F2C3400096023 /* doc */,
+				015525FB1A5F2C1900096023 /* vasm */,
+				0155259D1A5F2A9000096023 /* Products */,
+			);
+			indentWidth = 4;
+			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 1;
+		};
+		0155259D1A5F2A9000096023 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				015526A61A5F320D00096023 /* vasmm68k-mot */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		015525FB1A5F2C1900096023 /* vasm */ = {
+			isa = PBXGroup;
+			children = (
+				015525FE1A5F2C3400096023 /* cpus */,
+				015526721A5F2C3500096023 /* syntax */,
+				015525FC1A5F2C3400096023 /* atom.c */,
+				015525FD1A5F2C3400096023 /* atom.h */,
+				015526501A5F2C3400096023 /* elf_reloc_68k.h */,
+				015526511A5F2C3400096023 /* elf_reloc_386.h */,
+				015526521A5F2C3400096023 /* elf_reloc_arm.h */,
+				015526531A5F2C3400096023 /* elf_reloc_ppc.h */,
+				015526541A5F2C3400096023 /* elf_reloc_x86_64.h */,
+				015526551A5F2C3400096023 /* error.c */,
+				015526561A5F2C3400096023 /* error.h */,
+				015526571A5F2C3400096023 /* expr.c */,
+				015526581A5F2C3400096023 /* expr.h */,
+				015526591A5F2C3400096023 /* general_errors.h */,
+				0155265A1A5F2C3400096023 /* hugeint.c */,
+				0155265B1A5F2C3400096023 /* hugeint.h */,
+				0155265C1A5F2C3400096023 /* output_aout.c */,
+				0155265D1A5F2C3400096023 /* output_aout.h */,
+				0155265E1A5F2C3400096023 /* output_bin.c */,
+				0155265F1A5F2C3400096023 /* output_elf.c */,
+				015526601A5F2C3400096023 /* output_elf.h */,
+				015526611A5F2C3400096023 /* output_errors.h */,
+				015526621A5F2C3500096023 /* output_hunk.c */,
+				015526631A5F2C3500096023 /* output_hunk.h */,
+				015526641A5F2C3500096023 /* output_test.c */,
+				015526651A5F2C3500096023 /* output_tos.c */,
+				015526661A5F2C3500096023 /* output_tos.h */,
+				015526671A5F2C3500096023 /* output_vobj.c */,
+				015526681A5F2C3500096023 /* parse.c */,
+				015526691A5F2C3500096023 /* parse.h */,
+				0155266A1A5F2C3500096023 /* reloc.c */,
+				0155266B1A5F2C3500096023 /* reloc.h */,
+				0155266C1A5F2C3500096023 /* supp.c */,
+				0155266D1A5F2C3500096023 /* supp.h */,
+				0155266E1A5F2C3500096023 /* symbol.c */,
+				0155266F1A5F2C3500096023 /* symbol.h */,
+				015526701A5F2C3500096023 /* symtab.c */,
+				015526711A5F2C3500096023 /* symtab.h */,
+				015526831A5F2C3500096023 /* tfloat.h */,
+				015526841A5F2C3500096023 /* vasm.c */,
+				015526851A5F2C3500096023 /* vasm.h */,
+				015526861A5F2C3500096023 /* vobjdump.c */,
+				015526871A5F2C3500096023 /* vobjdump.h */,
+			);
+			name = vasm;
+			sourceTree = "<group>";
+		};
+		015525FE1A5F2C3400096023 /* cpus */ = {
+			isa = PBXGroup;
+			children = (
+				015526181A5F2C3400096023 /* m68k */,
+			);
+			name = cpus;
+			path = vasm/cpus;
+			sourceTree = "<group>";
+		};
+		015526181A5F2C3400096023 /* m68k */ = {
+			isa = PBXGroup;
+			children = (
+				015526191A5F2C3400096023 /* cpu.c */,
+				0155261A1A5F2C3400096023 /* cpu.h */,
+				0155261B1A5F2C3400096023 /* cpu_errors.h */,
+				0155261C1A5F2C3400096023 /* cpu_models.h */,
+				0155261D1A5F2C3400096023 /* opcodes.h */,
+				0155261E1A5F2C3400096023 /* operands.h */,
+				0155261F1A5F2C3400096023 /* specregs.h */,
+			);
+			path = m68k;
+			sourceTree = "<group>";
+		};
+		015526391A5F2C3400096023 /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				0155263A1A5F2C3400096023 /* cpu_6502.texi */,
+				0155263B1A5F2C3400096023 /* cpu_6800.texi */,
+				0155263C1A5F2C3400096023 /* cpu_arm.texi */,
+				0155263D1A5F2C3400096023 /* cpu_c16x.texi */,
+				0155263E1A5F2C3400096023 /* cpu_jagrisc.texi */,
+				0155263F1A5F2C3400096023 /* cpu_m68k.texi */,
+				015526401A5F2C3400096023 /* cpu_ppc.texi */,
+				015526411A5F2C3400096023 /* cpu_x86.texi */,
+				015526421A5F2C3400096023 /* cpu_z80.texi */,
+				015526431A5F2C3400096023 /* interface.texi */,
+				015526441A5F2C3400096023 /* output_aout.texi */,
+				015526451A5F2C3400096023 /* output_bin.texi */,
+				015526461A5F2C3400096023 /* output_elf.texi */,
+				015526471A5F2C3400096023 /* output_hunk.texi */,
+				015526481A5F2C3400096023 /* output_test.texi */,
+				015526491A5F2C3400096023 /* output_tos.texi */,
+				0155264A1A5F2C3400096023 /* output_vobj.texi */,
+				0155264B1A5F2C3400096023 /* syntax_mot.texi */,
+				0155264C1A5F2C3400096023 /* syntax_oldstyle.texi */,
+				0155264D1A5F2C3400096023 /* syntax_std.texi */,
+				0155264E1A5F2C3400096023 /* vasm.texi */,
+				0155264F1A5F2C3400096023 /* vasm_main.texi */,
+			);
+			name = doc;
+			path = vasm/doc;
+			sourceTree = "<group>";
+		};
+		015526721A5F2C3500096023 /* syntax */ = {
+			isa = PBXGroup;
+			children = (
+				015526731A5F2C3500096023 /* mot */,
+			);
+			name = syntax;
+			path = vasm/syntax;
+			sourceTree = "<group>";
+		};
+		015526731A5F2C3500096023 /* mot */ = {
+			isa = PBXGroup;
+			children = (
+				015526741A5F2C3500096023 /* syntax.c */,
+				015526751A5F2C3500096023 /* syntax.h */,
+				015526761A5F2C3500096023 /* syntax_errors.h */,
+			);
+			path = mot;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		015526A51A5F320D00096023 /* vasmm68k-mot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 015526AA1A5F320D00096023 /* Build configuration list for PBXNativeTarget "vasmm68k-mot" */;
+			buildPhases = (
+				015526A21A5F320D00096023 /* Sources */,
+				015526A31A5F320D00096023 /* Frameworks */,
+			);
+			buildRules = (
+				0155274F1A5F49A800096023 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = "vasmm68k-mot";
+			productName = "vasmm68k-mot";
+			productReference = 015526A61A5F320D00096023 /* vasmm68k-mot */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		015525941A5F2A9000096023 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Volker Barthelmann";
+				TargetAttributes = {
+					015526A51A5F320D00096023 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 015525971A5F2A9000096023 /* Build configuration list for PBXProject "vasm" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 015525931A5F2A9000096023;
+			productRefGroup = 0155259D1A5F2A9000096023 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				015526A51A5F320D00096023 /* vasmm68k-mot */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		015526A21A5F320D00096023 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0155274D1A5F444400096023 /* vasm.c in Sources */,
+				015527441A5F444400096023 /* output_hunk.c in Sources */,
+				0155273F1A5F444400096023 /* expr.c in Sources */,
+				015527341A5F340300096023 /* syntax.c in Sources */,
+				0155273E1A5F444400096023 /* error.c in Sources */,
+				015527451A5F444400096023 /* output_test.c in Sources */,
+				015527401A5F444400096023 /* hugeint.c in Sources */,
+				0155273D1A5F444400096023 /* atom.c in Sources */,
+				015527471A5F444400096023 /* output_vobj.c in Sources */,
+				015527491A5F444400096023 /* reloc.c in Sources */,
+				015527481A5F444400096023 /* parse.c in Sources */,
+				015527431A5F444400096023 /* output_elf.c in Sources */,
+				0155274B1A5F444400096023 /* symbol.c in Sources */,
+				0155274C1A5F444400096023 /* symtab.c in Sources */,
+				015527421A5F444400096023 /* output_bin.c in Sources */,
+				015527411A5F444400096023 /* output_aout.c in Sources */,
+				015527461A5F444400096023 /* output_tos.c in Sources */,
+				0155274A1A5F444400096023 /* supp.c in Sources */,
+				015527501A5F4A0600096023 /* cpu.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		015525A11A5F2A9000096023 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		015525A21A5F2A9000096023 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		015526AB1A5F320D00096023 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		015526AC1A5F320D00096023 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		015525971A5F2A9000096023 /* Build configuration list for PBXProject "vasm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				015525A11A5F2A9000096023 /* Debug */,
+				015525A21A5F2A9000096023 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		015526AA1A5F320D00096023 /* Build configuration list for PBXNativeTarget "vasmm68k-mot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				015526AB1A5F320D00096023 /* Debug */,
+				015526AC1A5F320D00096023 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 015525941A5F2A9000096023 /* Project object */;
+}
