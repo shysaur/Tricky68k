@@ -8,17 +8,19 @@
 
 #import "MOSTeletypeView.h"
 #import "MOSTeletypeViewDelegate.h"
+#import "MOSTeletypeTypesetter.h"
 
 
 @implementation MOSTeletypeView
 
 
-- init {
-  self = [super init];
+- (instancetype)initWithCoder:(NSCoder *)coder {
+  self = [super initWithCoder:coder];
   
   [self setContinuousSpellCheckingEnabled:NO];
   [self setAllowsUndo:NO];
   [self setTeletypeCursorPosition:0];
+  [[self layoutManager] setTypesetter:[[MOSTeletypeTypesetter alloc] init]];
   
   return self;
 }
