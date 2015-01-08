@@ -6,13 +6,10 @@
 //  Copyright (c) 2014 Daniele Cattaneo. All rights reserved.
 //
 
-#import "Document.h"
+#import "MOSSource.h"
 
-@interface Document ()
 
-@end
-
-@implementation Document
+@implementation MOSSource
 
 - (instancetype)init {
     self = [super init];
@@ -34,7 +31,7 @@
 - (NSString *)windowNibName {
   // Override returning the nib file name of the document
   // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
-  return @"Document";
+  return @"MOSSource";
 }
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {

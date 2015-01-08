@@ -14,10 +14,10 @@
 		01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01509B131A52191300724F29 /* NSFileHandle+Strings.m */; };
 		0155257B1A5EC0EA00096023 /* MOSTeletypeTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0155257A1A5EC0EA00096023 /* MOSTeletypeTypesetter.m */; };
 		0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */; };
-		016CD13C1A51A10E00D64892 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13B1A51A10E00D64892 /* AppDelegate.m */; };
+		016CD13C1A51A10E00D64892 /* MOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13B1A51A10E00D64892 /* MOSAppDelegate.m */; };
 		016CD13E1A51A10E00D64892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13D1A51A10E00D64892 /* main.m */; };
-		016CD1411A51A10E00D64892 /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1401A51A10E00D64892 /* Document.m */; };
-		016CD1441A51A10F00D64892 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1421A51A10F00D64892 /* Document.xib */; };
+		016CD1411A51A10E00D64892 /* MOSSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1401A51A10E00D64892 /* MOSSource.m */; };
+		016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1421A51A10F00D64892 /* MOSSource.xib */; };
 		016CD1461A51A10F00D64892 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1451A51A10F00D64892 /* Images.xcassets */; };
 		016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CD1471A51A10F00D64892 /* MainMenu.xib */; };
 		016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1601A51AC7600D64892 /* MOSExecutable.m */; };
@@ -61,12 +61,12 @@
 		0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimTableViewDelegate.m; sourceTree = "<group>"; };
 		016CD1351A51A10E00D64892 /* M68kSimApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M68kSimApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016CD1391A51A10E00D64892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		016CD13A1A51A10E00D64892 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		016CD13B1A51A10E00D64892 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		016CD13A1A51A10E00D64892 /* MOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSAppDelegate.h; sourceTree = "<group>"; };
+		016CD13B1A51A10E00D64892 /* MOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOSAppDelegate.m; sourceTree = "<group>"; };
 		016CD13D1A51A10E00D64892 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		016CD13F1A51A10E00D64892 /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
-		016CD1401A51A10E00D64892 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
-		016CD1431A51A10F00D64892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		016CD13F1A51A10E00D64892 /* MOSSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSSource.h; sourceTree = "<group>"; };
+		016CD1401A51A10E00D64892 /* MOSSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOSSource.m; sourceTree = "<group>"; };
+		016CD1431A51A10F00D64892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSource.xib; sourceTree = "<group>"; };
 		016CD1451A51A10F00D64892 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		016CD1481A51A10F00D64892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		016CD15F1A51AC7600D64892 /* MOSExecutable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOSExecutable.h; path = M68kSimApp/MOSExecutable.h; sourceTree = "<group>"; };
@@ -97,6 +97,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0155257C1A5EF3F800096023 /* Teletype IO */ = {
+			isa = PBXGroup;
+			children = (
+				014A3C6B1A5D432300F73FC5 /* MOSTeletypeView.h */,
+				014A3C6C1A5D432300F73FC5 /* MOSTeletypeView.m */,
+				015525791A5EC0EA00096023 /* MOSTeletypeTypesetter.h */,
+				0155257A1A5EC0EA00096023 /* MOSTeletypeTypesetter.m */,
+				014A3C6E1A5D439500F73FC5 /* MOSTeletypeViewDelegate.h */,
+				014A3C6F1A5D439500F73FC5 /* MOSTeletypeViewDelegate.m */,
+			);
+			name = "Teletype IO";
+			sourceTree = "<group>";
+		};
+		0155257D1A5EF41700096023 /* Simulator State TableViews */ = {
+			isa = PBXGroup;
+			children = (
+				0161BB721A5AF7560007548E /* MOSSimTableViewDelegate.h */,
+				0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */,
+				0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */,
+				011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */,
+				0196535D1A54D353002B3C39 /* MOSSimDisasmDataSource.h */,
+				0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */,
+				01A419431A57382900D9BD02 /* MOSSimStackDumpDataSource.h */,
+				01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */,
+				0196535A1A543A04002B3C39 /* MOSSimDumpDataSource.h */,
+				0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */,
+			);
+			name = "Simulator State TableViews";
+			sourceTree = "<group>";
+		};
+		0155257E1A5EF45700096023 /* UI Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0155257C1A5EF3F800096023 /* Teletype IO */,
+				0155257D1A5EF41700096023 /* Simulator State TableViews */,
+				016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */,
+				016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */,
+			);
+			name = "UI Controllers";
+			sourceTree = "<group>";
+		};
 		016CD12C1A51A10E00D64892 = {
 			isa = PBXGroup;
 			children = (
@@ -117,8 +158,8 @@
 		016CD1371A51A10E00D64892 /* M68kSimApp */ = {
 			isa = PBXGroup;
 			children = (
-				016CD13A1A51A10E00D64892 /* AppDelegate.h */,
-				016CD13B1A51A10E00D64892 /* AppDelegate.m */,
+				016CD13A1A51A10E00D64892 /* MOSAppDelegate.h */,
+				016CD13B1A51A10E00D64892 /* MOSAppDelegate.m */,
 				016CD1471A51A10F00D64892 /* MainMenu.xib */,
 				016CD15E1A51A4EC00D64892 /* Source Editor */,
 				016CD1641A51AC7D00D64892 /* Standalone Simulator */,
@@ -141,9 +182,9 @@
 		016CD15E1A51A4EC00D64892 /* Source Editor */ = {
 			isa = PBXGroup;
 			children = (
-				016CD13F1A51A10E00D64892 /* Document.h */,
-				016CD1401A51A10E00D64892 /* Document.m */,
-				016CD1421A51A10F00D64892 /* Document.xib */,
+				016CD13F1A51A10E00D64892 /* MOSSource.h */,
+				016CD1401A51A10E00D64892 /* MOSSource.m */,
+				016CD1421A51A10F00D64892 /* MOSSource.xib */,
 			);
 			name = "Source Editor";
 			sourceTree = "<group>";
@@ -168,24 +209,7 @@
 				014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */,
 				01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */,
 				01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */,
-				014A3C6B1A5D432300F73FC5 /* MOSTeletypeView.h */,
-				014A3C6C1A5D432300F73FC5 /* MOSTeletypeView.m */,
-				015525791A5EC0EA00096023 /* MOSTeletypeTypesetter.h */,
-				0155257A1A5EC0EA00096023 /* MOSTeletypeTypesetter.m */,
-				014A3C6E1A5D439500F73FC5 /* MOSTeletypeViewDelegate.h */,
-				014A3C6F1A5D439500F73FC5 /* MOSTeletypeViewDelegate.m */,
-				0161BB721A5AF7560007548E /* MOSSimTableViewDelegate.h */,
-				0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */,
-				0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */,
-				011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */,
-				0196535D1A54D353002B3C39 /* MOSSimDisasmDataSource.h */,
-				0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */,
-				01A419431A57382900D9BD02 /* MOSSimStackDumpDataSource.h */,
-				01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */,
-				0196535A1A543A04002B3C39 /* MOSSimDumpDataSource.h */,
-				0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */,
-				016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */,
-				016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */,
+				0155257E1A5EF45700096023 /* UI Controllers */,
 				016CD1681A51B27900D64892 /* MOSSimulatorView.xib */,
 			);
 			name = "Simulator Client";
@@ -259,7 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016CD1441A51A10F00D64892 /* Document.xib in Resources */,
+				016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */,
 				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
 				016CD1631A51AC7600D64892 /* MOSExecutable.xib in Resources */,
@@ -293,7 +317,7 @@
 			files = (
 				014A3C6A1A5D3B1900F73FC5 /* MOSNamedPipe.m in Sources */,
 				014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */,
-				016CD1411A51A10E00D64892 /* Document.m in Sources */,
+				016CD1411A51A10E00D64892 /* MOSSource.m in Sources */,
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
 				016CD13E1A51A10E00D64892 /* main.m in Sources */,
 				0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */,
@@ -302,7 +326,7 @@
 				01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */,
 				011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */,
 				0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */,
-				016CD13C1A51A10E00D64892 /* AppDelegate.m in Sources */,
+				016CD13C1A51A10E00D64892 /* MOSAppDelegate.m in Sources */,
 				016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */,
 				01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */,
 				0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */,
@@ -313,12 +337,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		016CD1421A51A10F00D64892 /* Document.xib */ = {
+		016CD1421A51A10F00D64892 /* MOSSource.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				016CD1431A51A10F00D64892 /* Base */,
 			);
-			name = Document.xib;
+			name = MOSSource.xib;
 			sourceTree = "<group>";
 		};
 		016CD1471A51A10F00D64892 /* MainMenu.xib */ = {

@@ -6,13 +6,10 @@
 //  Copyright (c) 2014 Daniele Cattaneo. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "MOSAppDelegate.h"
 
-@interface AppDelegate ()
 
-@end
-
-@implementation AppDelegate
+@implementation MOSAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   // Insert code here to initialize your application

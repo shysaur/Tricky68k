@@ -1,5 +1,5 @@
 //
-//  Document.h
+//  AppDelegate.h
 //  M68kSimApp
 //
 //  Created by Daniele Cattaneo on 29/12/14.
@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Document : NSDocument
 
+@interface MOSAppDelegate : NSObject <NSApplicationDelegate>
 
 @end
 
