@@ -30,17 +30,17 @@
                     </connections>
                 </button>
                 <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="27P-Wg-SmO">
-                    <rect key="frame" x="79" y="481" width="70" height="32"/>
-                    <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0Od-YP-5AV">
+                    <rect key="frame" x="79" y="481" width="79" height="32"/>
+                    <buttonCell key="cell" type="push" title="Pause" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0Od-YP-5AV">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="stop:" target="-2" id="0oM-TP-DHz"/>
+                        <action selector="pause:" target="-2" id="2Qx-5g-lJL"/>
                     </connections>
                 </button>
                 <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P68-1E-1ly">
-                    <rect key="frame" x="149" y="481" width="84" height="32"/>
+                    <rect key="frame" x="158" y="481" width="84" height="32"/>
                     <buttonCell key="cell" type="push" title="Step In" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H1d-C6-duL">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -50,7 +50,7 @@
                     </connections>
                 </button>
                 <button horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6A4-mi-J19">
-                    <rect key="frame" x="233" y="481" width="102" height="32"/>
+                    <rect key="frame" x="242" y="481" width="102" height="32"/>
                     <buttonCell key="cell" type="push" title="Step Over" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="83w-Hs-kko">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -375,7 +375,7 @@
                     </tableHeaderView>
                 </scrollView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="p0f-L7-J0e">
-                    <rect key="frame" x="335" y="489" width="82" height="17"/>
+                    <rect key="frame" x="344" y="489" width="82" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Flags display" id="gSU-Ea-Lgl">
                         <font key="font" metaFont="fixedUser"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -396,10 +396,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="585" height="133"/>
-                                <size key="maxSize" width="585" height="10000000"/>
+                                <size key="maxSize" width="587" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <size key="minSize" width="585" height="133"/>
-                                <size key="maxSize" width="585" height="10000000"/>
+                                <size key="maxSize" width="587" height="10000000"/>
                                 <connections>
                                     <outlet property="delegate" destination="OaH-e5-S6R" id="ht3-ce-v6W"/>
                                 </connections>

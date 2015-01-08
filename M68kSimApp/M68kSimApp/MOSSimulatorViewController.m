@@ -131,7 +131,7 @@
 }
 
 
-- (IBAction)stop:(id)sender {
+- (IBAction)pause:(id)sender {
   [simProxy stop];
 }
 
@@ -148,6 +148,15 @@
 
 - (BOOL)isSimulatorRunning {
   return simRunning;
+}
+
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
+  if ([menuItem action] == @selector(run:)) return !simRunning;
+  if ([menuItem action] == @selector(stepIn:)) return !simRunning;
+  if ([menuItem action] == @selector(stepOver:)) return !simRunning;
+  if ([menuItem action] == @selector(pause:)) return simRunning;
+  return [super validateMenuItem:menuItem];
 }
 
 

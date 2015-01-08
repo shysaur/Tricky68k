@@ -33,7 +33,7 @@
 - (MOSSimulatorProxy*)simulatorProxy;
 
 - (IBAction)run:(id)sender;
-- (IBAction)stop:(id)sender;
+- (IBAction)pause:(id)sender;
 - (IBAction)stepIn:(id)sender;
 - (IBAction)stepOver:(id)sender;
 

@@ -604,20 +604,31 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="View" id="H8h-7b-M4v">
+                <menuItem title="Debug" id="H8h-7b-M4v">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="View" id="HyV-fh-RgO">
+                    <menu key="submenu" title="Debug" id="eJt-hF-Co2">
                         <items>
-                            <menuItem title="Show Toolbar" keyEquivalent="t" id="snW-S8-Cw5">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem title="Run" keyEquivalent="r" id="bNf-3m-2Vg">
                                 <connections>
-                                    <action selector="toggleToolbarShown:" target="-1" id="BXY-wc-z0C"/>
+                                    <action selector="run:" target="-1" id="qUt-vD-N86"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Customize Toolbar…" id="1UK-8n-QPP">
+                            <menuItem title="Pause" keyEquivalent="c" id="l7k-Di-4sK">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                <connections>
+                                    <action selector="pause:" target="-1" id="Y2u-V8-3k1"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Step In" keyEquivalent="" id="d3i-RD-KaA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="pQI-g3-MTW"/>
+                                    <action selector="stepIn:" target="-1" id="SOu-I6-0wS"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Step Over" keyEquivalent="" id="2Jy-hC-C6v">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="stepOver:" target="-1" id="MqE-x4-h8f"/>
                                 </connections>
                             </menuItem>
                         </items>
