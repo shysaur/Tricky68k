@@ -10,6 +10,7 @@
 
 
 @class MOSSimulatorProxy;
+@class MOSTeletypeView;
 
 
 @interface MOSTeletypeViewDelegate : NSObject <NSTextViewDelegate> {
@@ -17,10 +18,14 @@
   NSFileHandle *toSim;
   NSFileHandle *fromSim;
   NSMutableString *lineBuffer;
-  IBOutlet NSTextView *textView;
+  NSInteger cursor, viewCursor, viewSpan;
+  IBOutlet MOSTeletypeView *textView;
 }
 
 - (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
-- (void)sendString:(NSString*)str;
+
+- (void)typedString:(NSString*)str;
+- (void)moveCursor:(NSInteger)displ;
+- (void)deleteCharactersFromCursor:(NSInteger)amount;
 
 @end

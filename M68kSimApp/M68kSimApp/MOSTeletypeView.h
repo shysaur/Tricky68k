@@ -9,6 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MOSTeletypeView : NSTextView
+@interface MOSTeletypeView : NSTextView {
+  NSRect curRect;
+}
+
+- (void)setTeletypeCursorPosition:(NSInteger)cur;
 
 @end
