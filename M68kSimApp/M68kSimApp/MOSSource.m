@@ -20,6 +20,7 @@
   [fragaria setObject:self forKey:MGSFODelegate];
   [fragaria embedInView:editView];
   
+  [fragaria setObject:@"VASM Motorola 68000 Assembly" forKey:MGSFOSyntaxDefinitionName];
   [fragaria setObject:@YES forKey:MGSFOIsSyntaxColoured];
   [fragaria setObject:@YES forKey:MGSFOShowLineNumberGutter];
   if (initialData) {

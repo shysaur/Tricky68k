@@ -15,6 +15,8 @@
 		0155257B1A5EC0EA00096023 /* MOSTeletypeTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0155257A1A5EC0EA00096023 /* MOSTeletypeTypesetter.m */; };
 		015525801A5EFD9700096023 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; };
 		015525831A5EFE5200096023 /* MGSFragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		015525851A5F11CB00096023 /* Syntax Definitions in Resources */ = {isa = PBXBuildFile; fileRef = 015525841A5F11CB00096023 /* Syntax Definitions */; };
+		015525871A5F11E300096023 /* SyntaxDefinitions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 015525861A5F11E300096023 /* SyntaxDefinitions.plist */; };
 		0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */; };
 		016CD13C1A51A10E00D64892 /* MOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13B1A51A10E00D64892 /* MOSAppDelegate.m */; };
 		016CD13E1A51A10E00D64892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13D1A51A10E00D64892 /* main.m */; };
@@ -72,6 +74,8 @@
 		015525791A5EC0EA00096023 /* MOSTeletypeTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSTeletypeTypesetter.h; sourceTree = "<group>"; };
 		0155257A1A5EC0EA00096023 /* MOSTeletypeTypesetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSTeletypeTypesetter.m; sourceTree = "<group>"; };
 		0155257F1A5EFD9700096023 /* MGSFragaria.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSFragaria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		015525841A5F11CB00096023 /* Syntax Definitions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Syntax Definitions"; sourceTree = "<group>"; };
+		015525861A5F11E300096023 /* SyntaxDefinitions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinitions.plist; sourceTree = "<group>"; };
 		0161BB721A5AF7560007548E /* MOSSimTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimTableViewDelegate.h; sourceTree = "<group>"; };
 		0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimTableViewDelegate.m; sourceTree = "<group>"; };
 		016CD1351A51A10E00D64892 /* M68kSimApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M68kSimApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				016CD1451A51A10F00D64892 /* Images.xcassets */,
+				015525861A5F11E300096023 /* SyntaxDefinitions.plist */,
+				015525841A5F11CB00096023 /* Syntax Definitions */,
 				016CD1391A51A10E00D64892 /* Info.plist */,
 				016CD13D1A51A10E00D64892 /* main.m */,
 			);
@@ -302,8 +308,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */,
+				015525871A5F11E300096023 /* SyntaxDefinitions.plist in Resources */,
 				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
+				015525851A5F11CB00096023 /* Syntax Definitions in Resources */,
 				016CD1631A51AC7600D64892 /* MOSExecutable.xib in Resources */,
 				016CD16A1A51B27900D64892 /* MOSSimulatorView.xib in Resources */,
 			);
