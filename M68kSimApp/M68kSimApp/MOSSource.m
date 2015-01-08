@@ -7,46 +7,69 @@
 //
 
 #import "MOSSource.h"
+#import <MGSFragaria/MGSFragaria.h>
 
 
 @implementation MOSSource
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-    // Add your subclass-specific initialization here.
-    }
-    return self;
-}
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
   [super windowControllerDidLoadNib:aController];
-  // Add any code here that needs to be executed once the windowController has loaded the document's window.
+  
+  fragaria = [[MGSFragaria alloc] init];
+  [fragaria setObject:self forKey:MGSFODelegate];
+  [fragaria embedInView:editView];
+  
+  [fragaria setObject:@YES forKey:MGSFOIsSyntaxColoured];
+  [fragaria setObject:@YES forKey:MGSFOShowLineNumberGutter];
+  if (initialData) {
+    [self loadData:initialData];
+    initialData = nil;
+  }
+  
+  textView = [fragaria objectForKey:ro_MGSFOTextView];
 }
 
-+ (BOOL)autosavesInPlace {
-  return YES;
-}
 
 - (NSString *)windowNibName {
-  // Override returning the nib file name of the document
-  // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
   return @"MOSSource";
 }
 
+
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {
-  // Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
-  // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-  [NSException raise:@"UnimplementedMethod" format:@"%@ is unimplemented", NSStringFromSelector(_cmd)];
-  return nil;
+  NSTextStorage *ts;
+  NSRange allRange;
+  NSDictionary *opts;
+  NSData *res;
+  NSNumber *enc;
+  
+  enc = [NSNumber numberWithInteger:NSUTF8StringEncoding];
+  opts = @{NSDocumentTypeDocumentOption: NSPlainTextDocumentType,
+           NSCharacterEncodingDocumentAttribute: enc};
+  ts = [textView textStorage];
+  
+  allRange.length = [ts length];
+  allRange.location = 0;
+  res = [ts dataFromRange:allRange documentAttributes:opts error:outError];
+  return res;
 }
 
+
+- (void)loadData:(NSData*)data {
+  NSString *tmp;
+  
+  tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  [fragaria setString:tmp];
+}
+
+
 - (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
-  // Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
-  // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
-  // If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
-  [NSException raise:@"UnimplementedMethod" format:@"%@ is unimplemented", NSStringFromSelector(_cmd)];
+  if (fragaria)
+    [self loadData:data];
+  else
+    initialData = data;
   return YES;
 }
+
 
 @end

@@ -9,7 +9,15 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MOSSource : NSDocument
+@class MGSFragaria;
+
+
+@interface MOSSource : NSDocument {
+  NSTextView *textView;
+  NSData *initialData;
+  MGSFragaria *fragaria;
+  IBOutlet NSView *editView;
+}
 
 @end
 

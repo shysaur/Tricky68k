@@ -5,6 +5,9 @@
       location = "group:M68kSimApp/M68kSimApp.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Fragraria/Fragaria.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:m68ksim/m68ksim.xcodeproj">
    </FileRef>
    <FileRef

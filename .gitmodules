@@ -1,3 +1,6 @@
 [submodule "Musashi/musashi"]
 	path = Musashi/musashi
 	url = git://github.com/kstenerud/Musashi.git
+[submodule "Fragraria"]
+	path = Fragraria
+	url = git://github.com/mz2/Fragaria.git
