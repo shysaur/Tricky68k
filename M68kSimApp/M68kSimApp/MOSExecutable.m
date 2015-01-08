@@ -44,6 +44,13 @@
 }
 
 
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
+  if ([anItem action] == @selector(runPageLayout:)) return NO;
+  if ([anItem action] == @selector(printDocument:)) return NO;
+  return [super validateUserInterfaceItem:anItem];
+}
+
+
 - (BOOL)isEntireFileLoaded {
   return YES;
 }
