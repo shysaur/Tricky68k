@@ -1,0 +1,159 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		018F65451A601C6A005BA00E /* binutils-gdb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "binutils-gdb"; sourceTree = "<group>"; };
+		018F65561A6036E1005BA00E /* buildscript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = buildscript.sh; sourceTree = "<group>"; };
+		018F65581A60396B005BA00E /* m68k-elf-addr2line */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-addr2line"; path = "bin/m68k-elf-addr2line"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65591A60396B005BA00E /* m68k-elf-ar */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-ar"; path = "bin/m68k-elf-ar"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F655A1A60396C005BA00E /* m68k-elf-as */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-as"; path = "bin/m68k-elf-as"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F655B1A60396C005BA00E /* m68k-elf-c++filt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-c++filt"; path = "bin/m68k-elf-c++filt"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F655C1A60396D005BA00E /* m68k-elf-elfedit */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-elfedit"; path = "bin/m68k-elf-elfedit"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F655D1A60396D005BA00E /* m68k-elf-gdb */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-gdb"; path = "bin/m68k-elf-gdb"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F655E1A60396E005BA00E /* m68k-elf-gprof */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-gprof"; path = "bin/m68k-elf-gprof"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F655F1A60396F005BA00E /* m68k-elf-ld */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-ld"; path = "bin/m68k-elf-ld"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65611A603970005BA00E /* m68k-elf-nm */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-nm"; path = "bin/m68k-elf-nm"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65621A603970005BA00E /* m68k-elf-objcopy */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-objcopy"; path = "bin/m68k-elf-objcopy"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65631A603971005BA00E /* m68k-elf-objdump */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-objdump"; path = "bin/m68k-elf-objdump"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65641A603971005BA00E /* m68k-elf-ranlib */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-ranlib"; path = "bin/m68k-elf-ranlib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65651A603972005BA00E /* m68k-elf-readelf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-readelf"; path = "bin/m68k-elf-readelf"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65661A603972005BA00E /* m68k-elf-size */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-size"; path = "bin/m68k-elf-size"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65671A603973005BA00E /* m68k-elf-strings */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-strings"; path = "bin/m68k-elf-strings"; sourceTree = BUILT_PRODUCTS_DIR; };
+		018F65681A603973005BA00E /* m68k-elf-strip */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-strip"; path = "bin/m68k-elf-strip"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		018F65351A60167E005BA00E = {
+			isa = PBXGroup;
+			children = (
+				018F65561A6036E1005BA00E /* buildscript.sh */,
+				018F65451A601C6A005BA00E /* binutils-gdb */,
+				018F656B1A6039A5005BA00E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		018F656B1A6039A5005BA00E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				018F65581A60396B005BA00E /* m68k-elf-addr2line */,
+				018F65591A60396B005BA00E /* m68k-elf-ar */,
+				018F655A1A60396C005BA00E /* m68k-elf-as */,
+				018F655B1A60396C005BA00E /* m68k-elf-c++filt */,
+				018F655C1A60396D005BA00E /* m68k-elf-elfedit */,
+				018F655D1A60396D005BA00E /* m68k-elf-gdb */,
+				018F655E1A60396E005BA00E /* m68k-elf-gprof */,
+				018F655F1A60396F005BA00E /* m68k-elf-ld */,
+				018F65611A603970005BA00E /* m68k-elf-nm */,
+				018F65621A603970005BA00E /* m68k-elf-objcopy */,
+				018F65631A603971005BA00E /* m68k-elf-objdump */,
+				018F65641A603971005BA00E /* m68k-elf-ranlib */,
+				018F65651A603972005BA00E /* m68k-elf-readelf */,
+				018F65661A603972005BA00E /* m68k-elf-size */,
+				018F65671A603973005BA00E /* m68k-elf-strings */,
+				018F65681A603973005BA00E /* m68k-elf-strip */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		018F65501A602050005BA00E /* binutils */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "--target=m68k-elf --prefix=$(BUILT_PRODUCTS_DIR)";
+			buildConfigurationList = 018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "binutils" */;
+			buildPhases = (
+			);
+			buildToolPath = "$(SRCROOT)/buildscript.sh";
+			buildWorkingDirectory = "$(BUILDROOT)";
+			dependencies = (
+			);
+			name = binutils;
+			passBuildSettingsInEnvironment = 1;
+			productName = binutils;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		018F65361A60167E005BA00E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = FSF;
+				TargetAttributes = {
+					018F65501A602050005BA00E = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 018F65391A60167E005BA00E /* Build configuration list for PBXProject "binutils" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 018F65351A60167E005BA00E;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				018F65501A602050005BA00E /* binutils */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		018F653B1A60167E005BA00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		018F653C1A60167E005BA00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		018F65521A602050005BA00E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		018F65531A602050005BA00E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		018F65391A60167E005BA00E /* Build configuration list for PBXProject "binutils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				018F653B1A60167E005BA00E /* Debug */,
+				018F653C1A60167E005BA00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "binutils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				018F65521A602050005BA00E /* Debug */,
+				018F65531A602050005BA00E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 018F65361A60167E005BA00E /* Project object */;
+}

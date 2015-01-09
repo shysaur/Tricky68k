@@ -4,3 +4,6 @@
 [submodule "Fragraria"]
 	path = Fragraria
 	url = git://github.com/mz2/Fragaria.git
+[submodule "binutils/binutils-gdb"]
+	path = binutils/binutils-gdb
+	url = git://sourceware.org/git/binutils-gdb.git
