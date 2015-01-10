@@ -79,8 +79,6 @@ static void *AssemblageEvent = &AssemblageEvent;
 
 
 - (IBAction)assembleAndRun:(id)sender {
-  NSURL *tempSourceCopy;
-  
   if (assembler) return;
   
   assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
@@ -112,6 +110,7 @@ static void *AssemblageEvent = &AssemblageEvent;
     if ([assembler assemblageResult] == MOSAssemblageResultFailure) {
       NSLog(@"Assemblage failed");
     } else {
+      unlink([tempSourceCopy fileSystemRepresentation]);
       [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:assemblyOutput display:YES completionHandler:nil];
     }
     [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];

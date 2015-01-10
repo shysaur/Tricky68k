@@ -19,6 +19,7 @@
   MGSFragaria *fragaria;
   MOSAssembler *assembler;
   NSURL *assemblyOutput;
+  NSURL *tempSourceCopy;
   IBOutlet NSView *editView;
 }
 

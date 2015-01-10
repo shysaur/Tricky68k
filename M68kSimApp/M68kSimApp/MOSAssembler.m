@@ -125,6 +125,7 @@
     
     asmResult = MOSAssemblageResultSuccess;
   finish:
+    unlink([unlinkedelf fileSystemRepresentation]);
     dispatch_async(dispatch_get_main_queue(), ^{
       [self willChangeValueForKey:@"complete"];
       completed = YES;
