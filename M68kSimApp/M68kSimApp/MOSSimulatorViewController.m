@@ -18,8 +18,8 @@
 @implementation MOSSimulatorViewController
 
 
-- init {
-  self = [super init];
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   viewHasLoaded = NO;
   return self;
 }
