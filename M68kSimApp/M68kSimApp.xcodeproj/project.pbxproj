@@ -171,6 +171,7 @@
 				0155257D1A5EF41700096023 /* Simulator State TableViews */,
 				016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */,
 				016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */,
+				016CD1681A51B27900D64892 /* MOSSimulatorView.xib */,
 			);
 			name = "UI Controllers";
 			sourceTree = "<group>";
@@ -250,7 +251,6 @@
 				01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */,
 				01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */,
 				0155257E1A5EF45700096023 /* UI Controllers */,
-				016CD1681A51B27900D64892 /* MOSSimulatorView.xib */,
 			);
 			name = "Simulator Client";
 			sourceTree = "<group>";

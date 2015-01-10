@@ -32,6 +32,7 @@
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
+  [simProxy kill];
   simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
   [simProxy addObserver:self forKeyPath:@"simulatorState"
                 options:NSKeyValueObservingOptionInitial context:NULL];
@@ -143,6 +144,11 @@
 
 - (IBAction)stepOver:(id)sender {
   [simProxy stepOver];
+}
+
+
+- (IBAction)restart:(id)sender {
+  [self setSimulatedExecutable:simExec];
 }
 
 

@@ -100,7 +100,9 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     
     [strongTask waitUntilExit];
     /* We don't want this block to retain the proxy, otherwise we can't kill
-     * the simulator on dealloc. */
+     * the simulator on dealloc. We won't be able to kill it when a command
+     * is in progress, though (so it won't work when the simulator is running,
+     * for example). */
     strongSelf = weakSelf;
     
     if (strongSelf) {
@@ -176,6 +178,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 
 - (BOOL)runWithCommand:(NSString*)cmd {
+  
   if (curState != MOSSimulatorStatePaused || isSimDead) return NO;
   if (![self sendCommandToSimulatorDebugger:cmd]) return NO;
   

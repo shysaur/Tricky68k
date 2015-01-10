@@ -632,6 +632,13 @@
                                     <action selector="pause:" target="-1" id="Y2u-V8-3k1"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Restart" id="gwX-WD-bvu">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="restart:" target="-1" id="yGv-H7-ma1"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="K9E-7S-616"/>
                             <menuItem title="Step In" keyEquivalent="" id="d3i-RD-KaA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
