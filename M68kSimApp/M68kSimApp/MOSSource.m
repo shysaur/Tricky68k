@@ -8,6 +8,11 @@
 
 #import "MOSSource.h"
 #import <MGSFragaria/MGSFragaria.h>
+#import "NSURL+TemporaryFile.h"
+#import "MOSAssembler.h"
+
+
+static void *AssemblageEvent = &AssemblageEvent;
 
 
 @implementation MOSSource
@@ -70,6 +75,49 @@
   else
     initialData = data;
   return YES;
+}
+
+
+- (IBAction)assembleAndRun:(id)sender {
+  NSURL *tempSourceCopy;
+  
+  if (assembler) return;
+  
+  assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+  @try {
+    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];
+  } @finally {}
+  assembler = [[MOSAssembler alloc] init];
+  [assembler addObserver:self forKeyPath:@"complete" options:0 context:AssemblageEvent];
+  [assembler setOutputFile:assemblyOutput];
+  
+  tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
+  [self saveToURL:tempSourceCopy ofType:@"public.plain-text"
+    forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
+      if (err) {
+        [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];
+        assembler = nil;
+        return;
+      }
+      [assembler setSourceFile:tempSourceCopy];
+      [assembler assemble];
+  }];
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+    change:(NSDictionary *)change context:(void *)context {
+  if (context == AssemblageEvent) {
+    NSLog(@"Assemblage has finished");
+    if ([assembler assemblageResult] == MOSAssemblageResultFailure) {
+      NSLog(@"Assemblage failed");
+    } else {
+      [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:assemblyOutput display:YES completionHandler:nil];
+    }
+    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];
+    assembler = nil;
+  } else
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 

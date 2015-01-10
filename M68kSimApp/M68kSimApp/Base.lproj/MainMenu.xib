@@ -604,6 +604,19 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Assembler" id="ClQ-X9-chs">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Assembler" id="fVL-NN-tUs">
+                        <items>
+                            <menuItem title="Assemble and Run" id="sfc-Vy-BKl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="assembleAndRun:" target="-1" id="x06-Tz-bcQ"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Debug" id="H8h-7b-M4v">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Debug" id="eJt-hF-Co2">

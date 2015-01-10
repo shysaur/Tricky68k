@@ -10,14 +10,19 @@
 
 
 @class MGSFragaria;
+@class MOSAssembler;
 
 
 @interface MOSSource : NSDocument {
   NSTextView *textView;
   NSData *initialData;
   MGSFragaria *fragaria;
+  MOSAssembler *assembler;
+  NSURL *assemblyOutput;
   IBOutlet NSView *editView;
 }
+
+- (IBAction)assembleAndRun:(id)sender;
 
 @end
 

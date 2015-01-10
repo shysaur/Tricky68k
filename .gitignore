@@ -212,3 +212,5 @@ m68ksim/test.ld
 m68ksim/test.o
 m68ksim/test.s
 Untitled.s
+*.o
+broken.s
