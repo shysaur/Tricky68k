@@ -19,15 +19,17 @@
 
 + (instancetype)URLWithTemporaryFilePathWithExtension:(NSString*)ext {
   NSFileManager *fm;
+  NSString *tempdir;
   NSString *uuid;
   NSString *bundleid;
   NSString *path;
   
   fm = [NSFileManager defaultManager];
   bundleid = [[NSBundle mainBundle] bundleIdentifier];
+  tempdir = NSTemporaryDirectory();
   do {
     uuid = [[NSUUID UUID] UUIDString];
-    path = [NSString stringWithFormat:@"/tmp/temp.%@.%@.%@", bundleid, uuid, ext];
+    path = [NSString stringWithFormat:@"%@/%@.%@.%@", tempdir, bundleid, uuid, ext];
   } while ([fm fileExistsAtPath:path isDirectory:NO]);
   return [[NSURL alloc] initFileURLWithPath:path isDirectory:NO];
 }
