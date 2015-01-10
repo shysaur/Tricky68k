@@ -156,7 +156,7 @@
   if ([menuItem action] == @selector(stepIn:)) return !simRunning;
   if ([menuItem action] == @selector(stepOver:)) return !simRunning;
   if ([menuItem action] == @selector(pause:)) return simRunning;
-  return [super validateMenuItem:menuItem];
+  return YES;
 }
 
 
