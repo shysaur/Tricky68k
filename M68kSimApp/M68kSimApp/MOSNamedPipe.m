@@ -10,18 +10,25 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #import "MOSNamedPipe.h"
+#import "NSURL+TemporaryFile.h"
 
 
 @implementation MOSNamedPipe
 
 
 - init {
-  char temp[80] = "/tmp/tempMOSNamedPipe.XXXXXXXXXXXXXXXX";
+  int res;
+  const char *temp;
+  NSURL *tempUrl;
   
   self = [super init];
   
-  if (!mktemp(temp)) return nil;
-  if (mkfifo(temp, 0666)) return nil;
+  do {
+    tempUrl = [NSURL URLWithTemporaryFilePath];
+    temp = [tempUrl fileSystemRepresentation];
+    res = mkfifo(temp, 0666);
+    if (res < 0 && errno != EEXIST) return nil;
+  } while (res < 0);
   
   mount = [[NSURL alloc] initFileURLWithFileSystemRepresentation:temp
     isDirectory:NO relativeToURL:nil];
