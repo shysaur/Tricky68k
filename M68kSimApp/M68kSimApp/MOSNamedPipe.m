@@ -58,7 +58,7 @@
 - (void)dealloc {
   if (writeFh) [writeFh closeFile];
   if (readFh) [readFh closeFile];
-  unlink([[mount path] UTF8String]);
+  unlink([[mount path] fileSystemRepresentation]);
 }
 
 
