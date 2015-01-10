@@ -78,6 +78,12 @@ static void *AssemblageEvent = &AssemblageEvent;
 }
 
 
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
+  if ([anItem action] == @selector(assembleAndRun:)) return !assembler;
+  return [super validateUserInterfaceItem:anItem];
+}
+
+
 - (IBAction)assembleAndRun:(id)sender {
   if (assembler) return;
   
