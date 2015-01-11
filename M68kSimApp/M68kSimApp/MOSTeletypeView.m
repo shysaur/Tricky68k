@@ -78,9 +78,9 @@
 }
 
 
-- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
+- (BOOL)validateMenuItem:(NSMenuItem *)anItem {
   if ([anItem action] == @selector(cut:)) return NO;
-  return [super validateUserInterfaceItem:anItem];
+  return YES;
 }
 
 

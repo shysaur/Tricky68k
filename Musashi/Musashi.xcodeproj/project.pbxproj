@@ -325,6 +325,7 @@
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = lib;
 				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = (
 					"-DM68K_COMPILE_FOR_MAME=OPT_OFF",
 					"-include\"$PROJECT_DIR/m68kconf.h\"",
@@ -339,6 +340,7 @@
 				EXECUTABLE_EXTENSION = a;
 				EXECUTABLE_PREFIX = lib;
 				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = (
 					"-DM68K_COMPILE_FOR_MAME=OPT_OFF",
 					"-include\"$PROJECT_DIR/m68kconf.h\"",

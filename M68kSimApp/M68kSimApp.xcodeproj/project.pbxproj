@@ -246,8 +246,6 @@
 		016CD1651A51AF7A00D64892 /* Simulator Client */ = {
 			isa = PBXGroup;
 			children = (
-				014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */,
-				014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */,
 				01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */,
 				01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */,
 				0155257E1A5EF45700096023 /* UI Controllers */,
@@ -280,6 +278,8 @@
 		018F65731A609FCD005BA00E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */,
+				014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */,
 				01509B121A52191300724F29 /* NSFileHandle+Strings.h */,
 				01509B131A52191300724F29 /* NSFileHandle+Strings.m */,
 				015708AB1A618E8B005D08DB /* NSURL+TemporaryFile.h */,
@@ -515,6 +515,7 @@
 				);
 				INFOPLIST_FILE = M68kSimApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -530,6 +531,7 @@
 				);
 				INFOPLIST_FILE = M68kSimApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

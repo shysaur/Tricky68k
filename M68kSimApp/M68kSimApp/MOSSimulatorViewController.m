@@ -88,8 +88,8 @@
 }
 
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
+- (void)loadView {
+  [super loadView];
   viewHasLoaded = YES;
   
   if (!simProxy)

@@ -23,15 +23,16 @@
 }
 
 
-- (void)windowControllerWillLoadNib:(NSWindowController *)windowController {
-  NSAssert(simVc, @"Simulator must exist at nib load");
-  [simVc loadView];
-  [simVc viewDidLoad];
-}
-
-
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
+  NSResponder *oldresp;
+  
   [[aController window] setContentView:[simVc view]];
+  if ([[simVc view] nextResponder] != simVc) {
+    /* Since Yosemite, AppKit will do this automatically */
+    oldresp = [[simVc view] nextResponder];
+    [[simVc view] setNextResponder:simVc];
+    [simVc setNextResponder:oldresp];
+  }
   [super windowControllerDidLoadNib:aController];
 }
 
@@ -43,10 +44,10 @@
 }
 
 
-- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
+- (BOOL)validateMenuItem:(NSMenuItem *)anItem {
   if ([anItem action] == @selector(runPageLayout:)) return NO;
   if ([anItem action] == @selector(printDocument:)) return NO;
-  return [super validateUserInterfaceItem:anItem];
+  return YES;
 }
 
 

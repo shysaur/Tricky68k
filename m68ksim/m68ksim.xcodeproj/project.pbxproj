@@ -257,6 +257,7 @@
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/M68kSim-cveyivcdmknefqcmyikhklmdldlu/Build/Products/Debug",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "-DM68K_COMPILE_FOR_MAME=OPT_OFF";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$PROJECT_DIR/../Musashi/**";
@@ -271,6 +272,7 @@
 					"$(inherited)",
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/M68kSim-cveyivcdmknefqcmyikhklmdldlu/Build/Products/Debug",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "-DM68K_COMPILE_FOR_MAME=OPT_OFF";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$PROJECT_DIR/../Musashi/**";

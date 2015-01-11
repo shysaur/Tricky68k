@@ -78,7 +78,7 @@ static void *AssemblageEvent = &AssemblageEvent;
 }
 
 
-- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
+- (BOOL)validateMenuItem:(NSMenuItem *)anItem {
   if ([anItem action] == @selector(assembleAndRun:)) return !assembler;
   return YES;
 }
