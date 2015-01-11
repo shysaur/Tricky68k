@@ -10,6 +10,7 @@
 #import <MGSFragaria/MGSFragaria.h>
 #import "NSURL+TemporaryFile.h"
 #import "MOSAssembler.h"
+#import "MOSJobStatusManager.h"
 
 
 static void *AssemblageEvent = &AssemblageEvent;
@@ -98,12 +99,19 @@ static void *AssemblageEvent = &AssemblageEvent;
   tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
   [self saveToURL:tempSourceCopy ofType:@"public.plain-text"
     forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
+      MOSJobStatusManager *jsm;
+      NSUInteger jobid;
+      
+      jsm = [MOSJobStatusManager sharedJobStatusManger];
+      jobid = [jsm addJobWithInfo:@{MOSJobVisibleDescription: @"Assembling a file"}];
+      
       if (err) {
         [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];
         assembler = nil;
         return;
       }
       [assembler setSourceFile:tempSourceCopy];
+      [assembler setJobId:jobid];
       [assembler assemble];
   }];
 }

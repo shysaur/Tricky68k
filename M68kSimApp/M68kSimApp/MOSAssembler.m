@@ -8,6 +8,7 @@
 
 #import "MOSAssembler.h"
 #import "NSURL+TemporaryFile.h"
+#import "MOSJobStatusManager.h"
 
 
 @implementation MOSAssembler
@@ -18,8 +19,15 @@
 
   running = NO;
   completed = NO;
+  isJob = NO;
   
   return self;
+}
+
+
+- (void)setJobId:(NSUInteger)jobid {
+  jobIdentifier = jobid;
+  isJob = YES;
 }
 
 
@@ -96,7 +104,7 @@
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
     [task setLaunchURL:execurl];
     unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-    params = [@[@"-quiet", @"-Felf", @"-spaces",
+    params = [@[ @"-Felf", @"-spaces",
                 @"-o", [unlinkedelf path], [sourceFile path]] mutableCopy];
     if (listingFile) {
       [params addObjectsFromArray:@[@"-L", [listingFile path]]];
@@ -128,19 +136,33 @@
   finish:
     unlink([unlinkedelf fileSystemRepresentation]);
     dispatch_async(dispatch_get_main_queue(), ^{
+      MOSJobStatusManager *jsm;
+      
       [self willChangeValueForKey:@"complete"];
       completed = YES;
       [self didChangeValueForKey:@"complete"];
       [self willChangeValueForKey:@"assembling"];
       running = NO;
       [self didChangeValueForKey:@"assembling"];
+      
+      if (isJob) {
+        jsm = [MOSJobStatusManager sharedJobStatusManger];
+        [jsm finishJob:jobIdentifier withResult:MOSJobStatusSuccess];
+      }
     });
   });
 }
 
 
 - (void)receivedTaskOutput:(NSString *)line {
-  NSLog(@"taskoutput: %@", line);
+  MOSJobStatusManager *jsm;
+  
+  if (!isJob)
+    NSLog(@"taskoutput: %@", line);
+  else {
+    jsm = [MOSJobStatusManager sharedJobStatusManger];
+    [jsm addEvent:@{MOSJobEventText: line} toJob:jobIdentifier];
+  }
 }
 
 

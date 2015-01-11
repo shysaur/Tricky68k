@@ -7,16 +7,28 @@
 //
 
 #import "MOSAppDelegate.h"
+#import "MOSJobWindowController.h"
 
 
 @implementation MOSAppDelegate
+
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   // Insert code here to initialize your application
 }
 
+
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
   // Insert code here to tear down your application
 }
+
+
+- (IBAction)openJobsWindow:(id)sender {
+  if (!jobsWc) {
+    jobsWc = [[MOSJobWindowController alloc] initWithWindowNibName:@"MOSJobWindow"];
+  }
+  [jobsWc showWindow:sender];
+}
+
 
 @end

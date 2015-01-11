@@ -11,6 +11,9 @@
 		014A3C6A1A5D3B1900F73FC5 /* MOSNamedPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */; };
 		014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C6C1A5D432300F73FC5 /* MOSTeletypeView.m */; };
 		014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C6F1A5D439500F73FC5 /* MOSTeletypeViewDelegate.m */; };
+		014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D85D51A62CF2100648B41 /* MOSJobWindowController.m */; };
+		014D85D81A62CF2100648B41 /* MOSJobWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014D85D61A62CF2100648B41 /* MOSJobWindow.xib */; };
+		014D85DC1A62D01900648B41 /* MOSJobStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D85DB1A62D01900648B41 /* MOSJobStatusManager.m */; };
 		01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01509B131A52191300724F29 /* NSFileHandle+Strings.m */; };
 		0155257B1A5EC0EA00096023 /* MOSTeletypeTypesetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0155257A1A5EC0EA00096023 /* MOSTeletypeTypesetter.m */; };
 		015525801A5EFD9700096023 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; };
@@ -77,6 +80,11 @@
 		014A3C6C1A5D432300F73FC5 /* MOSTeletypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSTeletypeView.m; sourceTree = "<group>"; };
 		014A3C6E1A5D439500F73FC5 /* MOSTeletypeViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSTeletypeViewDelegate.h; sourceTree = "<group>"; };
 		014A3C6F1A5D439500F73FC5 /* MOSTeletypeViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSTeletypeViewDelegate.m; sourceTree = "<group>"; };
+		014D85D41A62CF2100648B41 /* MOSJobWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSJobWindowController.h; sourceTree = "<group>"; };
+		014D85D51A62CF2100648B41 /* MOSJobWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJobWindowController.m; sourceTree = "<group>"; };
+		014D85D61A62CF2100648B41 /* MOSJobWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MOSJobWindow.xib; sourceTree = "<group>"; };
+		014D85DA1A62D01900648B41 /* MOSJobStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSJobStatusManager.h; sourceTree = "<group>"; };
+		014D85DB1A62D01900648B41 /* MOSJobStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJobStatusManager.m; sourceTree = "<group>"; };
 		01509B121A52191300724F29 /* NSFileHandle+Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+Strings.h"; sourceTree = "<group>"; };
 		01509B131A52191300724F29 /* NSFileHandle+Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+Strings.m"; sourceTree = "<group>"; };
 		015525791A5EC0EA00096023 /* MOSTeletypeTypesetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSTeletypeTypesetter.h; sourceTree = "<group>"; };
@@ -134,6 +142,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		014D85D91A62CF2D00648B41 /* Job Manager */ = {
+			isa = PBXGroup;
+			children = (
+				014D85DA1A62D01900648B41 /* MOSJobStatusManager.h */,
+				014D85DB1A62D01900648B41 /* MOSJobStatusManager.m */,
+				014D85D41A62CF2100648B41 /* MOSJobWindowController.h */,
+				014D85D51A62CF2100648B41 /* MOSJobWindowController.m */,
+				014D85D61A62CF2100648B41 /* MOSJobWindow.xib */,
+			);
+			name = "Job Manager";
+			sourceTree = "<group>";
+		};
 		0155257C1A5EF3F800096023 /* Teletype IO */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +222,7 @@
 				018F65731A609FCD005BA00E /* Utility */,
 				016CD15E1A51A4EC00D64892 /* Source Editor */,
 				018F656C1A604989005BA00E /* Assembler Client */,
+				014D85D91A62CF2D00648B41 /* Job Manager */,
 				016CD1641A51AC7D00D64892 /* Standalone Simulator */,
 				016CD1651A51AF7A00D64892 /* Simulator Client */,
 				016CD1381A51A10E00D64892 /* Supporting Files */,
@@ -352,6 +373,7 @@
 				016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */,
 				015525871A5F11E300096023 /* SyntaxDefinitions.plist in Resources */,
 				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
+				014D85D81A62CF2100648B41 /* MOSJobWindow.xib in Resources */,
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
 				015708AF1A619346005D08DB /* DefaultLinkerFile.ld in Resources */,
 				015525851A5F11CB00096023 /* Syntax Definitions in Resources */,
@@ -389,6 +411,7 @@
 				015708AD1A618E8B005D08DB /* NSURL+TemporaryFile.m in Sources */,
 				016CD1411A51A10E00D64892 /* MOSSource.m in Sources */,
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
+				014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */,
 				018F65721A6053F4005BA00E /* MOSMonitoredTask.m in Sources */,
 				016CD13E1A51A10E00D64892 /* main.m in Sources */,
 				0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */,
@@ -403,6 +426,7 @@
 				0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */,
 				018F656F1A604B5C005BA00E /* MOSAssembler.m in Sources */,
 				01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */,
+				014D85DC1A62D01900648B41 /* MOSJobStatusManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

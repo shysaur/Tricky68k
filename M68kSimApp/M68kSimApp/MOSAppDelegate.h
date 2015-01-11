@@ -9,7 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MOSAppDelegate : NSObject <NSApplicationDelegate>
+@interface MOSAppDelegate : NSObject <NSApplicationDelegate> {
+  NSWindowController *jobsWc;
+}
+
+- (IBAction)openJobsWindow:(id)sender;
 
 @end
 

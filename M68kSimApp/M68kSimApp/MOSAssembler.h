@@ -18,6 +18,8 @@ typedef enum {
 
 
 @interface MOSAssembler : NSObject <MOSMonitoredTaskDelegate> {
+  NSUInteger jobIdentifier;
+  BOOL isJob;
   NSURL *sourceFile;
   NSURL *outputFile;
   NSURL *listingFile;
@@ -25,6 +27,8 @@ typedef enum {
   BOOL running;
   BOOL completed;
 }
+
+- (void)setJobId:(NSUInteger)jobid;
 
 - (void)setSourceFile:(NSURL*)sf;
 - (NSURL*)sourceFile;
