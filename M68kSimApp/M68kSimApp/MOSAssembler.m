@@ -96,7 +96,8 @@
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
     [task setLaunchURL:execurl];
     unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-    params = [@[@"-quiet", @"-Felf", @"-o", [unlinkedelf path], [sourceFile path]] mutableCopy];
+    params = [@[@"-quiet", @"-Felf", @"-spaces",
+                @"-o", [unlinkedelf path], [sourceFile path]] mutableCopy];
     if (listingFile) {
       [params addObjectsFromArray:@[@"-L", [listingFile path]]];
     }
