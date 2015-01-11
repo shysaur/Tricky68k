@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <signal.h>
+#include "m68ksim.h"
 #include "addrspace.h"
 #include "ram.h"
 #include "musashi/m68k.h"
@@ -60,15 +61,13 @@ int main(int argc, char *argv[]) {
         case 'i':
           if (strcasecmp(optarg, "tty") == 0)
             tty_installCommand(special, argc, argv);
-          else {
-            fprintf(stderr, "Unknown device type %s.\n", optarg);
-            exit(1);
-          }
+          else
+            DIE("Unknown device type %s.\n", optarg);
           break;
           
         case 'l':
           if (!elf_load(optarg))
-            printf("Failed to load %s.\n", optarg);
+            DIE("Failed to load %s.\n", optarg);
           break;
         
         case 'd':

@@ -14,4 +14,10 @@ extern volatile int sim_on, debug_on;
 extern int bufkill_on;
 
 
+#define DIE(msg, ...) { \
+  printf(msg"\n", ##__VA_ARGS__); \
+  exit(1); \
+}
+
+
 #endif

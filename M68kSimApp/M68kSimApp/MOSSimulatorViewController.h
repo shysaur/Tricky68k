@@ -29,7 +29,7 @@
   IBOutlet MOSTeletypeViewDelegate *ttyDelegate;
 }
 
-- (void)setSimulatedExecutable:(NSURL*)url;
+- (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr;
 - (MOSSimulatorProxy*)simulatorProxy;
 
 - (IBAction)run:(id)sender;

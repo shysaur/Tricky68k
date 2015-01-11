@@ -63,7 +63,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 
 - initWithExecutableURL:(NSURL*)url {
-  NSArray *args;
+  NSArray *args, *resp;
   __weak MOSSimulatorProxy *weakSelf;
   __strong NSTask *strongTask;
   
@@ -76,8 +76,9 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   fromSim = [[NSPipe alloc] init];
   toSimTty = [[MOSNamedPipe alloc] init];
   fromSimTty = [[MOSNamedPipe alloc] init];
-  args = @[@"-B", @"-d", @"-l", [url path],
-           @"-I", @"tty", @"0xFFE000", [[toSimTty pipeURL] path], [[fromSimTty pipeURL] path]];
+  args = @[@"-B", @"-d",
+           @"-I", @"tty", @"0xFFE000", [[toSimTty pipeURL] path], [[fromSimTty pipeURL] path],
+           @"-l", [url path]];
   
   simTask = [[NSTask alloc] init];
   [simTask setLaunchPath:[[self simulatorURL] path]];
@@ -90,9 +91,6 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   curState = MOSSimulatorStatePaused;
   [self didChangeValueForKey:@"simulatorState"];
   [simTask launch];
-  
-  [toSimTty fileHandleForWriting];
-  [fromSimTty fileHandleForReading];
   
   strongTask = simTask;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -112,6 +110,16 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
       });
     }
   });
+  
+  [toSimTty fileHandleForWriting];
+  [fromSimTty fileHandleForReading];
+  
+  resp = [self getSimulatorResponse];
+  if ([resp count]) {
+    NSLog(@"Simulator open error: %@", resp);
+    [simTask terminate];
+    [self changeSimulatorStatusTo:MOSSimulatorStateDead];
+  }
   
   return self;
 }
@@ -145,11 +153,13 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   res = [NSMutableArray array];
   tmp = [[fromSim fileHandleForReading] readLine];
-  while (![tmp isEqual:@"debug? "]) {
+  while (tmp && ![tmp isEqual:@"debug? "]) {
     [res addObject:tmp];
     tmp = [[fromSim fileHandleForReading] readLine];
   }
-  [[toSim fileHandleForWriting] writeLine:@""];
+  if (tmp) { /* not dead */
+    [[toSim fileHandleForWriting] writeLine:@""];
+  }
   return [res copy];
 }
 

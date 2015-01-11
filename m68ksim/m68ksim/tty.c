@@ -13,6 +13,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <poll.h>
+#include "m68ksim.h"
 #include "tty.h"
 #include "addrspace.h"
 
@@ -99,11 +100,6 @@ int tty_install(uint32_t base, int fildes_in, int fildes_out) {
   return 1;
 }
 
-
-#define DIE(msg, ...) { \
-  fprintf(stderr, msg"\n", ##__VA_ARGS__); \
-  exit(1); \
-}
 
 void tty_installCommand(int special, int argc, char *argv[]) {
   uint32_t base;

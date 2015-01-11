@@ -25,18 +25,36 @@
 }
 
 
-- (void)setSimulatedExecutable:(NSURL*)url {
+- (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr {
   simExec = url;
-  if (!viewHasLoaded) return;
   
+  [self reloadSimulatedExecutable];
+  
+  if ([simProxy simulatorState] == MOSSimulatorStateDead) {
+    if (outerr) *outerr = [NSError errorWithDomain:NSCocoaErrorDomain code:NSExecutableNotLoadableError userInfo:nil];
+    return NO;
+  }
+  return YES;
+}
+
+
+- (void)reloadSimulatedExecutable {
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
+  
   [simProxy kill];
-  simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
+  simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:simExec];
+  
   [simProxy addObserver:self forKeyPath:@"simulatorState"
                 options:NSKeyValueObservingOptionInitial context:NULL];
   
+  [self setSimulatorForSubviewControllers];
+}
+
+
+- (void)setSimulatorForSubviewControllers {
+  if (!viewHasLoaded) return;
   [dumpDs setSimulatorProxy:simProxy];
   [disasmDs setSimulatorProxy:simProxy];
   [regdumpDs setSimulatorProxy:simProxy];
@@ -63,7 +81,7 @@
   [alert addButtonWithTitle:@"Close"];
   [alert beginSheetModalForWindow:pw completionHandler:^(NSModalResponse resp){
     if (resp == NSAlertFirstButtonReturn)
-      [self setSimulatedExecutable:simExec];
+      [self reloadSimulatedExecutable];
     else
       [pw close];
   }];
@@ -74,8 +92,8 @@
   [super viewDidLoad];
   viewHasLoaded = YES;
   
-  if (!simProxy && simExec) {
-    [self setSimulatedExecutable:simExec];
+  if (simProxy) {
+    [self setSimulatorForSubviewControllers];
   }
 }
 
@@ -90,7 +108,7 @@
     [openexe beginSheetModalForWindow:[[self view] window] completionHandler:^(NSInteger result){
       [openexe orderOut:nil];
       if (result == NSFileHandlingPanelOKButton) {
-        [self setSimulatedExecutable:[[openexe URLs] firstObject]];
+        [self setSimulatedExecutable:[[openexe URLs] firstObject] error:nil];
       } else {
         [[[self view] window] close];
       }
@@ -148,7 +166,7 @@
 
 
 - (IBAction)restart:(id)sender {
-  [self setSimulatedExecutable:simExec];
+  [self reloadSimulatedExecutable];
 }
 
 

@@ -39,8 +39,7 @@
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError {
   simVc = [[MOSSimulatorViewController alloc]
     initWithNibName:@"MOSSimulatorView" bundle:[NSBundle mainBundle]];
-  [simVc setSimulatedExecutable:url];
-  return YES;
+  return [simVc setSimulatedExecutable:url error:outError];
 }
 
 
