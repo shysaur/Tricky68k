@@ -92,28 +92,10 @@
   [super viewDidLoad];
   viewHasLoaded = YES;
   
-  if (simProxy) {
-    [self setSimulatorForSubviewControllers];
-  }
-}
-
-
-- (void)viewDidAppear {
-  NSOpenPanel *openexe;
-  
-  [super viewDidAppear];
-  if (!simProxy && !simExec) {
-    openexe = [[NSOpenPanel alloc] init];
-    [openexe setAllowedFileTypes:@[@"public.executable"]];
-    [openexe beginSheetModalForWindow:[[self view] window] completionHandler:^(NSInteger result){
-      [openexe orderOut:nil];
-      if (result == NSFileHandlingPanelOKButton) {
-        [self setSimulatedExecutable:[[openexe URLs] firstObject] error:nil];
-      } else {
-        [[[self view] window] close];
-      }
-    }];
-  }
+  if (!simProxy)
+    [NSException raise:NSInvalidArgumentException
+      format:@"Simulator view can't load if no executable is associated with it."];
+  [self setSimulatorForSubviewControllers];
 }
 
 
