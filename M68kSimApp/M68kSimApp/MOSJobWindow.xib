@@ -15,14 +15,15 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Actions" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="463" y="204" width="312" height="375"/>
+            <rect key="contentRect" x="463" y="204" width="248" height="316"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <value key="minSize" type="size" width="238" height="89"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="312" height="375"/>
+                <rect key="frame" x="0.0" y="0.0" width="248" height="316"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBF-gN-A0i">
-                        <rect key="frame" x="-1" y="-1" width="314" height="377"/>
+                        <rect key="frame" x="-1" y="-1" width="250" height="318"/>
                         <clipView key="contentView" id="QEI-nz-x06">
                             <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,7 +34,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="309" minWidth="40" maxWidth="1000" id="cur-kS-0PO">
+                                        <tableColumn width="245" minWidth="40" maxWidth="1000" id="cur-kS-0PO">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -47,12 +48,12 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="gXp-Vx-OTm">
-                                                    <rect key="frame" x="1" y="1" width="309" height="14"/>
+                                                    <rect key="frame" x="1" y="1" width="245" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nZ3-8T-HRQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="311" height="14"/>
-                                                            <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="fbl-ur-oMc">
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nZ3-8T-HRQ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="247" height="14"/>
+                                                            <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Table View Cell" id="fbl-ur-oMc">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -144,7 +145,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="262" y="250.5"/>
+            <point key="canvasLocation" x="230" y="221"/>
         </window>
         <treeController editable="NO" childrenKeyPath="privateMOSJobEvents" id="meV-76-mZL">
             <connections>
