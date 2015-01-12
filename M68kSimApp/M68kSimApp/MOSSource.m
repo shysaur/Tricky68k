@@ -100,10 +100,15 @@ static void *AssemblageEvent = &AssemblageEvent;
   [self saveToURL:tempSourceCopy ofType:@"public.plain-text"
     forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
       MOSJobStatusManager *jsm;
+      NSDictionary *jobinfo;
       NSUInteger jobid;
-      
+      NSString *title;
+  
       jsm = [MOSJobStatusManager sharedJobStatusManger];
-      jobid = [jsm addJobWithInfo:@{MOSJobVisibleDescription: @"Assembling a file"}];
+      title = [NSString stringWithFormat:@"Assemble %@", [[self fileURL] lastPathComponent]];
+      jobinfo = @{MOSJobVisibleDescription: title,
+                  MOSJobAssociatedFile: [self fileURL]};
+      jobid = [jsm addJobWithInfo:jobinfo];
       
       if (err) {
         [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];
