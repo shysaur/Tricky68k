@@ -327,6 +327,42 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
 
 
+- (NSArray*)breakpointList {
+  NSString *obj;
+  const char *data;
+  NSArray __block *list;
+  NSMutableSet *res;
+  uint32_t addr;
+  
+  dispatch_sync(simQueue, ^{
+    if ([self sendCommandToSimulatorDebugger:@"p"])
+      list = [self getSimulatorResponse];
+  });
+  
+  res = [[NSMutableSet alloc] init];
+  for (obj in list) {
+    data = [obj UTF8String];
+    sscanf(data+3, "%X", &addr);
+    [res addObject:[NSNumber numberWithUnsignedLong:addr]];
+  }
+  return [res copy];
+}
+
+
+- (void)addBreakpointAtAddress:(uint32_t)addr {
+  dispatch_sync(simQueue, ^{
+    [self sendCommandToSimulatorDebugger:[NSString stringWithFormat:@"b 0x%X", addr]];
+  });
+}
+
+
+- (void)removeBreakpointAtAddress:(uint32_t)addr {
+  dispatch_sync(simQueue, ^{
+    [self sendCommandToSimulatorDebugger:[NSString stringWithFormat:@"x 0x%X", addr]];
+  });
+}
+
+
 - (BOOL)stepIn {
   return [self runWithCommand:@"s"];
 }

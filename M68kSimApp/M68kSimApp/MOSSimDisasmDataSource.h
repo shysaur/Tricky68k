@@ -13,12 +13,14 @@
 @class MOSSimulatorProxy;
 
 
-@interface MOSSimDisasmDataSource : MOSSimTableViewDelegate <NSTableViewDataSource> {
+@interface MOSSimDisasmDataSource : MOSSimTableViewDelegate <NSTableViewDataSource, NSTableViewDelegate> {
   NSInteger maxLines, cacheStart;
   uint32_t addrCacheStart, addrCacheEnd, centerAddr;
+  NSSet *breakpoints;
   NSMutableArray *lineCache;
 }
 
 - (NSInteger)programCounterRow;
+- (IBAction)clickedTableView:(id)sender;
 
 @end

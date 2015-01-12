@@ -78,6 +78,10 @@ typedef enum {
 - (NSData*)rawDumpFromLocation:(uint32_t)loc withSize:(uint32_t)size;
 - (NSDictionary*)registerDump;
 
+- (NSSet*)breakpointList;
+- (void)addBreakpointAtAddress:(uint32_t)addr;
+- (void)removeBreakpointAtAddress:(uint32_t)addr;
+
 - (NSFileHandle*)teletypeOutput;
 - (NSFileHandle*)teletypeInput;
 

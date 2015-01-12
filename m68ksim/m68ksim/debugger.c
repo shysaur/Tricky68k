@@ -168,7 +168,7 @@ void debug_debugConsole(void) {
           printf("Must specify a valid address for setting a breakpoint\n");
         else {
           bp_add(bpa);
-          printf("Breakpoint set at %#010x.\n", bpa);
+          if (!bufkill_on) printf("Breakpoint set at %#010x.\n", bpa);
         }
         break;
       

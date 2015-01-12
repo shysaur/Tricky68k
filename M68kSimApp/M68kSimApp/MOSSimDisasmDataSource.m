@@ -60,9 +60,30 @@
 }
 
 
+- (IBAction)clickedTableView:(id)sender {
+  NSInteger row;
+  uint32_t addr;
+  BOOL hasBreakpt;
+  
+  if ([tableView clickedColumn] == 0) {
+    row = [tableView clickedRow];
+    addr = [self getAddressForLine:row];
+    hasBreakpt = [breakpoints containsObject:[NSNumber numberWithUnsignedLong:addr]];
+    if (!hasBreakpt) {
+      [simProxy addBreakpointAtAddress:addr];
+    } else {
+      [simProxy removeBreakpointAtAddress:addr];
+    }
+    breakpoints = [simProxy breakpointList];
+    [tableView reloadData];
+  }
+}
+
+
 - (void)refreshSimulatorData {
   NSDictionary *regs;
   
+  breakpoints = [simProxy breakpointList];
   regs = [simProxy registerDump];
   centerAddr = (uint32_t)[[regs objectForKey:MOS68kRegisterPC] unsignedLongValue];
   lineCache = [[simProxy disassemble:1 instructionsFromLocation:centerAddr] mutableCopy];
@@ -105,37 +126,65 @@
 }
 
 
-- (NSView *)tableView:(NSTableView *)tv viewForTableColumn:(NSTableColumn *)tc row:(NSInteger)row {
-  NSString *line;
+- (NSString *)getLine:(NSInteger)row {
+  NSInteger linestodo;
   NSArray *add;
   NSMutableArray *newcache;
-  NSInteger linestodo;
+  
+  if (row < cacheStart) {
+    linestodo = row - cacheStart;
+    add = [simProxy disassemble:(int)linestodo instructionsFromLocation:addrCacheStart];
+    newcache = [add mutableCopy];
+    [newcache addObjectsFromArray:lineCache];
+    lineCache = newcache;
+    cacheStart = row;
+    [self updateCacheStartAddress];
+  } else if (row >= cacheStart + [lineCache count]) {
+    linestodo = row - (cacheStart + [lineCache count]) + 1;
+    add = [simProxy disassemble:(int)linestodo+1 instructionsFromLocation:addrCacheEnd];
+    newcache = [add mutableCopy];
+    [newcache removeObjectAtIndex:0];
+    [lineCache addObjectsFromArray:newcache];
+    [self updateCacheEndAddress];
+  }
+  return [lineCache objectAtIndex:row - cacheStart];
+}
+
+
+- (uint32_t)getAddressForLine:(NSInteger)row {
+  NSString *line;
+  uint32_t addr;
+  
+  line = [self getLine:row];
+  sscanf([line UTF8String]+2, "%X", &addr);
+  return addr;
+}
+
+
+- (NSView *)tableView:(NSTableView *)tv viewForTableColumn:(NSTableColumn *)tc row:(NSInteger)row {
+  NSString *line;
+  
+  uint32_t addr;
+  BOOL hasBrkpt;
   id result;
   
   if ([simProxy simulatorState] != MOSSimulatorStatePaused) {
     line = @"";
+    result = [tv makeViewWithIdentifier:@"normalView" owner:self];
+    [[result textField] setStringValue:line];
   } else {
-    if (row < cacheStart) {
-      linestodo = row - cacheStart;
-      add = [simProxy disassemble:(int)linestodo instructionsFromLocation:addrCacheStart];
-      newcache = [add mutableCopy];
-      [newcache addObjectsFromArray:lineCache];
-      lineCache = newcache;
-      cacheStart = row;
-      [self updateCacheStartAddress];
-    } else if (row >= cacheStart + [lineCache count]) {
-      linestodo = row - (cacheStart + [lineCache count]) + 1;
-      add = [simProxy disassemble:(int)linestodo+1 instructionsFromLocation:addrCacheEnd];
-      newcache = [add mutableCopy];
-      [newcache removeObjectAtIndex:0];
-      [lineCache addObjectsFromArray:newcache];
-      [self updateCacheEndAddress];
+    if ([[tc identifier] isEqual:@"breakpointColumn"]) {
+      addr = [self getAddressForLine:row];
+      hasBrkpt = [breakpoints containsObject:[NSNumber numberWithUnsignedLong:addr]];
+      result = [tv makeViewWithIdentifier:@"breakpointView" owner:self];
+      [[result imageView] setHidden:!hasBrkpt];
+    } else {
+      line = [self getLine:row];
+      result = [tv makeViewWithIdentifier:@"normalView" owner:self];
+      [[result textField] setStringValue:line];
     }
-    
-    line = [lineCache objectAtIndex:row - cacheStart];
   }
-  result = [tv makeViewWithIdentifier:@"normalView" owner:self];
-  [[result textField] setStringValue:line];
+  
   return result;
 }
 
