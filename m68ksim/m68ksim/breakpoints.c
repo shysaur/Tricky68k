@@ -82,7 +82,7 @@ void bp_printList(void) {
   
   this = bp_listHead;
   while (this) {
-    printf(" - %08X\next", this->val);
+    printf(" - %08X\n", this->val);
     this = this->next;
   }
 }
