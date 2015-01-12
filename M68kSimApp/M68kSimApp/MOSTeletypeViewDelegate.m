@@ -158,6 +158,7 @@
   attrs = [[NSAttributedString alloc] initWithString:str];
   [ts appendAttributedString:attrs];
   
+  
   [textView setTeletypeCursorPosition:([ts length] - [lineBuffer length]) + cursor];
 }
 

@@ -17,6 +17,7 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
   self = [super initWithCoder:coder];
   
+  lastCur = 0;
   [self setContinuousSpellCheckingEnabled:NO];
   [self setAllowsUndo:NO];
   [self setTeletypeCursorPosition:0];
@@ -31,6 +32,12 @@
 }
 
 
+- (void)setFrameSize:(NSSize)newSize {
+  [super setFrameSize:newSize];
+  [self setTeletypeCursorPosition:lastCur];
+}
+
+
 - (void)setTeletypeCursorPosition:(NSInteger)cur {
   NSInteger gliph;
   NSRect glyphRect, oldRect;
@@ -38,6 +45,8 @@
   NSLayoutManager *lm;
   NSTextContainer *tc;
   NSAttributedString *space;
+  
+  lastCur = cur;
   
   lm = [self layoutManager];
   tc = [self textContainer];

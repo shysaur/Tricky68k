@@ -11,6 +11,7 @@
 
 @interface MOSTeletypeView : NSTextView {
   NSRect curRect;
+  NSInteger lastCur;
 }
 
 - (void)setTeletypeCursorPosition:(NSInteger)cur;
