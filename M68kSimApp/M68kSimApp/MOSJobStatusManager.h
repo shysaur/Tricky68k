@@ -41,5 +41,6 @@ NSString * const MOSJobEventTypeError;
 
 - (void)clearJobList;
 - (NSArray*)jobList;
+- (NSArray*)eventListForJob:(NSUInteger)jobid;
 
 @end

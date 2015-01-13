@@ -167,4 +167,14 @@ NSString * const MOSJobEventTypeError           = @"MOSJobStatusFailure";
 }
 
 
+- (NSArray*)eventListForJob:(NSUInteger)jobid {
+  NSMutableArray *eventList;
+  NSMutableDictionary *job;
+  
+  job = [jobs objectForKey:[NSNumber numberWithUnsignedInteger:jobid]];
+  eventList = [job objectForKey:MOSJobEvents];
+  return [eventList copy];
+}
+
+
 @end

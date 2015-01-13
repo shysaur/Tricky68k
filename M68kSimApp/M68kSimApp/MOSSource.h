@@ -18,6 +18,8 @@
   NSData *initialData;
   MGSFragaria *fragaria;
   MOSAssembler *assembler;
+  NSUInteger lastJobId;
+  BOOL hadJob;
   NSURL *assemblyOutput;
   NSURL *tempSourceCopy;
   IBOutlet NSView *editView;

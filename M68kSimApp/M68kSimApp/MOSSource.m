@@ -13,14 +13,40 @@
 #import "MOSJobStatusManager.h"
 
 
+static void *AssemblageComplete = &AssemblageComplete;
 static void *AssemblageEvent = &AssemblageEvent;
+
+
+NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
+  NSDictionary *event;
+  SMLSyntaxError *serror;
+  NSMutableArray *serrors;
+  
+  serrors = [NSMutableArray array];
+  for (event in events) {
+    if ([[event objectForKey:MOSJobEventType] isEqual:MOSJobEventTypeMessage]) continue;
+    if (![event objectForKey:MOSJobEventAssociatedLine]) continue;
+    
+    serror = [[SMLSyntaxError alloc] init];
+    [serror setDescription:[event objectForKey:MOSJobEventText]];
+    [serror setLine:[[event objectForKey:MOSJobEventAssociatedLine] intValue]];
+    [serrors addObject:serror];
+  }
+  return [serrors copy];
+}
 
 
 @implementation MOSSource
 
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
+  MOSJobStatusManager *sm;
+  
   [super windowControllerDidLoadNib:aController];
+  
+  hadJob = NO;
+  sm = [MOSJobStatusManager sharedJobStatusManger];
+  [sm addObserver:self forKeyPath:@"jobList" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
   
   fragaria = [[MGSFragaria alloc] init];
   [fragaria setObject:self forKey:MGSFODelegate];
@@ -90,41 +116,45 @@ static void *AssemblageEvent = &AssemblageEvent;
   
   assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
   @try {
-    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];
+    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
   } @finally {}
   assembler = [[MOSAssembler alloc] init];
-  [assembler addObserver:self forKeyPath:@"complete" options:0 context:AssemblageEvent];
+  [assembler addObserver:self forKeyPath:@"complete" options:0 context:AssemblageComplete];
+  
   [assembler setOutputFile:assemblyOutput];
-  
   tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
-  [self saveToURL:tempSourceCopy ofType:@"public.plain-text"
-    forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
-      MOSJobStatusManager *jsm;
-      NSDictionary *jobinfo;
-      NSUInteger jobid;
-      NSString *title;
   
-      jsm = [MOSJobStatusManager sharedJobStatusManger];
-      title = [NSString stringWithFormat:@"Assemble %@", [[self fileURL] lastPathComponent]];
-      jobinfo = @{MOSJobVisibleDescription: title,
-                  MOSJobAssociatedFile: [self fileURL]};
-      jobid = [jsm addJobWithInfo:jobinfo];
-      
-      if (err) {
-        [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];
-        assembler = nil;
-        return;
-      }
-      [assembler setSourceFile:tempSourceCopy];
-      [assembler setJobId:jobid];
-      [assembler assemble];
+  [self saveToURL:tempSourceCopy ofType:@"public.plain-text"
+  forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
+    MOSJobStatusManager *jsm;
+    NSDictionary *jobinfo;
+    NSString *title;
+
+    jsm = [MOSJobStatusManager sharedJobStatusManger];
+    title = [NSString stringWithFormat:@"Assemble %@", [[self fileURL] lastPathComponent]];
+    jobinfo = @{MOSJobVisibleDescription: title,
+                MOSJobAssociatedFile: [self fileURL]};
+    lastJobId = [jsm addJobWithInfo:jobinfo];
+    hadJob = YES;
+    
+    if (err) {
+      [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
+      assembler = nil;
+      return;
+    }
+    [assembler setSourceFile:tempSourceCopy];
+    [assembler setJobId:lastJobId];
+    [assembler assemble];
   }];
 }
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
     change:(NSDictionary *)change context:(void *)context {
-  if (context == AssemblageEvent) {
+  NSArray *events;
+  MOSJobStatusManager *sm;
+  
+  if (context == AssemblageComplete) {
     NSLog(@"Assemblage has finished");
     if ([assembler assemblageResult] == MOSAssemblageResultFailure) {
       NSLog(@"Assemblage failed");
@@ -132,11 +162,36 @@ static void *AssemblageEvent = &AssemblageEvent;
       unlink([tempSourceCopy fileSystemRepresentation]);
       [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:assemblyOutput display:YES completionHandler:nil];
     }
-    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageEvent];
+    
+    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
     assembler = nil;
+  } else if (context == AssemblageEvent) {
+    if (!hadJob) return;
+    
+    sm = [MOSJobStatusManager sharedJobStatusManger];
+    events = [sm eventListForJob:lastJobId];
+    if (!events) {
+      [fragaria setSyntaxErrors:@[]];
+      hadJob = NO;
+      return;
+    }
+    [fragaria setSyntaxErrors:MOSSyntaxErrorsFromEvents(events)];
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 
+- (void)dealloc {
+  MOSJobStatusManager *sm;
+  
+  sm = [MOSJobStatusManager sharedJobStatusManger];
+  [sm removeObserver:self forKeyPath:@"jobList" context:AssemblageEvent];
+}
+
+
 @end
+
+
+
+
+
