@@ -155,10 +155,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   MOSJobStatusManager *sm;
   
   if (context == AssemblageComplete) {
-    NSLog(@"Assemblage has finished");
-    if ([assembler assemblageResult] == MOSAssemblageResultFailure) {
-      NSLog(@"Assemblage failed");
-    } else {
+    if ([assembler assemblageResult] != MOSAssemblageResultFailure) {
       unlink([tempSourceCopy fileSystemRepresentation]);
       [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:assemblyOutput display:YES completionHandler:nil];
     }
