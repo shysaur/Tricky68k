@@ -15,5 +15,6 @@
 }
 
 - (void)setTeletypeCursorPosition:(NSInteger)cur;
+- (void)setTeletypeFormat;
 
 @end

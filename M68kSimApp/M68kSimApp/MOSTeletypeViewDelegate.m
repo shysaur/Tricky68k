@@ -146,6 +146,7 @@
   selRange.length = 0;
   [textView setSelectedRange:selRange];
   /* This is the real cursor */
+  [textView setTeletypeFormat];
   [textView setTeletypeCursorPosition:selRange.location];
 }
 
@@ -157,7 +158,7 @@
   ts = [textView textStorage];
   attrs = [[NSAttributedString alloc] initWithString:str];
   [ts appendAttributedString:attrs];
-  
+  [textView setTeletypeFormat];
   
   [textView setTeletypeCursorPosition:([ts length] - [lineBuffer length]) + cursor];
 }

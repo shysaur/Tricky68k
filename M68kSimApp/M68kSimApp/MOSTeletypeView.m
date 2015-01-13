@@ -8,7 +8,6 @@
 
 #import "MOSTeletypeView.h"
 #import "MOSTeletypeViewDelegate.h"
-#import "MOSTeletypeTypesetter.h"
 
 
 @implementation MOSTeletypeView
@@ -21,7 +20,6 @@
   [self setContinuousSpellCheckingEnabled:NO];
   [self setAllowsUndo:NO];
   [self setTeletypeCursorPosition:0];
-  [[self layoutManager] setTypesetter:[[MOSTeletypeTypesetter alloc] init]];
   
   return self;
 }
@@ -39,39 +37,75 @@
 
 
 - (void)setTeletypeCursorPosition:(NSInteger)cur {
-  NSInteger gliph;
+  NSInteger gliph, length, lastcindex;
   NSRect glyphRect, oldRect;
-  NSRange gliphRange, charRange;
+  NSSize spaceSize;
+  NSRange gliphRange;
   NSLayoutManager *lm;
   NSTextContainer *tc;
-  NSAttributedString *space;
+  unichar lastc;
   
   lastCur = cur;
   
   lm = [self layoutManager];
   tc = [self textContainer];
-  if (cur == [[self textStorage] length]) {
-    space = [[NSAttributedString alloc] initWithString:@"\u2060 "];
-    [[self textStorage] appendAttributedString:space];
-    charRange.location = cur;
-    charRange.length = 2;
-    gliph = [lm glyphIndexForCharacterAtIndex:cur+1];
-    gliphRange.length = 1;
-    gliphRange.location = gliph;
-    glyphRect = [lm boundingRectForGlyphRange:gliphRange inTextContainer:tc];
-    [[self textStorage] replaceCharactersInRange:charRange withString:@""];
-  } else {
-    gliph = [lm glyphIndexForCharacterAtIndex:cur];
-    gliphRange.length = 1;
-    gliphRange.location = gliph;
-    glyphRect = [lm boundingRectForGlyphRange:gliphRange inTextContainer:tc];
-  }
   
+  length = [[self textStorage] length];
+  if (length == 0) {
+    [[[self textStorage] mutableString] appendString:@" "];
+    gliph = [lm glyphIndexForCharacterAtIndex:0];
+    gliphRange.length = 1;
+    gliphRange.location = 0;
+    glyphRect = [lm boundingRectForGlyphRange:gliphRange inTextContainer:tc];
+    [[[self textStorage] mutableString] setString:@""];
+  } else {
+    if (cur >= length)
+      lastcindex = length-1;
+    else
+      lastcindex = cur;
+      
+    gliph = [lm glyphIndexForCharacterAtIndex:lastcindex];
+    lastc = [[[self textStorage] mutableString] characterAtIndex:lastcindex];
+
+    gliphRange.length = 1;
+    gliphRange.location = gliph;
+    glyphRect = [lm boundingRectForGlyphRange:gliphRange inTextContainer:tc];
+    
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:lastc]) {
+      glyphRect.size.height /= 2;
+      glyphRect.origin.y += glyphRect.size.height;
+      glyphRect.origin.x += [tc lineFragmentPadding];
+      glyphRect.size.width = 0;
+    }
+    
+    if (cur >= length) {
+      spaceSize = [@" " sizeWithAttributes:@{NSFontAttributeName: [self font]}];
+      glyphRect.origin.x += glyphRect.size.width;
+      glyphRect.size.width = spaceSize.width;
+    }
+  }
+
   oldRect = curRect;
   curRect = glyphRect;
   [self setNeedsDisplayInRect:oldRect];
   [self setNeedsDisplayInRect:curRect];
   [self scrollRangeToVisible:NSMakeRange(cur, 0)];
+}
+
+
+- (void)setTeletypeFormat {
+  NSMutableParagraphStyle *parstyle;
+  NSMutableDictionary *attributes;
+  NSRange all;
+  
+  all.location = 0;
+  all.length = [[self textStorage] length];
+  parstyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+  [parstyle setLineBreakMode:NSLineBreakByCharWrapping];
+  attributes = [NSMutableDictionary dictionary];
+  [attributes setObject:[parstyle copy] forKey:NSParagraphStyleAttributeName];
+  [attributes setObject:[self font] forKey:NSFontAttributeName];
+  [[self textStorage] setAttributes:[attributes copy] range:all];
 }
 
 
