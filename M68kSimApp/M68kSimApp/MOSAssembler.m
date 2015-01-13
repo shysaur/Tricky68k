@@ -9,6 +9,20 @@
 #import "MOSAssembler.h"
 #import "NSURL+TemporaryFile.h"
 #import "MOSJobStatusManager.h"
+#import "NSScanner+Shorteners.h"
+
+
+NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
+  switch (ar) {
+    case MOSAssemblageResultSuccessWithWarning:
+      return MOSJobStatusSuccessWithWarning;
+    case MOSAssemblageResultSuccess:
+      return MOSJobStatusSuccess;
+    default: /* MOSAssemblageResultFailure */
+      return MOSJobStatusFailure;
+  }
+  return nil;
+}
 
 
 @implementation MOSAssembler
@@ -104,7 +118,7 @@
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
     [task setLaunchURL:execurl];
     unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-    params = [@[ @"-Felf", @"-spaces",
+    params = [@[@"-quiet", @"-Felf", @"-spaces",
                 @"-o", [unlinkedelf path], [sourceFile path]] mutableCopy];
     if (listingFile) {
       [params addObjectsFromArray:@[@"-L", [listingFile path]]];
@@ -147,7 +161,7 @@
       
       if (isJob) {
         jsm = [MOSJobStatusManager sharedJobStatusManger];
-        [jsm finishJob:jobIdentifier withResult:MOSJobStatusSuccess];
+        [jsm finishJob:jobIdentifier withResult:MOSAsmResultToJobStat(asmResult)];
       }
     });
   });
@@ -156,13 +170,72 @@
 
 - (void)receivedTaskOutput:(NSString *)line {
   MOSJobStatusManager *jsm;
-  
+  NSDictionary *event;
+
   if (!isJob)
     NSLog(@"taskoutput: %@", line);
   else {
     jsm = [MOSJobStatusManager sharedJobStatusManger];
-    [jsm addEvent:@{MOSJobEventText: line} toJob:jobIdentifier];
+    /* The parser is able to gracefully dismiss ld output as normal messages */
+    event = [self parseVasmOutput:line];
+    if (event) [jsm addEvent:event toJob:jobIdentifier];
   }
+}
+
+
+- (NSDictionary*)parseVasmOutput:(NSString *)line {
+  NSMutableDictionary *res;
+  NSScanner *scan;
+  NSInteger lineno;
+  BOOL isFatal;
+  
+  scan = [NSScanner scannerWithString:line];
+  res = [NSMutableDictionary dictionary];
+  
+  /* No empty lines thanks */
+  if ([line isEqual:@""]) return nil;
+  
+  /* Source code line echo: filter out */
+  if ([scan scanString:@">"]) return nil;
+  
+  /* Pass nesting info lines as found */
+  if ([scan scanString:@"called"] || [scan scanString:@"included"])
+    goto returnAsIs;
+  
+  isFatal = [scan scanString:@"fatal"];
+  if ([scan scanString:@"error"])
+    [res setObject:MOSJobEventTypeError forKey:MOSJobEventType];
+  else if ([scan scanString:@"message"])
+    [res setObject:MOSJobEventTypeMessage forKey:MOSJobEventType];
+  else if ([scan scanString:@"warning"])
+    [res setObject:MOSJobEventTypeWarning forKey:MOSJobEventType];
+  else {
+    /* No error|message|warning header: something else we pass thru as is */
+    goto returnAsIs;
+  }
+  /* skip eventual error number */
+  [scan scanInteger:NULL];
+  
+  /* Check for line numbers */
+  if ([scan scanString:@"in line"]) {
+    if (![scan scanInteger:&lineno]) goto returnAsIs;
+    [res setObject:[NSNumber numberWithInteger:lineno] forKey:MOSJobEventAssociatedLine];
+    [scan scanUpToString:@"\": "];
+    if (![scan scanString:@"\": "]) goto returnAsIs;
+  } else {
+    [scan scanUpToString:@": "];
+    if (![scan scanString:@": "]) goto returnAsIs;
+  }
+  
+  [res setObject:[scan scanUpToEndOfString] forKey:MOSJobEventText];
+  if (isFatal) [res setObject:MOSJobEventTypeError forKey:MOSJobEventType];
+  
+  return [res copy];
+  
+returnAsIs:
+  [res setObject:line forKey:MOSJobEventText];
+  [res setObject:MOSJobEventTypeMessage forKey:MOSJobEventType];
+  return [res copy];
 }
 
 

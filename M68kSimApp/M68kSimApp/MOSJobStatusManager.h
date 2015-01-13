@@ -20,6 +20,7 @@ NSString * const MOSJobStatusSuccessWithWarning;
 NSString * const MOSJobStatusFailure;
 
 NSString * const MOSJobEventText;
+NSString * const MOSJobEventAssociatedLine;
 NSString * const MOSJobEventType;
 NSString * const MOSJobEventTypeMessage;
 NSString * const MOSJobEventTypeWarning;

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01000A511A65AD130080AC5F /* NSScanner+Shorteners.m in Sources */ = {isa = PBXBuildFile; fileRef = 01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */; };
+		01000A561A65B9C40080AC5F /* MOSJobStatusFailure.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 01000A521A65B9C40080AC5F /* MOSJobStatusFailure.tiff */; };
+		01000A571A65B9C40080AC5F /* MOSJobStatusWorking.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 01000A531A65B9C40080AC5F /* MOSJobStatusWorking.tiff */; };
+		01000A581A65B9C40080AC5F /* MOSJobStatusSuccess.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 01000A541A65B9C40080AC5F /* MOSJobStatusSuccess.tiff */; };
+		01000A591A65B9C40080AC5F /* MOSJobStatusSuccessWithWarning.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 01000A551A65B9C40080AC5F /* MOSJobStatusSuccessWithWarning.tiff */; };
+		01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01000A5B1A65BB330080AC5F /* MOSJobStatusStringTransformer.m */; };
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
 		014A3C6A1A5D3B1900F73FC5 /* MOSNamedPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */; };
 		014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C6C1A5D432300F73FC5 /* MOSTeletypeView.m */; };
@@ -71,6 +77,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01000A4F1A65AD130080AC5F /* NSScanner+Shorteners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+Shorteners.h"; sourceTree = "<group>"; };
+		01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+Shorteners.m"; sourceTree = "<group>"; };
+		01000A521A65B9C40080AC5F /* MOSJobStatusFailure.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MOSJobStatusFailure.tiff; sourceTree = "<group>"; };
+		01000A531A65B9C40080AC5F /* MOSJobStatusWorking.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MOSJobStatusWorking.tiff; sourceTree = "<group>"; };
+		01000A541A65B9C40080AC5F /* MOSJobStatusSuccess.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MOSJobStatusSuccess.tiff; sourceTree = "<group>"; };
+		01000A551A65B9C40080AC5F /* MOSJobStatusSuccessWithWarning.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MOSJobStatusSuccessWithWarning.tiff; sourceTree = "<group>"; };
+		01000A5A1A65BB330080AC5F /* MOSJobStatusStringTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSJobStatusStringTransformer.h; sourceTree = "<group>"; };
+		01000A5B1A65BB330080AC5F /* MOSJobStatusStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJobStatusStringTransformer.m; sourceTree = "<group>"; };
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSNamedPipe.h; sourceTree = "<group>"; };
@@ -144,6 +158,8 @@
 			children = (
 				014D85DA1A62D01900648B41 /* MOSJobStatusManager.h */,
 				014D85DB1A62D01900648B41 /* MOSJobStatusManager.m */,
+				01000A5A1A65BB330080AC5F /* MOSJobStatusStringTransformer.h */,
+				01000A5B1A65BB330080AC5F /* MOSJobStatusStringTransformer.m */,
 				014D85D41A62CF2100648B41 /* MOSJobWindowController.h */,
 				014D85D51A62CF2100648B41 /* MOSJobWindowController.m */,
 				014D85D61A62CF2100648B41 /* MOSJobWindow.xib */,
@@ -229,6 +245,10 @@
 			isa = PBXGroup;
 			children = (
 				016CD1451A51A10F00D64892 /* Images.xcassets */,
+				01000A521A65B9C40080AC5F /* MOSJobStatusFailure.tiff */,
+				01000A531A65B9C40080AC5F /* MOSJobStatusWorking.tiff */,
+				01000A541A65B9C40080AC5F /* MOSJobStatusSuccess.tiff */,
+				01000A551A65B9C40080AC5F /* MOSJobStatusSuccessWithWarning.tiff */,
 				015708AE1A619346005D08DB /* DefaultLinkerFile.ld */,
 				015525861A5F11E300096023 /* SyntaxDefinitions.plist */,
 				015525841A5F11CB00096023 /* Syntax Definitions */,
@@ -300,6 +320,8 @@
 				01509B131A52191300724F29 /* NSFileHandle+Strings.m */,
 				015708AB1A618E8B005D08DB /* NSURL+TemporaryFile.h */,
 				015708AC1A618E8B005D08DB /* NSURL+TemporaryFile.m */,
+				01000A4F1A65AD130080AC5F /* NSScanner+Shorteners.h */,
+				01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -368,12 +390,16 @@
 				016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */,
 				015525871A5F11E300096023 /* SyntaxDefinitions.plist in Resources */,
 				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
+				01000A571A65B9C40080AC5F /* MOSJobStatusWorking.tiff in Resources */,
 				014D85D81A62CF2100648B41 /* MOSJobWindow.xib in Resources */,
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
+				01000A591A65B9C40080AC5F /* MOSJobStatusSuccessWithWarning.tiff in Resources */,
 				015708AF1A619346005D08DB /* DefaultLinkerFile.ld in Resources */,
+				01000A561A65B9C40080AC5F /* MOSJobStatusFailure.tiff in Resources */,
 				015525851A5F11CB00096023 /* Syntax Definitions in Resources */,
 				016CD1631A51AC7600D64892 /* MOSExecutable.xib in Resources */,
 				016CD16A1A51B27900D64892 /* MOSSimulatorView.xib in Resources */,
+				01000A581A65B9C40080AC5F /* MOSJobStatusSuccess.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +431,7 @@
 				014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */,
 				015708AD1A618E8B005D08DB /* NSURL+TemporaryFile.m in Sources */,
 				016CD1411A51A10E00D64892 /* MOSSource.m in Sources */,
+				01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */,
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
 				014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */,
 				018F65721A6053F4005BA00E /* MOSMonitoredTask.m in Sources */,
@@ -417,6 +444,7 @@
 				016CD13C1A51A10E00D64892 /* MOSAppDelegate.m in Sources */,
 				016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */,
 				01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */,
+				01000A511A65AD130080AC5F /* NSScanner+Shorteners.m in Sources */,
 				0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */,
 				018F656F1A604B5C005BA00E /* MOSAssembler.m in Sources */,
 				01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */,

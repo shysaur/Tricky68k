@@ -21,6 +21,7 @@ NSString * const MOSJobStatusSuccessWithWarning = @"MOSJobStatusSuccessWithWarni
 NSString * const MOSJobStatusFailure            = @"MOSJobStatusFailure";
 
 NSString * const MOSJobEventText                = @"MOSJobVisibleDescription";
+NSString * const MOSJobEventAssociatedLine      = @"MOSJobEventAssociatedLine";
 NSString * const MOSJobEventType                = @"MOSJobStatus";
 
 NSString * const MOSJobEventTypeMessage         = @"MOSJobStatusSuccess";
