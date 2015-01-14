@@ -24,22 +24,13 @@
 
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
-  NSResponder *oldresp;
-  
   [[aController window] setContentView:[simVc view]];
-  if ([[simVc view] nextResponder] != simVc) {
-    /* Since Yosemite, AppKit will do this automatically */
-    oldresp = [[simVc view] nextResponder];
-    [[simVc view] setNextResponder:simVc];
-    [simVc setNextResponder:oldresp];
-  }
   [super windowControllerDidLoadNib:aController];
 }
 
 
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError {
-  simVc = [[MOSSimulatorViewController alloc]
-    initWithNibName:@"MOSSimulatorView" bundle:[NSBundle mainBundle]];
+  simVc = [[MOSSimulatorViewController alloc] init];
   return [simVc setSimulatedExecutable:url error:outError];
 }
 

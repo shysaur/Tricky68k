@@ -142,8 +142,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (!assemblyOutput) return; /* never assembled */
   
   if (!simVc)
-    simVc = [[MOSSimulatorViewController alloc]
-      initWithNibName:@"MOSSimulatorView" bundle:[NSBundle mainBundle]];
+    simVc = [[MOSSimulatorViewController alloc] init];
 
   oldSimExec = [simVc simulatedExecutable];
   if (![oldSimExec isEqual:assemblyOutput]) {
