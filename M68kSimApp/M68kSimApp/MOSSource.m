@@ -11,6 +11,7 @@
 #import "NSURL+TemporaryFile.h"
 #import "MOSAssembler.h"
 #import "MOSJobStatusManager.h"
+#import "MOSSimulatorViewController.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -43,8 +44,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   MOSJobStatusManager *sm;
   
   [super windowControllerDidLoadNib:aController];
-  
+
   hadJob = NO;
+  simulatorMode = NO;
   sm = [MOSJobStatusManager sharedJobStatusManger];
   [sm addObserver:self forKeyPath:@"jobList" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
   
@@ -107,7 +109,79 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem {
   if ([anItem action] == @selector(assembleAndRun:)) return !assembler;
+  if ([anItem action] == @selector(switchToEditor:)) return simulatorMode;
+  if ([anItem action] == @selector(switchToSimulator:)) return !simulatorMode;
   return YES;
+}
+
+
+- (CATransition *)transitionForViewSwitch {
+  CATransition *res;
+  
+  res = [[CATransition alloc] init];
+  [res setType:kCATransitionPush];
+  if (simulatorMode)
+    [res setSubtype:kCATransitionFromLeft];
+  else
+    [res setSubtype:kCATransitionFromRight];
+  return res;
+}
+
+
+- (IBAction)switchToSimulator:(id)sender {
+  NSError *err;
+  NSView *contview;
+  NSArray *constr;
+  
+  if (simulatorMode) return;
+  if (!assemblyOutput) return;
+  
+  simVc = [[MOSSimulatorViewController alloc]
+    initWithNibName:@"MOSSimulatorView" bundle:[NSBundle mainBundle]];
+  if (![simVc setSimulatedExecutable:assemblyOutput error:&err]) {
+    [self presentError:err];
+    simVc = nil;
+    return;
+  }
+  simView = [simVc view];
+  
+  constr = [editView constraints];
+  [editView removeConstraints:constr];
+  
+  contview = [[self windowForSheet] contentView];
+  [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
+  [[contview animator] replaceSubview:editView with:simView];
+  [contview setAnimations:@{}];
+  
+  [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[simView]|"
+    options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
+  [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[simView]|"
+    options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
+  
+  simulatorMode = YES;
+}
+
+
+- (IBAction)switchToEditor:(id)editor {
+  NSView *contview;
+  NSArray *constr;
+  
+  if (!simulatorMode) return;
+  
+  constr = [editView constraints];
+  [simView removeConstraints:constr];
+  
+  contview = [[self windowForSheet] contentView];
+  [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
+  [[contview animator] replaceSubview:simView with:editView];
+  [contview setAnimations:@{}];
+  
+  [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[editView]|"
+    options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
+  [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[editView]|"
+    options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
+  
+  simulatorMode = NO;
 }
 
 
@@ -157,9 +231,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (context == AssemblageComplete) {
     if ([assembler assemblageResult] != MOSAssemblageResultFailure) {
       unlink([tempSourceCopy fileSystemRepresentation]);
-      [[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:assemblyOutput display:YES completionHandler:nil];
+      [self switchToSimulator:self];
     }
-    
     [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
     assembler = nil;
   } else if (context == AssemblageEvent) {

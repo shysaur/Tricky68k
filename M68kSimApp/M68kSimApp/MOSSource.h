@@ -7,22 +7,31 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Quartz/Quartz.h>
 
 
 @class MGSFragaria;
 @class MOSAssembler;
+@class MOSSimulatorViewController;
 
 
 @interface MOSSource : NSDocument {
-  NSTextView *textView;
   NSData *initialData;
+  
+  BOOL simulatorMode;
+  
+  NSTextView *textView;
   MGSFragaria *fragaria;
+  __strong IBOutlet NSView *editView;
+  
+  MOSSimulatorViewController *simVc;
+  NSView *simView;
+  
   MOSAssembler *assembler;
   NSUInteger lastJobId;
   BOOL hadJob;
   NSURL *assemblyOutput;
   NSURL *tempSourceCopy;
-  IBOutlet NSView *editView;
 }
 
 - (IBAction)assembleAndRun:(id)sender;

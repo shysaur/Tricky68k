@@ -615,6 +615,19 @@
                                     <action selector="assembleAndRun:" target="-1" id="x06-Tz-bcQ"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="THE-Iz-l38"/>
+                            <menuItem title="View Source" id="jdU-UM-hWr">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="switchToEditor:" target="-1" id="rXq-0D-c5b"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="View Simulator" id="eej-0c-4EI">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="switchToSimulator:" target="-1" id="wc5-vI-V1E"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
