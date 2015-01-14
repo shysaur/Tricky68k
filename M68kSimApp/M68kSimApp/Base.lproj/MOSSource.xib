@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSSource">
             <connections>
+                <outlet property="docWindow" destination="xOd-HO-29H" id="hRv-CS-1sO"/>
                 <outlet property="editView" destination="mtv-Sk-Suh" id="3Qo-1x-xTL"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>

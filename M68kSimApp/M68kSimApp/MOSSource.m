@@ -159,7 +159,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   constr = [editView constraints];
   [editView removeConstraints:constr];
   
-  contview = [[self windowForSheet] contentView];
+  contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
   [[contview animator] replaceSubview:editView with:simView];
   [contview setAnimations:@{}];
@@ -168,7 +168,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[simView]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
-  [[self windowForSheet] makeFirstResponder:simView];
+  [docWindow makeFirstResponder:simView];
   
   simulatorMode = YES;
 }
@@ -183,7 +183,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   constr = [editView constraints];
   [simView removeConstraints:constr];
   
-  contview = [[self windowForSheet] contentView];
+  contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
   [[contview animator] replaceSubview:simView with:editView];
   [contview setAnimations:@{}];
@@ -192,7 +192,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[editView]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
-  [[self windowForSheet] makeFirstResponder:editView];
+  [docWindow makeFirstResponder:editView];
   
   simulatorMode = NO;
 }
@@ -220,7 +220,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
       jobinfo = @{MOSJobVisibleDescription: title,
                   MOSJobAssociatedFile: [self fileURL]};
     } else {
-      title = [NSString stringWithFormat:@"Assemble %@", [[self windowForSheet] title]];
+      title = [NSString stringWithFormat:@"Assemble %@", [docWindow title]];
       jobinfo = @{MOSJobVisibleDescription: title};
     }
     lastJobId = [jsm addJobWithInfo:jobinfo];
