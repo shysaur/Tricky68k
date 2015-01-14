@@ -30,7 +30,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     
     serror = [[SMLSyntaxError alloc] init];
     [serror setDescription:[event objectForKey:MOSJobEventText]];
-    [serror setLine:[[event objectForKey:MOSJobEventAssociatedLine] intValue]];
+    [serror setLine:[[event objectForKey:MOSJobEventAssociatedLine] intValue]+1];
     [serrors addObject:serror];
   }
   return [serrors copy];
