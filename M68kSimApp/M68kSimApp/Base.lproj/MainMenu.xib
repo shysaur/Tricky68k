@@ -684,7 +684,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="9Ko-BT-3V6"/>
-                            <menuItem title="Activities" keyEquivalent="0" id="XhP-OZ-Ogi">
+                            <menuItem title="Actions" keyEquivalent="0" id="XhP-OZ-Ogi">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="openJobsWindow:" target="Voe-Tx-rLC" id="PyG-RE-H1X"/>
