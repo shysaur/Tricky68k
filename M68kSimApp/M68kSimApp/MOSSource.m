@@ -168,6 +168,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[simView]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
+  [[self windowForSheet] makeFirstResponder:simView];
   
   simulatorMode = YES;
 }
@@ -191,6 +192,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[editView]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
+  [[self windowForSheet] makeFirstResponder:editView];
   
   simulatorMode = NO;
 }
