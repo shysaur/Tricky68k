@@ -38,6 +38,11 @@
 }
 
 
+- (NSURL*)simulatedExecutable {
+  return simExec;
+}
+
+
 - (void)reloadSimulatedExecutable {
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];

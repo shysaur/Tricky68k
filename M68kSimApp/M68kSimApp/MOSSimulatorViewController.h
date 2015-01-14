@@ -30,6 +30,8 @@
 }
 
 - (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr;
+- (NSURL*)simulatedExecutable;
+
 - (MOSSimulatorProxy*)simulatorProxy;
 
 - (IBAction)run:(id)sender;

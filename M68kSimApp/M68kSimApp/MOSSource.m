@@ -108,9 +108,12 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (BOOL)validateMenuItem:(NSMenuItem *)anItem {
-  if ([anItem action] == @selector(assembleAndRun:)) return !assembler;
-  if ([anItem action] == @selector(switchToEditor:)) return simulatorMode;
-  if ([anItem action] == @selector(switchToSimulator:)) return !simulatorMode;
+  if ([anItem action] == @selector(assembleAndRun:))
+    return !assembler;
+  if ([anItem action] == @selector(switchToEditor:))
+    return simulatorMode && !assembler;
+  if ([anItem action] == @selector(switchToSimulator:))
+    return !simulatorMode && !assembler && assemblyOutput;
   return YES;
 }
 
@@ -132,16 +135,25 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSError *err;
   NSView *contview;
   NSArray *constr;
+  NSURL *oldSimExec;
   
-  if (simulatorMode) return;
-  if (!assemblyOutput) return;
+  if (simulatorMode) return;   /* already in simulator mode */
+  if (assembler) return;       /* assembling */
+  if (!assemblyOutput) return; /* never assembled */
   
-  simVc = [[MOSSimulatorViewController alloc]
-    initWithNibName:@"MOSSimulatorView" bundle:[NSBundle mainBundle]];
-  if (![simVc setSimulatedExecutable:assemblyOutput error:&err]) {
-    [self presentError:err];
-    simVc = nil;
-    return;
+  if (!simVc)
+    simVc = [[MOSSimulatorViewController alloc]
+      initWithNibName:@"MOSSimulatorView" bundle:[NSBundle mainBundle]];
+
+  oldSimExec = [simVc simulatedExecutable];
+  if (![oldSimExec isEqual:assemblyOutput]) {
+    if (![simVc setSimulatedExecutable:assemblyOutput error:&err]) {
+      [self presentError:err];
+      simVc = nil;
+      return;
+    }
+    
+    if (oldSimExec) unlink([oldSimExec fileSystemRepresentation]);
   }
   simView = [simVc view];
   
@@ -189,9 +201,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (assembler) return;
   
   assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-  @try {
-    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
-  } @finally {}
   assembler = [[MOSAssembler alloc] init];
   [assembler addObserver:self forKeyPath:@"complete" options:0 context:AssemblageComplete];
   
@@ -230,16 +239,19 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
     change:(NSDictionary *)change context:(void *)context {
+  MOSAssemblageResult asmres;
   NSArray *events;
   MOSJobStatusManager *sm;
   
   if (context == AssemblageComplete) {
-    if ([assembler assemblageResult] != MOSAssemblageResultFailure) {
+    asmres = [assembler assemblageResult];
+    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
+    assembler = nil;
+    
+    if (asmres != MOSAssemblageResultFailure) {
       unlink([tempSourceCopy fileSystemRepresentation]);
       [self switchToSimulator:self];
     }
-    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
-    assembler = nil;
   } else if (context == AssemblageEvent) {
     if (!hadJob) return;
     
@@ -253,6 +265,13 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [fragaria setSyntaxErrors:MOSSyntaxErrorsFromEvents(events)];
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+
+- (void)close {
+  [simView removeFromSuperviewWithoutNeedingDisplay];
+  simView = nil;
+  simVc = nil;
 }
 
 
