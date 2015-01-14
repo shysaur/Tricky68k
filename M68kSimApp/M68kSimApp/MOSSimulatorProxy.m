@@ -111,8 +111,11 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     }
   });
   
-  [toSimTty fileHandleForWriting];
-  [fromSimTty fileHandleForReading];
+  if (![toSimTty fileHandleForWriting] || ![fromSimTty fileHandleForReading]) {
+    NSLog(@"Simulator error: can't open tty");
+    [simTask terminate];
+    [self changeSimulatorStatusTo:MOSSimulatorStateDead];
+  }
   
   resp = [self getSimulatorResponse];
   if ([resp count]) {
