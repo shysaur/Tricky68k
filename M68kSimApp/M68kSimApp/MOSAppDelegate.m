@@ -8,6 +8,7 @@
 
 #import "MOSAppDelegate.h"
 #import "MOSJobWindowController.h"
+#import "MOSPreferencesWindowController.h"
 
 
 @implementation MOSAppDelegate
@@ -28,6 +29,14 @@
     jobsWc = [[MOSJobWindowController alloc] initWithWindowNibName:@"MOSJobWindow"];
   }
   [jobsWc showWindow:sender];
+}
+
+
+- (IBAction)openPreferencesWindow:(id)sender {
+  if (!prefsWc) {
+    prefsWc = [[MOSPreferencesWindowController alloc] init];
+  }
+  [prefsWc showWindow:sender];
 }
 
 

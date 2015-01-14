@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MOSPreferencesWindowController">
+            <connections>
+                <outlet property="toolbar" destination="IWy-Ps-0UK" id="oW5-Jh-U3H"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="480" width="395" height="196"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="395" height="196"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </view>
+            <toolbar key="toolbar" implicitIdentifier="45631712-654C-422E-89E9-DB985127807C" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="IWy-Ps-0UK">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="nPc-lm-kzE"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kAX-I0-4PP"/>
+                    <toolbarItem implicitItemIdentifier="FB94D5A2-9946-43B8-8E53-894C303DBD9A" explicitItemIdentifier="0" label="Editing" paletteLabel="Editing" tag="-1" image="NSFontPanel" selectable="YES" id="2xn-yq-TYF">
+                        <connections>
+                            <action selector="clickedPreferenceTab:" target="-2" id="UXb-3t-mmb"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="C2ED2E35-3EC7-48EB-913B-726D0479431D" explicitItemIdentifier="1" label="Fonts &amp; Colors" paletteLabel="Fonts &amp; Colors" image="NSColorPanel" selectable="YES" id="n7c-Yz-IHA">
+                        <connections>
+                            <action selector="clickedPreferenceTab:" target="-2" id="yXw-pP-Pc4"/>
+                        </connections>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="2xn-yq-TYF"/>
+                    <toolbarItem reference="n7c-Yz-IHA"/>
+                    <toolbarItem reference="kAX-I0-4PP"/>
+                </defaultToolbarItems>
+            </toolbar>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="259.5" y="315"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="NSColorPanel" width="32" height="32"/>
+        <image name="NSFontPanel" width="32" height="32"/>
+    </resources>
+</document>

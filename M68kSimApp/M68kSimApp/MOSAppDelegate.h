@@ -11,9 +11,11 @@
 
 @interface MOSAppDelegate : NSObject <NSApplicationDelegate> {
   NSWindowController *jobsWc;
+  NSWindowController *prefsWc;
 }
 
 - (IBAction)openJobsWindow:(id)sender;
+- (IBAction)openPreferencesWindow:(id)sender;
 
 @end
 
