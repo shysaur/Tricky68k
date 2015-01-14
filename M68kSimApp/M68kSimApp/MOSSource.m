@@ -205,9 +205,14 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     NSString *title;
 
     jsm = [MOSJobStatusManager sharedJobStatusManger];
-    title = [NSString stringWithFormat:@"Assemble %@", [[self fileURL] lastPathComponent]];
-    jobinfo = @{MOSJobVisibleDescription: title,
-                MOSJobAssociatedFile: [self fileURL]};
+    if ([self fileURL]) {
+      title = [NSString stringWithFormat:@"Assemble %@", [[self fileURL] lastPathComponent]];
+      jobinfo = @{MOSJobVisibleDescription: title,
+                  MOSJobAssociatedFile: [self fileURL]};
+    } else {
+      title = [NSString stringWithFormat:@"Assemble %@", [[self windowForSheet] title]];
+      jobinfo = @{MOSJobVisibleDescription: title};
+    }
     lastJobId = [jsm addJobWithInfo:jobinfo];
     hadJob = YES;
     
