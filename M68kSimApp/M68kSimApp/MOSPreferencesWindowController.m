@@ -17,19 +17,13 @@
 - (id)init {
   self = [super initWithWindowNibName:@"MOSPreferencesWindow"];
   currentPanel = -1;
+  [self loadPrefPanes];
   return self;
 }
 
 
 - (void)windowDidLoad {
-  [super windowDidLoad];
-  [self loadPrefPanes];
   [self switchTabToIndex:0 animate:NO keepXCenter:YES];
-}
-
-
-- (void)showWindow:(id)sender {
-  [super showWindow:sender];
 }
 
 
@@ -64,7 +58,7 @@
   if (anim) {
     tempView = [[NSView alloc] init];
     [wnd setContentView:tempView];
-    [wnd setFrame:rect display:YES animate:YES];
+    [wnd setFrame:rect display:YES animate:YES]; /* blocking! */
   } else
     [wnd setFrame:rect display:YES];
   
@@ -78,8 +72,8 @@
 {
   prefPanes = [[NSMutableArray alloc] init];
   
-  [prefPanes addObject:[[MGSFragariaFontsAndColoursPrefsViewController alloc] init]];
   [prefPanes addObject:[[MGSFragariaTextEditingPrefsViewController alloc] init]];
+  [prefPanes addObject:[[MGSFragariaFontsAndColoursPrefsViewController alloc] init]];
 }
 
 
