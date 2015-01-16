@@ -238,9 +238,9 @@
 				018F65731A609FCD005BA00E /* Utility */,
 				01C20CA01A67269B00057D6B /* Preferences Window */,
 				016CD15E1A51A4EC00D64892 /* Source Editor */,
-				018F656C1A604989005BA00E /* Assembler Client */,
 				014D85D91A62CF2D00648B41 /* Job Manager */,
 				016CD1641A51AC7D00D64892 /* Standalone Simulator */,
+				018F656C1A604989005BA00E /* Assembler Client */,
 				016CD1651A51AF7A00D64892 /* Simulator Client */,
 				016CD1381A51A10E00D64892 /* Supporting Files */,
 			);

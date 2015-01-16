@@ -192,7 +192,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[editView]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
-  [docWindow makeFirstResponder:editView];
+  [docWindow makeFirstResponder:textView];
   
   simulatorMode = NO;
 }
