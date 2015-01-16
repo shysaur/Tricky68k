@@ -651,13 +651,13 @@
                             <menuItem isSeparatorItem="YES" id="WIM-gd-xk6">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Entab… (Spaces To Tabs)" tag="102" keyEquivalent="t" id="xVl-Qg-4na">
+                            <menuItem title="Spaces To Tabs..." tag="102" keyEquivalent="t" id="xVl-Qg-4na">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="entabAction:" target="lC9-Yb-pZX" id="LXa-Td-IUA"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Detab… (Tabs To Spaces)" tag="102" keyEquivalent="T" id="Vo8-fq-osw">
+                            <menuItem title="Tabs To Spaces..." tag="102" keyEquivalent="T" id="Vo8-fq-osw">
                                 <connections>
                                     <action selector="detabAction:" target="lC9-Yb-pZX" id="6jh-lF-WDq"/>
                                 </connections>
@@ -665,7 +665,7 @@
                             <menuItem isSeparatorItem="YES" id="hYG-LG-Klp">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Capitalise First Letter Of Every Word" tag="102" keyEquivalent="c" id="k5L-2K-BaO">
+                            <menuItem title="To Title Case" tag="102" keyEquivalent="c" id="k5L-2K-BaO">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="capitaliseAction:" target="lC9-Yb-pZX" id="q06-g8-spZ"/>
