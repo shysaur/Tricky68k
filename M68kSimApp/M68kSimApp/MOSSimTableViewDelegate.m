@@ -31,6 +31,23 @@ static void *ReloadTableView = &ReloadTableView;
 }
 
 
+- (void)awakeFromNib {
+  CGFloat rowHeight;
+  
+  rowHeight = round([[self defaultMonospacedFont] boundingRectForFont].size.height);
+  [tableView setRowHeight:rowHeight];
+}
+
+
+- (void)defaultMonospacedFontHasChanged {
+  CGFloat rowHeight;
+  
+  rowHeight = round([[self defaultMonospacedFont] boundingRectForFont].size.height);
+  [tableView setRowHeight:rowHeight];
+  [tableView reloadData];
+}
+
+
 - (void)observeValueForKeyPath:(NSString*)keyPath    ofObject:(id)object
                         change:(NSDictionary*)change context:(void*)context {
   if (context == ReloadTableView) {

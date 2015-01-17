@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOSSimulatorSubviewDelegate.h"
 
 
 @class MOSSimulatorProxy;
 @class MOSTeletypeView;
 
 
-@interface MOSTeletypeViewDelegate : NSObject <NSTextViewDelegate> {
+@interface MOSTeletypeViewDelegate : MOSSimulatorSubviewDelegate <NSTextViewDelegate> {
   MOSSimulatorProxy *simProxy;
   NSFileHandle *toSim;
   NSFileHandle *fromSim;

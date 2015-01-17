@@ -9,6 +9,7 @@
 #import "MOSPreferencesWindowController.h"
 #import <MGSFragaria/MGSFragariaFontsAndColoursPrefsViewController.h>
 #import <MGSFragaria/MGSFragariaTextEditingPrefsViewController.h>
+#import "MOSSimulatorPrefViewController.h"
 
 
 @implementation MOSPreferencesWindowController
@@ -43,6 +44,7 @@
   NSViewController *pane;
   NSView *paneView;
   NSView *tempView;
+  id oldresp;
   
   pane = [prefPanes objectAtIndex:paneIdx];
   paneView = [pane view];
@@ -63,6 +65,14 @@
     [wnd setFrame:rect display:YES];
   
   [wnd setContentView:paneView];
+  
+  [wnd makeFirstResponder:paneView];
+  if ([paneView nextResponder] != pane) {
+    oldresp = [paneView nextResponder];
+    [paneView setNextResponder:pane];
+    [pane setNextResponder:oldresp];
+  }
+  
   [toolbar setSelectedItemIdentifier:[NSString stringWithFormat:@"%ld", paneIdx]];
   currentPanel = paneIdx;
 }
@@ -72,6 +82,7 @@
 {
   prefPanes = [[NSMutableArray alloc] init];
   
+  [prefPanes addObject:[[MOSSimulatorPrefViewController alloc] init]];
   [prefPanes addObject:[[MGSFragariaTextEditingPrefsViewController alloc] init]];
   [prefPanes addObject:[[MGSFragariaFontsAndColoursPrefsViewController alloc] init]];
 }

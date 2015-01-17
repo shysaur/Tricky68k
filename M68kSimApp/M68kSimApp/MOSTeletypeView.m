@@ -25,6 +25,12 @@
 }
 
 
+- (void)setDelegate:(MOSTeletypeViewDelegate<NSTextViewDelegate>*)delegate {
+  [super setDelegate:delegate];
+  [self setTeletypeFont:[delegate defaultMonospacedFont]];
+}
+
+
 - (BOOL)shouldDrawInsertionPoint {
   return NO;
 }
@@ -44,6 +50,7 @@
   NSLayoutManager *lm;
   NSTextContainer *tc;
   unichar lastc;
+  NSAttributedString *space;
   
   lastCur = cur;
   
@@ -52,7 +59,8 @@
   
   length = [[self textStorage] length];
   if (length == 0) {
-    [[[self textStorage] mutableString] appendString:@" "];
+    space = [[NSAttributedString alloc] initWithString:@" " attributes:ttyAttributes];
+    [[self textStorage] appendAttributedString:space];
     gliph = [lm glyphIndexForCharacterAtIndex:0];
     gliphRange.length = 1;
     gliphRange.location = 0;
@@ -79,7 +87,7 @@
     }
     
     if (cur >= length) {
-      spaceSize = [@" " sizeWithAttributes:@{NSFontAttributeName: [self font]}];
+      spaceSize = [@" " sizeWithAttributes:ttyAttributes];
       glyphRect.origin.x += glyphRect.size.width;
       glyphRect.size.width = spaceSize.width;
     }
@@ -93,19 +101,27 @@
 }
 
 
-- (void)setTeletypeFormat {
+- (void)setTeletypeFont:(NSFont*)font {
   NSMutableParagraphStyle *parstyle;
-  NSMutableDictionary *attributes;
+  
+  parstyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+  [parstyle setLineBreakMode:NSLineBreakByCharWrapping];
+  
+  ttyAttributes = @{
+    NSParagraphStyleAttributeName:[parstyle copy],
+    NSFontAttributeName:font };
+  
+  [self setTeletypeFormat];
+  [self setTeletypeCursorPosition:lastCur];
+}
+
+
+- (void)setTeletypeFormat {
   NSRange all;
   
   all.location = 0;
   all.length = [[self textStorage] length];
-  parstyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-  [parstyle setLineBreakMode:NSLineBreakByCharWrapping];
-  attributes = [NSMutableDictionary dictionary];
-  [attributes setObject:[parstyle copy] forKey:NSParagraphStyleAttributeName];
-  [attributes setObject:[self font] forKey:NSFontAttributeName];
-  [[self textStorage] setAttributes:[attributes copy] range:all];
+  [[self textStorage] setAttributes:ttyAttributes range:all];
 }
 
 

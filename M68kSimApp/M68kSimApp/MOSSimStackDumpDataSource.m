@@ -38,6 +38,7 @@
             addr, dump[0], dump[1], dump[2], dump[3]];
   }
   result = [tv makeViewWithIdentifier:@"normalView" owner:self];
+  [[result textField] setFont:[self defaultMonospacedFont]];
   [[result textField] setStringValue:line];
   return result;
 }

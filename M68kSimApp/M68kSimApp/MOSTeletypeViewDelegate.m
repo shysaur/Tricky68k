@@ -45,6 +45,11 @@
 }
 
 
+- (void)defaultMonospacedFontHasChanged {
+  [textView setTeletypeFont:[self defaultMonospacedFont]];
+}
+
+
 - (void)typedString:(NSString *)str {
   NSString *tmp;
   const char *buf, *newline;

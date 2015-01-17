@@ -7,12 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOSSimulatorSubviewDelegate.h"
 
 
 @class MOSSimulatorProxy;
 
 
-@interface MOSSimTableViewDelegate : NSObject {
+@interface MOSSimTableViewDelegate : MOSSimulatorSubviewDelegate {
   IBOutlet NSTableView *tableView;
   MOSSimulatorProxy *simProxy;
 }

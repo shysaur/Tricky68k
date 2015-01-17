@@ -47,11 +47,12 @@ const BOOL isRowHeader[] = {
   id result;
   
   if (isRowHeader[row]) {
-    result = [tv makeViewWithIdentifier:@"nameView" owner:self];
+    result = [tv makeViewWithIdentifier:@"headerView" owner:self];
     [[result textField] setStringValue:[rows objectAtIndex:row]];
   } else {
     if ([[tc identifier] isEqual:@"nameColumn"]) {
       result = [tv makeViewWithIdentifier:@"nameView" owner:self];
+      [[result textField] setFont:[self defaultMonospacedFont]];
       [[result textField] setStringValue:[rows objectAtIndex:row]];
     } else {
       result = [tv makeViewWithIdentifier:@"valueView" owner:self];
@@ -65,6 +66,7 @@ const BOOL isRowHeader[] = {
         else
           line = [NSString stringWithFormat:@"%08X", [value intValue]];
       }
+      [[result textField] setFont:[self defaultMonospacedFont]];
       [[result textField] setStringValue:line];
     }
   }

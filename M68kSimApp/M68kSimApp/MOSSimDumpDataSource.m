@@ -32,6 +32,7 @@
       line = [NSArray arrayWithObject:@"Error"];
   }
   result = [tv makeViewWithIdentifier:@"normalView" owner:self];
+  [[result textField] setFont:[self defaultMonospacedFont]];
   [[result textField] setStringValue:[line firstObject]];
   return result;
 }

@@ -26,18 +26,24 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="nPc-lm-kzE"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kAX-I0-4PP"/>
-                    <toolbarItem implicitItemIdentifier="FB94D5A2-9946-43B8-8E53-894C303DBD9A" explicitItemIdentifier="0" label="Editing" paletteLabel="Editing" tag="-1" image="NSFontPanel" selectable="YES" id="2xn-yq-TYF">
+                    <toolbarItem implicitItemIdentifier="FB94D5A2-9946-43B8-8E53-894C303DBD9A" explicitItemIdentifier="1" label="Editing" paletteLabel="Editing" tag="-1" image="NSFontPanel" selectable="YES" id="2xn-yq-TYF">
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="UXb-3t-mmb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="C2ED2E35-3EC7-48EB-913B-726D0479431D" explicitItemIdentifier="1" label="Fonts &amp; Colors" paletteLabel="Fonts &amp; Colors" image="NSColorPanel" selectable="YES" id="n7c-Yz-IHA">
+                    <toolbarItem implicitItemIdentifier="C2ED2E35-3EC7-48EB-913B-726D0479431D" explicitItemIdentifier="2" label="Fonts &amp; Colors" paletteLabel="Fonts &amp; Colors" image="NSColorPanel" selectable="YES" id="n7c-Yz-IHA">
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="yXw-pP-Pc4"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="8C4823D5-8A99-435B-BEC4-4ADC63C87227" explicitItemIdentifier="0" label="Simulator" paletteLabel="Simulator" tag="-1" image="NSUserAccounts" selectable="YES" id="bog-L9-HV1">
+                        <connections>
+                            <action selector="clickedPreferenceTab:" target="-2" id="YKU-Wj-lJV"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
+                    <toolbarItem reference="bog-L9-HV1"/>
                     <toolbarItem reference="2xn-yq-TYF"/>
                     <toolbarItem reference="n7c-Yz-IHA"/>
                     <toolbarItem reference="kAX-I0-4PP"/>
@@ -52,5 +58,6 @@
     <resources>
         <image name="NSColorPanel" width="32" height="32"/>
         <image name="NSFontPanel" width="32" height="32"/>
+        <image name="NSUserAccounts" width="32" height="32"/>
     </resources>
 </document>

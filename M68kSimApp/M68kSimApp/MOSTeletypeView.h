@@ -12,8 +12,10 @@
 @interface MOSTeletypeView : NSTextView {
   NSRect curRect;
   NSInteger lastCur;
+  NSDictionary *ttyAttributes;
 }
 
+- (void)setTeletypeFont:(NSFont*)font;
 - (void)setTeletypeCursorPosition:(NSInteger)cur;
 - (void)setTeletypeFormat;
 

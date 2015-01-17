@@ -177,10 +177,12 @@
       addr = [self getAddressForLine:row];
       hasBrkpt = [breakpoints containsObject:[NSNumber numberWithUnsignedLong:addr]];
       result = [tv makeViewWithIdentifier:@"breakpointView" owner:self];
+      [[result textField] setFont:[self defaultMonospacedFont]];
       [[result imageView] setHidden:!hasBrkpt];
     } else {
       line = [self getLine:row];
       result = [tv makeViewWithIdentifier:@"normalView" owner:self];
+      [[result textField] setFont:[self defaultMonospacedFont]];
       [[result textField] setStringValue:line];
     }
   }
