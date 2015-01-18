@@ -19,6 +19,7 @@
   nc = [NSNotificationCenter defaultCenter];
   
   [super windowDidLoad];
+#if __MAC_OS_X_VERSION_MAX_ALLOWED > __MAC_10_9
   if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9) {
     [[self window] setTitleVisibility: NSWindowTitleHidden];
     [nc addObserver:self selector:@selector(windowDidBecomeMainWindow) name:NSWindowDidBecomeMainNotification object:[self window]];
@@ -26,6 +27,9 @@
   } else {
     [fakeTitle removeFromSuperview];
   }
+#else
+  [fakeTitle removeFromSuperview];
+#endif
 }
 
 
