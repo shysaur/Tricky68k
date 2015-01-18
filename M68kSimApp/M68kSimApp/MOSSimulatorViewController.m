@@ -194,6 +194,7 @@
 
 
 - (BOOL)validateUserInterfaceItem:(id)anItem {
+  if (!simProxy) return NO;
   if ([anItem action] == @selector(run:)) return !simRunning;
   if ([anItem action] == @selector(stepIn:)) return !simRunning;
   if ([anItem action] == @selector(stepOver:)) return !simRunning;
@@ -207,7 +208,7 @@
   uint32_t flags;
   int x, n, z, v, c;
   
-  if ([simProxy simulatorState] != MOSSimulatorStatePaused) return @"";
+  if (!simProxy || [simProxy simulatorState] != MOSSimulatorStatePaused) return @"";
   regdump = [simProxy registerDump];
   flags = (uint32_t)[[regdump objectForKey:MOS68kRegisterSR] integerValue];
   x = (flags & 0b10000) >> 4;

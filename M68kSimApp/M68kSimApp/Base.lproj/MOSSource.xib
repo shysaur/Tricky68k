@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="docWindow" destination="xOd-HO-29H" id="hRv-CS-1sO"/>
                 <outlet property="editView" destination="mtv-Sk-Suh" id="3Qo-1x-xTL"/>
+                <outlet property="simVc" destination="aXJ-fz-zD2" id="TDF-ci-m4A"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
         </customObject>
@@ -41,27 +42,27 @@
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="G9P-xs-Tqq"/>
                     <toolbarItem implicitItemIdentifier="0716A56E-9CEA-4796-A292-DE38BA154BB6" label="Start" paletteLabel="Start" tag="-1" image="MOSStart" id="Fnv-hX-0RA">
                         <connections>
-                            <action selector="run:" target="-2" id="HB4-Sf-iZ5"/>
+                            <action selector="run:" target="aXJ-fz-zD2" id="jbT-cU-Zpg"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="9B1EC159-5E9E-4034-BA17-48C435A978DA" label="Pause" paletteLabel="Pause" tag="-1" image="MOSPause" id="UeF-fG-hQG">
                         <connections>
-                            <action selector="pause:" target="-2" id="IZh-JS-C6d"/>
+                            <action selector="pause:" target="aXJ-fz-zD2" id="Obu-Fy-Bhm"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="6EB0BC35-4C7A-4B6D-B66F-DABEE979F866" label="Restart" paletteLabel="Restart" tag="-1" image="MOSRestart" id="nt3-hT-vi5">
                         <connections>
-                            <action selector="restart:" target="-2" id="LlY-iG-BmG"/>
+                            <action selector="restart:" target="aXJ-fz-zD2" id="LV7-fS-lXT"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="6105519B-6891-471E-A201-720CAC22C736" label="Step In" paletteLabel="Step In" tag="-1" image="MOSStepIn" id="84K-vV-6NM">
                         <connections>
-                            <action selector="stepIn:" target="-2" id="lvH-bM-Afd"/>
+                            <action selector="stepIn:" target="aXJ-fz-zD2" id="Ytc-IS-WR1"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="E7D0F59C-F469-4193-A060-52CFBE02D4BD" label="Step Over" paletteLabel="Step Over" tag="-1" image="MOSStepOver" id="Vf4-fr-SvF">
                         <connections>
-                            <action selector="stepOver:" target="-2" id="pWg-qY-Vh3"/>
+                            <action selector="stepOver:" target="aXJ-fz-zD2" id="0bB-K9-pqo"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="D14A9D31-167A-4221-BCA6-CAE454106F70" label="Flags" paletteLabel="Flags" id="YNr-Fs-uhv">
@@ -102,6 +103,7 @@
             </connections>
             <point key="canvasLocation" x="265.5" y="360.5"/>
         </window>
+        <viewController nibName="MOSSimulatorView" id="aXJ-fz-zD2" customClass="MOSSimulatorViewController"/>
     </objects>
     <resources>
         <image name="MOSPause" width="15" height="15"/>

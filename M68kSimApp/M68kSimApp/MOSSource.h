@@ -28,7 +28,7 @@
   MGSFragaria *fragaria;
   __strong IBOutlet NSView *editView;
   
-  MOSSimulatorViewController *simVc;
+  IBOutlet MOSSimulatorViewController *simVc;
   NSView *simView;
   
   MOSAssembler *assembler;
@@ -39,11 +39,8 @@
 }
 
 - (IBAction)assembleAndRun:(id)sender;
-- (IBAction)run:(id)sender;
-- (IBAction)pause:(id)sender;
-- (IBAction)restart:(id)sender;
-- (IBAction)stepIn:(id)sender;
-- (IBAction)stepOver:(id)sender;
+- (IBAction)switchToSimulator:(id)sender;
+- (IBAction)switchToEditor:(id)editor;
 
 @end
 

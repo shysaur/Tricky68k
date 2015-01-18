@@ -140,9 +140,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (simulatorMode) return;   /* already in simulator mode */
   if (assembler) return;       /* assembling */
   if (!assemblyOutput) return; /* never assembled */
-  
-  if (!simVc)
-    simVc = [[MOSSimulatorViewController alloc] init];
 
   oldSimExec = [simVc simulatedExecutable];
   if (![oldSimExec isEqual:assemblyOutput]) {
@@ -273,40 +270,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [simView removeFromSuperviewWithoutNeedingDisplay];
   simView = nil;
   simVc = nil;
-}
-
-
-- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
-  if ([MOSSimulatorViewController instancesRespondToSelector:[theItem action]]) {
-    if (!simVc || !simulatorMode) return NO;
-    return [simVc validateUserInterfaceItem:theItem];
-  }
-  return [super validateUserInterfaceItem:theItem];
-}
-
-
-- (IBAction)run:(id)sender {
-  [simVc run:sender];
-}
-
-
-- (IBAction)pause:(id)sender {
-  [simVc pause:sender];
-}
-
-
-- (IBAction)restart:(id)sender {
-  [simVc restart:sender];
-}
-
-
-- (IBAction)stepIn:(id)sender {
-  [simVc stepIn:sender];
-}
-
-
-- (IBAction)stepOver:(id)sender {
-  [simVc stepOver:sender];
 }
 
 
