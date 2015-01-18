@@ -107,14 +107,24 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
-- (BOOL)validateMenuItem:(NSMenuItem *)anItem {
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
   if ([anItem action] == @selector(assembleAndRun:))
     return !assembler;
   if ([anItem action] == @selector(switchToEditor:))
-    return simulatorMode && !assembler;
+    return [self sourceModeSwitchAllowed];
   if ([anItem action] == @selector(switchToSimulator:))
-    return !simulatorMode && !assembler && assemblyOutput;
-  return YES;
+    return [self simulatorModeSwitchAllowed];
+  return [super validateUserInterfaceItem:anItem];
+}
+
+
+- (BOOL)simulatorModeSwitchAllowed {
+  return !simulatorMode && !assembler && assemblyOutput;
+}
+
+
+- (BOOL)sourceModeSwitchAllowed {
+  return simulatorMode && !assembler;
 }
 
 
@@ -140,6 +150,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (simulatorMode) return;   /* already in simulator mode */
   if (assembler) return;       /* assembling */
   if (!assemblyOutput) return; /* never assembled */
+  
+  [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
 
   oldSimExec = [simVc simulatedExecutable];
   if (![oldSimExec isEqual:assemblyOutput]) {
@@ -168,6 +181,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [docWindow makeFirstResponder:simView];
   
   simulatorMode = YES;
+  
+  [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
 }
 
 
@@ -176,6 +192,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSArray *constr;
   
   if (!simulatorMode) return;
+  
+  [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
   
   constr = [editView constraints];
   [simView removeConstraints:constr];
@@ -192,11 +211,17 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [docWindow makeFirstResponder:textView];
   
   simulatorMode = NO;
+  
+  [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
 }
 
 
 - (IBAction)assembleAndRun:(id)sender {
   if (assembler) return;
+  
+  [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
   
   assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
   assembler = [[MOSAssembler alloc] init];
@@ -232,6 +257,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [assembler setJobId:lastJobId];
     [assembler assemble];
   }];
+  
+  [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
 }
 
 
@@ -242,9 +270,13 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   MOSJobStatusManager *sm;
   
   if (context == AssemblageComplete) {
+    [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
+    [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
     asmres = [assembler assemblageResult];
     [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
     assembler = nil;
+    [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
+    [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
     
     if (asmres != MOSAssemblageResultFailure) {
       unlink([tempSourceCopy fileSystemRepresentation]);

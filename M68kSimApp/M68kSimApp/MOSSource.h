@@ -42,5 +42,8 @@
 - (IBAction)switchToSimulator:(id)sender;
 - (IBAction)switchToEditor:(id)editor;
 
+- (BOOL)simulatorModeSwitchAllowed;
+- (BOOL)sourceModeSwitchAllowed;
+
 @end
 
