@@ -44,10 +44,10 @@
 }
 
 
-- (BOOL)validateMenuItem:(NSMenuItem *)anItem {
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
   if ([anItem action] == @selector(runPageLayout:)) return NO;
   if ([anItem action] == @selector(printDocument:)) return NO;
-  return YES;
+  return [super validateUserInterfaceItem:anItem];
 }
 
 
