@@ -31,13 +31,15 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "m68000_icon_256.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "m68000_icon_512.png",
       "scale" : "2x"
     },
     {

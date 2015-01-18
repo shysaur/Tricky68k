@@ -21,6 +21,7 @@
 		014D85D81A62CF2100648B41 /* MOSJobWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014D85D61A62CF2100648B41 /* MOSJobWindow.xib */; };
 		014D85DC1A62D01900648B41 /* MOSJobStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D85DB1A62D01900648B41 /* MOSJobStatusManager.m */; };
 		01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01509B131A52191300724F29 /* NSFileHandle+Strings.m */; };
+		0151CF361A6C44F9003985B6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0151CF351A6C44F9003985B6 /* Credits.rtf */; };
 		015525801A5EFD9700096023 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; };
 		015525831A5EFE5200096023 /* MGSFragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		015525851A5F11CB00096023 /* Syntax Definitions in Resources */ = {isa = PBXBuildFile; fileRef = 015525841A5F11CB00096023 /* Syntax Definitions */; };
@@ -113,6 +114,7 @@
 		014D85DB1A62D01900648B41 /* MOSJobStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJobStatusManager.m; sourceTree = "<group>"; };
 		01509B121A52191300724F29 /* NSFileHandle+Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+Strings.h"; sourceTree = "<group>"; };
 		01509B131A52191300724F29 /* NSFileHandle+Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+Strings.m"; sourceTree = "<group>"; };
+		0151CF351A6C44F9003985B6 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		0155257F1A5EFD9700096023 /* MGSFragaria.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSFragaria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		015525841A5F11CB00096023 /* Syntax Definitions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Syntax Definitions"; sourceTree = "<group>"; };
 		015525861A5F11E300096023 /* SyntaxDefinitions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SyntaxDefinitions.plist; sourceTree = "<group>"; };
@@ -135,7 +137,7 @@
 		0161F7FD1A6B26BD00848C0D /* MOSStart.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MOSStart.pdf; sourceTree = "<group>"; };
 		0161F7FE1A6B26BD00848C0D /* MOSStepIn.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MOSStepIn.pdf; sourceTree = "<group>"; };
 		0161F7FF1A6B26BD00848C0D /* MOSStepOver.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MOSStepOver.pdf; sourceTree = "<group>"; };
-		016CD1351A51A10E00D64892 /* M68kSimApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M68kSimApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		016CD1351A51A10E00D64892 /* Tricky68k.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tricky68k.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016CD1391A51A10E00D64892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016CD13A1A51A10E00D64892 /* MOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSAppDelegate.h; sourceTree = "<group>"; };
 		016CD13B1A51A10E00D64892 /* MOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOSAppDelegate.m; sourceTree = "<group>"; };
@@ -253,7 +255,7 @@
 		016CD1361A51A10E00D64892 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				016CD1351A51A10E00D64892 /* M68kSimApp.app */,
+				016CD1351A51A10E00D64892 /* Tricky68k.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -280,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				016CD1451A51A10F00D64892 /* Images.xcassets */,
+				0151CF351A6C44F9003985B6 /* Credits.rtf */,
 				01000A521A65B9C40080AC5F /* MOSJobStatusFailure.tiff */,
 				01000A531A65B9C40080AC5F /* MOSJobStatusWorking.tiff */,
 				01000A541A65B9C40080AC5F /* MOSJobStatusSuccess.tiff */,
@@ -384,9 +387,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		016CD1341A51A10E00D64892 /* M68kSimApp */ = {
+		016CD1341A51A10E00D64892 /* Tricky68k */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 016CD1581A51A10F00D64892 /* Build configuration list for PBXNativeTarget "M68kSimApp" */;
+			buildConfigurationList = 016CD1581A51A10F00D64892 /* Build configuration list for PBXNativeTarget "Tricky68k" */;
 			buildPhases = (
 				016CD1311A51A10E00D64892 /* Sources */,
 				016CD1321A51A10E00D64892 /* Frameworks */,
@@ -399,9 +402,9 @@
 			);
 			dependencies = (
 			);
-			name = M68kSimApp;
+			name = Tricky68k;
 			productName = M68kSimApp;
-			productReference = 016CD1351A51A10E00D64892 /* M68kSimApp.app */;
+			productReference = 016CD1351A51A10E00D64892 /* Tricky68k.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -419,7 +422,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 016CD1301A51A10E00D64892 /* Build configuration list for PBXProject "M68kSimApp" */;
+			buildConfigurationList = 016CD1301A51A10E00D64892 /* Build configuration list for PBXProject "Tricky68k" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -432,7 +435,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				016CD1341A51A10E00D64892 /* M68kSimApp */,
+				016CD1341A51A10E00D64892 /* Tricky68k */,
 			);
 		};
 /* End PBXProject section */
@@ -444,6 +447,7 @@
 			files = (
 				01C20CA51A6726D600057D6B /* MOSPreferencesWindow.xib in Resources */,
 				0161F8001A6B26BD00848C0D /* MOSPause.pdf in Resources */,
+				0151CF361A6C44F9003985B6 /* Credits.rtf in Resources */,
 				016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */,
 				015525871A5F11E300096023 /* SyntaxDefinitions.plist in Resources */,
 				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
@@ -630,7 +634,7 @@
 				INFOPLIST_FILE = M68kSimApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tricky68k;
 			};
 			name = Debug;
 		};
@@ -646,14 +650,14 @@
 				INFOPLIST_FILE = M68kSimApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tricky68k;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		016CD1301A51A10E00D64892 /* Build configuration list for PBXProject "M68kSimApp" */ = {
+		016CD1301A51A10E00D64892 /* Build configuration list for PBXProject "Tricky68k" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				016CD1561A51A10F00D64892 /* Debug */,
@@ -662,7 +666,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		016CD1581A51A10F00D64892 /* Build configuration list for PBXNativeTarget "M68kSimApp" */ = {
+		016CD1581A51A10F00D64892 /* Build configuration list for PBXNativeTarget "Tricky68k" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				016CD1591A51A10F00D64892 /* Debug */,
