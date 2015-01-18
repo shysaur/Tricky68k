@@ -67,16 +67,19 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="D14A9D31-167A-4221-BCA6-CAE454106F70" label="Flags" paletteLabel="Flags" id="YNr-Fs-uhv">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="38" height="17"/>
-                        <size key="maxSize" width="42" height="17"/>
+                        <size key="minSize" width="130" height="17"/>
+                        <size key="maxSize" width="130" height="17"/>
                         <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="gRc-1b-iwd">
-                            <rect key="frame" x="6" y="15" width="38" height="17"/>
+                            <rect key="frame" x="0.0" y="14" width="130" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Flags" id="haM-3l-V8E">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="X:0 N:0 Z:0 V:0 C:0" id="haM-3l-V8E">
                                 <font key="font" metaFont="fixedUser"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <binding destination="aXJ-fz-zD2" name="value" keyPath="flagsStatus" id="emE-sl-A3K"/>
+                            </connections>
                         </textField>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="B7CE896D-D0C5-4CF3-82AD-B9886F517939" label="Running" paletteLabel="Running" tag="-1" id="2Vy-z2-Mzg">
@@ -86,6 +89,9 @@
                         <progressIndicator key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="7fd-6g-kz8">
                             <rect key="frame" x="16" y="16" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <connections>
+                                <binding destination="aXJ-fz-zD2" name="animate" keyPath="simulatorRunning" id="8SF-8G-2me"/>
+                            </connections>
                         </progressIndicator>
                     </toolbarItem>
                 </allowedToolbarItems>
@@ -94,7 +100,9 @@
                     <toolbarItem reference="UeF-fG-hQG"/>
                     <toolbarItem reference="84K-vV-6NM"/>
                     <toolbarItem reference="Vf4-fr-SvF"/>
+                    <toolbarItem reference="YNr-Fs-uhv"/>
                     <toolbarItem reference="G9P-xs-Tqq"/>
+                    <toolbarItem reference="2Vy-z2-Mzg"/>
                     <toolbarItem reference="nt3-hT-vi5"/>
                 </defaultToolbarItems>
             </toolbar>

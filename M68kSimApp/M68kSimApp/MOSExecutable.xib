@@ -52,13 +52,44 @@
                             <action selector="stepOver:" target="amo-g3-g3r" id="oIY-pe-xqo"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="F0AB7E56-866C-48DF-9099-4B79B33EB10C" label="Flags" paletteLabel="Flags" id="dfM-x8-BM3">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="130" height="17"/>
+                        <size key="maxSize" width="130" height="17"/>
+                        <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="6wT-FR-dN1">
+                            <rect key="frame" x="0.0" y="14" width="130" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="X:0 N:0 Z:0 V:0 C:0" id="Izj-Wx-byc">
+                                <font key="font" metaFont="fixedUser"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="amo-g3-g3r" name="value" keyPath="flagsStatus" id="NX2-V5-ycn"/>
+                            </connections>
+                        </textField>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="8613C0E4-8A02-4109-9FEF-E50925108C12" label="Running" paletteLabel="Running" tag="-1" id="4TL-zP-4xO">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="16" height="16"/>
+                        <size key="maxSize" width="16" height="16"/>
+                        <progressIndicator key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="mxY-fR-ci6">
+                            <rect key="frame" x="16" y="16" width="16" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <connections>
+                                <binding destination="amo-g3-g3r" name="animate" keyPath="simulatorRunning" id="EOH-kb-hQd"/>
+                            </connections>
+                        </progressIndicator>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="qw2-zd-DqC"/>
                     <toolbarItem reference="kPO-jd-gK6"/>
                     <toolbarItem reference="3J9-HF-kpW"/>
                     <toolbarItem reference="LdT-11-A9i"/>
+                    <toolbarItem reference="dfM-x8-BM3"/>
                     <toolbarItem reference="hUX-yi-LpL"/>
+                    <toolbarItem reference="4TL-zP-4xO"/>
                     <toolbarItem reference="aFu-8o-yfC"/>
                 </defaultToolbarItems>
             </toolbar>
@@ -68,6 +99,7 @@
             <point key="canvasLocation" x="268.5" y="243.5"/>
         </window>
         <viewController nibName="MOSSimulatorView" id="amo-g3-g3r" customClass="MOSSimulatorViewController"/>
+        <userDefaultsController representsSharedInstance="YES" id="FjJ-QI-wh0"/>
     </objects>
     <resources>
         <image name="MOSPause" width="15" height="15"/>
