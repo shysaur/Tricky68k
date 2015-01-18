@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSExecutable">
             <connections>
+                <outlet property="simVc" destination="amo-g3-g3r" id="q9c-GG-NHQ"/>
                 <outlet property="window" destination="xOd-HO-29H" id="f58-yQ-E9I"/>
             </connections>
         </customObject>
@@ -28,27 +29,27 @@
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="hUX-yi-LpL"/>
                     <toolbarItem implicitItemIdentifier="0716A56E-9CEA-4796-A292-DE38BA154BB6" label="Start" paletteLabel="Start" tag="-1" image="MOSStart" id="qw2-zd-DqC">
                         <connections>
-                            <action selector="run:" target="-2" id="ngG-bp-bVD"/>
+                            <action selector="run:" target="amo-g3-g3r" id="JqF-PG-ezJ"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="9B1EC159-5E9E-4034-BA17-48C435A978DA" label="Pause" paletteLabel="Pause" tag="-1" image="MOSPause" id="kPO-jd-gK6">
                         <connections>
-                            <action selector="pause:" target="-2" id="jsI-cG-3Ss"/>
+                            <action selector="pause:" target="amo-g3-g3r" id="KeM-i5-aBA"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="6EB0BC35-4C7A-4B6D-B66F-DABEE979F866" label="Restart" paletteLabel="Restart" tag="-1" image="MOSRestart" id="aFu-8o-yfC">
                         <connections>
-                            <action selector="restart:" target="-2" id="YdG-C1-h5D"/>
+                            <action selector="restart:" target="amo-g3-g3r" id="aiJ-gv-SeM"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="6105519B-6891-471E-A201-720CAC22C736" label="Step In" paletteLabel="Step In" tag="-1" image="MOSStepIn" id="3J9-HF-kpW">
                         <connections>
-                            <action selector="stepIn:" target="-2" id="bTd-cY-Gis"/>
+                            <action selector="stepIn:" target="amo-g3-g3r" id="fiS-lT-e4y"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="E7D0F59C-F469-4193-A060-52CFBE02D4BD" label="Step Over" paletteLabel="Step Over" tag="-1" image="MOSStepOver" id="LdT-11-A9i">
                         <connections>
-                            <action selector="stepOver:" target="-2" id="km3-Y9-T4M"/>
+                            <action selector="stepOver:" target="amo-g3-g3r" id="oIY-pe-xqo"/>
                         </connections>
                     </toolbarItem>
                 </allowedToolbarItems>
@@ -66,6 +67,7 @@
             </connections>
             <point key="canvasLocation" x="268.5" y="243.5"/>
         </window>
+        <viewController nibName="MOSSimulatorView" id="amo-g3-g3r" customClass="MOSSimulatorViewController"/>
     </objects>
     <resources>
         <image name="MOSPause" width="15" height="15"/>

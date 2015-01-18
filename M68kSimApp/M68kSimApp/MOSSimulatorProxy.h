@@ -62,6 +62,7 @@ typedef enum {
 
 
 - initWithExecutableURL:(NSURL*)url;
+- (NSURL*)executableURL;
 
 - (BOOL)run;
 - (BOOL)stop;

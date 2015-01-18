@@ -47,9 +47,7 @@
 
 
 - (IBAction)changeDebuggerFont:(id)sender {
-  NSUserDefaults *ud;
   NSFontManager *fm;
-  NSData *archivedFont;
   NSFont *viewFont;
   
   fm = [NSFontManager sharedFontManager];

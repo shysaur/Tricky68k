@@ -31,7 +31,7 @@
 
 - (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr;
 - (NSURL*)simulatedExecutable;
-
+- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
 - (MOSSimulatorProxy*)simulatorProxy;
 
 - (BOOL)validateUserInterfaceItem:(id)anItem;

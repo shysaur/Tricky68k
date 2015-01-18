@@ -70,6 +70,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   self = [super init];
   weakSelf = self;
   
+  exec = url;
   simQueue = dispatch_queue_create("com.danielecattaneo.m68ksimqueue", NULL);
   
   toSim = [[NSPipe alloc] init];
@@ -125,6 +126,11 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   }
   
   return self;
+}
+
+
+- (NSURL*)executableURL {
+  return exec;
 }
 
 

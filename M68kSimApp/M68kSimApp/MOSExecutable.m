@@ -8,6 +8,7 @@
 
 #import "MOSExecutable.h"
 #import "MOSSimulatorViewController.h"
+#import "MOSSimulatorProxy.h"
 
 
 @implementation MOSExecutable
@@ -24,14 +25,22 @@
 
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
+  [simVc setSimulatorProxy:simProxy];
+  /* simProxy is the responsibility of the view controller from now on (the
+   * restart button may change it) */
+  simProxy = nil;
   [[aController window] setContentView:[simVc view]];
   [super windowControllerDidLoadNib:aController];
 }
 
 
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError {
-  simVc = [[MOSSimulatorViewController alloc] init];
-  return [simVc setSimulatedExecutable:url error:outError];
+  simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
+  if ([simProxy simulatorState] == MOSSimulatorStateDead) {
+    if (outError) *outError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSExecutableNotLoadableError userInfo:nil];
+    return NO;
+  }
+  return YES;
 }
 
 
@@ -39,40 +48,6 @@
   if ([anItem action] == @selector(runPageLayout:)) return NO;
   if ([anItem action] == @selector(printDocument:)) return NO;
   return YES;
-}
-
-
-- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
-  if ([MOSSimulatorViewController instancesRespondToSelector:[theItem action]]) {
-    if (!simVc) return NO;
-    return [simVc validateUserInterfaceItem:theItem];
-  }
-  return [super validateUserInterfaceItem:theItem];
-}
-
-
-- (IBAction)run:(id)sender {
-  [simVc run:sender];
-}
-
-
-- (IBAction)pause:(id)sender {
-  [simVc pause:sender];
-}
-
-
-- (IBAction)restart:(id)sender {
-  [simVc restart:sender];
-}
-
-
-- (IBAction)stepIn:(id)sender {
-  [simVc stepIn:sender];
-}
-
-
-- (IBAction)stepOver:(id)sender {
-  [simVc stepOver:sender];
 }
 
 

@@ -10,17 +10,14 @@
 
 
 @class MOSSimulatorViewController;
+@class MOSSimulatorProxy;
+
 
 @interface MOSExecutable : NSDocument {
   NSWindowController *wc;
   NSWindow *window;
-  MOSSimulatorViewController *simVc;
+  MOSSimulatorProxy *simProxy;
+  IBOutlet MOSSimulatorViewController *simVc;
 }
-
-- (IBAction)run:(id)sender;
-- (IBAction)pause:(id)sender;
-- (IBAction)restart:(id)sender;
-- (IBAction)stepIn:(id)sender;
-- (IBAction)stepOver:(id)sender;
 
 @end

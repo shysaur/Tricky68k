@@ -18,6 +18,13 @@
 @implementation MOSSimulatorViewController
 
 
+- (instancetype)initWithCoder:(NSCoder*)coder {
+  self = [super initWithCoder:coder];
+  viewHasLoaded = NO;
+  return self;
+}
+
+
 - (instancetype)init {
   return [self initWithNibName:@"MOSSimulatorView" bundle:[NSBundle mainBundle]];
 }
@@ -49,12 +56,21 @@
 
 
 - (void)reloadSimulatedExecutable {
+  MOSSimulatorProxy *oldSimProxy;
+  
+  oldSimProxy = simProxy;
+  [self setSimulatorProxy:[[MOSSimulatorProxy alloc] initWithExecutableURL:simExec]];
+  [oldSimProxy kill];
+}
+
+
+- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
   
-  [simProxy kill];
-  simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:simExec];
+  simProxy = sp;
+  simExec = [simProxy executableURL];
   
   [simProxy addObserver:self forKeyPath:@"simulatorState"
                 options:NSKeyValueObservingOptionInitial context:NULL];
