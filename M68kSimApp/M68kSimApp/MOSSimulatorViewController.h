@@ -34,6 +34,8 @@
 
 - (MOSSimulatorProxy*)simulatorProxy;
 
+- (BOOL)validateUserInterfaceItem:(id)anItem;
+
 - (IBAction)run:(id)sender;
 - (IBAction)pause:(id)sender;
 - (IBAction)restart:(id)sender;

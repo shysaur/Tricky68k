@@ -42,6 +42,40 @@
 }
 
 
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem {
+  if ([MOSSimulatorViewController instancesRespondToSelector:[theItem action]]) {
+    if (!simVc) return NO;
+    return [simVc validateUserInterfaceItem:theItem];
+  }
+  return [super validateUserInterfaceItem:theItem];
+}
+
+
+- (IBAction)run:(id)sender {
+  [simVc run:sender];
+}
+
+
+- (IBAction)pause:(id)sender {
+  [simVc pause:sender];
+}
+
+
+- (IBAction)restart:(id)sender {
+  [simVc restart:sender];
+}
+
+
+- (IBAction)stepIn:(id)sender {
+  [simVc stepIn:sender];
+}
+
+
+- (IBAction)stepOver:(id)sender {
+  [simVc stepOver:sender];
+}
+
+
 - (BOOL)isEntireFileLoaded {
   return YES;
 }

@@ -34,6 +34,11 @@
 		0161F7F61A6AFD2600848C0D /* MOSSimulatorPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F7F41A6AFD2600848C0D /* MOSSimulatorPrefViewController.m */; };
 		0161F7F71A6AFD2600848C0D /* MOSSimulatorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0161F7F51A6AFD2600848C0D /* MOSSimulatorPrefView.xib */; };
 		0161F7FA1A6B1CBE00848C0D /* MOSSimulatorViewDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F7F91A6B1CBE00848C0D /* MOSSimulatorViewDefaults.m */; };
+		0161F8001A6B26BD00848C0D /* MOSPause.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0161F7FB1A6B26BD00848C0D /* MOSPause.pdf */; };
+		0161F8011A6B26BD00848C0D /* MOSRestart.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0161F7FC1A6B26BD00848C0D /* MOSRestart.pdf */; };
+		0161F8021A6B26BD00848C0D /* MOSStart.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0161F7FD1A6B26BD00848C0D /* MOSStart.pdf */; };
+		0161F8031A6B26BD00848C0D /* MOSStepIn.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0161F7FE1A6B26BD00848C0D /* MOSStepIn.pdf */; };
+		0161F8041A6B26BD00848C0D /* MOSStepOver.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0161F7FF1A6B26BD00848C0D /* MOSStepOver.pdf */; };
 		016CD13C1A51A10E00D64892 /* MOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13B1A51A10E00D64892 /* MOSAppDelegate.m */; };
 		016CD13E1A51A10E00D64892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13D1A51A10E00D64892 /* main.m */; };
 		016CD1411A51A10E00D64892 /* MOSSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1401A51A10E00D64892 /* MOSSource.m */; };
@@ -123,6 +128,11 @@
 		0161F7F51A6AFD2600848C0D /* MOSSimulatorPrefView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MOSSimulatorPrefView.xib; sourceTree = "<group>"; };
 		0161F7F81A6B1CBE00848C0D /* MOSSimulatorViewDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorViewDefaults.h; sourceTree = "<group>"; };
 		0161F7F91A6B1CBE00848C0D /* MOSSimulatorViewDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorViewDefaults.m; sourceTree = "<group>"; };
+		0161F7FB1A6B26BD00848C0D /* MOSPause.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MOSPause.pdf; sourceTree = "<group>"; };
+		0161F7FC1A6B26BD00848C0D /* MOSRestart.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MOSRestart.pdf; sourceTree = "<group>"; };
+		0161F7FD1A6B26BD00848C0D /* MOSStart.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MOSStart.pdf; sourceTree = "<group>"; };
+		0161F7FE1A6B26BD00848C0D /* MOSStepIn.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MOSStepIn.pdf; sourceTree = "<group>"; };
+		0161F7FF1A6B26BD00848C0D /* MOSStepOver.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = MOSStepOver.pdf; sourceTree = "<group>"; };
 		016CD1351A51A10E00D64892 /* M68kSimApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M68kSimApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016CD1391A51A10E00D64892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016CD13A1A51A10E00D64892 /* MOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSAppDelegate.h; sourceTree = "<group>"; };
@@ -270,6 +280,11 @@
 				01000A531A65B9C40080AC5F /* MOSJobStatusWorking.tiff */,
 				01000A541A65B9C40080AC5F /* MOSJobStatusSuccess.tiff */,
 				01000A551A65B9C40080AC5F /* MOSJobStatusSuccessWithWarning.tiff */,
+				0161F7FB1A6B26BD00848C0D /* MOSPause.pdf */,
+				0161F7FC1A6B26BD00848C0D /* MOSRestart.pdf */,
+				0161F7FD1A6B26BD00848C0D /* MOSStart.pdf */,
+				0161F7FE1A6B26BD00848C0D /* MOSStepIn.pdf */,
+				0161F7FF1A6B26BD00848C0D /* MOSStepOver.pdf */,
 				015708AE1A619346005D08DB /* DefaultLinkerFile.ld */,
 				015525861A5F11E300096023 /* SyntaxDefinitions.plist */,
 				015525841A5F11CB00096023 /* Syntax Definitions */,
@@ -422,11 +437,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C20CA51A6726D600057D6B /* MOSPreferencesWindow.xib in Resources */,
+				0161F8001A6B26BD00848C0D /* MOSPause.pdf in Resources */,
 				016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */,
 				015525871A5F11E300096023 /* SyntaxDefinitions.plist in Resources */,
 				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
 				01000A571A65B9C40080AC5F /* MOSJobStatusWorking.tiff in Resources */,
+				0161F8041A6B26BD00848C0D /* MOSStepOver.pdf in Resources */,
 				0161F7F71A6AFD2600848C0D /* MOSSimulatorPrefView.xib in Resources */,
+				0161F8031A6B26BD00848C0D /* MOSStepIn.pdf in Resources */,
+				0161F8021A6B26BD00848C0D /* MOSStart.pdf in Resources */,
 				014D85D81A62CF2100648B41 /* MOSJobWindow.xib in Resources */,
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
 				01000A591A65B9C40080AC5F /* MOSJobStatusSuccessWithWarning.tiff in Resources */,
@@ -436,6 +455,7 @@
 				016CD1631A51AC7600D64892 /* MOSExecutable.xib in Resources */,
 				016CD16A1A51B27900D64892 /* MOSSimulatorView.xib in Resources */,
 				01000A581A65B9C40080AC5F /* MOSJobStatusSuccess.tiff in Resources */,
+				0161F8011A6B26BD00848C0D /* MOSRestart.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

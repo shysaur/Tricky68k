@@ -177,11 +177,11 @@
 }
 
 
-- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
-  if ([menuItem action] == @selector(run:)) return !simRunning;
-  if ([menuItem action] == @selector(stepIn:)) return !simRunning;
-  if ([menuItem action] == @selector(stepOver:)) return !simRunning;
-  if ([menuItem action] == @selector(pause:)) return simRunning;
+- (BOOL)validateUserInterfaceItem:(id)anItem {
+  if ([anItem action] == @selector(run:)) return !simRunning;
+  if ([anItem action] == @selector(stepIn:)) return !simRunning;
+  if ([anItem action] == @selector(stepOver:)) return !simRunning;
+  if ([anItem action] == @selector(pause:)) return simRunning;
   return YES;
 }
 

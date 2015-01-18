@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
@@ -21,10 +22,56 @@
                 <rect key="frame" x="0.0" y="0.0" width="507" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="B6660E77-AC14-40D0-AB64-4F7D20B17D02" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="bln-W9-P5I">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="bfi-m3-bz0"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="hUX-yi-LpL"/>
+                    <toolbarItem implicitItemIdentifier="0716A56E-9CEA-4796-A292-DE38BA154BB6" label="Start" paletteLabel="Start" tag="-1" image="MOSStart" id="qw2-zd-DqC">
+                        <connections>
+                            <action selector="run:" target="-2" id="ngG-bp-bVD"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="9B1EC159-5E9E-4034-BA17-48C435A978DA" label="Pause" paletteLabel="Pause" tag="-1" image="MOSPause" id="kPO-jd-gK6">
+                        <connections>
+                            <action selector="pause:" target="-2" id="jsI-cG-3Ss"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="6EB0BC35-4C7A-4B6D-B66F-DABEE979F866" label="Restart" paletteLabel="Restart" tag="-1" image="MOSRestart" id="aFu-8o-yfC">
+                        <connections>
+                            <action selector="restart:" target="-2" id="YdG-C1-h5D"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="6105519B-6891-471E-A201-720CAC22C736" label="Step In" paletteLabel="Step In" tag="-1" image="MOSStepIn" id="3J9-HF-kpW">
+                        <connections>
+                            <action selector="stepIn:" target="-2" id="bTd-cY-Gis"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="E7D0F59C-F469-4193-A060-52CFBE02D4BD" label="Step Over" paletteLabel="Step Over" tag="-1" image="MOSStepOver" id="LdT-11-A9i">
+                        <connections>
+                            <action selector="stepOver:" target="-2" id="km3-Y9-T4M"/>
+                        </connections>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="qw2-zd-DqC"/>
+                    <toolbarItem reference="kPO-jd-gK6"/>
+                    <toolbarItem reference="3J9-HF-kpW"/>
+                    <toolbarItem reference="LdT-11-A9i"/>
+                    <toolbarItem reference="hUX-yi-LpL"/>
+                    <toolbarItem reference="aFu-8o-yfC"/>
+                </defaultToolbarItems>
+            </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
             <point key="canvasLocation" x="268.5" y="243.5"/>
         </window>
     </objects>
+    <resources>
+        <image name="MOSPause" width="15" height="15"/>
+        <image name="MOSRestart" width="8" height="8"/>
+        <image name="MOSStart" width="15" height="15"/>
+        <image name="MOSStepIn" width="15" height="15"/>
+        <image name="MOSStepOver" width="15" height="15"/>
+    </resources>
 </document>

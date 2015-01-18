@@ -17,4 +17,10 @@
   MOSSimulatorViewController *simVc;
 }
 
+- (IBAction)run:(id)sender;
+- (IBAction)pause:(id)sender;
+- (IBAction)restart:(id)sender;
+- (IBAction)stepIn:(id)sender;
+- (IBAction)stepOver:(id)sender;
+
 @end
