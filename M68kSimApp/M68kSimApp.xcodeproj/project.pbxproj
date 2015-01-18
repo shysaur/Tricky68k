@@ -57,6 +57,7 @@
 		0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */; };
 		01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */; };
 		01AD6C041A6C294200CB47A1 /* MOSBuildAndRun.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 01AD6C031A6C294200CB47A1 /* MOSBuildAndRun.tiff */; };
+		01AD6C081A6C323A00CB47A1 /* VasmTemplate.s in Resources */ = {isa = PBXBuildFile; fileRef = 01AD6C051A6C306100CB47A1 /* VasmTemplate.s */; };
 		01C20CA41A6726D600057D6B /* MOSPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */; };
 		01C20CA51A6726D600057D6B /* MOSPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C20CA31A6726D600057D6B /* MOSPreferencesWindow.xib */; };
 /* End PBXBuildFile section */
@@ -164,6 +165,7 @@
 		01A419431A57382900D9BD02 /* MOSSimStackDumpDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimStackDumpDataSource.h; sourceTree = "<group>"; };
 		01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimStackDumpDataSource.m; sourceTree = "<group>"; };
 		01AD6C031A6C294200CB47A1 /* MOSBuildAndRun.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MOSBuildAndRun.tiff; sourceTree = "<group>"; };
+		01AD6C051A6C306100CB47A1 /* VasmTemplate.s */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = VasmTemplate.s; sourceTree = "<group>"; };
 		01C20CA11A6726D600057D6B /* MOSPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPreferencesWindowController.h; sourceTree = "<group>"; };
 		01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPreferencesWindowController.m; sourceTree = "<group>"; };
 		01C20CA31A6726D600057D6B /* MOSPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MOSPreferencesWindow.xib; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				0161F7FE1A6B26BD00848C0D /* MOSStepIn.pdf */,
 				0161F7FF1A6B26BD00848C0D /* MOSStepOver.pdf */,
 				01AD6C031A6C294200CB47A1 /* MOSBuildAndRun.tiff */,
+				01AD6C051A6C306100CB47A1 /* VasmTemplate.s */,
 				015708AE1A619346005D08DB /* DefaultLinkerFile.ld */,
 				015525861A5F11E300096023 /* SyntaxDefinitions.plist */,
 				015525841A5F11CB00096023 /* Syntax Definitions */,
@@ -453,6 +456,7 @@
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
 				01000A591A65B9C40080AC5F /* MOSJobStatusSuccessWithWarning.tiff in Resources */,
 				01AD6C041A6C294200CB47A1 /* MOSBuildAndRun.tiff in Resources */,
+				01AD6C081A6C323A00CB47A1 /* VasmTemplate.s in Resources */,
 				015708AF1A619346005D08DB /* DefaultLinkerFile.ld in Resources */,
 				01000A561A65B9C40080AC5F /* MOSJobStatusFailure.tiff in Resources */,
 				015525851A5F11CB00096023 /* Syntax Definitions in Resources */,
@@ -627,7 +631,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -644,7 +647,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};

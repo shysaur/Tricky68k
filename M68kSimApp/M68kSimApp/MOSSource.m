@@ -60,6 +60,12 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (initialData) {
     [self loadData:initialData];
     initialData = nil;
+  } else {
+    initialData = [NSData dataWithContentsOfURL:
+      [[NSBundle mainBundle] URLForResource:@"VasmTemplate" withExtension:@"s"]];
+    if (initialData)
+      [self loadData:initialData];
+    initialData = nil;
   }
   
   textView = [fragaria objectForKey:ro_MGSFOTextView];
