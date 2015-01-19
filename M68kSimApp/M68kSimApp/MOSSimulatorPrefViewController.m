@@ -20,6 +20,8 @@
 
 - (void)loadView {
   [super loadView];
+  ptSizeFormatter = [[NSNumberFormatter alloc] init];
+  [ptSizeFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
   [self updateFontPreview];
 }
 
@@ -27,9 +29,11 @@
 - (void)updateFontPreview {
   NSFont *viewFont;
   NSString *fontName;
+  NSString *sizeString;
   
   viewFont = MOSSimulatorViewTeletypeFont();
-  fontName = [NSString stringWithFormat:@"%@ – %f", [viewFont displayName], [viewFont pointSize]];
+  sizeString = [ptSizeFormatter stringFromNumber:[NSNumber numberWithFloat:[viewFont pointSize]]];
+  fontName = [NSString stringWithFormat:@"%@ – %@", [viewFont displayName], sizeString];
   
   [fontPreviewView setStringValue:fontName];
   [fontPreviewView setFont:viewFont];

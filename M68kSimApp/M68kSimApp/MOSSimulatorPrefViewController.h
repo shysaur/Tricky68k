@@ -10,6 +10,7 @@
 
 
 @interface MOSSimulatorPrefViewController : NSViewController {
+  NSNumberFormatter *ptSizeFormatter;
   IBOutlet NSTextField *fontPreviewView;
 }
 
