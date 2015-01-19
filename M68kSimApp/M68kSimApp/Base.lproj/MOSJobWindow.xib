@@ -55,7 +55,7 @@
                                                             <rect key="frame" x="228" y="0.0" width="12" height="14"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MOSJobStatusWorking" id="3Vl-Oo-7BF"/>
                                                             <connections>
-                                                                <binding destination="gXp-Vx-OTm" name="valueURL" keyPath="objectValue.MOSJobStatus" id="fIE-AL-yFe">
+                                                                <binding destination="gXp-Vx-OTm" name="value" keyPath="objectValue.MOSJobStatus" id="y2r-5B-Bd1">
                                                                     <dictionary key="options">
                                                                         <bool key="NSConditionallySetsEnabled" value="NO"/>
                                                                         <string key="NSValueTransformerName">MOSJobStatusStringTransformer</string>

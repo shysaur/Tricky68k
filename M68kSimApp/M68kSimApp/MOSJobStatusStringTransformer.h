@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Daniele Cattaneo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 
 @interface MOSJobStatusStringTransformer : NSValueTransformer

@@ -24,7 +24,7 @@
 
 - (id)transformedValue:(id)beforeObject {
   if (beforeObject == nil) return nil;
-  return [[NSBundle mainBundle] URLForResource:beforeObject withExtension:@"tiff"];
+  return [NSImage imageNamed:beforeObject];
 }
 
 
