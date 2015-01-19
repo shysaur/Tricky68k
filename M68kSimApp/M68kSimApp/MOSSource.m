@@ -306,6 +306,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (void)close {
   [simView removeFromSuperviewWithoutNeedingDisplay];
+  [simVc pause:self];
   simView = nil;
   simVc = nil;
 }
