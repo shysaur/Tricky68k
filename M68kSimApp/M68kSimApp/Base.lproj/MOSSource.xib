@@ -72,10 +72,10 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="F21C2713-3650-478C-9636-40CB3CF2B614" label="Source" paletteLabel="Source" image="NSLeftFacingTriangleTemplate" id="3dk-W4-Ajn" customClass="MOSToolbarItem">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="81" height="25"/>
+                        <size key="minSize" width="76" height="25"/>
                         <size key="maxSize" width="81" height="25"/>
                         <button key="view" verticalHuggingPriority="750" id="eQ3-3l-e4g">
-                            <rect key="frame" x="0.0" y="14" width="81" height="25"/>
+                            <rect key="frame" x="-1" y="14" width="77" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="roundTextured" title="Source" bezelStyle="texturedRounded" image="NSLeftFacingTriangleTemplate" imagePosition="left" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dh3-2Q-pc6">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -125,7 +125,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="16" height="16"/>
                         <size key="maxSize" width="16" height="16"/>
-                        <progressIndicator key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="6aQ-8f-RoR">
+                        <progressIndicator key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="6aQ-8f-RoR" customClass="MOSProgressIndicator">
                             <rect key="frame" x="16" y="16" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <connections>

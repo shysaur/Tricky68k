@@ -15,6 +15,7 @@
 		014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C6F1A5D439500F73FC5 /* MOSTeletypeViewDelegate.m */; };
 		014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D85D51A62CF2100648B41 /* MOSJobWindowController.m */; };
 		014D85DC1A62D01900648B41 /* MOSJobStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D85DB1A62D01900648B41 /* MOSJobStatusManager.m */; };
+		015094741A6DA7050024D28F /* MOSProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 015094731A6DA7050024D28F /* MOSProgressIndicator.m */; };
 		01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01509B131A52191300724F29 /* NSFileHandle+Strings.m */; };
 		015525801A5EFD9700096023 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; };
 		015525831A5EFE5200096023 /* MGSFragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -99,6 +100,8 @@
 		014D85D51A62CF2100648B41 /* MOSJobWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJobWindowController.m; sourceTree = "<group>"; };
 		014D85DA1A62D01900648B41 /* MOSJobStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSJobStatusManager.h; sourceTree = "<group>"; };
 		014D85DB1A62D01900648B41 /* MOSJobStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJobStatusManager.m; sourceTree = "<group>"; };
+		015094721A6DA7050024D28F /* MOSProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSProgressIndicator.h; sourceTree = "<group>"; };
+		015094731A6DA7050024D28F /* MOSProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSProgressIndicator.m; sourceTree = "<group>"; };
 		01509B121A52191300724F29 /* NSFileHandle+Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+Strings.h"; sourceTree = "<group>"; };
 		01509B131A52191300724F29 /* NSFileHandle+Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+Strings.m"; sourceTree = "<group>"; };
 		0155257F1A5EFD9700096023 /* MGSFragaria.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSFragaria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -347,6 +350,8 @@
 				01E93C851A6D8D77004BE3C4 /* MOSToolbarItem.m */,
 				01E93C871A6D98F7004BE3C4 /* MOSSmallToolbar.h */,
 				01E93C881A6D98F7004BE3C4 /* MOSSmallToolbar.m */,
+				015094721A6DA7050024D28F /* MOSProgressIndicator.h */,
+				015094731A6DA7050024D28F /* MOSProgressIndicator.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				016CD1691A51B27900D64892 /* MOSSimulatorViewController.m in Sources */,
 				01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */,
 				011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */,
+				015094741A6DA7050024D28F /* MOSProgressIndicator.m in Sources */,
 				0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */,
 				016CD13C1A51A10E00D64892 /* MOSAppDelegate.m in Sources */,
 				016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */,
