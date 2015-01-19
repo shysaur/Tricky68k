@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="507" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="B6660E77-AC14-40D0-AB64-4F7D20B17D02" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="bln-W9-P5I">
+            <toolbar key="toolbar" implicitIdentifier="B6660E77-AC14-40D0-AB64-4F7D20B17D02" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="bln-W9-P5I" customClass="MOSSmallToolbar">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="bfi-m3-bz0"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="hUX-yi-LpL"/>

@@ -51,6 +51,8 @@
 		01E93C7B1A6D491D004BE3C4 /* MOSSimulatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C7D1A6D491D004BE3C4 /* MOSSimulatorView.xib */; };
 		01E93C7E1A6D4927004BE3C4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C801A6D4927004BE3C4 /* Credits.rtf */; };
 		01E93C811A6D492F004BE3C4 /* VasmTemplate.s in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C831A6D492F004BE3C4 /* VasmTemplate.s */; };
+		01E93C861A6D8D77004BE3C4 /* MOSToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E93C851A6D8D77004BE3C4 /* MOSToolbarItem.m */; };
+		01E93C891A6D98F7004BE3C4 /* MOSSmallToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E93C881A6D98F7004BE3C4 /* MOSSmallToolbar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -151,6 +153,10 @@
 		01E93C7C1A6D491D004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSimulatorView.xib; sourceTree = "<group>"; };
 		01E93C7F1A6D4927004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Credits.rtf; sourceTree = "<group>"; };
 		01E93C821A6D492F004BE3C4 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/VasmTemplate.s; sourceTree = "<group>"; usesTabs = 1; };
+		01E93C841A6D8D76004BE3C4 /* MOSToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSToolbarItem.h; sourceTree = "<group>"; };
+		01E93C851A6D8D77004BE3C4 /* MOSToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSToolbarItem.m; sourceTree = "<group>"; };
+		01E93C871A6D98F7004BE3C4 /* MOSSmallToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSmallToolbar.h; sourceTree = "<group>"; };
+		01E93C881A6D98F7004BE3C4 /* MOSSmallToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSmallToolbar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +343,10 @@
 				015708AC1A618E8B005D08DB /* NSURL+TemporaryFile.m */,
 				01000A4F1A65AD130080AC5F /* NSScanner+Shorteners.h */,
 				01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */,
+				01E93C841A6D8D76004BE3C4 /* MOSToolbarItem.h */,
+				01E93C851A6D8D77004BE3C4 /* MOSToolbarItem.m */,
+				01E93C871A6D98F7004BE3C4 /* MOSSmallToolbar.h */,
+				01E93C881A6D98F7004BE3C4 /* MOSSmallToolbar.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -458,6 +468,7 @@
 				014A3C6A1A5D3B1900F73FC5 /* MOSNamedPipe.m in Sources */,
 				014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */,
 				015708AD1A618E8B005D08DB /* NSURL+TemporaryFile.m in Sources */,
+				01E93C891A6D98F7004BE3C4 /* MOSSmallToolbar.m in Sources */,
 				016CD1411A51A10E00D64892 /* MOSSource.m in Sources */,
 				01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */,
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
@@ -477,6 +488,7 @@
 				01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */,
 				01000A511A65AD130080AC5F /* NSScanner+Shorteners.m in Sources */,
 				0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */,
+				01E93C861A6D8D77004BE3C4 /* MOSToolbarItem.m in Sources */,
 				018F656F1A604B5C005BA00E /* MOSAssembler.m in Sources */,
 				0161F7FA1A6B1CBE00848C0D /* MOSSimulatorViewDefaults.m in Sources */,
 				01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */,
@@ -655,6 +667,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = Tricky68k;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -671,6 +684,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = Tricky68k;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

@@ -16,7 +16,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Window">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="133" y="235" width="633" height="413"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
@@ -30,13 +30,13 @@
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="mtv-Sk-Suh" secondAttribute="bottom" id="HQp-Fa-oxj"/>
-                    <constraint firstItem="mtv-Sk-Suh" firstAttribute="top" secondItem="gIp-Ho-8D9" secondAttribute="top" id="Oac-hs-08b"/>
-                    <constraint firstAttribute="trailing" secondItem="mtv-Sk-Suh" secondAttribute="trailing" id="RR1-Ld-omt"/>
-                    <constraint firstItem="mtv-Sk-Suh" firstAttribute="leading" secondItem="gIp-Ho-8D9" secondAttribute="leading" id="TcY-Zf-Jzc"/>
+                    <constraint firstAttribute="trailing" secondItem="mtv-Sk-Suh" secondAttribute="trailing" id="UuH-JE-PYk"/>
+                    <constraint firstAttribute="bottom" secondItem="mtv-Sk-Suh" secondAttribute="bottom" id="lkZ-da-Art"/>
+                    <constraint firstItem="mtv-Sk-Suh" firstAttribute="leading" secondItem="gIp-Ho-8D9" secondAttribute="leading" id="sLY-Ia-kfu"/>
+                    <constraint firstItem="mtv-Sk-Suh" firstAttribute="top" secondItem="gIp-Ho-8D9" secondAttribute="top" id="u7y-KO-NWh"/>
                 </constraints>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="E916DC60-EB02-42B4-B4B8-AD2152ED3BA8" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="iKM-om-1Sa">
+            <toolbar key="toolbar" implicitIdentifier="E916DC60-EB02-42B4-B4B8-AD2152ED3BA8" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="iKM-om-1Sa" customClass="MOSSmallToolbar">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="3he-x7-aUf"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="G9P-xs-Tqq"/>
@@ -65,92 +65,87 @@
                             <action selector="stepOver:" target="aXJ-fz-zD2" id="0bB-K9-pqo"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="D14A9D31-167A-4221-BCA6-CAE454106F70" label="Flags" paletteLabel="Flags" id="YNr-Fs-uhv">
-                        <nil key="toolTip"/>
-                        <size key="minSize" width="130" height="17"/>
-                        <size key="maxSize" width="130" height="17"/>
-                        <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="gRc-1b-iwd">
-                            <rect key="frame" x="0.0" y="14" width="130" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="X:0 N:0 Z:0 V:0 C:0" id="haM-3l-V8E">
-                                <font key="font" metaFont="fixedUser"/>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                            <connections>
-                                <binding destination="aXJ-fz-zD2" name="value" keyPath="flagsStatus" id="emE-sl-A3K"/>
-                            </connections>
-                        </textField>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B7CE896D-D0C5-4CF3-82AD-B9886F517939" label="Running" paletteLabel="Running" tag="-1" id="2Vy-z2-Mzg">
-                        <nil key="toolTip"/>
-                        <size key="minSize" width="16" height="16"/>
-                        <size key="maxSize" width="16" height="16"/>
-                        <progressIndicator key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="7fd-6g-kz8">
-                            <rect key="frame" x="16" y="16" width="16" height="16"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <connections>
-                                <binding destination="aXJ-fz-zD2" name="animate" keyPath="simulatorRunning" id="8SF-8G-2me"/>
-                            </connections>
-                        </progressIndicator>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1C8176F7-98B5-4212-8BC2-899359B12B7D" label="Source" paletteLabel="Source" image="NSLeftFacingTriangleTemplate" id="beK-xO-gGi">
-                        <nil key="toolTip"/>
-                        <size key="minSize" width="80" height="25"/>
-                        <size key="maxSize" width="80" height="25"/>
-                        <button key="view" verticalHuggingPriority="750" id="AiJ-M8-1Mb">
-                            <rect key="frame" x="0.0" y="14" width="80" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" title="Source" bezelStyle="texturedRounded" image="NSLeftFacingTriangleTemplate" imagePosition="left" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ean-xk-FLS">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="switchToEditor:" target="-2" id="1D2-70-P2p"/>
-                                <binding destination="-2" name="enabled" keyPath="sourceModeSwitchAllowed" id="Ge2-RW-Etz"/>
-                            </connections>
-                        </button>
-                        <connections>
-                            <action selector="switchToEditor:" target="-2" id="THl-wv-8tR"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="76EB9E9F-8AD7-49CA-94CC-0962CD6DB04C" label="Simulator" paletteLabel="Simulator" image="NSRightFacingTriangleTemplate" id="Rhq-mm-bS0">
-                        <nil key="toolTip"/>
-                        <size key="minSize" width="90" height="25"/>
-                        <size key="maxSize" width="95" height="25"/>
-                        <button key="view" verticalHuggingPriority="750" id="e4a-WP-7jB">
-                            <rect key="frame" x="0.0" y="14" width="95" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" title="Simulator" bezelStyle="texturedRounded" image="NSRightFacingTriangleTemplate" imagePosition="right" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8lU-Vw-G6I">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <binding destination="-2" name="enabled" keyPath="simulatorModeSwitchAllowed" id="nSo-4F-Ovc"/>
-                            </connections>
-                        </button>
-                        <connections>
-                            <action selector="switchToSimulator:" target="-2" id="7g2-Oj-Wix"/>
-                        </connections>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="2982C90F-C0AF-4985-B9CC-B372B88F6DDC" label="Build and Run" paletteLabel="Build and Run" tag="-1" image="MOSBuildAndRun" id="MIY-8W-9wC">
                         <connections>
                             <action selector="assembleAndRun:" target="-2" id="E9V-gA-ysQ"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="F21C2713-3650-478C-9636-40CB3CF2B614" label="Source" paletteLabel="Source" image="NSLeftFacingTriangleTemplate" id="3dk-W4-Ajn" customClass="MOSToolbarItem">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="81" height="25"/>
+                        <size key="maxSize" width="81" height="25"/>
+                        <button key="view" verticalHuggingPriority="750" id="eQ3-3l-e4g">
+                            <rect key="frame" x="0.0" y="14" width="81" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="Source" bezelStyle="texturedRounded" image="NSLeftFacingTriangleTemplate" imagePosition="left" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dh3-2Q-pc6">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="switchToEditor:" target="-2" id="eht-1a-klO"/>
+                                <binding destination="-2" name="enabled" keyPath="sourceModeSwitchAllowed" id="vvP-Nt-5Ju"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="5AE2A4AC-BA83-47A9-BB9F-8F603E7CD315" label="Simulator" paletteLabel="Simulator" image="NSRightFacingTriangleTemplate" id="NA4-nB-ShK" customClass="MOSToolbarItem">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="91" height="25"/>
+                        <size key="maxSize" width="91" height="25"/>
+                        <button key="view" verticalHuggingPriority="750" id="Bbs-4i-yXA">
+                            <rect key="frame" x="0.0" y="14" width="91" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="Simulator" bezelStyle="texturedRounded" image="NSRightFacingTriangleTemplate" imagePosition="right" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="I92-Bk-RSf">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="switchToSimulator:" target="-2" id="dsS-mU-oly"/>
+                                <binding destination="-2" name="enabled" keyPath="simulatorModeSwitchAllowed" id="Xwy-Z0-tmu"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="1364D17F-D627-4D56-AA8D-2F230FD21F15" label="Flags" paletteLabel="Flags" id="oO9-9Z-dDn">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="130" height="17"/>
+                        <size key="maxSize" width="130" height="17"/>
+                        <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="fJE-AB-Kgp">
+                            <rect key="frame" x="0.0" y="14" width="130" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="X:0 N:0 Z:0 V:0 C:0" id="KGu-P4-fYo">
+                                <font key="font" metaFont="fixedUser"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="aXJ-fz-zD2" name="value" keyPath="flagsStatus" id="JXI-Mh-8qy"/>
+                            </connections>
+                        </textField>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="A1F5BB2F-1ADE-40EC-AC17-F2C8D68125C1" label="Running" paletteLabel="Running" tag="-1" id="vhP-jP-K1W">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="16" height="16"/>
+                        <size key="maxSize" width="16" height="16"/>
+                        <progressIndicator key="view" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="6aQ-8f-RoR">
+                            <rect key="frame" x="16" y="16" width="16" height="16"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <connections>
+                                <binding destination="aXJ-fz-zD2" name="animate" keyPath="simulatorRunning" id="2yM-1p-rwN"/>
+                            </connections>
+                        </progressIndicator>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="beK-xO-gGi"/>
+                    <toolbarItem reference="3dk-W4-Ajn"/>
                     <toolbarItem reference="MIY-8W-9wC"/>
                     <toolbarItem reference="Fnv-hX-0RA"/>
                     <toolbarItem reference="UeF-fG-hQG"/>
                     <toolbarItem reference="84K-vV-6NM"/>
                     <toolbarItem reference="Vf4-fr-SvF"/>
-                    <toolbarItem reference="YNr-Fs-uhv"/>
+                    <toolbarItem reference="oO9-9Z-dDn"/>
                     <toolbarItem reference="G9P-xs-Tqq"/>
-                    <toolbarItem reference="2Vy-z2-Mzg"/>
+                    <toolbarItem reference="vhP-jP-K1W"/>
                     <toolbarItem reference="nt3-hT-vi5"/>
-                    <toolbarItem reference="Rhq-mm-bS0"/>
+                    <toolbarItem reference="NA4-nB-ShK"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
