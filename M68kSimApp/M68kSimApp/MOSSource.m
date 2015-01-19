@@ -287,6 +287,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     if (asmres != MOSAssemblageResultFailure) {
       unlink([tempSourceCopy fileSystemRepresentation]);
       [self switchToSimulator:self];
+      /* Since we are changing simulator executable, validation of toolbar
+       * items will change, even if no events did occur. */
+      [[docWindow toolbar] validateVisibleItems];
     }
   } else if (context == AssemblageEvent) {
     if (!hadJob) return;
