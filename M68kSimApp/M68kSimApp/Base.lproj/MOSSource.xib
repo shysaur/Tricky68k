@@ -96,10 +96,10 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="1C8176F7-98B5-4212-8BC2-899359B12B7D" label="Source" paletteLabel="Source" image="NSLeftFacingTriangleTemplate" id="beK-xO-gGi">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="71" height="25"/>
-                        <size key="maxSize" width="75" height="25"/>
+                        <size key="minSize" width="80" height="25"/>
+                        <size key="maxSize" width="80" height="25"/>
                         <button key="view" verticalHuggingPriority="750" id="AiJ-M8-1Mb">
-                            <rect key="frame" x="3" y="14" width="75" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="roundTextured" title="Source" bezelStyle="texturedRounded" image="NSLeftFacingTriangleTemplate" imagePosition="left" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ean-xk-FLS">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -116,10 +116,10 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="76EB9E9F-8AD7-49CA-94CC-0962CD6DB04C" label="Simulator" paletteLabel="Simulator" image="NSRightFacingTriangleTemplate" id="Rhq-mm-bS0">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="84" height="25"/>
-                        <size key="maxSize" width="90" height="25"/>
+                        <size key="minSize" width="90" height="25"/>
+                        <size key="maxSize" width="95" height="25"/>
                         <button key="view" verticalHuggingPriority="750" id="e4a-WP-7jB">
-                            <rect key="frame" x="0.0" y="14" width="90" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="95" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <buttonCell key="cell" type="roundTextured" title="Simulator" bezelStyle="texturedRounded" image="NSRightFacingTriangleTemplate" imagePosition="right" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8lU-Vw-G6I">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
