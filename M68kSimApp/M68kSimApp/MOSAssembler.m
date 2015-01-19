@@ -118,7 +118,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
     [task setLaunchURL:execurl];
     unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-    params = [@[@"-quiet", @"-Felf", @"-spaces",
+    params = [@[@"-quiet", @"-Felf", @"-spaces", @"-no-opt",
                 @"-o", [unlinkedelf path], [sourceFile path]] mutableCopy];
     if (listingFile) {
       [params addObjectsFromArray:@[@"-L", [listingFile path]]];
