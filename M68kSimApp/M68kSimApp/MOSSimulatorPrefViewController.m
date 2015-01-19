@@ -30,6 +30,7 @@
   
   viewFont = MOSSimulatorViewTeletypeFont();
   fontName = [NSString stringWithFormat:@"%@ – %f", [viewFont displayName], [viewFont pointSize]];
+  
   [fontPreviewView setStringValue:fontName];
   [fontPreviewView setFont:viewFont];
 }
