@@ -27,7 +27,10 @@ void cpu_instrCallback(void) {
   
   pc = m68k_get_reg(NULL, M68K_REG_PC);
   if (bp_find(pc)) debug_on = 1;
-  if (skip_on && pc == skip_addr) debug_on = 1;
+  if (skip_on && pc == skip_addr) {
+    skip_on = 0;
+    debug_on = 1;
+  }
   if (debug_on) {
     debug_debugConsole();
   }
