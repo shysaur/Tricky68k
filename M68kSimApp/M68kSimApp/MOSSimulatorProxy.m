@@ -206,7 +206,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   /* Watch for the next interruption. Pipe read operations will fail on
    * process death, so this will never lock forever. */
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
     NSString *temp;
     
     do {
