@@ -12,6 +12,7 @@
 #import "MOSAssembler.h"
 #import "MOSJobStatusManager.h"
 #import "MOSSimulatorViewController.h"
+#import "MOSAppDelegate.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -290,6 +291,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
       /* Since we are changing simulator executable, validation of toolbar
        * items will change, even if no events did occur. */
       [[docWindow toolbar] validateVisibleItems];
+    } else {
+      [(MOSAppDelegate*)[NSApp delegate] openJobsWindow:self];
     }
   } else if (context == AssemblageEvent) {
     if (!hadJob) return;
