@@ -32,12 +32,14 @@
   NSView *simView;
   
   MOSAssembler *assembler;
+  BOOL runWhenAssemblyComplete;
   NSUInteger lastJobId;
   BOOL hadJob;
   NSURL *assemblyOutput;
   NSURL *tempSourceCopy;
 }
 
+- (IBAction)assemble:(id)sender;
 - (IBAction)assembleAndRun:(id)sender;
 - (IBAction)switchToSimulator:(id)sender;
 - (IBAction)switchToEditor:(id)editor;

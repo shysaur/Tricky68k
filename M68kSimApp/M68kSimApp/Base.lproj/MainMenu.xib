@@ -223,33 +223,39 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Font" systemMenu="font" id="aXa-aM-Jaq">
                                                 <items>
-                                                    <menuItem title="Show Fonts" keyEquivalent="t" id="Q5e-8K-NDq">
+                                                    <menuItem title="Show Fonts" keyEquivalent="T" id="Q5e-8K-NDq">
+                                                        <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="orderFrontFontPanel:" target="YLy-65-1bz" id="WHr-nq-2xA"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Bold" tag="2" keyEquivalent="b" id="GB9-OM-e27">
+                                                    <menuItem title="Bold" tag="2" id="GB9-OM-e27">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="addFontTrait:" target="YLy-65-1bz" id="hqk-hr-sYV"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Italic" tag="1" keyEquivalent="i" id="Vjx-xi-njq">
+                                                    <menuItem title="Italic" tag="1" id="Vjx-xi-njq">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="addFontTrait:" target="YLy-65-1bz" id="IHV-OB-c03"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Underline" keyEquivalent="u" id="WRG-CD-K1S">
+                                                    <menuItem title="Underline" id="WRG-CD-K1S">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="underline:" target="-1" id="FYS-2b-JAY"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem isSeparatorItem="YES" id="5gT-KC-WSO"/>
-                                                    <menuItem title="Bigger" tag="3" keyEquivalent="+" id="Ptp-SP-VEL">
+                                                    <menuItem title="Bigger" tag="3" id="Ptp-SP-VEL">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="modifyFont:" target="YLy-65-1bz" id="Uc7-di-UnL"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Smaller" tag="4" keyEquivalent="-" id="i1d-Er-qST">
+                                                    <menuItem title="Smaller" tag="4" id="i1d-Er-qST">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="modifyFont:" target="YLy-65-1bz" id="HcX-Lf-eNd"/>
                                                         </connections>
@@ -350,6 +356,7 @@
                                                     </menuItem>
                                                     <menuItem isSeparatorItem="YES" id="Ndw-q3-faq"/>
                                                     <menuItem title="Show Colors" keyEquivalent="C" id="bgn-CT-cEk">
+                                                        <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="orderFrontColorPanel:" target="-1" id="mSX-Xz-DV3"/>
                                                         </connections>
@@ -618,6 +625,11 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="assembleAndRun:" target="-1" id="x06-Tz-bcQ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Assemble" keyEquivalent="b" id="k00-hj-YDR">
+                                <connections>
+                                    <action selector="assemble:" target="-1" id="iZe-j8-e4f"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="THE-Iz-l38"/>

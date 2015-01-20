@@ -115,7 +115,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
-  if ([anItem action] == @selector(assembleAndRun:))
+  if ([anItem action] == @selector(assembleAndRun:) ||
+      [anItem action] == @selector(assemble:))
     return !assembler;
   if ([anItem action] == @selector(switchToEditor:))
     return [self sourceModeSwitchAllowed];
@@ -225,6 +226,18 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (IBAction)assembleAndRun:(id)sender {
+  runWhenAssemblyComplete = YES;
+  [self assembleInBackground];
+}
+
+
+- (IBAction)assemble:(id)sender {
+  runWhenAssemblyComplete = NO;
+  [self assembleInBackground];
+}
+
+
+- (void)assembleInBackground {
   if (assembler) return;
   
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
@@ -285,7 +298,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
     [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
     
-    if (asmres != MOSAssemblageResultFailure) {
+    if (asmres != MOSAssemblageResultFailure && runWhenAssemblyComplete) {
       unlink([tempSourceCopy fileSystemRepresentation]);
       [self switchToSimulator:self];
       /* Since we are changing simulator executable, validation of toolbar
