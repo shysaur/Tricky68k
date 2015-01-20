@@ -18,7 +18,16 @@
   
   lastCur = 0;
   [self setContinuousSpellCheckingEnabled:NO];
+  [self setGrammarCheckingEnabled:NO];
   [self setAllowsUndo:NO];
+  [self setUsesFontPanel:NO];
+  [self setAutomaticTextReplacementEnabled:NO];
+  [self setAutomaticSpellingCorrectionEnabled:NO];
+  [self setAutomaticQuoteSubstitutionEnabled:NO];
+  [self setAutomaticLinkDetectionEnabled:NO];
+  [self setAutomaticDataDetectionEnabled:NO];
+  [self setAutomaticDashSubstitutionEnabled:NO];
+  [self setEnabledTextCheckingTypes:0];
   [self setTeletypeCursorPosition:0];
   
   return self;
@@ -137,9 +146,10 @@
 }
 
 
-- (BOOL)validateMenuItem:(NSMenuItem *)anItem {
-  if ([anItem action] == @selector(cut:)) return NO;
-  return YES;
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
+  if ([anItem action] != @selector(copy:) &&
+      [anItem action] != @selector(paste:)) return NO;
+  return [super validateUserInterfaceItem:anItem];
 }
 
 
