@@ -381,12 +381,14 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Text" id="d9c-me-L2H">
                                                 <items>
-                                                    <menuItem title="Align Left" keyEquivalent="{" id="ZM1-6Q-yy1">
+                                                    <menuItem title="Align Left" id="ZM1-6Q-yy1">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="alignLeft:" target="-1" id="zUv-R1-uAa"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Center" keyEquivalent="|" id="VIY-Ag-zcb">
+                                                    <menuItem title="Center" id="VIY-Ag-zcb">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="alignCenter:" target="-1" id="spX-mk-kcS"/>
                                                         </connections>
@@ -397,7 +399,8 @@
                                                             <action selector="alignJustified:" target="-1" id="ljL-7U-jND"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Align Right" keyEquivalent="}" id="wb2-vD-lq4">
+                                                    <menuItem title="Align Right" id="wb2-vD-lq4">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="alignRight:" target="-1" id="r48-bG-YeY"/>
                                                         </connections>
@@ -621,8 +624,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Code" id="lMQ-tW-PDX">
                         <items>
-                            <menuItem title="Assemble and Run" id="sfc-Vy-BKl">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Assemble and Run" keyEquivalent="r" id="sfc-Vy-BKl">
                                 <connections>
                                     <action selector="assembleAndRun:" target="-1" id="x06-Tz-bcQ"/>
                                 </connections>
@@ -716,7 +718,8 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Simulator" id="fVL-NN-tUs">
                         <items>
-                            <menuItem title="Run" keyEquivalent="r" id="bNf-3m-2Vg">
+                            <menuItem title="Run" keyEquivalent="y" id="bNf-3m-2Vg">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
                                     <action selector="run:" target="-1" id="qUt-vD-N86"/>
                                 </connections>
@@ -727,8 +730,7 @@
                                     <action selector="pause:" target="-1" id="Y2u-V8-3k1"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Restart" id="gwX-WD-bvu">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Restart" keyEquivalent="R" id="gwX-WD-bvu">
                                 <connections>
                                     <action selector="restart:" target="-1" id="yGv-H7-ma1"/>
                                 </connections>
@@ -765,14 +767,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="9Ko-BT-3V6"/>
-                            <menuItem title="View Source" id="jdU-UM-hWr">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="View Source" keyEquivalent="{" id="jdU-UM-hWr">
                                 <connections>
                                     <action selector="switchToEditor:" target="-1" id="rXq-0D-c5b"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="View Simulator" id="eej-0c-4EI">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="View Simulator" keyEquivalent="}" id="eej-0c-4EI">
                                 <connections>
                                     <action selector="switchToSimulator:" target="-1" id="wc5-vI-V1E"/>
                                 </connections>
