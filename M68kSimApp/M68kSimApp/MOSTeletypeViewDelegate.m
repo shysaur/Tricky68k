@@ -60,7 +60,7 @@
     newline++;
     tmp = [[NSString alloc] initWithBytes:buf length:(newline-buf)
       encoding:NSUTF8StringEncoding];
-    [self insertString:str];
+    [self insertString:tmp];
     [self flushBuffer];
     buf = newline;
     newline = strstr(buf, "\n");
