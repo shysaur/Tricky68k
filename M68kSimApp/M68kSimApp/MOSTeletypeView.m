@@ -52,10 +52,10 @@
 
 
 - (void)setTeletypeCursorPosition:(NSInteger)cur {
-  NSInteger gliph, length, lastcindex;
+  NSInteger glyph, length, lastcindex;
   NSRect glyphRect, oldRect;
   NSSize spaceSize;
-  NSRange gliphRange;
+  NSRange glyphRange;
   NSLayoutManager *lm;
   NSTextContainer *tc;
   unichar lastc;
@@ -70,10 +70,9 @@
   if (length == 0) {
     space = [[NSAttributedString alloc] initWithString:@" " attributes:ttyAttributes];
     [[self textStorage] appendAttributedString:space];
-    gliph = [lm glyphIndexForCharacterAtIndex:0];
-    gliphRange.length = 1;
-    gliphRange.location = 0;
-    glyphRect = [lm boundingRectForGlyphRange:gliphRange inTextContainer:tc];
+    glyphRange.length = 1;
+    glyphRange.location = 0;
+    glyphRect = [lm boundingRectForGlyphRange:glyphRange inTextContainer:tc];
     [[[self textStorage] mutableString] setString:@""];
   } else {
     if (cur >= length)
@@ -81,12 +80,12 @@
     else
       lastcindex = cur;
       
-    gliph = [lm glyphIndexForCharacterAtIndex:lastcindex];
+    glyph = [lm glyphIndexForCharacterAtIndex:lastcindex];
     lastc = [[[self textStorage] mutableString] characterAtIndex:lastcindex];
 
-    gliphRange.length = 1;
-    gliphRange.location = gliph;
-    glyphRect = [lm boundingRectForGlyphRange:gliphRange inTextContainer:tc];
+    glyphRange.length = 1;
+    glyphRange.location = glyph;
+    glyphRect = [lm boundingRectForGlyphRange:glyphRange inTextContainer:tc];
     
     if ([[NSCharacterSet newlineCharacterSet] characterIsMember:lastc]) {
       glyphRect.size.height /= 2;
