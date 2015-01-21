@@ -14,12 +14,12 @@
             </ul> ]]>
             </description>
             <pubDate>Wed, 21 January 2015 22:42:58 +0100</pubDate>
-            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_0.9.2/Tricky68k_092.app.cpgz" 
-              sparkle:version="619" 
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_0.9.2/Tricky68k_092.tar.bz2" 
+              sparkle:version="618" 
               sparkle:shortVersionString="0.9.2"
               length="1940068" 
               type="application/octet-stream" 
-              sparkle:dsaSignature="MCwCFE8bEf6rShYqwAj3d0qg0OhX8CPOAhRfrXxFE5KZOQrn1mFrYtYRMbOxwA==" />
+              sparkle:dsaSignature="MC0CFC3g1OHaVdFD81W3w62GLr1iFTrcAhUAhoe1re2gobGzUIGRE2s66zpl+88=" />
             <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
         </item>
     </channel>
