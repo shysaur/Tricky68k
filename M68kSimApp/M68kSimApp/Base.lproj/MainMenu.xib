@@ -15,6 +15,7 @@
         <customObject id="Voe-Tx-rLC" customClass="MOSAppDelegate"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="lC9-Yb-pZX" customClass="MGSTextMenuController"/>
+        <customObject id="54r-Kb-6jQ" customClass="SUUpdater"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
                 <menuItem title="Tricky68k" id="1Xt-HY-uBw">
@@ -31,6 +32,12 @@
                             <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                 <connections>
                                     <action selector="openPreferencesWindow:" target="Voe-Tx-rLC" id="6SB-VK-vQm"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Check for Updates..." id="aWS-ex-8HW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="54r-Kb-6jQ" id="AWe-H8-8s9"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>

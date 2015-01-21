@@ -22,4 +22,7 @@
    <FileRef
       location = "group:Musashi/Musashi.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Sparkle/Sparkle.xcodeproj">
+   </FileRef>
 </Workspace>

@@ -10,6 +10,9 @@
 		01000A511A65AD130080AC5F /* NSScanner+Shorteners.m in Sources */ = {isa = PBXBuildFile; fileRef = 01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */; };
 		01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01000A5B1A65BB330080AC5F /* MOSJobStatusStringTransformer.m */; };
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
+		012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; };
+		012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 012AEB1D1A7045E400906B25 /* dsa_pub.pem */; };
 		014A3C6A1A5D3B1900F73FC5 /* MOSNamedPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */; };
 		014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C6C1A5D432300F73FC5 /* MOSTeletypeView.m */; };
 		014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C6F1A5D439500F73FC5 /* MOSTeletypeViewDelegate.m */; };
@@ -65,6 +68,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				015525831A5EFE5200096023 /* MGSFragaria.framework in Install Frameworks */,
+				012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */,
 			);
 			name = "Install Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +95,8 @@
 		01000A5B1A65BB330080AC5F /* MOSJobStatusStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJobStatusStringTransformer.m; sourceTree = "<group>"; };
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
+		012AEB1A1A703F5A00906B25 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		012AEB1D1A7045E400906B25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../../Updates/dsa_pub.pem; sourceTree = "<group>"; };
 		014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSNamedPipe.h; sourceTree = "<group>"; };
 		014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSNamedPipe.m; sourceTree = "<group>"; };
 		014A3C6B1A5D432300F73FC5 /* MOSTeletypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSTeletypeView.h; sourceTree = "<group>"; };
@@ -170,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				015525801A5EFD9700096023 /* MGSFragaria.framework in Frameworks */,
+				012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +286,7 @@
 				015708AE1A619346005D08DB /* DefaultLinkerFile.ld */,
 				015525861A5F11E300096023 /* SyntaxDefinitions.plist */,
 				015525841A5F11CB00096023 /* Syntax Definitions */,
+				012AEB1D1A7045E400906B25 /* dsa_pub.pem */,
 				016CD1391A51A10E00D64892 /* Info.plist */,
 				016CD13D1A51A10E00D64892 /* main.m */,
 			);
@@ -320,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				0155257F1A5EFD9700096023 /* MGSFragaria.framework */,
+				012AEB1A1A703F5A00906B25 /* Sparkle.framework */,
 				015708A41A618BEE005D08DB /* vasmm68k-mot */,
 				015708A61A618C17005D08DB /* m68k-elf-ld */,
 				01864B921A51CCF6005B2B0D /* m68ksim */,
@@ -443,6 +452,7 @@
 				01E93C751A6D4906004BE3C4 /* MOSJobWindow.xib in Resources */,
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
 				01E93C811A6D492F004BE3C4 /* VasmTemplate.s in Resources */,
+				012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */,
 				015708AF1A619346005D08DB /* DefaultLinkerFile.ld in Resources */,
 				015525851A5F11CB00096023 /* Syntax Definitions in Resources */,
 				01E93C781A6D490F004BE3C4 /* MOSExecutable.xib in Resources */,
