@@ -5,6 +5,25 @@
         <link>https://github.com/shysaur/Tricky68k/raw/master/Updates/tricky68k-appcast.xml</link>
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
+        
+        <item>
+            <title>Release 0.9.3</title>
+            <description><![CDATA[ <ul>
+              <li>Autosave now works.</li>
+              <li>Added automatic update checking.</li>
+              <li>Improved stability of the teletype.</li>
+            </ul> ]]>
+            </description>
+            <pubDate>Thu, 22 January 2015 00:28:07 +0100</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_0.9.3/Tricky68k_093.tar.bz2" 
+              sparkle:version="636" 
+              sparkle:shortVersionString="0.9.3"
+              length="2423297" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC4CFQDP/VqmrIe9Jog6xIjHFyfuv1LGBgIVAOViGv0PRAQWWEJOY9djKK2BuP8X" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+        
         <item>
             <title>Release 0.9.2</title>
             <description><![CDATA[ <ul>
