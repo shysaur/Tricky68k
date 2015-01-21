@@ -113,8 +113,8 @@
     return;
   else if (amount > 0) {
     range.length = amount;
-    if (range.location + range.length > [lineBuffer length])
-      range.length = [lineBuffer length] - range.location;
+    if (cursor + range.length > [lineBuffer length])
+      range.length = [lineBuffer length] - cursor;
   } else {
     range.length = -amount;
     cursor += amount;
