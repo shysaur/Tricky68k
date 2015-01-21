@@ -8,6 +8,7 @@
 
 #import "MOSSource.h"
 #import <MGSFragaria/MGSFragaria.h>
+#import <MGSFragaria/SMLTextView.h>
 #import "NSURL+TemporaryFile.h"
 #import "MOSAssembler.h"
 #import "MOSJobStatusManager.h"
@@ -68,8 +69,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
       [self loadData:initialData];
     initialData = nil;
   }
-  
+
   textView = [fragaria objectForKey:ro_MGSFOTextView];
+  [self setUndoManager:[textView undoManager]];
 }
 
 
@@ -328,6 +330,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [simVc pause:self];
   simView = nil;
   simVc = nil;
+  
+  [super close];
 }
 
 

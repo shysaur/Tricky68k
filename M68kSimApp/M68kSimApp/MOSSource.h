@@ -11,6 +11,7 @@
 
 
 @class MGSFragaria;
+@class SMLTextView;
 @class MOSAssembler;
 @class MOSSimulatorViewController;
 
@@ -24,7 +25,7 @@
   IBOutlet NSWindow *docWindow;
   BOOL simulatorMode;
   
-  NSTextView *textView;
+  SMLTextView *textView;
   MGSFragaria *fragaria;
   __strong IBOutlet NSView *editView;
   
