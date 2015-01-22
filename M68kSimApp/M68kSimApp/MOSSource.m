@@ -207,7 +207,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
-- (IBAction)switchToEditor:(id)editor {
+- (IBAction)switchToEditor:(id)sender {
   NSView *contview;
   NSArray *constr;
   
