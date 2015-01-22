@@ -256,15 +256,17 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
     MOSJobStatusManager *jsm;
     NSDictionary *jobinfo;
-    NSString *title;
+    NSString *title, *label;
 
     jsm = [MOSJobStatusManager sharedJobStatusManger];
     if ([self fileURL]) {
-      title = [NSString stringWithFormat:@"Assemble %@", [[self fileURL] lastPathComponent]];
+      label = [[self fileURL] lastPathComponent];
+      title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@", @"Assembler job name"), label];
       jobinfo = @{MOSJobVisibleDescription: title,
                   MOSJobAssociatedFile: [self fileURL]};
     } else {
-      title = [NSString stringWithFormat:@"Assemble %@", [docWindow title]];
+      label = [docWindow title];
+      title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@", @"Assembler job name"), label];
       jobinfo = @{MOSJobVisibleDescription: title};
     }
     lastJobId = [jsm addJobWithInfo:jobinfo];

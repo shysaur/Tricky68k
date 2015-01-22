@@ -101,10 +101,10 @@
   pw = [[self view] window];
   alert = [[NSAlert alloc] init];
   [alert setAlertStyle:NSCriticalAlertStyle];
-  [alert setMessageText:@"Simulator backend died unexpectedly"];
-  [alert setInformativeText:@"This is a bug. Want to restart from scratch or you want to quit?"];
-  [alert addButtonWithTitle:@"Restart"];
-  [alert addButtonWithTitle:@"Close"];
+  [alert setMessageText:NSLocalizedString(@"Simulator backend died unexpectedly", @"Title of simulator death alert")];
+  [alert setInformativeText:NSLocalizedString(@"This is a bug. Want to restart from scratch or you want to quit?", @"Informative text of simulator death alert")];
+  [alert addButtonWithTitle:NSLocalizedString(@"Restart", @"Restart (simulator)")];
+  [alert addButtonWithTitle:NSLocalizedString(@"Close", @"Close")];
   [alert beginSheetModalForWindow:pw completionHandler:^(NSModalResponse resp){
     if (resp == NSAlertFirstButtonReturn)
       [self reloadSimulatedExecutable];
