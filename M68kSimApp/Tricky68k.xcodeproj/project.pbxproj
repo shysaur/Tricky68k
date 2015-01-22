@@ -98,7 +98,7 @@
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		012AEB1A1A703F5A00906B25 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		012AEB1D1A7045E400906B25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../../Updates/dsa_pub.pem; sourceTree = "<group>"; };
-		013A6AFA1A718458007C053B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		013A6AFA1A718458007C053B /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSNamedPipe.h; sourceTree = "<group>"; };
 		014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSNamedPipe.m; sourceTree = "<group>"; };
 		014A3C6B1A5D432300F73FC5 /* MOSTeletypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSTeletypeView.h; sourceTree = "<group>"; };
