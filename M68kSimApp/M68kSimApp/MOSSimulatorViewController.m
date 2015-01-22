@@ -143,6 +143,9 @@
     newstate = [object simulatorState];
     switch (newstate) {
       case MOSSimulatorStateDead:
+        [self willChangeValueForKey:@"simulatorRunning"];
+        simRunning = NO;
+        [self didChangeValueForKey:@"simulatorRunning"];
         [self simulatorIsDead];
         break;
         
