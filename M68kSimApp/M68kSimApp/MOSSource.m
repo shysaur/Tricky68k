@@ -138,6 +138,16 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
+- (void)simulatorModeShouldTerminate:(id)sender {
+  [self switchToEditor:sender];
+  /* Keep simulator in limbo, and force re-assembly of new file for next time */
+  [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  assemblyOutput = nil;
+  [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  [[docWindow toolbar] validateVisibleItems];
+}
+
+
 - (CATransition *)transitionForViewSwitch {
   CATransition *res;
   

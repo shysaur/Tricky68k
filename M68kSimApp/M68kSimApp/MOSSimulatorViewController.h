@@ -17,6 +17,13 @@
 @class MOSTeletypeViewDelegate;
 
 
+@protocol MOSSimulatorViewParentWindowDelegate <NSWindowDelegate>
+
+- (void)simulatorModeShouldTerminate:(id)sender;
+
+@end
+
+
 @interface MOSSimulatorViewController : NSViewController {
   MOSSimulatorProxy *simProxy;
   NSURL *simExec;

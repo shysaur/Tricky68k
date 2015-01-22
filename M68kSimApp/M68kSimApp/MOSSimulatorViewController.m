@@ -109,7 +109,13 @@
     if (resp == NSAlertFirstButtonReturn)
       [self reloadSimulatedExecutable];
     else
-      [pw close];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[pw delegate] respondsToSelector:@selector(simulatorModeShouldTerminate:)]) {
+          id pwd = [pw delegate];
+          [pwd simulatorModeShouldTerminate:self];
+        } else
+          [pw performClose:self];
+      });
   }];
 }
 
