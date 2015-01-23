@@ -7,10 +7,22 @@
 //
 
 #import "MOSSimulatorSubviewDelegate.h"
-#import "MOSSimulatorViewDefaults.h"
+#import "NSUserDefaults+Archiver.h"
 
 
 @implementation MOSSimulatorSubviewDelegate
+
+
++ (void)load {
+  NSFont *defaultTextFont;
+  NSData *archivedFont;
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
+  defaultTextFont = [NSFont fontWithName:@"Menlo" size:11.0];
+  archivedFont = [NSArchiver archivedDataWithRootObject:defaultTextFont];
+  [ud registerDefaults:@{@"DebuggerTextFont": archivedFont}];
+}
 
 
 - (instancetype)init {
@@ -49,7 +61,7 @@
     return;
   
   oldArchivedFont = archivedFont;
-  viewFont = MOSSimulatorViewTeletypeFont();
+  viewFont = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
   [self defaultMonospacedFontHasChanged];
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "MOSSimulatorPrefViewController.h"
-#import "MOSSimulatorViewDefaults.h"
+#import "NSUserDefaults+Archiver.h"
 
 
 @implementation MOSSimulatorPrefViewController
@@ -30,8 +30,10 @@
   NSFont *viewFont;
   NSString *fontName;
   NSString *sizeString;
+  NSUserDefaults *ud;
   
-  viewFont = MOSSimulatorViewTeletypeFont();
+  ud = [NSUserDefaults standardUserDefaults];
+  viewFont = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
   sizeString = [ptSizeFormatter stringFromNumber:[NSNumber numberWithFloat:[viewFont pointSize]]];
   fontName = [NSString stringWithFormat:@"%@ – %@", [viewFont displayName], sizeString];
   
@@ -46,7 +48,7 @@
   
   fm = [NSFontManager sharedFontManager];
   font = [fm convertFont:[fm selectedFont]];
-  MOSSimulatorViewSetTeletypeFont(font);
+  [[NSUserDefaults standardUserDefaults] setObjectByArchiving:font forKey:@"DebuggerTextFont"];
   [self updateFontPreview];
 }
 
@@ -54,9 +56,11 @@
 - (IBAction)changeDebuggerFont:(id)sender {
   NSFontManager *fm;
   NSFont *viewFont;
+  NSUserDefaults *ud;
   
+  ud = [NSUserDefaults standardUserDefaults];
   fm = [NSFontManager sharedFontManager];
-  viewFont = MOSSimulatorViewTeletypeFont();
+  viewFont = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
   [fm setSelectedFont:viewFont isMultiple:NO];
   [fm orderFrontFontPanel:self];
 }
