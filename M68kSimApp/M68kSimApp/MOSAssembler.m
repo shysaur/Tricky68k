@@ -34,6 +34,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   running = NO;
   completed = NO;
   isJob = NO;
+  options = 0;
   
   return self;
 }
@@ -93,6 +94,15 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
+- (void)setAssemblageOptions:(MOSAssemblageOptions)opts {
+  options = opts;
+}
+
+
+- (MOSAssemblageOptions)assemblageOptions {
+  return options;
+}
+
 
 - (void)assemble {
   if (running || completed)
@@ -112,17 +122,19 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     NSURL *unlinkedelf;
     NSURL *linkerfile;
     NSMutableArray *params;
-    NSArray *params2;
     
     task = [[MOSMonitoredTask alloc] init];
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
     [task setLaunchURL:execurl];
     unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-    params = [@[@"-quiet", @"-Felf", @"-spaces", @"-no-opt",
-                @"-o", [unlinkedelf path], [sourceFile path]] mutableCopy];
-    if (listingFile) {
+    
+    params = [@[@"-quiet", @"-Felf", @"-spaces"] mutableCopy];
+    if (!(options & MOSAssemblageOptionOptimizationOn))
+      [params addObject:@"-no-opt"];
+    [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [sourceFile path]]];
+    if (listingFile)
       [params addObjectsFromArray:@[@"-L", [listingFile path]]];
-    }
+    
     [task setArguments:params];
     [task setDelegate:self];
     [task launch];
@@ -136,8 +148,14 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"m68k-elf-ld"];
     [task setLaunchURL:execurl];
     linkerfile = [[NSBundle mainBundle] URLForResource:@"DefaultLinkerFile" withExtension:@"ld"];
-    params2 = @[@"--entry=0x2000", @"-o", [outputFile path], [unlinkedelf path], [linkerfile path]];
-    [task setArguments:params2];
+    
+    params = [NSMutableArray array];
+    if (!(options & MOSAssemblageOptionEntryPointSymbolic))
+      [params addObject:@"--entry=0x2000"];
+    [params addObjectsFromArray:@[@"-o", [outputFile path]]];
+    [params addObjectsFromArray:@[[unlinkedelf path], [linkerfile path]]];
+    
+    [task setArguments:params];
     [task setDelegate:self];
     [task launch];
     [task waitUntilExit];

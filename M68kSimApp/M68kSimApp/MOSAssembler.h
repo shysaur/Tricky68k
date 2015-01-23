@@ -16,6 +16,13 @@ typedef enum {
   MOSAssemblageResultSuccessWithWarning,
 } MOSAssemblageResult;
 
+typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
+  MOSAssemblageOptionOptimizationOff = 0,
+  MOSAssemblageOptionOptimizationOn = 1 << 0,
+  MOSAssemblageOptionEntryPointFixed = 0,
+  MOSAssemblageOptionEntryPointSymbolic = 1 << 1,
+};
+
 
 @interface MOSAssembler : NSObject <MOSMonitoredTaskDelegate> {
   NSUInteger jobIdentifier;
@@ -24,6 +31,7 @@ typedef enum {
   NSURL *outputFile;
   NSURL *listingFile;
   MOSAssemblageResult asmResult;
+  MOSAssemblageOptions options;
   BOOL running;
   BOOL completed;
 }
@@ -36,6 +44,8 @@ typedef enum {
 - (NSURL*)outputFile;
 - (void)setOutputListingFile:(NSURL*)lf;
 - (NSURL*)outputListingFile;
+- (void)setAssemblageOptions:(MOSAssemblageOptions)opts;
+- (MOSAssemblageOptions)assemblageOptions;
 
 - (void)assemble;
 - (BOOL)isAssembling;
