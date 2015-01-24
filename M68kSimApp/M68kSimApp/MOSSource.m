@@ -178,7 +178,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (![oldSimExec isEqual:assemblyOutput]) {
     if (![simVc setSimulatedExecutable:assemblyOutput error:&err]) {
       [self presentError:err];
-      simVc = nil;
       return;
     }
     
