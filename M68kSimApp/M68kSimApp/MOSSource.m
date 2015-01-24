@@ -42,6 +42,17 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 @implementation MOSSource
 
 
++ (void)load {
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
+  [ud registerDefaults:@{
+    @"FixedEntryPoint": @YES,
+    @"UseAssemblyTimeOptimization": @NO
+  }];
+}
+
+
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
   MOSJobStatusManager *sm;
   
@@ -254,40 +265,49 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
   
-  assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
   assembler = [[MOSAssembler alloc] init];
-  [assembler addObserver:self forKeyPath:@"complete" options:0 context:AssemblageComplete];
   
-  [assembler setOutputFile:assemblyOutput];
   tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
   
   [self saveToURL:tempSourceCopy ofType:@"public.plain-text"
   forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
+    NSUserDefaults *ud;
+    MOSAssemblageOptions opts;
     MOSJobStatusManager *jsm;
     NSDictionary *jobinfo;
     NSString *title, *label;
+    
+    if (err) {
+      assembler = nil;
+      return;
+    }
+    [assembler addObserver:self forKeyPath:@"complete" options:0 context:AssemblageComplete];
 
+    ud = [NSUserDefaults standardUserDefaults];
     jsm = [MOSJobStatusManager sharedJobStatusManger];
+    
+    assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+    
     if ([self fileURL]) {
       label = [[self fileURL] lastPathComponent];
       title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@", @"Assembler job name"), label];
-      jobinfo = @{MOSJobVisibleDescription: title,
-                  MOSJobAssociatedFile: [self fileURL]};
+      jobinfo = @{MOSJobVisibleDescription: title, MOSJobAssociatedFile: [self fileURL]};
     } else {
       label = [docWindow title];
       title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@", @"Assembler job name"), label];
       jobinfo = @{MOSJobVisibleDescription: title};
     }
+    
     lastJobId = [jsm addJobWithInfo:jobinfo];
     hadJob = YES;
     
-    if (err) {
-      [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
-      assembler = nil;
-      return;
-    }
+    opts = [ud boolForKey:@"FixedEntryPoint"] ? MOSAssemblageOptionEntryPointFixed : MOSAssemblageOptionEntryPointSymbolic;
+    opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ? MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
+    
+    [assembler setOutputFile:assemblyOutput];
     [assembler setSourceFile:tempSourceCopy];
     [assembler setJobId:lastJobId];
+    [assembler setAssemblageOptions:opts];
     [assembler assemble];
   }];
   
