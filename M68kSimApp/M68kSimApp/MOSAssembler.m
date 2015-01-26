@@ -124,6 +124,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     NSURL *linkerfile;
     NSMutableArray *params;
     
+    linking = NO;
     task = [[MOSMonitoredTask alloc] init];
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
     [task setLaunchURL:execurl];
@@ -145,6 +146,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
       goto finish;
     }
     
+    linking = YES;
     task = [[MOSMonitoredTask alloc] init];
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"m68k-elf-ld"];
     [task setLaunchURL:execurl];
@@ -197,8 +199,10 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     NSLog(@"taskoutput: %@", line);
   else {
     jsm = [MOSJobStatusManager sharedJobStatusManger];
-    /* The parser is able to gracefully dismiss ld output as normal messages */
+    if (!linking)
     event = [self parseVasmOutput:line];
+    else
+      event = [self parseLinkerOutput:line];
     if (event) [jsm addEvent:event toJob:jobIdentifier];
   }
 }
@@ -252,6 +256,34 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   [res setObject:[scan scanUpToEndOfString] forKey:MOSJobEventText];
   if (isFatal) [res setObject:MOSJobEventTypeError forKey:MOSJobEventType];
   
+  return [res copy];
+  
+returnAsIs:
+  [res setObject:line forKey:MOSJobEventText];
+  [res setObject:MOSJobEventTypeMessage forKey:MOSJobEventType];
+  return [res copy];
+}
+
+
+- (NSDictionary*)parseLinkerOutput:(NSString *)line {
+  NSMutableDictionary *res;
+  NSScanner *scan;
+  
+  scan = [NSScanner scannerWithString:line];
+  res = [NSMutableDictionary dictionary];
+  
+  /* Skip the filename */
+  [scan scanUpToString:@":"];
+  if (![scan scanString:@":"]) goto returnAsIs;
+  
+  if ([scan scanString:@"warning: "]) {
+    gotWarnings = YES;
+    [res setObject:MOSJobEventTypeWarning forKey:MOSJobEventType];
+  } else
+    [res setObject:MOSJobEventTypeError forKey:MOSJobEventType];
+  
+  /* Return the rest of the line as a message */
+  [res setObject:[scan scanUpToEndOfString] forKey:MOSJobEventText];
   return [res copy];
   
 returnAsIs:

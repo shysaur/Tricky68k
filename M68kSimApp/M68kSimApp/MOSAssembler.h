@@ -34,6 +34,7 @@ typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
   MOSAssemblageOptions options;
   BOOL gotWarnings;
   BOOL running;
+  BOOL linking;
   BOOL completed;
 }
 
