@@ -27,6 +27,7 @@ typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
 @interface MOSAssembler : NSObject <MOSMonitoredTaskDelegate> {
   NSUInteger jobIdentifier;
   BOOL isJob;
+  NSMutableArray *sections;
   NSURL *sourceFile;
   NSURL *outputFile;
   NSURL *listingFile;

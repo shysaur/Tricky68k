@@ -32,19 +32,29 @@
 }
 
 
-- (BOOL)scanCharactersFromString:(NSString *)set {
+- (BOOL)scanCharactersFromString:(NSString *)set intoString:(NSString **)str {
   NSCharacterSet *cs;
   
   cs = [NSCharacterSet characterSetWithCharactersInString:set];
-  return [self scanCharactersFromSet:cs];
+  return [self scanCharactersFromSet:cs intoString:str];
 }
 
 
-- (BOOL)scanUpToCharactersFromString:(NSString *)set{
+- (BOOL)scanUpToCharactersFromString:(NSString *)set intoString:(NSString **)str {
   NSCharacterSet *cs;
   
   cs = [NSCharacterSet characterSetWithCharactersInString:set];
-  return [self scanUpToCharactersFromSet:cs];
+  return [self scanUpToCharactersFromSet:cs intoString:str];
+}
+
+
+- (BOOL)scanCharactersFromString:(NSString *)set {
+  return [self scanCharactersFromString:set intoString:nil];
+}
+
+
+- (BOOL)scanUpToCharactersFromString:(NSString *)set {
+  return [self scanUpToCharactersFromString:set intoString:nil];
 }
 
 
@@ -57,7 +67,6 @@
   [self setScanLocation:[[self string] length]];
   return res;
 }
-
 
 
 @end

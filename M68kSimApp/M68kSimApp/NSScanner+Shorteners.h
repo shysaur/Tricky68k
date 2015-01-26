@@ -16,6 +16,8 @@
 - (BOOL)scanCharactersFromSet:(NSCharacterSet *)set;
 - (BOOL)scanUpToCharactersFromSet:(NSCharacterSet *)set;
 
+- (BOOL)scanCharactersFromString:(NSString *)set intoString:(NSString **)str;
+- (BOOL)scanUpToCharactersFromString:(NSString *)set intoString:(NSString **)str;
 - (BOOL)scanCharactersFromString:(NSString *)set;
 - (BOOL)scanUpToCharactersFromString:(NSString *)set;
 

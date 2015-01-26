@@ -8,6 +8,7 @@
 
 #import "MOSAssembler.h"
 #import "NSURL+TemporaryFile.h"
+#import "NSFileHandle+Strings.h"
 #import "MOSJobStatusManager.h"
 #import "NSScanner+Shorteners.h"
 
@@ -117,6 +118,8 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   [self didChangeValueForKey:@"assembling"];
   
   gotWarnings = NO;
+  sections = [NSMutableArray array];
+  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     MOSMonitoredTask *task;
     NSURL *execurl;
@@ -130,7 +133,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     [task setLaunchURL:execurl];
     unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
     
-    params = [@[@"-quiet", @"-Felf", @"-spaces"] mutableCopy];
+    params = [@[@"-Felf", @"-spaces"] mutableCopy];
     if (!(options & MOSAssemblageOptionOptimizationOn))
       [params addObject:@"-no-opt"];
     [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [sourceFile path]]];
@@ -150,15 +153,16 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     task = [[MOSMonitoredTask alloc] init];
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"m68k-elf-ld"];
     [task setLaunchURL:execurl];
-    linkerfile = [[NSBundle mainBundle] URLForResource:@"DefaultLinkerFile" withExtension:@"ld"];
+    linkerfile = [NSURL URLWithTemporaryFilePathWithExtension:@"ld"];
+    [self makeLinkerFile:linkerfile];
     
     params = [NSMutableArray array];
     if (!(options & MOSAssemblageOptionEntryPointSymbolic))
       [params addObject:@"--entry=0x2000"];
     else
       [params addObject:@"--entry=start"];
-    [params addObjectsFromArray:@[@"-o", [outputFile path]]];
-    [params addObjectsFromArray:@[[unlinkedelf path], [linkerfile path]]];
+    [params addObjectsFromArray:@[@"-o", [outputFile path], @"-T", [linkerfile path]]];
+    [params addObjectsFromArray:@[[unlinkedelf path]]];
     
     [task setArguments:params];
     [task setDelegate:self];
@@ -191,6 +195,38 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
+- (BOOL)makeLinkerFile:(NSURL*)ld {
+  int fh;
+  const char *sns;
+  uint32_t segment_addr;
+  NSString *section;
+  NSFileHandle *nfh;
+  
+  fh = open([ld fileSystemRepresentation], O_WRONLY | O_CREAT, 0666);
+  if (fh < 0) return NO;
+  nfh = [[NSFileHandle alloc] initWithFileDescriptor:fh closeOnDealloc:YES];
+  if (!nfh) return NO;
+  
+  [nfh writeLine:@"SECTIONS {"];
+  for (section in sections) {
+    [nfh writeString:section];
+    [nfh writeString:@" "];
+    sns = [section UTF8String];
+    if (strstr(sns, "seg") == sns) {
+      sscanf(sns+3, "%x", &segment_addr);
+      [nfh writeString:[NSString stringWithFormat:@"0x%X ", segment_addr]];
+    }
+    [nfh writeString:@": { *("];
+    [nfh writeString:section];
+    [nfh writeLine:@") }"];
+  }
+  [nfh writeLine:@"}"];
+  
+  [nfh closeFile];
+  return YES;
+}
+
+
 - (void)receivedTaskOutput:(NSString *)line {
   MOSJobStatusManager *jsm;
   NSDictionary *event;
@@ -200,7 +236,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   else {
     jsm = [MOSJobStatusManager sharedJobStatusManger];
     if (!linking)
-    event = [self parseVasmOutput:line];
+      event = [self parseVasmOutput:line];
     else
       event = [self parseLinkerOutput:line];
     if (event) [jsm addEvent:event toJob:jobIdentifier];
@@ -212,6 +248,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   NSMutableDictionary *res;
   NSScanner *scan;
   NSInteger lineno;
+  NSString *secname;
   BOOL isFatal;
   
   scan = [NSScanner scannerWithString:line];
@@ -219,7 +256,8 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   
   /* No empty lines thanks */
   if ([line isEqual:@""]) return nil;
-  
+  /* Filter out the banner */
+  if ([scan scanString:@"vasm "]) return nil;
   /* Source code line echo: filter out */
   if ([scan scanString:@">"]) return nil;
   
@@ -236,8 +274,15 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     [res setObject:MOSJobEventTypeWarning forKey:MOSJobEventType];
     gotWarnings = YES;
   } else {
-    /* No error|message|warning header: something else we pass thru as is */
-    goto returnAsIs;
+    /* No error|message|warning header: might be a section name */
+    /* Section name is terminated by an open parens */
+    if (![scan scanUpToString:@"(" intoString:&secname]) goto returnAsIs;
+    /* The line must end by the "bytes" string */
+    [scan scanUpToString:@"bytes"];
+    if (![scan scanString:@"bytes"]) goto returnAsIs;
+    /* If both of these conditions are fulfilled, add a section to the array */
+    [sections addObject:secname];
+    return nil;
   }
   /* skip eventual error number */
   [scan scanInteger:NULL];
