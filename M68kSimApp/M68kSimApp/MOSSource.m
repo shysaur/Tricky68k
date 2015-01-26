@@ -188,6 +188,10 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   oldSimExec = [simVc simulatedExecutable];
   if (![oldSimExec isEqual:assemblyOutput]) {
     if (![simVc setSimulatedExecutable:assemblyOutput error:&err]) {
+      /* Keep simulator in limbo, and force re-assembly of new file for next time */
+      [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
+      assemblyOutput = nil;
+      [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
       [self presentError:err];
       return;
     }

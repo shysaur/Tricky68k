@@ -44,6 +44,7 @@
   
   if ([simProxy simulatorState] == MOSSimulatorStateDead) {
     if (outerr) *outerr = [NSError errorWithDomain:NSCocoaErrorDomain code:NSExecutableNotLoadableError userInfo:nil];
+    simProxy = nil;
     return NO;
   }
   return YES;
