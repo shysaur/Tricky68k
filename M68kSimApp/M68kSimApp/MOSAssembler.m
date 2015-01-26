@@ -116,6 +116,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   running = YES;
   [self didChangeValueForKey:@"assembling"];
   
+  gotWarnings = NO;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     MOSMonitoredTask *task;
     NSURL *execurl;
@@ -166,7 +167,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
       goto finish;
     }
     
-    asmResult = MOSAssemblageResultSuccess;
+    asmResult = gotWarnings ? MOSAssemblageResultSuccessWithWarning : MOSAssemblageResultSuccess;
   finish:
     unlink([unlinkedelf fileSystemRepresentation]);
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -227,9 +228,10 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     [res setObject:MOSJobEventTypeError forKey:MOSJobEventType];
   else if ([scan scanString:@"message"])
     [res setObject:MOSJobEventTypeMessage forKey:MOSJobEventType];
-  else if ([scan scanString:@"warning"])
+  else if ([scan scanString:@"warning"]) {
     [res setObject:MOSJobEventTypeWarning forKey:MOSJobEventType];
-  else {
+    gotWarnings = YES;
+  } else {
     /* No error|message|warning header: something else we pass thru as is */
     goto returnAsIs;
   }

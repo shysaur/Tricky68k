@@ -32,6 +32,7 @@ typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
   NSURL *listingFile;
   MOSAssemblageResult asmResult;
   MOSAssemblageOptions options;
+  BOOL gotWarnings;
   BOOL running;
   BOOL completed;
 }
