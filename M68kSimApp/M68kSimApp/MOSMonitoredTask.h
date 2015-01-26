@@ -22,6 +22,7 @@
 @interface MOSMonitoredTask : NSObject {
   id<MOSMonitoredTaskDelegate> delegate;
   dispatch_semaphore_t exitSem;
+  dispatch_semaphore_t pipeClosedSem;
   NSTask *task;
   NSPipe *outputPipe;
   NSMutableArray *lines;

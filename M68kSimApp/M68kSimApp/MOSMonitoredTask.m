@@ -22,6 +22,7 @@
   running = NO;
   didLaunch = NO;
   exitSem = dispatch_semaphore_create(0);
+  pipeClosedSem = dispatch_semaphore_create(0);
   
   [task setStandardError:outputPipe];
   [task setStandardOutput:outputPipe];
@@ -150,13 +151,17 @@
       });
       line = [outFh readLine];
     }
+    dispatch_semaphore_signal(pipeClosedSem);
   });
 }
+
 
 - (void)waitUntilExit {
   if (!didLaunch) return;
   dispatch_semaphore_wait(exitSem, DISPATCH_TIME_FOREVER);
   dispatch_semaphore_signal(exitSem);
+  dispatch_semaphore_wait(pipeClosedSem, DISPATCH_TIME_FOREVER);
+  dispatch_semaphore_signal(pipeClosedSem);
 }
 
 
