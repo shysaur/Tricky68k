@@ -117,22 +117,6 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="3F47EAFD-B971-4CC4-BC62-8FEA7F4AE566" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="jAt-AX-sQh">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="27E16381-E7A0-4AE2-AA70-4115CF09C818" label="Clear" paletteLabel="Clear" id="XGK-07-Zrr">
-                        <nil key="toolTip"/>
-                        <size key="minSize" width="57" height="19"/>
-                        <size key="maxSize" width="60" height="19"/>
-                        <button key="view" verticalHuggingPriority="750" id="tz0-O7-5My">
-                            <rect key="frame" x="0.0" y="14" width="60" height="19"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundRect" title="Clear" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JNB-HA-bIa">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="smallSystem"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="clearJobList:" target="-2" id="1mm-43-uU0"/>
-                            </connections>
-                        </button>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="3ACF6DAD-7199-4430-B2DF-62173F3FB15F" label="Custom View" paletteLabel="Custom View" id="YDd-lk-HmM">
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="17"/>
@@ -149,18 +133,34 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="iSJ-m2-fIk"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="DCB-iR-Zks"/>
+                    <toolbarItem implicitItemIdentifier="48C473F6-BE97-4705-A79D-E2DF79D802F0" label="Custom View" paletteLabel="Custom View" id="Gs1-xN-rmV">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="52" height="27"/>
+                        <size key="maxSize" width="54" height="29"/>
+                        <button key="view" verticalHuggingPriority="750" id="D26-ng-yvY">
+                            <rect key="frame" x="11" y="14" width="54" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="Clear" bezelStyle="texturedRounded" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lsD-sL-xCh">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystem"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="clearJobList:" target="-2" id="Fdy-wB-X4l"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="iSJ-m2-fIk"/>
                     <toolbarItem reference="YDd-lk-HmM"/>
                     <toolbarItem reference="iSJ-m2-fIk"/>
-                    <toolbarItem reference="XGK-07-Zrr"/>
+                    <toolbarItem reference="Gs1-xN-rmV"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="230" y="221"/>
+            <point key="canvasLocation" x="237" y="214"/>
         </window>
         <treeController editable="NO" childrenKeyPath="privateMOSJobEvents" id="meV-76-mZL">
             <connections>
