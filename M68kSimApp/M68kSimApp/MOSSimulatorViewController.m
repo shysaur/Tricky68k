@@ -15,6 +15,9 @@
 #import "MOSTeletypeViewDelegate.h"
 
 
+NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
+
+
 @implementation MOSSimulatorViewController
 
 
@@ -43,7 +46,19 @@
   [self reloadSimulatedExecutable];
   
   if ([simProxy simulatorState] == MOSSimulatorStateDead) {
-    if (outerr) *outerr = [NSError errorWithDomain:NSCocoaErrorDomain code:NSExecutableNotLoadableError userInfo:nil];
+    if (outerr)
+      *outerr = [NSError errorWithDomain:MOSSimulatorViewErrorDomain
+        code:MOSSimulatorViewErrorLoadingFailed
+        userInfo:@{
+          NSLocalizedDescriptionKey:NSLocalizedString(@"Impossible to load "
+            "this executable.", @"Loading error message title"),
+          NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"This is "
+            "often caused by a missing entry point, or by trying to load an "
+            "executable not built for the Motorola 68000 CPU.\nTo make the "
+            "entry point available, declare it as a public symbol using the "
+            "\"public\" directive.", @"Generic loading error recovery "
+            "suggestion")
+        }];
     simProxy = nil;
     return NO;
   }

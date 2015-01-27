@@ -9,6 +9,14 @@
 #import <Cocoa/Cocoa.h>
 
 
+extern NSString * const MOSSimulatorViewErrorDomain;
+
+enum {
+  MOSSimulatorViewErrorNone,
+  MOSSimulatorViewErrorLoadingFailed
+};
+
+
 @class MOSSimulatorProxy;
 @class MOSSimDumpDataSource;
 @class MOSSimDisasmDataSource;
