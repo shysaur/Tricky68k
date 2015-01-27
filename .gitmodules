@@ -1,9 +1,9 @@
 [submodule "Musashi/musashi"]
 	path = Musashi/musashi
 	url = git://github.com/kstenerud/Musashi.git
-[submodule "Fragraria"]
-	path = Fragraria
-	url = git://github.com/mz2/Fragaria.git
+[submodule "Fragaria"]
+	path = Fragaria
+	url = https://shysaur@github.com/shysaur/Fragaria.git
 [submodule "binutils/binutils-gdb"]
 	path = binutils/binutils-gdb
 	url = git://sourceware.org/git/binutils-gdb.git

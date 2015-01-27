@@ -8,7 +8,7 @@
       location = "group:M68kSimApp/Tricky68k.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Fragraria/Fragaria.xcodeproj">
+      location = "group:Fragaria/Fragaria.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:binutils/binutils.xcodeproj">
