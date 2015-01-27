@@ -141,10 +141,10 @@
 				015525FB1A5F2C1900096023 /* vasm */,
 				0155259D1A5F2A9000096023 /* Products */,
 			);
-			indentWidth = 4;
+			indentWidth = 2;
 			sourceTree = "<group>";
-			tabWidth = 4;
-			usesTabs = 1;
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		0155259D1A5F2A9000096023 /* Products */ = {
 			isa = PBXGroup;

@@ -448,19 +448,32 @@ static unsigned build_symbol_table(symbol *first,
   if (!no_symbols)  /* symbols with local binding first */
     for (symp=first; symp; symp=symp->next)
       if (*symp->name!='.' && *symp->name!=' ' && !(symp->flags&VASMINTERN))
-        if (symp->type!=IMPORT && !(symp->flags & (EXPORT|WEAK)))
-          newsym(symp->name,get_sym_value(symp)-(symp->sec->org),get_sym_size(symp),
-                 STB_LOCAL,get_sym_info(symp),get_sym_index(symp));
+        if (symp->type!=IMPORT && !(symp->flags & (EXPORT|WEAK))) {
+          if (symp->sec) {
+            newsym(symp->name,get_sym_value(symp)-(symp->sec->org),get_sym_size(symp),
+                   STB_LOCAL,get_sym_info(symp),get_sym_index(symp));
+          } else {
+            newsym(symp->name,get_sym_value(symp),get_sym_size(symp),
+                   STB_LOCAL,get_sym_info(symp),get_sym_index(symp));
+          }
+        }
 
   firstglobal = symindex;  /* now the global and weak symbols */
 
   for (symp=first; symp; symp=symp->next)
     if (*symp->name != '.'  && !(symp->flags&VASMINTERN))
       if ((symp->type!=IMPORT && (symp->flags & (EXPORT|WEAK))) ||
-          (symp->type==IMPORT && (symp->flags & (COMMON|WEAK))))
-        newsym(symp->name,get_sym_value(symp)-(symp->sec->org),get_sym_size(symp),
-               (symp->flags & WEAK) ? STB_WEAK : STB_GLOBAL,
-               get_sym_info(symp),get_sym_index(symp));
+          (symp->type==IMPORT && (symp->flags & (COMMON|WEAK)))) {
+        if (symp->sec) {
+          newsym(symp->name,get_sym_value(symp)-(symp->sec->org),get_sym_size(symp),
+                 (symp->flags & WEAK) ? STB_WEAK : STB_GLOBAL,
+                 get_sym_info(symp),get_sym_index(symp));
+        } else {
+          newsym(symp->name,get_sym_value(symp),get_sym_size(symp),
+                 (symp->flags & WEAK) ? STB_WEAK : STB_GLOBAL,
+                 get_sym_info(symp),get_sym_index(symp));
+        }
+      }
 
   return firstglobal;
 }
