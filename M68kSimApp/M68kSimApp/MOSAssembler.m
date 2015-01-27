@@ -201,11 +201,18 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   uint32_t segment_addr;
   NSString *section;
   NSFileHandle *nfh;
+  BOOL isAbsolute;
   
   fh = open([ld fileSystemRepresentation], O_WRONLY | O_CREAT, 0666);
   if (fh < 0) return NO;
   nfh = [[NSFileHandle alloc] initWithFileDescriptor:fh closeOnDealloc:YES];
   if (!nfh) return NO;
+  
+  [nfh writeString:
+   @"MEMORY {\n"
+    "  vectors(rw) : ORIGIN = 0x00000000, LENGTH = 0x00000400\n"
+    "  ram(rwx)    : ORIGIN = 0x00000400, LENGTH = 0x01000000\n"
+    "}\n"];
   
   [nfh writeLine:@"SECTIONS {"];
   for (section in sections) {
@@ -213,12 +220,18 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     [nfh writeString:@" "];
     sns = [section UTF8String];
     if (strstr(sns, "seg") == sns) {
+      isAbsolute = YES;
       sscanf(sns+3, "%x", &segment_addr);
       [nfh writeString:[NSString stringWithFormat:@"0x%X ", segment_addr]];
-    }
+    } else
+      isAbsolute = NO;
     [nfh writeString:@": { *("];
     [nfh writeString:section];
-    [nfh writeLine:@") }"];
+    [nfh writeString:@") }"];
+    if (!isAbsolute)
+      [nfh writeLine:@" > ram"];
+    else
+      [nfh writeLine:@""];
   }
   [nfh writeLine:@"}"];
   
