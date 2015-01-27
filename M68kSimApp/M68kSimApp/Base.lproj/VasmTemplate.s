@@ -1,8 +1,9 @@
 
 
+	public start	;Make the entry point public
+	org $2000		;Place the origin at $2000
 
-	org $2000    ;Entry point is fixed, don't change this!
-	
+
 start:
 	;  YOUR CODE HERE
 	;Instructions must be indented by at least one space,
