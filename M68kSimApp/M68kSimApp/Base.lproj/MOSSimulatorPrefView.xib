@@ -14,11 +14,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <view id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="477" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmC-7D-yka">
-                    <rect key="frame" x="121" y="20" width="235" height="40"/>
+                    <rect key="frame" x="183" y="20" width="235" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="B1D-Lk-Wff"/>
                         <constraint firstAttribute="width" constant="235" id="fub-x1-E8p"/>
@@ -30,7 +30,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bTV-SL-ELI">
-                    <rect key="frame" x="359" y="36" width="82" height="28"/>
+                    <rect key="frame" x="421" y="36" width="82" height="28"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="MRx-3k-n0O"/>
                     </constraints>
@@ -43,7 +43,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P4n-eH-KsK">
-                    <rect key="frame" x="38" y="43" width="77" height="17"/>
+                    <rect key="frame" x="100" y="43" width="77" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="uRC-e0-mIC"/>
                     </constraints>
