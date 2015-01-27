@@ -7,6 +7,26 @@
         <language>en</language>
         
         <item>
+            <title>Release 0.9.4</title>
+            <description><![CDATA[ <ul>
+              <li>ORG directives now work as they should.</li>
+              <li>You can now choose the location of the entry point of your code.</li>
+              <li>Added an option to enable automatic optimization of assembly code.</li>
+              <li>Improved error messages.</li>
+              <li>Small cosmetic fixes.</li>
+            </ul> ]]>
+            </description>
+            <pubDate>Tue, 27 January 2015 18:27:29 +0100</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_0.9.4/Tricky68k_094.tar.bz2" 
+              sparkle:version="726" 
+              sparkle:shortVersionString="0.9.4"
+              length="2446407" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC0CFFr/mq83H/kRwy56UPrQloFT8RoNAhUA2kaIcGAzO5L2bFM40N34/Rs/r5U=" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 0.9.3</title>
             <description><![CDATA[ <ul>
               <li>Autosave now works.</li>
