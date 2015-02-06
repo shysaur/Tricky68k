@@ -19,6 +19,7 @@
   nc = [NSNotificationCenter defaultCenter];
   
   [super windowDidLoad];
+  [[self window] setExcludedFromWindowsMenu:YES];
 #if __MAC_OS_X_VERSION_MAX_ALLOWED > __MAC_10_9
   if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9) {
     [[self window] setTitleVisibility: NSWindowTitleHidden];
