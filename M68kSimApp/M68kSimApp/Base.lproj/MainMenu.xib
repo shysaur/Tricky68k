@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
@@ -12,7 +12,11 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="MOSAppDelegate"/>
+        <customObject id="Voe-Tx-rLC" customClass="MOSAppDelegate">
+            <connections>
+                <outlet property="examplesMenu" destination="Brh-ql-R0z" id="qeE-5x-lA7"/>
+            </connections>
+        </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="lC9-Yb-pZX" customClass="MGSTextMenuController"/>
         <customObject id="54r-Kb-6jQ" customClass="SUUpdater"/>
@@ -809,6 +813,11 @@
                                 <connections>
                                     <action selector="showHelp:" target="-1" id="y7X-2Q-9no"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="HUx-Bj-o2l"/>
+                            <menuItem title="Examples" id="KO6-a4-ahe">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Examples" id="Brh-ql-R0z"/>
                             </menuItem>
                         </items>
                     </menu>

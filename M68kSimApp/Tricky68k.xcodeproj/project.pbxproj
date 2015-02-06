@@ -14,6 +14,10 @@
 		012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 012AEB1D1A7045E400906B25 /* dsa_pub.pem */; };
 		013A6AF91A718458007C053B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013A6AFB1A718458007C053B /* Localizable.strings */; };
+		0141FA2F1A8424C00053C38E /* Expression Calculator.s in Sources */ = {isa = PBXBuildFile; fileRef = 0141FA2D1A8424C00053C38E /* Expression Calculator.s */; };
+		0141FA301A8424C00053C38E /* String Reverser.s in Sources */ = {isa = PBXBuildFile; fileRef = 0141FA2E1A8424C00053C38E /* String Reverser.s */; };
+		0141FA321A8424E20053C38E /* Expression Calculator.s in Copy Examples */ = {isa = PBXBuildFile; fileRef = 0141FA2D1A8424C00053C38E /* Expression Calculator.s */; };
+		0141FA331A8424E20053C38E /* String Reverser.s in Copy Examples */ = {isa = PBXBuildFile; fileRef = 0141FA2E1A8424C00053C38E /* String Reverser.s */; };
 		014A3C6A1A5D3B1900F73FC5 /* MOSNamedPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */; };
 		014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C6C1A5D432300F73FC5 /* MOSTeletypeView.m */; };
 		014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C6F1A5D439500F73FC5 /* MOSTeletypeViewDelegate.m */; };
@@ -63,6 +67,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0141FA141A8418070053C38E /* Copy Examples */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Examples;
+			dstSubfolderSpec = 7;
+			files = (
+				0141FA321A8424E20053C38E /* Expression Calculator.s in Copy Examples */,
+				0141FA331A8424E20053C38E /* String Reverser.s in Copy Examples */,
+			);
+			name = "Copy Examples";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		015525811A5EFE2C00096023 /* Install Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,6 +116,8 @@
 		012AEB1A1A703F5A00906B25 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		012AEB1D1A7045E400906B25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../../Updates/dsa_pub.pem; sourceTree = "<group>"; };
 		013A6AFA1A718458007C053B /* Base */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0141FA2D1A8424C00053C38E /* Expression Calculator.s */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; name = "Expression Calculator.s"; path = "../../Examples/Expression Calculator.s"; sourceTree = "<group>"; };
+		0141FA2E1A8424C00053C38E /* String Reverser.s */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; name = "String Reverser.s"; path = "../../Examples/String Reverser.s"; sourceTree = "<group>"; };
 		014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSNamedPipe.h; sourceTree = "<group>"; };
 		014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSNamedPipe.m; sourceTree = "<group>"; };
 		014A3C6B1A5D432300F73FC5 /* MOSTeletypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSTeletypeView.h; sourceTree = "<group>"; };
@@ -205,6 +223,17 @@
 			name = "Syntax Definitions";
 			sourceTree = "<group>";
 		};
+		0141FA311A8424C40053C38E /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				0141FA2D1A8424C00053C38E /* Expression Calculator.s */,
+				0141FA2E1A8424C00053C38E /* String Reverser.s */,
+			);
+			indentWidth = 4;
+			name = Examples;
+			sourceTree = "<group>";
+			tabWidth = 4;
+		};
 		014D85D91A62CF2D00648B41 /* Job Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +333,7 @@
 				01E93C801A6D4927004BE3C4 /* Credits.rtf */,
 				015094751A6DBF1A0024D28F /* Acknowledgments.md */,
 				013A6AF71A718424007C053B /* Assembler Stuff */,
+				0141FA311A8424C40053C38E /* Examples */,
 				013A6AF81A71843B007C053B /* Syntax Definitions */,
 				012AEB1D1A7045E400906B25 /* dsa_pub.pem */,
 				016CD1391A51A10E00D64892 /* Info.plist */,
@@ -415,6 +445,7 @@
 				016CD1311A51A10E00D64892 /* Sources */,
 				016CD1321A51A10E00D64892 /* Frameworks */,
 				016CD1331A51A10E00D64892 /* Resources */,
+				0141FA141A8418070053C38E /* Copy Examples */,
 				01864B911A51C863005B2B0D /* Install Supporting Executables */,
 				015525811A5EFE2C00096023 /* Install Frameworks */,
 				0112028E1A55BA1100F61E42 /* Advance Build Number */,
@@ -526,6 +557,7 @@
 				0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */,
 				016CD1691A51B27900D64892 /* MOSSimulatorViewController.m in Sources */,
 				01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */,
+				0141FA2F1A8424C00053C38E /* Expression Calculator.s in Sources */,
 				011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */,
 				015094741A6DA7050024D28F /* MOSProgressIndicator.m in Sources */,
 				0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */,
@@ -533,6 +565,7 @@
 				016CD1621A51AC7600D64892 /* MOSExecutable.m in Sources */,
 				017D70041A72DF35003DCAF3 /* NSUserDefaults+Archiver.m in Sources */,
 				01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */,
+				0141FA301A8424C00053C38E /* String Reverser.s in Sources */,
 				01000A511A65AD130080AC5F /* NSScanner+Shorteners.m in Sources */,
 				0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */,
 				01E93C861A6D8D77004BE3C4 /* MOSToolbarItem.m in Sources */,

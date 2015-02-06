@@ -15,7 +15,7 @@
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-
+  [self populateExamplesMenu];
 }
 
 
@@ -40,4 +40,49 @@
 }
 
 
+- (void)populateExamplesMenu {
+  NSBundle *bundle;
+  NSArray *examples;
+  NSURL *example;
+  NSString *exampleName;
+  NSMenuItem *tempMenuItem;
+  
+  bundle = [NSBundle mainBundle];
+  examples = [bundle URLsForResourcesWithExtension:@"s" subdirectory:@"Examples"];
+  for (example in examples) {
+    exampleName = [[example lastPathComponent] stringByDeletingPathExtension];
+    
+    tempMenuItem = [[NSMenuItem alloc] init];
+    [tempMenuItem setTitle:exampleName];
+    [tempMenuItem setTarget:self];
+    [tempMenuItem setAction:@selector(openExample:)];
+    [examplesMenu addItem:tempMenuItem];
+  }
+}
+
+
+- (IBAction)openExample:(id)sender {
+  NSBundle *bundle;
+  NSString *exampleName;
+  NSURL *example;
+  NSDocumentController *sdc;
+  NSError *err;
+  
+  exampleName = [sender title];
+  bundle = [NSBundle mainBundle];
+  example = [bundle URLForResource:exampleName withExtension:@"s"
+    subdirectory:@"Examples"];
+  if (!example) return;
+  
+  sdc = [NSDocumentController sharedDocumentController];
+  if (![sdc duplicateDocumentWithContentsOfURL:example copying:NO
+        displayName:exampleName error:&err])
+    [NSApp presentError:err];
+}
+
+
 @end
+
+
+
+
