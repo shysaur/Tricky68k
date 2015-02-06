@@ -9,11 +9,14 @@
 #import "MOSSource.h"
 #import <MGSFragaria/MGSFragaria.h>
 #import <MGSFragaria/SMLTextView.h>
+#import <MGSFragaria/MGSFragariaPreferences.h>
 #import "NSURL+TemporaryFile.h"
+#import "NSUserDefaults+Archiver.h"
 #import "MOSAssembler.h"
 #import "MOSJobStatusManager.h"
 #import "MOSSimulatorViewController.h"
 #import "MOSAppDelegate.h"
+#import "MOSPrintingTextView.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -357,6 +360,50 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [fragaria setSyntaxErrors:MOSSyntaxErrorsFromEvents(events)];
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+
+- (NSPrintInfo*)printInfo {
+  NSPrintInfo *pi;
+  
+  pi = [super printInfo];
+  [pi setHorizontalPagination:NSFitPagination];
+  [pi setVerticalPagination:NSAutoPagination];
+  [pi setHorizontallyCentered:NO];
+  [pi setVerticallyCentered:NO];
+  [pi setLeftMargin:(72.0/2.54)*1.5];
+  [pi setRightMargin:(72.0/2.54)*1.5];
+  [pi setTopMargin:(72.0/2.54)*2.0];
+  [pi setBottomMargin:(72.0/2.54)*2.0];
+  return pi;
+}
+
+
+- (NSPrintOperation *)printOperationWithSettings:(NSDictionary *)printSettings
+  error:(NSError **)outError {
+  NSPrintOperation *po;
+  MOSPrintingTextView *printView;
+  NSPrintInfo *printInfo;
+  NSFont *font;
+  NSPrintPanel *printPanel;
+  NSPrintPanelOptions opts;
+  
+  printInfo = [self printInfo];
+  [[printInfo dictionary] addEntriesFromDictionary:printSettings];
+  font = [[NSUserDefaults standardUserDefaults] unarchivedObjectForKey:MGSFragariaPrefsTextFont];
+  printView = [[MOSPrintingTextView alloc] init];
+  [printView setPrintInfo:printInfo];
+  [printView setString:[fragaria string]];
+  [printView setFont:font];
+  
+  po = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];
+  [po setShowsPrintPanel:YES];
+  [po setShowsProgressPanel:YES];
+  printPanel = [po printPanel];
+  opts = [printPanel options] | NSPrintPanelShowsPaperSize | NSPrintPanelShowsOrientation;
+  [printPanel setOptions:opts];
+  
+  return po;
 }
 
 
