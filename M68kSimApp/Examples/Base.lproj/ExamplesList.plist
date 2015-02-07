@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>fileName</key>
+		<string>expression.s</string>
+		<key>localizedTitle</key>
+		<string>Expression Calculator</string>
+	</dict>
+	<dict>
+		<key>kind</key>
+		<string>separator</string>
+	</dict>
+	<dict>
+		<key>fileName</key>
+		<string>reverser.s</string>
+		<key>localizedTitle</key>
+		<string>String Reverser</string>
+	</dict>
+</array>
+</plist>

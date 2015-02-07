@@ -12,6 +12,8 @@
 @interface MOSAppDelegate : NSObject <NSApplicationDelegate> {
   NSWindowController *jobsWc;
   NSWindowController *prefsWc;
+  
+  NSArray *examplesData;
   IBOutlet NSMenu *examplesMenu;
 }
 

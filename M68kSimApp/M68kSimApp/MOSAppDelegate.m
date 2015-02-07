@@ -42,21 +42,36 @@
 
 - (void)populateExamplesMenu {
   NSBundle *bundle;
-  NSArray *examples;
-  NSURL *example;
+  NSURL *examplesDirPlist;
+  NSDictionary *example;
   NSString *exampleName;
   NSMenuItem *tempMenuItem;
+  NSInteger i;
   
   bundle = [NSBundle mainBundle];
-  examples = [bundle URLsForResourcesWithExtension:@"s" subdirectory:@"Examples"];
-  for (example in examples) {
-    exampleName = [[example lastPathComponent] stringByDeletingPathExtension];
-    
-    tempMenuItem = [[NSMenuItem alloc] init];
-    [tempMenuItem setTitle:exampleName];
-    [tempMenuItem setTarget:self];
-    [tempMenuItem setAction:@selector(openExample:)];
+  examplesDirPlist = [bundle URLForResource:@"ExamplesList" withExtension:@"plist"];
+  examplesData = [NSArray arrayWithContentsOfURL:examplesDirPlist];
+  
+  i = 0;
+  for (example in examplesData) {
+    if ([[example objectForKey:@"kind"] isEqual:@"separator"]) {
+      tempMenuItem = [NSMenuItem separatorItem];
+    } else {
+      tempMenuItem = [[NSMenuItem alloc] init];
+      [tempMenuItem setTag:i];
+      
+      exampleName = [example objectForKey:@"localizedTitle"];
+      [tempMenuItem setTitle:exampleName];
+      
+      if ([example objectForKey:@"fileName"]) {
+        [tempMenuItem setTarget:self];
+        [tempMenuItem setAction:@selector(openExample:)];
+      } else {
+        [tempMenuItem setEnabled:NO];
+      }
+    }
     [examplesMenu addItem:tempMenuItem];
+    i++;
   }
 }
 
@@ -67,11 +82,13 @@
   NSURL *example;
   NSDocumentController *sdc;
   NSError *err;
+  NSInteger i;
   
-  exampleName = [sender title];
+  i = [sender tag];
   bundle = [NSBundle mainBundle];
-  example = [bundle URLForResource:exampleName withExtension:@"s"
-    subdirectory:@"Examples"];
+  exampleName = [[examplesData objectAtIndex:i] objectForKey:@"fileName"];
+  exampleName = [exampleName stringByDeletingPathExtension];
+  example = [bundle URLForResource:exampleName withExtension:@"s"];
   if (!example) return;
   
   sdc = [NSDocumentController sharedDocumentController];
