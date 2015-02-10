@@ -18,7 +18,6 @@
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-        <customObject id="lC9-Yb-pZX" customClass="MGSTextMenuController"/>
         <customObject id="54r-Kb-6jQ" customClass="SUUpdater"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -648,29 +647,29 @@
                             <menuItem isSeparatorItem="YES" id="THE-Iz-l38"/>
                             <menuItem title="Shift Left" keyEquivalent="[" id="Aq2-NM-zGo">
                                 <connections>
-                                    <action selector="shiftLeftAction:" target="lC9-Yb-pZX" id="h46-om-MUu"/>
+                                    <action selector="shiftLeft:" target="-1" id="tX9-hE-XYB"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Shift Right" keyEquivalent="]" id="D5h-Wq-CXO">
                                 <connections>
-                                    <action selector="shiftRightAction:" target="lC9-Yb-pZX" id="F03-H8-Jva"/>
+                                    <action selector="shiftRight:" target="-1" id="UaL-QQ-hP1"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Comment Or Uncomment" tag="103" keyEquivalent="/" id="ame-zc-9uP">
                                 <connections>
-                                    <action selector="commentOrUncommentAction:" target="lC9-Yb-pZX" id="pdS-Tb-58l"/>
+                                    <action selector="commentOrUncomment:" target="-1" id="gza-Mf-nwP"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Remove Needless Whitespace" tag="102" keyEquivalent="k" id="VBO-KC-Iuo">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="removeNeedlessWhitespaceAction:" target="lC9-Yb-pZX" id="JaA-q7-KM6"/>
+                                    <action selector="removeNeedlessWhitespace:" target="-1" id="B6H-V2-IIS"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Remove Line Endings" tag="102" keyEquivalent="E" id="hTc-8W-oM6">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="removeLineEndingsAction:" target="lC9-Yb-pZX" id="deN-ht-XJr"/>
+                                    <action selector="removeLineEndings:" target="-1" id="cJZ-KE-fNP"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="WIM-gd-xk6">
@@ -679,12 +678,12 @@
                             <menuItem title="Spaces To Tabs..." tag="102" keyEquivalent="t" id="xVl-Qg-4na">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="entabAction:" target="lC9-Yb-pZX" id="LXa-Td-IUA"/>
+                                    <action selector="entab:" target="-1" id="TFW-CJ-mng"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Tabs To Spaces..." tag="102" keyEquivalent="T" id="Vo8-fq-osw">
                                 <connections>
-                                    <action selector="detabAction:" target="lC9-Yb-pZX" id="6jh-lF-WDq"/>
+                                    <action selector="detab:" target="-1" id="on4-Yh-HC5"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="hYG-LG-Klp">
@@ -693,24 +692,24 @@
                             <menuItem title="To Title Case" tag="102" keyEquivalent="c" id="k5L-2K-BaO">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="capitaliseAction:" target="lC9-Yb-pZX" id="q06-g8-spZ"/>
+                                    <action selector="capitalizeWord:" target="-1" id="tV6-3G-AD5"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="To UPPERCASE" tag="102" keyEquivalent="C" id="ZJN-up-Q4w">
                                 <connections>
-                                    <action selector="toUppercaseAction:" target="lC9-Yb-pZX" id="z5E-d0-Uip"/>
+                                    <action selector="uppercaseCharacters:" target="-1" id="GXP-B9-5nh"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="To lowercase" tag="102" keyEquivalent="C" id="gyr-Jm-YgE">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="toLowercaseAction:" target="lC9-Yb-pZX" id="ybW-aR-3By"/>
+                                    <action selector="lowercaseCharacters:" target="-1" id="BbG-nv-bFw"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Switch Characters" keyEquivalent="t" id="c8u-R6-kqK">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
-                                    <action selector="interchangeAdjacentCharactersAction:" target="lC9-Yb-pZX" id="63c-RK-nii"/>
+                                    <action selector="transpose:" target="-1" id="gyW-aG-JVC"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="zdb-Ek-h0Q">
@@ -719,7 +718,7 @@
                             <menuItem title="Go To Line…" keyEquivalent="g" id="Pmk-zi-Z17">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
-                                    <action selector="goToLineAction:" target="lC9-Yb-pZX" id="RFX-Or-HlK"/>
+                                    <action selector="goToLine:" target="-1" id="xjq-5O-Ph9"/>
                                 </connections>
                             </menuItem>
                         </items>
