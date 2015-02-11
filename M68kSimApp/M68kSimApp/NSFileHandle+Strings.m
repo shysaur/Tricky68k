@@ -55,7 +55,7 @@
     }
     res = read(fildes, bufp, 1);
   }
-  if (res < 0 && errno != EAGAIN) {
+  if (res < 0 && errno != EAGAIN && errno != EINTR) {
     readerr = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
     [NSException raise:@"File handler error" format:@"%@", [readerr localizedDescription]];
   }

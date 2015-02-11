@@ -403,7 +403,9 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 
 - (void)kill {
-  [simTask terminate];
+  dispatch_sync(simQueue, ^{
+    [simTask terminate];
+  });
 }
 
 
