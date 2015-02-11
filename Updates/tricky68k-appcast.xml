@@ -7,6 +7,30 @@
         <language>en</language>
         
         <item>
+            <title>Release 0.9.5</title>
+            <description><![CDATA[ <ul>
+              <li>
+              <strong>New!</strong> Now Tricky68k has three examples built in. Check them out from the Help menu!</li>
+              <li>Improved code editor.</li>
+              <li>Added printing, autosave and versions.</li>
+              <li>Breakpoints are now preserved when restarting the simulator.</li>
+              <li>The teletype is now cleared when restarting the simulator.</li>
+              <li>Minor improvements to the Actions window.</li>
+              <li>Minor improvements to error messages.</li>
+              <li>Fixed rare crash when restarting the simulator.</li>
+              </ul> ]]>
+            </description>
+            <pubDate>Wed, 11 February 2015 23:47:36 +0100</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_0.9.5/Tricky68k_095.tar.bz2" 
+              sparkle:version="807" 
+              sparkle:shortVersionString="0.9.5"
+              length="6691609" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC0CFF7hJUWbJBySAYPjoOTtr/3ER5+BAhUA6ig7F/z7k5xefDJ80AvwK9qLd+U=" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 0.9.4</title>
             <description><![CDATA[ <ul>
               <li>ORG directives now work as they should.</li>
