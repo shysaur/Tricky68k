@@ -92,7 +92,7 @@
   if (!example) return;
   
   sdc = [NSDocumentController sharedDocumentController];
-  if (![sdc duplicateDocumentWithContentsOfURL:example copying:NO
+  if (![sdc duplicateDocumentWithContentsOfURL:example copying:YES
         displayName:exampleName error:&err])
     [NSApp presentError:err];
 }
