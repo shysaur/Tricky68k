@@ -3,20 +3,34 @@
 <plist version="1.0">
 <array>
 	<dict>
-		<key>fileName</key>
-		<string>expression.s</string>
 		<key>localizedTitle</key>
-		<string>Expression Calculator</string>
-	</dict>
-	<dict>
-		<key>kind</key>
-		<string>separator</string>
+		<string>Easy Examples</string>
 	</dict>
 	<dict>
 		<key>fileName</key>
 		<string>reverser.s</string>
 		<key>localizedTitle</key>
 		<string>String Reverser</string>
+	</dict>
+	<dict>
+		<key>kind</key>
+		<string>separator</string>
+	</dict>
+	<dict>
+		<key>localizedTitle</key>
+		<string>Advanced Examples</string>
+	</dict>
+	<dict>
+		<key>fileName</key>
+		<string>expression.s</string>
+		<key>localizedTitle</key>
+		<string>Expression Calculator</string>
+	</dict>
+	<dict>
+		<key>fileName</key>
+		<string>tic-tac-toe.s</string>
+		<key>localizedTitle</key>
+		<string>Tic Tac Toe</string>
 	</dict>
 </array>
 </plist>
