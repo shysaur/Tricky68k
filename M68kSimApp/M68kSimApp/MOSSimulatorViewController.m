@@ -43,6 +43,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 - (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr {
   simExec = url;
   
+  [simProxy removeAllBreakpoints];
   [self reloadSimulatedExecutable];
   
   if ([simProxy simulatorState] == MOSSimulatorStateDead) {
@@ -73,9 +74,14 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 - (void)reloadSimulatedExecutable {
   MOSSimulatorProxy *oldSimProxy;
+  MOSSimulatorProxy *newSimProxy;
+  NSSet *breakpoints;
   
+  breakpoints = [simProxy breakpointList];
   oldSimProxy = simProxy;
-  [self setSimulatorProxy:[[MOSSimulatorProxy alloc] initWithExecutableURL:simExec]];
+  newSimProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:simExec];
+  [newSimProxy addBreakpoints:breakpoints];
+  [self setSimulatorProxy:newSimProxy];
   [oldSimProxy kill];
 }
 

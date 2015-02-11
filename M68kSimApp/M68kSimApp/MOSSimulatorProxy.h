@@ -80,6 +80,8 @@ typedef enum {
 - (NSDictionary*)registerDump;
 
 - (NSSet*)breakpointList;
+- (void)addBreakpoints:(NSSet*)addrs;
+- (void)removeAllBreakpoints;
 - (void)addBreakpointAtAddress:(uint32_t)addr;
 - (void)removeBreakpointAtAddress:(uint32_t)addr;
 

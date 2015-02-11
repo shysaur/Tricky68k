@@ -372,6 +372,26 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
 
 
+- (void)addBreakpoints:(NSSet*)addrs {
+  NSNumber *addr;
+  
+  for (addr in addrs) {
+    [self addBreakpointAtAddress:(uint32_t)[addr unsignedLongValue]];
+  }
+}
+
+
+- (void)removeAllBreakpoints {
+  NSSet *addrs;
+  NSNumber *addr;
+  
+  addrs = [self breakpointList];
+  for (addr in addrs) {
+    [self removeBreakpointAtAddress:(uint32_t)[addr unsignedLongValue]];
+  }
+}
+
+
 - (BOOL)stepIn {
   return [self runWithCommand:@"s"];
 }
