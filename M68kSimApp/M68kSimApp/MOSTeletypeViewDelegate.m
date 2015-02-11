@@ -25,6 +25,11 @@
 
 
 - (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
+  [textView setString:@""];
+  [lineBuffer setString:@""];
+  cursor = viewCursor = viewSpan = 0;
+  [self updateLineBufferEcho];
+  
   simProxy = sp;
   toSim = [simProxy teletypeOutput];
   fromSim = [simProxy teletypeInput];
