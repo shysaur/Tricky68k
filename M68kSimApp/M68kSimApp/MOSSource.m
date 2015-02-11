@@ -56,6 +56,16 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
++ (BOOL)autosavesInPlace {
+  return YES;
+}
+
+
++ (BOOL)preservesVersions {
+  return YES;
+}
+
+
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
   MOSJobStatusManager *sm;
   
