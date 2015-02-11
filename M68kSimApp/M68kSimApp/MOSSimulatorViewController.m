@@ -123,8 +123,8 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   pw = [[self view] window];
   alert = [[NSAlert alloc] init];
   [alert setAlertStyle:NSCriticalAlertStyle];
-  [alert setMessageText:NSLocalizedString(@"Simulator backend died unexpectedly", @"Title of simulator death alert")];
-  [alert setInformativeText:NSLocalizedString(@"This is a bug. Want to restart from scratch or you want to cancel the simulation?", @"Informative text of simulator death alert")];
+  [alert setMessageText:NSLocalizedString(@"Your program has died", @"Title of simulator death alert")];
+  [alert setInformativeText:NSLocalizedString(@"This usually happens when your program accesses a memory area which you didn't declare with the DC or DS directives, or when a stack overflow occurs.", @"Informative text of simulator death alert")];
   [alert addButtonWithTitle:NSLocalizedString(@"Restart", @"Restart (simulator)")];
   [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
   [alert beginSheetModalForWindow:pw completionHandler:^(NSModalResponse resp){
