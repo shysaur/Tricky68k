@@ -78,7 +78,7 @@
 
 - (IBAction)openExample:(id)sender {
   NSBundle *bundle;
-  NSString *exampleName;
+  NSString *exampleName, *exampleTitle;
   NSURL *example;
   NSDocumentController *sdc;
   NSError *err;
@@ -91,9 +91,10 @@
   example = [bundle URLForResource:exampleName withExtension:@"s"];
   if (!example) return;
   
+  exampleTitle = [[examplesData objectAtIndex:i] objectForKey:@"localizedTitle"];
   sdc = [NSDocumentController sharedDocumentController];
   if (![sdc duplicateDocumentWithContentsOfURL:example copying:YES
-        displayName:exampleName error:&err])
+        displayName:exampleTitle error:&err])
     [NSApp presentError:err];
 }
 
