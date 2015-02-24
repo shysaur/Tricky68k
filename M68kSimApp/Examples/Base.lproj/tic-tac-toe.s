@@ -129,7 +129,7 @@ cpuTurn:
     move.l a0,-(sp)  
     jsr (a1)                    ;Call the subfunction
     move.l (sp)+,a0       
-    and.w d0,d0                 ;Check if it succeeded
+    tst.w d0                    ;Check if it succeeded
     beq .loop                   ;If not, try the next subfunction
     rts                         ;Otherwise we're done, return
     
@@ -221,7 +221,7 @@ cpuBlockFork:
     movea.l #21,a0              ;Otherwise check the other diagonal
 .test:
     bsr getPlayerRowAndStats
-    and.w d0,d0                 ;If the CPU has already moved in a corner of
+    tst.w d0                    ;If the CPU has already moved in a corner of
     bpl cpuFail                 ; this diagonal, the player can't fork there.
     beq cpuFail                 ;Not a fork if a cell is still empty
     cmp.w d0,d2                 ;If the opponent took both corners of the
@@ -249,9 +249,9 @@ cpuCorner:
     movea.l #21,a0              ;Otherwise try the second diagonal
 .test:
     bsr getPlayerRowAndStats
-    and.w d0,d0                 
+    tst.w d0                 
     beq moveIn1                 ;If the first corner is clear move there
-    and.w d2,d2
+    tst.w d2
     beq moveIn3                 ;If the second corner is clear move there
     bra cpuFail                 ;Otherwise fail
     
@@ -260,7 +260,7 @@ cpuCorner:
 cpuCenter:
     movea.l #18,a0              ;Get a diagonal
     bsr getPlayerRowAndStats
-    and.w d1,d1
+    tst.w d1
     beq moveIn2                 ;If the center is clear move there
     bra cpuFail                 ;Otherwise fail
     
@@ -273,9 +273,9 @@ cpuSide:
     movea.l #1*3,a0             ;Otherwise try the left and right sides
 .test:
     bsr getPlayerRowAndStats
-    and.w d0,d0
+    tst.w d0
     beq moveIn1                 ;Try one cell
-    and.w d2,d2
+    tst.w d2
     beq moveIn3                 ;Try the other cell
     bra cpuFail                 ;If both are taken, fail
 
@@ -305,7 +305,7 @@ checkGameOver:
     bne .loop               ;Otherwise check next row/column/diagonal
     clr.w d0                ;If checked everything and nobody has won, return 0
 .done:
-    and.w d0,d0
+    tst.w d0
     rts                     ;Return
     
     
@@ -318,7 +318,7 @@ checkDraw:
     beq .done               ;If found an empty cell, we're done, not a draw
     subq.l #1,d1
     bne .loop               ;Next cell
-    and.w d0,d0             ;If all cells are filled, it's a draw. Update flags
+    tst.w d0                ;If all cells are filled, it's a draw. Update flags
 .done:
     rts                     ;Return
 
@@ -429,9 +429,9 @@ getRowAndStats:
     ;input D0.w, D1.w, D2.w: row
     ;      A0.l: index in the search table of the row (not preserved)
 moveFirstEmpty:
-    and.w d0,d0
+    tst.w d0
     beq moveIn1             ;If 1st cell empty, move there
-    and.w d1,d1
+    tst.w d1
     beq moveIn2             ;If 2nd cell empty, move there
     ;Otherwise assume the 3rd cell is empty and move there
     
