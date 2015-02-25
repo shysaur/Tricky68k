@@ -76,13 +76,11 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   sm = [MOSJobStatusManager sharedJobStatusManger];
   [sm addObserver:self forKeyPath:@"jobList" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
   
-  fragaria = [[MGSFragaria alloc] init];
-  [fragaria setObject:self forKey:MGSFODelegate];
-  [fragaria embedInView:editView];
+  fragaria = [[MGSFragaria alloc] initWithView:editView];
   
-  [fragaria setObject:@"VASM Motorola 68000 Assembly" forKey:MGSFOSyntaxDefinitionName];
-  [fragaria setObject:@YES forKey:MGSFOIsSyntaxColoured];
-  [fragaria setObject:@YES forKey:MGSFOShowLineNumberGutter];
+  [fragaria setSyntaxDefinitionName:@"VASM Motorola 68000 Assembly"];
+  [fragaria setIsSyntaxColoured:YES];
+  [fragaria setShowsLineNumbers:YES];
   if (initialData) {
     [self loadData:initialData];
     initialData = nil;
