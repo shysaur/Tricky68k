@@ -36,6 +36,12 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     serror = [[SMLSyntaxError alloc] init];
     [serror setErrorDescription:[event objectForKey:MOSJobEventText]];
     [serror setLine:[[event objectForKey:MOSJobEventAssociatedLine] intValue]];
+    
+    if ([[event objectForKey:MOSJobEventType] isEqual:MOSJobEventTypeError])
+      [serror setWarningLevel:kMGSErrorCategoryError];
+    else
+      [serror setWarningLevel:kMGSErrorCategoryWarning];
+    
     [serrors addObject:serror];
   }
   return [serrors copy];
