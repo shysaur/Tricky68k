@@ -60,6 +60,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
             "\"public\" directive.", @"Generic loading error recovery "
             "suggestion")
         }];
+    [simProxy removeObserver:self forKeyPath:@"simulatorState"];
     simProxy = nil;
     return NO;
   }
@@ -95,7 +96,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   simExec = [simProxy executableURL];
   
   [simProxy addObserver:self forKeyPath:@"simulatorState"
-                options:NSKeyValueObservingOptionInitial context:NULL];
+    options:NSKeyValueObservingOptionInitial context:NULL];
   
   [self setSimulatorForSubviewControllers];
 }
