@@ -34,8 +34,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     if (![event objectForKey:MOSJobEventAssociatedLine]) continue;
     
     serror = [[SMLSyntaxError alloc] init];
-    [serror setDescription:[event objectForKey:MOSJobEventText]];
-    [serror setLine:[[event objectForKey:MOSJobEventAssociatedLine] intValue]+1];
+    [serror setErrorDescription:[event objectForKey:MOSJobEventText]];
+    [serror setLine:[[event objectForKey:MOSJobEventAssociatedLine] intValue]];
     [serrors addObject:serror];
   }
   return [serrors copy];
@@ -92,7 +92,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     initialData = nil;
   }
 
-  textView = [fragaria objectForKey:ro_MGSFOTextView];
+  textView = [fragaria textView];
   [self setUndoManager:[textView undoManager]];
 }
 
