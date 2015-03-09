@@ -84,8 +84,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   fragaria = [[MGSFragaria alloc] initWithView:editView];
   
-  [fragaria setSyntaxDefinitionName:@"VASM Motorola 68000 Assembly"];
-  [fragaria setIsSyntaxColoured:YES];
+  [fragaria setSyntaxDefinitionName:@"ASM-m68k"];
+  [fragaria setSyntaxColoured:YES];
   [fragaria setShowsLineNumbers:YES];
   if (initialData) {
     [self loadData:initialData];
