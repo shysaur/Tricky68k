@@ -47,7 +47,7 @@
   NSFont *font;
   
   fm = [NSFontManager sharedFontManager];
-  font = [fm convertFont:[fm selectedFont]];
+  font = [fm convertFont:baseFont];
   [[NSUserDefaults standardUserDefaults] setObjectByArchiving:font forKey:@"DebuggerTextFont"];
   [self updateFontPreview];
 }
@@ -55,13 +55,12 @@
 
 - (IBAction)changeDebuggerFont:(id)sender {
   NSFontManager *fm;
-  NSFont *viewFont;
   NSUserDefaults *ud;
   
   ud = [NSUserDefaults standardUserDefaults];
   fm = [NSFontManager sharedFontManager];
-  viewFont = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
-  [fm setSelectedFont:viewFont isMultiple:NO];
+  baseFont = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
+  [fm setSelectedFont:baseFont isMultiple:NO];
   [fm orderFrontFontPanel:self];
 }
 
