@@ -157,12 +157,15 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (BOOL)simulatorModeSwitchAllowed {
-  return !simulatorMode && !assembler && assemblyOutput;
+  return !simulatorMode      /* mustn't be in simulator mode */
+          && !assembler      /* mustn't be assembling */
+          && assemblyOutput; /* must have assembled at least once */
 }
 
 
 - (BOOL)sourceModeSwitchAllowed {
-  return simulatorMode && !assembler;
+  return simulatorMode
+          && !assembler;
 }
 
 
@@ -195,9 +198,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSArray *constr;
   NSURL *oldSimExec;
   
-  if (simulatorMode) return;   /* already in simulator mode */
-  if (assembler) return;       /* assembling */
-  if (!assemblyOutput) return; /* never assembled */
+  if (![self simulatorModeSwitchAllowed]) return;
   
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
@@ -349,6 +350,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     asmres = [assembler assemblageResult];
     [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
     assembler = nil;
+    if (asmres == MOSAssemblageResultFailure) assemblyOutput = nil;
     [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
     [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
     
