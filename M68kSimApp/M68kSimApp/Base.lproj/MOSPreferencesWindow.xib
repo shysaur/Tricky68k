@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSPreferencesWindowController">
@@ -31,11 +31,6 @@
                             <action selector="clickedPreferenceTab:" target="-2" id="UXb-3t-mmb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="C2ED2E35-3EC7-48EB-913B-726D0479431D" explicitItemIdentifier="3" label="Fonts &amp; Colors" paletteLabel="Fonts &amp; Colors" image="NSColorPanel" selectable="YES" id="n7c-Yz-IHA">
-                        <connections>
-                            <action selector="clickedPreferenceTab:" target="-2" id="yXw-pP-Pc4"/>
-                        </connections>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="8C4823D5-8A99-435B-BEC4-4ADC63C87227" explicitItemIdentifier="1" label="Simulator" paletteLabel="Simulator" tag="-1" image="NSUserAccounts" selectable="YES" id="bog-L9-HV1">
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="YKU-Wj-lJV"/>
@@ -51,7 +46,6 @@
                     <toolbarItem reference="dkF-4T-CZO"/>
                     <toolbarItem reference="bog-L9-HV1"/>
                     <toolbarItem reference="2xn-yq-TYF"/>
-                    <toolbarItem reference="n7c-Yz-IHA"/>
                     <toolbarItem reference="kAX-I0-4PP"/>
                 </defaultToolbarItems>
             </toolbar>
@@ -62,7 +56,6 @@
         </window>
     </objects>
     <resources>
-        <image name="NSColorPanel" width="32" height="32"/>
         <image name="NSFontPanel" width="32" height="32"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="NSUserAccounts" width="32" height="32"/>

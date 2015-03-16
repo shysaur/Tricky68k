@@ -7,10 +7,9 @@
 //
 
 #import "MOSPreferencesWindowController.h"
-#import <MGSFragaria/MGSFragariaFontsAndColoursPrefsViewController.h>
-#import <MGSFragaria/MGSFragariaTextEditingPrefsViewController.h>
 #import "MOSSimulatorPrefViewController.h"
 #import "MOSAssemblerPrefViewController.h"
+#import "MOSEditorPrefViewController.h"
 
 
 @implementation MOSPreferencesWindowController
@@ -85,8 +84,7 @@
   
   [prefPanes addObject:[[MOSAssemblerPrefViewController alloc] init]];
   [prefPanes addObject:[[MOSSimulatorPrefViewController alloc] init]];
-  [prefPanes addObject:[[MGSFragariaTextEditingPrefsViewController alloc] init]];
-  [prefPanes addObject:[[MGSFragariaFontsAndColoursPrefsViewController alloc] init]];
+  [prefPanes addObject:[[MOSEditorPrefViewController alloc] init]];
 }
 
 
