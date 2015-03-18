@@ -13,6 +13,20 @@
 @implementation MOSSimDumpDataSource
 
 
+- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
+  NSUInteger pc;
+  NSInteger rows;
+  NSRect visibleRect;
+  
+  [super setSimulatorProxy:sp];
+  pc = [[[sp registerDump] objectForKey:MOS68kRegisterPC] unsignedIntegerValue];
+  
+  visibleRect = [tableView visibleRect];
+  rows = [tableView rowsInRect:visibleRect].length;
+  [tableView scrollRowToVisible:pc/16+rows*2/3];
+}
+
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
   return 0x1000000 / 16;
 }
