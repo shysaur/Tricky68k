@@ -69,4 +69,9 @@
 }
 
 
+- (BOOL)isTransient {
+  return NO;
+}
+
+
 @end

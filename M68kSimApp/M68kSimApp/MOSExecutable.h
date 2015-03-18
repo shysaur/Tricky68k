@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOSDocument.h"
 
 
 @class MOSSimulatorViewController;
 @class MOSSimulatorProxy;
 
 
-@interface MOSExecutable : NSDocument {
+@interface MOSExecutable : MOSDocument {
   NSWindowController *wc;
   NSWindow *window;
   MOSSimulatorProxy *simProxy;

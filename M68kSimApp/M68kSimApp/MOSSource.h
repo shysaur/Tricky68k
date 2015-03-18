@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
+#include "MOSDocument.h"
 
 
 @class MGSFragaria;
@@ -16,7 +17,7 @@
 @class MOSSimulatorViewController;
 
 
-@interface MOSSource : NSDocument {
+@interface MOSSource : MOSDocument {
   NSData *initialData;
   
   /* AppKit already has a private window outlet, but it's not exposed
