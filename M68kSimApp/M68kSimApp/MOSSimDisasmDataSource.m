@@ -13,13 +13,23 @@
 @implementation MOSSimDisasmDataSource
 
 
++ (void)load {
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
+  [ud registerDefaults:@{
+    @"DisassemblyLines": @1500
+  }];
+}
+
+
 - init {
   NSUserDefaults *ud;
   
   self = [super init];
   
   ud = [NSUserDefaults standardUserDefaults];
-  maxLines = [ud integerForKey:@"disassemblyLines"];
+  maxLines = [ud integerForKey:@"DisassemblyLines"];
   if (maxLines < 25) maxLines = 1501;
   maxLines |= 1; /* always odd */
   
