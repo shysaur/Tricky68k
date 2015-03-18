@@ -65,6 +65,7 @@
 		01E93C861A6D8D77004BE3C4 /* MOSToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E93C851A6D8D77004BE3C4 /* MOSToolbarItem.m */; };
 		01E93C891A6D98F7004BE3C4 /* MOSSmallToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E93C881A6D98F7004BE3C4 /* MOSSmallToolbar.m */; };
 		01EB0DAC1A8BF62000428082 /* tic-tac-toe.s in Resources */ = {isa = PBXBuildFile; fileRef = 01EB0DAA1A8BF4C000428082 /* tic-tac-toe.s */; };
+		01EBAA201AB96F1A0076AD02 /* helloworld.s in Resources */ = {isa = PBXBuildFile; fileRef = 01EBAA1F1AB96E670076AD02 /* helloworld.s */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -185,6 +186,7 @@
 		01E93C871A6D98F7004BE3C4 /* MOSSmallToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSmallToolbar.h; sourceTree = "<group>"; };
 		01E93C881A6D98F7004BE3C4 /* MOSSmallToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSmallToolbar.m; sourceTree = "<group>"; };
 		01EB0DAB1A8BF4C100428082 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = "Examples/Base.lproj/tic-tac-toe.s"; sourceTree = SOURCE_ROOT; };
+		01EBAA1E1AB96E670076AD02 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/helloworld.s; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				0105F3EB1A86A8310045BDD3 /* ExamplesList.plist */,
+				01EBAA1F1AB96E670076AD02 /* helloworld.s */,
 				0105F3EE1A86A8350045BDD3 /* expression.s */,
 				0105F3F11A86A8450045BDD3 /* reverser.s */,
 				01EB0DAA1A8BF4C000428082 /* tic-tac-toe.s */,
@@ -487,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01EBAA201AB96F1A0076AD02 /* helloworld.s in Resources */,
 				01EB0DAC1A8BF62000428082 /* tic-tac-toe.s in Resources */,
 				01E93C721A6D48F3004BE3C4 /* MOSPreferencesWindow.xib in Resources */,
 				01E93C7E1A6D4927004BE3C4 /* Credits.rtf in Resources */,
@@ -697,6 +701,15 @@
 			);
 			name = "tic-tac-toe.s";
 			sourceTree = "<group>";
+		};
+		01EBAA1F1AB96E670076AD02 /* helloworld.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01EBAA1E1AB96E670076AD02 /* Base */,
+			);
+			name = helloworld.s;
+			path = Examples;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */
 
