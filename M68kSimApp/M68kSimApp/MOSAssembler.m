@@ -176,6 +176,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     asmResult = gotWarnings ? MOSAssemblageResultSuccessWithWarning : MOSAssemblageResultSuccess;
   finish:
     unlink([unlinkedelf fileSystemRepresentation]);
+    unlink([linkerfile fileSystemRepresentation]);
     dispatch_async(dispatch_get_main_queue(), ^{
       MOSJobStatusManager *jsm;
       
