@@ -4,6 +4,9 @@
 /* Cancel */
 "Cancel" = "Cancel";
 
+/* Text of the event which occurs when creating a linker file failed. */
+"Could not create a linker file." = "Could not create a linker file.";
+
 /* Loading error message title */
 "Impossible to load this executable." = "Impossible to load this executable.";
 

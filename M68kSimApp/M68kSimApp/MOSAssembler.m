@@ -126,6 +126,9 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     NSURL *unlinkedelf;
     NSURL *linkerfile;
     NSMutableArray *params;
+    MOSJobStatusManager *jsm;
+    
+    jsm = [MOSJobStatusManager sharedJobStatusManger];
     
     linking = NO;
     task = [[MOSMonitoredTask alloc] init];
@@ -144,17 +147,21 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     [task setDelegate:self];
     [task launch];
     [task waitUntilExit];
-    if ([task terminationStatus] != 0) {
-      asmResult = MOSAssemblageResultFailure;
-      goto finish;
-    }
+    if ([task terminationStatus] != 0) goto fail;
     
     linking = YES;
     task = [[MOSMonitoredTask alloc] init];
     execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"m68k-elf-ld"];
     [task setLaunchURL:execurl];
     linkerfile = [NSURL URLWithTemporaryFilePathWithExtension:@"ld"];
-    [self makeLinkerFile:linkerfile];
+    if (![self makeLinkerFile:linkerfile]) {
+      [jsm addEvent:@{
+        MOSJobEventType: MOSJobEventTypeError,
+        MOSJobEventText: NSLocalizedString(@"Could not create a linker file.",
+          @"Text of the event which occurs when creating a linker file failed.")
+        } toJob:jobIdentifier];
+      goto fail;
+    }
     
     params = [NSMutableArray array];
     if (!(options & MOSAssemblageOptionEntryPointSymbolic))
@@ -168,12 +175,15 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     [task setDelegate:self];
     [task launch];
     [task waitUntilExit];
-    if ([task terminationStatus] != 0) {
-      asmResult = MOSAssemblageResultFailure;
-      goto finish;
-    }
+    if ([task terminationStatus] != 0) goto fail;
     
-    asmResult = gotWarnings ? MOSAssemblageResultSuccessWithWarning : MOSAssemblageResultSuccess;
+    if (gotWarnings)
+      asmResult = MOSAssemblageResultSuccessWithWarning;
+    else
+      asmResult = MOSAssemblageResultSuccess;
+    goto finish;
+  fail:
+    asmResult = MOSAssemblageResultFailure;
   finish:
     unlink([unlinkedelf fileSystemRepresentation]);
     unlink([linkerfile fileSystemRepresentation]);
@@ -202,42 +212,47 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   uint32_t segment_addr;
   NSString *section;
   NSFileHandle *nfh;
-  BOOL isAbsolute;
+  BOOL isAbsolute, res;
   
   fh = open([ld fileSystemRepresentation], O_WRONLY | O_CREAT, 0666);
   if (fh < 0) return NO;
   nfh = [[NSFileHandle alloc] initWithFileDescriptor:fh closeOnDealloc:YES];
   if (!nfh) return NO;
   
-  [nfh writeString:
-   @"MEMORY {\n"
-    "  vectors(rw) : ORIGIN = 0x00000000, LENGTH = 0x00000400\n"
-    "  ram(rwx)    : ORIGIN = 0x00000400, LENGTH = 0x01000000\n"
-    "}\n"];
-  
-  [nfh writeLine:@"SECTIONS {"];
-  for (section in sections) {
-    [nfh writeString:section];
-    [nfh writeString:@" "];
-    sns = [section UTF8String];
-    if (strstr(sns, "seg") == sns) {
-      isAbsolute = YES;
-      sscanf(sns+3, "%x", &segment_addr);
-      [nfh writeString:[NSString stringWithFormat:@"0x%X ", segment_addr]];
-    } else
-      isAbsolute = NO;
-    [nfh writeString:@": { *("];
-    [nfh writeString:section];
-    [nfh writeString:@") }"];
-    if (!isAbsolute)
-      [nfh writeLine:@" > ram"];
-    else
-      [nfh writeLine:@""];
+  res = YES;
+  @try {
+    [nfh writeString:
+     @"MEMORY {\n"
+      "  vectors(rw) : ORIGIN = 0x00000000, LENGTH = 0x00000400\n"
+      "  ram(rwx)    : ORIGIN = 0x00000400, LENGTH = 0x01000000\n"
+      "}\n"];
+    
+    [nfh writeLine:@"SECTIONS {"];
+    for (section in sections) {
+      [nfh writeString:section];
+      [nfh writeString:@" "];
+      sns = [section UTF8String];
+      if (strstr(sns, "seg") == sns) {
+        isAbsolute = YES;
+        sscanf(sns+3, "%x", &segment_addr);
+        [nfh writeString:[NSString stringWithFormat:@"0x%X ", segment_addr]];
+      } else
+        isAbsolute = NO;
+      [nfh writeString:@": { *("];
+      [nfh writeString:section];
+      [nfh writeString:@") }"];
+      if (!isAbsolute)
+        [nfh writeLine:@" > ram"];
+      else
+        [nfh writeLine:@""];
+    }
+    [nfh writeLine:@"}"];
+  } @catch (NSException *exc) {
+    res = NO;
   }
-  [nfh writeLine:@"}"];
   
   [nfh closeFile];
-  return YES;
+  return res;
 }
 
 
