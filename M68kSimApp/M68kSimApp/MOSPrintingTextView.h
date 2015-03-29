@@ -13,5 +13,6 @@
 }
 
 - (void)setPrintInfo:(NSPrintInfo*)pi;
+- (void)setTabWidth:(NSInteger)tabWidth;
 
 @end

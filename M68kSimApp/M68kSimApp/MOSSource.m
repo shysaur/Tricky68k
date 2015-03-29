@@ -394,14 +394,19 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSFont *font;
   NSPrintPanel *printPanel;
   NSPrintPanelOptions opts;
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
   
   printInfo = [self printInfo];
   [[printInfo dictionary] addEntriesFromDictionary:printSettings];
-  font = [[NSUserDefaults standardUserDefaults] unarchivedObjectForKey:MGSFragariaPrefsTextFont];
+  font = [ud unarchivedObjectForKey:MGSFragariaPrefsTextFont];
+  
   printView = [[MOSPrintingTextView alloc] init];
   [printView setPrintInfo:printInfo];
   [printView setString:[fragaria string]];
   [printView setFont:font];
+  [printView setTabWidth:[ud integerForKey:MGSFragariaPrefsTabWidth]];
   
   po = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];
   [po setShowsPrintPanel:YES];
