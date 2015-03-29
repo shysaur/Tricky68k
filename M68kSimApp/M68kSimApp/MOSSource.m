@@ -74,6 +74,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
   MOSJobStatusManager *sm;
+  NSString *tmp;
+  NSURL *template;
   
   [super windowControllerDidLoadNib:aController];
 
@@ -87,17 +89,13 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [fragaria setSyntaxDefinitionName:@"ASM-m68k"];
   [fragaria setSyntaxColoured:YES];
   [fragaria setShowsLineNumbers:YES];
-  if (initialData) {
-    [self loadData:initialData];
-    initialData = nil;
-  } else {
-    initialData = [NSData dataWithContentsOfURL:
-      [[NSBundle mainBundle] URLForResource:@"VasmTemplate" withExtension:@"s"]];
-    if (initialData)
-      [self loadData:initialData];
-    initialData = nil;
+  if (!text) {
+    template = [[NSBundle mainBundle] URLForResource:@"VasmTemplate" withExtension:@"s"];
+    tmp = [NSString stringWithContentsOfURL:template encoding:NSUTF8StringEncoding error:nil];
+    text = [[NSTextStorage alloc] initWithString:tmp];
   }
-
+  [fragaria replaceTextStorage:text];
+  
   textView = [fragaria textView];
   [self setUndoManager:[textView undoManager]];
 }
@@ -109,7 +107,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {
-  NSTextStorage *ts;
   NSRange allRange;
   NSDictionary *opts;
   NSData *res;
@@ -118,28 +115,22 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   enc = [NSNumber numberWithInteger:NSUTF8StringEncoding];
   opts = @{NSDocumentTypeDocumentOption: NSPlainTextDocumentType,
            NSCharacterEncodingDocumentAttribute: enc};
-  ts = [textView textStorage];
   
-  allRange.length = [ts length];
+  allRange.length = [text length];
   allRange.location = 0;
-  res = [ts dataFromRange:allRange documentAttributes:opts error:outError];
+  res = [text dataFromRange:allRange documentAttributes:opts error:outError];
   return res;
 }
 
 
-- (void)loadData:(NSData*)data {
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
   NSString *tmp;
   
   tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  [fragaria setString:tmp];
-}
-
-
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
-  if (fragaria)
-    [self loadData:data];
+  if (!text)
+    text = [[NSTextStorage alloc] initWithString:tmp];
   else
-    initialData = data;
+    [[text mutableString] setString:tmp];
   return YES;
 }
 
