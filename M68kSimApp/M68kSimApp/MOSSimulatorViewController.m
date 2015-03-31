@@ -144,8 +144,6 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 
 - (void)loadView {
-  NSResponder *oldresp;
-  
   [super loadView];
   viewHasLoaded = YES;
   
@@ -153,14 +151,6 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
     [NSException raise:NSInvalidArgumentException
       format:@"Simulator view can't load if no executable is associated with it."];
   [self setSimulatorForSubviewControllers];
-  
-  /* Install in responder chain */
-  if ([[self view] nextResponder] != self) {
-    /* Since Yosemite, AppKit will try to do this automatically */
-    oldresp = [[self view] nextResponder];
-    [[self view] setNextResponder:self];
-    [self setNextResponder:oldresp];
-  }
 }
 
 

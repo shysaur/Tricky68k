@@ -188,6 +188,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSView *contview;
   NSArray *constr;
   NSURL *oldSimExec;
+  NSResponder *oldresp;
   
   if (![self simulatorModeSwitchAllowed]) return;
   
@@ -216,6 +217,13 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
   [[contview animator] replaceSubview:editView with:simView];
   [contview setAnimations:@{}];
+  
+  oldresp = [simView nextResponder];
+  if (oldresp != simVc) {
+    /* Since Yosemite, AppKit will try to do this automatically */
+    [simView setNextResponder:simVc];
+    [simVc setNextResponder:oldresp];
+  }
   
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[simView]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];

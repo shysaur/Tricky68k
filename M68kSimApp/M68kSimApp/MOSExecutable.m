@@ -25,11 +25,24 @@
 
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
+  NSView *simView;
+  NSResponder *oldresp;
+  
   [simVc setSimulatorProxy:simProxy];
   /* simProxy is the responsibility of the view controller from now on (the
    * restart button may change it) */
   simProxy = nil;
-  [[aController window] setContentView:[simVc view]];
+  simView = [simVc view];
+  [[aController window] setContentView:simView];
+  
+  /* Install the view controller in the responder chain */
+  oldresp = [simView nextResponder];
+  if (oldresp != simVc) {
+    /* Since Yosemite, AppKit will try to do this automatically */
+    [simView setNextResponder:simVc];
+    [simVc setNextResponder:oldresp];
+  }
+  
   [super windowControllerDidLoadNib:aController];
 }
 
