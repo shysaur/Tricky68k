@@ -558,6 +558,7 @@
                 <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
                     <color key="value" name="controlColor" catalog="System" colorSpace="catalog"/>
                 </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="canDrawSubviewsIntoLayer" value="YES"/>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="356" y="358.5"/>
         </view>
