@@ -47,6 +47,7 @@
 		017D70041A72DF35003DCAF3 /* NSUserDefaults+Archiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 017D70031A72DF35003DCAF3 /* NSUserDefaults+Archiver.m */; };
 		017D700D1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017D700B1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m */; };
 		017D700F1A731E68003DCAF3 /* MOSAssemblerPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017D70111A731E68003DCAF3 /* MOSAssemblerPrefView.xib */; };
+		01843FF91AC9A0AE00FF3BC7 /* MOSColoredView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01843FF81AC9A0AE00FF3BC7 /* MOSColoredView.m */; };
 		01864B901A51BED9005B2B0D /* MOSSimulatorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */; };
 		01864B951A51CD23005B2B0D /* m68ksim in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 01864B921A51CCF6005B2B0D /* m68ksim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		018F656F1A604B5C005BA00E /* MOSAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 018F656E1A604B5C005BA00E /* MOSAssembler.m */; };
@@ -161,6 +162,8 @@
 		017D700A1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAssemblerPrefViewController.h; sourceTree = "<group>"; };
 		017D700B1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSAssemblerPrefViewController.m; sourceTree = "<group>"; };
 		017D70101A731E68003DCAF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSAssemblerPrefView.xib; sourceTree = "<group>"; };
+		01843FF71AC9A0AE00FF3BC7 /* MOSColoredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSColoredView.h; sourceTree = "<group>"; };
+		01843FF81AC9A0AE00FF3BC7 /* MOSColoredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSColoredView.m; sourceTree = "<group>"; };
 		01864B8E1A51BED9005B2B0D /* MOSSimulatorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorProxy.h; sourceTree = "<group>"; };
 		01864B8F1A51BED9005B2B0D /* MOSSimulatorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorProxy.m; sourceTree = "<group>"; };
 		01864B921A51CCF6005B2B0D /* m68ksim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = m68ksim; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -396,23 +399,8 @@
 		018F65731A609FCD005BA00E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */,
-				014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */,
-				01509B121A52191300724F29 /* NSFileHandle+Strings.h */,
-				01509B131A52191300724F29 /* NSFileHandle+Strings.m */,
-				015708AB1A618E8B005D08DB /* NSURL+TemporaryFile.h */,
-				015708AC1A618E8B005D08DB /* NSURL+TemporaryFile.m */,
-				01000A4F1A65AD130080AC5F /* NSScanner+Shorteners.h */,
-				01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */,
-				017D70021A72DF35003DCAF3 /* NSUserDefaults+Archiver.h */,
-				017D70031A72DF35003DCAF3 /* NSUserDefaults+Archiver.m */,
-				01E93C841A6D8D76004BE3C4 /* MOSToolbarItem.h */,
-				01E93C851A6D8D77004BE3C4 /* MOSToolbarItem.m */,
-				01E93C871A6D98F7004BE3C4 /* MOSSmallToolbar.h */,
-				01E93C881A6D98F7004BE3C4 /* MOSSmallToolbar.m */,
-				015094721A6DA7050024D28F /* MOSProgressIndicator.h */,
-				015094731A6DA7050024D28F /* MOSProgressIndicator.m */,
-				01EBAA271AB9F9490076AD02 /* Transient Documents */,
+				01D31B701ACB10D100753A3B /* Foundation */,
+				01D31B6E1ACB10BC00753A3B /* AppKit */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -434,6 +422,39 @@
 				01E93C741A6D48F3004BE3C4 /* MOSPreferencesWindow.xib */,
 			);
 			name = "Preferences Window";
+			sourceTree = "<group>";
+		};
+		01D31B6E1ACB10BC00753A3B /* AppKit */ = {
+			isa = PBXGroup;
+			children = (
+				01843FF71AC9A0AE00FF3BC7 /* MOSColoredView.h */,
+				01843FF81AC9A0AE00FF3BC7 /* MOSColoredView.m */,
+				01E93C841A6D8D76004BE3C4 /* MOSToolbarItem.h */,
+				01E93C851A6D8D77004BE3C4 /* MOSToolbarItem.m */,
+				01E93C871A6D98F7004BE3C4 /* MOSSmallToolbar.h */,
+				01E93C881A6D98F7004BE3C4 /* MOSSmallToolbar.m */,
+				015094721A6DA7050024D28F /* MOSProgressIndicator.h */,
+				015094731A6DA7050024D28F /* MOSProgressIndicator.m */,
+				01EBAA271AB9F9490076AD02 /* Transient Documents */,
+			);
+			name = AppKit;
+			sourceTree = "<group>";
+		};
+		01D31B701ACB10D100753A3B /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */,
+				014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */,
+				01509B121A52191300724F29 /* NSFileHandle+Strings.h */,
+				01509B131A52191300724F29 /* NSFileHandle+Strings.m */,
+				015708AB1A618E8B005D08DB /* NSURL+TemporaryFile.h */,
+				015708AC1A618E8B005D08DB /* NSURL+TemporaryFile.m */,
+				01000A4F1A65AD130080AC5F /* NSScanner+Shorteners.h */,
+				01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */,
+				017D70021A72DF35003DCAF3 /* NSUserDefaults+Archiver.h */,
+				017D70031A72DF35003DCAF3 /* NSUserDefaults+Archiver.m */,
+			);
+			name = Foundation;
 			sourceTree = "<group>";
 		};
 		01EBAA271AB9F9490076AD02 /* Transient Documents */ = {
@@ -560,6 +581,7 @@
 				014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */,
 				015708AD1A618E8B005D08DB /* NSURL+TemporaryFile.m in Sources */,
 				01E93C891A6D98F7004BE3C4 /* MOSSmallToolbar.m in Sources */,
+				01843FF91AC9A0AE00FF3BC7 /* MOSColoredView.m in Sources */,
 				017D700D1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m in Sources */,
 				016CD1411A51A10E00D64892 /* MOSSource.m in Sources */,
 				01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */,
