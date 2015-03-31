@@ -172,6 +172,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (CATransition *)transitionForViewSwitch {
   CATransition *res;
+  CAMediaTimingFunction *tim;
   
   res = [[CATransition alloc] init];
   [res setType:kCATransitionPush];
@@ -179,6 +180,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [res setSubtype:kCATransitionFromLeft];
   else
     [res setSubtype:kCATransitionFromRight];
+  tim = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+  [res setTimingFunction:tim];
   return res;
 }
 
