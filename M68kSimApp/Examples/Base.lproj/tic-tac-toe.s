@@ -6,7 +6,7 @@
     ; Plays tic-tac-toe with the user. It should never lose. 
     ; Exercise for the reader: make the program play with itself.
     ;
-    ; To play, at the "?" prompt type the number of the cell where you wish
+    ;   To play, at the "?" prompt type the number of the cell where you wish
     ; to move, and then press enter.
     ;
     ;    1 | 2 | 3

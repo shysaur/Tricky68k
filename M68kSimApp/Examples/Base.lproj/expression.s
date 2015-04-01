@@ -7,7 +7,7 @@
     ; value, then prints it. If the expression is invalid, "Parsing error"
     ; is printed.
     ;
-    ; Negative numbers like -1234 are not accepted, but you can write
+    ;   Negative numbers like -1234 are not accepted, but you can write
     ; (0 - 1234) instead. Also, this program does not divide and multiply
     ; correctly if the operands do not fit in 16 bits (that is, they are
     ; < -32768 or > 32767).

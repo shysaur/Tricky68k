@@ -3,7 +3,7 @@
     ; 
     ; Selection Sort
     ;
-    ;   Selection Sort is one of the simplest sorting algorithms and, like
+    ; Selection Sort is one of the simplest sorting algorithms and, like
     ; the more widely known Bubble Sort, its performance is O(n^2).
     ;
     ;   It works by swapping the first item of the array with the smallest item
