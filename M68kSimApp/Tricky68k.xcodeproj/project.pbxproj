@@ -45,6 +45,7 @@
 		016CD1691A51B27900D64892 /* MOSSimulatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */; };
 		016F94F11A8559D200770684 /* MOSPrintingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 016F94F01A8559D200770684 /* MOSPrintingTextView.m */; };
 		017D25201ACC755400F74869 /* digits.s in Resources */ = {isa = PBXBuildFile; fileRef = 017D25221ACC755400F74869 /* digits.s */; };
+		017D25261ACC8DFC00F74869 /* selection-sort.s in Resources */ = {isa = PBXBuildFile; fileRef = 017D25281ACC8DFC00F74869 /* selection-sort.s */; };
 		017D70041A72DF35003DCAF3 /* NSUserDefaults+Archiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 017D70031A72DF35003DCAF3 /* NSUserDefaults+Archiver.m */; };
 		017D700D1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017D700B1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m */; };
 		017D700F1A731E68003DCAF3 /* MOSAssemblerPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017D70111A731E68003DCAF3 /* MOSAssemblerPrefView.xib */; };
@@ -159,6 +160,7 @@
 		016F94EF1A8559D200770684 /* MOSPrintingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPrintingTextView.h; sourceTree = "<group>"; };
 		016F94F01A8559D200770684 /* MOSPrintingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPrintingTextView.m; sourceTree = "<group>"; };
 		017D25211ACC755400F74869 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/digits.s; sourceTree = "<group>"; };
+		017D25271ACC8DFC00F74869 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = "Base.lproj/selection-sort.s"; sourceTree = "<group>"; };
 		017D70021A72DF35003DCAF3 /* NSUserDefaults+Archiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Archiver.h"; sourceTree = "<group>"; };
 		017D70031A72DF35003DCAF3 /* NSUserDefaults+Archiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Archiver.m"; sourceTree = "<group>"; };
 		017D700A1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAssemblerPrefViewController.h; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				0105F3F11A86A8450045BDD3 /* reverser.s */,
 				01EB0DAA1A8BF4C000428082 /* tic-tac-toe.s */,
 				017D25221ACC755400F74869 /* digits.s */,
+				017D25281ACC8DFC00F74869 /* selection-sort.s */,
 			);
 			indentWidth = 4;
 			name = Examples;
@@ -532,6 +535,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				017D25261ACC8DFC00F74869 /* selection-sort.s in Resources */,
 				017D25201ACC755400F74869 /* digits.s in Resources */,
 				01EBAA201AB96F1A0076AD02 /* helloworld.s in Resources */,
 				01EB0DAC1A8BF62000428082 /* tic-tac-toe.s in Resources */,
@@ -678,6 +682,15 @@
 				017D25211ACC755400F74869 /* Base */,
 			);
 			name = digits.s;
+			path = Examples;
+			sourceTree = SOURCE_ROOT;
+		};
+		017D25281ACC8DFC00F74869 /* selection-sort.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				017D25271ACC8DFC00F74869 /* Base */,
+			);
+			name = "selection-sort.s";
 			path = Examples;
 			sourceTree = SOURCE_ROOT;
 		};

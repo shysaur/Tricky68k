@@ -28,6 +28,12 @@
 	</dict>
 	<dict>
 		<key>fileName</key>
+		<string>selection-sort.s</string>
+		<key>localizedTitle</key>
+		<string>Selection Sort</string>
+	</dict>
+	<dict>
+		<key>fileName</key>
 		<string>reverser.s</string>
 		<key>localizedTitle</key>
 		<string>String Reverser</string>
