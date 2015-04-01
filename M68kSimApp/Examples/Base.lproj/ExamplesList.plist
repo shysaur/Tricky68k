@@ -8,6 +8,12 @@
 	</dict>
 	<dict>
 		<key>fileName</key>
+		<string>digits.s</string>
+		<key>localizedTitle</key>
+		<string>Digit Counter</string>
+	</dict>
+	<dict>
+		<key>fileName</key>
 		<string>helloworld.s</string>
 		<key>localizedTitle</key>
 		<string>Hello World</string>
