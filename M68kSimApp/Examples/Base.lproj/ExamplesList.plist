@@ -19,6 +19,14 @@
 		<string>Hello World</string>
 	</dict>
 	<dict>
+		<key>kind</key>
+		<string>separator</string>
+	</dict>
+	<dict>
+		<key>localizedTitle</key>
+		<string>Average Examples</string>
+	</dict>
+	<dict>
 		<key>fileName</key>
 		<string>reverser.s</string>
 		<key>localizedTitle</key>
