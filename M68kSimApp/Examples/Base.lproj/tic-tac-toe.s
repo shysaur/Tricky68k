@@ -18,7 +18,7 @@
 
 
     public start    ;Make the entry point public
-	org $2000		;Place the origin at $2000
+    org $2000       ;Place the origin at $2000
 
 
 TTY:              equ $FFE000
