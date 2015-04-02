@@ -1,17 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "MOSJobStatusWorking.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "mac",
+      "filename" : "MOSJobStatusWorking.pdf"
     }
   ],
   "info" : {
