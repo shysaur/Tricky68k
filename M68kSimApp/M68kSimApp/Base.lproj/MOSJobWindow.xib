@@ -175,6 +175,6 @@
         <customObject id="yji-SQ-rNS" customClass="MOSJobStatusManager"/>
     </objects>
     <resources>
-        <image name="MOSJobStatusWorking" width="12" height="12"/>
+        <image name="MOSJobStatusWorking" width="10" height="10"/>
     </resources>
 </document>
