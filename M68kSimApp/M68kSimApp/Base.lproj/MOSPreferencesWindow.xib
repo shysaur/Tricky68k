@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
@@ -26,17 +26,17 @@
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="nPc-lm-kzE"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kAX-I0-4PP"/>
-                    <toolbarItem implicitItemIdentifier="FB94D5A2-9946-43B8-8E53-894C303DBD9A" explicitItemIdentifier="2" label="Editing" paletteLabel="Editing" tag="-1" image="NSFontPanel" selectable="YES" id="2xn-yq-TYF">
+                    <toolbarItem implicitItemIdentifier="FB94D5A2-9946-43B8-8E53-894C303DBD9A" explicitItemIdentifier="2" label="Editing" paletteLabel="Editing" tag="-1" image="MOSEditorPrefs" selectable="YES" id="2xn-yq-TYF">
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="UXb-3t-mmb"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="8C4823D5-8A99-435B-BEC4-4ADC63C87227" explicitItemIdentifier="1" label="Simulator" paletteLabel="Simulator" tag="-1" image="NSUserAccounts" selectable="YES" id="bog-L9-HV1">
+                    <toolbarItem implicitItemIdentifier="8C4823D5-8A99-435B-BEC4-4ADC63C87227" explicitItemIdentifier="1" label="Simulator" paletteLabel="Simulator" tag="-1" image="MOSSimulatorPrefs" selectable="YES" id="bog-L9-HV1">
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="YKU-Wj-lJV"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="8EF43F9D-8372-428D-9B86-34FD59005A30" explicitItemIdentifier="0" label="Assembler" paletteLabel="Assembler" tag="-1" image="NSPreferencesGeneral" selectable="YES" id="dkF-4T-CZO">
+                    <toolbarItem implicitItemIdentifier="8EF43F9D-8372-428D-9B86-34FD59005A30" explicitItemIdentifier="0" label="Assembler" paletteLabel="Assembler" tag="-1" image="MOSAssemblerPrefs" selectable="YES" id="dkF-4T-CZO">
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="6FP-ae-KQB"/>
                         </connections>
@@ -56,8 +56,8 @@
         </window>
     </objects>
     <resources>
-        <image name="NSFontPanel" width="32" height="32"/>
-        <image name="NSPreferencesGeneral" width="32" height="32"/>
-        <image name="NSUserAccounts" width="32" height="32"/>
+        <image name="MOSAssemblerPrefs" width="32" height="32"/>
+        <image name="MOSEditorPrefs" width="32" height="32"/>
+        <image name="MOSSimulatorPrefs" width="32" height="32"/>
     </resources>
 </document>
