@@ -7,6 +7,32 @@
         <language>en</language>
         
         <item>
+            <title>Release 1.0.0</title>
+            <description><![CDATA[ <ul>
+              <li><strong>New!</strong> Three more examples added!</li>
+              <li><strong>New!</strong> Tricky68k is now retina-ready; added a new application icon.</li>
+              <li>The tic-tac-toe example is now commented!</li>
+              <li>Improved performance of the editor-simulator switching animation.</li>
+              <li>More editor improvements and fixes.</li>
+              <li>Improved the appearance of simulator mode.</li>
+              <li>New unmodified documents now close when another document is opened.</li>
+              <li>Improved the preferences window.</li>
+              <li>Printing now correctly handles files with tabs.</li>
+              <li>Fixed a bug where the simulator menu items could not be used on Mavericks.</li>
+              <li>Other cosmetic improvements and bug-fixes.</li>
+              </ul> ]]>
+            </description>
+            <pubDate>Sat, 04 April 2015 19:07:04 +0200</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_1.0.0/Tricky68k_100.tar.bz2" 
+              sparkle:version="976" 
+              sparkle:shortVersionString="1.0.0"
+              length="3659683" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MCwCFBUwK09QJ12FCDR9rA9Zvv1zBlV6AhRbBrmp1vs/OcLW30L2fLyfONNg+A==" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+          
+        <item>
             <title>Release 0.9.5</title>
             <description><![CDATA[ <ul>
               <li>
