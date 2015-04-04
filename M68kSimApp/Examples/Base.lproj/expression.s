@@ -229,10 +229,10 @@ itoa:                       ;Make space for the result in the buffer
     adda.l #12,a0           ; (the string will be constructed backwards)
     move.b #0,-(a0)         ;Terminate the string
     move.l d0,d6
-    tst.l d6
+.abs:
+    neg.l d6
     beq .zero               ;Special-case zero
-    bpl .loop
-    neg.l d6                ;Get absolute value
+    bmi .abs                ;Get absolute value
 .loop:
     move.w #10,d7           ;Divide the value by 10
     bsr divu32by16          ; (remainder = next digit in D7)
