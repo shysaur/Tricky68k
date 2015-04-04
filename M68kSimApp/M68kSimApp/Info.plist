@@ -19,6 +19,15 @@
 			<string>MOSExecutable</string>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>s</string>
+				<string>asm</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>AssemblySource</string>
+			<key>CFBundleTypeName</key>
+			<string>Assembly Source</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSItemContentTypes</key>
@@ -48,7 +57,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>972</string>
+	<string>975</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.developer-tools</string>
 	<key>LSMinimumSystemVersion</key>
