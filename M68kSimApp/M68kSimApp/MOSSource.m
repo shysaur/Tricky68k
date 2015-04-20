@@ -9,7 +9,7 @@
 #import "MOSSource.h"
 #import <MGSFragaria/MGSFragaria.h>
 #import <MGSFragaria/SMLTextView.h>
-#import <MGSFragaria/MGSFragariaPreferences.h>
+#import "MGSFragariaPreferences.h"
 #import "NSURL+TemporaryFile.h"
 #import "NSUserDefaults+Archiver.h"
 #import "MOSAssembler.h"
@@ -17,6 +17,7 @@
 #import "MOSSimulatorViewController.h"
 #import "MOSAppDelegate.h"
 #import "MOSPrintingTextView.h"
+#import "MGSPreferencesObserver.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -84,7 +85,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   sm = [MOSJobStatusManager sharedJobStatusManger];
   [sm addObserver:self forKeyPath:@"jobList" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
   
-  fragaria = [[MGSFragaria alloc] initWithView:editView];
+  prefobs = [[MGSPreferencesObserver alloc] initWithFragaria:fragaria];
   
   [fragaria setSyntaxDefinitionName:@"ASM-m68k"];
   [fragaria setSyntaxColoured:YES];
@@ -213,12 +214,12 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   }
   simView = [simVc view];
   
-  constr = [editView constraints];
-  [editView removeConstraints:constr];
+  constr = [fragaria constraints];
+  [fragaria removeConstraints:constr];
   
   contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
-  [[contview animator] replaceSubview:editView with:simView];
+  [[contview animator] replaceSubview:fragaria with:simView];
   [contview setAnimations:@{}];
   
   oldresp = [simView nextResponder];
@@ -250,18 +251,18 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
   
-  constr = [editView constraints];
+  constr = [fragaria constraints];
   [simView removeConstraints:constr];
   
   contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
-  [[contview animator] replaceSubview:simView with:editView];
+  [[contview animator] replaceSubview:simView with:fragaria];
   [contview setAnimations:@{}];
   
-  [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[editView]|"
-    options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
-  [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[editView]|"
-    options:0 metrics:nil views:NSDictionaryOfVariableBindings(editView)]];
+  [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[fragaria]|"
+    options:0 metrics:nil views:NSDictionaryOfVariableBindings(fragaria)]];
+  [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[fragaria]|"
+    options:0 metrics:nil views:NSDictionaryOfVariableBindings(fragaria)]];
   [docWindow makeFirstResponder:textView];
   
   simulatorMode = NO;

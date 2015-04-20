@@ -71,6 +71,8 @@
 		01EBAA201AB96F1A0076AD02 /* helloworld.s in Resources */ = {isa = PBXBuildFile; fileRef = 01EBAA1F1AB96E670076AD02 /* helloworld.s */; };
 		01EBAA231AB973DF0076AD02 /* MOSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBAA221AB973DF0076AD02 /* MOSDocument.m */; };
 		01EBAA261AB9D9140076AD02 /* MOSDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBAA251AB9D9140076AD02 /* MOSDocumentController.m */; };
+		01F236EF1AE5470E0039EB73 /* MGSFragariaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F236EC1AE5470E0039EB73 /* MGSFragariaPreferences.m */; };
+		01F236F01AE5470E0039EB73 /* MGSPreferencesObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F236EE1AE5470E0039EB73 /* MGSPreferencesObserver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -200,6 +202,10 @@
 		01EBAA221AB973DF0076AD02 /* MOSDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSDocument.m; sourceTree = "<group>"; };
 		01EBAA241AB9D9140076AD02 /* MOSDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSDocumentController.h; sourceTree = "<group>"; };
 		01EBAA251AB9D9140076AD02 /* MOSDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSDocumentController.m; sourceTree = "<group>"; };
+		01F236EB1AE5470E0039EB73 /* MGSFragariaPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSFragariaPreferences.h; sourceTree = "<group>"; };
+		01F236EC1AE5470E0039EB73 /* MGSFragariaPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSFragariaPreferences.m; sourceTree = "<group>"; };
+		01F236ED1AE5470E0039EB73 /* MGSPreferencesObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSPreferencesObserver.h; sourceTree = "<group>"; };
+		01F236EE1AE5470E0039EB73 /* MGSPreferencesObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSPreferencesObserver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,6 +426,10 @@
 				017D700A1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.h */,
 				017D700B1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m */,
 				017D70111A731E68003DCAF3 /* MOSAssemblerPrefView.xib */,
+				01F236EB1AE5470E0039EB73 /* MGSFragariaPreferences.h */,
+				01F236EC1AE5470E0039EB73 /* MGSFragariaPreferences.m */,
+				01F236ED1AE5470E0039EB73 /* MGSPreferencesObserver.h */,
+				01F236EE1AE5470E0039EB73 /* MGSPreferencesObserver.m */,
 				015D18BC1AB6427B00F2A41A /* MOSEditorPrefViewController.h */,
 				015D18BD1AB6427B00F2A41A /* MOSEditorPrefViewController.m */,
 				011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */,
@@ -596,6 +606,7 @@
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
 				014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */,
 				01EBAA261AB9D9140076AD02 /* MOSDocumentController.m in Sources */,
+				01F236F01AE5470E0039EB73 /* MGSPreferencesObserver.m in Sources */,
 				0161F7F61A6AFD2600848C0D /* MOSSimulatorPrefViewController.m in Sources */,
 				0161F7F21A6ADF0200848C0D /* MOSSimulatorSubviewDelegate.m in Sources */,
 				018F65721A6053F4005BA00E /* MOSMonitoredTask.m in Sources */,
@@ -613,6 +624,7 @@
 				01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */,
 				01000A511A65AD130080AC5F /* NSScanner+Shorteners.m in Sources */,
 				015D18BF1AB6427B00F2A41A /* MOSEditorPrefViewController.m in Sources */,
+				01F236EF1AE5470E0039EB73 /* MGSFragariaPreferences.m in Sources */,
 				0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */,
 				01E93C861A6D8D77004BE3C4 /* MOSToolbarItem.m in Sources */,
 				018F656F1A604B5C005BA00E /* MOSAssembler.m in Sources */,

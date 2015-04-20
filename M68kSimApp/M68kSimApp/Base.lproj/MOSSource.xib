@@ -8,7 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MOSSource">
             <connections>
                 <outlet property="docWindow" destination="xOd-HO-29H" id="hRv-CS-1sO"/>
-                <outlet property="editView" destination="mtv-Sk-Suh" id="3Qo-1x-xTL"/>
+                <outlet property="fragaria" destination="mtv-Sk-Suh" id="k4N-x3-4li"/>
                 <outlet property="simVc" destination="aXJ-fz-zD2" id="TDF-ci-m4A"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
@@ -25,7 +25,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="633" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="mtv-Sk-Suh">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="mtv-Sk-Suh" customClass="MGSFragariaView">
                         <rect key="frame" x="0.0" y="0.0" width="633" height="413"/>
                     </customView>
                 </subviews>

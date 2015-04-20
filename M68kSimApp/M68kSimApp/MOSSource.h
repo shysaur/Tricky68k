@@ -11,10 +11,11 @@
 #include "MOSDocument.h"
 
 
-@class MGSFragaria;
+@class MGSFragariaView;
 @class SMLTextView;
 @class MOSAssembler;
 @class MOSSimulatorViewController;
+@class MGSPreferencesObserver;
 
 
 @interface MOSSource : MOSDocument {
@@ -26,8 +27,8 @@
   
   NSTextStorage *text;
   SMLTextView *textView;
-  MGSFragaria *fragaria;
-  __strong IBOutlet NSView *editView;
+  __strong IBOutlet MGSFragariaView *fragaria;
+  MGSPreferencesObserver *prefobs;
   
   IBOutlet MOSSimulatorViewController *simVc;
   NSView *simView;
