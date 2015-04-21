@@ -9,7 +9,7 @@
 #import "MOSSource.h"
 #import <MGSFragaria/MGSFragaria.h>
 #import <MGSFragaria/SMLTextView.h>
-#import "MGSFragariaPreferences.h"
+#import "MOSFragariaPreferencesObserver.h"
 #import "NSURL+TemporaryFile.h"
 #import "NSUserDefaults+Archiver.h"
 #import "MOSAssembler.h"
@@ -17,7 +17,7 @@
 #import "MOSSimulatorViewController.h"
 #import "MOSAppDelegate.h"
 #import "MOSPrintingTextView.h"
-#import "MGSPreferencesObserver.h"
+#import "MOSFragariaPreferencesObserver.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -85,7 +85,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   sm = [MOSJobStatusManager sharedJobStatusManger];
   [sm addObserver:self forKeyPath:@"jobList" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
   
-  prefobs = [[MGSPreferencesObserver alloc] initWithFragaria:fragaria];
+  prefobs = [[MOSFragariaPreferencesObserver alloc] initWithFragaria:fragaria];
   
   [fragaria setSyntaxDefinitionName:@"ASM-m68k"];
   [fragaria setSyntaxColoured:YES];

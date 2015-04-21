@@ -9,7 +9,7 @@
 #import "MOSEditorPrefViewController.h"
 #import "NSUserDefaults+Archiver.h"
 #import <MGSFragaria/MGSFragaria.h>
-#import "MGSFragariaPreferences.h"
+#import "MOSFragariaPreferencesObserver.h"
 
 
 @implementation MOSEditorPrefViewController

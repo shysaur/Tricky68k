@@ -15,7 +15,7 @@
 @class SMLTextView;
 @class MOSAssembler;
 @class MOSSimulatorViewController;
-@class MGSPreferencesObserver;
+@class MOSFragariaPreferencesObserver;
 
 
 @interface MOSSource : MOSDocument {
@@ -28,7 +28,7 @@
   NSTextStorage *text;
   SMLTextView *textView;
   __strong IBOutlet MGSFragariaView *fragaria;
-  MGSPreferencesObserver *prefobs;
+  MOSFragariaPreferencesObserver *prefobs;
   
   IBOutlet MOSSimulatorViewController *simVc;
   NSView *simView;
