@@ -329,7 +329,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     tmp = [obj UTF8String];
     sscanf(tmp, "%s%s%X", reg, pad, &val);
     rego = [NSString stringWithUTF8String:reg];
-    valo = [NSNumber numberWithUnsignedLong:val];
+    valo = [NSNumber numberWithUnsignedInt:val];
     [res setObject:valo forKey:rego];
   }
   return [res copy];
@@ -352,7 +352,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   for (obj in list) {
     data = [obj UTF8String];
     sscanf(data+3, "%X", &addr);
-    [res addObject:[NSNumber numberWithUnsignedLong:addr]];
+    [res addObject:[NSNumber numberWithUnsignedInt:addr]];
   }
   return [res copy];
 }
@@ -376,7 +376,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   NSNumber *addr;
   
   for (addr in addrs) {
-    [self addBreakpointAtAddress:(uint32_t)[addr unsignedLongValue]];
+    [self addBreakpointAtAddress:[addr unsignedIntValue]];
   }
 }
 
@@ -387,7 +387,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   addrs = [self breakpointList];
   for (addr in addrs) {
-    [self removeBreakpointAtAddress:(uint32_t)[addr unsignedLongValue]];
+    [self removeBreakpointAtAddress:[addr unsignedIntValue]];
   }
 }
 

@@ -30,7 +30,7 @@
     line = @"";
   } else {
     regs = [simProxy registerDump];
-    addr = (uint32_t)[[regs objectForKey:MOS68kRegisterSP] integerValue];
+    addr = [[regs objectForKey:MOS68kRegisterSP] unsignedIntValue];
     addr += row * 4;
     data = [simProxy rawDumpFromLocation:addr withSize:4];
     dump = (uint8_t*)[data bytes];

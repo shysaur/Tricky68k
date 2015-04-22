@@ -78,7 +78,7 @@
   if ([tableView clickedColumn] == 0) {
     row = [tableView clickedRow];
     addr = [self getAddressForLine:row];
-    hasBreakpt = [breakpoints containsObject:[NSNumber numberWithUnsignedLong:addr]];
+    hasBreakpt = [breakpoints containsObject:[NSNumber numberWithUnsignedInt:addr]];
     if (!hasBreakpt) {
       [simProxy addBreakpointAtAddress:addr];
     } else {
@@ -95,7 +95,7 @@
   
   breakpoints = [simProxy breakpointList];
   regs = [simProxy registerDump];
-  centerAddr = (uint32_t)[[regs objectForKey:MOS68kRegisterPC] unsignedLongValue];
+  centerAddr = [[regs objectForKey:MOS68kRegisterPC] unsignedIntValue];
   lineCache = [[simProxy disassemble:1 instructionsFromLocation:centerAddr] mutableCopy];
   cacheStart = (maxLines - 1) / 2;
   addrCacheStart = addrCacheEnd = centerAddr;
@@ -185,7 +185,7 @@
   } else {
     if ([[tc identifier] isEqual:@"breakpointColumn"]) {
       addr = [self getAddressForLine:row];
-      hasBrkpt = [breakpoints containsObject:[NSNumber numberWithUnsignedLong:addr]];
+      hasBrkpt = [breakpoints containsObject:[NSNumber numberWithUnsignedInt:addr]];
       result = [tv makeViewWithIdentifier:@"breakpointView" owner:self];
       [[result textField] setFont:[self defaultMonospacedFont]];
       [[result imageView] setHidden:!hasBrkpt];

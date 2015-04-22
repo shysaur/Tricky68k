@@ -232,7 +232,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   
   if (!simProxy || [simProxy simulatorState] != MOSSimulatorStatePaused) return @"";
   regdump = [simProxy registerDump];
-  flags = (uint32_t)[[regdump objectForKey:MOS68kRegisterSR] integerValue];
+  flags = [[regdump objectForKey:MOS68kRegisterSR] unsignedIntValue];
   x = (flags & 0b10000) >> 4;
   n = (flags & 0b1000) >> 3;
   z = (flags & 0b100) >> 2;
