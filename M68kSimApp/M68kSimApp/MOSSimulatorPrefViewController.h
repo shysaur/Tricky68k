@@ -10,9 +10,7 @@
 
 
 @interface MOSSimulatorPrefViewController : NSViewController {
-  NSNumberFormatter *ptSizeFormatter;
   NSFont *baseFont;
-  IBOutlet NSTextField *fontPreviewView;
 }
 
 - (IBAction)changeDebuggerFont:(id)sender;

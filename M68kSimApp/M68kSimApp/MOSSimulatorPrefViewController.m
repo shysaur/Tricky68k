@@ -18,38 +18,14 @@
 }
 
 
-- (void)loadView {
-  [super loadView];
-  ptSizeFormatter = [[NSNumberFormatter alloc] init];
-  [ptSizeFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-  [self updateFontPreview];
-}
-
-
-- (void)updateFontPreview {
-  NSFont *viewFont;
-  NSString *fontName;
-  NSString *sizeString;
-  NSUserDefaults *ud;
-  
-  ud = [NSUserDefaults standardUserDefaults];
-  viewFont = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
-  sizeString = [ptSizeFormatter stringFromNumber:[NSNumber numberWithFloat:[viewFont pointSize]]];
-  fontName = [NSString stringWithFormat:@"%@ – %@", [viewFont displayName], sizeString];
-  
-  [fontPreviewView setStringValue:fontName];
-  [fontPreviewView setFont:viewFont];
-}
-
-
 - (void)changeFont:(id)sender {
   NSFontManager *fm;
   NSFont *font;
+  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   
   fm = [NSFontManager sharedFontManager];
   font = [fm convertFont:baseFont];
-  [[NSUserDefaults standardUserDefaults] setObjectByArchiving:font forKey:@"DebuggerTextFont"];
-  [self updateFontPreview];
+  [ud setObjectByArchiving:font forKey:@"DebuggerTextFont"];
 }
 
 
