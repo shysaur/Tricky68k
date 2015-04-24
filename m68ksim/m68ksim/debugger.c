@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <errno.h>
+#include <string.h>
 #include "m68ksim.h"
 #include "debugger.h"
 #include "breakpoints.h"
@@ -60,16 +61,60 @@ int debug_printDisassemblyLine(uint32_t addr, char *instr2, int ilen, uint32_t m
 }
 
 
+int debug_guessLengthOfInstructionEndingAt(uint32_t addr, int try, int *conf) {
+  static char tcb[80];
+  int canbe[MAX_INSTR_LEN/2];
+  int ilen, rlen, maxlen, i, c, nconf, pnconf;
+  uint32_t taddr, istr;
+  
+  c = i = maxlen = 0;
+  for (ilen=2; ilen<=MAX_INSTR_LEN; ilen+=2, i++) {
+    taddr = addr - ilen;
+    
+    istr = m68k_read_disassembler_16(addr - ilen);
+    if ((rlen = m68k_is_valid_instruction(istr, M68K_CPU_TYPE_68000)))
+      rlen = m68k_disassemble(tcb, addr-ilen, M68K_CPU_TYPE_68000);
+    
+    if ((canbe[i] = (rlen == ilen))) {
+      c++;
+      if (rlen > maxlen)
+        maxlen = rlen;
+    }
+  }
+  if (try < 1 || !c) {
+    if (conf) (*conf) = c ? 2 : 0;
+    return maxlen;
+  }
+  
+  rlen = pnconf = 0;
+  for (i=0; i<MAX_INSTR_LEN/2; i++) {
+    if (canbe[i]) {
+      ilen = debug_guessLengthOfInstructionEndingAt(addr-(i+1)*2, try-1, &nconf);
+      if (ilen >= 2) {
+        if (nconf > pnconf) {
+          pnconf = nconf;
+          rlen = (i+1)*2;
+        }
+      } else
+        c--;
+    }
+  }
+  
+  if (c) {
+    if (conf) (*conf) = pnconf + 2;
+    return rlen;
+  }
+  if (conf) (*conf) = pnconf + 1;
+  return maxlen;
+}
+
+
 void debug_printDisassembly(uint32_t addr, int len, uint32_t mark) {
-  int i, tilen, ilen;
-  static char instr[80];
+  int i, ilen;
   
   if (len < 0) {
-    ilen = 2;
-    for (i=4; i<=MAX_INSTR_LEN; i+=2) {
-      tilen = m68k_disassemble(instr, addr-i, M68K_CPU_TYPE_68000);
-      if (tilen == i) ilen = tilen;
-    }
+    ilen = debug_guessLengthOfInstructionEndingAt(addr, 5, NULL);
+    if (ilen == 0) ilen = 2;
     addr -= ilen;
     debug_printDisassembly(addr, len+1, mark);
     debug_printDisassemblyLine(addr, NULL, 0, mark);
