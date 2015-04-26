@@ -232,6 +232,10 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 - (void)changeSimulatorStatusTo:(MOSSimulatorState)news {
   if (curState == news) return;
+  
+  /* clean caches when simulator state changes */
+  regsCache = nil;
+  
   [self willChangeValueForKey:@"simulatorState"];
   curState = news;
   [self didChangeValueForKey:@"simulatorState"];
@@ -319,6 +323,8 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   char reg[10], pad[10];
   uint32_t val;
   
+  if (regsCache) return regsCache;
+  
   dispatch_sync(simQueue, ^{
     if ([self sendCommandToSimulatorDebugger:@"v"])
       list = [self getSimulatorResponse];
@@ -332,7 +338,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     valo = [NSNumber numberWithUnsignedInt:val];
     [res setObject:valo forKey:rego];
   }
-  return [res copy];
+  return regsCache = [res copy];
 }
 
 

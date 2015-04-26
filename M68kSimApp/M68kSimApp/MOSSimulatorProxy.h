@@ -57,6 +57,7 @@ typedef enum {
   MOSNamedPipe *toSimTty;
   MOSNamedPipe *fromSimTty;
   MOSSimulatorState curState;
+  NSDictionary *regsCache;
   BOOL isSimDead;
 }
 
