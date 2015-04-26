@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSJobWindowController">
@@ -29,10 +29,11 @@
                             <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="cur-kS-0PO" id="ftZ-vY-f56">
+                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="cur-kS-0PO" id="ftZ-vY-f56">
+                                    <rect key="frame" x="0.0" y="0.0" width="251" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <size key="intercellSpacing" width="3" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="intercellSpacing" width="0.0" height="2"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn width="248" minWidth="40" maxWidth="65535" id="cur-kS-0PO">
@@ -49,7 +50,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="gXp-Vx-OTm">
-                                                    <rect key="frame" x="1" y="1" width="248" height="14"/>
+                                                    <rect key="frame" x="0.0" y="1" width="248" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uz6-D6-g7u">
@@ -69,7 +70,7 @@
                                                             </connections>
                                                         </imageView>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nZ3-8T-HRQ">
-                                                            <rect key="frame" x="22" y="0.0" width="226" height="14"/>
+                                                            <rect key="frame" x="22" y="0.0" width="84" height="14"/>
                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="fbl-ur-oMc">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -81,7 +82,7 @@
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="nZ3-8T-HRQ" secondAttribute="trailing" constant="2" id="Ilb-SJ-vd8"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nZ3-8T-HRQ" secondAttribute="trailing" constant="2" id="Ilb-SJ-vd8"/>
                                                         <constraint firstAttribute="bottom" secondItem="Uz6-D6-g7u" secondAttribute="bottom" id="JhY-SX-XGG"/>
                                                         <constraint firstItem="Uz6-D6-g7u" firstAttribute="top" secondItem="gXp-Vx-OTm" secondAttribute="top" id="MFo-Hl-d3r"/>
                                                         <constraint firstItem="Uz6-D6-g7u" firstAttribute="leading" secondItem="gXp-Vx-OTm" secondAttribute="leading" constant="5" id="Pri-1X-4l9"/>
@@ -103,7 +104,7 @@
                             </subviews>
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="ymL-HQ-CIL">
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ymL-HQ-CIL">
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
