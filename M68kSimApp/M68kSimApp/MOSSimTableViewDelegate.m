@@ -48,10 +48,22 @@ static void *ReloadTableView = &ReloadTableView;
 }
 
 
-- (void)observeValueForKeyPath:(NSString*)keyPath    ofObject:(id)object
-                        change:(NSDictionary*)change context:(void*)context {
+- (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object
+  change:(NSDictionary*)change context:(void*)context {
+  __weak MOSSimulatorProxy *weaksp = simProxy;
+  __weak NSTableView *weaktv = tableView;
+  dispatch_time_t somet;
+  
   if (context == ReloadTableView) {
-    [tableView reloadData];
+    if (![simProxy isSimulatorRunning])
+      [tableView reloadData];
+    else {
+      somet = dispatch_time(DISPATCH_TIME_NOW, 50000000);
+      dispatch_after(somet, dispatch_get_main_queue(), ^{
+        if ([weaksp isSimulatorRunning])
+          [weaktv reloadData];
+      });
+    }
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
