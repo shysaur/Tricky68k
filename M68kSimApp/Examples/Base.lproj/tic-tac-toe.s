@@ -90,7 +90,7 @@ askOrder:
     blt .checknumber            ;If character < '0', try next character
     cmp.b #1,d0
     bgt .checknumber            ;If character > '1', try next character
-    and.b d0,d0                 ;Set the zero flag according to the value of D0
+    tst.b d0                    ;Set the zero flag according to the value of D0
     rts                         ;Return
     
 
