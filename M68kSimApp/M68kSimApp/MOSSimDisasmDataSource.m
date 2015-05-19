@@ -183,18 +183,16 @@
     result = [tv makeViewWithIdentifier:@"normalView" owner:self];
     [[result textField] setStringValue:line];
   } else {
-    if ([[tc identifier] isEqual:@"breakpointColumn"]) {
-      addr = [self getAddressForLine:row];
-      hasBrkpt = [breakpoints containsObject:[NSNumber numberWithUnsignedInt:addr]];
-      result = [tv makeViewWithIdentifier:@"breakpointView" owner:self];
-      [[result textField] setFont:[self defaultMonospacedFont]];
-      [[result imageView] setHidden:!hasBrkpt];
-    } else {
-      line = [self getLine:row];
+    addr = [self getAddressForLine:row];
+    hasBrkpt = [breakpoints containsObject:[NSNumber numberWithUnsignedInt:addr]];
+    line = [self getLine:row];
+    if ([line characterAtIndex:0] != '>')
       result = [tv makeViewWithIdentifier:@"normalView" owner:self];
-      [[result textField] setFont:[self defaultMonospacedFont]];
-      [[result textField] setStringValue:line];
-    }
+    else
+      result = [tv makeViewWithIdentifier:@"pcmarkedView" owner:self];
+    [[result imageView] setHidden:!hasBrkpt];
+    [[result textField] setFont:[self defaultMonospacedFont]];
+    [[result textField] setStringValue:[line substringFromIndex:1]];
   }
   
   return result;
