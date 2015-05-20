@@ -69,6 +69,11 @@ static void *ReloadTableView = &ReloadTableView;
 }
 
 
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row {
+  return NO;
+}
+
+
 - (void)dealloc {
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorRunning" context:ReloadTableView];
