@@ -65,12 +65,10 @@ int debug_guessLengthOfInstructionEndingAt(uint32_t addr, int try, int *conf) {
   static char tcb[80];
   int canbe[MAX_INSTR_LEN/2];
   int ilen, rlen, maxlen, i, c, nconf, pnconf;
-  uint32_t taddr, istr;
+  uint32_t istr;
   
   c = i = maxlen = 0;
   for (ilen=2; ilen<=MAX_INSTR_LEN; ilen+=2, i++) {
-    taddr = addr - ilen;
-    
     istr = m68k_read_disassembler_16(addr - ilen);
     if ((rlen = m68k_is_valid_instruction(istr, M68K_CPU_TYPE_68000)))
       rlen = m68k_disassemble(tcb, addr-ilen, M68K_CPU_TYPE_68000);
