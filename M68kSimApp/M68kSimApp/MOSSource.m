@@ -85,17 +85,18 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   sm = [MOSJobStatusManager sharedJobStatusManger];
   [sm addObserver:self forKeyPath:@"jobList" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
   
-  prefobs = [[MOSFragariaPreferencesObserver alloc] initWithFragaria:fragaria];
-  
-  [fragaria setSyntaxDefinitionName:@"ASM-m68k"];
-  [fragaria setSyntaxColoured:YES];
-  [fragaria setShowsLineNumbers:YES];
   if (!text) {
     template = [[NSBundle mainBundle] URLForResource:@"VasmTemplate" withExtension:@"s"];
     tmp = [NSString stringWithContentsOfURL:template encoding:NSUTF8StringEncoding error:nil];
     text = [[NSTextStorage alloc] initWithString:tmp];
   }
   [fragaria replaceTextStorage:text];
+  
+  prefobs = [[MOSFragariaPreferencesObserver alloc] initWithFragaria:fragaria];
+  
+  [fragaria setSyntaxDefinitionName:@"ASM-m68k"];
+  [fragaria setSyntaxColoured:YES];
+  [fragaria setShowsLineNumbers:YES];
   
   textView = [fragaria textView];
   [self setUndoManager:[textView undoManager]];
