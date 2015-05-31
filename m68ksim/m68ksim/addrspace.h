@@ -3,7 +3,7 @@
 //  Musashi
 //
 //  Created by Daniele Cattaneo on 28/12/14.
-//  Copyright (c) 2014 Daniele Cattaneo. All rights reserved.
+//  Copyright (c) 2014 Daniele Cattaneo. 
 //
 
 #ifndef __m68ksim__addrspace__

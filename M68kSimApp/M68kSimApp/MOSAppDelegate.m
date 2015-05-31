@@ -3,7 +3,7 @@
 //  M68kSimApp
 //
 //  Created by Daniele Cattaneo on 29/12/14.
-//  Copyright (c) 2014 Daniele Cattaneo. All rights reserved.
+//  Copyright (c) 2014 Daniele Cattaneo. 
 //
 
 #import "MOSAppDelegate.h"
