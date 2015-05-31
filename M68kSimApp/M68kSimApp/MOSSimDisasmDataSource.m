@@ -182,6 +182,7 @@
     line = @"";
     result = [tv makeViewWithIdentifier:@"normalView" owner:self];
     [[result textField] setStringValue:line];
+    [[result imageView] setHidden:YES];
   } else {
     addr = [self getAddressForLine:row];
     hasBrkpt = [breakpoints containsObject:[NSNumber numberWithUnsignedInt:addr]];
