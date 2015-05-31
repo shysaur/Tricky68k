@@ -7,6 +7,26 @@
         <language>en</language>
         
         <item>
+            <title>Release 1.0.1</title>
+            <description><![CDATA[ <ul>
+              <li>Huge speed-up to the simulator view when rapidly single-stepping.</li>
+              <li>Bug fixes and speed improvements to the editing tools (indent, detab, etc.)</li>
+              <li>Improved appearance of the disassembly in the simulator.</li>
+              <li>Nicer toolbar icons.</li>
+              <li>Other minor fixes.</li>
+              </ul> ]]>
+            </description>
+            <pubDate>Sun, 31 May 2015 23:43:42 +0200</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_1.0.1/Tricky68k_101.tar.bz2" 
+              sparkle:version="1075" 
+              sparkle:shortVersionString="1.0.1"
+              length="3633490" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC0CFQCNxi3PAAB+DClDlyiRRBPzENNPHwIUMLO+uJQUA80lTLkUiV0vUiHwvmU=" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 1.0.0</title>
             <description><![CDATA[ <ul>
               <li><strong>New!</strong> Three more examples added!</li>
