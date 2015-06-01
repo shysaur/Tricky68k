@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <MGSFragaria/MGSFragaria.h>
+#import <Fragaria/Fragaria.h>
 #import "MOSFragariaPreferencesObserver.h"
 
 

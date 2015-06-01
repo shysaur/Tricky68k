@@ -7,8 +7,7 @@
 //
 
 #import "MOSSource.h"
-#import <MGSFragaria/MGSFragaria.h>
-#import <MGSFragaria/SMLTextView.h>
+#import <Fragaria/Fragaria.h>
 #import "MOSFragariaPreferencesObserver.h"
 #import "NSURL+TemporaryFile.h"
 #import "NSUserDefaults+Archiver.h"

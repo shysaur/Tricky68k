@@ -13,6 +13,8 @@
 		0105F3EC1A86A8350045BDD3 /* expression.s in Resources */ = {isa = PBXBuildFile; fileRef = 0105F3EE1A86A8350045BDD3 /* expression.s */; };
 		0105F3EF1A86A8450045BDD3 /* reverser.s in Resources */ = {isa = PBXBuildFile; fileRef = 0105F3F11A86A8450045BDD3 /* reverser.s */; };
 		0108A2AF1AE6FE4500085E5F /* MOSDescribeArchivedFontTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0108A2AE1AE6FE4500085E5F /* MOSDescribeArchivedFontTransformer.m */; };
+		010AACAB1B1CDEA0005D9984 /* Fragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010AACAA1B1CDEA0005D9984 /* Fragaria.framework */; };
+		010AACAC1B1CDEA0005D9984 /* Fragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 010AACAA1B1CDEA0005D9984 /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
 		011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */; };
 		012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; };
@@ -27,8 +29,6 @@
 		015094741A6DA7050024D28F /* MOSProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 015094731A6DA7050024D28F /* MOSProgressIndicator.m */; };
 		015094761A6DBF1A0024D28F /* Acknowledgments.md in Resources */ = {isa = PBXBuildFile; fileRef = 015094751A6DBF1A0024D28F /* Acknowledgments.md */; };
 		01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01509B131A52191300724F29 /* NSFileHandle+Strings.m */; };
-		015525801A5EFD9700096023 /* MGSFragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; };
-		015525831A5EFE5200096023 /* MGSFragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0155257F1A5EFD9700096023 /* MGSFragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		015708A51A618BEE005D08DB /* vasmm68k-mot in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 015708A41A618BEE005D08DB /* vasmm68k-mot */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		015708A71A618C17005D08DB /* m68k-elf-ld in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 015708A61A618C17005D08DB /* m68k-elf-ld */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		015708AD1A618E8B005D08DB /* NSURL+TemporaryFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 015708AC1A618E8B005D08DB /* NSURL+TemporaryFile.m */; };
@@ -82,8 +82,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				015525831A5EFE5200096023 /* MGSFragaria.framework in Install Frameworks */,
 				012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */,
+				010AACAC1B1CDEA0005D9984 /* Fragaria.framework in Install Frameworks */,
 			);
 			name = "Install Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +113,7 @@
 		0105F3F01A86A8450045BDD3 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/reverser.s; sourceTree = "<group>"; };
 		0108A2AD1AE6FE4500085E5F /* MOSDescribeArchivedFontTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSDescribeArchivedFontTransformer.h; sourceTree = "<group>"; };
 		0108A2AE1AE6FE4500085E5F /* MOSDescribeArchivedFontTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSDescribeArchivedFontTransformer.m; sourceTree = "<group>"; };
+		010AACAA1B1CDEA0005D9984 /* Fragaria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Fragaria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		011D72D81AD0382900368CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSEditorPrefView.xib; sourceTree = "<group>"; };
@@ -134,7 +135,6 @@
 		015094751A6DBF1A0024D28F /* Acknowledgments.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Acknowledgments.md; sourceTree = "<group>"; };
 		01509B121A52191300724F29 /* NSFileHandle+Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+Strings.h"; sourceTree = "<group>"; };
 		01509B131A52191300724F29 /* NSFileHandle+Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+Strings.m"; sourceTree = "<group>"; };
-		0155257F1A5EFD9700096023 /* MGSFragaria.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MGSFragaria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		015708A41A618BEE005D08DB /* vasmm68k-mot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = "vasmm68k-mot"; sourceTree = BUILT_PRODUCTS_DIR; };
 		015708A61A618C17005D08DB /* m68k-elf-ld */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-ld"; path = "bin/m68k-elf-ld"; sourceTree = BUILT_PRODUCTS_DIR; };
 		015708AB1A618E8B005D08DB /* NSURL+TemporaryFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+TemporaryFile.h"; sourceTree = "<group>"; };
@@ -213,8 +213,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				015525801A5EFD9700096023 /* MGSFragaria.framework in Frameworks */,
 				012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */,
+				010AACAB1B1CDEA0005D9984 /* Fragaria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,7 +388,7 @@
 		01864B941A51CD10005B2B0D /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				0155257F1A5EFD9700096023 /* MGSFragaria.framework */,
+				010AACAA1B1CDEA0005D9984 /* Fragaria.framework */,
 				012AEB1A1A703F5A00906B25 /* Sparkle.framework */,
 				015708A41A618BEE005D08DB /* vasmm68k-mot */,
 				015708A61A618C17005D08DB /* m68k-elf-ld */,
