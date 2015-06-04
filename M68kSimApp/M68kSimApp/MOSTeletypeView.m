@@ -283,6 +283,9 @@
   
   i = [lineRanges count] - 1;
   h = [self locationForLine:i].y + [self heightForLine:i];
+  if ([[self superview] isKindOfClass:[NSClipView class]]) {
+    h = MAX(h, [[self superview] frame].size.height);
+  }
   [self setFrameSize:NSMakeSize([self frame].size.width, h)];
 }
 
