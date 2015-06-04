@@ -2,238 +2,455 @@
 //  MOSTeletypeView.m
 //  M68kSimApp
 //
-//  Created by Daniele Cattaneo on 07/01/15.
-//  Copyright (c) 2015 Daniele Cattaneo. 
+//  Created by Daniele Cattaneo on 02/06/15.
+//  Copyright (c) 2015 danielecattaneo. All rights reserved.
 //
 
 #import "MOSTeletypeView.h"
-#import "MOSTeletypeViewDelegate.h"
+#import <objc/objc-runtime.h>
 
 
 @implementation MOSTeletypeView
 
 
-- (instancetype)initWithCoder:(NSCoder *)coder {
-  self = [super initWithCoder:coder];
-  
-  lastCur = 0;
-  [self setContinuousSpellCheckingEnabled:NO];
-  [self setGrammarCheckingEnabled:NO];
-  [self setAllowsUndo:NO];
-  [self setUsesFontPanel:NO];
-  [self setAutomaticTextReplacementEnabled:NO];
-  [self setAutomaticSpellingCorrectionEnabled:NO];
-  [self setAutomaticQuoteSubstitutionEnabled:NO];
-  [self setAutomaticLinkDetectionEnabled:NO];
-  [self setAutomaticDataDetectionEnabled:NO];
-  [self setAutomaticDashSubstitutionEnabled:NO];
-  [self setEnabledTextCheckingTypes:0];
-  [self setTeletypeCursorPosition:0];
-  
+- (instancetype)initWithFrame:(NSRect)frameRect {
+  self = [super initWithFrame:frameRect];
+  [self awakeFromNib];
   return self;
 }
 
 
-- (void)setDelegate:(MOSTeletypeViewDelegate<NSTextViewDelegate>*)delegate {
-  [super setDelegate:delegate];
-  [self setTeletypeFont:[delegate defaultMonospacedFont]];
+- (void)awakeFromNib {
+  storage = [[NSMutableString alloc] init];
+  lineBuffer = [[NSMutableString alloc] init];
+  lineRanges = [[NSMutableArray alloc] init];
+  [lineRanges addObject:[NSValue valueWithRange:NSMakeRange(0, 0)]];
+  lineLocationCache = [[NSMutableDictionary alloc] init];
+  
+  dispFont = [NSFont userFixedPitchFontOfSize:11.0];
+  [self reloadFontInfo];
+  [self updateViewHeight];
 }
 
 
-- (BOOL)shouldDrawInsertionPoint {
+- (void)reloadFontInfo {
+  CTFontRef font = (__bridge CTFontRef)(dispFont);
+  CGFloat ascent, descent, leading;
+  UniChar test[1] = {' '};
+  CGGlyph glyphs[1];
+  
+  CTFontGetGlyphsForCharacters(font, test, glyphs, 1);
+  charSize.width = CTFontGetAdvancesForGlyphs(font, kCTFontOrientationHorizontal, glyphs, NULL, 1);
+  ascent = CTFontGetAscent(font);
+  descent = CTFontGetDescent(font);
+  leading = CTFontGetLeading(font);
+  charSize.height = ceil(ascent + descent + leading);
+  baselineOffset = descent;
+  [lineLocationCache removeAllObjects];
+}
+
+
+- (void)resetCursorRects {
+  [self addCursorRect:[self visibleRect] cursor:[NSCursor IBeamCursor]];
+}
+
+
+- (BOOL)acceptsFirstResponder {
+  return YES;
+}
+
+
+- (NSString *)string {
+  return [storage copy];
+}
+
+
+- (void)setString:(NSString *)string {
+  storage = [string mutableCopy];
+  [lineLocationCache removeAllObjects];
+  [self cacheLineRanges];
+  [self updateViewHeight];
+  [self setNeedsDisplay:YES];
+}
+
+
+- (void)insertText:(id)aString replacementRange:(NSRange)replacementRange {
+  if (replacementRange.length == 0 && replacementRange.location >= [storage length])
+    [self insertText:aString];
+}
+
+
+- (void)doCommandBySelector:(SEL)aSelector  {
+  if ([self respondsToSelector:aSelector])
+    ((void (*)(id, SEL, id))objc_msgSend)(self, aSelector, nil);
+}
+
+
+- (void)setMarkedText:(id)aString selectedRange:(NSRange)selectedRange
+  replacementRange:(NSRange)replacemenkltRange  { }
+
+
+- (void)unmarkText { }
+
+
+- (NSRange)selectedRange {
+  return NSMakeRange([storage length], 0);
+}
+
+
+- (NSRange)markedRange  {
+  return NSMakeRange(0, 0);
+}
+
+
+- (BOOL)hasMarkedText  {
   return NO;
 }
 
 
-- (void)setFrameSize:(NSSize)newSize {
-  [super setFrameSize:newSize];
-  [self setTeletypeCursorPosition:lastCur];
+- (NSAttributedString *)attributedSubstringForProposedRange:(NSRange)aRange
+  actualRange:(NSRangePointer)actualRange  {
+  NSRange allText;
+  static NSRange adj;
+  NSString *res;
+  
+  allText = NSMakeRange(0, [storage length]);
+  
+  adj = NSIntersectionRange(aRange, allText);
+  if (!NSEqualRanges(aRange, adj) && actualRange)
+    actualRange = &adj;
+  else
+    actualRange = NULL;
+  
+  res = [storage substringWithRange:adj];
+  return [[NSAttributedString alloc] initWithString:res];
 }
 
 
-- (void)setTeletypeCursorPosition:(NSInteger)cur {
-  NSInteger glyph, length, lastcindex;
-  NSRect glyphRect, oldRect;
-  NSSize spaceSize;
-  NSRange glyphRange;
-  NSLayoutManager *lm;
-  NSTextContainer *tc;
-  unichar lastc;
-  NSAttributedString *space;
-  
-  lastCur = cur;
-  
-  lm = [self layoutManager];
-  tc = [self textContainer];
-  
-  length = [[self textStorage] length];
-  if (length == 0) {
-    space = [[NSAttributedString alloc] initWithString:@" " attributes:ttyAttributes];
-    [[self textStorage] appendAttributedString:space];
-    glyphRange.length = 1;
-    glyphRange.location = 0;
-    glyphRect = [lm boundingRectForGlyphRange:glyphRange inTextContainer:tc];
-    [[[self textStorage] mutableString] setString:@""];
-  } else {
-    if (cur >= length)
-      lastcindex = length-1;
-    else
-      lastcindex = cur;
-      
-    glyph = [lm glyphIndexForCharacterAtIndex:lastcindex];
-    lastc = [[[self textStorage] mutableString] characterAtIndex:lastcindex];
+- (NSRect)firstRectForCharacterRange:(NSRange)aRange actualRange:(NSRangePointer)actualRange  {
+  actualRange = NULL;
+  return NSMakeRect(0,0,0,0);
+}
 
-    glyphRange.length = 1;
-    glyphRange.location = glyph;
-    glyphRect = [lm boundingRectForGlyphRange:glyphRange inTextContainer:tc];
-    
-    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:lastc]) {
-      glyphRect.size.height /= 2;
-      glyphRect.origin.y += glyphRect.size.height;
-      glyphRect.origin.x += [tc lineFragmentPadding];
-      glyphRect.size.width = 0;
+
+- (NSUInteger)characterIndexForPoint:(NSPoint)aPoint  {
+  NSInteger guess, startchar, c;
+  NSRange lineRange;
+  NSRect lineRect;
+  
+  guess = [self lineIndexForPoint:aPoint];
+  
+  aPoint.y -= lineRect.origin.y;
+  startchar = aPoint.y / charSize.height;
+  c = startchar + aPoint.x / charSize.width;
+  
+  lineRange = [[lineRanges objectAtIndex:guess] rangeValue];
+  if (c > lineRange.length)
+    return NSNotFound;
+  return lineRange.location + c;
+}
+
+
+- (NSInteger)lineIndexForPoint:(NSPoint)aPoint {
+  NSInteger guess, lines;
+  NSRect lineRect;
+  
+  NSAssert(NSPointInRect(aPoint, [self bounds]), @"Given point is outside bounds");
+  lines = [lineRanges count];
+  
+  guess = aPoint.y / charSize.height;
+  lineRect = [self rectForLine:guess];
+  while (!NSPointInRect(aPoint, lineRect)) {
+    if (aPoint.y < lineRect.origin.y) {
+      guess = guess / 2;
+    } else {
+      if (guess == lines - 1) return NSNotFound;
+      guess = guess + (lines - guess) / 2;
     }
-    
-    if (cur >= length) {
-      spaceSize = [@" " sizeWithAttributes:ttyAttributes];
-      glyphRect.origin.x += glyphRect.size.width;
-      glyphRect.size.width = spaceSize.width;
-    }
+    lineRect = [self rectForLine:guess];
   }
-
-  oldRect = curRect;
-  curRect = glyphRect;
-  [self setNeedsDisplayInRect:oldRect];
-  [self setNeedsDisplayInRect:curRect];
-  [self scrollRangeToVisible:NSMakeRange(cur, 0)];
+  return guess;
 }
 
 
-- (void)setTeletypeFont:(NSFont*)font {
-  NSMutableParagraphStyle *parstyle;
-  
-  parstyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-  [parstyle setLineBreakMode:NSLineBreakByCharWrapping];
-  
-  ttyAttributes = @{
-    NSParagraphStyleAttributeName:[parstyle copy],
-    NSFontAttributeName:font };
-  
-  [self setTeletypeFormat];
-  [self setTeletypeCursorPosition:lastCur];
+- (NSArray *)validAttributesForMarkedText {
+  return @[];
 }
 
 
-- (void)setTeletypeFormat {
-  NSRange all;
-  
-  all.location = 0;
-  all.length = [[self textStorage] length];
-  [[self textStorage] setAttributes:ttyAttributes range:all];
+- (BOOL)isFlipped {
+  return YES;
 }
 
 
-- (void)drawViewBackgroundInRect:(NSRect)rect {
-  NSBezierPath *cursor;
+- (void)scrollToEndOfDocument:(id)sender {
+  id clipview;
+  CGFloat top;
   
-  [super drawViewBackgroundInRect:rect];
-  if (NSIntersectsRect(rect, curRect)) {
-    cursor = [NSBezierPath bezierPathWithRect:curRect];
-    [[NSColor colorWithCalibratedWhite:.5f alpha:1] setFill];
-    [cursor fill];
+  clipview = [self superview];
+  if (![clipview isKindOfClass:[NSClipView class]])
+    return;
+  
+  if ([clipview bounds].size.height < [self bounds].size.height) {
+    top = [self bounds].size.height - [clipview bounds].size.height;
+    [clipview scrollToPoint:NSMakePoint(0, top)];
   }
 }
 
 
-- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
-  if ([anItem action] != @selector(copy:) &&
-      [anItem action] != @selector(paste:)) return NO;
-  return [super validateUserInterfaceItem:anItem];
-}
-
-
-- (void)paste:(id)sender {
-  NSPasteboard *pb;
-  NSArray *arry;
-  NSString *obj;
-  
-  pb = [NSPasteboard generalPasteboard];
-  arry = [pb readObjectsForClasses:@[[NSString class]] options:nil];
-  for (obj in arry) {
-    [self insertText:obj];
-  }
-}
-
-
-- (void)insertText:(id)aString {
-  MOSTeletypeViewDelegate *d;
-  
-  d = [self delegate];
-  [d typedString:aString];
+- (void)insertOutputText:(NSString *)text {
+  [storage appendString:text];
+  [self cacheLineRanges];
+  [self updateViewHeight];
+  [self scrollToEndOfDocument:nil];
+  [self setNeedsDisplay:YES];
 }
 
 
 - (void)deleteBackward:(id)sender {
-  MOSTeletypeViewDelegate *d;
+  if (![lineBuffer length]) {
+    NSBeep();
+    return;
+  }
   
-  d = [self delegate];
-  [d deleteCharactersFromCursor:-1];
+  [storage deleteCharactersInRange:NSMakeRange([storage length]-1, 1)];
+  [lineBuffer deleteCharactersInRange:NSMakeRange([lineBuffer length]-1, 1)];
+  [self cacheLineRanges];
+  [self updateViewHeight];
+  [self setNeedsDisplay:YES];
 }
 
 
-- (void)deleteForward:(id)sender {
-  MOSTeletypeViewDelegate *d;
-  
-  d = [self delegate];
-  [d deleteCharactersFromCursor:1];
+- (void)keyDown:(NSEvent *)theEvent {
+  [self interpretKeyEvents:@[theEvent]];
 }
 
 
-- (void)deleteToBeginningOfLine:(id)sender {
-  MOSTeletypeViewDelegate *d;
-  
-  d = [self delegate];
-  [d deleteCharactersFromCursor:-(NSIntegerMax/2)];
+- (void)insertNewline:(id)sender {
+  [self insertText:@"\n"];
 }
 
 
-- (void)deleteToEndOfLine:(id)sender {
-  MOSTeletypeViewDelegate *d;
+- (void)insertText:(id)aString {
+  NSInteger i, c;
+  unichar a;
   
-  d = [self delegate];
-  [d deleteCharactersFromCursor:(NSIntegerMax/2)];
+  if ([aString isKindOfClass:[NSAttributedString class]])
+    aString = [aString string];
+  
+  if ((c = [aString length]) > 1) {
+    for (i=0; i<c-1; i++)
+      [self insertText:[aString substringWithRange:NSMakeRange(i, 1)]];
+    aString = [aString substringWithRange:NSMakeRange(i, 1)];
+  }
+  
+  a = [aString characterAtIndex:0];
+  if ([[NSCharacterSet newlineCharacterSet] characterIsMember:a]) {
+    [self insertOutputText:@"\n"];
+    if ([self.delegate respondsToSelector:@selector(typedString:)]) {
+      [lineBuffer appendString:@"\n"];
+      [self.delegate typedString:[lineBuffer copy]];
+    }
+    [lineBuffer setString:@""];
+  } else {
+    [self insertOutputText:aString];
+    [lineBuffer appendString:aString];
+  }
 }
 
 
-- (void)moveLeft:(id)sender {
-  MOSTeletypeViewDelegate *d;
+- (void)cacheLineRanges {
+  NSUInteger start, end, cend, l;
   
-  d = [self delegate];
-  [d moveCursor:-1];
+  [lineRanges removeAllObjects];
+  start = end = cend = 0;
+  l = [storage length];
+  
+  while (start < l) {
+    [storage getLineStart:NULL end:&end contentsEnd:&cend forRange:NSMakeRange(start, 0)];
+    [lineRanges addObject:[NSValue valueWithRange:NSMakeRange(start, cend - start)]];
+    start = end;
+  }
+  
+  if (end != cend || start == 0)
+    [lineRanges addObject:[NSValue valueWithRange:NSMakeRange(start, 0)]];
 }
 
 
-- (void)moveRight:(id)sender {
-  MOSTeletypeViewDelegate *d;
+- (void)updateViewHeight {
+  NSUInteger i;
+  CGFloat h;
   
-  d = [self delegate];
-  [d moveCursor:1];
+  i = [lineRanges count] - 1;
+  h = [self locationForLine:i].y + [self heightForLine:i];
+  [self setFrameSize:NSMakeSize([self frame].size.width, h)];
 }
 
 
-- (void)moveToBeginningOfLine:(id)sender {
-  MOSTeletypeViewDelegate *d;
+- (void)setFrame:(NSRect)frame {
+  NSRect oldFrame;
   
-  d = [self delegate];
-  [d moveCursor:-(NSIntegerMax/2)];
+  oldFrame = [self frame];
+  [super setFrame:frame];
+  if (oldFrame.size.width != frame.size.width) {
+    [lineLocationCache removeAllObjects];
+    [self updateViewHeight];
+    [self setNeedsDisplay:YES];
+  }
 }
 
 
-- (void)moveToEndOfLine:(id)sender {
-  MOSTeletypeViewDelegate *d;
+- (void)drawRect:(NSRect)dirtyRect {
+  CGContextRef cgc = [[NSGraphicsContext currentContext] graphicsPort];
+  const CGAffineTransform cga = {1.0, 0.0, 0.0, -1.0, 0.0, 0.0};
+  NSRange line;
+  NSPoint point;
+  NSInteger i, c;
+  NSString *tmp;
   
-  d = [self delegate];
-  [d moveCursor:-(NSIntegerMax/2)];
+  CGContextSetTextDrawingMode(cgc, kCGTextFill);
+  CGContextSetTextMatrix(cgc, cga);
+  
+  [[NSColor whiteColor] set];
+  NSRectFill(dirtyRect);
+  [[NSColor blackColor] set];
+  
+  i = [self lineIndexForPoint:dirtyRect.origin];
+  c = [lineRanges count];
+  point = [self locationForLine:i];
+  while (point.y < NSMaxY(dirtyRect)) {
+    line = [[lineRanges objectAtIndex:i] rangeValue];
+    tmp = [storage substringWithRange:line];
+    [self drawLine:tmp atPoint:point withCursor:(i == c-1)];
+    i++;
+    if (i < c)
+      point = [self locationForLine:i];
+    else
+      break;
+  }
+  
+  [super drawRect:dirtyRect];
+}
+
+
+- (void)cacheLocationsForLines:(NSRange)lr {
+  NSValue *pointval;
+  NSPoint point;
+  
+  if (lr.location) {
+    pointval = [lineLocationCache objectForKey:@(lr.location-1)];
+    NSAssert(pointval, @"cacheLocationsForLines: called with invalid range");
+    point = [pointval pointValue];
+    point.y += [self heightForLine:lr.location-1];
+  } else {
+    point = NSZeroPoint;
+  }
+  
+  [lineLocationCache setObject:[NSValue valueWithPoint:point] forKey:@(lr.location)];
+  lr.length--;
+  lr.location++;
+  
+  for (; lr.length; lr.location++, lr.length--) {
+    point.y += [self heightForLine:lr.location - 1];
+    [lineLocationCache setObject:[NSValue valueWithPoint:point] forKey:@(lr.location)];
+  }
+}
+
+
+- (NSPoint)locationForLine:(NSInteger)line {
+  NSValue *pointval;
+  NSInteger i;
+  
+  pointval = [lineLocationCache objectForKey:@(line)];
+  if (pointval) return [pointval pointValue];
+  
+  for (i=line; i>=0; i--) {
+    pointval = [lineLocationCache objectForKey:@(line)];
+    if (pointval) break;
+  }
+  i++;
+  [self cacheLocationsForLines:NSMakeRange(i, line + 1- i)];
+  
+  pointval = [lineLocationCache objectForKey:@(line)];
+  NSAssert(pointval, @"cacheLocationsForLines: failed!");
+  return [pointval pointValue];
+}
+
+
+- (CGFloat)heightForLine:(NSInteger)i {
+  NSRange line;
+  NSInteger hmul, lineWidth;
+  
+  lineWidth = [self bounds].size.width / charSize.width;
+  line = [[lineRanges objectAtIndex:i] rangeValue];
+  hmul = MAX(1, (((NSInteger)line.length - 1) / lineWidth) + 1);
+  return hmul * charSize.height;
+}
+
+
+- (NSRect)rectForLine:(NSInteger)line {
+  NSRect res;
+  
+  res.origin = [self locationForLine:line];
+  res.size.height = [self heightForLine:line];
+  res.size.width = [self bounds].size.width;
+  return res;
+}
+
+
+- (NSPoint)drawLine:(NSString *)line atPoint:(NSPoint)point withCursor:(BOOL)cur {
+  CTFontRef font = (__bridge CTFontRef)(dispFont);
+  CGContextRef cgc = [[NSGraphicsContext currentContext] graphicsPort];
+  UniChar *string;
+  static CGGlyph *glyphs;
+  static NSInteger glyphsBufSize = 0;
+  CGPoint tmppos;
+  NSInteger lineWidth, i, c, j;
+  NSRect cursorRect;
+  
+  c = [line length];
+  
+  if (glyphsBufSize < c) {
+    free(glyphs);
+    glyphsBufSize = c * 2;
+    glyphs = malloc(glyphsBufSize * sizeof(CGGlyph));
+  }
+  string = (UniChar*)[line cStringUsingEncoding:NSUTF16StringEncoding];
+  CTFontGetGlyphsForCharacters(font, string, glyphs, c);
+
+  CGContextSetTextPosition(cgc, point.x, point.y);
+  cursorRect.origin = point;
+  
+  tmppos = NSMakePoint(0, 0);
+  tmppos.y -= charSize.height - baselineOffset;
+  lineWidth = j = [self bounds].size.width / charSize.width;
+  for (i=0; i<c; i++) {
+    if (j == lineWidth)
+      point.y += charSize.height;
+    
+    CTFontDrawGlyphs(font, glyphs+i, &tmppos, 1, cgc);
+    
+    j--;
+    if (j)
+      tmppos.x += charSize.width;
+    else {
+      tmppos.x = point.x;
+      tmppos.y -= charSize.height;
+      j = lineWidth;
+    }
+  }
+  
+  if (cur) {
+    cursorRect.origin.x += tmppos.x;
+    cursorRect.origin.y -= tmppos.y + (charSize.height - baselineOffset);
+    cursorRect.size = charSize;
+    [[NSGraphicsContext currentContext] saveGraphicsState];
+    [[NSColor grayColor] set];
+    NSRectFill(cursorRect);
+    [[NSGraphicsContext currentContext] restoreGraphicsState];
+  }
+  
+  return point;
 }
 
 

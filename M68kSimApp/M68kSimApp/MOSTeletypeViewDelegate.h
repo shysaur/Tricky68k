@@ -7,26 +7,22 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOSTeletypeView.h"
 #import "MOSSimulatorSubviewDelegate.h"
 
 
 @class MOSSimulatorProxy;
-@class MOSTeletypeView;
 
 
-@interface MOSTeletypeViewDelegate : MOSSimulatorSubviewDelegate <NSTextViewDelegate> {
+@interface MOSTeletypeViewDelegate : MOSSimulatorSubviewDelegate <MOSTeletypeViewDelegate> {
   MOSSimulatorProxy *simProxy;
   NSFileHandle *toSim;
   NSFileHandle *fromSim;
-  NSMutableString *lineBuffer;
-  NSInteger cursor, viewCursor, viewSpan;
   IBOutlet MOSTeletypeView *textView;
 }
 
 - (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
 
 - (void)typedString:(NSString*)str;
-- (void)moveCursor:(NSInteger)displ;
-- (void)deleteCharactersFromCursor:(NSInteger)amount;
 
 @end
