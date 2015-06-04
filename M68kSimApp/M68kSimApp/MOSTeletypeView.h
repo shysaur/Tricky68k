@@ -25,9 +25,15 @@
   NSFont *dispFont;
   NSSize charSize;
   CGFloat baselineOffset;
+  
+  NSInteger dragPivot;
+  NSRange selection;
 }
 
 - (void)insertOutputText:(NSString *)text;
+
+- (void)copy:(id)sender;
+- (void)paste:(id)sender;
 
 - (NSString *)string;
 - (void)setString:(NSString *)string;
