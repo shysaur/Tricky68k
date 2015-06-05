@@ -136,10 +136,8 @@
   allText = NSMakeRange(0, [storage length]);
   
   adj = NSIntersectionRange(aRange, allText);
-  if (!NSEqualRanges(aRange, adj) && actualRange)
-    actualRange = &adj;
-  else
-    actualRange = NULL;
+  if (actualRange)
+    *actualRange = adj;
   
   res = [storage substringWithRange:adj];
   return [[NSAttributedString alloc] initWithString:res];
@@ -683,11 +681,11 @@
 
 - (void)drawSelection {
   NSRange range = selection;
-  NSRange l0, l1;
+  NSRange l1;
   NSInteger li0, li1;
   NSPoint start, end;
   NSRect r, tr = [self textRect];
-  BOOL sameline, nlextend0, nlextend1;
+  BOOL sameline, nlextend1;
   
   [[NSColor selectedTextBackgroundColor] set];
   
@@ -696,11 +694,9 @@
     
   start = [self originOfCharacterAtIndex:range.location outputLine:&li0];
   end = [self originOfCharacterAtIndex:NSMaxRange(range)-1 outputLine:&li1];
-  l0 = [[lineRanges objectAtIndex:li0] rangeValue];
   l1 = [[lineRanges objectAtIndex:li1] rangeValue];
   
   sameline = start.y == end.y;
-  nlextend0 = range.location > NSMaxRange(l0);
   nlextend1 = NSMaxRange(range) > NSMaxRange(l1);
   
   if (sameline) {
