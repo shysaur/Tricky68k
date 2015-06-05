@@ -226,6 +226,39 @@
 }
 
 
+#pragma mark - Menus
+
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
+  if ([menuItem action] == @selector(copy:))
+    return selection.length > 0;
+  return YES;
+}
+
+
++ (NSMenu *)defaultMenu {
+  static NSMenu *cache;
+  NSMenuItem *tmp;
+  
+  if (cache)
+    return cache;
+  
+  cache = [[NSMenu alloc] init];
+  
+  tmp = [[NSMenuItem alloc] init];
+  [tmp setAction:@selector(copy:)];
+  [tmp setTitle:NSLocalizedString(@"Copy", @"Copy (teletype view menu)")];
+  [cache addItem:tmp];
+  
+  tmp = [[NSMenuItem alloc] init];
+  [tmp setAction:@selector(paste:)];
+  [tmp setTitle:NSLocalizedString(@"Paste", @"Paste (teletype view menu)")];
+  [cache addItem:tmp];
+  
+  return cache;
+}
+
+
 #pragma mark - Responder Actions
 
 
