@@ -38,6 +38,8 @@
 
 - (NSString *)string;
 - (void)setString:(NSString *)string;
+- (NSFont *)font;
+- (void)setFont:(NSFont *)font;
 
 @property (weak) id <MOSTeletypeViewDelegate> delegate;
 

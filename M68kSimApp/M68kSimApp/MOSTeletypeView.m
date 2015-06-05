@@ -33,7 +33,6 @@
   
   dispFont = [NSFont userFixedPitchFontOfSize:11.0];
   [self reloadFontInfo];
-  [self updateViewHeight];
 }
 
 
@@ -53,21 +52,41 @@
 #pragma mark - Appearance properties
 
 
+- (NSFont *)font {
+  return dispFont;
+}
+
+
+- (void)setFont:(NSFont *)font {
+  dispFont = font;
+  [self reloadFontInfo];
+  [self setNeedsDisplay:YES];
+}
+
+
 - (void)reloadFontInfo {
   CTFontRef font = (__bridge CTFontRef)(dispFont);
-  CGFloat ascent, descent, leading;
-  UniChar test[1] = {' '};
-  CGGlyph glyphs[1];
+  NSInteger i;
+  CGFloat ascent, descent, leading, advance;
+  UniChar test[4] = {' ', '0', '8', 'W'};
+  CGGlyph glyphs[4];
+  CGSize adv[4];
   
-  CTFontGetGlyphsForCharacters(font, test, glyphs, 1);
-  charSize.width = CTFontGetAdvancesForGlyphs(font,
-    kCTFontOrientationHorizontal, glyphs, NULL, 1);
+  CTFontGetGlyphsForCharacters(font, test, glyphs, 4);
+  CTFontGetAdvancesForGlyphs(font, kCTFontOrientationHorizontal, glyphs, adv, 4);
+  advance = adv[0].width;
+  for (i=1; i<4; i++)
+    if (adv[i].width > advance)
+      advance = adv[i].width;
+  charSize.width = advance;
+  
   ascent = CTFontGetAscent(font);
   descent = CTFontGetDescent(font);
   leading = CTFontGetLeading(font);
   charSize.height = ceil(ascent + descent + leading);
   baselineOffset = descent;
   [lineLocationCache removeAllObjects];
+  [self updateViewHeight];
 }
 
 

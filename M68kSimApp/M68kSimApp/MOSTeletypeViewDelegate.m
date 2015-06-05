@@ -15,6 +15,7 @@
 
 - (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
   [textView setString:@""];
+  [self defaultMonospacedFontHasChanged];
   
   simProxy = sp;
   toSim = [simProxy teletypeOutput];
@@ -37,7 +38,7 @@
 
 
 - (void)defaultMonospacedFontHasChanged {
-  //[textView setTeletypeFont:[self defaultMonospacedFont]];
+  [textView setFont:[self defaultMonospacedFont]];
 }
 
 
