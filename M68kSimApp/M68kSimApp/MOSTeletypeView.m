@@ -24,6 +24,7 @@
 
 
 - (void)awakeFromNib {
+  viewPadding = NSMakeSize(3, 0);
   storage = [[NSMutableString alloc] init];
   lineBuffer = [[NSMutableString alloc] init];
   lineRanges = [[NSMutableArray alloc] init];
@@ -86,7 +87,7 @@
 
 
 - (void)setMarkedText:(id)aString selectedRange:(NSRange)selectedRange
-  replacementRange:(NSRange)replacemenkltRange  { }
+  replacementRange:(NSRange)replacementRange  { }
 
 
 - (void)unmarkText { }
@@ -129,7 +130,7 @@
 - (NSRect)firstRectForCharacterRange:(NSRange)aRange actualRange:(NSRangePointer)actualRange {
   NSInteger l0, i, w;
   NSPoint p0, p1;
-  NSRect res;
+  NSRect res, tr = [self textRect];
   NSRange r0;
   
   p0 = [self originOfCharacterAtIndex:aRange.location outputLine:&l0];
@@ -138,11 +139,11 @@
   res.origin = p0;
   res.size.height = charSize.height;
   if (p0.y != p1.y) {
-    res.size.width = [self frame].size.width - res.origin.x;
+    res.size.width = tr.size.width - res.origin.x;
     if (actualRange) {
       r0 = [[lineRanges objectAtIndex:l0] rangeValue];
       i = aRange.location - r0.location;
-      w = [self bounds].size.width / charSize.width;
+      w = tr.size.width / charSize.width;
       aRange.length = w - i % w;
       *actualRange = aRange;
     }
@@ -169,16 +170,18 @@
 
 /* Returns [storage length] if the cursor points outside the contents */
 - (NSUInteger)characterIndexForPoint:(NSPoint)aPoint  {
-  NSInteger guess, startchar, c;
+  NSInteger guess, startchar, c, lineWidth;
   NSRange lineRange;
-  NSRect lineRect;
+  NSRect lineRect, tr = [self textRect];
   
   guess = [self lineIndexForPoint:aPoint];
   lineRect = [self rectForLine:guess];
+  lineWidth = tr.size.width / charSize.width;
   
-  aPoint.y -= lineRect.origin.y;
-  startchar = aPoint.y / charSize.height;
-  c = startchar + aPoint.x / charSize.width;
+  aPoint.y = MAX(0, aPoint.y - lineRect.origin.y);
+  aPoint.x = MIN(MAX(0, aPoint.x - lineRect.origin.x), tr.size.width);
+  startchar = (NSInteger)(aPoint.y / charSize.height) * lineWidth;
+  c = startchar + (NSInteger)(aPoint.x / charSize.width);
   
   lineRange = [[lineRanges objectAtIndex:guess] rangeValue];
   if (c >= lineRange.length) {
@@ -193,33 +196,37 @@
 
 - (NSInteger)lineIndexForPoint:(NSPoint)aPoint {
   NSInteger guess, lines, sb, se;
-  NSRect lineRect;
+  NSRect lineRect, tr = [self textRect];
   
   lines = [lineRanges count];
-  if (!NSPointInRect(aPoint, [self bounds])) {
-    if (aPoint.y < 0)
-      return 0;
-    return lines-1;
-  }
   
-  guess = MIN(aPoint.y / charSize.height, lines - 1);
+  if (aPoint.y < tr.origin.y)
+    return 0;
+  else if (aPoint.y >= NSMaxY(tr))
+    return lines-1;
+  
+  guess = MIN((aPoint.y - tr.origin.y) / charSize.height, lines - 1);
   sb = 0;
   se = lines;
+  
   lineRect = [self rectForLine:guess];
   lineRect.size.width = [self frame].size.width;
+  lineRect.origin.x = 0;
   
-  while (!NSPointInRect(aPoint, lineRect)) {
+  while (aPoint.y < lineRect.origin.y || aPoint.y >= NSMaxY(lineRect)) {
     if (aPoint.y < lineRect.origin.y) {
       if (guess == 0) return 0;
       se = guess - 1;
-      guess = guess + (guess - sb) / 2;
+      guess = MIN(guess + (guess - sb) / 2, se);
     } else {
       if (guess == lines - 1) return lines-1;
       sb = guess + 1;
-      guess = guess + (se - guess) / 2;
+      guess = MAX(sb, guess + (se - guess) / 2);
     }
+    
     lineRect = [self rectForLine:guess];
     lineRect.size.width = [self frame].size.width;
+    lineRect.origin.x = 0;
   }
   
   return guess;
@@ -495,7 +502,7 @@
   CGFloat h;
   
   i = [lineRanges count] - 1;
-  h = [self locationForLine:i].y + [self heightForLine:i];
+  h = [self locationForLine:i].y + [self heightForLine:i] + viewPadding.height;
   if ([[self superview] isKindOfClass:[NSClipView class]]) {
     h = MAX(h, [[self superview] frame].size.height);
   }
@@ -519,10 +526,23 @@
 #pragma mark - Metrics computation
 
 
+- (NSRect)textRect {
+  NSRect bounds;
+  
+  bounds = [self bounds];
+  bounds.origin.x += viewPadding.width;
+  bounds.origin.y += viewPadding.height;
+  bounds.size.width -= 2 * viewPadding.width;
+  bounds.size.height -= 2 * viewPadding.height;
+  return bounds;
+}
+
+
 - (NSPoint)originOfCharacterAtIndex:(NSUInteger)i outputLine:(NSInteger *)lo {
   NSInteger l, lineWidth, hmul, wmul;
   NSPoint linezero, chardelta;
   NSRange r;
+  NSRect tr = [self textRect];
   
   l = [self lineOfCharacterAtIndex:i];
   if (l < 0)
@@ -530,7 +550,7 @@
   r = [[lineRanges objectAtIndex:l] rangeValue];
   if (lo) *lo = l;
   
-  lineWidth = [self frame].size.width / charSize.width;
+  lineWidth = tr.size.width / charSize.width;
   i -= r.location;
   hmul = i / lineWidth;
   wmul = i % lineWidth;
@@ -543,6 +563,7 @@
 - (void)cacheLocationsForLines:(NSRange)lr {
   NSValue *pointval;
   NSPoint point;
+  NSRect tr = [self textRect];
   
   if (lr.location) {
     pointval = [lineLocationCache objectForKey:@(lr.location-1)];
@@ -550,7 +571,7 @@
     point = [pointval pointValue];
     point.y += [self heightForLine:lr.location-1];
   } else {
-    point = NSZeroPoint;
+    point = tr.origin;
   }
   
   [lineLocationCache setObject:[NSValue valueWithPoint:point] forKey:@(lr.location)];
@@ -576,7 +597,7 @@
     if (pointval) break;
   }
   i++;
-  [self cacheLocationsForLines:NSMakeRange(i, line + 1- i)];
+  [self cacheLocationsForLines:NSMakeRange(i, line + 1 - i)];
   
   pointval = [lineLocationCache objectForKey:@(line)];
   NSAssert(pointval, @"cacheLocationsForLines: failed!");
@@ -587,8 +608,9 @@
 - (CGFloat)heightForLine:(NSInteger)i {
   NSRange line;
   NSInteger hmul, lineWidth;
+  NSRect tr = [self textRect];
   
-  lineWidth = [self bounds].size.width / charSize.width;
+  lineWidth = tr.size.width / charSize.width;
   line = [[lineRanges objectAtIndex:i] rangeValue];
   hmul = MAX(1, (((NSInteger)line.length - 1) / lineWidth) + 1);
   return hmul * charSize.height;
@@ -600,7 +622,7 @@
   
   res.origin = [self locationForLine:line];
   res.size.height = [self heightForLine:line];
-  res.size.width = [self bounds].size.width;
+  res.size.width = [self textRect].size.width;
   return res;
 }
 
@@ -637,8 +659,6 @@
     else
       break;
   }
-  
-  [super drawRect:dirtyRect];
 }
 
 
@@ -647,7 +667,7 @@
   NSRange l0, l1;
   NSInteger li0, li1;
   NSPoint start, end;
-  NSRect r;
+  NSRect r, tr = [self textRect];
   BOOL sameline, nlextend0, nlextend1;
   
   [[NSColor selectedTextBackgroundColor] set];
@@ -668,7 +688,7 @@
     if (!nlextend1)
       end.x += charSize.width;
     else
-      end.x = [self bounds].size.width;
+      end.x = NSMaxX(tr);
     end.y += charSize.height;
     r.origin = start;
     r.size = NSMakeSize(end.x - start.x, end.y - start.y);
@@ -676,28 +696,28 @@
       NSRectFill(r);
   } else {
     r.origin = start;
-    r.size = NSMakeSize([self bounds].size.width - start.x, charSize.height);
+    r.size = NSMakeSize(NSMaxX(tr) - start.x, charSize.height);
     if ([self needsToDrawRect:r])
       NSRectFill(r);
     
-    r.origin = NSMakePoint(0, start.y + charSize.height);
-    r.size = NSMakeSize([self bounds].size.width, end.y - r.origin.y);
+    r.origin = NSMakePoint(tr.origin.x, start.y + charSize.height);
+    r.size = NSMakeSize(tr.size.width, end.y - r.origin.y);
     if ([self needsToDrawRect:r])
       NSRectFill(r);
     
     if (!nlextend1)
       end.x += charSize.width;
     else
-      end.x = [self bounds].size.width;
-    r.origin = NSMakePoint(0, end.y);
-    r.size = NSMakeSize(end.x, charSize.height);
+      end.x = NSMaxX(tr);
+    r.origin = NSMakePoint(tr.origin.x, end.y);
+    r.size = NSMakeSize(end.x - tr.origin.x, charSize.height);
     if ([self needsToDrawRect:r])
       NSRectFill(r);
   }
 }
 
 
-- (NSPoint)drawLine:(NSRange)range atPoint:(NSPoint)point withCursor:(BOOL)cur {
+- (void)drawLine:(NSRange)range atPoint:(NSPoint)point withCursor:(BOOL)cur {
   CTFontRef font = (__bridge CTFontRef)(dispFont);
   NSString *line;
   CGContextRef cgc = [[NSGraphicsContext currentContext] graphicsPort];
@@ -706,7 +726,7 @@
   static NSInteger glyphsBufSize = 0;
   CGPoint tmppos;
   NSInteger lineWidth, i, c, j;
-  NSRect cursorRect;
+  NSRect cursorRect, tr = [self textRect];
   
   c = range.length;
   
@@ -724,10 +744,8 @@
   
   tmppos = NSMakePoint(0, 0);
   tmppos.y -= charSize.height - baselineOffset;
-  lineWidth = j = [self bounds].size.width / charSize.width;
+  lineWidth = j = tr.size.width / charSize.width;
   for (i=0; i<c; i++) {
-    if (j == lineWidth)
-      point.y += charSize.height;
     
     CTFontDrawGlyphs(font, glyphs+i, &tmppos, 1, cgc);
     
@@ -735,7 +753,7 @@
     if (j)
       tmppos.x += charSize.width;
     else {
-      tmppos.x = point.x;
+      tmppos.x = 0;
       tmppos.y -= charSize.height;
       j = lineWidth;
     }
@@ -750,8 +768,6 @@
     NSRectFill(cursorRect);
     [[NSGraphicsContext currentContext] restoreGraphicsState];
   }
-  
-  return point;
 }
 
 

@@ -22,6 +22,7 @@
   NSMutableArray *lineRanges; // <- no newlines!
   NSMutableDictionary *lineLocationCache;
   
+  NSSize viewPadding;
   NSFont *dispFont;
   NSSize charSize;
   CGFloat baselineOffset;
