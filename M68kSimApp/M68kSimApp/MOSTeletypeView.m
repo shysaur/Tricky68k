@@ -326,6 +326,7 @@
   
   evloc = [theEvent locationInWindow];
   localPoint = [self convertPoint:evloc fromView:nil];
+  localPoint.x += charSize.width / 2;
   dragPivot = [self characterIndexForPoint:localPoint];
   if (dragPivot == NSNotFound)
     dragPivot = [storage length];
@@ -340,8 +341,11 @@
   NSPoint localPoint, evloc;
   NSInteger tochar;
   
+  if (dragPivot == NSNotFound) return;
+  
   evloc = [theEvent locationInWindow];
   localPoint = [self convertPoint:evloc fromView:nil];
+  localPoint.x += charSize.width / 2;
   tochar = [self characterIndexForPoint:localPoint];
   
   if (tochar <= dragPivot) {
@@ -420,6 +424,8 @@
     return;
   }
   
+  selection.length = 0;
+  dragPivot = NSNotFound;
   [storage deleteCharactersInRange:NSMakeRange([storage length]-1, 1)];
   [lineBuffer deleteCharactersInRange:NSMakeRange([lineBuffer length]-1, 1)];
   [self cacheLineRanges];
@@ -434,24 +440,28 @@
 
 
 - (void)insertNewline:(id)sender {
-  [self insertText:@"\n"];
+  [self insertCharacter:'\n'];
 }
 
 
 - (void)insertText:(id)aString {
   NSInteger i, c;
-  unichar a;
   
   if ([aString isKindOfClass:[NSAttributedString class]])
     aString = [aString string];
   
-  if ((c = [aString length]) > 1) {
-    for (i=0; i<c-1; i++)
-      [self insertText:[aString substringWithRange:NSMakeRange(i, 1)]];
-    aString = [aString substringWithRange:NSMakeRange(i, 1)];
-  }
+  c = [aString length];
+  for (i=0; i<c; i++)
+    [self insertCharacter:[aString characterAtIndex:i]];
+}
+
+
+- (void)insertCharacter:(unichar)a {
+  NSString *tmp;
   
-  a = [aString characterAtIndex:0];
+  selection.length = 0;
+  dragPivot = NSNotFound;
+  
   if ([[NSCharacterSet newlineCharacterSet] characterIsMember:a]) {
     [self insertOutputText:@"\n"];
     if ([self.delegate respondsToSelector:@selector(typedString:)]) {
@@ -460,8 +470,9 @@
     }
     [lineBuffer setString:@""];
   } else {
-    [self insertOutputText:aString];
-    [lineBuffer appendString:aString];
+    tmp = [NSString stringWithCharacters:&a length:1];
+    [self insertOutputText:tmp];
+    [lineBuffer appendString:tmp];
   }
 }
 
