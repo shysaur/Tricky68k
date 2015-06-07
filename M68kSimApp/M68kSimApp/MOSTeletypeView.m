@@ -123,7 +123,7 @@
 
 
 - (NSRange)markedRange  {
-  return NSMakeRange(0, 0);
+  return NSMakeRange(NSNotFound, 0);
 }
 
 
@@ -201,7 +201,8 @@
 #pragma mark - Hit Testing
 
 
-/* Returns [storage length] if the cursor points outside the contents */
+/* Returns [storage length] if the cursor points outside the contents.
+ * Otherwise, always returns a valid character index. */
 - (NSUInteger)characterIndexForPoint:(NSPoint)aPoint  {
   NSInteger guess, startchar, c, lineWidth;
   NSRange lineRange;
@@ -227,6 +228,7 @@
 }
 
 
+/* Always returns a valid line index. */
 - (NSInteger)lineIndexForPoint:(NSPoint)aPoint {
   NSInteger guess, lines, sb, se;
   NSRect lineRect, tr = [self textRect];
@@ -328,8 +330,6 @@
   localPoint = [self convertPoint:evloc fromView:nil];
   localPoint.x += charSize.width / 2;
   dragPivot = [self characterIndexForPoint:localPoint];
-  if (dragPivot == NSNotFound)
-    dragPivot = [storage length];
   
   selection.location = dragPivot;
   selection.length = 0;
@@ -494,6 +494,8 @@
 }
 
 
+/* Always returns a valid line index, even if the character index is out of
+ * bounds */
 - (NSInteger)lineOfCharacterAtIndex:(NSUInteger)i {
   NSUInteger l, cs, ce;
   NSValue *srv;
@@ -582,6 +584,7 @@
 }
 
 
+/* Always returns a valid point. */
 - (NSPoint)originOfCharacterAtIndex:(NSUInteger)i outputLine:(NSInteger *)lo {
   NSInteger l, lineWidth, hmul, wmul;
   NSPoint linezero, chardelta;
@@ -661,6 +664,9 @@
 }
 
 
+/* Line rects must not have no gaps between them and must be coherent with
+ * the values returned by -heightForLine: and -locationForLine:, otherwise
+ * -lineIndexForPoint: will enter an infinite loop. */
 - (NSRect)rectForLine:(NSInteger)line {
   NSRect res;
   
@@ -693,13 +699,15 @@
   while (point.y < NSMaxY(dirtyRect)) {
     line = [[lineRanges objectAtIndex:i] rangeValue];
     [self drawSelectionInRange:[storage lineRangeForRange:line]];
-    [self drawTextInRange:line atPoint:point withCursor:(i == c-1)];
+    [self drawTextInRange:line atPoint:point];
     i++;
     if (i < c)
       point = [self locationForLine:i];
     else
       break;
   }
+  
+  [self drawCursor];
 }
 
 
@@ -716,38 +724,49 @@
 }
 
 
-- (void)drawTextInRange:(NSRange)range atPoint:(NSPoint)point withCursor:(BOOL)cur {
+- (void)drawCursor {
+  NSRect cursor;
+  
+  cursor.origin = [self originOfCharacterAtIndex:[storage length] outputLine:nil];
+  cursor.size = charSize;
+  if ([self needsToDrawRect:cursor]) {
+    [[NSColor grayColor] set];
+    NSRectFill(cursor);
+  }
+}
+
+
+- (void)drawTextInRange:(NSRange)range atPoint:(NSPoint)point {
   CTFontRef font = (__bridge CTFontRef)(dispFont);
-  NSString *line;
   CGContextRef cgc = [[NSGraphicsContext currentContext] graphicsPort];
-  UniChar *string;
-  static CGGlyph *glyphs;
-  static NSInteger glyphsBufSize = 0;
+  static UniChar *string = NULL;
+  static CGGlyph *glyphs = NULL;
+  static NSInteger bufsize = 0;
   CGPoint tmppos;
   NSInteger lineWidth, i, c, j;
-  NSRect cursorRect, tr = [self textRect];
+  NSRect tr = [self textRect];
   
   [[NSColor blackColor] set];
   
   c = range.length;
-  
-  if (glyphsBufSize < c) {
+  if (bufsize < c) {
     free(glyphs);
-    glyphsBufSize = c * 2;
-    glyphs = malloc(glyphsBufSize * sizeof(CGGlyph));
+    free(string);
+    bufsize = c * 2;
+    glyphs = malloc(bufsize * sizeof(CGGlyph));
+    string = malloc(bufsize * sizeof(UniChar));
   }
-  line = [storage substringWithRange:range];
-  string = (UniChar*)[line cStringUsingEncoding:NSUTF16StringEncoding];
+  [storage getCharacters:string range:range];
+  
   CTFontGetGlyphsForCharacters(font, string, glyphs, c);
-
   CGContextSetTextPosition(cgc, point.x, point.y);
-  cursorRect.origin = point;
   
   tmppos = NSMakePoint(0, 0);
   tmppos.y -= charSize.height - baselineOffset;
   lineWidth = j = tr.size.width / charSize.width;
+  
   for (i=0; i<c; i++) {
-    
+
     CTFontDrawGlyphs(font, glyphs+i, &tmppos, 1, cgc);
     
     j--;
@@ -758,16 +777,6 @@
       tmppos.y -= charSize.height;
       j = lineWidth;
     }
-  }
-  
-  if (cur) {
-    cursorRect.origin.x += tmppos.x;
-    cursorRect.origin.y -= tmppos.y + (charSize.height - baselineOffset);
-    cursorRect.size = charSize;
-    [[NSGraphicsContext currentContext] saveGraphicsState];
-    [[NSColor grayColor] set];
-    NSRectFill(cursorRect);
-    [[NSGraphicsContext currentContext] restoreGraphicsState];
   }
 }
 
