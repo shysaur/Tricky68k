@@ -49,6 +49,11 @@
 }
 
 
+- (BOOL)isOpaque {
+  return YES;
+}
+
+
 #pragma mark - Appearance properties
 
 
@@ -146,27 +151,38 @@
 
 - (NSRect)firstRectForCharacterRange:(NSRange)aRange actualRange:(NSRangePointer)actualRange {
   NSInteger l0, i, w;
+  unichar lastchar;
+  CGFloat lastcharwidth;
   NSPoint p0, p1;
   NSRect res, tr = [self textRect];
   NSRange r0;
   
   p0 = [self originOfCharacterAtIndex:aRange.location outputLine:&l0];
-  p1 = [self originOfCharacterAtIndex:NSMaxRange(aRange) outputLine:NULL];
+  p1 = [self originOfCharacterAtIndex:NSMaxRange(aRange)-1 outputLine:NULL];
   
   res.origin = p0;
   res.size.height = charSize.height;
   if (p0.y != p1.y) {
-    res.size.width = tr.size.width - res.origin.x;
+    res.size.width = NSMaxX(tr) - res.origin.x;
     if (actualRange) {
-      r0 = [[lineRanges objectAtIndex:l0] rangeValue];
+      r0 = [storage lineRangeForRange:[[lineRanges objectAtIndex:l0] rangeValue]];
       i = aRange.location - r0.location;
       w = tr.size.width / charSize.width;
       aRange.length = w - i % w;
+      if (NSMaxRange(aRange) > NSMaxRange(r0))
+        aRange.length = NSMaxRange(r0) - aRange.location;
       *actualRange = aRange;
     }
   } else {
-    res.size.width = p1.x - p0.x;
-    if (actualRange) *actualRange = aRange;
+    lastchar = [storage characterAtIndex:NSMaxRange(aRange)-1];
+    if ([[NSCharacterSet newlineCharacterSet] characterIsMember:lastchar])
+      lastcharwidth = NSMaxX(tr) - p1.x;
+    else
+      lastcharwidth = charSize.width;
+    
+    res.size.width = p1.x - p0.x + lastcharwidth;
+    if (actualRange)
+      *actualRange = aRange;
   }
   return res;
 }
@@ -660,16 +676,13 @@
   [[NSColor whiteColor] set];
   NSRectFill(dirtyRect);
   
-  [self drawSelection];
-  
-  [[NSColor blackColor] set];
-  
   i = [self lineIndexForPoint:dirtyRect.origin];
   c = [lineRanges count];
   point = [self locationForLine:i];
   while (point.y < NSMaxY(dirtyRect)) {
     line = [[lineRanges objectAtIndex:i] rangeValue];
-    [self drawLine:line atPoint:point withCursor:(i == c-1)];
+    [self drawSelectionInRange:[storage lineRangeForRange:line]];
+    [self drawTextInRange:line atPoint:point withCursor:(i == c-1)];
     i++;
     if (i < c)
       point = [self locationForLine:i];
@@ -679,60 +692,20 @@
 }
 
 
-- (void)drawSelection {
-  NSRange range = selection;
-  NSRange l1;
-  NSInteger li0, li1;
-  NSPoint start, end;
-  NSRect r, tr = [self textRect];
-  BOOL sameline, nlextend1;
+- (void)drawSelectionInRange:(NSRange)range {
+  NSRect selRect;
   
-  [[NSColor selectedTextBackgroundColor] set];
-  
+  range = NSIntersectionRange(range, selection);
   if (!range.length)
     return;
-    
-  start = [self originOfCharacterAtIndex:range.location outputLine:&li0];
-  end = [self originOfCharacterAtIndex:NSMaxRange(range)-1 outputLine:&li1];
-  l1 = [[lineRanges objectAtIndex:li1] rangeValue];
   
-  sameline = start.y == end.y;
-  nlextend1 = NSMaxRange(range) > NSMaxRange(l1);
-  
-  if (sameline) {
-    if (!nlextend1)
-      end.x += charSize.width;
-    else
-      end.x = NSMaxX(tr);
-    end.y += charSize.height;
-    r.origin = start;
-    r.size = NSMakeSize(end.x - start.x, end.y - start.y);
-    if ([self needsToDrawRect:r])
-      NSRectFill(r);
-  } else {
-    r.origin = start;
-    r.size = NSMakeSize(NSMaxX(tr) - start.x, charSize.height);
-    if ([self needsToDrawRect:r])
-      NSRectFill(r);
-    
-    r.origin = NSMakePoint(tr.origin.x, start.y + charSize.height);
-    r.size = NSMakeSize(tr.size.width, end.y - r.origin.y);
-    if ([self needsToDrawRect:r])
-      NSRectFill(r);
-    
-    if (!nlextend1)
-      end.x += charSize.width;
-    else
-      end.x = NSMaxX(tr);
-    r.origin = NSMakePoint(tr.origin.x, end.y);
-    r.size = NSMakeSize(end.x - tr.origin.x, charSize.height);
-    if ([self needsToDrawRect:r])
-      NSRectFill(r);
-  }
+  selRect = [self firstRectForCharacterRange:range actualRange:NULL];
+  [[NSColor selectedTextBackgroundColor] set];
+  NSRectFill(selRect);
 }
 
 
-- (void)drawLine:(NSRange)range atPoint:(NSPoint)point withCursor:(BOOL)cur {
+- (void)drawTextInRange:(NSRange)range atPoint:(NSPoint)point withCursor:(BOOL)cur {
   CTFontRef font = (__bridge CTFontRef)(dispFont);
   NSString *line;
   CGContextRef cgc = [[NSGraphicsContext currentContext] graphicsPort];
@@ -742,6 +715,8 @@
   CGPoint tmppos;
   NSInteger lineWidth, i, c, j;
   NSRect cursorRect, tr = [self textRect];
+  
+  [[NSColor blackColor] set];
   
   c = range.length;
   
