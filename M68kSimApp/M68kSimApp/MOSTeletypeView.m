@@ -331,9 +331,9 @@
   localPoint.x += charSize.width / 2;
   dragPivot = [self characterIndexForPoint:localPoint];
   
+  [self setNeedsDisplayOfSelection];
   selection.location = dragPivot;
   selection.length = 0;
-  [self setNeedsDisplay:YES];
 }
 
 
@@ -342,6 +342,8 @@
   NSInteger tochar;
   
   if (dragPivot == NSNotFound) return;
+  
+  [self setNeedsDisplayOfSelection];
   
   evloc = [theEvent locationInWindow];
   localPoint = [self convertPoint:evloc fromView:nil];
@@ -360,7 +362,8 @@
     [self scrollLineUp:nil];
   else if (localPoint.y > NSMaxY([self visibleRect]) - charSize.height)
     [self scrollLineDown:nil];
-  [self setNeedsDisplay:YES];
+  
+  [self setNeedsDisplayOfSelection];
 }
 
 
@@ -410,11 +413,12 @@
 
 
 - (void)insertOutputText:(NSString *)text {
+  [self setNeedsDisplayOfLastLine];
   [storage appendString:text];
   [self cacheLineRanges];
   [self updateViewHeight];
   [self scrollToEndOfDocument:nil];
-  [self setNeedsDisplay:YES];
+  [self setNeedsDisplayOfLastLine];
 }
 
 
@@ -424,13 +428,16 @@
     return;
   }
   
+  [self setNeedsDisplayOfSelection];
   selection.length = 0;
   dragPivot = NSNotFound;
+  
+  [self setNeedsDisplayOfLastLine];
   [storage deleteCharactersInRange:NSMakeRange([storage length]-1, 1)];
   [lineBuffer deleteCharactersInRange:NSMakeRange([lineBuffer length]-1, 1)];
   [self cacheLineRanges];
   [self updateViewHeight];
-  [self setNeedsDisplay:YES];
+  [self setNeedsDisplayOfLastLine];
 }
 
 
@@ -678,6 +685,23 @@
 
 
 #pragma mark - Drawing
+
+
+- (void)setNeedsDisplayOfSelection {
+  NSRect t0, t1;
+  
+  if (!selection.length)
+    return;
+  
+  t0 = [self rectForLine:[self lineOfCharacterAtIndex:selection.location]];
+  t1 = [self rectForLine:[self lineOfCharacterAtIndex:NSMaxRange(selection)-1]];
+  [self setNeedsDisplayInRect:NSUnionRect(t0, t1)];
+}
+
+
+- (void)setNeedsDisplayOfLastLine {
+  [self setNeedsDisplayInRect:[self rectForLine:[lineRanges count]-1]];
+}
 
 
 - (void)drawRect:(NSRect)dirtyRect {
