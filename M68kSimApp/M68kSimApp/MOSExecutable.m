@@ -8,7 +8,7 @@
 
 #import "MOSExecutable.h"
 #import "MOSSimulatorViewController.h"
-#import "MOSSimulatorProxy.h"
+#import "MOSSimulator.h"
 
 
 @implementation MOSExecutable
@@ -48,7 +48,7 @@
 
 
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError {
-  simProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
+  simProxy = [[MOSSimulator alloc] initWithExecutableURL:url];
   if ([simProxy simulatorState] == MOSSimulatorStateDead) {
     if (outError)
       *outError = [NSError errorWithDomain:MOSSimulatorViewErrorDomain

@@ -7,7 +7,7 @@
 //
 
 #import "MOSSimulatorViewController.h"
-#import "MOSSimulatorProxy.h"
+#import "MOSSimulator.h"
 #import "MOSSimDumpDataSource.h"
 #import "MOSSimDisasmDataSource.h"
 #import "MOSSimRegistersDataSource.h"
@@ -74,20 +74,20 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 
 - (void)reloadSimulatedExecutable {
-  MOSSimulatorProxy *oldSimProxy;
-  MOSSimulatorProxy *newSimProxy;
+  MOSSimulator *oldSimProxy;
+  MOSSimulator *newSimProxy;
   NSSet *breakpoints;
   
   breakpoints = [simProxy breakpointList];
   oldSimProxy = simProxy;
-  newSimProxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:simExec];
+  newSimProxy = [[MOSSimulator alloc] initWithExecutableURL:simExec];
   [newSimProxy addBreakpoints:breakpoints];
   [self setSimulatorProxy:newSimProxy];
   [oldSimProxy kill];
 }
 
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
+- (void)setSimulatorProxy:(MOSSimulator*)sp {
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
@@ -112,7 +112,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 }
 
 
-- (MOSSimulatorProxy*)simulatorProxy {
+- (MOSSimulator*)simulatorProxy {
   return simProxy;
 }
 

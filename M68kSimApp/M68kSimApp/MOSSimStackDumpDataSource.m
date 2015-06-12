@@ -7,7 +7,7 @@
 //
 
 #import "MOSSimStackDumpDataSource.h"
-#import "MOSSimulatorProxy.h"
+#import "MOSSimulator.h"
 
 
 @implementation MOSSimStackDumpDataSource

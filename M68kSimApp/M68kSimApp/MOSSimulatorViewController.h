@@ -17,7 +17,7 @@ enum {
 };
 
 
-@class MOSSimulatorProxy;
+@class MOSSimulator;
 @class MOSSimDumpDataSource;
 @class MOSSimDisasmDataSource;
 @class MOSSimRegistersDataSource;
@@ -33,7 +33,7 @@ enum {
 
 
 @interface MOSSimulatorViewController : NSViewController {
-  MOSSimulatorProxy *simProxy;
+  MOSSimulator *simProxy;
   NSURL *simExec;
   BOOL simRunning;
   BOOL viewHasLoaded;
@@ -46,8 +46,8 @@ enum {
 
 - (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr;
 - (NSURL*)simulatedExecutable;
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
-- (MOSSimulatorProxy*)simulatorProxy;
+- (void)setSimulatorProxy:(MOSSimulator*)sp;
+- (MOSSimulator*)simulatorProxy;
 
 - (BOOL)validateUserInterfaceItem:(id)anItem;
 

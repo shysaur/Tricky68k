@@ -7,13 +7,13 @@
 //
 
 #import "MOSTeletypeViewDelegate.h"
-#import "MOSSimulatorProxy.h"
+#import "MOSSimulator.h"
 
 
 @implementation MOSTeletypeViewDelegate
 
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
+- (void)setSimulatorProxy:(MOSSimulator*)sp {
   [textView setString:@""];
   [self defaultMonospacedFontHasChanged];
   

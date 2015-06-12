@@ -11,17 +11,17 @@
 #import "MOSSimulatorSubviewDelegate.h"
 
 
-@class MOSSimulatorProxy;
+@class MOSSimulator;
 
 
 @interface MOSTeletypeViewDelegate : MOSSimulatorSubviewDelegate <MOSTeletypeViewDelegate> {
-  MOSSimulatorProxy *simProxy;
+  MOSSimulator *simProxy;
   NSFileHandle *toSim;
   NSFileHandle *fromSim;
   IBOutlet MOSTeletypeView *textView;
 }
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
+- (void)setSimulatorProxy:(MOSSimulator*)sp;
 
 - (void)typedString:(NSString*)str;
 

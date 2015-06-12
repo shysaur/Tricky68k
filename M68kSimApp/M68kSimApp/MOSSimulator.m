@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MOSNamedPipe.h"
-#import "MOSSimulatorProxy.h"
+#import "MOSSimulator.h"
 #import "NSFileHandle+Strings.h"
 
 
@@ -51,7 +51,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
 
 
-@implementation MOSSimulatorProxy
+@implementation MOSSimulator
 
 
 - (NSURL*)simulatorURL {
@@ -64,7 +64,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 - initWithExecutableURL:(NSURL*)url {
   NSArray *args, *resp;
-  __weak MOSSimulatorProxy *weakSelf;
+  __weak MOSSimulator *weakSelf;
   __strong NSTask *strongTask;
   
   self = [super init];
@@ -95,7 +95,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   strongTask = simTask;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    __strong MOSSimulatorProxy *strongSelf;
+    __strong MOSSimulator *strongSelf;
     
     [strongTask waitUntilExit];
     /* We don't want this block to retain the proxy, otherwise we can't kill

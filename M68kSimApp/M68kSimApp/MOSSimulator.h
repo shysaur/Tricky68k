@@ -48,7 +48,7 @@ typedef enum {
 @class MOSNamedPipe;
 
 
-@interface MOSSimulatorProxy : NSObject {
+@interface MOSSimulator : NSObject {
   dispatch_queue_t simQueue;
   NSTask *simTask;
   NSURL *exec;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Daniele Cattaneo. 
 //
 
-#import "MOSSimulatorProxy.h"
+#import "MOSSimulator.h"
 #import "MOSSimTableViewDelegate.h"
 
 
@@ -16,7 +16,7 @@ static void *ReloadTableView = &ReloadTableView;
 @implementation MOSSimTableViewDelegate
 
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
+- (void)setSimulatorProxy:(MOSSimulator*)sp {
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorRunning" context:ReloadTableView];
   } @catch (NSException * __unused exception) {}
@@ -26,7 +26,7 @@ static void *ReloadTableView = &ReloadTableView;
 }
 
 
-- (MOSSimulatorProxy*)simulatorProxy {
+- (MOSSimulator*)simulatorProxy {
   return simProxy;
 }
 
@@ -50,7 +50,7 @@ static void *ReloadTableView = &ReloadTableView;
 
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object
   change:(NSDictionary*)change context:(void*)context {
-  __weak MOSSimulatorProxy *weaksp = simProxy;
+  __weak MOSSimulator *weaksp = simProxy;
   __weak NSTableView *weaktv = tableView;
   dispatch_time_t somet;
   

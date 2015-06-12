@@ -7,7 +7,7 @@
 //
 
 #import "MOSSimDisasmDataSource.h"
-#import "MOSSimulatorProxy.h"
+#import "MOSSimulator.h"
 
 
 @implementation MOSSimDisasmDataSource
@@ -37,7 +37,7 @@
 }
 
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp {
+- (void)setSimulatorProxy:(MOSSimulator*)sp {
   NSInteger rows;
   NSRect visibleRect;
   

@@ -10,7 +10,7 @@
 #import "MOSSimTableViewDelegate.h"
 
 
-@class MOSSimulatorProxy;
+@class MOSSimulator;
 
 
 @interface MOSSimDisasmDataSource : MOSSimTableViewDelegate <NSTableViewDataSource, NSTableViewDelegate> {

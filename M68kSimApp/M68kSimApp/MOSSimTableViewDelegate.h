@@ -10,15 +10,15 @@
 #import "MOSSimulatorSubviewDelegate.h"
 
 
-@class MOSSimulatorProxy;
+@class MOSSimulator;
 
 
 @interface MOSSimTableViewDelegate : MOSSimulatorSubviewDelegate {
   IBOutlet NSTableView *tableView;
-  MOSSimulatorProxy *simProxy;
+  MOSSimulator *simProxy;
 }
 
-- (void)setSimulatorProxy:(MOSSimulatorProxy*)sp;
-- (MOSSimulatorProxy*)simulatorProxy;
+- (void)setSimulatorProxy:(MOSSimulator*)sp;
+- (MOSSimulator*)simulatorProxy;
 
 @end

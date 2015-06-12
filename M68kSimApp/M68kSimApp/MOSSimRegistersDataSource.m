@@ -7,7 +7,7 @@
 //
 
 #import "MOSSimRegistersDataSource.h"
-#import "MOSSimulatorProxy.h"
+#import "MOSSimulator.h"
 
 
 const BOOL isRowHeader[] = {

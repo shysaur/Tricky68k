@@ -11,13 +11,13 @@
 
 
 @class MOSSimulatorViewController;
-@class MOSSimulatorProxy;
+@class MOSSimulator;
 
 
 @interface MOSExecutable : MOSDocument {
   NSWindowController *wc;
   NSWindow *window;
-  MOSSimulatorProxy *simProxy;
+  MOSSimulator *simProxy;
   IBOutlet MOSSimulatorViewController *simVc;
 }
 
