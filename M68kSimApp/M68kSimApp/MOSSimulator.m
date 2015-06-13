@@ -47,12 +47,37 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - initWithExecutableURL:(NSURL*)url {
-  self = [super init];
+  NSFileHandle *fromSim;
+  __weak MOSSimulator *weakSelf;
+  
+  weakSelf = self = [super init];
   if (!self) return nil;
   
   proxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
   [proxy addObserver:self forKeyPath:@"simulatorState"
     options:NSKeyValueObservingOptionInitial context:SimulatorStateChanged];
+  
+  fromSim = [proxy teletypeInput];
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    MOSSimulator *strongSelf;
+    void (^sendblock)(NSString *string);
+    NSData *temp;
+    NSString *str;
+    
+    temp = [fromSim readDataOfLength:1];
+    while ([temp length]) {
+      strongSelf = weakSelf;
+      sendblock = strongSelf->ttySendBlock;
+      strongSelf = nil;
+      
+      str = [[NSString alloc] initWithData:temp encoding:NSISOLatin1StringEncoding];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        sendblock(str);
+      });
+      temp = [fromSim readDataOfLength:1];
+    }
+  });
   
   return self;
 }
@@ -254,13 +279,16 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 }
 
 
-- (NSFileHandle*)teletypeOutput {
-  return [proxy teletypeOutput];
+- (void)setSendToTeletypeBlock:(void (^)(NSString *string))block {
+  ttySendBlock = block;
 }
 
 
-- (NSFileHandle*)teletypeInput {
-  return [proxy teletypeInput];
+- (void)sendToSimulator:(NSString*)string {
+  NSData *data;
+  
+  data = [string dataUsingEncoding:NSISOLatin1StringEncoding];
+  [[proxy teletypeOutput] writeData:data];
 }
 
 

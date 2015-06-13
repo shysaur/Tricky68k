@@ -14,26 +14,16 @@
 
 
 - (void)setSimulatorProxy:(MOSSimulator*)sp {
+  MOSTeletypeView *tty;
+  
   [textView setString:@""];
   [self defaultMonospacedFontHasChanged];
+  tty = textView;
   
   simProxy = sp;
-  toSim = [simProxy teletypeOutput];
-  fromSim = [simProxy teletypeInput];
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    NSData *temp;
-    
-    temp = [fromSim readDataOfLength:1];
-    while ([temp length]) {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *string;
-        
-        string = [[NSString alloc] initWithData:temp encoding:NSISOLatin1StringEncoding];
-        [textView insertOutputText:string];
-      });
-      temp = [fromSim readDataOfLength:1];
-    }
-  });
+  [simProxy setSendToTeletypeBlock:^(NSString *str){
+    [tty insertOutputText:str];
+  }];
 }
 
 
@@ -43,10 +33,7 @@
 
 
 - (void)typedString:(NSString *)str {
-  NSData *data;
-  
-  data = [str dataUsingEncoding:NSISOLatin1StringEncoding];
-  [toSim writeData:data];
+  [simProxy sendToSimulator:str];
 }
 
 

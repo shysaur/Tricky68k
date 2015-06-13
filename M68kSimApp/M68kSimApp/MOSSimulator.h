@@ -41,6 +41,7 @@ extern NSString * const MOS68kRegisterCAAR;
 @interface MOSSimulator : NSObject {
   MOSSimulatorState stateMirror;
   MOSSimulatorProxy *proxy;
+  void (^ttySendBlock)(NSString *string);
   NSDictionary *regsCache;
   BOOL isSimDead;
 }
@@ -70,8 +71,8 @@ extern NSString * const MOS68kRegisterCAAR;
 - (void)addBreakpointAtAddress:(uint32_t)addr;
 - (void)removeBreakpointAtAddress:(uint32_t)addr;
 
-- (NSFileHandle*)teletypeOutput;
-- (NSFileHandle*)teletypeInput;
+- (void)setSendToTeletypeBlock:(void (^)(NSString *string))block;
+- (void)sendToSimulator:(NSString*)string;
 
 
 @end

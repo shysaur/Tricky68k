@@ -16,8 +16,6 @@
 
 @interface MOSTeletypeViewDelegate : MOSSimulatorSubviewDelegate <MOSTeletypeViewDelegate> {
   MOSSimulator *simProxy;
-  NSFileHandle *toSim;
-  NSFileHandle *fromSim;
   IBOutlet MOSTeletypeView *textView;
 }
 
