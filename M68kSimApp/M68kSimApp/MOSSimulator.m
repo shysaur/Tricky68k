@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MOSNamedPipe.h"
+#import "MOSSimulatorProxy.h"
 #import "MOSSimulator.h"
 #import "NSFileHandle+Strings.h"
 
@@ -40,247 +40,54 @@ NSString * const MOS68kRegisterCACR  = @"CACR";
 NSString * const MOS68kRegisterCAAR  = @"CAAR";
 
 
-void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
-  NSString *mess;
-  va_list ap;
-  
-  va_start(ap, fmt);
-  mess = [[NSString alloc] initWithFormat:fmt arguments:ap];
-  NSLog(@"Simulator PID %d: %@", [proc processIdentifier], mess);
-  va_end(ap);
-}
+static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 @implementation MOSSimulator
 
 
-- (NSURL*)simulatorURL {
-  NSBundle *cb;
-  
-  cb = [NSBundle mainBundle];
-  return [cb URLForAuxiliaryExecutable:@"m68ksim"];
-}
-
-
 - initWithExecutableURL:(NSURL*)url {
-  NSArray *args, *resp;
-  __weak MOSSimulator *weakSelf;
-  __strong NSTask *strongTask;
-  
   self = [super init];
-  weakSelf = self;
+  if (!self) return nil;
   
-  exec = url;
-  simQueue = dispatch_queue_create("com.danielecattaneo.m68ksimqueue", NULL);
-  
-  toSim = [[NSPipe alloc] init];
-  fromSim = [[NSPipe alloc] init];
-  toSimTty = [[MOSNamedPipe alloc] init];
-  fromSimTty = [[MOSNamedPipe alloc] init];
-  args = @[@"-B", @"-d",
-           @"-I", @"tty", @"0xFFE000", [[toSimTty pipeURL] path], [[fromSimTty pipeURL] path],
-           @"-l", [url path]];
-  
-  simTask = [[NSTask alloc] init];
-  [simTask setLaunchPath:[[self simulatorURL] path]];
-  [simTask setArguments:args];
-  [simTask setStandardInput:toSim];
-  [simTask setStandardOutput:fromSim];
-  
-  [self willChangeValueForKey:@"simulatorState"];
-  isSimDead = NO;
-  curState = MOSSimulatorStatePaused;
-  [self didChangeValueForKey:@"simulatorState"];
-  [simTask launch];
-  
-  strongTask = simTask;
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    __strong MOSSimulator *strongSelf;
-    
-    [strongTask waitUntilExit];
-    /* We don't want this block to retain the proxy, otherwise we can't kill
-     * the simulator on dealloc. We won't be able to kill it when a command
-     * is in progress, though (so it won't work when the simulator is running,
-     * for example). */
-    strongSelf = weakSelf;
-    
-    if (strongSelf) {
-      strongSelf->isSimDead = YES;
-      dispatch_async(dispatch_get_main_queue(), ^{
-        [strongSelf changeSimulatorStatusTo:MOSSimulatorStateDead];
-      });
-    }
-  });
-  
-  if (![toSimTty fileHandleForWriting] || ![fromSimTty fileHandleForReading]) {
-    NSLog(@"Simulator error: can't open tty");
-    [simTask terminate];
-    [self changeSimulatorStatusTo:MOSSimulatorStateDead];
-  }
-  
-  resp = [self getSimulatorResponse];
-  if ([resp count]) {
-    NSLog(@"Simulator open error: %@", resp);
-    [simTask terminate];
-    [self changeSimulatorStatusTo:MOSSimulatorStateDead];
-  }
+  proxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
+  [proxy addObserver:self forKeyPath:@"simulatorState"
+    options:NSKeyValueObservingOptionInitial context:SimulatorStateChanged];
   
   return self;
 }
 
 
 - (NSURL*)executableURL {
-  return exec;
-}
-
-
-- (BOOL)sendCommandToSimulatorDebugger:(NSString *)com {
-  NSString *dbgPrmpt;
-  
-  if (curState != MOSSimulatorStatePaused || isSimDead) return NO;
-  
-  dbgPrmpt = [[fromSim fileHandleForReading] readLine];
-  if (isSimDead) return NO;
-  
-  if (![dbgPrmpt isEqual:@"debug? "]) {
-    MOSSimLog(simTask, @"Can't send command %@. Read %@ instead of prompt.", com, dbgPrmpt);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self changeSimulatorStatusTo:MOSSimulatorStateUnknown];
-    });
-    return NO;
-  }
-  
-  [[toSim fileHandleForWriting] writeLine:com];
-  return YES;
-}
-
-
-- (NSArray*)getSimulatorResponse {
-  NSString *tmp;
-  NSMutableArray *res;
-  
-  res = [NSMutableArray array];
-  tmp = [[fromSim fileHandleForReading] readLine];
-  while (tmp && ![tmp isEqual:@"debug? "]) {
-    [res addObject:tmp];
-    tmp = [[fromSim fileHandleForReading] readLine];
-  }
-  if (tmp) { /* not dead */
-    [[toSim fileHandleForWriting] writeLine:@""];
-  }
-  return [res copy];
-}
-
-
-- (NSArray*)getSimulatorResponseWithLength:(int)c {
-  int i;
-  NSString *tmp;
-  NSMutableArray *res;
-  
-  res = [NSMutableArray array];
-  for (i=0; i<c; i++) {
-    tmp = [[fromSim fileHandleForReading] readLine];
-    if (!tmp) break; /* eof */
-    if ([tmp isEqual:@"debug? "]) {
-      if (i==1)
-        MOSSimLog(simTask, @"Error! %@", res);
-      else
-        MOSSimLog(simTask, @"Response incomplete. %d lines expected. %@", c, res);
-      [[toSim fileHandleForWriting] writeLine:@""];
-      break;
-    }
-    [res addObject:tmp];
-  }
-  return [res copy];
-}
-
-
-- (BOOL)runWithCommand:(NSString*)cmd {
-  if (curState != MOSSimulatorStatePaused || isSimDead) return NO;
-  if (![self sendCommandToSimulatorDebugger:cmd]) return NO;
-  
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [self changeSimulatorStatusTo:MOSSimulatorStateRunning];
-  });
-  
-  /* Watch for the next interruption. Pipe read operations will fail on
-   * process death, so this will never lock forever. */
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    NSString *temp;
-    
-    do {
-      temp = [[fromSim fileHandleForReading] readLine];
-      if (isSimDead || !temp) break; /* eof <=> simulator died */
-      
-      if (![temp isEqual:@"debug? "])
-        MOSSimLog(simTask, @"Error! %@", temp);
-    } while (![temp isEqual:@"debug? "]);
-    
-    if (!isSimDead && temp) {
-      [[toSim fileHandleForWriting] writeLine:@""];
-      
-      dispatch_async(dispatch_get_main_queue(), ^{
-        [self changeSimulatorStatusTo:MOSSimulatorStatePaused];
-      });
-    }
-  });
-  
-  return YES;
-}
-
-
-- (void)changeSimulatorStatusTo:(MOSSimulatorState)news {
-  if (curState == news) return;
-  
-  /* clean caches when simulator state changes */
-  regsCache = nil;
-  
-  [self willChangeValueForKey:@"simulatorState"];
-  curState = news;
-  [self didChangeValueForKey:@"simulatorState"];
+  return [proxy executableURL];
 }
 
 
 - (BOOL)run {
-  return [self runWithCommand:@"c"];
+  [proxy exitDebuggerWithCommand:@"c"];
+  return YES;
 }
 
 
 - (BOOL)stop {
-  if (curState != MOSSimulatorStateRunning || isSimDead) return NO;
-  [simTask interrupt];
+  [proxy enterDebugger];
   return YES;
 }
 
 
 - (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc {
   NSString *com;
-  NSArray __block *res;
-  
-  if (curState != MOSSimulatorStatePaused || isSimDead) return nil;
-  
+
   com = [NSString stringWithFormat:@"u %d %d", loc, cnt];
-  dispatch_sync(simQueue, ^{
-    if ([self sendCommandToSimulatorDebugger:com])
-      res = [self getSimulatorResponseWithLength:ABS(cnt)];
-  });
-  return res;
+  return [proxy sendCommandToDebugger:com];
 }
 
 
 - (NSArray*)dump:(int)cnt linesFromLocation:(uint32_t)loc {
   NSString *com;
-  NSArray __block *res;
-  
-  if (curState != MOSSimulatorStatePaused || isSimDead) return nil;
   
   com = [NSString stringWithFormat:@"d %d %d", loc, cnt];
-  dispatch_sync(simQueue, ^{
-    if ([self sendCommandToSimulatorDebugger:com])
-      res = [self getSimulatorResponseWithLength:cnt];
-  });
-  return res;
+  return [proxy sendCommandToDebugger:com];
 }
 
 
@@ -316,7 +123,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 - (NSDictionary*)registerDump {
   NSMutableDictionary *res;
-  NSArray __block *list;
+  NSArray *list;
   NSString *obj, *rego;
   NSNumber *valo;
   const char *tmp;
@@ -325,10 +132,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   if (regsCache) return regsCache;
   
-  dispatch_sync(simQueue, ^{
-    if ([self sendCommandToSimulatorDebugger:@"v"])
-      list = [self getSimulatorResponse];
-  });
+  list = [proxy sendCommandToDebugger:@"v"];
   
   res = [NSMutableDictionary dictionary];
   for (obj in list) {
@@ -345,14 +149,11 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 - (NSArray*)breakpointList {
   NSString *obj;
   const char *data;
-  NSArray __block *list;
+  NSArray *list;
   NSMutableSet *res;
   uint32_t addr;
   
-  dispatch_sync(simQueue, ^{
-    if ([self sendCommandToSimulatorDebugger:@"p"])
-      list = [self getSimulatorResponse];
-  });
+  list = [proxy sendCommandToDebugger:@"p"];
   
   res = [[NSMutableSet alloc] init];
   for (obj in list) {
@@ -365,16 +166,12 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 
 - (void)addBreakpointAtAddress:(uint32_t)addr {
-  dispatch_sync(simQueue, ^{
-    [self sendCommandToSimulatorDebugger:[NSString stringWithFormat:@"b 0x%X", addr]];
-  });
+  [proxy sendCommandToDebugger:[NSString stringWithFormat:@"b 0x%X", addr]];
 }
 
 
 - (void)removeBreakpointAtAddress:(uint32_t)addr {
-  dispatch_sync(simQueue, ^{
-    [self sendCommandToSimulatorDebugger:[NSString stringWithFormat:@"x 0x%X", addr]];
-  });
+  [proxy sendCommandToDebugger:[NSString stringWithFormat:@"x 0x%X", addr]];
 }
 
 
@@ -399,19 +196,19 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 
 - (BOOL)stepIn {
-  return [self runWithCommand:@"s"];
+  [proxy exitDebuggerWithCommand:@"s"];
+  return YES;
 }
 
 
 - (BOOL)stepOver {
-  return [self runWithCommand:@"n"];
+  [proxy exitDebuggerWithCommand:@"n"];
+  return YES;
 }
 
 
 - (void)kill {
-  dispatch_sync(simQueue, ^{
-    [simTask terminate];
-  });
+  [proxy kill];
 }
 
 
@@ -425,33 +222,50 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
 
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+  change:(NSDictionary *)change context:(void *)context {
+  
+  if (context == SimulatorStateChanged) {
+    [self setSimulatorState:[proxy simulatorState]];
+  } else
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+
+- (void)setSimulatorState:(MOSSimulatorState)state {
+  stateMirror = state;
+  if (state == MOSSimulatorStateRunning)
+    regsCache = nil;
+}
+
+
 - (MOSSimulatorState)simulatorState {
-  return curState;
+  return stateMirror;
 }
 
 
 - (BOOL)isSimulatorRunning {
-  return curState == MOSSimulatorStateRunning;
+  return [self simulatorState] == MOSSimulatorStateRunning;
 }
 
 
 - (BOOL)isSimulatorDead {
-  return curState == MOSSimulatorStateDead;
+  return [self simulatorState] == MOSSimulatorStateDead;
 }
 
 
 - (NSFileHandle*)teletypeOutput {
-  return [toSimTty fileHandleForWriting];
+  return [proxy teletypeOutput];
 }
 
 
 - (NSFileHandle*)teletypeInput {
-  return [fromSimTty fileHandleForReading];
+  return [proxy teletypeInput];
 }
 
 
 - (void)dealloc {
-  [self kill];
+  [proxy removeObserver:self forKeyPath:@"simulatorState" context:SimulatorStateChanged];
 }
 
 

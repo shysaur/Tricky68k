@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MOSSimulatorProxy.h"
 
 
 extern NSString * const MOS68kRegisterD0;
@@ -37,26 +38,9 @@ extern NSString * const MOS68kRegisterCACR;
 extern NSString * const MOS68kRegisterCAAR;
 
 
-typedef enum {
-  MOSSimulatorStateRunning,
-  MOSSimulatorStatePaused,
-  MOSSimulatorStateUnknown,
-  MOSSimulatorStateDead
-} MOSSimulatorState;
-
-
-@class MOSNamedPipe;
-
-
 @interface MOSSimulator : NSObject {
-  dispatch_queue_t simQueue;
-  NSTask *simTask;
-  NSURL *exec;
-  NSPipe *toSim;
-  NSPipe *fromSim;
-  MOSNamedPipe *toSimTty;
-  MOSNamedPipe *fromSimTty;
-  MOSSimulatorState curState;
+  MOSSimulatorState stateMirror;
+  MOSSimulatorProxy *proxy;
   NSDictionary *regsCache;
   BOOL isSimDead;
 }
