@@ -224,6 +224,8 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
       MOSSimLog(simTask, @"received %@ on debugger reenter", tmp);
       tmp = [[fromSim fileHandleForReading] readLine];
     }
+    if (!tmp) return; /* EOF => sim dead */
+    
     if (dispatch_semaphore_wait(waitingForDebugger, DISPATCH_TIME_NOW)) {
       dispatch_async(dispatch_get_main_queue(), ^{
         if ([self simulatorState] != MOSSimulatorStatePaused) {
