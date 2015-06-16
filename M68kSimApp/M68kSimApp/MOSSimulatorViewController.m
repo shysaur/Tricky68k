@@ -234,7 +234,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 
 - (BOOL)validateUserInterfaceItem:(id)anItem {
-  if (!simProxy) return NO;
+  if (!simProxy || [simProxy isSimulatorDead]) return NO;
   if ([anItem action] == @selector(run:)) return !simRunning && !exceptionOccurred;
   if ([anItem action] == @selector(stepIn:)) return !simRunning && !exceptionOccurred;
   if ([anItem action] == @selector(stepOver:)) return !simRunning && !exceptionOccurred;
