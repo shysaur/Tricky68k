@@ -136,11 +136,13 @@ error_t *elf_check(FILE *elf, Elf32_Ehdr *header) {
   if (header->e_type != ET_EXEC) goto invalid;
   if (header->e_machine != EM_68K) goto invalid;
   if (header->e_version != 1) goto invalid;
-  if (header->e_entry == 0) goto invalid;
+  if (header->e_entry == 0) goto noentry;
   
   return NULL;
 invalid:
   return error_new(503, "This is not a 32-bit big-endian M68000 ELF executable");
+noentry:
+  return error_new(504, "This executable's entry point is invalid");
 }
 
 
