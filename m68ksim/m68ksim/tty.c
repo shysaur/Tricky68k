@@ -67,17 +67,19 @@ void tty_write_8bit(struct segment_desc_s *me, uint32_t addr, uint8_t data) {
 }
 
 
-int tty_install(uint32_t base, int fildes_in, int fildes_out) {
+error_t *tty_install(uint32_t base, int fildes_in, int fildes_out) {
   segment_desc *desc;
+  error_t *tmpe;
   
-  if (tty_alreadyInstalled) return 0;
+  if (tty_alreadyInstalled)
+    return error_new(401, "Can't install more than one TTY");
   
   tty_fildesout = fildes_out;
   tty_fildesin = fildes_in;
   
-  desc = malloc(sizeof(segment_desc));
-  if (!desc) return 0;
-  memset(desc, 0, sizeof(segment_desc));
+  desc = calloc(1, sizeof(segment_desc));
+  if (!desc)
+    return error_new(402, "Failed to allocate TTY segment descriptor");
   
   desc->base = base;
   desc->size = SEGM_GRANULARITY;
@@ -90,42 +92,48 @@ int tty_install(uint32_t base, int fildes_in, int fildes_out) {
   desc->write_32bit = tty_write_32bit;
   desc->write_8bit = tty_write_8bit;
   
-  if (!mem_installSegment(desc)) {
+  if ((tmpe = mem_installSegment(desc))) {
     free(desc);
-    return 0;
+    return tmpe;
   }
   
   tty_alreadyInstalled = 1;
-  
-  return 1;
+  return NULL;
 }
 
 
-void tty_installCommand(int special, int argc, char *argv[]) {
+error_t *tty_installCommand(int special, int argc, char *argv[]) {
   uint32_t base;
   char *outf, *inf;
   int outfd, infd;
   
-  if (optind >= argc) DIE("Missing parameters for tty device install.");
+  if (optind >= argc)
+    return error_new(411, "Missing parameters for tty device install.");
   errno = 0;
   base = (uint32_t)strtoul(argv[optind++], NULL, 0);
-  if (errno == EINVAL) DIE("Missing parameters for tty device install.");
+  
+  if (errno == EINVAL)
+    return error_new(411, "Missing parameters for tty device install.");
   
   if (special) {
-    if (optind >= argc) DIE("Missing parameters for tty device install.");
+    if (optind >= argc)
+      return error_new(411, "Missing parameters for tty device install.");
     inf = argv[optind++];
-    if (optind >= argc) DIE("Missing parameters for tty device install.");
+    if (optind >= argc)
+      return error_new(411, "Missing parameters for tty device install.");
     outf = argv[optind++];
     
     infd = open(inf, O_RDONLY);
-    if (infd < 0) DIE("Can't open input file %s", inf);
+    if (infd < 0)
+      return error_new(412, "Can't open input file %s", inf);
     outfd = open(outf, O_WRONLY);
-    if (outfd < 0) DIE("Can't open output file %s.", outf);
+    if (outfd < 0)
+      return error_new(413, "Can't open output file %s.", outf);
   } else {
     outfd = dup(STDOUT_FILENO);
     infd = dup(STDIN_FILENO);
   }
   
-  if (!tty_install(base, infd, outfd)) DIE("Error installing TTY device.");
+  return tty_install(base, infd, outfd);
 }
 

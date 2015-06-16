@@ -106,14 +106,17 @@ typedef struct __attribute__ ((packed)) {
 } Elf32_Phdr;
 
 
-int elf_check(FILE *elf, Elf32_Ehdr *header) {
+error_t *elf_check(FILE *elf, Elf32_Ehdr *header) {
   fseek(elf, 0, SEEK_SET);
-  if (fread(header, sizeof(Elf32_Ehdr), 1, elf) < 1) return 0;
+  if (fread(header, sizeof(Elf32_Ehdr), 1, elf) < 1)
+    return error_new(501, "Can't load a non-ELF file");
   
-  if (*((int*)header->e_ident) != 0x464C457F) return 0;
-  if (header->e_ident[EI_CLASS] != ELFCLASS32) return 0;
-  if (header->e_ident[EI_DATA] != ELFDATA2MSB) return 0;
-  if (header->e_ident[EI_VERSION] != 1) return 0;
+  if (*((int*)header->e_ident) != 0x464C457F)
+    return error_new(502, "Can't load a non-ELF file");
+  
+  if (header->e_ident[EI_CLASS] != ELFCLASS32) goto invalid;
+  if (header->e_ident[EI_DATA] != ELFDATA2MSB) goto invalid;
+  if (header->e_ident[EI_VERSION] != 1) goto invalid;
   
   header->e_type = BE_TO_LE_16(header->e_type);
   header->e_machine = BE_TO_LE_16(header->e_machine);
@@ -129,16 +132,19 @@ int elf_check(FILE *elf, Elf32_Ehdr *header) {
   header->e_shnum = BE_TO_LE_16(header->e_shnum);
   header->e_shstrndx = BE_TO_LE_16(header->e_shstrndx);
   
-  if (header->e_type != ET_EXEC) return 0;
-  if (header->e_machine != EM_68K) return 0;
-  if (header->e_version != 1) return 0;
-  if (header->e_entry == 0) return 0;
+  if (header->e_type != ET_EXEC) goto invalid;
+  if (header->e_machine != EM_68K) goto invalid;
+  if (header->e_version != 1) goto invalid;
+  if (header->e_entry == 0) goto invalid;
   
-  return 1;
+  return NULL;
+invalid:
+  return error_new(503, "This is not a 32-bit big-endian M68000 ELF executable");
 }
 
 
-int elf_load(const char *fn) {
+error_t *elf_load(const char *fn) {
+  error_t *tmpe;
   Elf32_Phdr segment;
   Elf32_Ehdr header;
   uint32_t start, len, copystart;
@@ -147,13 +153,17 @@ int elf_load(const char *fn) {
   FILE *fp;
   
   fp = fopen(fn, "r");
-  if (!fp) return 0;
+  if (!fp)
+    return error_new(511, "Can't open %s for reading", fn);
   
-  if (!elf_check(fp, &header)) return 0;
+  if ((tmpe = elf_check(fp, &header))) return tmpe;
   
   for (i=0; i<PRG_HEADER_TBL_ITEM_COUNT; i++) {
     fseek(fp, PRG_HEADER_TBL_OFFSET + i*PRG_HEADER_TBL_ITEM_SIZE, SEEK_SET);
-    if (fread(&segment, sizeof(Elf32_Phdr), 1, fp) < 1) return 0;
+    if (fread(&segment, sizeof(Elf32_Phdr), 1, fp) < 1) {
+      fclose(fp);
+      return error_new(512, "This ELF file is corrupt");
+    }
     
     segment.p_type  = BE_TO_LE_32(segment.p_type);
     segment.p_offset = BE_TO_LE_32(segment.p_offset);
@@ -166,7 +176,7 @@ int elf_load(const char *fn) {
     
     if (segment.p_type == PT_DYNAMIC || segment.p_type == PT_INTERP) {
       fclose(fp);
-      return 0; /* no dynamic libraries thanks */
+      return error_new(513, "Can't execute an ELF dynamic library");
     }
     
     if (segment.p_type == PT_NULL) continue;
@@ -178,31 +188,32 @@ int elf_load(const char *fn) {
     len = (segment.p_vaddr+segment.p_memsz) + (SEGM_GRANULARITY-1);
     len = (len - (len % SEGM_GRANULARITY)) - start;
     copystart = segment.p_vaddr - start;
-    dest = ram_install(start, len) + copystart;
+    dest = ram_install(start, len, &tmpe) + copystart;
     
     if (!dest) {
       fclose(fp);
-      return 0;
+      return tmpe;
     }
     
     if (segment.p_filesz > segment.p_memsz) {
       if (fread(dest, segment.p_memsz, 1, fp) < 1) {
         fclose(fp);
-        return 0;
+        return error_new(501, "This ELF file is corrupt");
       }
     } else {
       if (fread(dest, segment.p_filesz, 1, fp) < 1) {
         fclose(fp);
-        return 0;
+        return error_new(501, "This ELF file is corrupt");
       }
     }
   }
   
-  ram_install(0, SEGM_GRANULARITY);
+  ram_install(0, SEGM_GRANULARITY, &tmpe);
+  if (tmpe) return tmpe;
   m68k_write_memory_32(4, header.e_entry);
   
   fclose(fp);
-  return 1;
+  return NULL;
 }
 
 

@@ -10,6 +10,7 @@
 #define __m68ksim__addrspace__
 
 #include <stdint.h>
+#include "error.h"
 
 
 #define LE_TO_BE_16(x)  (((((x)) & 0xFF) << 8) | (((x)) >> 8))
@@ -47,7 +48,7 @@ typedef struct segment_desc_s {
 
 
 void mem_init(void);
-int mem_installSegment(segment_desc *desc);
+error_t *mem_installSegment(segment_desc *desc);
 segment_desc *mem_peekSegment(uint32_t addr);
 
 

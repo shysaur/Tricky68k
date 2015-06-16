@@ -42,18 +42,24 @@ void ram_write_8bit(struct segment_desc_s *me, uint32_t addr, uint8_t data) {
 }
 
 
-void *ram_install(uint32_t base, uint32_t size) {
+void *ram_install(uint32_t base, uint32_t size, error_t **err) {
   segment_desc *desc;
+  error_t *tmp;
   
-  desc = malloc(sizeof(segment_desc));
-  if (!desc) return NULL;
-  memset(desc, 0, sizeof(segment_desc));
-  desc->data = malloc(size);
-  if (!desc->data) {
-    free(desc);
+  desc = calloc(1, sizeof(segment_desc));
+  if (!desc) {
+    if (err)
+      *err = error_new(301, "Can't allocate RAM segment descriptor");
     return NULL;
   }
-  memset(desc->data, 0, size);
+  
+  desc->data = calloc(1, size);
+  if (!desc->data) {
+    free(desc);
+    if (err)
+      *err = error_new(302, "Can't allocate RAM storage (%u bytes)", size);
+    return NULL;
+  }
   
   desc->base = base;
   desc->size = size;
@@ -64,11 +70,15 @@ void *ram_install(uint32_t base, uint32_t size) {
   desc->write_32bit = ram_write_32bit;
   desc->write_16bit = ram_write_16bit;
   desc->write_8bit = ram_write_8bit;
-  if (!mem_installSegment(desc)) {
+  
+  if ((tmp = mem_installSegment(desc))) {
     free(desc->data);
     free(desc);
+    if (err) *err = tmp;
     return NULL;
   }
+  
+  if (err) *err = NULL;
   return desc->data;
 }
 

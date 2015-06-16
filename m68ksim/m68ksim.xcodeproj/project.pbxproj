@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012AE3931B2E291A0057D0B2 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 012AE3911B2E291A0057D0B2 /* error.c */; };
 		01B1B8BD1A503F810016F319 /* addrspace.c in Sources */ = {isa = PBXBuildFile; fileRef = 01B1B8BB1A503F810016F319 /* addrspace.c */; };
 		01B1B8C11A503FC90016F319 /* libMusashi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B1B8C01A503FC90016F319 /* libMusashi.a */; };
 		01B1B8C61A5056C50016F319 /* m68ksim.c in Sources */ = {isa = PBXBuildFile; fileRef = 01B1B8C51A5056C50016F319 /* m68ksim.c */; };
@@ -31,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		01263D231A503D4F00996230 /* m68ksim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = m68ksim; sourceTree = BUILT_PRODUCTS_DIR; };
+		012AE3911B2E291A0057D0B2 /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = error.c; sourceTree = "<group>"; };
+		012AE3921B2E291A0057D0B2 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
 		01B1B8BB1A503F810016F319 /* addrspace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = addrspace.c; sourceTree = "<group>"; };
 		01B1B8BC1A503F810016F319 /* addrspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addrspace.h; sourceTree = "<group>"; };
 		01B1B8C01A503FC90016F319 /* libMusashi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMusashi.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +97,8 @@
 				01B1B8CF1A50BCFF0016F319 /* debugger.h */,
 				01B1B8D11A50BD890016F319 /* breakpoints.c */,
 				01B1B8D21A50BD890016F319 /* breakpoints.h */,
+				012AE3911B2E291A0057D0B2 /* error.c */,
+				012AE3921B2E291A0057D0B2 /* error.h */,
 			);
 			path = m68ksim;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			files = (
 				01B1B8D31A50BD890016F319 /* breakpoints.c in Sources */,
 				01B1B8C91A5064100016F319 /* ram.c in Sources */,
+				012AE3931B2E291A0057D0B2 /* error.c in Sources */,
 				01B1B8CC1A50989F0016F319 /* elf.c in Sources */,
 				01B1B8BD1A503F810016F319 /* addrspace.c in Sources */,
 				01B1B8C61A5056C50016F319 /* m68ksim.c in Sources */,

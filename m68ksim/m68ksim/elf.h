@@ -9,8 +9,10 @@
 #ifndef __m68ksim__elf__
 #define __m68ksim__elf__
 
+#include "error.h"
 
-int elf_load(const char *fn);
+
+error_t *elf_load(const char *fn);
 
 
 #endif

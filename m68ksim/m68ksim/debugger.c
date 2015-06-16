@@ -15,6 +15,7 @@
 #include "debugger.h"
 #include "breakpoints.h"
 #include "musashi/m68k.h"
+#include "error.h"
 
 
 #define MAX_INSTR_LEN   10 /*bytes*/
@@ -178,6 +179,7 @@ void debug_debugConsole(void) {
   pc = m68k_get_reg(NULL, M68K_REG_PC);
   
   while (!cont) {
+    error_drainPool();
     printf("debug? ");
     if (bufkill_on) {
       putchar('\n');
@@ -202,7 +204,7 @@ void debug_debugConsole(void) {
         errno = 0;
         bpa = (uint32_t)strtol(cp+1, NULL, 0);
         if (errno == EINVAL)
-          printf("Must specify a valid address for clearing a breakpoint\n");
+          error_print(error_new(601, "Parameter must be an address (like 0x1234)"));
         else
           bp_remove(bpa);
         break;
@@ -211,7 +213,7 @@ void debug_debugConsole(void) {
         errno = 0;
         bpa = (uint32_t)strtol(cp+1, NULL, 0);
         if (errno == EINVAL)
-          printf("Must specify a valid address for setting a breakpoint\n");
+          error_print(error_new(602, "Parameter must be an address (like 0x1234)"));
         else {
           bp_add(bpa);
           if (!bufkill_on) printf("Breakpoint set at %#010x.\n", bpa);
@@ -232,7 +234,7 @@ void debug_debugConsole(void) {
         addr = (uint32_t)strtol(cp+1, &cp, 0);
         lines = (int)strtol(cp, NULL, 0);
         if (errno == EINVAL)
-          printf("Parameters missing.\n");
+          error_print(error_new(603, "Parameters missing"));
         else
           debug_printDisassembly(addr, lines, pc);
         break;
@@ -242,7 +244,7 @@ void debug_debugConsole(void) {
         addr = (uint32_t)strtol(cp+1, &cp, 0);
         lines = (int)strtol(cp, NULL, 0);
         if (errno == EINVAL)
-          printf("Parameters missing.\n");
+          error_print(error_new(604, "Parameters missing"));
         else
           debug_dumpMemory(addr, lines);
         break;
@@ -260,7 +262,7 @@ void debug_debugConsole(void) {
         break;
         
       default:
-        printf("Unrecognized command.\n");
+        error_print(error_new(605, "Unrecognized command"));
     }
   }
 }

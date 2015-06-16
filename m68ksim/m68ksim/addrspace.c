@@ -26,21 +26,26 @@ void mem_init(void) {
 }
 
 
-int mem_installSegment(segment_desc *desc) {
+error_t *mem_installSegment(segment_desc *desc) {
   int start, len, i;
   
-  if (desc->base % SEGM_GRANULARITY != 0) return 0;
-  if (desc->size % SEGM_GRANULARITY != 0) return 0;
+  if (desc->base % SEGM_GRANULARITY != 0)
+    return error_new(201, "Segment base not aligned");
+  if (desc->size % SEGM_GRANULARITY != 0)
+    return error_new(202, "Segment size not aligned");
   
   len = desc->size / SEGM_GRANULARITY;
   start = desc->base / SEGM_GRANULARITY;
   for (i=0; i<len; i++)
-    if (addrSpace[start+i] != NULL) return 0;
+    if (addrSpace[start+i] != NULL)
+      return error_new(203, "Segment at 0x%08X is already allocated",
+                       (start+i)*SEGM_GRANULARITY);
   for (i=0; i<len; i++) {
     desc->refc++;
     addrSpace[start++] = desc;
   }
-  return 1;
+  
+  return NULL;
 }
 
 
@@ -68,7 +73,7 @@ static inline segment_desc *mem_getSegmentAndCheck(uint32_t address, int as) {
   
   this = mem_getSegmentAndCheckSilent(address, as);
   if (!this) {
-    printf("Access to unmapped address %#010x\n", address);
+    error_print(error_new(299, "Access to unmapped address %#010x", address));
     if (sim_on) debug_debugConsole();
     exit(1);
   }

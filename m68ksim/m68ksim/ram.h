@@ -10,9 +10,10 @@
 #define __m68ksim__ram__
 
 #include <stdint.h>
+#include "error.h"
 
 
-void *ram_install(uint32_t base, uint32_t size);
+void *ram_install(uint32_t base, uint32_t size, error_t **err);
 
 
 #endif

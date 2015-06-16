@@ -19,6 +19,7 @@
 #include "debugger.h"
 #include "breakpoints.h"
 #include "tty.h"
+#include "error.h"
 
 
 volatile int sim_on, debug_on;
@@ -33,6 +34,7 @@ void signal_enterDebugger(int signo) {
 int main(int argc, char *argv[]) {
   uint32_t availRam, stackTop, stackSize;
   int c, special;
+  error_t *tmpe;
   
   sim_on = 0;
   debug_on = 0;
@@ -53,21 +55,21 @@ int main(int argc, char *argv[]) {
           availRam = (unsigned int)strtoul(optarg, NULL, 0);
           if (availRam == 0)
             availRam = 0x800000;
-          ram_install(0, availRam);
+          ram_install(0, availRam, &tmpe);
+          iferror_die(tmpe);
           break;
           
         case 'I':
           special = 1;
         case 'i':
           if (strcasecmp(optarg, "tty") == 0)
-            tty_installCommand(special, argc, argv);
+            iferror_die(tty_installCommand(special, argc, argv));
           else
-            DIE("Unknown device type %s.\n", optarg);
+            iferror_die(error_new(101, "Unknown device type %s.\n", optarg));
           break;
           
         case 'l':
-          if (!elf_load(optarg))
-            DIE("Failed to load %s.\n", optarg);
+          iferror_die(elf_load(optarg));
           break;
         
         case 'd':
@@ -79,12 +81,15 @@ int main(int argc, char *argv[]) {
           break;
       }
     } else
-      printf("Ignored unknown option %s.\n", argv[optind++]);
+      iferror_die(error_new(102, "Ignored unknown option %s.\n", argv[optind++]));
   }
   
-  ram_install(stackTop - stackSize, stackSize);
-  ram_install(0, SEGM_GRANULARITY);
+  ram_install(stackTop - stackSize, stackSize, &tmpe);
+  iferror_die(tmpe);
+  ram_install(0, SEGM_GRANULARITY, NULL);
+  
   m68k_write_memory_32(0, stackTop);
+  error_drainPool();
   
   m68k_init();
   sim_on = 1;
