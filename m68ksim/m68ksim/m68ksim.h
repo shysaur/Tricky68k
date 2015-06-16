@@ -11,7 +11,7 @@
 
 
 extern volatile int sim_on, debug_on;
-extern int bufkill_on;
+extern int servermode_on;
 
 
 #endif

@@ -181,7 +181,7 @@ void debug_debugConsole(void) {
   while (!cont) {
     error_drainPool();
     printf("debug? ");
-    if (bufkill_on) {
+    if (servermode_on) {
       putchar('\n');
       fflush(stdout);
     }
@@ -216,7 +216,7 @@ void debug_debugConsole(void) {
           error_print(error_new(602, "Parameter must be an address (like 0x1234)"));
         else {
           bp_add(bpa);
-          if (!bufkill_on) printf("Breakpoint set at %#010x.\n", bpa);
+          if (!servermode_on) printf("Breakpoint set at %#010x.\n", bpa);
         }
         break;
       

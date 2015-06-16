@@ -105,11 +105,11 @@ void error_print(error_t *err) {
   if (!err)
     return;
   else if (err == ERROR_FALLBACK) {
-    if (bufkill_on)
+    if (servermode_on)
       fputs("error! 999 ", stderr);
     fputs("Unknown error, a malloc probably failed somewhere\n", stderr);
   } else {
-    if (bufkill_on)
+    if (servermode_on)
       fprintf(stderr, "error! %d ", err->code);
     fputs(err->mess, stderr);
     fputc('\n', stderr);

@@ -23,7 +23,7 @@
 
 
 volatile int sim_on, debug_on;
-int bufkill_on;
+int servermode_on;
 
 
 void signal_enterDebugger(int signo) {
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
   
   sim_on = 0;
   debug_on = 0;
-  bufkill_on = 0;
+  servermode_on = 0;
   signal(SIGINT, signal_enterDebugger);
   mem_init();
   
@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
           break;
           
         case 'B':
-          bufkill_on = 1;
+          servermode_on = 1;
           break;
       }
     } else
