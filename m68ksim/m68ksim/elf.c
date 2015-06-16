@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <errno.h>
 #include "elf.h"
 #include "ram.h"
 #include "addrspace.h"
@@ -143,6 +144,13 @@ invalid:
 }
 
 
+error_t *elf_checkEofOrError(FILE *fp, const char *fn) {
+  if (feof(fp))
+    return error_new(511, "This ELF file is corrupt");
+  return error_new(-errno, "Can't read from %s", fn);
+}
+
+
 error_t *elf_load(const char *fn) {
   error_t *tmpe;
   Elf32_Phdr segment;
@@ -154,15 +162,16 @@ error_t *elf_load(const char *fn) {
   
   fp = fopen(fn, "r");
   if (!fp)
-    return error_new(511, "Can't open %s for reading", fn);
+    return error_new(-errno, "Can't open %s for reading", fn);
   
   if ((tmpe = elf_check(fp, &header))) return tmpe;
   
   for (i=0; i<PRG_HEADER_TBL_ITEM_COUNT; i++) {
     fseek(fp, PRG_HEADER_TBL_OFFSET + i*PRG_HEADER_TBL_ITEM_SIZE, SEEK_SET);
     if (fread(&segment, sizeof(Elf32_Phdr), 1, fp) < 1) {
+      tmpe = elf_checkEofOrError(fp, fn);
       fclose(fp);
-      return error_new(512, "This ELF file is corrupt");
+      return tmpe;
     }
     
     segment.p_type  = BE_TO_LE_32(segment.p_type);
@@ -176,7 +185,7 @@ error_t *elf_load(const char *fn) {
     
     if (segment.p_type == PT_DYNAMIC || segment.p_type == PT_INTERP) {
       fclose(fp);
-      return error_new(513, "Can't execute an ELF dynamic library");
+      return error_new(512, "Can't execute an ELF dynamic library");
     }
     
     if (segment.p_type == PT_NULL) continue;
@@ -189,21 +198,23 @@ error_t *elf_load(const char *fn) {
     len = (len - (len % SEGM_GRANULARITY)) - start;
     copystart = segment.p_vaddr - start;
     dest = ram_install(start, len, &tmpe) + copystart;
-    
     if (!dest) {
+      tmpe = elf_checkEofOrError(fp, fn);
       fclose(fp);
       return tmpe;
     }
     
     if (segment.p_filesz > segment.p_memsz) {
       if (fread(dest, segment.p_memsz, 1, fp) < 1) {
+        tmpe = elf_checkEofOrError(fp, fn);
         fclose(fp);
-        return error_new(501, "This ELF file is corrupt");
+        return tmpe;
       }
     } else {
       if (fread(dest, segment.p_filesz, 1, fp) < 1) {
+        tmpe = elf_checkEofOrError(fp, fn);
         fclose(fp);
-        return error_new(501, "This ELF file is corrupt");
+        return tmpe;
       }
     }
   }

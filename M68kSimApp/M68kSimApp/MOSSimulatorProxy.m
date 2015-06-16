@@ -218,7 +218,9 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   if ([tmp length] >= 7)
     sscanf(str+7, "%d", &code);
   
-  return NSERROR_SIM(code);
+  if (code > 0)
+    return NSERROR_SIM(code);
+  return [NSError errorWithDomain:NSPOSIXErrorDomain code:-code userInfo:nil];
 }
 
 
