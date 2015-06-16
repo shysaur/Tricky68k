@@ -9,9 +9,15 @@
 #import "MOSSimulatorProxy.h"
 #import "MOSNamedPipe.h"
 #import "NSFileHandle+Strings.h"
+#import "MOSError.h"
 
 
 #define RESPONSE_TIMEOUT dispatch_time(DISPATCH_TIME_NOW, 1000000000)
+#define NSERROR_SIM(c) [MOSError errorWithDomain:MOSSimulatorErrorDomain \
+  code:((c)) userInfo:nil]
+
+
+NSString * const MOSSimulatorErrorDomain = @"MOSSimulatorErrorDomain";
 
 
 void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
@@ -28,13 +34,15 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 @implementation MOSSimulatorProxy
 
 
-- (instancetype)initWithExecutableURL:(NSURL*)url {
+- (instancetype)initWithExecutableURL:(NSURL*)url error:(NSError **)err {
   NSArray *args, *resp;
+  NSError *tmpe;
   __weak MOSSimulatorProxy *weakSelf;
   __strong NSTask *strongTask;
   dispatch_semaphore_t ttyOpenSem;
   int i;
   
+  if (err) *err = nil;
   self = [super init];
   if (!self) return nil;
   
@@ -56,6 +64,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   [simTask setArguments:args];
   [simTask setStandardInput:toSim];
   [simTask setStandardOutput:fromSim];
+  [simTask setStandardError:fromSim];
   
   curState = MOSSimulatorStatePaused;
   [simTask launch];
@@ -102,17 +111,20 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
       break;
   }
   if (i != 4) {
-    MOSSimLog(simTask, @"can't open pipes");
+    if (err) *err = NSERROR_SIM(MOSSimulatorErrorPipeOpeningFailure);
     [self kill];
     return self;
   }
   
-  resp = [self receiveResponseWithoutCommand];
+  resp = [self receiveResponseWithoutCommandWithError:&tmpe];
   if (!resp) {
+    if (err) *err = NSERROR_SIM(MOSSimulatorErrorTimeout);
     MOSSimLog(simTask, @"initial prompt timeout!");
     [self kill];
-  } else if ([resp count]) {
-    MOSSimLog(simTask, @"error opening %@: @%", url, resp);
+  } else if (tmpe || [resp count]) {
+    if (tmpe && err) *err = tmpe;
+    if ([resp count])
+      MOSSimLog(simTask, @"initial response opening %@: %@", url, resp);
     [self kill];
   }
   
@@ -146,7 +158,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
    
    
-- (BOOL)sendCommandWithoutResponse:(NSString*)com {
+- (BOOL)sendCommandWithoutResponse:(NSString*)com error:(NSError **)err {
   dispatch_semaphore_t complete;
   
   complete = dispatch_semaphore_create(0);
@@ -156,73 +168,117 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   });
   
   if (dispatch_semaphore_wait(complete, RESPONSE_TIMEOUT)) {
-    MOSSimLog(simTask, @"debugger command send timeout!");
+    if (err) *err = NSERROR_SIM(MOSSimulatorErrorTimeout);
     return NO;
   }
   return YES;
 }
 
 
-- (NSArray*)receiveResponseWithoutCommand {
+- (NSArray *)receiveResponseWithoutCommandWithError:(NSError **)err  {
   NSMutableArray __block *res;
+  NSError __block *simerr;
   dispatch_semaphore_t complete;
+  
+  if (err) *err = nil;
   
   complete = dispatch_semaphore_create(0);
   res = [NSMutableArray array];
   dispatch_async(receiveQueue, ^{
     NSString *tmp;
+    BOOL first = YES;
     
     tmp = [[fromSim fileHandleForReading] readLine];
     while (tmp && ![tmp isEqual:@"debug? "]) {
-      [res addObject:tmp];
+      if (first && [tmp hasPrefix:@"error! "])
+        simerr = [self errorFromLine:tmp];
+      else
+        [res addObject:tmp];
       tmp = [[fromSim fileHandleForReading] readLine];
+      first = NO;
     }
     dispatch_semaphore_signal(complete);
   });
   
   if (dispatch_semaphore_wait(complete, RESPONSE_TIMEOUT)) {
-    MOSSimLog(simTask, @"debugger response timeout!");
+    if (err) *err = NSERROR_SIM(MOSSimulatorErrorTimeout);
     return nil;
-  }
+  } else if (simerr)
+    if (err) *err = simerr;
   
   return [res copy];
 }
 
 
-- (void)enterDebugger {
-  if ([self simulatorState] != MOSSimulatorStateRunning)
-    return;
+- (NSError *)errorFromLine:(NSString *)tmp {
+  const char *str;
+  int code = MOSSimulatorErrorUnknown;
+  
+  str = [tmp UTF8String];
+  if ([tmp length] >= 7)
+    sscanf(str+7, "%d", &code);
+  
+  return NSERROR_SIM(code);
+}
+
+
+- (BOOL)enterDebuggerWithError:(NSError **)err {
+  if ([self simulatorState] != MOSSimulatorStateRunning) {
+    if (err) *err = NSERROR_SIM(MOSSimulatorErrorWrongState);
+    return NO;
+  }
+  
+  if (err) *err = nil;
+  
   if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW)) {
+    if (err) *err = lastErrorOnSimReenter;
+    lastErrorOnSimReenter = nil;
     [self setSimulatorState:MOSSimulatorStatePaused];
-    return;
+    return YES;
   }
   
   dispatch_semaphore_signal(waitingForDebugger);
   [simTask interrupt];
   
   if (dispatch_semaphore_wait(enteredDebugger, RESPONSE_TIMEOUT)) {
-    MOSSimLog(simTask, @"task did not reenter the debugger!!");
+    if (err) *err = NSERROR_SIM(MOSSimulatorErrorTimeout);
     [simTask terminate];
-    return;
+    return NO;
   }
   
+  if (err) *err = lastErrorOnSimReenter;
+  lastErrorOnSimReenter = nil;
   [self setSimulatorState:MOSSimulatorStatePaused];
+  return YES;
 }
 
 
-- (void)exitDebuggerWithCommand:(NSString *)com {
-  if ([self simulatorState] != MOSSimulatorStatePaused)
-    return;
-  [self sendCommandWithoutResponse:com];
+- (BOOL)exitDebuggerWithCommand:(NSString *)com error:(NSError **)err {
+  NSError *tmpe;
+  
+  if ([self simulatorState] != MOSSimulatorStatePaused) {
+    if (err) *err = NSERROR_SIM(MOSSimulatorErrorWrongState);
+    return NO;
+  }
+  
+  if (![self sendCommandWithoutResponse:com error:&tmpe]) {
+    if (err) *err = tmpe;
+    return NO;
+  }
   [self setSimulatorState:MOSSimulatorStateRunning];
   
   dispatch_async(receiveQueue, ^{
     NSString *tmp;
+    BOOL first = YES;
     
     tmp = [[fromSim fileHandleForReading] readLine];
     while (tmp && ![tmp isEqual:@"debug? "]) {
-      MOSSimLog(simTask, @"received %@ on debugger reenter", tmp);
+      if (first && [tmp hasPrefix:@"error! "])
+        lastErrorOnSimReenter = [self errorFromLine:tmp];
+      else
+        MOSSimLog(simTask, @"received %@ on debugger reenter", tmp);
       tmp = [[fromSim fileHandleForReading] readLine];
+      first = NO;
     }
     if (!tmp) return; /* EOF => sim dead */
     
@@ -236,28 +292,48 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     }
     dispatch_semaphore_signal(enteredDebugger);
   });
+  
+  lastErrorOnSimReenter = nil;
+  return YES;
 }
 
 
-- (NSArray*)sendCommandToDebugger:(NSString *)com {
+- (NSArray*)sendCommandToDebugger:(NSString *)com error:(NSError **)err {
   BOOL hasToRestart;
   NSArray *res;
+  NSError *tmpe;
   
   if ([self simulatorState] == MOSSimulatorStateRunning) {
     hasToRestart = YES;
-    [self enterDebugger];
+    [self enterDebuggerWithError:&tmpe];
+    if (tmpe && err) *err = tmpe;
   } else if ([self simulatorState] == MOSSimulatorStatePaused)
     hasToRestart = NO;
-  else
+  else {
+    if (err) *err = NSERROR_SIM(MOSSimulatorErrorBrokenConnection);
     return nil;
+  }
   
-  if (![self sendCommandWithoutResponse:com])
+  if (![self sendCommandWithoutResponse:com error:&tmpe]) {
+    if (err) *err = tmpe;
     return nil;
-  res = [self receiveResponseWithoutCommand];
+  }
+  res = [self receiveResponseWithoutCommandWithError:&tmpe];
+  if (err) *err = tmpe;
   
-  if (hasToRestart)
-    [self exitDebuggerWithCommand:@"c"];
+  if (hasToRestart) {
+    if (![self exitDebuggerWithCommand:@"c" error:&tmpe]) {
+      MOSSimLog(simTask, @"-sendCommandToDebugger:error: can't reenter "
+        "previous state. %@", tmpe);
+      [self kill];
+    }
+  }
   return res;
+}
+
+
+- (NSError*)lastSimulationException {
+  return lastErrorOnSimReenter;
 }
 
 

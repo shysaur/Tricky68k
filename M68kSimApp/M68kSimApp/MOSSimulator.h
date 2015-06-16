@@ -47,7 +47,7 @@ extern NSString * const MOS68kRegisterCAAR;
 }
 
 
-- initWithExecutableURL:(NSURL*)url;
+- initWithExecutableURL:(NSURL*)url error:(NSError **)err;
 - (NSURL*)executableURL;
 
 - (BOOL)run;
@@ -56,6 +56,7 @@ extern NSString * const MOS68kRegisterCAAR;
 - (BOOL)stepOver;
 - (void)kill;
 
+- (NSError *)lastSimulatorException;
 - (MOSSimulatorState)simulatorState;
 - (BOOL)isSimulatorRunning;
 - (BOOL)isSimulatorDead;

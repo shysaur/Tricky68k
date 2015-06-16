@@ -16,6 +16,18 @@ typedef enum {
   MOSSimulatorStateDead
 } MOSSimulatorState;
 
+enum {
+  MOSSimulatorErrorUnknown = -1,
+  MOSSimulatorErrorTimeout = -2,
+  MOSSimulatorErrorPipeOpeningFailure = -3,
+  MOSSimulatorErrorUnrecognizedMessage = -4,
+  MOSSimulatorErrorBrokenConnection = -5,
+  MOSSimulatorErrorWrongState = -6
+};
+
+
+extern NSString * const MOSSimulatorErrorDomain;
+
 
 @class MOSNamedPipe;
 
@@ -23,6 +35,7 @@ typedef enum {
 @interface MOSSimulatorProxy : NSObject {
   NSTask *simTask;
   NSURL *exec;
+  NSError *lastErrorOnSimReenter;
   dispatch_semaphore_t waitingForDebugger;
   dispatch_semaphore_t enteredDebugger;
   dispatch_queue_t sendQueue;
@@ -34,14 +47,15 @@ typedef enum {
   MOSSimulatorState curState;
 }
 
-- initWithExecutableURL:(NSURL*)url;
+- (instancetype)initWithExecutableURL:(NSURL*)url error:(NSError**)err;
 - (NSURL*)executableURL;
 
 - (MOSSimulatorState)simulatorState;
 
-- (void)enterDebugger;
-- (void)exitDebuggerWithCommand:(NSString*)com;
-- (NSArray*)sendCommandToDebugger:(NSString *)com;
+- (BOOL)enterDebuggerWithError:(NSError **)err;
+- (BOOL)exitDebuggerWithCommand:(NSString*)com error:(NSError **)err;
+- (NSArray*)sendCommandToDebugger:(NSString *)com error:(NSError **)err;
+- (NSError*)lastSimulationException;
 
 - (NSFileHandle*)teletypeOutput;
 - (NSFileHandle*)teletypeInput;

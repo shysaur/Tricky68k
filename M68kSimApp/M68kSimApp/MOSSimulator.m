@@ -10,6 +10,7 @@
 #import "MOSSimulatorProxy.h"
 #import "MOSSimulator.h"
 #import "NSFileHandle+Strings.h"
+#import "MOSError.h"
 
 
 NSString * const MOS68kRegisterD0    = @"D0";
@@ -46,38 +47,43 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 @implementation MOSSimulator
 
 
-- initWithExecutableURL:(NSURL*)url {
+- initWithExecutableURL:(NSURL*)url error:(NSError **)err {
   NSFileHandle *fromSim;
   __weak MOSSimulator *weakSelf;
+  NSError *tmpe;
   
   weakSelf = self = [super init];
   if (!self) return nil;
   
-  proxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url];
+  proxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url error:&tmpe];
+  if (err) *err = tmpe;
+  
   [proxy addObserver:self forKeyPath:@"simulatorState"
     options:NSKeyValueObservingOptionInitial context:SimulatorStateChanged];
   
   fromSim = [proxy teletypeInput];
   
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    MOSSimulator *strongSelf;
-    void (^sendblock)(NSString *string);
-    NSData *temp;
-    NSString *str;
-    
-    temp = [fromSim readDataOfLength:1];
-    while ([temp length]) {
-      strongSelf = weakSelf;
-      sendblock = strongSelf->ttySendBlock;
-      strongSelf = nil;
+  if ([proxy simulatorState] != MOSSimulatorStateDead) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+      MOSSimulator *strongSelf;
+      void (^sendblock)(NSString *string);
+      NSData *temp;
+      NSString *str;
       
-      str = [[NSString alloc] initWithData:temp encoding:NSISOLatin1StringEncoding];
-      dispatch_async(dispatch_get_main_queue(), ^{
-        sendblock(str);
-      });
       temp = [fromSim readDataOfLength:1];
-    }
-  });
+      while ([temp length]) {
+        strongSelf = weakSelf;
+        sendblock = strongSelf->ttySendBlock;
+        strongSelf = nil;
+        
+        str = [[NSString alloc] initWithData:temp encoding:NSISOLatin1StringEncoding];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          sendblock(str);
+        });
+        temp = [fromSim readDataOfLength:1];
+      }
+    });
+  }
   
   return self;
 }
@@ -89,14 +95,12 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (BOOL)run {
-  [proxy exitDebuggerWithCommand:@"c"];
-  return YES;
+  return [proxy exitDebuggerWithCommand:@"c" error:nil];
 }
 
 
 - (BOOL)stop {
-  [proxy enterDebugger];
-  return YES;
+  return [proxy enterDebuggerWithError:nil];
 }
 
 
@@ -104,7 +108,7 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   NSString *com;
 
   com = [NSString stringWithFormat:@"u %d %d", loc, cnt];
-  return [proxy sendCommandToDebugger:com];
+  return [proxy sendCommandToDebugger:com error:nil];
 }
 
 
@@ -112,7 +116,7 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   NSString *com;
   
   com = [NSString stringWithFormat:@"d %d %d", loc, cnt];
-  return [proxy sendCommandToDebugger:com];
+  return [proxy sendCommandToDebugger:com error:nil];
 }
 
 
@@ -157,7 +161,7 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   
   if (regsCache) return regsCache;
   
-  list = [proxy sendCommandToDebugger:@"v"];
+  list = [proxy sendCommandToDebugger:@"v" error:nil];
   
   res = [NSMutableDictionary dictionary];
   for (obj in list) {
@@ -178,7 +182,7 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   NSMutableSet *res;
   uint32_t addr;
   
-  list = [proxy sendCommandToDebugger:@"p"];
+  list = [proxy sendCommandToDebugger:@"p" error:nil];
   
   res = [[NSMutableSet alloc] init];
   for (obj in list) {
@@ -191,12 +195,12 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (void)addBreakpointAtAddress:(uint32_t)addr {
-  [proxy sendCommandToDebugger:[NSString stringWithFormat:@"b 0x%X", addr]];
+  [proxy sendCommandToDebugger:[NSString stringWithFormat:@"b 0x%X", addr] error:nil];
 }
 
 
 - (void)removeBreakpointAtAddress:(uint32_t)addr {
-  [proxy sendCommandToDebugger:[NSString stringWithFormat:@"x 0x%X", addr]];
+  [proxy sendCommandToDebugger:[NSString stringWithFormat:@"x 0x%X", addr] error:nil];
 }
 
 
@@ -221,14 +225,12 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (BOOL)stepIn {
-  [proxy exitDebuggerWithCommand:@"s"];
-  return YES;
+  return [proxy exitDebuggerWithCommand:@"s" error:nil];
 }
 
 
 - (BOOL)stepOver {
-  [proxy exitDebuggerWithCommand:@"n"];
-  return YES;
+  return [proxy exitDebuggerWithCommand:@"n" error:nil];
 }
 
 
@@ -289,6 +291,11 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   
   data = [string dataUsingEncoding:NSISOLatin1StringEncoding];
   [[proxy teletypeOutput] writeData:data];
+}
+
+
+- (NSError *)lastSimulatorException {
+  return [proxy lastSimulationException];
 }
 
 

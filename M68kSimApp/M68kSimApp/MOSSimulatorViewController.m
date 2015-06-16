@@ -41,25 +41,15 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 
 - (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr {
+  NSError *tmpe;
+  
   simExec = url;
   
   [simProxy removeAllBreakpoints];
-  [self reloadSimulatedExecutable];
+  tmpe = [self reloadSimulatedExecutable];
   
-  if ([simProxy simulatorState] == MOSSimulatorStateDead) {
-    if (outerr)
-      *outerr = [NSError errorWithDomain:MOSSimulatorViewErrorDomain
-        code:MOSSimulatorViewErrorLoadingFailed
-        userInfo:@{
-          NSLocalizedDescriptionKey:NSLocalizedString(@"Impossible to load "
-            "this executable.", @"Loading error message title"),
-          NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"This is "
-            "often caused by a missing entry point, or by trying to load an "
-            "executable not built for the Motorola 68000 CPU.\nTo make the "
-            "entry point available, declare it as a public symbol using the "
-            "\"public\" directive.", @"Generic loading error recovery "
-            "suggestion")
-        }];
+  if (tmpe) {
+    if (outerr) *outerr = tmpe;
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
     simProxy = nil;
     return NO;
@@ -73,17 +63,21 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 }
 
 
-- (void)reloadSimulatedExecutable {
+- (NSError *)reloadSimulatedExecutable {
   MOSSimulator *oldSimProxy;
   MOSSimulator *newSimProxy;
   NSSet *breakpoints;
+  NSError *res;
   
   breakpoints = [simProxy breakpointList];
   oldSimProxy = simProxy;
-  newSimProxy = [[MOSSimulator alloc] initWithExecutableURL:simExec];
+  newSimProxy = [[MOSSimulator alloc] initWithExecutableURL:simExec error:&res];
   [newSimProxy addBreakpoints:breakpoints];
   [self setSimulatorProxy:newSimProxy];
   [oldSimProxy kill];
+  exceptionOccurred = NO;
+  
+  return res;
 }
 
 
