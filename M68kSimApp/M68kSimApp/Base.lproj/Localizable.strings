@@ -1,6 +1,9 @@
 /* Assembler job name */
 "Assemble %@" = "Assemble %@";
 
+/* Description for generic simulator IPC errors */
+"Can't connect to the simulator" = "Can't connect to the simulator";
+
 /* Cancel */
 "Cancel" = "Cancel";
 
@@ -10,8 +13,11 @@
 /* Text of the event which occurs when creating a linker file failed. */
 "Could not create a linker file." = "Could not create a linker file.";
 
-/* Loading error message title */
-"Impossible to load this executable." = "Impossible to load this executable.";
+/* Debug (after segmentation fault) */
+"Debug" = "Debug";
+
+/* Error description when the simulator can't load a file */
+"Impossible to load this executable" = "Impossible to load this executable";
 
 /* Paste (teletype view menu) */
 "Paste" = "Paste";
@@ -19,11 +25,17 @@
 /* Restart (simulator) */
 "Restart" = "Restart";
 
+/* Error description when the user program segmentation faults */
+"Segmentation fault!" = "Segmentation fault!";
+
 /* Info about what happens when assembler optimizations are disabled */
 "The assembler output will contain exactly the instructions you specified in the source file." = "The assembler output will contain exactly the instructions you specified in the source file.";
 
 /* Info about what happens when assembler optimizations are enabled */
 "The assembler will replace your instructions with shorter or faster equivalents, if available." = "The assembler will replace your instructions with shorter or faster equivalents, if available.";
+
+/* Error description when the ELF file's entry point is NULL */
+"The entry point is missing" = "The entry point is missing";
 
 /* Info about what happens when entry point is fixed */
 "The entry point of the program will always be located at $2000, regardless of the location of your start label." = "The entry point of the program will always be located at $2000, regardless of the location of your start label.";
@@ -31,15 +43,24 @@
 /* Info about what happens when entry point is not fixed (uses start symbol) */
 "The entry point of the program will be located where you place a global label named \"start\"." = "The entry point of the program will be located where you place a global label named \"start\".";
 
-/* Generic loading error recovery suggestion */
-"This is often caused by a missing entry point, or by trying to load an executable not built for the Motorola 68000 CPU.\nTo make the entry point available, declare it as a public symbol using the \"public\" directive." = "This is often caused by a missing entry point, or by trying to load an executable not built for the Motorola 68000 CPU.\nTo make the entry point available, declare it as a public symbol using the \"public\" directive.";
-
-/* Loading error recovery suggestion for the standalone simulator only */
-"This is often caused by trying to load an executable not built for the Motorola 68000 CPU." = "This is often caused by trying to load an executable not built for the Motorola 68000 CPU.";
-
-/* Informative text of simulator death alert */
-"This usually happens when your program accesses a memory area which you didn't declare with the DC or DS directives, or when a stack overflow occurs." = "This usually happens when your program accesses a memory area which you didn't declare with the DC or DS directives, or when a stack overflow occurs.";
+/* Recovery suggestion for not opening a valid ELF */
+"The file you're trying to open is not a valid Motorola 68000 32-bit big-endian executable ELF file. It has probably been made for another architecture." = "The file you're trying to open is not a valid Motorola 68000 32-bit big-endian executable ELF file. It has probably been made for another architecture.";
 
 /* Title of simulator death alert */
-"Your program has died" = "Your program has died";
+"The simulator has died" = "The simulator has died";
+
+/* Recovery suggestion for generic simulator IPC errors (no options are given) */
+"The simulator's process is not responding." = "The simulator's process is not responding.";
+
+/* Recovery suggestion for opening a dylib */
+"This file is a dynamic library." = "This file is a dynamic library.";
+
+/* Informative text of simulator death alert */
+"This was unexpected and shouldn't happen. Try restarting and see what happens. Also, look at the system log to look for clues about the cause of this issue." = "This was unexpected and shouldn't happen. Try restarting and see what happens. Also, look at the system log to look for clues about the cause of this issue.";
+
+/* Recovery suggestion for fixing a missing entry point */
+"To make the entry point available, declare it as a public symbol using the \"public\" directive, or select \"Use fixed entry point\" in the assembler preferences." = "To make the entry point available, declare it as a public symbol using the \"public\" directive, or select \"Use fixed entry point\" in the assembler preferences.";
+
+/* Recovery suggestion for a segmentation fault in the simulated program */
+"Your program has accessed a memory area not declared with a DS or DC directive, or a stack overflow occurred." = "Your program has accessed a memory area not declared with a DS or DC directive, or a stack overflow occurred.";
 
