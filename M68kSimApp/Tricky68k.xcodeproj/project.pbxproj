@@ -17,6 +17,7 @@
 		010AACAC1B1CDEA0005D9984 /* Fragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 010AACAA1B1CDEA0005D9984 /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
 		011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */; };
+		0124CF161B2F5EF800DD0A5C /* MOSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 0124CF151B2F5EF800DD0A5C /* MOSError.m */; };
 		012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; };
 		012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 012AEB1D1A7045E400906B25 /* dsa_pub.pem */; };
@@ -118,6 +119,8 @@
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		011D72D81AD0382900368CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSEditorPrefView.xib; sourceTree = "<group>"; };
+		0124CF141B2F5EF800DD0A5C /* MOSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSError.h; sourceTree = "<group>"; };
+		0124CF151B2F5EF800DD0A5C /* MOSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSError.m; sourceTree = "<group>"; };
 		012AEB1A1A703F5A00906B25 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		012AEB1D1A7045E400906B25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../../Updates/dsa_pub.pem; sourceTree = "<group>"; };
 		013A6AFA1A718458007C053B /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -474,6 +477,8 @@
 				01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */,
 				017D70021A72DF35003DCAF3 /* NSUserDefaults+Archiver.h */,
 				017D70031A72DF35003DCAF3 /* NSUserDefaults+Archiver.m */,
+				0124CF141B2F5EF800DD0A5C /* MOSError.h */,
+				0124CF151B2F5EF800DD0A5C /* MOSError.m */,
 			);
 			name = Foundation;
 			sourceTree = "<group>";
@@ -605,6 +610,7 @@
 				015708AD1A618E8B005D08DB /* NSURL+TemporaryFile.m in Sources */,
 				01E93C891A6D98F7004BE3C4 /* MOSSmallToolbar.m in Sources */,
 				01843FF91AC9A0AE00FF3BC7 /* MOSColoredView.m in Sources */,
+				0124CF161B2F5EF800DD0A5C /* MOSError.m in Sources */,
 				017D700D1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m in Sources */,
 				016CD1411A51A10E00D64892 /* MOSSource.m in Sources */,
 				01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */,
