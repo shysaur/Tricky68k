@@ -37,6 +37,7 @@ enum {
   NSURL *simExec;
   BOOL simRunning;
   BOOL viewHasLoaded;
+  BOOL exceptionOccurred;
   IBOutlet MOSSimDumpDataSource *dumpDs;
   IBOutlet MOSSimDisasmDataSource *disasmDs;
   IBOutlet MOSSimRegistersDataSource *regdumpDs;

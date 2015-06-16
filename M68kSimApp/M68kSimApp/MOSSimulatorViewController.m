@@ -142,6 +142,23 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 }
 
 
+- (void)simulatorExceptionOccurred {
+  NSWindow *pw;
+  NSAlert *alert;
+  NSError *err;
+  
+  exceptionOccurred = YES;
+  err = [simProxy lastSimulatorException];
+  alert = [NSAlert alertWithError:err];
+  [alert setAlertStyle:NSCriticalAlertStyle];
+  [alert addButtonWithTitle:NSLocalizedString(@"Debug", @"Debug (after "
+    "segmentation fault)")];
+  
+  pw = [[self view] window];
+  [alert beginSheetModalForWindow:pw completionHandler:nil];
+}
+
+
 - (void)loadView {
   [super loadView];
   viewHasLoaded = YES;
@@ -174,6 +191,8 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
         simRunning = (newstate == MOSSimulatorStateRunning);
         [self didChangeValueForKey:@"flagsStatus"];
         [self didChangeValueForKey:@"simulatorRunning"];
+        if (newstate == MOSSimulatorStatePaused && [simProxy lastSimulatorException])
+          [self simulatorExceptionOccurred];
         break;
         
       default:
@@ -216,10 +235,10 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 - (BOOL)validateUserInterfaceItem:(id)anItem {
   if (!simProxy) return NO;
-  if ([anItem action] == @selector(run:)) return !simRunning;
-  if ([anItem action] == @selector(stepIn:)) return !simRunning;
-  if ([anItem action] == @selector(stepOver:)) return !simRunning;
-  if ([anItem action] == @selector(pause:)) return simRunning;
+  if ([anItem action] == @selector(run:)) return !simRunning && !exceptionOccurred;
+  if ([anItem action] == @selector(stepIn:)) return !simRunning && !exceptionOccurred;
+  if ([anItem action] == @selector(stepOver:)) return !simRunning && !exceptionOccurred;
+  if ([anItem action] == @selector(pause:)) return simRunning && !exceptionOccurred;
   return YES;
 }
 
