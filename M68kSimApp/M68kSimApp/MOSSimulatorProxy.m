@@ -267,8 +267,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     if (err) *err = tmpe;
     return NO;
   }
-  [self setSimulatorState:MOSSimulatorStateRunning];
-  
+
   dispatch_async(receiveQueue, ^{
     NSString *tmp;
     BOOL first = YES;
@@ -295,6 +294,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     dispatch_semaphore_signal(enteredDebugger);
   });
   
+  [self setSimulatorState:MOSSimulatorStateRunning];
   lastErrorOnSimReenter = nil;
   return YES;
 }
@@ -308,7 +308,11 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   if ([self simulatorState] == MOSSimulatorStateRunning) {
     hasToRestart = YES;
     [self enterDebuggerWithError:&tmpe];
-    if (tmpe && err) *err = tmpe;
+    if (tmpe) {
+      MOSSimLog(simTask, @"-sendCommandToDebugger:error: can't enter "
+                "new state. %@", tmpe);
+      if (err) *err = tmpe;
+    }
   } else if ([self simulatorState] == MOSSimulatorStatePaused)
     hasToRestart = NO;
   else {
