@@ -35,6 +35,7 @@ enum {
 @interface MOSSimulatorViewController : NSViewController {
   MOSSimulator *simProxy;
   NSURL *simExec;
+  NSString *clockFreq;
   BOOL simRunning;
   BOOL viewHasLoaded;
   BOOL exceptionOccurred;
@@ -60,5 +61,6 @@ enum {
 
 - (BOOL)isSimulatorRunning;
 - (NSString *)flagsStatus;
+- (NSString *)clockFrequency;
 
 @end

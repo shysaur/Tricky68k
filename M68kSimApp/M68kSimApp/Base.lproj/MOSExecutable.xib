@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSExecutable">
@@ -81,6 +81,23 @@
                             </connections>
                         </progressIndicator>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="99416AD0-F2D1-48CE-9AAD-20A135EDB1BE" label="Clock Frequency" paletteLabel="Clock Frequency" id="Ejx-rd-nYs">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="38" height="14"/>
+                        <size key="maxSize" width="59" height="17"/>
+                        <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="cqb-Kq-8Ez">
+                            <rect key="frame" x="18" y="14" width="59" height="14"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="50.0 MHz" id="OBg-tM-M5Q">
+                                <font key="font" metaFont="smallSystem"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="amo-g3-g3r" name="value" keyPath="clockFrequency" id="cyl-uG-iBZ"/>
+                            </connections>
+                        </textField>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="qw2-zd-DqC"/>
@@ -89,6 +106,7 @@
                     <toolbarItem reference="LdT-11-A9i"/>
                     <toolbarItem reference="dfM-x8-BM3"/>
                     <toolbarItem reference="hUX-yi-LpL"/>
+                    <toolbarItem reference="Ejx-rd-nYs"/>
                     <toolbarItem reference="4TL-zP-4xO"/>
                     <toolbarItem reference="aFu-8o-yfC"/>
                 </defaultToolbarItems>
@@ -102,10 +120,10 @@
         <userDefaultsController representsSharedInstance="YES" id="FjJ-QI-wh0"/>
     </objects>
     <resources>
-        <image name="MOSPause" width="15" height="15"/>
-        <image name="MOSRestart" width="8" height="8"/>
-        <image name="MOSStart" width="15" height="15"/>
-        <image name="MOSStepIn" width="15" height="15"/>
-        <image name="MOSStepOver" width="15" height="15"/>
+        <image name="MOSPause" width="24" height="24"/>
+        <image name="MOSRestart" width="24" height="24"/>
+        <image name="MOSStart" width="24" height="24"/>
+        <image name="MOSStepIn" width="24" height="24"/>
+        <image name="MOSStepOver" width="24" height="24"/>
     </resources>
 </document>

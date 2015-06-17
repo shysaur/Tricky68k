@@ -191,8 +191,15 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
         simRunning = (newstate == MOSSimulatorStateRunning);
         [self didChangeValueForKey:@"flagsStatus"];
         [self didChangeValueForKey:@"simulatorRunning"];
-        if (newstate == MOSSimulatorStatePaused && [simProxy lastSimulatorException])
-          [self simulatorExceptionOccurred];
+        if (newstate == MOSSimulatorStatePaused) {
+          if ([simProxy lastSimulatorException])
+            [self simulatorExceptionOccurred];
+        } else if (newstate == MOSSimulatorStateRunning) {
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC / 2),
+            dispatch_get_main_queue(), ^{
+            [self updateClockFrequencyDisplay];
+          });
+        }
         break;
         
       default:
@@ -200,6 +207,47 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
     }
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+
+- (void)updateClockFrequencyDisplay {
+  static NSNumberFormatter *nf;
+  static NSString *mhzFmt;
+  NSString *tmp;
+  float mhz;
+  
+  if (!nf) {
+    nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+    [nf setMaximumFractionDigits:1];
+  }
+  if (!mhzFmt) {
+    mhzFmt = NSLocalizedString(@"%@ MHz", @"Clock frequency badge format (MHz)");
+  }
+  
+  if (simRunning) {
+    mhz = [simProxy clockFrequency];
+    if (mhz >= 0)
+      tmp = [NSString stringWithFormat:mhzFmt, [nf stringFromNumber:@(mhz)]];
+    else
+      tmp = @"";
+    [self setClockFrequency:tmp];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC),
+      dispatch_get_main_queue(), ^{
+      [self updateClockFrequencyDisplay];
+    });
+  }
+}
+
+
+- (void)setClockFrequency:(NSString *)str {
+  clockFreq = str;
+}
+
+
+- (NSString *)clockFrequency {
+  return clockFreq;
 }
 
 
