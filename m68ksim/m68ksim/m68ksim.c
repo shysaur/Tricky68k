@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <signal.h>
+#include <limits.h>
 #include "m68ksim.h"
 #include "addrspace.h"
 #include "ram.h"
@@ -24,6 +25,9 @@
 
 volatile int sim_on, debug_on;
 int servermode_on;
+
+struct timeval cyc_t0;
+long long cyc_dcycles;
 
 
 void signal_enterDebugger(int signo) {
@@ -96,8 +100,18 @@ int main(int argc, char *argv[]) {
   m68k_set_cpu_type(M68K_CPU_TYPE_68000);
   m68k_set_instr_hook_callback(cpu_instrCallback);
   m68k_pulse_reset();
+  
+  gettimeofday(&cyc_t0, NULL);
+  cyc_dcycles = 0;
   for (;;) {
-    m68k_execute(100000);
+    m68k_execute(CYCLES_PER_LOOP);
+    
+    if (cyc_dcycles > LONG_LONG_MAX - (CYCLES_PER_LOOP+1)) {
+      cyc_dcycles = 0;
+      gettimeofday(&cyc_t0, NULL);
+    } else {
+      cyc_dcycles += m68k_cycles_run();
+    }
   }
   return 1;
 }

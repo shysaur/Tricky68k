@@ -290,6 +290,25 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 }
 
 
+- (float)clockFrequency {
+  NSArray *line;
+  NSString *tmp;
+  long long int khz;
+  
+  disableNotifications = YES;
+  line = [proxy sendCommandToDebugger:@"f" error:nil];
+  disableNotifications = NO;
+  if ([self simulatorState] != [proxy simulatorState])
+    [self setSimulatorState:[proxy simulatorState]];
+  
+  tmp = [line firstObject];
+  sscanf([tmp UTF8String], "%lld", &khz);
+  if (khz < 0)
+    return khz;
+  return (float)khz / 1000.0;
+}
+
+
 + (NSSet *)keyPathsForValuesAffectingSimulatorRunning {
   return [NSSet setWithObjects:@"simulatorState", nil];
 }
@@ -304,7 +323,8 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   change:(NSDictionary *)change context:(void *)context {
   
   if (context == SimulatorStateChanged) {
-    [self setSimulatorState:[proxy simulatorState]];
+    if (!disableNotifications)
+      [self setSimulatorState:[proxy simulatorState]];
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }

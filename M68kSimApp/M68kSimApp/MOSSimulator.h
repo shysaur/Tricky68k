@@ -44,6 +44,7 @@ extern NSString * const MOS68kRegisterCAAR;
   void (^ttySendBlock)(NSString *string);
   NSDictionary *regsCache;
   BOOL isSimDead;
+  BOOL disableNotifications;
 }
 
 
@@ -65,6 +66,8 @@ extern NSString * const MOS68kRegisterCAAR;
 - (NSArray*)dump:(int)cnt linesFromLocation:(uint32_t)loc;
 - (NSData*)rawDumpFromLocation:(uint32_t)loc withSize:(uint32_t)size;
 - (NSDictionary*)registerDump;
+
+- (float)clockFrequency;
 
 - (NSSet*)breakpointList;
 - (void)addBreakpoints:(NSSet*)addrs;

@@ -173,7 +173,24 @@ void debug_dumpContext(void) {
 void debug_debugConsole(void) {
   char cl[256], temp[80], *cp;
   uint32_t pc, bpa, addr;
-  int cont, lines;
+  int cont, lines, cyc_ran;
+  struct timeval cyc_t1;
+  long long cyc_dt, khz;
+  
+  gettimeofday(&cyc_t1, NULL);
+  cyc_ran = m68k_cycles_run();
+  cyc_dcycles += cyc_ran;
+  cyc_dt = (((long long)cyc_t1.tv_sec) * 1000000) + cyc_t1.tv_usec;
+  cyc_dt -= (((long long)cyc_t0.tv_sec) * 1000000) + cyc_t0.tv_usec;
+  cyc_dt /= 1000;
+  
+  if (cyc_dt)
+    khz = cyc_dcycles / cyc_dt;
+  else
+    khz = -1;
+  if (khz > 50000000)
+    /* Absurd frequency; assume the infinite loop optimization has triggered */
+    khz /= CYCLES_PER_LOOP;
   
   cont = 0;
   pc = m68k_get_reg(NULL, M68K_REG_PC);
@@ -258,6 +275,10 @@ void debug_debugConsole(void) {
         exit(0);
         break;
         
+      case 'f':
+        printf("%lld kHz\n", khz);
+        break;
+        
       case '\n':
         break;
         
@@ -265,6 +286,9 @@ void debug_debugConsole(void) {
         error_print(error_new(605, "Unrecognized command"));
     }
   }
+  
+  cyc_dcycles = -cyc_ran;
+  gettimeofday(&cyc_t0, NULL);
 }
 
 
