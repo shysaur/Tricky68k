@@ -39,6 +39,7 @@ extern NSString * const MOS68kRegisterCAAR;
 
 
 @interface MOSSimulator : NSObject {
+  NSError *lastError;
   MOSSimulatorState stateMirror;
   MOSSimulatorProxy *proxy;
   void (^ttySendBlock)(NSString *string);

@@ -126,15 +126,19 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 - (void)simulatorIsDead {
   NSAlert *alert;
   NSWindow *pw;
+  NSError *err;
   
-  alert = [[NSAlert alloc] init];
+  if ((err = [simProxy lastSimulatorException])) {
+    alert = [NSAlert alertWithError:err];
+  } else {
+    alert = [[NSAlert alloc] init];
+    [alert setMessageText:NSLocalizedString(@"The simulator has died", @"Title "
+      "of simulator death alert")];
+    [alert setInformativeText:NSLocalizedString(@"An unexpected condition "
+      "occurred which caused the simulator to crash. Try restarting and see "
+      "what happens.", @"Informative text of simulator death alert")];
+  }
   [alert setAlertStyle:NSCriticalAlertStyle];
-  [alert setMessageText:NSLocalizedString(@"The simulator has died", @"Title "
-    "of simulator death alert")];
-  [alert setInformativeText:NSLocalizedString(@"This was unexpected and "
-    "shouldn't happen. Try restarting and see what happens. Also, look at the "
-    "system log to look for clues about the cause of this issue.",
-    @"Informative text of simulator death alert")];
   [alert addButtonWithTitle:NSLocalizedString(@"Restart", @"Restart (simulator)")];
   [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
   
@@ -176,8 +180,8 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   viewHasLoaded = YES;
   
   if (!simProxy)
-    [NSException raise:NSInvalidArgumentException
-      format:@"Simulator view can't load if no executable is associated with it."];
+    [NSException raise:NSInvalidArgumentException format:@"Simulator view "
+      "can't load if no executable is associated with it."];
   [self setSimulatorForSubviewControllers];
 }
 
@@ -185,6 +189,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 - (void)observeValueForKeyPath:(NSString*)keyPath    ofObject:(id)object
                         change:(NSDictionary*)change context:(void*)context {
   MOSSimulatorState newstate;
+  NSError *exc;
   
   if (context == NULL) {
     newstate = [object simulatorState];
@@ -196,19 +201,21 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
         [self simulatorIsDead];
         break;
         
-      case MOSSimulatorStateRunning:
       case MOSSimulatorStatePaused:
+        stepping = NO;
+        dispatch_source_set_timer(clockUpdateTimer, DISPATCH_TIME_FOREVER, 0, 0);
+        exc = [simProxy lastSimulatorException];
+      case MOSSimulatorStateRunning:
         [self willChangeValueForKey:@"flagsStatus"];
         [self willChangeValueForKey:@"simulatorRunning"];
         simRunning = (newstate == MOSSimulatorStateRunning);
         [self didChangeValueForKey:@"flagsStatus"];
         [self didChangeValueForKey:@"simulatorRunning"];
         if (newstate == MOSSimulatorStatePaused) {
-          stepping = NO;
-          dispatch_source_set_timer(clockUpdateTimer, DISPATCH_TIME_FOREVER, 0, 0);
-          [self updateClockFrequencyDisplay];
-          if ([simProxy lastSimulatorException])
+          if (exc) {
             [self simulatorExceptionOccurred];
+          }
+          [self updateClockFrequencyDisplay];
         } else if (newstate == MOSSimulatorStateRunning) {
           dispatch_source_set_timer(clockUpdateTimer, dispatch_time(
             DISPATCH_TIME_NOW, NSEC_PER_SEC/2), NSEC_PER_SEC, NSEC_PER_SEC/4);

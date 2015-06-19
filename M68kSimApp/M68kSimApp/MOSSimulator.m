@@ -146,43 +146,79 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (BOOL)run {
-  return [proxy exitDebuggerWithCommand:@"c" error:nil];
+  NSError *tmp;
+  BOOL res;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return NO;
+  
+  res = [proxy exitDebuggerWithCommand:@"c" error:&tmp];
+  lastError = tmp;
+  return res;
 }
 
 
 - (BOOL)stop {
-  return [proxy enterDebuggerWithError:nil];
+  NSError *tmp;
+  BOOL res;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return NO;
+  
+  res = [proxy enterDebuggerWithError:&tmp];
+  lastError = tmp;
+  return res;
 }
 
 
 - (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc {
   NSString *com;
+  NSError *tmp;
+  NSArray *res;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return nil;
 
   com = [NSString stringWithFormat:@"u %d %d", loc, cnt];
-  return [proxy sendCommandToDebugger:com error:nil];
+  res = [proxy sendCommandToDebugger:com error:&tmp];
+  lastError = tmp;
+  return res;
 }
 
 
 - (NSArray*)dump:(int)cnt linesFromLocation:(uint32_t)loc {
   NSString *com;
+  NSError *tmp;
+  NSArray *res;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return nil;
   
   com = [NSString stringWithFormat:@"d %d %d", loc, cnt];
-  return [proxy sendCommandToDebugger:com error:nil];
+  res = [proxy sendCommandToDebugger:com error:&tmp];
+  lastError = tmp;
+  return res;
 }
 
 
 - (NSData*)rawDumpFromLocation:(uint32_t)loc withSize:(uint32_t)size {
   NSArray *lines;
   NSMutableData *res;
+  NSString *tmp;
   const char *line, *linep;
   int i, j, c, t;
   uint8_t decLine[16];
   
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return nil;
+  
   c = (size+15) / 16;
   lines = [self dump:c linesFromLocation:loc];
+  if ([lines count] < c)
+    return nil;
+  
   res = [NSMutableData data];
   for (i=0; i<c; i++) {
-    line = [[lines objectAtIndex:i] UTF8String];
+    tmp = [lines objectAtIndex:i];
+    if ([tmp length] < (10 + 16*3))
+      return nil;
+    
+    line = [tmp UTF8String];
     linep = line + 10;
     for (j=0; j<16; j++) {
       t = *(linep++);
@@ -202,6 +238,7 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (NSDictionary*)registerDump {
+  NSError *err;
   NSMutableDictionary *res;
   NSArray *list;
   NSString *obj, *rego;
@@ -212,7 +249,9 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   
   if (regsCache) return regsCache;
   
-  list = [proxy sendCommandToDebugger:@"v" error:nil];
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return nil;
+  list = [proxy sendCommandToDebugger:@"v" error:&err];
+  lastError = err;
   
   res = [NSMutableDictionary dictionary];
   for (obj in list) {
@@ -227,16 +266,21 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (NSArray*)breakpointList {
+  NSError *err;
   NSString *obj;
   const char *data;
   NSArray *list;
   NSMutableSet *res;
   uint32_t addr;
   
-  list = [proxy sendCommandToDebugger:@"p" error:nil];
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return nil;
+  list = [proxy sendCommandToDebugger:@"p" error:&err];
+  lastError = err;
   
   res = [[NSMutableSet alloc] init];
   for (obj in list) {
+    if ([obj length] < 3)
+      return nil;
     data = [obj UTF8String];
     sscanf(data+3, "%X", &addr);
     [res addObject:[NSNumber numberWithUnsignedInt:addr]];
@@ -246,12 +290,26 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (void)addBreakpointAtAddress:(uint32_t)addr {
-  [proxy sendCommandToDebugger:[NSString stringWithFormat:@"b 0x%X", addr] error:nil];
+  NSString *com;
+  NSError *err;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return;
+  
+  com = [NSString stringWithFormat:@"b 0x%X", addr];
+  [proxy sendCommandToDebugger:com error:&err];
+  lastError = err;
 }
 
 
 - (void)removeBreakpointAtAddress:(uint32_t)addr {
-  [proxy sendCommandToDebugger:[NSString stringWithFormat:@"x 0x%X", addr] error:nil];
+  NSString *com;
+  NSError *err;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return;
+  
+  com = [NSString stringWithFormat:@"x 0x%X", addr];
+  [proxy sendCommandToDebugger:com error:&err];
+  lastError = err;
 }
 
 
@@ -276,12 +334,26 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (BOOL)stepIn {
-  return [proxy exitDebuggerWithCommand:@"s" error:nil];
+  NSError *err;
+  BOOL res;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return NO;
+  
+  res = [proxy exitDebuggerWithCommand:@"s" error:&err];
+  lastError = err;
+  return res;
 }
 
 
 - (BOOL)stepOver {
-  return [proxy exitDebuggerWithCommand:@"n" error:nil];
+  NSError *err;
+  BOOL res;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return NO;
+  
+  res = [proxy exitDebuggerWithCommand:@"n" error:&err];
+  lastError = err;
+  return res;
 }
 
 
@@ -291,17 +363,24 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
 - (float)clockFrequency {
+  NSError *err;
   NSArray *line;
   NSString *tmp;
   long long int khz;
   
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return -1;
+  
   disableNotifications = YES;
-  line = [proxy sendCommandToDebugger:@"f" error:nil];
+  line = [proxy sendCommandToDebugger:@"f" error:&err];
+  lastError = err;
   disableNotifications = NO;
   if ([self simulatorState] != [proxy simulatorState])
     [self setSimulatorState:[proxy simulatorState]];
   
   tmp = [line firstObject];
+  if (!tmp)
+    return -1;
+  
   sscanf([tmp UTF8String], "%lld", &khz);
   if (khz < 0)
     return khz;
@@ -323,8 +402,16 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   change:(NSDictionary *)change context:(void *)context {
   
   if (context == SimulatorStateChanged) {
-    if (!disableNotifications)
+    if ([proxy simulatorState] == MOSSimulatorStatePaused) {
+      lastError = [proxy lastSimulationException];
+    }
+    if ([proxy simulatorState] == MOSSimulatorStateDead) {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [self setSimulatorState:MOSSimulatorStateDead];
+      });
+    } else if (!disableNotifications) {
       [self setSimulatorState:[proxy simulatorState]];
+    }
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
@@ -360,13 +447,15 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 - (void)sendToSimulator:(NSString*)string {
   NSData *data;
   
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return;
+  
   data = [string dataUsingEncoding:NSISOLatin1StringEncoding];
   [[proxy teletypeOutput] writeData:data];
 }
 
 
 - (NSError *)lastSimulatorException {
-  return [proxy lastSimulationException];
+  return lastError;
 }
 
 

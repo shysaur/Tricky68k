@@ -1,6 +1,9 @@
 /* Clock frequency badge format (MHz) */
 "%@ MHz" = "%@ MHz";
 
+/* Informative text of simulator death alert */
+"An unexpected condition occurred which caused the simulator to crash. Try restarting and see what happens." = "An unexpected condition occurred which caused the simulator to crash. Try restarting and see what happens.";
+
 /* Assembler job name */
 "Assemble %@" = "Assemble %@";
 
@@ -57,9 +60,6 @@
 
 /* Recovery suggestion for opening a dylib */
 "This file is a dynamic library." = "This file is a dynamic library.";
-
-/* Informative text of simulator death alert */
-"This was unexpected and shouldn't happen. Try restarting and see what happens. Also, look at the system log to look for clues about the cause of this issue." = "This was unexpected and shouldn't happen. Try restarting and see what happens. Also, look at the system log to look for clues about the cause of this issue.";
 
 /* Recovery suggestion for fixing a missing entry point */
 "To make the entry point available, declare it as a public symbol using the \"public\" directive, or select \"Use fixed entry point\" in the assembler preferences." = "To make the entry point available, declare it as a public symbol using the \"public\" directive, or select \"Use fixed entry point\" in the assembler preferences.";
