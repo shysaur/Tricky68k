@@ -40,6 +40,7 @@ enum {
   BOOL viewHasLoaded;
   BOOL exceptionOccurred;
   BOOL stepping;
+  dispatch_source_t clockUpdateTimer;
   IBOutlet MOSSimDumpDataSource *dumpDs;
   IBOutlet MOSSimDisasmDataSource *disasmDs;
   IBOutlet MOSSimRegistersDataSource *regdumpDs;

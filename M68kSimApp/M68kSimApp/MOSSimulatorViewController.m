@@ -23,7 +23,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 - (instancetype)initWithCoder:(NSCoder*)coder {
   self = [super initWithCoder:coder];
-  viewHasLoaded = NO;
+  [self finishInitialization];
   return self;
 }
 
@@ -35,8 +35,20 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-  viewHasLoaded = NO;
+  [self finishInitialization];
   return self;
+}
+
+
+- (void)finishInitialization {
+  viewHasLoaded = NO;
+  clockUpdateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,
+    dispatch_get_main_queue());
+  dispatch_source_set_event_handler(clockUpdateTimer, ^{
+    [self updateClockFrequencyDisplay];
+  });
+  dispatch_source_set_timer(clockUpdateTimer, DISPATCH_TIME_FOREVER, 0, 0);
+  dispatch_resume(clockUpdateTimer);
 }
 
 
@@ -193,13 +205,13 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
         [self didChangeValueForKey:@"simulatorRunning"];
         if (newstate == MOSSimulatorStatePaused) {
           stepping = NO;
+          dispatch_source_set_timer(clockUpdateTimer, DISPATCH_TIME_FOREVER, 0, 0);
+          [self updateClockFrequencyDisplay];
           if ([simProxy lastSimulatorException])
             [self simulatorExceptionOccurred];
         } else if (newstate == MOSSimulatorStateRunning) {
-          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC / 2),
-            dispatch_get_main_queue(), ^{
-            [self updateClockFrequencyDisplay];
-          });
+          dispatch_source_set_timer(clockUpdateTimer, dispatch_time(
+            DISPATCH_TIME_NOW, NSEC_PER_SEC/2), NSEC_PER_SEC, NSEC_PER_SEC/4);
         }
         break;
         
@@ -233,11 +245,8 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
     else
       tmp = @"";
     [self setClockFrequency:tmp];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC),
-      dispatch_get_main_queue(), ^{
-      [self updateClockFrequencyDisplay];
-    });
+  } else {
+    [self setClockFrequency:@""];
   }
 }
 
@@ -315,6 +324,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
+  dispatch_suspend(clockUpdateTimer);
   [simProxy kill];
 }
 
