@@ -1,3 +1,6 @@
+/* Clock frequency badge format (MHz) */
+"%@ MHz" = "%@ MHz";
+
 /* Assembler job name */
 "Assemble %@" = "Assemble %@";
 
