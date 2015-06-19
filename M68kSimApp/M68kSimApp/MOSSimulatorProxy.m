@@ -116,7 +116,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     return self;
   }
   
-  resp = [self receiveResponseWithoutCommandWithError:&tmpe];
+  resp = [self receiveResponseWithoutCommandWithError:&tmpe restarting:NO];
   if (!resp) {
     if (err) *err = NSERROR_SIM(MOSSimulatorErrorTimeout);
     MOSSimLog(simTask, @"initial prompt timeout!");
@@ -175,7 +175,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
 
 
-- (NSArray *)receiveResponseWithoutCommandWithError:(NSError **)err  {
+- (NSArray *)receiveResponseWithoutCommandWithError:(NSError **)err restarting:(BOOL)s  {
   NSMutableArray __block *res;
   NSError __block *simerr;
   dispatch_semaphore_t complete;
@@ -186,10 +186,11 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   res = [NSMutableArray array];
   dispatch_async(receiveQueue, ^{
     NSString *tmp;
+    NSString *prompt = s ? @"continuing." : @"debug? ";
     BOOL first = YES;
     
     tmp = [[fromSim fileHandleForReading] readLine];
-    while (tmp && ![tmp isEqual:@"debug? "]) {
+    while (tmp && ![tmp isEqual:prompt]) {
       if (first && [tmp hasPrefix:@"error! "])
         simerr = [self errorFromLine:tmp];
       else
@@ -229,7 +230,6 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     if (err) *err = NSERROR_SIM(MOSSimulatorErrorWrongState);
     return NO;
   }
-  
   if (err) *err = nil;
   
   if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW)) {
@@ -264,6 +264,10 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   }
   
   if (![self sendCommandWithoutResponse:com error:&tmpe]) {
+    if (err) *err = tmpe;
+    return NO;
+  }
+  if (![self receiveResponseWithoutCommandWithError:&tmpe restarting:YES]) {
     if (err) *err = tmpe;
     return NO;
   }
@@ -325,7 +329,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     if (err) *err = tmpe;
     return nil;
   }
-  res = [self receiveResponseWithoutCommandWithError:&tmpe];
+  res = [self receiveResponseWithoutCommandWithError:&tmpe restarting:NO];
   if (err) *err = tmpe;
   
   if (hasToRestart) {

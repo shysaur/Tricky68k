@@ -289,6 +289,10 @@ void debug_debugConsole(void) {
   
   cyc_dcycles = -cyc_ran;
   gettimeofday(&cyc_t0, NULL);
+  if (servermode_on) {
+    puts("continuing.");
+    fflush(stdout);
+  }
 }
 
 
