@@ -283,6 +283,8 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     }
     if (!tmp) return; /* EOF => sim dead */
     
+    dispatch_semaphore_signal(enteredDebugger);
+    
     if (dispatch_semaphore_wait(waitingForDebugger, DISPATCH_TIME_NOW)) {
       dispatch_async(dispatch_get_main_queue(), ^{
         if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW)) {
@@ -291,7 +293,6 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
         }
       });
     }
-    dispatch_semaphore_signal(enteredDebugger);
   });
   
   [self setSimulatorState:MOSSimulatorStateRunning];
