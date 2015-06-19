@@ -169,6 +169,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   if (dispatch_semaphore_wait(complete, RESPONSE_TIMEOUT)) {
     if (err) *err = NSERROR_SIM(MOSSimulatorErrorTimeout);
+    [self kill];
     return NO;
   }
   return YES;
@@ -203,6 +204,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   if (dispatch_semaphore_wait(complete, RESPONSE_TIMEOUT)) {
     if (err) *err = NSERROR_SIM(MOSSimulatorErrorTimeout);
+    [self kill];
     return nil;
   } else if (simerr)
     if (err) *err = simerr;
@@ -244,7 +246,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   if (dispatch_semaphore_wait(enteredDebugger, RESPONSE_TIMEOUT)) {
     if (err) *err = NSERROR_SIM(MOSSimulatorErrorTimeout);
-    [simTask terminate];
+    [self kill];
     return NO;
   }
   
