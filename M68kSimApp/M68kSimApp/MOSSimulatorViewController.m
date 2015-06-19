@@ -192,6 +192,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
         [self didChangeValueForKey:@"flagsStatus"];
         [self didChangeValueForKey:@"simulatorRunning"];
         if (newstate == MOSSimulatorStatePaused) {
+          stepping = NO;
           if ([simProxy lastSimulatorException])
             [self simulatorExceptionOccurred];
         } else if (newstate == MOSSimulatorStateRunning) {
@@ -225,7 +226,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
     mhzFmt = NSLocalizedString(@"%@ MHz", @"Clock frequency badge format (MHz)");
   }
   
-  if (simRunning) {
+  if (simRunning && !stepping) {
     mhz = [simProxy clockFrequency];
     if (mhz >= 0)
       tmp = [NSString stringWithFormat:mhzFmt, [nf stringFromNumber:@(mhz)]];
@@ -262,11 +263,13 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 
 - (IBAction)stepIn:(id)sender {
+  stepping = YES;
   [simProxy stepIn];
 }
 
 
 - (IBAction)stepOver:(id)sender {
+  stepping = YES;
   [simProxy stepOver];
 }
 

@@ -39,6 +39,7 @@ enum {
   BOOL simRunning;
   BOOL viewHasLoaded;
   BOOL exceptionOccurred;
+  BOOL stepping;
   IBOutlet MOSSimDumpDataSource *dumpDs;
   IBOutlet MOSSimDisasmDataSource *disasmDs;
   IBOutlet MOSSimRegistersDataSource *regdumpDs;
