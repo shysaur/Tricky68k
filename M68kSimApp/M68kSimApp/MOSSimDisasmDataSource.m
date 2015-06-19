@@ -96,7 +96,7 @@
   breakpoints = [simProxy breakpointList];
   regs = [simProxy registerDump];
   centerAddr = [[regs objectForKey:MOS68kRegisterPC] unsignedIntValue];
-  lineCache = [[simProxy disassemble:1 instructionsFromLocation:centerAddr] mutableCopy];
+  lineCache = [[self disassemble:1 instructionsFromLocation:centerAddr] mutableCopy];
   cacheStart = (maxLines - 1) / 2;
   addrCacheStart = addrCacheEnd = centerAddr;
 }
@@ -143,7 +143,7 @@
   
   if (row < cacheStart) {
     linestodo = row - cacheStart;
-    add = [simProxy disassemble:(int)linestodo instructionsFromLocation:addrCacheStart];
+    add = [self disassemble:linestodo instructionsFromLocation:addrCacheStart];
     newcache = [add mutableCopy];
     [newcache addObjectsFromArray:lineCache];
     lineCache = newcache;
@@ -151,13 +151,29 @@
     [self updateCacheStartAddress];
   } else if (row >= cacheStart + [lineCache count]) {
     linestodo = row - (cacheStart + [lineCache count]) + 1;
-    add = [simProxy disassemble:(int)linestodo+1 instructionsFromLocation:addrCacheEnd];
+    add = [self disassemble:linestodo+1 instructionsFromLocation:addrCacheEnd];
     newcache = [add mutableCopy];
     [newcache removeObjectAtIndex:0];
     [lineCache addObjectsFromArray:newcache];
     [self updateCacheEndAddress];
   }
   return [lineCache objectAtIndex:row - cacheStart];
+}
+
+
+- (NSArray *)disassemble:(NSInteger)c instructionsFromLocation:(uint32_t)addr {
+  NSArray *res;
+  NSMutableArray *tmp;
+  NSInteger i;
+  
+  res = [simProxy disassemble:(int)c instructionsFromLocation:addr];
+  if (!res || [res count] < ABS(c)) {
+    tmp = [NSMutableArray array];
+    for (i=0; i<c; i++)
+      [tmp addObject:@""];
+    return tmp;
+  }
+  return res;
 }
 
 

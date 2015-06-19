@@ -33,9 +33,13 @@
     addr = [[regs objectForKey:MOS68kRegisterSP] unsignedIntValue];
     addr += row * 4;
     data = [simProxy rawDumpFromLocation:addr withSize:4];
-    dump = (uint8_t*)[data bytes];
-    line = [NSString stringWithFormat:@"%08X: %02X%02X %02X%02X",
-            addr, dump[0], dump[1], dump[2], dump[3]];
+    if (data) {
+      dump = (uint8_t*)[data bytes];
+      line = [NSString stringWithFormat:@"%08X: %02X%02X %02X%02X",
+        addr, dump[0], dump[1], dump[2], dump[3]];
+    } else {
+      line = @"";
+    }
   }
   result = [tv makeViewWithIdentifier:@"normalView" owner:self];
   [[result textField] setFont:[self defaultMonospacedFont]];

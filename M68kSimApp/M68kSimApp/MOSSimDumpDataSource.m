@@ -42,8 +42,8 @@
   } else {
     addr = (uint32_t)(row * 16);
     line = [simProxy dump:1 linesFromLocation:addr];
-    if (line == nil)
-      line = [NSArray arrayWithObject:@"Error"];
+    if (!line)
+      line = [NSArray arrayWithObject:@""];
   }
   result = [tv makeViewWithIdentifier:@"normalView" owner:self];
   [[result textField] setFont:[self defaultMonospacedFont]];
