@@ -285,9 +285,9 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     
     if (dispatch_semaphore_wait(waitingForDebugger, DISPATCH_TIME_NOW)) {
       dispatch_async(dispatch_get_main_queue(), ^{
-        if ([self simulatorState] != MOSSimulatorStatePaused) {
-          [self setSimulatorState:MOSSimulatorStatePaused];
-          dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_FOREVER);
+        if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW)) {
+          if ([self simulatorState] != MOSSimulatorStatePaused)
+            [self setSimulatorState:MOSSimulatorStatePaused];
         }
       });
     }
