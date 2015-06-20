@@ -239,7 +239,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   if (!nf) {
     nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
-    [nf setMaximumFractionDigits:1];
+    [nf setUsesGroupingSeparator:NO];
   }
   if (!mhzFmt) {
     mhzFmt = NSLocalizedString(@"%@ MHz", @"Clock frequency badge format (MHz)");
@@ -247,9 +247,16 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   
   if (simRunning && !stepping) {
     mhz = [simProxy clockFrequency];
-    if (mhz >= 0)
+    if (mhz >= 0) {
+      if (mhz >= 1000.0) {
+        [nf setMinimumFractionDigits:0];
+        [nf setMaximumFractionDigits:0];
+      } else {
+        [nf setMinimumFractionDigits:1];
+        [nf setMaximumFractionDigits:1];
+      }
       tmp = [NSString stringWithFormat:mhzFmt, [nf stringFromNumber:@(mhz)]];
-    else
+    } else
       tmp = @"";
     [self setClockFrequency:tmp];
   } else {

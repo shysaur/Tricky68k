@@ -84,17 +84,18 @@
                     <toolbarItem implicitItemIdentifier="99416AD0-F2D1-48CE-9AAD-20A135EDB1BE" label="Clock Frequency" paletteLabel="Clock Frequency" id="Ejx-rd-nYs">
                         <nil key="toolTip"/>
                         <size key="minSize" width="38" height="14"/>
-                        <size key="maxSize" width="59" height="17"/>
+                        <size key="maxSize" width="64" height="17"/>
                         <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="cqb-Kq-8Ez">
-                            <rect key="frame" x="18" y="14" width="59" height="14"/>
+                            <rect key="frame" x="17" y="14" width="64" height="14"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="50.0 MHz" id="OBg-tM-M5Q">
+                            <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="250.0 MHz" id="OBg-tM-M5Q">
                                 <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                             <connections>
                                 <binding destination="amo-g3-g3r" name="value" keyPath="clockFrequency" id="cyl-uG-iBZ"/>
+                                <binding destination="amo-g3-g3r" name="toolTip" keyPath="clockFrequency" id="81f-Dz-oU8"/>
                             </connections>
                         </textField>
                     </toolbarItem>

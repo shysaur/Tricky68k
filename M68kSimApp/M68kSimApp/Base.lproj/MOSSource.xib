@@ -135,18 +135,19 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="F505F236-751E-4E02-A31D-C923687FAFB1" label="Clock Frequency" paletteLabel="Clock Frequency" id="9uF-9j-CSG">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="31" height="14"/>
-                        <size key="maxSize" width="62" height="17"/>
+                        <size key="minSize" width="60" height="14"/>
+                        <size key="maxSize" width="64" height="17"/>
                         <textField key="view" verticalHuggingPriority="750" id="t3c-Io-sbL">
-                            <rect key="frame" x="17" y="14" width="59" height="14"/>
+                            <rect key="frame" x="17" y="14" width="64" height="14"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="50.0 MHz" id="fbJ-eL-KTA">
+                            <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="250.0 MHz" id="fbJ-eL-KTA">
                                 <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                             <connections>
                                 <binding destination="aXJ-fz-zD2" name="value" keyPath="clockFrequency" id="ACI-GJ-0zg"/>
+                                <binding destination="aXJ-fz-zD2" name="toolTip" keyPath="clockFrequency" id="rgP-lf-hR9"/>
                             </connections>
                         </textField>
                     </toolbarItem>
