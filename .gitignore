@@ -218,3 +218,5 @@ releases
 testwithload
 loopingsort
 tictactoe
+m68ksim/corrupt
+m68ksim/infiniteloop
