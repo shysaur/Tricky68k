@@ -524,7 +524,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MOS;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Daniele Cattaneo";
 				TargetAttributes = {
 					016CD1341A51A10E00D64892 = {
@@ -834,6 +834,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -902,6 +903,7 @@
 				INFOPLIST_FILE = M68kSimApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielecattaneo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Tricky68k;
 				SDKROOT = macosx;
 			};
@@ -919,6 +921,7 @@
 				INFOPLIST_FILE = M68kSimApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielecattaneo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Tricky68k;
 				SDKROOT = macosx;
 			};
