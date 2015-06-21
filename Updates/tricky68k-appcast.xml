@@ -7,6 +7,22 @@
         <language>en</language>
         
         <item>
+            <title>Release 1.0.2</title>
+            <description><![CDATA[ <ul>
+              <li>Fixed random crashes when opening documents.</li>
+              </ul> ]]>
+            </description>
+            <pubDate>Sun, 21 June 2015 15:48:19 +0200</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_1.0.2/Tricky68k_102.tar.bz2" 
+              sparkle:version="1078" 
+              sparkle:shortVersionString="1.0.2"
+              length="3633303" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC0CFQDjxqF03yrV9JL3QWCAw6JG2YnrlQIUWyMurSidfH5CmjOOZFOZPWsPjt8=" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 1.0.1</title>
             <description><![CDATA[ <ul>
               <li>Huge speed-up to the simulator view when rapidly single-stepping.</li>
