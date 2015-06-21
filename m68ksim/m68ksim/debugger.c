@@ -190,7 +190,7 @@ void debug_debugConsole(void) {
     khz = -1;
   if (khz > 50000000)
     /* Absurd frequency; assume the infinite loop optimization has triggered */
-    khz /= CYCLES_PER_LOOP;
+    khz = khz / (CYCLES_PER_LOOP + 10) * 10;
   
   cont = 0;
   pc = m68k_get_reg(NULL, M68K_REG_PC);
