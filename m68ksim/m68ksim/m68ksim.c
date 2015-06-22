@@ -30,6 +30,36 @@ struct timeval cyc_t0;
 long long cyc_dcycles;
 
 
+void printVersion(FILE *fp) {
+  const char *ver =
+    "m68ksim, version 1.0.0, using Musashi version 3.4\n"
+    "(c) 2014-15 Daniele Cattaneo; (c) 1998-2001 Karl Stenerud.\n";
+  fputs(ver, fp);
+}
+
+
+void printHelp(FILE *fp, char *myname) {
+  const char *usage =
+    "\n"
+    "Usage: %s [-B][-m ram_size] -l elf [-d][-i devtype base][-I devtype\n"
+    "               base param1 param2]\n"
+    "-v show version\n"
+    "-B enable server mode\n"
+    "-m sets RAM size (starting at address 0); standard is 8 MB\n"
+    "-l loads the specified ELF file, automatically allocating RAM as needed\n"
+    "-d enables debug mode\n"
+    "-i connects a device of a given type at the specified address\n"
+    "-I like -i, but with additional options\n"
+    "\n"
+    "Available devices:\n"
+    "tty    Teletype. Read from the input FIFO at the specified base address,\n"
+    "       write to the output file at the same address. Additional options:\n"
+    "        input_file output_file\n";
+  printVersion(fp);
+  fprintf(fp, usage, myname);
+}
+
+
 void signal_enterDebugger(int signo) {
   debug_on = 1;
 }
@@ -52,7 +82,7 @@ int main(int argc, char *argv[]) {
   optind = 1;
   while (optind < argc) {
     special = 0;
-    c = getopt(argc, argv, "Bdm:l:i:I:");
+    c = getopt(argc, argv, "Bdm:l:i:I:vh");
     if (c != -1) {
       switch (c) {
         case 'm':
@@ -82,6 +112,15 @@ int main(int argc, char *argv[]) {
           
         case 'B':
           servermode_on = 1;
+          break;
+          
+        case 'v':
+          printVersion(stdout);
+          exit(0);
+          break;
+        case 'h':
+          printHelp(stdout, argv[0]);
+          exit(0);
           break;
       }
     } else
