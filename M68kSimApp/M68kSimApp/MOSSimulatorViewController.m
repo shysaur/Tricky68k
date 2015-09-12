@@ -41,11 +41,18 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
 
 - (void)finishInitialization {
+  __weak MOSSimulatorViewController *weakSelf = self;
+  
   viewHasLoaded = NO;
+  
   clockUpdateTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,
     dispatch_get_main_queue());
   dispatch_source_set_event_handler(clockUpdateTimer, ^{
-    [self updateClockFrequencyDisplay];
+    MOSSimulatorViewController *strongSelf;
+    
+    strongSelf = weakSelf;
+    [strongSelf updateClockFrequencyDisplay];
+    strongSelf = nil;
   });
   dispatch_source_set_timer(clockUpdateTimer, DISPATCH_TIME_FOREVER, 0, 0);
   dispatch_resume(clockUpdateTimer);
@@ -338,7 +345,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
-  dispatch_suspend(clockUpdateTimer);
+  clockUpdateTimer = nil;
   [simProxy kill];
 }
 
