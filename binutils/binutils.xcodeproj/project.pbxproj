@@ -83,7 +83,7 @@
 		018F65361A60167E005BA00E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = FSF;
 				TargetAttributes = {
 					018F65501A602050005BA00E = {
@@ -111,6 +111,8 @@
 		018F653B1A60167E005BA00E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
