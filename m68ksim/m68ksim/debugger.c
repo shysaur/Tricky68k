@@ -173,24 +173,8 @@ void debug_dumpContext(void) {
 void debug_debugConsole(void) {
   char cl[256], temp[80], *cp;
   uint32_t pc, bpa, addr;
-  int cont, lines, cyc_ran;
-  struct timeval cyc_t1;
-  long long cyc_dt, khz;
-  
-  gettimeofday(&cyc_t1, NULL);
-  cyc_ran = m68k_cycles_run();
-  cyc_dcycles += cyc_ran;
-  cyc_dt = (((long long)cyc_t1.tv_sec) * 1000000) + cyc_t1.tv_usec;
-  cyc_dt -= (((long long)cyc_t0.tv_sec) * 1000000) + cyc_t0.tv_usec;
-  cyc_dt /= 1000;
-  
-  if (cyc_dt)
-    khz = cyc_dcycles / cyc_dt;
-  else
-    khz = -1;
-  if (khz > 50000000)
-    /* Absurd frequency; assume the infinite loop optimization has triggered */
-    khz = khz / (CYCLES_PER_LOOP + 10) * 10;
+  long long spd;
+  int cont, lines;
   
   cont = 0;
   pc = m68k_get_reg(NULL, M68K_REG_PC);
@@ -269,14 +253,15 @@ void debug_debugConsole(void) {
       case 'v':
         debug_dumpContext();
         break;
+        
+      /* speed */
+      case 'f':
+        printf("%lld kHz\n", khz_estimate);
+        break;
       
       /* misc */
       case 'q':
         exit(0);
-        break;
-        
-      case 'f':
-        printf("%lld kHz\n", khz);
         break;
         
       case '\n':
@@ -287,12 +272,11 @@ void debug_debugConsole(void) {
     }
   }
   
-  cyc_dcycles = -cyc_ran;
-  gettimeofday(&cyc_t0, NULL);
   if (servermode_on) {
     puts("continuing.");
     fflush(stdout);
   }
+  debug_happened = 1;
 }
 
 

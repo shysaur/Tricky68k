@@ -9,14 +9,11 @@
 #ifndef m68ksim_m68ksim_h
 #define m68ksim_m68ksim_h
 
-#include <sys/time.h>
 
-#define CYCLES_PER_LOOP 1000000
+#define CYCLES_PER_LOOP 50000
 
-extern volatile int sim_on, debug_on;
+extern volatile int sim_on, debug_on, debug_happened;
 extern int servermode_on;
-
-extern struct timeval cyc_t0;
-extern long long cyc_dcycles;
+extern volatile long long khz_estimate;
 
 #endif

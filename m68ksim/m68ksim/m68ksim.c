@@ -12,6 +12,7 @@
 #include <string.h>
 #include <signal.h>
 #include <limits.h>
+#include <sys/time.h>
 #include "m68ksim.h"
 #include "addrspace.h"
 #include "ram.h"
@@ -23,11 +24,21 @@
 #include "error.h"
 
 
-volatile int sim_on, debug_on;
+#define MAX(a, b) ((((a)) > ((b)) ? ((a)) : ((b))))
+#define MIN(a, b) ((((a)) < ((b)) ? ((a)) : ((b))))
+
+#define SMOOTH_T 10
+
+
+volatile int sim_on, debug_on, debug_happened;
 int servermode_on;
 
-struct timeval cyc_t0;
+long long cyc_t[SMOOTH_T];
 long long cyc_dcycles;
+long long cyc_dcyclesadj[SMOOTH_T];
+int cyc_i = 0, cyc_c = 0;
+
+volatile long long khz_estimate;
 
 
 void printVersion(FILE *fp) {
@@ -65,6 +76,84 @@ void signal_enterDebugger(int signo) {
 }
 
 
+long long cpu_measureClockSpeed(void) {
+  struct timeval tmp;
+  int i1, i0;
+  long long cyc_ran;
+  long long dt, dcycles, khz;
+  
+  i1 = cyc_i;
+  i0 = ((cyc_i - (cyc_c-1)) + SMOOTH_T) % SMOOTH_T;
+  
+  gettimeofday(&tmp, NULL);
+  cyc_t[cyc_i] = tmp.tv_usec + (long long)tmp.tv_sec * 1000000;
+  
+  cyc_ran = m68k_cycles_run();
+  cyc_dcyclesadj[cyc_i] = cyc_dcycles + cyc_ran;
+  
+  cyc_i = (cyc_i + 1) % SMOOTH_T;
+  if (cyc_c < SMOOTH_T) {
+    cyc_c++;
+    return -1;
+  }
+  
+  dt = cyc_t[i1] - cyc_t[i0];
+  dcycles = cyc_dcyclesadj[i1] - cyc_dcyclesadj[i0];
+  
+  if (dt > 100)
+    khz = (dcycles * 1000) / dt;
+  else
+    khz = -1;
+  
+  return khz;
+}
+
+
+void cpu_resetClockMeasurement(int cyc_ran) {
+  struct timeval tmp;
+  
+  cyc_i = 1;
+  cyc_c = 1;
+  cyc_dcycles = -cyc_ran;
+  cyc_dcyclesadj[0] = 0;
+  
+  gettimeofday(&tmp, NULL);
+  cyc_t[0] = tmp.tv_usec + (long long)tmp.tv_sec * 1000000;
+}
+
+
+void cpu_run(void) {
+  long long khz;
+  
+  m68k_pulse_reset();
+  cpu_resetClockMeasurement(0);
+
+  for (;;) {
+    m68k_execute(CYCLES_PER_LOOP);
+    
+    /* debug_on might be set when pthread_cond_wait was interrupted early
+     * because SIGINT happened while in it.
+     * debug_happened means m68k_execute took longer to execute because
+     * the debug menu has been used in the meantime.
+     * Both cause significant errors when computing clock speed, so we keep
+     * the oldest good measurement. */
+    if (!(debug_happened || debug_on)) {
+      khz = cpu_measureClockSpeed();
+      if (khz > 0) {
+        khz_estimate = khz;
+      }
+    }
+    
+    if (cyc_dcycles > LONG_LONG_MAX - (CYCLES_PER_LOOP+1) || debug_happened || debug_on) {
+      cpu_resetClockMeasurement(0);
+    } else {
+      cyc_dcycles += m68k_cycles_run();
+    }
+    debug_happened = 0;
+  }
+}
+
+
 int main(int argc, char *argv[]) {
   uint32_t availRam, stackTop, stackSize;
   int c, special;
@@ -72,7 +161,9 @@ int main(int argc, char *argv[]) {
   
   sim_on = 0;
   debug_on = 0;
+  debug_happened = 0;
   servermode_on = 0;
+  khz_estimate = -1;
   signal(SIGINT, signal_enterDebugger);
   mem_init();
   
@@ -138,20 +229,8 @@ int main(int argc, char *argv[]) {
   sim_on = 1;
   m68k_set_cpu_type(M68K_CPU_TYPE_68000);
   m68k_set_instr_hook_callback(cpu_instrCallback);
-  m68k_pulse_reset();
+  cpu_run();
   
-  gettimeofday(&cyc_t0, NULL);
-  cyc_dcycles = 0;
-  for (;;) {
-    m68k_execute(CYCLES_PER_LOOP);
-    
-    if (cyc_dcycles > LONG_LONG_MAX - (CYCLES_PER_LOOP+1)) {
-      cyc_dcycles = 0;
-      gettimeofday(&cyc_t0, NULL);
-    } else {
-      cyc_dcycles += m68k_cycles_run();
-    }
-  }
   return 1;
 }
 
