@@ -258,6 +258,21 @@ void debug_debugConsole(void) {
       case 'f':
         printf("%lld kHz\n", khz_estimate);
         break;
+        
+      case 'F':
+        errno = 0;
+        spd = strtol(cp+1, &cp, 0);
+        if (errno == EINVAL)
+          error_print(error_new(606, "Parameter must be a number"));
+        else {
+          if (spd == 0)
+            khz_capEnable = 0;
+          else {
+            khz_cap = spd;
+            khz_capEnable = 1;
+          }
+        }
+        break;
       
       /* misc */
       case 'q':

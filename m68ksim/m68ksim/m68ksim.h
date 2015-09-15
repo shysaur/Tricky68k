@@ -14,6 +14,8 @@
 
 extern volatile int sim_on, debug_on, debug_happened;
 extern int servermode_on;
-extern volatile long long khz_estimate;
+extern volatile long long khz_estimate, khz_cap;
+extern int khz_capEnable;
+
 
 #endif

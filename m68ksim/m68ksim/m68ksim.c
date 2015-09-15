@@ -12,6 +12,7 @@
 #include <string.h>
 #include <signal.h>
 #include <limits.h>
+#include <pthread.h>
 #include <sys/time.h>
 #include "m68ksim.h"
 #include "addrspace.h"
@@ -39,6 +40,11 @@ long long cyc_dcyclesadj[SMOOTH_T];
 int cyc_i = 0, cyc_c = 0;
 
 volatile long long khz_estimate;
+volatile long long khz_cap = 4000;
+int khz_capEnable = 0;
+
+pthread_cond_t cpu_timer;
+pthread_mutex_t cpu_timerMut;
 
 
 void printVersion(FILE *fp) {
@@ -61,6 +67,7 @@ void printHelp(FILE *fp, char *myname) {
     "-d enables debug mode\n"
     "-i connects a device of a given type at the specified address\n"
     "-I like -i, but with additional options\n"
+    "-s sets a clock speed cap at the specified kHz frequency (0 = no cap)\n"
     "\n"
     "Available devices:\n"
     "tty    Teletype. Read from the input FIFO at the specified base address,\n"
@@ -122,14 +129,45 @@ void cpu_resetClockMeasurement(int cyc_ran) {
 }
 
 
+void *cpu_timerThread(void *param) {
+  long long realt, t, drift;
+  struct timeval t0, t1;
+  
+  drift = 0;
+  gettimeofday(&t0, NULL);
+  for (;;) {
+    t = (CYCLES_PER_LOOP * 1000) / khz_cap;
+    usleep((useconds_t)MAX(1, t - drift));
+    gettimeofday(&t1, NULL);
+    pthread_mutex_lock(&cpu_timerMut);
+    pthread_cond_signal(&cpu_timer);
+    pthread_mutex_unlock(&cpu_timerMut);
+    
+    realt = (t1.tv_sec * 1000000 + t1.tv_usec) - (t0.tv_sec * 1000000 + t0.tv_usec);
+    gettimeofday(&t0, NULL);
+    drift = (realt - MAX(1, t - drift));
+  }
+  
+  return NULL;
+}
+
+
 void cpu_run(void) {
+  pthread_t timer;
   long long khz;
+  
+  pthread_mutex_init(&cpu_timerMut, NULL);
+  pthread_cond_init(&cpu_timer, NULL);
+  pthread_create(&timer, NULL, cpu_timerThread, NULL);
   
   m68k_pulse_reset();
   cpu_resetClockMeasurement(0);
 
+  pthread_mutex_lock(&cpu_timerMut);
   for (;;) {
     m68k_execute(CYCLES_PER_LOOP);
+    if (khz_capEnable)
+      pthread_cond_wait(&cpu_timer, &cpu_timerMut);
     
     /* debug_on might be set when pthread_cond_wait was interrupted early
      * because SIGINT happened while in it.
@@ -151,6 +189,7 @@ void cpu_run(void) {
     }
     debug_happened = 0;
   }
+  //pthread_mutex_unlock(&cpu_timerMut);
 }
 
 
@@ -173,7 +212,7 @@ int main(int argc, char *argv[]) {
   optind = 1;
   while (optind < argc) {
     special = 0;
-    c = getopt(argc, argv, "Bdm:l:i:I:vh");
+    c = getopt(argc, argv, "Bdm:l:i:I:vhs:");
     if (c != -1) {
       switch (c) {
         case 'm':
@@ -203,6 +242,12 @@ int main(int argc, char *argv[]) {
           
         case 'B':
           servermode_on = 1;
+          break;
+          
+        case 's':
+          khz_cap = strtoul(optarg, NULL, 0);
+          if (khz_cap > 0)
+            khz_capEnable = 1;
           break;
           
         case 'v':
