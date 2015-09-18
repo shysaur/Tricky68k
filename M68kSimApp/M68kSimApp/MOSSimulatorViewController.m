@@ -23,6 +23,17 @@ static void *SimulatorState = &SimulatorState;
 @implementation MOSSimulatorViewController
 
 
++ (void)load {
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
+  [ud registerDefaults:@{
+    @"MaxClock": @4.0,
+    @"LimitClock": @NO
+  }];
+}
+
+
 - (instancetype)initWithCoder:(NSCoder*)coder {
   self = [super initWithCoder:coder];
   [self finishInitialization];
@@ -43,7 +54,11 @@ static void *SimulatorState = &SimulatorState;
 
 
 - (void)finishInitialization {
+  NSNotificationCenter *nc;
   __weak MOSSimulatorViewController *weakSelf = self;
+  
+  nc = [NSNotificationCenter defaultCenter];
+  [nc addObserver:self selector:@selector(updateSimulatorMaxClockFrequency) name:NSUserDefaultsDidChangeNotification object:nil];
   
   viewHasLoaded = NO;
   
@@ -109,6 +124,7 @@ static void *SimulatorState = &SimulatorState;
   
   simProxy = sp;
   simExec = [simProxy executableURL];
+  [self updateSimulatorMaxClockFrequency];
   
   [simProxy addObserver:self forKeyPath:@"simulatorState"
     options:NSKeyValueObservingOptionInitial context:SimulatorState];
@@ -239,6 +255,16 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+- (void)updateSimulatorMaxClockFrequency {
+  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+  
+  if ([ud boolForKey:@"LimitClock"])
+    [simProxy setMaximumClockFrequency:[ud doubleForKey:@"MaxClock"]];
+  else
+    [simProxy setMaximumClockFrequency:0];
+}
+
+
 - (void)updateClockFrequencyDisplay {
   static NSNumberFormatter *nf;
   static NSString *mhzFmt;
@@ -344,9 +370,12 @@ static void *SimulatorState = &SimulatorState;
 
 
 - (void)dealloc {
+  NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+  
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
+  [nc removeObserver:self];
   clockUpdateTimer = nil;
   [simProxy kill];
 }

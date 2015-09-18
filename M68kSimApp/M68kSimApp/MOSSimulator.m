@@ -388,6 +388,25 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 }
 
 
+- (void)setMaximumClockFrequency:(double)mhz {
+  long long khz;
+  NSError *err;
+  NSString *com;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return;
+  
+  khz = mhz * 1000.0;
+  com = [NSString stringWithFormat:@"F %lld", khz];
+  
+  disableNotifications = YES;
+  [proxy sendCommandToDebugger:com error:&err];
+  lastError = err;
+  disableNotifications = NO;
+  if ([self simulatorState] != [proxy simulatorState])
+    [self setSimulatorState:[proxy simulatorState]];
+}
+
+
 + (NSSet *)keyPathsForValuesAffectingSimulatorRunning {
   return [NSSet setWithObjects:@"simulatorState", nil];
 }

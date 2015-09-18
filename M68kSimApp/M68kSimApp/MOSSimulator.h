@@ -69,6 +69,7 @@ extern NSString * const MOS68kRegisterCAAR;
 - (NSDictionary*)registerDump;
 
 - (float)clockFrequency;
+- (void)setMaximumClockFrequency:(double)mhz;
 
 - (NSSet*)breakpointList;
 - (void)addBreakpoints:(NSSet*)addrs;
