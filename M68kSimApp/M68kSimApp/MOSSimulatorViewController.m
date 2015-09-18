@@ -17,6 +17,8 @@
 
 NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
 
+static void *SimulatorState = &SimulatorState;
+
 
 @implementation MOSSimulatorViewController
 
@@ -109,7 +111,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   simExec = [simProxy executableURL];
   
   [simProxy addObserver:self forKeyPath:@"simulatorState"
-    options:NSKeyValueObservingOptionInitial context:NULL];
+    options:NSKeyValueObservingOptionInitial context:SimulatorState];
   
   [self setSimulatorForSubviewControllers];
 }
@@ -198,7 +200,7 @@ NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
   MOSSimulatorState newstate;
   NSError *exc;
   
-  if (context == NULL) {
+  if (context == SimulatorState) {
     newstate = [object simulatorState];
     switch (newstate) {
       case MOSSimulatorStateDead:
