@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSJobWindowController">
@@ -30,7 +30,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="cur-kS-0PO" id="ftZ-vY-f56">
-                                    <rect key="frame" x="0.0" y="0.0" width="251" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="248" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="0.0" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -61,7 +61,7 @@
                                                             </constraints>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="MOSJobStatusWorking" id="3Vl-Oo-7BF"/>
                                                             <connections>
-                                                                <binding destination="gXp-Vx-OTm" name="value" keyPath="objectValue.MOSJobStatus" id="y2r-5B-Bd1">
+                                                                <binding destination="gXp-Vx-OTm" name="value" keyPath="objectValue.status" id="g44-Rb-ZHR">
                                                                     <dictionary key="options">
                                                                         <bool key="NSConditionallySetsEnabled" value="NO"/>
                                                                         <string key="NSValueTransformerName">MOSJobStatusStringTransformer</string>
@@ -77,7 +77,7 @@
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <connections>
-                                                                <binding destination="gXp-Vx-OTm" name="value" keyPath="objectValue.MOSJobVisibleDescription" id="hVh-aR-Dal"/>
+                                                                <binding destination="gXp-Vx-OTm" name="value" keyPath="objectValue.visibleDescription" id="6VO-qP-7Yp"/>
                                                             </connections>
                                                         </textField>
                                                     </subviews>
@@ -168,7 +168,7 @@
             </connections>
             <point key="canvasLocation" x="237" y="214"/>
         </window>
-        <treeController editable="NO" childrenKeyPath="privateMOSJobEvents" id="meV-76-mZL">
+        <treeController editable="NO" childrenKeyPath="events" id="meV-76-mZL">
             <connections>
                 <binding destination="yji-SQ-rNS" name="contentArray" keyPath="jobList" id="xI3-TH-mXf"/>
             </connections>

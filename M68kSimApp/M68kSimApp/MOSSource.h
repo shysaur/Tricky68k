@@ -16,6 +16,7 @@
 @class MOSAssembler;
 @class MOSSimulatorViewController;
 @class MOSFragariaPreferencesObserver;
+@class MOSJob;
 
 
 @interface MOSSource : MOSDocument {
@@ -35,7 +36,7 @@
   
   MOSAssembler *assembler;
   BOOL runWhenAssemblyComplete;
-  NSUInteger lastJobId;
+  MOSJob *lastJob;
   BOOL hadJob;
   NSURL *assemblyOutput;
   NSURL *tempSourceCopy;

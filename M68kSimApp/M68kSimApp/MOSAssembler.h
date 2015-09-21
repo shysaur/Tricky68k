@@ -24,8 +24,11 @@ typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
 };
 
 
+@class MOSJob;
+
+
 @interface MOSAssembler : NSObject <MOSMonitoredTaskDelegate> {
-  NSUInteger jobIdentifier;
+  MOSJob *jobStatus;
   BOOL isJob;
   NSMutableArray *sections;
   NSURL *sourceFile;
@@ -39,7 +42,7 @@ typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
   BOOL completed;
 }
 
-- (void)setJobId:(NSUInteger)jobid;
+- (void)setJobStatus:(MOSJob *)js;
 
 - (void)setSourceFile:(NSURL*)sf;
 - (NSURL*)sourceFile;

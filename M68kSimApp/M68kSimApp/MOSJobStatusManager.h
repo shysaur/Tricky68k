@@ -9,38 +9,18 @@
 #import <Foundation/Foundation.h>
 
 
-NSString * const MOSJobStatus;
-NSString * const MOSJobAssociatedFile;
-NSString * const MOSJobStartDate;
-NSString * const MOSJobVisibleDescription;
-
-NSString * const MOSJobStatusWorking;
-NSString * const MOSJobStatusSuccess;
-NSString * const MOSJobStatusSuccessWithWarning;
-NSString * const MOSJobStatusFailure;
-
-NSString * const MOSJobEventText;
-NSString * const MOSJobEventAssociatedLine;
-NSString * const MOSJobEventType;
-NSString * const MOSJobEventTypeMessage;
-NSString * const MOSJobEventTypeWarning;
-NSString * const MOSJobEventTypeError;
+@class MOSJob;
 
 
 @interface MOSJobStatusManager : NSObject {
-  NSUInteger idCounter;
-  NSMutableDictionary *jobs;
+  NSMutableSet *jobs;
   NSArray *cachedJobList;
 }
 
 + (MOSJobStatusManager *)sharedJobStatusManger;
 
-- (NSUInteger)addJobWithInfo:(NSDictionary *)info;
-- (void)finishJob:(NSUInteger)jobid withResult:(NSString *)jobres;
-- (void)addEvent:(NSDictionary *)info toJob:(NSUInteger)jobid;
-
+- (void)addJob:(MOSJob *)job;
 - (void)clearJobList;
 - (NSArray*)jobList;
-- (NSArray*)eventListForJob:(NSUInteger)jobid;
 
 @end

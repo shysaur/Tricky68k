@@ -10,6 +10,7 @@
 #import "NSURL+TemporaryFile.h"
 #import "NSFileHandle+Strings.h"
 #import "MOSJobStatusManager.h"
+#import "MOSJob.h"
 #import "NSScanner+Shorteners.h"
 
 
@@ -41,8 +42,8 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
-- (void)setJobId:(NSUInteger)jobid {
-  jobIdentifier = jobid;
+- (void)setJobStatus:(MOSJob *)js {
+  jobStatus = js;
   isJob = YES;
 }
 
@@ -155,11 +156,11 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     [task setLaunchURL:execurl];
     linkerfile = [NSURL URLWithTemporaryFilePathWithExtension:@"ld"];
     if (![self makeLinkerFile:linkerfile]) {
-      [jsm addEvent:@{
+      [jobStatus addEvent:@{
         MOSJobEventType: MOSJobEventTypeError,
         MOSJobEventText: NSLocalizedString(@"Could not create a linker file.",
           @"Text of the event which occurs when creating a linker file failed.")
-        } toJob:jobIdentifier];
+        }];
       goto fail;
     }
     
@@ -188,8 +189,6 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     unlink([unlinkedelf fileSystemRepresentation]);
     unlink([linkerfile fileSystemRepresentation]);
     dispatch_async(dispatch_get_main_queue(), ^{
-      MOSJobStatusManager *jsm;
-      
       [self willChangeValueForKey:@"complete"];
       completed = YES;
       [self didChangeValueForKey:@"complete"];
@@ -198,8 +197,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
       [self didChangeValueForKey:@"assembling"];
       
       if (isJob) {
-        jsm = [MOSJobStatusManager sharedJobStatusManger];
-        [jsm finishJob:jobIdentifier withResult:MOSAsmResultToJobStat(asmResult)];
+        [jobStatus setStatus:MOSAsmResultToJobStat(asmResult)];
       }
     });
   });
@@ -257,18 +255,16 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 
 
 - (void)receivedTaskOutput:(NSString *)line {
-  MOSJobStatusManager *jsm;
   NSDictionary *event;
 
   if (!isJob)
     NSLog(@"taskoutput: %@", line);
   else {
-    jsm = [MOSJobStatusManager sharedJobStatusManger];
     if (!linking)
       event = [self parseVasmOutput:line];
     else
       event = [self parseLinkerOutput:line];
-    if (event) [jsm addEvent:event toJob:jobIdentifier];
+    if (event) [jobStatus addEvent:event];
   }
 }
 

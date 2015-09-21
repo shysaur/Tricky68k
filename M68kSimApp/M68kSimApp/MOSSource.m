@@ -13,6 +13,7 @@
 #import "NSUserDefaults+Archiver.h"
 #import "MOSAssembler.h"
 #import "MOSJobStatusManager.h"
+#import "MOSJob.h"
 #import "MOSSimulatorViewController.h"
 #import "MOSAppDelegate.h"
 #import "MOSPrintingTextView.h"
@@ -73,7 +74,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
-  MOSJobStatusManager *sm;
   NSString *tmp;
   NSURL *template;
   
@@ -81,8 +81,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
   hadJob = NO;
   simulatorMode = NO;
-  sm = [MOSJobStatusManager sharedJobStatusManger];
-  [sm addObserver:self forKeyPath:@"jobList" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
   
   if (!text) {
     template = [[NSBundle mainBundle] URLForResource:@"VasmTemplate" withExtension:@"s"];
@@ -299,7 +297,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     NSUserDefaults *ud;
     MOSAssemblageOptions opts;
     MOSJobStatusManager *jsm;
-    NSDictionary *jobinfo;
     NSString *title, *label;
     
     if (err) {
@@ -313,17 +310,22 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     
     assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
     
+    if (lastJob)
+      [lastJob removeObserver:self forKeyPath:@"events" context:AssemblageEvent];
+    lastJob = [[MOSJob alloc] init];
+    [lastJob addObserver:self forKeyPath:@"events" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
+    
     if ([self fileURL]) {
       label = [[self fileURL] lastPathComponent];
       title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@", @"Assembler job name"), label];
-      jobinfo = @{MOSJobVisibleDescription: title, MOSJobAssociatedFile: [self fileURL]};
+      [lastJob setAssociatedFile:[self fileURL]];
     } else {
       label = [docWindow title];
       title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@", @"Assembler job name"), label];
-      jobinfo = @{MOSJobVisibleDescription: title};
     }
+    [lastJob setVisibleDescription:title];
     
-    lastJobId = [jsm addJobWithInfo:jobinfo];
+    [jsm addJob:lastJob];
     hadJob = YES;
     
     opts = [ud boolForKey:@"FixedEntryPoint"] ? MOSAssemblageOptionEntryPointFixed : MOSAssemblageOptionEntryPointSymbolic;
@@ -331,7 +333,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     
     [assembler setOutputFile:assemblyOutput];
     [assembler setSourceFile:tempSourceCopy];
-    [assembler setJobId:lastJobId];
+    [assembler setJobStatus:lastJob];
     [assembler setAssemblageOptions:opts];
     [assembler assemble];
   }];
@@ -370,7 +372,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     if (!hadJob) return;
     
     sm = [MOSJobStatusManager sharedJobStatusManger];
-    events = [sm eventListForJob:lastJobId];
+    events = [lastJob events];
     if (!events) {
       [fragaria setSyntaxErrors:@[]];
       hadJob = NO;
@@ -442,10 +444,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (void)dealloc {
-  MOSJobStatusManager *sm;
-  
-  sm = [MOSJobStatusManager sharedJobStatusManger];
-  [sm removeObserver:self forKeyPath:@"jobList" context:AssemblageEvent];
+  if (lastJob)
+    [lastJob removeObserver:self forKeyPath:@"events" context:AssemblageEvent];
 }
 
 
