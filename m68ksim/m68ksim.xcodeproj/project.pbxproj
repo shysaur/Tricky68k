@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		012AE3931B2E291A0057D0B2 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 012AE3911B2E291A0057D0B2 /* error.c */; };
+		019091281BB1B5FF00D2610D /* symbols.c in Sources */ = {isa = PBXBuildFile; fileRef = 019091261BB1B5FF00D2610D /* symbols.c */; settings = {ASSET_TAGS = (); }; };
+		0190912B1BB1B6FA00D2610D /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 019091291BB1B6FA00D2610D /* hashtable.c */; settings = {ASSET_TAGS = (); }; };
 		01B1B8BD1A503F810016F319 /* addrspace.c in Sources */ = {isa = PBXBuildFile; fileRef = 01B1B8BB1A503F810016F319 /* addrspace.c */; };
 		01B1B8C11A503FC90016F319 /* libMusashi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B1B8C01A503FC90016F319 /* libMusashi.a */; };
 		01B1B8C61A5056C50016F319 /* m68ksim.c in Sources */ = {isa = PBXBuildFile; fileRef = 01B1B8C51A5056C50016F319 /* m68ksim.c */; };
@@ -34,6 +36,10 @@
 		01263D231A503D4F00996230 /* m68ksim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = m68ksim; sourceTree = BUILT_PRODUCTS_DIR; };
 		012AE3911B2E291A0057D0B2 /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = error.c; sourceTree = "<group>"; };
 		012AE3921B2E291A0057D0B2 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		019091261BB1B5FF00D2610D /* symbols.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = symbols.c; sourceTree = "<group>"; };
+		019091271BB1B5FF00D2610D /* symbols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = symbols.h; sourceTree = "<group>"; };
+		019091291BB1B6FA00D2610D /* hashtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashtable.c; sourceTree = "<group>"; };
+		0190912A1BB1B6FA00D2610D /* hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hashtable.h; sourceTree = "<group>"; };
 		01B1B8BB1A503F810016F319 /* addrspace.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = addrspace.c; sourceTree = "<group>"; };
 		01B1B8BC1A503F810016F319 /* addrspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addrspace.h; sourceTree = "<group>"; };
 		01B1B8C01A503FC90016F319 /* libMusashi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMusashi.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,12 +99,16 @@
 				01EA24EC1A58AF0400B318E4 /* tty.h */,
 				01B1B8CA1A50989F0016F319 /* elf.c */,
 				01B1B8CB1A50989F0016F319 /* elf.h */,
+				019091261BB1B5FF00D2610D /* symbols.c */,
+				019091271BB1B5FF00D2610D /* symbols.h */,
 				01B1B8CE1A50BCFF0016F319 /* debugger.c */,
 				01B1B8CF1A50BCFF0016F319 /* debugger.h */,
 				01B1B8D11A50BD890016F319 /* breakpoints.c */,
 				01B1B8D21A50BD890016F319 /* breakpoints.h */,
 				012AE3911B2E291A0057D0B2 /* error.c */,
 				012AE3921B2E291A0057D0B2 /* error.h */,
+				019091291BB1B6FA00D2610D /* hashtable.c */,
+				0190912A1BB1B6FA00D2610D /* hashtable.h */,
 			);
 			path = m68ksim;
 			sourceTree = "<group>";
@@ -168,6 +178,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				01B1B8D31A50BD890016F319 /* breakpoints.c in Sources */,
+				019091281BB1B5FF00D2610D /* symbols.c in Sources */,
+				0190912B1BB1B6FA00D2610D /* hashtable.c in Sources */,
 				01B1B8C91A5064100016F319 /* ram.c in Sources */,
 				012AE3931B2E291A0057D0B2 /* error.c in Sources */,
 				01B1B8CC1A50989F0016F319 /* elf.c in Sources */,

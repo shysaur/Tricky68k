@@ -16,6 +16,7 @@
 #include "breakpoints.h"
 #include "musashi/m68k.h"
 #include "error.h"
+#include "symbols.h"
 
 
 #define MAX_INSTR_LEN   10 /*bytes*/
@@ -42,6 +43,7 @@ void cpu_instrCallback(void) {
 int debug_printDisassemblyLine(uint32_t addr, char *instr2, int ilen, uint32_t mark) {
   int j;
   char instr[80];
+  char *lab;
   
   putchar(addr == mark ? '>' : ' ');
   putchar(' ');
@@ -49,7 +51,9 @@ int debug_printDisassemblyLine(uint32_t addr, char *instr2, int ilen, uint32_t m
     ilen = m68k_disassemble(instr, addr, M68K_CPU_TYPE_68000);
     instr2 = instr;
   }
-  printf("%08X  ", addr);
+  if (!(lab = symbols_symbolAtAddress(addr)))
+    lab = "";
+  printf("%08X  %16.16s  ", addr, lab);
   for (j=0; j<MAX_INSTR_LEN; j+=2) {
     if (j < ilen)
       printf("%04X ", m68k_read_disassembler_16(addr+j));

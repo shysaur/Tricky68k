@@ -10,10 +10,15 @@
 #include <string.h>
 #include <stdint.h>
 #include <errno.h>
+#include <stdlib.h>
 #include "elf.h"
 #include "ram.h"
 #include "addrspace.h"
+#include "symbols.h"
 #include "musashi/m68k.h"
+
+
+#pragma mark - ELF types
 
 
 typedef uint32_t Elf32_Addr;
@@ -21,6 +26,9 @@ typedef uint16_t Elf32_Half;
 typedef uint32_t Elf32_Off;
 typedef int32_t Elf32_Sword;
 typedef uint32_t Elf32_Word;
+
+
+#pragma mark - ELF Header
 
 
 #define EI_NIDENT 16
@@ -59,14 +67,7 @@ typedef uint32_t Elf32_Word;
 #define EM_860   7 /* Intel 80860 */
 #define EM_MIPS  8 /* MIPS RS3000 */
 
-#define PRG_HEADER_TBL_OFFSET           (header.e_phoff)
-#define SECT_HEADER_TBL_OFFSET          (header.e_shoff)
 #define HEADER_SIZE                     (header.e_ehsize)
-#define PRG_HEADER_TBL_ITEM_SIZE        (header.e_phentsize)
-#define PRG_HEADER_TBL_ITEM_COUNT       (header.e_phnum)
-#define SECT_HEADER_TBL_ITEM_SIZE       (header.e_shentsize)
-#define SECT_HEADER_TBL_ITEM_COUNT      (header.e_shnum)
-#define SECT_HEADER_TBL_ITEM_SECNAMETBL (header.e_shstrndx)
 
 typedef struct __attribute__ ((packed)) {
   unsigned char e_ident[EI_NIDENT];
@@ -85,6 +86,13 @@ typedef struct __attribute__ ((packed)) {
   Elf32_Half e_shstrndx;
 } Elf32_Ehdr;
 
+
+#pragma mark - ELF Program Header (segment)
+
+
+#define PRG_HEADER_TBL_OFFSET           (header.e_phoff)
+#define PRG_HEADER_TBL_ITEM_SIZE        (header.e_phentsize)
+#define PRG_HEADER_TBL_ITEM_COUNT       (header.e_phnum)
 
 #define PT_NULL 0
 #define PT_LOAD 1
@@ -105,6 +113,102 @@ typedef struct __attribute__ ((packed)) {
   Elf32_Word  p_flags;
   Elf32_Word  p_align;
 } Elf32_Phdr;
+
+
+#pragma mark - ELF Section Header
+
+
+#define SECT_HEADER_TBL_OFFSET          (header.e_shoff)
+#define SECT_HEADER_TBL_ITEM_SIZE       (header.e_shentsize)
+#define SECT_HEADER_TBL_ITEM_COUNT      (header.e_shnum)
+#define SECT_HEADER_TBL_ITEM_SECNAMETBL (header.e_shstrndx)
+
+/* Special section indices */
+#define SHN_UNDEF       0
+#define SHN_LORESERVE   0xff00
+#define SHN_LOPROC      0xff00
+#define SHN_HIPROC      0xff1f
+#define SHN_LOOS        0xff20
+#define SHN_HIOS        0xff3f
+#define SHN_ABS         0xfff1
+#define SHN_COMMON      0xfff2
+#define SHN_XINDEX      0xffff
+#define SHN_HIRESERVE   0xffff
+
+/* sh_type */
+#define SHT_NULL                0
+#define SHT_PROGBITS            1
+#define SHT_SYMTAB              2
+#define SHT_STRTAB              3
+#define SHT_RELA                4
+#define SHT_HASH                5
+#define SHT_DYNAMIC             6
+#define SHT_NOTE                7
+#define SHT_NOBITS              8
+#define SHT_REL                 9
+#define SHT_SHLIB               10
+#define SHT_DYNSYM              11
+#define SHT_INIT_ARRAY          14
+#define SHT_FINI_ARRAY          15
+#define SHT_PREINIT_ARRAY       16
+#define SHT_GROUP               17
+#define SHT_SYMTAB_SHNDX        18
+#define SHT_NUM                 19
+#define SHT_LOOS                0x60000000
+#define SHT_HIOS                0x6fffffff
+#define SHT_LOPROC              0x70000000
+#define SHT_HIPROC              0x7fffffff
+#define SHT_LOUSER              0x80000000
+#define SHT_HIUSER              0xffffffff
+
+typedef struct __attribute__ ((packed)) {
+  Elf32_Word sh_name;
+  Elf32_Word sh_type;
+  Elf32_Word sh_flags;
+  Elf32_Addr sh_addr;
+  Elf32_Off  sh_offset;
+  Elf32_Word sh_size;
+  Elf32_Word sh_link;
+  Elf32_Word sh_info;
+  Elf32_Word sh_addralign;
+  Elf32_Word sh_entsize;
+} Elf32_Shdr;
+
+
+#pragma mark - ELF Symbol Table Section
+
+
+/* Symbol binding */
+#define STB_LOCAL   0
+#define STB_GLOBAL  1
+#define STB_WEAK    2
+#define STB_LOPROC  13
+#define STB_HIPROC  15
+
+/* Symbol types */
+#define STT_NOTYPE  0
+#define STT_OBJECT  1
+#define STT_FUNC    2
+#define STT_SECTION 3
+#define STT_FILE    4
+#define STT_LOPROC  13
+#define STT_HIPROC  15
+
+#define ELF32_ST_BIND(i)    ((i)>>4)
+#define ELF32_ST_TYPE(i)    ((i)&0xf)
+#define ELF32_ST_INFO(b,t)  (((b)<<4)+((t)&0xf))
+
+typedef struct __attribute__ ((packed)) {
+  Elf32_Word    st_name;
+  Elf32_Addr    st_value;
+  Elf32_Word    st_size;
+  unsigned char st_info;
+  unsigned char st_other;
+  Elf32_Half    st_shndx;
+} Elf32_Sym;
+
+
+#pragma mark - Code
 
 
 error_t *elf_check(FILE *elf, Elf32_Ehdr *header) {
@@ -203,6 +307,98 @@ error_t *elf_loadSegments(const char *fn, FILE *fp, Elf32_Ehdr header) {
 }
 
 
+error_t *elf_getSection(const char *fn, FILE *fp, Elf32_Ehdr header, int *i,
+                        Elf32_Shdr *section, Elf32_Word type) {
+  for (; (*i)<SECT_HEADER_TBL_ITEM_COUNT; (*i)++) {
+    fseek(fp, SECT_HEADER_TBL_OFFSET + *i*SECT_HEADER_TBL_ITEM_SIZE, SEEK_SET);
+    if (fread(section, sizeof(Elf32_Shdr), 1, fp) < 1)
+      return elf_checkEofOrError(fp, fn);
+    
+    section->sh_name = BE_TO_LE_32(section->sh_name);
+    section->sh_type = BE_TO_LE_32(section->sh_type);
+    section->sh_flags = BE_TO_LE_32(section->sh_flags);
+    section->sh_addr = BE_TO_LE_32(section->sh_addr);
+    section->sh_offset = BE_TO_LE_32(section->sh_offset);
+    section->sh_size = BE_TO_LE_32(section->sh_size);
+    section->sh_link = BE_TO_LE_32(section->sh_link);
+    section->sh_info = BE_TO_LE_32(section->sh_info);
+    section->sh_addralign = BE_TO_LE_32(section->sh_addralign);
+    section->sh_entsize = BE_TO_LE_32(section->sh_entsize);
+    
+    if (section->sh_type == type)
+      return NULL;
+  }
+  
+  *i = -1;
+  return NULL;
+}
+
+
+error_t *elf_loadSymbols(const char *fn, FILE *fp, Elf32_Ehdr header) {
+  error_t *tmpe;
+  Elf32_Shdr symtab, strtab;
+  size_t symo;
+  Elf32_Sym sym;
+  char *strings = NULL;
+  int i;
+  
+  i = 0;
+  if ((tmpe = elf_getSection(fn, fp, header, &i, &symtab, SHT_SYMTAB)))
+    return tmpe;
+  if (i < 0 || symtab.sh_size == 0 || symtab.sh_link == 0)
+    return NULL;
+  
+  i = symtab.sh_link;
+  if ((tmpe = elf_getSection(fn, fp, header, &i, &strtab, SHT_STRTAB)))
+    return tmpe;
+  if (i != symtab.sh_link)
+    return error_new(520, "Missing string table section at index %d", i);
+  
+  if (strtab.sh_size) {
+    strings = malloc(strtab.sh_size);
+    
+    fseek(fp, strtab.sh_offset, SEEK_SET);
+    if (fread(strings, strtab.sh_size, 1, fp) < 1) {
+      free(strings);
+      return elf_checkEofOrError(fp, fn);
+    }
+    
+    strings[strtab.sh_size-1] = '\0';
+  }
+  
+  for (symo = 0; symo < symtab.sh_size; symo += sizeof(Elf32_Sym)) {
+    fseek(fp, symtab.sh_offset + symo, SEEK_SET);
+    if (fread(&sym, sizeof(Elf32_Sym), 1, fp) < 1) {
+      free(strings);
+      return elf_checkEofOrError(fp, fn);
+    }
+    
+    sym.st_name = BE_TO_LE_32(sym.st_name);
+    sym.st_value = BE_TO_LE_32(sym.st_value);
+    sym.st_size = BE_TO_LE_32(sym.st_size);
+    sym.st_shndx = BE_TO_LE_16(sym.st_shndx);
+    
+    if (!sym.st_name)
+      continue;
+    if (ELF32_ST_TYPE(sym.st_info) != STT_OBJECT &&
+        ELF32_ST_TYPE(sym.st_info) != STT_FUNC &&
+        ELF32_ST_TYPE(sym.st_info) != STT_NOTYPE)
+      continue;
+    if (sym.st_shndx == SHN_UNDEF || sym.st_shndx >= SHN_LORESERVE)
+      continue;
+    
+    if (sym.st_name >= strtab.sh_size) {
+      free(strings);
+      return error_new(521, "Missing string %d in table %d", sym.st_name, symtab.sh_link);
+    }
+    symbols_add(sym.st_value, strings+sym.st_name);
+  }
+  
+  free(strings);
+  return NULL;
+}
+
+
 error_t *elf_load(const char *fn) {
   error_t *tmpe = NULL;
   Elf32_Ehdr header;
@@ -215,6 +411,8 @@ error_t *elf_load(const char *fn) {
   if ((tmpe = elf_check(fp, &header)))
     goto cleanup;
   if ((tmpe = elf_loadSegments(fn, fp, header)))
+    goto cleanup;
+  if ((tmpe = elf_loadSymbols(fn, fp, header)))
     goto cleanup;
   
   ram_install(0, SEGM_GRANULARITY, &tmpe);

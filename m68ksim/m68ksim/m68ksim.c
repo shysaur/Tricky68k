@@ -23,6 +23,7 @@
 #include "breakpoints.h"
 #include "tty.h"
 #include "error.h"
+#include "symbols.h"
 
 
 #define MAX(a, b) ((((a)) > ((b)) ? ((a)) : ((b))))
@@ -205,6 +206,7 @@ int main(int argc, char *argv[]) {
   khz_estimate = -1;
   signal(SIGINT, signal_enterDebugger);
   mem_init();
+  symbols_init();
   
   stackTop = ADDRSPACE_SIZE/2;
   stackSize = SEGM_GRANULARITY * 4;
