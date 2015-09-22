@@ -153,28 +153,17 @@ error_t *elf_checkEofOrError(FILE *fp, const char *fn) {
 }
 
 
-error_t *elf_load(const char *fn) {
+error_t *elf_loadSegments(const char *fn, FILE *fp, Elf32_Ehdr header) {
   error_t *tmpe;
-  Elf32_Phdr segment;
-  Elf32_Ehdr header;
   uint32_t start, len, copystart;
   void *dest;
+  Elf32_Phdr segment;
   int i;
-  FILE *fp;
-  
-  fp = fopen(fn, "r");
-  if (!fp)
-    return error_new(-errno, "Can't open %s for reading", fn);
-  
-  if ((tmpe = elf_check(fp, &header))) return tmpe;
   
   for (i=0; i<PRG_HEADER_TBL_ITEM_COUNT; i++) {
     fseek(fp, PRG_HEADER_TBL_OFFSET + i*PRG_HEADER_TBL_ITEM_SIZE, SEEK_SET);
-    if (fread(&segment, sizeof(Elf32_Phdr), 1, fp) < 1) {
-      tmpe = elf_checkEofOrError(fp, fn);
-      fclose(fp);
-      return tmpe;
-    }
+    if (fread(&segment, sizeof(Elf32_Phdr), 1, fp) < 1)
+      return elf_checkEofOrError(fp, fn);
     
     segment.p_type  = BE_TO_LE_32(segment.p_type);
     segment.p_offset = BE_TO_LE_32(segment.p_offset);
@@ -185,10 +174,8 @@ error_t *elf_load(const char *fn) {
     segment.p_flags = BE_TO_LE_32(segment.p_flags);
     segment.p_align = BE_TO_LE_32(segment.p_align);
     
-    if (segment.p_type == PT_DYNAMIC || segment.p_type == PT_INTERP) {
-      fclose(fp);
+    if (segment.p_type == PT_DYNAMIC || segment.p_type == PT_INTERP)
       return error_new(512, "Can't execute an ELF dynamic library");
-    }
     
     if (segment.p_type == PT_NULL) continue;
     if (segment.p_type != PT_LOAD) continue;
@@ -200,33 +187,45 @@ error_t *elf_load(const char *fn) {
     len = (len - (len % SEGM_GRANULARITY)) - start;
     copystart = segment.p_vaddr - start;
     dest = ram_install(start, len, &tmpe) + copystart;
-    if (!dest) {
-      tmpe = elf_checkEofOrError(fp, fn);
-      fclose(fp);
+    if (!dest)
       return tmpe;
-    }
     
     if (segment.p_filesz > segment.p_memsz) {
-      if (fread(dest, segment.p_memsz, 1, fp) < 1) {
-        tmpe = elf_checkEofOrError(fp, fn);
-        fclose(fp);
-        return tmpe;
-      }
+      if (fread(dest, segment.p_memsz, 1, fp) < 1)
+        return elf_checkEofOrError(fp, fn);
     } else {
-      if (fread(dest, segment.p_filesz, 1, fp) < 1) {
-        tmpe = elf_checkEofOrError(fp, fn);
-        fclose(fp);
-        return tmpe;
-      }
+      if (fread(dest, segment.p_filesz, 1, fp) < 1)
+        return elf_checkEofOrError(fp, fn);
     }
   }
   
+  return NULL;
+}
+
+
+error_t *elf_load(const char *fn) {
+  error_t *tmpe = NULL;
+  Elf32_Ehdr header;
+  FILE *fp;
+  
+  fp = fopen(fn, "r");
+  if (!fp)
+    return error_new(-errno, "Can't open %s for reading", fn);
+  
+  if ((tmpe = elf_check(fp, &header)))
+    goto cleanup;
+  if ((tmpe = elf_loadSegments(fn, fp, header)))
+    goto cleanup;
+  
   ram_install(0, SEGM_GRANULARITY, &tmpe);
-  if (tmpe) return tmpe;
+  if (tmpe)
+    goto cleanup;
+  
   m68k_write_memory_32(4, header.e_entry);
   
+cleanup:
   fclose(fp);
-  return NULL;
+  return tmpe;
 }
 
 
