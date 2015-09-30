@@ -11,57 +11,31 @@
 #include "hashtable.h"
 
 
-#define MAX_NAME 80
-
-
-typedef struct {
-  uint32_t address;
-  char name[MAX_NAME+1];
-} symbol;
-
-
-static hashtable_t *symbols;
+static autoHashtable_t *symbols;
 
 
 hashtable_hash_t symbols_symbolHash(void *data) {
-  uint32_t *a;
-  
-  a = (uint32_t*)data;
-  return *a;
+  return (hashtable_hash_t)((uintptr_t)data);
 }
 
 
 int symbols_symbolCompare(void *data, void *key) {
-  uint32_t *x, *y;
-  
-  x = (uint32_t*)data;
-  y = (uint32_t*)key;
-  return *x == *y;
+  return data == key;
 }
 
 
 void symbols_init(void) {
-  symbols = hashtable_make(997, symbols_symbolCompare, symbols_symbolHash, free);
+  symbols = autoHashtable_make(0, symbols_symbolCompare, symbols_symbolHash, NULL, free);
 }
 
 
 void symbols_add(uint32_t a, char *name) {
-  symbol *s;
-  
-  s = malloc(sizeof(symbol));
-  s->address = a;
-  strlcpy(s->name, name, MAX_NAME+1);
-  hashtable_insert(symbols, s);
+  autoHashtable_insert(symbols, (void*)((uintptr_t)a), strdup(name));
 }
 
 
 char *symbols_symbolAtAddress(uint32_t a) {
-  symbol *res;
-  
-  res = (symbol*)hashtable_search(symbols, &a);
-  if (!res)
-    return NULL;
-  return res->name;
+  return (char*)autoHashtable_search(symbols, (void*)((uintptr_t)a));
 }
 
 
