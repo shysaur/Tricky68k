@@ -21,4 +21,6 @@
 - (void)setSimulatorProxy:(MOSSimulator*)sp;
 - (MOSSimulator*)simulatorProxy;
 
+- (void)dataHasChanged;
+
 @end

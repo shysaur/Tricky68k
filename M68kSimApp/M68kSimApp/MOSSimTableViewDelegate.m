@@ -48,6 +48,11 @@ static void *ReloadTableView = &ReloadTableView;
 }
 
 
+- (void)dataHasChanged {
+  [tableView reloadData];
+}
+
+
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object
   change:(NSDictionary*)change context:(void*)context {
   __weak MOSSimulator *weaksp = simProxy;

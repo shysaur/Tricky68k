@@ -84,9 +84,14 @@
     } else {
       [simProxy removeBreakpointAtAddress:addr];
     }
-    breakpoints = [simProxy breakpointList];
-    [tableView reloadData];
+    [self dataHasChanged];
   }
+}
+
+
+- (void)dataHasChanged {
+  breakpoints = [simProxy breakpointList];
+  [super dataHasChanged];
 }
 
 
