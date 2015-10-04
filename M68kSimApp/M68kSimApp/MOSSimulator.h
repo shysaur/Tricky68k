@@ -44,6 +44,7 @@ extern NSString * const MOS68kRegisterCAAR;
   MOSSimulatorProxy *proxy;
   void (^ttySendBlock)(NSString *string);
   NSDictionary *regsCache;
+  NSDictionary *symbolsCache;
   BOOL isSimDead;
   BOOL disableNotifications;
 }
@@ -76,6 +77,8 @@ extern NSString * const MOS68kRegisterCAAR;
 - (void)removeAllBreakpoints;
 - (void)addBreakpointAtAddress:(uint32_t)addr;
 - (void)removeBreakpointAtAddress:(uint32_t)addr;
+
+- (NSDictionary *)symbolTable;
 
 - (void)setSendToTeletypeBlock:(void (^)(NSString *string))block;
 - (void)sendToSimulator:(NSString*)string;

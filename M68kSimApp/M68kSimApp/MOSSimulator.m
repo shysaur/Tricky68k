@@ -333,6 +333,35 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 }
 
 
+- (NSDictionary *)symbolTable {
+  NSError *err;
+  NSString *obj;
+  const char *data;
+  NSArray *list;
+  NSMutableDictionary *res;
+  uint32_t addr;
+  NSString *name;
+  
+  if (symbolsCache)
+    return symbolsCache;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return nil;
+  list = [proxy sendCommandToDebugger:@"l" error:&err];
+  lastError = err;
+  
+  res = [[NSMutableDictionary alloc] init];
+  for (obj in list) {
+    if ([obj length] < (2+8+3))
+      return nil;
+    name = [obj substringFromIndex:2+8+3];
+    data = [obj UTF8String];
+    sscanf(data+2, "%X", &addr);
+    [res setObject:name forKey:@(addr)];
+  }
+  return symbolsCache = [res copy];
+}
+
+
 - (BOOL)stepIn {
   NSError *err;
   BOOL res;
