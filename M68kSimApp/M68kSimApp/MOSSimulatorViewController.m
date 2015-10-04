@@ -13,6 +13,8 @@
 #import "MOSSimRegistersDataSource.h"
 #import "MOSSimStackDumpDataSource.h"
 #import "MOSTeletypeViewDelegate.h"
+#import "MOSSimBrkptWindowController.h"
+#import "MOSMutableBreakpoint.h"
 
 
 NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
@@ -337,6 +339,31 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+- (IBAction)openBreakpointsWindow:(id)sender {
+  NSWindow *w;
+  
+  if (!brkptWc) {
+    brkptWc = [[MOSSimBrkptWindowController alloc] init];
+  }
+  [brkptWc setBreakpointsFromSet:[simProxy breakpointList]];
+  
+  w = [[self view] window];
+  [brkptWc beginSheetModalForWindow:w completionHandler:^(NSModalResponse res) {
+    NSArray *bpts;
+    MOSMutableBreakpoint *mb;
+    
+    if (res == NSModalResponseOK) {
+      [simProxy removeAllBreakpoints];
+      bpts = [brkptWc displayedBreakpoints];
+      for (mb in bpts) {
+        [simProxy addBreakpointAtAddress:[mb rawAddress]];
+      }
+      [disasmDs dataHasChanged];
+    }
+  }];
+}
+
+
 - (BOOL)isSimulatorRunning {
   return simRunning;
 }
@@ -344,10 +371,17 @@ static void *SimulatorState = &SimulatorState;
 
 - (BOOL)validateUserInterfaceItem:(id)anItem {
   if (!simProxy || [simProxy isSimulatorDead]) return NO;
-  if ([anItem action] == @selector(run:)) return !simRunning && !exceptionOccurred;
-  if ([anItem action] == @selector(stepIn:)) return !simRunning && !exceptionOccurred;
-  if ([anItem action] == @selector(stepOver:)) return !simRunning && !exceptionOccurred;
-  if ([anItem action] == @selector(pause:)) return simRunning && !exceptionOccurred;
+  
+  if ([anItem action] == @selector(run:) ||
+      [anItem action] == @selector(stepIn:) ||
+      [anItem action] == @selector(stepOver:) ||
+      [anItem action] == @selector(openBreakpointsWindow:)
+     )
+    return !simRunning && !exceptionOccurred;
+  
+  if ([anItem action] == @selector(pause:))
+    return simRunning && !exceptionOccurred;
+  
   return YES;
 }
 

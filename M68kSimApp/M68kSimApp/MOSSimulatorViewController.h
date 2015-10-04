@@ -23,6 +23,7 @@ enum {
 @class MOSSimRegistersDataSource;
 @class MOSSimStackDumpDataSource;
 @class MOSTeletypeViewDelegate;
+@class MOSSimBrkptWindowController;
 
 
 @protocol MOSSimulatorViewParentWindowDelegate <NSWindowDelegate>
@@ -46,6 +47,7 @@ enum {
   IBOutlet MOSSimRegistersDataSource *regdumpDs;
   IBOutlet MOSSimStackDumpDataSource *stackDs;
   IBOutlet MOSTeletypeViewDelegate *ttyDelegate;
+  MOSSimBrkptWindowController *brkptWc;
 }
 
 - (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr;
@@ -60,6 +62,7 @@ enum {
 - (IBAction)restart:(id)sender;
 - (IBAction)stepIn:(id)sender;
 - (IBAction)stepOver:(id)sender;
+- (IBAction)openBreakpointsWindow:(id)sender;
 
 - (BOOL)isSimulatorRunning;
 - (NSString *)flagsStatus;
