@@ -17,6 +17,7 @@
   NSArray *breakpts;
   NSArray *symbolLocator;
   NSDictionary *symbolTable;
+  NSArray *sortDesc;
   IBOutlet NSArrayController *bptsController;
 }
   

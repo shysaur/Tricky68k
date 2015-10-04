@@ -20,6 +20,23 @@
 }
 
 
+- (void)windowDidLoad {
+  [self setSortDescriptors:@[
+      [NSSortDescriptor sortDescriptorWithKey:@"address" ascending:YES]
+    ]];
+}
+
+
+- (void)setSortDescriptors:(NSArray*)sd {
+  sortDesc = sd;
+}
+
+
+- (NSArray *)sortDescriptors {
+  return sortDesc;
+}
+
+
 - (IBAction)cancel:(id)sender {
   [modalWindow endSheet:[self window] returnCode:NSModalResponseCancel];
   modalWindow = nil;

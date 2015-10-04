@@ -100,6 +100,7 @@ Gw
                                                     <outlet property="formatter" destination="HL0-Su-EuZ" id="aOc-nF-gsi"/>
                                                 </connections>
                                             </textFieldCell>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="address"/>
                                             <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                             <connections>
                                                 <binding destination="Fd8-K6-G5R" name="value" keyPath="arrangedObjects.address" id="cex-5l-wDh"/>
@@ -118,13 +119,19 @@ Gw
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                             <connections>
-                                                <binding destination="Fd8-K6-G5R" name="value" keyPath="arrangedObjects.symbolicLocation" id="m2R-op-Yzd"/>
+                                                <binding destination="Fd8-K6-G5R" name="value" keyPath="arrangedObjects.symbolicLocation" id="EdS-pV-6gu">
+                                                    <dictionary key="options">
+                                                        <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                        <bool key="NSCreatesSortDescriptor" value="NO"/>
+                                                    </dictionary>
+                                                </binding>
                                             </connections>
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
                                         <binding destination="Fd8-K6-G5R" name="content" keyPath="arrangedObjects" id="X2L-4u-RpW"/>
                                         <binding destination="Fd8-K6-G5R" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="X2L-4u-RpW" id="cMp-jr-Uc1"/>
+                                        <binding destination="-2" name="sortDescriptors" keyPath="sortDescriptors" previousBinding="cMp-jr-Uc1" id="mdA-bj-uqs"/>
                                     </connections>
                                 </tableView>
                             </subviews>
@@ -169,9 +176,10 @@ Gw
             </connections>
             <point key="canvasLocation" x="215" y="306.5"/>
         </window>
-        <arrayController objectClassName="MOSMutableBreakpoint" id="Fd8-K6-G5R">
+        <arrayController objectClassName="MOSMutableBreakpoint" automaticallyRearrangesObjects="YES" id="Fd8-K6-G5R">
             <connections>
                 <binding destination="-2" name="contentArray" keyPath="displayedBreakpoints" id="3kC-tA-jYK"/>
+                <binding destination="-2" name="sortDescriptors" keyPath="sortDescriptors" id="LPy-vr-Gil"/>
                 <outlet property="content" destination="-2" id="GRs-kc-LOR"/>
             </connections>
         </arrayController>
