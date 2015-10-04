@@ -15,6 +15,8 @@
 @interface MOSSimBrkptWindowController : NSWindowController {
   NSWindow *modalWindow;
   NSArray *breakpts;
+  NSArray *symbolLocator;
+  NSDictionary *symbolTable;
   IBOutlet NSArrayController *bptsController;
 }
   
@@ -30,5 +32,7 @@
 - (void)setBreakpointsFromSet:(NSSet*)b;
 - (void)setDisplayedBreakpoints:(NSArray *)b;
 - (NSArray *)displayedBreakpoints;
+
+- (void)setSymbolTable:(NSDictionary*)st;
 
 @end

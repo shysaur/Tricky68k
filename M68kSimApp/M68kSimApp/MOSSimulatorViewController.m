@@ -345,6 +345,7 @@ static void *SimulatorState = &SimulatorState;
   if (!brkptWc) {
     brkptWc = [[MOSSimBrkptWindowController alloc] init];
   }
+  [brkptWc setSymbolTable:[simProxy symbolTable]];
   [brkptWc setBreakpointsFromSet:[simProxy breakpointList]];
   
   w = [[self view] window];

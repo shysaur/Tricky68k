@@ -38,7 +38,8 @@
   
   switch ([sender selectedSegment]) {
     case 0:
-      [bptsController addObject:[[MOSMutableBreakpoint alloc] initWithAddress:0]];
+      [bptsController addObject:[[MOSMutableBreakpoint alloc] initWithAddress:0
+        symbolTable:symbolTable symbolLocator:symbolLocator]];
       break;
     case 1:
       [bptsController remove:sender];
@@ -67,7 +68,8 @@
   
   conv = [[NSMutableArray alloc] init];
   for (n in b) {
-    bp = [[MOSMutableBreakpoint alloc] initWithAddress:[n unsignedIntValue]];
+    bp = [[MOSMutableBreakpoint alloc] initWithAddress:[n unsignedIntValue]
+         symbolTable:symbolTable symbolLocator:symbolLocator];
     [conv addObject:bp];
   }
   [self setDisplayedBreakpoints:[conv copy]];
@@ -81,6 +83,14 @@
 
 - (NSArray *)displayedBreakpoints {
   return breakpts;
+}
+
+
+- (void)setSymbolTable:(NSDictionary*)st {
+  if (symbolTable != st) {
+    symbolLocator = [[st allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    symbolTable = st;
+  }
 }
 
 
