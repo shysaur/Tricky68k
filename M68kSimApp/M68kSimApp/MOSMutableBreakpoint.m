@@ -67,7 +67,8 @@
     sym = @"0";
     off = [a unsignedIntValue];
   } else {
-    n = [_symbolLocator objectAtIndex:i];
+    if (i < [_symbolLocator count])
+      n = [_symbolLocator objectAtIndex:i];
     if ([n isEqual:a]) {
       off = 0;
     } else {
