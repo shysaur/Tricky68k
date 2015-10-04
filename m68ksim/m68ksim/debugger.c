@@ -258,6 +258,10 @@ void debug_debugConsole(void) {
         debug_dumpContext();
         break;
         
+      case 'l':
+        symbols_printList();
+        break;
+        
       /* speed */
       case 'f':
         printf("%lld kHz\n", khz_estimate);

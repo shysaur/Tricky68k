@@ -15,6 +15,7 @@
 void symbols_init(void);
 void symbols_add(uint32_t a, char *name);
 char *symbols_symbolAtAddress(uint32_t a);
+void symbols_printList(void);
 
 
 #endif 
