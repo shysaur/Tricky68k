@@ -12,6 +12,9 @@
 @interface MOSError : NSError
 
 + (void)setUserInfoValueDictionary:(NSDictionary *)dict forDomain:(NSString *)d;
+
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code;
+
 - (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code
   userInfo:(NSDictionary *)dict;
 

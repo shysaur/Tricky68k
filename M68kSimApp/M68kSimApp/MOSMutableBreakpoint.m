@@ -9,9 +9,22 @@
 #import "MOSMutableBreakpoint.h"
 #import "MOSAddressFormatter.h"
 #import "NSScanner+Shorteners.h"
+#import "MOSError.h"
 
 
 static MOSAddressFormatter *addressFormatter;
+
+
+enum {
+  MOSParserNoError = 0,
+  MOSParserErrorUnknownSymbol,
+  MOSParserErrorUnrecognizedToken,
+  MOSParserErrorMismatchedParens,
+  MOSParserErrorExpectedSymbol,
+  MOSParserErrorExpectedOperator
+};
+
+NSString * const MOSParserErrorDomain = @"MOSParserErrorDomain";
 
 
 @implementation MOSMutableBreakpoint
@@ -21,6 +34,35 @@ static MOSAddressFormatter *addressFormatter;
   if (self == [MOSMutableBreakpoint class]) {
     addressFormatter = [[MOSAddressFormatter alloc] init];
   }
+}
+
+
++ (void)load {
+  NSDictionary *userinfo;
+  
+  userinfo = @{
+    @(MOSParserErrorUnknownSymbol): @{
+      NSLocalizedDescriptionKey: NSLocalizedString(@"Unknown symbol", @"Error "
+        "description when the breakpoint formula parser does not find a symbol")
+    },
+    @(MOSParserErrorMismatchedParens): @{
+      NSLocalizedDescriptionKey: NSLocalizedString(@"Parenthesis are not "
+        "correctly matched", @"Error description when the breakpoint formula "
+        "parser finds mismatched parens")
+    },
+    @(MOSParserErrorExpectedSymbol): @{
+      NSLocalizedDescriptionKey: NSLocalizedString(@"Symbol or numerical "
+        "constant expected",@"Error description when the breakpoint formula "
+        "parser does not find what it expected.")
+    },
+    @(MOSParserErrorExpectedOperator): @{
+      NSLocalizedDescriptionKey: NSLocalizedString(@"Operator expected",
+        @"Error description when the breakpoint formula parser does not find "
+        "an operator where it should be.")
+    }
+  };
+  
+  [MOSError setUserInfoValueDictionary:userinfo forDomain:MOSParserErrorDomain];
 }
 
 
@@ -117,6 +159,18 @@ static MOSAddressFormatter *addressFormatter;
 }
 
 
+#define ERROR_OUT(e) { \
+  if (err) *err = [MOSError errorWithDomain:MOSParserErrorDomain code:e]; \
+  return nil; \
+}
+
+#define TOKEN_EXPECT(c, e) { \
+  if (!token) \
+    return nil; \
+  if (![token isKindOfClass:[c class]]) \
+    ERROR_OUT(e); \
+}
+
 - (NSNumber *)recursiveParseLocationWithScanner:(NSScanner*)scan
     insideParens:(BOOL)par error:(NSError**)err {
   id token;
@@ -124,25 +178,22 @@ static MOSAddressFormatter *addressFormatter;
   unichar op;
   
   token = [self getTokenWithScanner:scan error:err];
-  if (!token || ![token isKindOfClass:[NSNumber class]])
-    return nil;
+  TOKEN_EXPECT(NSNumber, MOSParserErrorExpectedSymbol);
   lhside = [token unsignedIntValue];
   
   do {
     token = [self getTokenWithScanner:scan error:err];
-    if (!token || ![token isKindOfClass:[NSString class]])
-      return nil;
+    TOKEN_EXPECT(NSString, MOSParserErrorExpectedOperator);
     if ([token isEqual:@""]) {
       if (!par)
         return @(lhside);
-      return nil;
+      ERROR_OUT(MOSParserErrorMismatchedParens);
     }
     op = [token characterAtIndex:0];
     
     if (op == '*') {
       token = [self getTokenWithScanner:scan error:err];
-      if (!token || ![token isKindOfClass:[NSNumber class]])
-        return nil;
+      TOKEN_EXPECT(NSNumber, MOSParserErrorExpectedSymbol);
       rhside = [token unsignedIntValue];
       lhside *= rhside;
     }
@@ -150,15 +201,14 @@ static MOSAddressFormatter *addressFormatter;
   
   if (op == '+' || op == '-') {
     token = [self recursiveParseLocationWithScanner:scan insideParens:par error:err];
-    if (!token || ![token isKindOfClass:[NSNumber class]])
-      return nil;
+    TOKEN_EXPECT(NSNumber, MOSParserErrorExpectedSymbol);
     rhside = [token unsignedIntValue];
     if (op == '+')
       return @(lhside + rhside);
     return @(lhside - rhside);
   } else if (op == ')') {
     if (!par)
-      return nil;
+      ERROR_OUT(MOSParserErrorMismatchedParens);
     return @(lhside);
   }
   
@@ -175,15 +225,14 @@ static MOSAddressFormatter *addressFormatter;
   if ([scan scanAnyStringFromList:@[@"+", @"-", @"*", @")"] intoString:&operator])
     return operator;
 
-  if ([scan scanString:@"("]) {
+  if ([scan scanString:@"("])
     return [self recursiveParseLocationWithScanner:scan insideParens:YES error:err];
-  }
   
   if ([scan scanUpToCharactersFromString:@"+-*() \t" intoString:&token]) {
     if (![addressFormatter getObjectValue:&value forString:token errorDescription:nil]) {
       addrs = [_symbolTable allKeysForObject:token];
       if (![addrs count])
-        return nil;
+        ERROR_OUT(MOSParserErrorUnknownSymbol);
       value = [addrs firstObject];
     }
     return value;
@@ -191,7 +240,7 @@ static MOSAddressFormatter *addressFormatter;
   
   if ([scan isAtEnd])
     return @"";
-  return nil;
+  ERROR_OUT(MOSParserErrorUnrecognizedToken);
 }
 
 

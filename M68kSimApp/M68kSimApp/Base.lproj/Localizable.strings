@@ -25,6 +25,12 @@
 /* Error description when the simulator can't load a file */
 "Impossible to load this executable" = "Impossible to load this executable";
 
+/* Error description when the breakpoint formula parser does not find an operator where it should be. */
+"Operator expected" = "Operator expected";
+
+/* Error description when the breakpoint formula parser finds mismatched parens */
+"Parenthesis are not correctly matched" = "Parenthesis are not correctly matched";
+
 /* Paste (teletype view menu) */
 "Paste" = "Paste";
 
@@ -33,6 +39,9 @@
 
 /* Error description when the user program segmentation faults */
 "Segmentation fault!" = "Segmentation fault!";
+
+/* Error description when the breakpoint formula parser does not find what it expected. */
+"Symbol or numerical constant expected" = "Symbol or numerical constant expected";
 
 /* Info about what happens when assembler optimizations are disabled */
 "The assembler output will contain exactly the instructions you specified in the source file." = "The assembler output will contain exactly the instructions you specified in the source file.";
@@ -63,6 +72,9 @@
 
 /* Recovery suggestion for fixing a missing entry point */
 "To make the entry point available, declare it as a public symbol using the \"public\" directive, or select \"Use fixed entry point\" in the assembler preferences." = "To make the entry point available, declare it as a public symbol using the \"public\" directive, or select \"Use fixed entry point\" in the assembler preferences.";
+
+/* Error description when the breakpoint formula parser does not find a symbol */
+"Unknown symbol" = "Unknown symbol";
 
 /* Recovery suggestion for a segmentation fault in the simulated program */
 "Your program has accessed a memory area not declared with a DS or DC directive, or a stack overflow occurred." = "Your program has accessed a memory area not declared with a DS or DC directive, or a stack overflow occurred.";

@@ -23,6 +23,11 @@ static NSMutableDictionary *userInfoDataDict = nil;
 }
 
 
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code {
+  return [[MOSError alloc] initWithDomain:domain code:code userInfo:nil];
+}
+
+
 - (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code
   userInfo:(NSDictionary *)dict {
   NSDictionary *domaindict, *userinfo;
