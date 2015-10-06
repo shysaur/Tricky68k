@@ -25,6 +25,9 @@
 /* Error description when the simulator can't load a file */
 "Impossible to load this executable" = "Impossible to load this executable";
 
+/* Error description when MOSAddressFormatter fails. */
+"Not a valid memory address!" = "Not a valid memory address!";
+
 /* Error description when the breakpoint formula parser does not find an operator where it should be. */
 "Operator expected" = "Operator expected";
 
