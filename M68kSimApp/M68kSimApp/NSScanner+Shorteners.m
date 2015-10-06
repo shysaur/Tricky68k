@@ -69,4 +69,15 @@
 }
 
 
+- (BOOL)scanAnyStringFromList:(NSArray*)strs intoString:(NSString **)str {
+  NSString *test;
+  
+  for (test in strs) {
+    if ([self scanString:test intoString:str])
+      return YES;
+  }
+  return NO;
+}
+
+
 @end

@@ -112,17 +112,18 @@ Gw
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </tableHeaderCell>
-                                            <textFieldCell key="dataCell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" alignment="left" title="Text Cell" usesSingleLineMode="YES" id="CEI-5B-dbw">
+                                            <textFieldCell key="dataCell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" title="Text Cell" usesSingleLineMode="YES" id="CEI-5B-dbw">
                                                 <font key="font" metaFont="fixedUser"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                             <connections>
-                                                <binding destination="Fd8-K6-G5R" name="value" keyPath="arrangedObjects.symbolicLocation" id="EdS-pV-6gu">
+                                                <binding destination="Fd8-K6-G5R" name="value" keyPath="arrangedObjects.symbolicLocation" id="eqL-JL-BcE">
                                                     <dictionary key="options">
                                                         <bool key="NSConditionallySetsEditable" value="NO"/>
                                                         <bool key="NSCreatesSortDescriptor" value="NO"/>
+                                                        <bool key="NSValidatesImmediately" value="YES"/>
                                                     </dictionary>
                                                 </binding>
                                             </connections>

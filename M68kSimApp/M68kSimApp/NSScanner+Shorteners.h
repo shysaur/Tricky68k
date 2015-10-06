@@ -23,4 +23,6 @@
 
 - (NSString *)scanUpToEndOfString;
 
+- (BOOL)scanAnyStringFromList:(NSArray*)strs intoString:(NSString **)str;
+
 @end

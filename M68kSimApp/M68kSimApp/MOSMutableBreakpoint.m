@@ -7,9 +7,21 @@
 //
 
 #import "MOSMutableBreakpoint.h"
+#import "MOSAddressFormatter.h"
+#import "NSScanner+Shorteners.h"
+
+
+static MOSAddressFormatter *addressFormatter;
 
 
 @implementation MOSMutableBreakpoint
+
+
++ (void)initialize {
+  if (self == [MOSMutableBreakpoint class]) {
+    addressFormatter = [[MOSAddressFormatter alloc] init];
+  }
+}
 
 
 - (instancetype)initWithAddress:(uint32_t)a {
@@ -81,6 +93,105 @@
   if (off == 0)
     return _locationCache = sym;
   return _locationCache = [NSString stringWithFormat:@"%@ + 0x%X", sym, off];
+}
+
+
+- (void)setSymbolicLocation:(NSString *)str {
+  NSNumber *a;
+  
+  if ((a = [self parseSymbolicLocation:str error:nil]))
+    [self setAddress:a];
+}
+
+
+- (BOOL)validateSymbolicLocation:(id*)ioValue error:(NSError**)outError {
+  return !![self parseSymbolicLocation:*ioValue error:outError];
+}
+
+
+- (NSNumber *)parseSymbolicLocation:(NSString*)str error:(NSError**)err {
+  NSScanner *scan;
+  
+  scan = [NSScanner scannerWithString:str];
+  return [self recursiveParseLocationWithScanner:scan insideParens:0 error:err];
+}
+
+
+- (NSNumber *)recursiveParseLocationWithScanner:(NSScanner*)scan
+    insideParens:(BOOL)par error:(NSError**)err {
+  id token;
+  uint32_t lhside, rhside;
+  unichar op;
+  
+  token = [self getTokenWithScanner:scan error:err];
+  if (!token || ![token isKindOfClass:[NSNumber class]])
+    return nil;
+  lhside = [token unsignedIntValue];
+  
+  do {
+    token = [self getTokenWithScanner:scan error:err];
+    if (!token || ![token isKindOfClass:[NSString class]])
+      return nil;
+    if ([token isEqual:@""]) {
+      if (!par)
+        return @(lhside);
+      return nil;
+    }
+    op = [token characterAtIndex:0];
+    
+    if (op == '*') {
+      token = [self getTokenWithScanner:scan error:err];
+      if (!token || ![token isKindOfClass:[NSNumber class]])
+        return nil;
+      rhside = [token unsignedIntValue];
+      lhside *= rhside;
+    }
+  } while (op == '*');
+  
+  if (op == '+' || op == '-') {
+    token = [self recursiveParseLocationWithScanner:scan insideParens:par error:err];
+    if (!token || ![token isKindOfClass:[NSNumber class]])
+      return nil;
+    rhside = [token unsignedIntValue];
+    if (op == '+')
+      return @(lhside + rhside);
+    return @(lhside - rhside);
+  } else if (op == ')') {
+    if (!par)
+      return nil;
+    return @(lhside);
+  }
+  
+  return nil;
+}
+
+
+- (id)getTokenWithScanner:(NSScanner*)scan error:(NSError**)err {
+  NSString *operator;
+  NSString *token;
+  NSNumber *value;
+  NSArray *addrs;
+  
+  if ([scan scanAnyStringFromList:@[@"+", @"-", @"*", @")"] intoString:&operator])
+    return operator;
+
+  if ([scan scanString:@"("]) {
+    return [self recursiveParseLocationWithScanner:scan insideParens:YES error:err];
+  }
+  
+  if ([scan scanUpToCharactersFromString:@"+-*() \t" intoString:&token]) {
+    if (![addressFormatter getObjectValue:&value forString:token errorDescription:nil]) {
+      addrs = [_symbolTable allKeysForObject:token];
+      if (![addrs count])
+        return nil;
+      value = [addrs firstObject];
+    }
+    return value;
+  }
+  
+  if ([scan isAtEnd])
+    return @"";
+  return nil;
 }
 
 
