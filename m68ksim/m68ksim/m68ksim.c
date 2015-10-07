@@ -124,14 +124,14 @@ void *cpu_timerThread(void *param) {
   for (;;) {
     t = (CYCLES_PER_LOOP * 1000) / khz_cap;
     usleep((useconds_t)MAX(1, t - drift));
-    gettimeofday(&t1, NULL);
     pthread_mutex_lock(&cpu_timerMut);
     pthread_cond_signal(&cpu_timer);
+    gettimeofday(&t1, NULL);
     pthread_mutex_unlock(&cpu_timerMut);
     
     realt = (t1.tv_sec * 1000000 + t1.tv_usec) - (t0.tv_sec * 1000000 + t0.tv_usec);
-    gettimeofday(&t0, NULL);
     drift = (realt - MAX(1, t - drift));
+    t0 = t1;
   }
   
   return NULL;
