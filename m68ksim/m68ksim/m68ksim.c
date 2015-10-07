@@ -29,16 +29,13 @@
 #define MAX(a, b) ((((a)) > ((b)) ? ((a)) : ((b))))
 #define MIN(a, b) ((((a)) < ((b)) ? ((a)) : ((b))))
 
-#define SMOOTH_T 10
-
 
 volatile int sim_on, debug_on, debug_happened;
 int servermode_on;
 
-long long cyc_t[SMOOTH_T];
+long long cyc_t[2];
 long long cyc_dcycles;
-long long cyc_dcyclesadj[SMOOTH_T];
-int cyc_i = 0, cyc_c = 0;
+long long cyc_dcyclesadj[2];
 
 volatile long long khz_estimate;
 volatile long long khz_cap = 4000;
@@ -86,27 +83,17 @@ void signal_enterDebugger(int signo) {
 
 long long cpu_measureClockSpeed(void) {
   struct timeval tmp;
-  int i1, i0;
   long long cyc_ran;
   long long dt, dcycles, khz;
   
-  i1 = cyc_i;
-  i0 = ((cyc_i - (cyc_c-1)) + SMOOTH_T) % SMOOTH_T;
-  
   gettimeofday(&tmp, NULL);
-  cyc_t[cyc_i] = tmp.tv_usec + (long long)tmp.tv_sec * 1000000;
+  cyc_t[1] = tmp.tv_usec + (long long)tmp.tv_sec * 1000000;
   
   cyc_ran = m68k_cycles_run();
-  cyc_dcyclesadj[cyc_i] = cyc_dcycles + cyc_ran;
+  cyc_dcyclesadj[1] = cyc_dcycles + cyc_ran;
   
-  cyc_i = (cyc_i + 1) % SMOOTH_T;
-  if (cyc_c < SMOOTH_T) {
-    cyc_c++;
-    return -1;
-  }
-  
-  dt = cyc_t[i1] - cyc_t[i0];
-  dcycles = cyc_dcyclesadj[i1] - cyc_dcyclesadj[i0];
+  dt = cyc_t[1] - cyc_t[0];
+  dcycles = cyc_dcyclesadj[1] - cyc_dcyclesadj[0];
   
   if (dt > 100)
     khz = (dcycles * 1000) / dt;
@@ -120,8 +107,6 @@ long long cpu_measureClockSpeed(void) {
 void cpu_resetClockMeasurement(int cyc_ran) {
   struct timeval tmp;
   
-  cyc_i = 1;
-  cyc_c = 1;
   cyc_dcycles = -cyc_ran;
   cyc_dcyclesadj[0] = 0;
   
