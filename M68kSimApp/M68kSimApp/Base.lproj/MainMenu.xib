@@ -645,6 +645,12 @@
                                     <action selector="assemble:" target="-1" id="iZe-j8-e4f"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Assemble and Save As..." id="P3I-kE-fnb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="assembleAndSaveAs:" target="-1" id="j44-Q2-9T0"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="THE-Iz-l38"/>
                             <menuItem title="Shift Left" keyEquivalent="[" id="Aq2-NM-zGo">
                                 <connections>

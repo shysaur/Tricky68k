@@ -282,7 +282,31 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
+- (IBAction)assembleAndSaveAs:(id)sender {
+  NSSavePanel *sp;
+  
+  sp = [NSSavePanel savePanel];
+  [sp setAllowedFileTypes:@[@"o"]];
+  [sp setAllowsOtherFileTypes:YES];
+  [sp setCanSelectHiddenExtension:YES];
+  [sp beginSheetModalForWindow:docWindow completionHandler:^(NSInteger result){
+    if (result == NSFileHandlingPanelOKButton) {
+      runWhenAssemblyComplete = NO;
+      [self assembleInBackgroundToURL:[sp URL]];
+    }
+  }];
+}
+
+
 - (void)assembleInBackground {
+  NSURL *tmp;
+  
+  tmp = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+  [self assembleInBackgroundToURL:tmp];
+}
+
+
+- (void)assembleInBackgroundToURL:(NSURL *)outurl {
   if (assembler) return;
   
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
@@ -308,7 +332,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     ud = [NSUserDefaults standardUserDefaults];
     jsm = [MOSJobStatusManager sharedJobStatusManger];
     
-    assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+    assemblyOutput = outurl;
     
     if (lastJob)
       [lastJob removeObserver:self forKeyPath:@"events" context:AssemblageEvent];

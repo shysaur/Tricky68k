@@ -44,6 +44,7 @@
 
 - (IBAction)assemble:(id)sender;
 - (IBAction)assembleAndRun:(id)sender;
+- (IBAction)assembleAndSaveAs:(id)sender;
 - (IBAction)switchToSimulator:(id)sender;
 - (IBAction)switchToEditor:(id)editor;
 
