@@ -13,7 +13,7 @@
 #include <signal.h>
 #include <limits.h>
 #include <pthread.h>
-#include <sys/time.h>
+#include <mach/mach_time.h>
 #include "m68ksim.h"
 #include "addrspace.h"
 #include "ram.h"
@@ -36,6 +36,7 @@ int servermode_on;
 long long cyc_t[2];
 long long cyc_dcycles;
 long long cyc_dcyclesadj[2];
+mach_timebase_info_data_t td_info;
 
 volatile long long khz_estimate;
 volatile long long khz_cap = 4000;
@@ -82,12 +83,12 @@ void signal_enterDebugger(int signo) {
 
 
 long long cpu_measureClockSpeed(void) {
-  struct timeval tmp;
+  uint64_t tmp;
   long long cyc_ran;
   long long dt, dcycles, khz;
   
-  gettimeofday(&tmp, NULL);
-  cyc_t[1] = tmp.tv_usec + (long long)tmp.tv_sec * 1000000;
+  tmp = mach_absolute_time();
+  cyc_t[1] = tmp * td_info.numer / (td_info.denom * 1000);
   
   cyc_ran = m68k_cycles_run();
   cyc_dcyclesadj[1] = cyc_dcycles + cyc_ran;
@@ -105,32 +106,32 @@ long long cpu_measureClockSpeed(void) {
 
 
 void cpu_resetClockMeasurement(int cyc_ran) {
-  struct timeval tmp;
+  uint64_t tmp;
   
   cyc_dcycles = -cyc_ran;
   cyc_dcyclesadj[0] = 0;
   
-  gettimeofday(&tmp, NULL);
-  cyc_t[0] = tmp.tv_usec + (long long)tmp.tv_sec * 1000000;
+  tmp = mach_absolute_time();
+  cyc_t[0] = tmp * td_info.numer / (td_info.denom * 1000);
 }
 
 
 void *cpu_timerThread(void *param) {
   long long realt, t, drift;
-  struct timeval t0, t1;
+  uint64_t t0, t1;
   
   drift = 0;
-  gettimeofday(&t0, NULL);
+  t0 = mach_absolute_time();
   for (;;) {
     t = (CYCLES_PER_LOOP * 1000) / khz_cap;
     usleep((useconds_t)MAX(1, t - drift));
     pthread_mutex_lock(&cpu_timerMut);
     pthread_cond_signal(&cpu_timer);
-    gettimeofday(&t1, NULL);
+    t1 = mach_absolute_time();
     pthread_mutex_unlock(&cpu_timerMut);
     
-    realt = (t1.tv_sec * 1000000 + t1.tv_usec) - (t0.tv_sec * 1000000 + t0.tv_usec);
-    drift = (realt - MAX(1, t - drift));
+    realt = (t1 * td_info.numer / td_info.denom) - (t0 * td_info.numer / td_info.denom);
+    drift = ((realt / 1000) - MAX(1, t - drift));
     t0 = t1;
   }
   
@@ -145,6 +146,7 @@ void cpu_run(void) {
   pthread_mutex_init(&cpu_timerMut, NULL);
   pthread_cond_init(&cpu_timer, NULL);
   pthread_create(&timer, NULL, cpu_timerThread, NULL);
+  mach_timebase_info(&td_info);
   
   m68k_pulse_reset();
   cpu_resetClockMeasurement(0);
