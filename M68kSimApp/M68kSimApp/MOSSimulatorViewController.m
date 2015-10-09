@@ -269,30 +269,36 @@ static void *SimulatorState = &SimulatorState;
 
 - (void)updateClockFrequencyDisplay {
   static NSNumberFormatter *nf;
-  static NSString *mhzFmt;
-  NSString *tmp;
-  float mhz;
+  static NSString *mhzFmt, *ghzFmt;
+  NSString *tmp, *fmt;
+  float f;
   
   if (!nf) {
     nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterDecimalStyle];
     [nf setUsesGroupingSeparator:NO];
   }
-  if (!mhzFmt) {
+  if (!mhzFmt || !ghzFmt) {
     mhzFmt = NSLocalizedString(@"%@ MHz", @"Clock frequency badge format (MHz)");
+    ghzFmt = NSLocalizedString(@"%@ GHz", @"Clock frequency badge format (GHz)");
   }
   
   if (simRunning && !stepping) {
-    mhz = [simProxy clockFrequency];
-    if (mhz >= 0) {
-      if (mhz >= 1000.0) {
+    f = [simProxy clockFrequency];
+    fmt = mhzFmt;
+    if (f >= 0) {
+      if (f >= 1000.0) {
+        if (f >= 10000.0) {
+          f /= 1000.0;
+          fmt = ghzFmt;
+        }
         [nf setMinimumFractionDigits:0];
         [nf setMaximumFractionDigits:0];
       } else {
         [nf setMinimumFractionDigits:1];
         [nf setMaximumFractionDigits:1];
       }
-      tmp = [NSString stringWithFormat:mhzFmt, [nf stringFromNumber:@(mhz)]];
+      tmp = [NSString stringWithFormat:fmt, [nf stringFromNumber:@(f)]];
     } else
       tmp = @"";
     [self setClockFrequency:tmp];

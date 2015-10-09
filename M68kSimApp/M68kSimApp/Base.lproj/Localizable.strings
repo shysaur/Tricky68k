@@ -1,3 +1,6 @@
+/* Clock frequency badge format (GHz) */
+"%@ GHz" = "%@ GHz";
+
 /* Clock frequency badge format (MHz) */
 "%@ MHz" = "%@ MHz";
 
