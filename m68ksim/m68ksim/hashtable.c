@@ -237,8 +237,6 @@ hashtable_enum_t *hashtable_enumerate(hashtable_enum_t *s, hashtable_t *ht, void
   } else {
     if (ht)
       assert(ht == s->ht);
-    else
-      ht = s->ht;
   
     s->this = s->this->next;
     if (!(s->this)) {
