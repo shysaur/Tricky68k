@@ -35,12 +35,12 @@
 
 
 - (void)windowDidBecomeMainWindow {
-  [fakeTitle setTextColor:[NSColor colorWithCalibratedWhite:0.7/3.0 alpha:1]];
+  [fakeTitle setTextColor:[NSColor colorWithCalibratedWhite:0 alpha:0.77]];
 }
 
 
 - (void)windowDidResignMainWindow {
-  [fakeTitle setTextColor:[NSColor colorWithCalibratedWhite:2.0/3.0 alpha:1]];
+  [fakeTitle setTextColor:[NSColor colorWithCalibratedWhite:0.612 alpha:1]];
 }
 
 
