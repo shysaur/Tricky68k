@@ -451,6 +451,7 @@
   [lineBuffer deleteCharactersInRange:NSMakeRange([lineBuffer length]-1, 1)];
   [self cacheLineRanges];
   [self updateViewHeight];
+  [self scrollToEndOfDocument:nil];
   [self setNeedsDisplayOfLastLine];
 }
 
