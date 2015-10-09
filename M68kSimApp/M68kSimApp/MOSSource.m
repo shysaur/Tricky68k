@@ -371,7 +371,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     change:(NSDictionary *)change context:(void *)context {
   MOSAssemblageResult asmres;
   NSArray *events;
-  MOSJobStatusManager *sm;
   
   if (context == AssemblageComplete) {
     [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
@@ -395,7 +394,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   } else if (context == AssemblageEvent) {
     if (!hadJob) return;
     
-    sm = [MOSJobStatusManager sharedJobStatusManger];
     events = [lastJob events];
     if (!events) {
       [fragaria setSyntaxErrors:@[]];

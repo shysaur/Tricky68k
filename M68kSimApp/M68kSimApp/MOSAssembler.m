@@ -127,9 +127,6 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     NSURL *unlinkedelf;
     NSURL *linkerfile;
     NSMutableArray *params;
-    MOSJobStatusManager *jsm;
-    
-    jsm = [MOSJobStatusManager sharedJobStatusManger];
     
     linking = NO;
     task = [[MOSMonitoredTask alloc] init];
