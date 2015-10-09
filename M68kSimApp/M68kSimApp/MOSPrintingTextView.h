@@ -8,11 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MOSPrintingTextView : NSTextView {
-  NSPrintInfo *printInfo;
-}
+@interface MOSPrintingTextView : NSTextView
 
-- (void)setPrintInfo:(NSPrintInfo*)pi;
 - (void)setTabWidth:(NSInteger)tabWidth;
 
 @end

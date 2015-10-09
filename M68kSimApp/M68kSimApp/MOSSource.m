@@ -450,7 +450,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   font = [ud unarchivedObjectForKey:MGSFragariaPrefsTextFont];
   
   printView = [[MOSPrintingTextView alloc] init];
-  [printView setPrintInfo:printInfo];
   [printView setString:[fragaria string]];
   [printView setFont:font];
   [printView setTabWidth:[ud integerForKey:MGSFragariaPrefsTabWidth]];

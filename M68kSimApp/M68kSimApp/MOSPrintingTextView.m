@@ -12,19 +12,31 @@
 @implementation MOSPrintingTextView
 
 
-- (void)setPrintInfo:(NSPrintInfo*)pi {
-  printInfo = pi;
-}
-
-
 - (BOOL)knowsPageRange:(NSRangePointer)range {
   NSSize pageSize;
+  NSRange crange, grange, wrange;
+  NSLayoutManager *lm;
+  NSPrintInfo *printInfo;
+  
+  printInfo = [[NSPrintOperation currentOperation] printInfo];
   
   pageSize = [printInfo paperSize];
   pageSize.width -= [printInfo rightMargin] + [printInfo leftMargin];
   pageSize.height -= [printInfo topMargin] + [printInfo bottomMargin];
   [self setFrame:NSMakeRect(0, 0, pageSize.width, pageSize.height)];
   
+  /* Force re-layout of the view */
+  if ([[self textStorage] length] > 0) {
+    crange = NSMakeRange([[self textStorage] length]-1, 1);
+    wrange = NSMakeRange(0, [[self textStorage] length]);
+    lm = [self layoutManager];
+    [lm invalidateLayoutForCharacterRange:wrange actualCharacterRange:NULL];
+    grange = [lm glyphRangeForCharacterRange:crange actualCharacterRange:NULL];
+    if (grange.location) {
+      (void)[lm textContainerForGlyphAtIndex:grange.location-1 effectiveRange:NULL];
+    }
+  }
+
   return [super knowsPageRange:range];
 }
 
