@@ -377,7 +377,7 @@
 
   cvb = [clipview bounds];
   cvb.origin.y = MAX(0, cvb.origin.y - charSize.height);
-  [clipview scrollToPoint:cvb.origin];
+  [self scrollToPoint:cvb.origin];
 }
 
 
@@ -393,7 +393,7 @@
   cvb = [clipview bounds];
   maxy = [self bounds].size.height - cvb.size.height;
   cvb.origin.y = MIN(cvb.origin.y + charSize.height, maxy);
-  [clipview scrollToPoint:cvb.origin];
+  [self scrollToPoint:cvb.origin];
 }
 
 
@@ -407,7 +407,21 @@
   
   if ([clipview bounds].size.height < [self bounds].size.height) {
     top = [self bounds].size.height - [clipview bounds].size.height;
-    [clipview scrollToPoint:NSMakePoint(0, top)];
+    [self scrollToPoint:NSMakePoint(0, top)];
+  }
+}
+
+
+- (void)scrollToPoint:(NSPoint)pt {
+  id clipview, scrollview;
+  
+  clipview = [self superview];
+  if ([clipview isKindOfClass:[NSClipView class]]) {
+    [clipview scrollToPoint:pt];
+    
+    scrollview = [clipview superview];
+    if ([scrollview isKindOfClass:[NSScrollView class]])
+      [scrollview reflectScrolledClipView:clipview];
   }
 }
 
