@@ -76,6 +76,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController {
   NSString *tmp;
   NSURL *template;
+  BOOL fixtabs;
   
   [super windowControllerDidLoadNib:aController];
 
@@ -86,7 +87,10 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     template = [[NSBundle mainBundle] URLForResource:@"VasmTemplate" withExtension:@"s"];
     tmp = [NSString stringWithContentsOfURL:template encoding:NSUTF8StringEncoding error:nil];
     text = [[NSTextStorage alloc] initWithString:tmp];
-  }
+    fixtabs = YES;
+  } else
+    fixtabs = NO;
+  
   [fragaria replaceTextStorage:text];
   
   prefobs = [[MOSFragariaPreferencesObserver alloc] initWithFragaria:fragaria];
@@ -97,6 +101,13 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   textView = [fragaria textView];
   [self setUndoManager:[textView undoManager]];
+  
+  if (fixtabs && [fragaria indentWithSpaces]) {
+    [textView selectAll:self];
+    [textView performDetabWithNumberOfSpaces:[fragaria tabWidth]];
+    [textView setSelectedRange:NSMakeRange(0, 0)];
+  }
+  [[textView undoManager] removeAllActions];
 }
 
 
