@@ -1,7 +1,7 @@
 
 
-	public start	;Make the entry point public
-	org $2000		;Place the origin at $2000
+	public start    ;Make the entry point public
+	org $2000       ;Place the origin at $2000
 
 
 start:
