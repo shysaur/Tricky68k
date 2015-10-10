@@ -151,7 +151,7 @@ Gw
                             <animations/>
                         </scroller>
                         <tableHeaderView key="headerView" id="Njo-SR-BoL">
-                            <rect key="frame" x="0.0" y="0.0" width="298" height="23"/>
+                            <rect key="frame" x="0.0" y="0.0" width="298" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <animations/>
                         </tableHeaderView>
