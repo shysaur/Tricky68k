@@ -4,6 +4,9 @@
 /* Clock frequency badge format (MHz) */
 "%@ MHz" = "%@ MHz";
 
+/* Register table header for Ax, SP, PC */
+"Address Registers" = "Address Registers";
+
 /* Informative text of simulator death alert */
 "An unexpected condition occurred which caused the simulator to crash. Try restarting and see what happens." = "An unexpected condition occurred which caused the simulator to crash. Try restarting and see what happens.";
 
@@ -21,6 +24,9 @@
 
 /* Text of the event which occurs when creating a linker file failed. */
 "Could not create a linker file." = "Could not create a linker file.";
+
+/* Register table header for Dx */
+"Data Registers" = "Data Registers";
 
 /* Debug (after segmentation fault) */
 "Debug" = "Debug";
@@ -45,6 +51,9 @@
 
 /* Error description when the user program segmentation faults */
 "Segmentation fault!" = "Segmentation fault!";
+
+/* Register table header for SR */
+"Status Register" = "Status Register";
 
 /* Error description when the breakpoint formula parser does not find what it expected. */
 "Symbol or numerical constant expected" = "Symbol or numerical constant expected";

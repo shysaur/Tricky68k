@@ -21,11 +21,17 @@ const BOOL isRowHeader[] = {
 
 
 - init {
+  NSString *sr, *dr, *ar;
+  
   self = [super init];
+  
+  sr = NSLocalizedString(@"Status Register", @"Register table header for SR");
+  dr = NSLocalizedString(@"Data Registers", @"Register table header for Dx");
+  ar = NSLocalizedString(@"Address Registers", @"Register table header for Ax, SP, PC");
   rows = @[
-    @"Status Register",   @"SR",
-    @"Data Registers",    @"D0",@"D1",@"D2",@"D3",@"D4",@"D5",@"D6",@"D7",
-    @"Address Registers", @"A0",@"A1",@"A2",@"A3",@"A4",@"A5",@"A6",@"SP",@"PC"
+    sr, @"SR",
+    dr, @"D0",@"D1",@"D2",@"D3",@"D4",@"D5",@"D6",@"D7",
+    ar, @"A0",@"A1",@"A2",@"A3",@"A4",@"A5",@"A6",@"SP",@"PC"
   ];
   return self;
 }
