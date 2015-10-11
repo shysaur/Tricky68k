@@ -275,13 +275,14 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   }
 
   dispatch_async(receiveQueue, ^{
+    NSError *reenterError;
     NSString *tmp;
     BOOL first = YES;
     
     tmp = [[fromSim fileHandleForReading] readLine];
     while (tmp && ![tmp isEqual:@"debug? "]) {
       if (first && [tmp hasPrefix:@"error! "])
-        lastErrorOnSimReenter = [self errorFromLine:tmp];
+        reenterError = [self errorFromLine:tmp];
       else
         MOSSimLog(simTask, @"received %@ on debugger reenter", tmp);
       tmp = [[fromSim fileHandleForReading] readLine];
@@ -294,6 +295,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     if (dispatch_semaphore_wait(waitingForDebugger, DISPATCH_TIME_NOW)) {
       dispatch_async(dispatch_get_main_queue(), ^{
         if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW)) {
+          lastErrorOnSimReenter = reenterError;
           if ([self simulatorState] != MOSSimulatorStatePaused)
             [self setSimulatorState:MOSSimulatorStatePaused];
         }
