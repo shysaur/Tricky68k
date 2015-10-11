@@ -16,6 +16,28 @@ static void *ReloadTableView = &ReloadTableView;
 @implementation MOSSimTableViewDelegate
 
 
+- (instancetype)init {
+  __weak MOSSimTableViewDelegate *weakself;
+  
+  weakself = self = [super init];
+  
+  voidTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+  dispatch_source_set_timer(voidTimer, DISPATCH_TIME_FOREVER, DISPATCH_TIME_FOREVER, 0);
+  dispatch_source_set_event_handler(voidTimer, ^{
+    MOSSimTableViewDelegate *strongself = weakself;
+    [strongself->tableView reloadData];
+  });
+  dispatch_resume(voidTimer);
+  
+  return self;
+}
+
+
+- (void)dealloc {
+  voidTimer = nil;
+}
+
+
 - (void)setSimulatorProxy:(MOSSimulator*)sp {
   simProxy = sp;
   [self simulatorStateHasChanged];
@@ -50,18 +72,14 @@ static void *ReloadTableView = &ReloadTableView;
 
 
 - (void)simulatorStateHasChanged {
-  __weak MOSSimulator *weaksp = simProxy;
-  __weak NSTableView *weaktv = tableView;
   dispatch_time_t somet;
   
-  if (![simProxy isSimulatorRunning])
+  if (![simProxy isSimulatorRunning]) {
+    dispatch_source_set_timer(voidTimer, DISPATCH_TIME_FOREVER, 0, 0);
     [tableView reloadData];
-  else {
+  } else {
     somet = dispatch_time(DISPATCH_TIME_NOW, 50000000);
-    dispatch_after(somet, dispatch_get_main_queue(), ^{
-      if ([weaksp isSimulatorRunning])
-        [weaktv reloadData];
-    });
+    dispatch_source_set_timer(voidTimer, somet, DISPATCH_TIME_FOREVER, 5000000);
   }
 }
 

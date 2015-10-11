@@ -16,6 +16,7 @@
 @interface MOSSimTableViewDelegate : MOSSimulatorSubviewDelegate {
   IBOutlet NSTableView *tableView;
   MOSSimulator *simProxy;
+  dispatch_source_t voidTimer;
 }
 
 - (void)setSimulatorProxy:(MOSSimulator*)sp;
