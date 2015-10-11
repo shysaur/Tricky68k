@@ -41,11 +41,7 @@
   NSInteger rows;
   NSRect visibleRect;
   
-  @try {
-    [simProxy removeObserver:self forKeyPath:@"simulatorRunning" context:NULL];
-  } @catch (NSException * __unused exception) {}
   [super setSimulatorProxy:sp];
-  [simProxy addObserver:self forKeyPath:@"simulatorRunning" options:NSKeyValueObservingOptionInitial context:NULL];
   
   visibleRect = [tableView visibleRect];
   rows = [tableView rowsInRect:visibleRect].length;
@@ -53,20 +49,10 @@
 }
 
 
-- (void)dealloc {
-  @try {
-    [simProxy removeObserver:self forKeyPath:@"simulatorRunning" context:NULL];
-  } @catch (NSException * __unused exception) {}
-}
-
-
-- (void)observeValueForKeyPath:(NSString*)keyPath    ofObject:(id)object
-                        change:(NSDictionary*)change context:(void*)context {
-  if (context == NULL) {
-    if (![simProxy isSimulatorRunning])
-      [self refreshSimulatorData];
-  } else
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+- (void)simulatorStateHasChanged {
+  if (![simProxy isSimulatorRunning])
+    [self refreshSimulatorData];
+  [super simulatorStateHasChanged];
 }
 
 

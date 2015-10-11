@@ -145,6 +145,14 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+- (void)broadcastSimulatorStateChangeToSubviewControllers {
+  [dumpDs simulatorStateHasChanged];
+  [disasmDs simulatorStateHasChanged];
+  [regdumpDs simulatorStateHasChanged];
+  [stackDs simulatorStateHasChanged];
+}
+
+
 - (MOSSimulator*)simulatorProxy {
   return simProxy;
 }
@@ -185,13 +193,11 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (void)simulatorExceptionOccurred {
+- (void)presentSimulatorException:(NSError *)err {
   NSWindow *pw;
   NSAlert *alert;
-  NSError *err;
   
   exceptionOccurred = YES;
-  err = [simProxy lastSimulatorException];
   alert = [NSAlert alertWithError:err];
   [alert setAlertStyle:NSCriticalAlertStyle];
   [alert addButtonWithTitle:NSLocalizedString(@"Debug", @"Debug (after "
@@ -225,6 +231,7 @@ static void *SimulatorState = &SimulatorState;
         [self willChangeValueForKey:@"simulatorRunning"];
         simRunning = NO;
         [self didChangeValueForKey:@"simulatorRunning"];
+        [self broadcastSimulatorStateChangeToSubviewControllers];
         [self simulatorIsDead];
         break;
         
@@ -238,9 +245,10 @@ static void *SimulatorState = &SimulatorState;
         simRunning = (newstate == MOSSimulatorStateRunning);
         [self didChangeValueForKey:@"flagsStatus"];
         [self didChangeValueForKey:@"simulatorRunning"];
+        [self broadcastSimulatorStateChangeToSubviewControllers];
         if (newstate == MOSSimulatorStatePaused) {
           if (exc) {
-            [self simulatorExceptionOccurred];
+            [self presentSimulatorException:exc];
           }
           [self updateClockFrequencyDisplay];
         } else if (newstate == MOSSimulatorStateRunning) {
