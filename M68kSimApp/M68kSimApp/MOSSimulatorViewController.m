@@ -228,10 +228,7 @@ static void *SimulatorState = &SimulatorState;
     newstate = [object simulatorState];
     switch (newstate) {
       case MOSSimulatorStateDead:
-        [self willChangeValueForKey:@"simulatorRunning"];
-        simRunning = NO;
-        [self didChangeValueForKey:@"simulatorRunning"];
-        [self broadcastSimulatorStateChangeToSubviewControllers];
+        [self setSimulatorRunning:NO];
         [self simulatorIsDead];
         break;
         
@@ -240,12 +237,7 @@ static void *SimulatorState = &SimulatorState;
         dispatch_source_set_timer(clockUpdateTimer, DISPATCH_TIME_FOREVER, 0, 0);
         exc = [simProxy lastSimulatorException];
       case MOSSimulatorStateRunning:
-        [self willChangeValueForKey:@"flagsStatus"];
-        [self willChangeValueForKey:@"simulatorRunning"];
-        simRunning = (newstate == MOSSimulatorStateRunning);
-        [self didChangeValueForKey:@"flagsStatus"];
-        [self didChangeValueForKey:@"simulatorRunning"];
-        [self broadcastSimulatorStateChangeToSubviewControllers];
+        [self setSimulatorRunning:(newstate == MOSSimulatorStateRunning)];
         if (newstate == MOSSimulatorStatePaused) {
           if (exc) {
             [self presentSimulatorException:exc];
@@ -379,6 +371,12 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+- (void)setSimulatorRunning:(BOOL)val {
+  simRunning = val;
+  [self broadcastSimulatorStateChangeToSubviewControllers];
+}
+
+
 - (BOOL)isSimulatorRunning {
   return simRunning;
 }
@@ -401,12 +399,19 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
++ (NSSet *)keyPathsForValuesAffectingFlagsStatus {
+  return [NSSet setWithObject:@"simulatorRunning"];
+}
+
+
 - (NSString *)flagsStatus {
   NSDictionary *regdump;
   uint32_t flags;
   int x, n, z, v, c;
   
-  if (!simProxy || [simProxy simulatorState] != MOSSimulatorStatePaused) return @"";
+  if (!simProxy || [simProxy simulatorState] != MOSSimulatorStatePaused)
+    return @"";
+  
   regdump = [simProxy registerDump];
   flags = [[regdump objectForKey:MOS68kRegisterSR] unsignedIntValue];
   x = (flags & 0b10000) >> 4;
