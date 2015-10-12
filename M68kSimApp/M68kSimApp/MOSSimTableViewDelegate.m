@@ -76,7 +76,7 @@ static void *ReloadTableView = &ReloadTableView;
   
   if (![simProxy isSimulatorRunning]) {
     dispatch_source_set_timer(voidTimer, DISPATCH_TIME_FOREVER, 0, 0);
-    [tableView reloadData];
+    [self dataHasChanged];
   } else {
     somet = dispatch_time(DISPATCH_TIME_NOW, 50000000);
     dispatch_source_set_timer(voidTimer, somet, DISPATCH_TIME_FOREVER, 5000000);

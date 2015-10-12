@@ -49,13 +49,6 @@
 }
 
 
-- (void)simulatorStateHasChanged {
-  if (![simProxy isSimulatorRunning])
-    [self refreshSimulatorData];
-  [super simulatorStateHasChanged];
-}
-
-
 - (IBAction)clickedTableView:(id)sender {
   NSInteger row;
   uint32_t addr;
@@ -76,7 +69,8 @@
 
 
 - (void)dataHasChanged {
-  breakpoints = [simProxy breakpointList];
+  if (![simProxy isSimulatorRunning])
+    [self refreshSimulatorData];
   [super dataHasChanged];
 }
 
