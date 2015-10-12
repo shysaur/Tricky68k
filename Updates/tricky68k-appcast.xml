@@ -7,6 +7,34 @@
         <language>en</language>
         
         <item>
+            <title>Release 1.1.0</title>
+            <description><![CDATA[ <ul>
+              <li><strong>New!</strong> Added a clock frequency gauge in the simulator.</li>
+              <li><strong>New!</strong> Added an option to limit the clock frequency of the simulated CPU.</li>
+              <li><strong>New!</strong> Added a breakpoint list window.</li>
+              <li><strong>New!</strong> Now the simulator shows all the labels in the disassembly.</li>
+              <li>The simulator now properly reports any error which occured during the simulation, instead of just aborting.</li>
+              <li>Added an option to export an assembled ELF file.</li>
+              <li>Important speed and stability improvements to the simulator.</li>
+              <li>Improved the teletype's performance.</li>
+              <li>When creating a new program, the source template will conform to your editing preferences.</li>
+              <li>Now Tricky68k can open text files in addition to assembly files.</li>
+              <li>Fixed printing when the output spans more than one page.</li>
+              <li>binutils updated to 2.25.1.</li>
+              <li>Cosmetic improvements.</li>
+              </ul> ]]>
+            </description>
+            <pubDate>Mon, 12 October 2015 15:10:08 +0200</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_1.1.0/Tricky68k_110.tar.bz2" 
+              sparkle:version="1560" 
+              sparkle:shortVersionString="1.1.0"
+              length="3675236" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC4CFQDh7/J+WgJgqrx2bQvfcLx0QMmAvgIVALqWkUqtfPExMy6QZa3F6Ku5zw+i" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 1.0.2</title>
             <description><![CDATA[ <ul>
               <li>Fixed random crashes when opening documents.</li>
