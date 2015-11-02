@@ -136,9 +136,6 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
           action = @selector(assembleAndRun:);
           [view setTitle:@""];
         }
-        [view setAction:action];
-        [view setImage:image];
-        [view sizeToFit];
       } else {
         [view setTarget:simulatorVc];
         if ([itemIdentifier isEqual:MOSToolbarItemIdentifierPlay]) {
@@ -163,10 +160,11 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
           action = @selector(restart:);
         }
         [view setTitle:@""];
-        [view setAction:action];
-        [view setImage:image];
-        [view sizeToFit];
       }
+      [image setTemplate:YES];
+      [view setAction:action];
+      [view setImage:image];
+      [view sizeToFit];
       
     } else if ([text containsObject:itemIdentifier]) {
       view = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 100, 32)];
