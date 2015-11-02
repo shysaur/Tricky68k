@@ -66,7 +66,6 @@
 		0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */; };
 		01A0AA3F1BB04027002CAD97 /* MOSJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A0AA3E1BB04027002CAD97 /* MOSJob.m */; };
 		01A2ABB61BBC86FF008BBC59 /* MOSSimBrkptWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2ABB41BBC86FF008BBC59 /* MOSSimBrkptWindowController.m */; };
-		01A2ABB71BBC86FF008BBC59 /* MOSSimBrkptWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A2ABB51BBC86FF008BBC59 /* MOSSimBrkptWindow.xib */; };
 		01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */; };
 		01C20CA41A6726D600057D6B /* MOSPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */; };
 		01E93C6F1A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C711A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib */; };
@@ -76,6 +75,7 @@
 		01E93C7B1A6D491D004BE3C4 /* MOSSimulatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C7D1A6D491D004BE3C4 /* MOSSimulatorView.xib */; };
 		01E93C7E1A6D4927004BE3C4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C801A6D4927004BE3C4 /* Credits.rtf */; };
 		01E93C811A6D492F004BE3C4 /* VasmTemplate.s in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C831A6D492F004BE3C4 /* VasmTemplate.s */; };
+		01E974C71BE8021C002E91B5 /* MOSSimBrkptWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E974C91BE8021C002E91B5 /* MOSSimBrkptWindow.xib */; };
 		01EB0DAC1A8BF62000428082 /* tic-tac-toe.s in Resources */ = {isa = PBXBuildFile; fileRef = 01EB0DAA1A8BF4C000428082 /* tic-tac-toe.s */; };
 		01EBAA201AB96F1A0076AD02 /* helloworld.s in Resources */ = {isa = PBXBuildFile; fileRef = 01EBAA1F1AB96E670076AD02 /* helloworld.s */; };
 		01EBAA231AB973DF0076AD02 /* MOSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBAA221AB973DF0076AD02 /* MOSDocument.m */; };
@@ -209,7 +209,6 @@
 		01A0AA3E1BB04027002CAD97 /* MOSJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJob.m; sourceTree = "<group>"; };
 		01A2ABB31BBC86FF008BBC59 /* MOSSimBrkptWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimBrkptWindowController.h; sourceTree = "<group>"; };
 		01A2ABB41BBC86FF008BBC59 /* MOSSimBrkptWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimBrkptWindowController.m; sourceTree = "<group>"; };
-		01A2ABB51BBC86FF008BBC59 /* MOSSimBrkptWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MOSSimBrkptWindow.xib; sourceTree = "<group>"; };
 		01A419431A57382900D9BD02 /* MOSSimStackDumpDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimStackDumpDataSource.h; sourceTree = "<group>"; };
 		01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimStackDumpDataSource.m; sourceTree = "<group>"; };
 		01C20CA11A6726D600057D6B /* MOSPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPreferencesWindowController.h; sourceTree = "<group>"; };
@@ -221,6 +220,7 @@
 		01E93C7C1A6D491D004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSimulatorView.xib; sourceTree = "<group>"; };
 		01E93C7F1A6D4927004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Credits.rtf; sourceTree = "<group>"; };
 		01E93C821A6D492F004BE3C4 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/VasmTemplate.s; sourceTree = "<group>"; usesTabs = 1; };
+		01E974C81BE8021C002E91B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSimBrkptWindow.xib; sourceTree = "<group>"; };
 		01EB0DAB1A8BF4C100428082 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = "Examples/Base.lproj/tic-tac-toe.s"; sourceTree = SOURCE_ROOT; };
 		01EBAA1E1AB96E670076AD02 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/helloworld.s; sourceTree = "<group>"; };
 		01EBAA211AB973DF0076AD02 /* MOSDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSDocument.h; sourceTree = "<group>"; };
@@ -456,7 +456,7 @@
 				013D84C91BC0A594003E4817 /* MOSMutableBreakpoint.m */,
 				01A2ABB31BBC86FF008BBC59 /* MOSSimBrkptWindowController.h */,
 				01A2ABB41BBC86FF008BBC59 /* MOSSimBrkptWindowController.m */,
-				01A2ABB51BBC86FF008BBC59 /* MOSSimBrkptWindow.xib */,
+				01E974C91BE8021C002E91B5 /* MOSSimBrkptWindow.xib */,
 			);
 			name = "Breakpoint Window";
 			sourceTree = "<group>";
@@ -606,7 +606,7 @@
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
 				01E93C811A6D492F004BE3C4 /* VasmTemplate.s in Resources */,
 				011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */,
-				01A2ABB71BBC86FF008BBC59 /* MOSSimBrkptWindow.xib in Resources */,
+				01E974C71BE8021C002E91B5 /* MOSSimBrkptWindow.xib in Resources */,
 				012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */,
 				013A6AF91A718458007C053B /* Localizable.strings in Resources */,
 				01E93C781A6D490F004BE3C4 /* MOSExecutable.xib in Resources */,
@@ -835,6 +835,14 @@
 			sourceTree = "<group>";
 			tabWidth = 4;
 			usesTabs = 1;
+		};
+		01E974C91BE8021C002E91B5 /* MOSSimBrkptWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01E974C81BE8021C002E91B5 /* Base */,
+			);
+			name = MOSSimBrkptWindow.xib;
+			sourceTree = "<group>";
 		};
 		01EB0DAA1A8BF4C000428082 /* tic-tac-toe.s */ = {
 			isa = PBXVariantGroup;
