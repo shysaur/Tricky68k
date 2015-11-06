@@ -90,6 +90,8 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
   NSString *label;
   NSImage *image;
   SEL action;
+  CGFloat minsize;
+  NSRect rect;
   NSArray *system = @[
     NSToolbarSpaceItemIdentifier,
     NSToolbarFlexibleSpaceItemIdentifier ];
@@ -116,6 +118,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
     if ([buttons containsObject:itemIdentifier]) {
       view = [[NSButton alloc] initWithFrame:NSMakeRect(0, 0, 100, 32)];
       [view setBezelStyle:NSTexturedRoundedBezelStyle];
+      minsize = 0;
       if ([sourceButtons containsObject:itemIdentifier]) {
         [view setTarget:sourceDocument];
         if ([itemIdentifier isEqual:MOSToolbarItemIdentifierGoSource]) {
@@ -135,6 +138,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
           label = NSLocalizedString(@"Assemble and Run", @"Toolbar Item");
           action = @selector(assembleAndRun:);
           [view setTitle:@""];
+          minsize = 36;
         }
       } else {
         [view setTarget:simulatorVc];
@@ -158,6 +162,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
           image = [NSImage imageNamed:@"MOSRestart"];
           label = NSLocalizedString(@"Restart", @"Toolbar Item");
           action = @selector(restart:);
+          minsize = 36;
         }
         [view setTitle:@""];
       }
@@ -165,6 +170,11 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
       [view setAction:action];
       [view setImage:image];
       [view sizeToFit];
+      if (minsize > 0) {
+        rect = [view frame];
+        rect.size.width = MAX(rect.size.width, minsize);
+        [view setFrame:rect];
+      }
       
     } else if ([text containsObject:itemIdentifier]) {
       view = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 100, 32)];
