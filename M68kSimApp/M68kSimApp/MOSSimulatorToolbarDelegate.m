@@ -84,6 +84,26 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
 }
 
 
+- (NSString *)placeholderSpeed {
+  static NSString *cache;
+  NSString *format;
+  NSNumberFormatter *nf;
+  
+  if (cache)
+    return cache;
+  
+  nf = [[NSNumberFormatter alloc] init];
+  [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+  [nf setUsesGroupingSeparator:NO];
+  [nf setMinimumFractionDigits:1];
+  [nf setMaximumFractionDigits:1];
+  
+  format = NSLocalizedString(@"%@ MHz", @"Clock frequency badge format (MHz)");
+  cache = [NSString stringWithFormat:format, [nf stringFromNumber:@100.0]];
+  return cache;
+}
+
+
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
   NSToolbarItem *res;
   id view;
@@ -183,14 +203,16 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
         [view setObjectValue:@"X:0 N:0 Z:0 V:0 C:0"];
         [view setFont:[NSFont userFixedPitchFontOfSize:11]];
         [view sizeToFit];
-        [view bind:@"objectValue" toObject:simulatorVc withKeyPath:@"flagsStatus" options:nil];
+        if (flag)
+          [view bind:@"objectValue" toObject:simulatorVc withKeyPath:@"flagsStatus" options:nil];
       } else if ([itemIdentifier isEqual:MOSToolbarItemIdentifierClock]) {
         label = NSLocalizedString(@"Clock Frequency", @"Toolbar Item");
-        [view setObjectValue:@"123.4 MHz"];
+        [view setObjectValue:[self placeholderSpeed]];
         [view setFont:[NSFont systemFontOfSize:11]];
         [view setAlignment:NSTextAlignmentCenter];
         [view sizeToFit];
-        [view bind:@"value" toObject:simulatorVc withKeyPath:@"clockFrequency" options:nil];
+        if (flag)
+          [view bind:@"value" toObject:simulatorVc withKeyPath:@"clockFrequency" options:nil];
       }
       [view setBezeled:NO];
       [view setBordered:NO];
