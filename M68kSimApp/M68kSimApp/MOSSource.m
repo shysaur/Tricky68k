@@ -320,6 +320,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 - (void)assembleInBackgroundToURL:(NSURL *)outurl {
   if (assembler) return;
   
+  [self setTransient:NO];
+  
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
   
