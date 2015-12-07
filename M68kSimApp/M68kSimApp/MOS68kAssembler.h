@@ -27,7 +27,7 @@ typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
 @class MOSJob;
 
 
-@interface MOSAssembler : NSObject <MOSMonitoredTaskDelegate> {
+@interface MOS68kAssembler : NSObject <MOSMonitoredTaskDelegate> {
   MOSJob *jobStatus;
   BOOL isJob;
   NSMutableArray *sections;

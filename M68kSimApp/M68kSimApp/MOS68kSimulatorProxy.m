@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Daniele Cattaneo. All rights reserved.
 //
 
-#import "MOSSimulatorProxy.h"
+#import "MOS68kSimulatorProxy.h"
 #import "MOSNamedPipe.h"
 #import "NSFileHandle+Strings.h"
 #import "MOSError.h"
@@ -31,13 +31,13 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
 
 
-@implementation MOSSimulatorProxy
+@implementation MOS68kSimulatorProxy
 
 
 - (instancetype)initWithExecutableURL:(NSURL*)url error:(NSError **)err {
   NSArray *args, *resp;
   NSError *tmpe;
-  __weak MOSSimulatorProxy *weakSelf;
+  __weak MOS68kSimulatorProxy *weakSelf;
   __strong NSTask *strongTask;
   dispatch_semaphore_t ttyOpenSem;
   int i;
@@ -71,7 +71,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   strongTask = simTask;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    __strong MOSSimulatorProxy *strongSelf;
+    __strong MOS68kSimulatorProxy *strongSelf;
     
     [strongTask waitUntilExit];
     /* We don't want this block to retain the proxy, otherwise we can't kill

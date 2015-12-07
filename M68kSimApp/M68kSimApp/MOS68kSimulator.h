@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MOSSimulatorProxy.h"
+#import "MOS68kSimulatorProxy.h"
 
 
 extern NSString * const MOS68kRegisterD0;
@@ -38,10 +38,10 @@ extern NSString * const MOS68kRegisterCACR;
 extern NSString * const MOS68kRegisterCAAR;
 
 
-@interface MOSSimulator : NSObject {
+@interface MOS68kSimulator : NSObject {
   NSError *lastError;
   MOSSimulatorState stateMirror;
-  MOSSimulatorProxy *proxy;
+  MOS68kSimulatorProxy *proxy;
   void (^ttySendBlock)(NSString *string);
   NSDictionary *regsCache;
   NSDictionary *symbolsCache;

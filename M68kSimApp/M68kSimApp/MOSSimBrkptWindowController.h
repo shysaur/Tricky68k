@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class MOSSimulator;
+@class MOS68kSimulator;
 
 
 @interface MOSSimBrkptWindowController : NSWindowController {

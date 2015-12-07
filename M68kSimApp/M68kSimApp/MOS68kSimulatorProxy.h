@@ -32,7 +32,7 @@ extern NSString * const MOSSimulatorErrorDomain;
 @class MOSNamedPipe;
 
 
-@interface MOSSimulatorProxy : NSObject {
+@interface MOS68kSimulatorProxy : NSObject {
   NSTask *simTask;
   NSURL *exec;
   NSError *lastErrorOnSimReenter;

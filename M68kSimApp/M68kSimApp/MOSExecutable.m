@@ -8,7 +8,7 @@
 
 #import "MOSExecutable.h"
 #import "MOSSimulatorViewController.h"
-#import "MOSSimulator.h"
+#import "MOS68kSimulator.h"
 
 
 @implementation MOSExecutable
@@ -50,7 +50,7 @@
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError {
   NSError *tmpe;
   
-  simProxy = [[MOSSimulator alloc] initWithExecutableURL:url error:&tmpe];
+  simProxy = [[MOS68kSimulator alloc] initWithExecutableURL:url error:&tmpe];
   if (tmpe) {
     if (outError) *outError = tmpe;
     return NO;

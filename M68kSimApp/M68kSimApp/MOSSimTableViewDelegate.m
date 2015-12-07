@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Daniele Cattaneo. 
 //
 
-#import "MOSSimulator.h"
+#import "MOS68kSimulator.h"
 #import "MOSSimTableViewDelegate.h"
 
 
@@ -38,13 +38,13 @@ static void *ReloadTableView = &ReloadTableView;
 }
 
 
-- (void)setSimulatorProxy:(MOSSimulator*)sp {
+- (void)setSimulatorProxy:(MOS68kSimulator*)sp {
   simProxy = sp;
   [self simulatorStateHasChanged];
 }
 
 
-- (MOSSimulator*)simulatorProxy {
+- (MOS68kSimulator*)simulatorProxy {
   return simProxy;
 }
 

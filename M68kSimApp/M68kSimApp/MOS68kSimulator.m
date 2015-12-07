@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MOSSimulatorProxy.h"
-#import "MOSSimulator.h"
+#import "MOS68kSimulatorProxy.h"
+#import "MOS68kSimulator.h"
 #import "NSFileHandle+Strings.h"
 #import "MOSError.h"
 
@@ -44,7 +44,7 @@ NSString * const MOS68kRegisterCAAR  = @"CAAR";
 static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 
-@implementation MOSSimulator
+@implementation MOS68kSimulator
 
 
 + (void)load {
@@ -100,13 +100,13 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 - initWithExecutableURL:(NSURL*)url error:(NSError **)err {
   NSFileHandle *fromSim;
-  __weak MOSSimulator *weakSelf;
+  __weak MOS68kSimulator *weakSelf;
   NSError *tmpe;
   
   weakSelf = self = [super init];
   if (!self) return nil;
   
-  proxy = [[MOSSimulatorProxy alloc] initWithExecutableURL:url error:&tmpe];
+  proxy = [[MOS68kSimulatorProxy alloc] initWithExecutableURL:url error:&tmpe];
   if (err) *err = tmpe;
   
   [proxy addObserver:self forKeyPath:@"simulatorState"
@@ -116,7 +116,7 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   
   if ([proxy simulatorState] != MOSSimulatorStateDead) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-      MOSSimulator *strongSelf;
+      MOS68kSimulator *strongSelf;
       void (^sendblock)(NSString *string);
       NSData *temp;
       NSString *str;

@@ -10,7 +10,7 @@
 #import "MOSSimTableViewDelegate.h"
 
 
-@class MOSSimulator;
+@class MOS68kSimulator;
 
 
 @interface MOSSimDisasmDataSource : MOSSimTableViewDelegate <NSTableViewDataSource, NSTableViewDelegate> {

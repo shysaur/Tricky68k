@@ -7,13 +7,13 @@
 //
 
 #import "MOSTeletypeViewDelegate.h"
-#import "MOSSimulator.h"
+#import "MOS68kSimulator.h"
 
 
 @implementation MOSTeletypeViewDelegate
 
 
-- (void)setSimulatorProxy:(MOSSimulator*)sp {
+- (void)setSimulatorProxy:(MOS68kSimulator*)sp {
   MOSTeletypeView *tty;
   
   [textView setString:@""];

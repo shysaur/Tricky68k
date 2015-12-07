@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Daniele Cattaneo. 
 //
 
-#import "MOSAssembler.h"
+#import "MOS68kAssembler.h"
 #import "NSURL+TemporaryFile.h"
 #import "NSFileHandle+Strings.h"
 #import "MOSJobStatusManager.h"
@@ -27,7 +27,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
-@implementation MOSAssembler
+@implementation MOS68kAssembler
 
 
 - (instancetype)init {

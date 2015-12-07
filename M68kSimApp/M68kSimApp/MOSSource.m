@@ -11,7 +11,7 @@
 #import "MOSFragariaPreferencesObserver.h"
 #import "NSURL+TemporaryFile.h"
 #import "NSUserDefaults+Archiver.h"
-#import "MOSAssembler.h"
+#import "MOS68kAssembler.h"
 #import "MOSJobStatusManager.h"
 #import "MOSJob.h"
 #import "MOSSimulatorViewController.h"
@@ -325,7 +325,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
   
-  assembler = [[MOSAssembler alloc] init];
+  assembler = [[MOS68kAssembler alloc] init];
   
   tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
   
