@@ -68,6 +68,7 @@
 		01A2ABB61BBC86FF008BBC59 /* MOSSimBrkptWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2ABB41BBC86FF008BBC59 /* MOSSimBrkptWindowController.m */; };
 		01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */; };
 		01C20CA41A6726D600057D6B /* MOSPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */; };
+		01DA7A091C163AAC00E34AE0 /* MOSAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */; };
 		01E93C6F1A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C711A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib */; };
 		01E93C721A6D48F3004BE3C4 /* MOSPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C741A6D48F3004BE3C4 /* MOSPreferencesWindow.xib */; };
 		01E93C751A6D4906004BE3C4 /* MOSJobWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C771A6D4906004BE3C4 /* MOSJobWindow.xib */; };
@@ -213,6 +214,8 @@
 		01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimStackDumpDataSource.m; sourceTree = "<group>"; };
 		01C20CA11A6726D600057D6B /* MOSPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPreferencesWindowController.h; sourceTree = "<group>"; };
 		01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPreferencesWindowController.m; sourceTree = "<group>"; };
+		01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAssembler.h; sourceTree = "<group>"; };
+		01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSAssembler.m; sourceTree = "<group>"; };
 		01E93C701A6D48E9004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSimulatorPrefView.xib; sourceTree = "<group>"; };
 		01E93C731A6D48F3004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSPreferencesWindow.xib; sourceTree = "<group>"; };
 		01E93C761A6D4906004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSJobWindow.xib; sourceTree = "<group>"; };
@@ -521,6 +524,8 @@
 		01DA7A031C16379700E34AE0 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */,
+				01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */,
 				018F656C1A604989005BA00E /* Assembler Client */,
 				016CD1651A51AF7A00D64892 /* Simulator Client */,
 			);
@@ -652,6 +657,7 @@
 				014A3C6A1A5D3B1900F73FC5 /* MOSNamedPipe.m in Sources */,
 				016F94F11A8559D200770684 /* MOSPrintingTextView.m in Sources */,
 				014A3C701A5D439500F73FC5 /* MOSTeletypeViewDelegate.m in Sources */,
+				01DA7A091C163AAC00E34AE0 /* MOSAssembler.m in Sources */,
 				015708AD1A618E8B005D08DB /* NSURL+TemporaryFile.m in Sources */,
 				01843FF91AC9A0AE00FF3BC7 /* MOSColoredView.m in Sources */,
 				0124CF161B2F5EF800DD0A5C /* MOSError.m in Sources */,

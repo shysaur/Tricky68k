@@ -8,54 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "MOSMonitoredTask.h"
+#import "MOSAssembler.h"
 
 
-typedef enum {
-  MOSAssemblageResultSuccess,
-  MOSAssemblageResultFailure,
-  MOSAssemblageResultSuccessWithWarning,
-} MOSAssemblageResult;
-
-typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
-  MOSAssemblageOptionOptimizationOff = 0,
-  MOSAssemblageOptionOptimizationOn = 1 << 0,
-  MOSAssemblageOptionEntryPointFixed = 0,
-  MOSAssemblageOptionEntryPointSymbolic = 1 << 1,
-};
-
-
-@class MOSJob;
-
-
-@interface MOS68kAssembler : NSObject <MOSMonitoredTaskDelegate> {
-  MOSJob *jobStatus;
-  BOOL isJob;
+@interface MOS68kAssembler : MOSAssembler <MOSMonitoredTaskDelegate> {
   NSMutableArray *sections;
-  NSURL *sourceFile;
-  NSURL *outputFile;
-  NSURL *listingFile;
   MOSAssemblageResult asmResult;
-  MOSAssemblageOptions options;
   BOOL gotWarnings;
   BOOL running;
   BOOL linking;
   BOOL completed;
 }
-
-- (void)setJobStatus:(MOSJob *)js;
-
-- (void)setSourceFile:(NSURL*)sf;
-- (NSURL*)sourceFile;
-- (void)setOutputFile:(NSURL*)of;
-- (NSURL*)outputFile;
-- (void)setOutputListingFile:(NSURL*)lf;
-- (NSURL*)outputListingFile;
-- (void)setAssemblageOptions:(MOSAssemblageOptions)opts;
-- (MOSAssemblageOptions)assemblageOptions;
-
-- (void)assemble;
-- (BOOL)isAssembling;
-- (BOOL)isComplete;
-- (MOSAssemblageResult)assemblageResult;
 
 @end

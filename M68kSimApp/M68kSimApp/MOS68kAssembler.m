@@ -9,22 +9,8 @@
 #import "MOS68kAssembler.h"
 #import "NSURL+TemporaryFile.h"
 #import "NSFileHandle+Strings.h"
-#import "MOSJobStatusManager.h"
 #import "MOSJob.h"
 #import "NSScanner+Shorteners.h"
-
-
-NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
-  switch (ar) {
-    case MOSAssemblageResultSuccessWithWarning:
-      return MOSJobStatusSuccessWithWarning;
-    case MOSAssemblageResultSuccess:
-      return MOSJobStatusSuccess;
-    default: /* MOSAssemblageResultFailure */
-      return MOSJobStatusFailure;
-  }
-  return nil;
-}
 
 
 @implementation MOS68kAssembler
@@ -32,77 +18,9 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 
 - (instancetype)init {
   self = [super init];
-
   running = NO;
   completed = NO;
-  isJob = NO;
-  options = 0;
-  
   return self;
-}
-
-
-- (void)setJobStatus:(MOSJob *)js {
-  jobStatus = js;
-  isJob = YES;
-}
-
-
-- (void)setSourceFile:(NSURL*)sf {
-  if (running | completed)
-    [NSException raise:NSInvalidArgumentException
-      format: @"Can't change parameters after assembling."];
-  if (![sf isFileURL])
-    [NSException raise:NSInvalidArgumentException
-      format:@"Assembler source file must be a local URL"];
-  sourceFile = sf;
-}
-
-
-- (NSURL*)sourceFile {
-  return sourceFile;
-}
-
-
-- (void)setOutputFile:(NSURL*)of {
-  if (running | completed)
-    [NSException raise:NSInvalidArgumentException
-      format: @"Can't change parameters after assembling."];
-  if (![of isFileURL])
-    [NSException raise:NSInvalidArgumentException
-      format:@"Assembler source file must be a local URL"];
-  outputFile = of;
-}
-
-
-- (NSURL*)outputFile {
-  return outputFile;
-}
-
-
-- (void)setOutputListingFile:(NSURL*)lf {
-  if (running | completed)
-    [NSException raise:NSInvalidArgumentException
-      format: @"Can't change parameters after assembling."];
-  if (![lf isFileURL])
-    [NSException raise:NSInvalidArgumentException
-      format:@"Assembler source file must be a local URL"];
-  listingFile = lf;
-}
-
-
-- (NSURL*)outputListingFile {
-  return listingFile;
-}
-
-
-- (void)setAssemblageOptions:(MOSAssemblageOptions)opts {
-  options = opts;
-}
-
-
-- (MOSAssemblageOptions)assemblageOptions {
-  return options;
 }
 
 
@@ -110,7 +28,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   if (running || completed)
     [NSException raise:NSInvalidArgumentException
       format:@"Already assembled once."];
-  if (!sourceFile || !outputFile)
+  if (![self sourceFile] || ![self outputFile])
     [NSException raise:NSInvalidArgumentException
       format:@"Source file and output file not specified"];
   
@@ -135,11 +53,11 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
     
     params = [@[@"-Felf", @"-spaces"] mutableCopy];
-    if (!(options & MOSAssemblageOptionOptimizationOn))
+    if (!([self assemblageOptions] & MOSAssemblageOptionOptimizationOn))
       [params addObject:@"-no-opt"];
-    [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [sourceFile path]]];
-    if (listingFile)
-      [params addObjectsFromArray:@[@"-L", [listingFile path]]];
+    [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [[self sourceFile] path]]];
+    if ([self outputListingFile])
+      [params addObjectsFromArray:@[@"-L", [[self outputListingFile] path]]];
     
     [task setArguments:params];
     [task setDelegate:self];
@@ -153,7 +71,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     [task setLaunchURL:execurl];
     linkerfile = [NSURL URLWithTemporaryFilePathWithExtension:@"ld"];
     if (![self makeLinkerFile:linkerfile]) {
-      [jobStatus addEvent:@{
+      [[self jobStatus] addEvent:@{
         MOSJobEventType: MOSJobEventTypeError,
         MOSJobEventText: NSLocalizedString(@"Could not create a linker file.",
           @"Text of the event which occurs when creating a linker file failed.")
@@ -162,11 +80,11 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     }
     
     params = [NSMutableArray array];
-    if (!(options & MOSAssemblageOptionEntryPointSymbolic))
+    if (!([self assemblageOptions] & MOSAssemblageOptionEntryPointSymbolic))
       [params addObject:@"--entry=0x2000"];
     else
       [params addObject:@"--entry=start"];
-    [params addObjectsFromArray:@[@"-o", [outputFile path], @"-T", [linkerfile path]]];
+    [params addObjectsFromArray:@[@"-o", [[self outputFile] path], @"-T", [linkerfile path]]];
     [params addObjectsFromArray:@[[unlinkedelf path]]];
     
     [task setArguments:params];
@@ -193,9 +111,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
       running = NO;
       [self didChangeValueForKey:@"assembling"];
       
-      if (isJob) {
-        [jobStatus setStatus:MOSAsmResultToJobStat(asmResult)];
-      }
+      [[self jobStatus] setStatus:MOSAsmResultToJobStat(asmResult)];
     });
   });
 }
@@ -254,14 +170,14 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 - (void)receivedTaskOutput:(NSString *)line {
   NSDictionary *event;
 
-  if (!isJob)
+  if (![self jobStatus])
     NSLog(@"taskoutput: %@", line);
   else {
     if (!linking)
       event = [self parseVasmOutput:line];
     else
       event = [self parseLinkerOutput:line];
-    if (event) [jobStatus addEvent:event];
+    if (event) [[self jobStatus] addEvent:event];
   }
 }
 

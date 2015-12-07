@@ -13,7 +13,7 @@
 
 @class MGSFragariaView;
 @class SMLTextView;
-@class MOS68kAssembler;
+@class MOSAssembler;
 @class MOSSimulatorViewController;
 @class MOSFragariaPreferencesObserver;
 @class MOSJob;
@@ -34,7 +34,7 @@
   IBOutlet MOSSimulatorViewController *simVc;
   NSView *simView;
   
-  MOS68kAssembler *assembler;
+  MOSAssembler *assembler;
   BOOL runWhenAssemblyComplete;
   MOSJob *lastJob;
   BOOL hadJob;
