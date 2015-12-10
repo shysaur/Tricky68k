@@ -8,7 +8,6 @@
 
 #import "MOSSimulatorViewController.h"
 #import "MOSSimulator.h"
-#import "MOS68kSimulator.h"
 #import "MOSSimulatorPresentation.h"
 #import "MOSSimDumpDataSource.h"
 #import "MOSSimDisasmDataSource.h"
@@ -80,13 +79,13 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr {
+- (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st error:(NSError**)outerr {
   NSError *tmpe;
   
   simExec = url;
   
   [simProxy removeAllBreakpoints];
-  tmpe = [self reloadSimulatedExecutable];
+  tmpe = [self reloadSimulatedExecutableWithSimulatorType:st];
   
   if (tmpe) {
     if (outerr) *outerr = tmpe;
@@ -104,6 +103,11 @@ static void *SimulatorState = &SimulatorState;
 
 
 - (NSError *)reloadSimulatedExecutable {
+  return [self reloadSimulatedExecutableWithSimulatorType:[simProxy class]];
+}
+
+
+- (NSError *)reloadSimulatedExecutableWithSimulatorType:(Class)st {
   MOSSimulator *oldSimProxy;
   MOSSimulator *newSimProxy;
   NSSet *breakpoints;
@@ -111,7 +115,7 @@ static void *SimulatorState = &SimulatorState;
   
   breakpoints = [simProxy breakpointList];
   oldSimProxy = simProxy;
-  newSimProxy = [[MOS68kSimulator alloc] initWithExecutableURL:simExec error:&res];
+  newSimProxy = [[st alloc] initWithExecutableURL:simExec error:&res];
   [newSimProxy addBreakpoints:breakpoints];
   [self setSimulatorProxy:newSimProxy];
   [oldSimProxy kill];

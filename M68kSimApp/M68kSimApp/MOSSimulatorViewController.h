@@ -50,7 +50,8 @@ enum {
   MOSSimBrkptWindowController *brkptWc;
 }
 
-- (BOOL)setSimulatedExecutable:(NSURL*)url error:(NSError**)outerr;
+- (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st
+    error:(NSError**)outerr;
 - (NSURL*)simulatedExecutable;
 - (void)setSimulatorProxy:(MOSSimulator*)sp;
 - (MOSSimulator*)simulatorProxy;

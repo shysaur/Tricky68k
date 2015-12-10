@@ -12,6 +12,7 @@
 #import "NSURL+TemporaryFile.h"
 #import "NSUserDefaults+Archiver.h"
 #import "MOS68kAssembler.h"
+#import "MOS68kSimulator.h"
 #import "MOSJobStatusManager.h"
 #import "MOSJob.h"
 #import "MOSSimulatorViewController.h"
@@ -210,7 +211,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
   oldSimExec = [simVc simulatedExecutable];
   if (![oldSimExec isEqual:assemblyOutput]) {
-    if (![simVc setSimulatedExecutable:assemblyOutput error:&err]) {
+    if (![simVc setSimulatedExecutable:assemblyOutput simulatorType:[MOS68kSimulator class] error:&err]) {
       /* Keep simulator in limbo, and force re-assembly of new file for next time */
       [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
       assemblyOutput = nil;
