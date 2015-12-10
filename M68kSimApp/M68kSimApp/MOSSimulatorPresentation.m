@@ -23,4 +23,17 @@
   return [super init];
 }
 
+
+- (NSNumber *)programCounter
+  SUBCLASS_MUST_IMPLEMENT(nil);
+- (NSNumber *)stackPointer
+  SUBCLASS_MUST_IMPLEMENT(nil);
+- (NSNumber *)statusRegister
+  SUBCLASS_MUST_IMPLEMENT(nil);
+- (NSString *)statusRegisterInterpretation
+  SUBCLASS_MUST_IMPLEMENT(nil);
+- (NSArray *)registerFileInterpretation
+  SUBCLASS_MUST_IMPLEMENT(nil);
+
+
 @end

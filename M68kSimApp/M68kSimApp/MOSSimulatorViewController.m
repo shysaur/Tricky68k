@@ -9,6 +9,7 @@
 #import "MOSSimulatorViewController.h"
 #import "MOSSimulator.h"
 #import "MOS68kSimulator.h"
+#import "MOSSimulatorPresentation.h"
 #import "MOSSimDumpDataSource.h"
 #import "MOSSimDisasmDataSource.h"
 #import "MOSSimRegistersDataSource.h"
@@ -406,21 +407,9 @@ static void *SimulatorState = &SimulatorState;
 
 
 - (NSString *)flagsStatus {
-  NSDictionary *regdump;
-  uint32_t flags;
-  int x, n, z, v, c;
-  
   if (!simProxy || [simProxy simulatorState] != MOSSimulatorStatePaused)
     return @"";
-  
-  regdump = [simProxy registerDump];
-  flags = [[regdump objectForKey:MOS68kRegisterSR] unsignedIntValue];
-  x = (flags & 0b10000) >> 4;
-  n = (flags & 0b1000) >> 3;
-  z = (flags & 0b100) >> 2;
-  v = (flags & 0b10) >> 1;
-  c = (flags & 0b1);
-  return [NSString stringWithFormat:@"X:%d N:%d Z:%d V:%d C:%d", x, n, z, v, c];
+  return [[simProxy presentation] statusRegisterInterpretation];
 }
 
 

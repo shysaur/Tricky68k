@@ -8,7 +8,7 @@
 
 #import "MOSSimDumpDataSource.h"
 #import "MOSSimulator.h"
-#import "MOS68kSimulator.h"
+#import "MOSSimulatorPresentation.h"
 
 
 @implementation MOSSimDumpDataSource
@@ -18,9 +18,11 @@
   NSUInteger pc;
   NSInteger rows;
   NSRect visibleRect;
+  MOSSimulatorPresentation *pres;
   
   [super setSimulatorProxy:sp];
-  pc = [[[sp registerDump] objectForKey:MOS68kRegisterPC] unsignedIntegerValue];
+  pres = [sp presentation];
+  pc = [[pres programCounter] unsignedIntegerValue];
   
   visibleRect = [tableView visibleRect];
   rows = [tableView rowsInRect:visibleRect].length;

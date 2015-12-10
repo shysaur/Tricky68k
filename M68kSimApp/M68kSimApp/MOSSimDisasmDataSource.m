@@ -7,8 +7,8 @@
 //
 
 #import "MOSSimDisasmDataSource.h"
+#import "MOSSimulatorPresentation.h"
 #import "MOSSimulator.h"
-#import "MOS68kSimulator.h"
 
 
 @implementation MOSSimDisasmDataSource
@@ -77,11 +77,11 @@
 
 
 - (void)refreshSimulatorData {
-  NSDictionary *regs;
+  MOSSimulatorPresentation *pres;
   
   breakpoints = [simProxy breakpointList];
-  regs = [simProxy registerDump];
-  centerAddr = [[regs objectForKey:MOS68kRegisterPC] unsignedIntValue];
+  pres = [simProxy presentation];
+  centerAddr = [[pres programCounter] unsignedIntValue];
   lineCache = [[self disassemble:1 instructionsFromLocation:centerAddr] mutableCopy];
   cacheStart = (maxLines - 1) / 2;
   addrCacheStart = addrCacheEnd = centerAddr;

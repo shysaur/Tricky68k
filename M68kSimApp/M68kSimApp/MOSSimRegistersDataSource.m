@@ -8,77 +8,49 @@
 
 #import "MOSSimRegistersDataSource.h"
 #import "MOSSimulator.h"
-#import "MOS68kSimulator.h"
-
-
-const BOOL isRowHeader[] = {
-  YES, NO,
-  YES, NO,NO,NO,NO,NO,NO,NO,NO,
-  YES, NO,NO,NO,NO,NO,NO,NO,NO,NO
-};
+#import "MOSSimulatorPresentation.h"
 
 
 @implementation MOSSimRegistersDataSource
 
 
-- init {
-  NSString *sr, *dr, *ar;
-  
-  self = [super init];
-  
-  sr = NSLocalizedString(@"Status Register", @"Register table header for SR");
-  dr = NSLocalizedString(@"Data Registers", @"Register table header for Dx");
-  ar = NSLocalizedString(@"Address Registers", @"Register table header for Ax, SP, PC");
-  rows = @[
-    sr, @"SR",
-    dr, @"D0",@"D1",@"D2",@"D3",@"D4",@"D5",@"D6",@"D7",
-    ar, @"A0",@"A1",@"A2",@"A3",@"A4",@"A5",@"A6",@"SP",@"PC"
-  ];
-  return self;
-}
-
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-  return [rows count];
+  NSArray *rfi;
+  
+  rfi = [[simProxy presentation] registerFileInterpretation];
+  return [rfi count];
 }
 
 
 - (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row {
-  return isRowHeader[row];
+  NSArray *rfi;
+  
+  rfi = [[simProxy presentation] registerFileInterpretation];
+  return [[rfi objectAtIndex:row] isKindOfClass:[NSString class]];
 }
 
 
 - (NSView *)tableView:(NSTableView *)tv viewForTableColumn:(NSTableColumn *)tc row:(NSInteger)row {
-  NSDictionary *dump;
-  NSString *line;
   NSNumber *value;
+  NSArray *rfi;
+  id rowobj;
   id result;
   
-  if (isRowHeader[row]) {
+  rfi = [[simProxy presentation] registerFileInterpretation];
+  rowobj = [rfi objectAtIndex:row];
+  if ([rowobj isKindOfClass:[NSString class]]) {
     result = [tv makeViewWithIdentifier:@"headerView" owner:self];
-    [[result textField] setStringValue:[rows objectAtIndex:row]];
+    [[result textField] setStringValue:rowobj];
   } else {
     if ([[tc identifier] isEqual:@"nameColumn"]) {
       result = [tv makeViewWithIdentifier:@"nameView" owner:self];
       [[result textField] setFont:[self defaultMonospacedFont]];
-      [[result textField] setStringValue:[rows objectAtIndex:row]];
+      [[result textField] setStringValue:[rowobj objectForKey:@"label"]];
     } else {
       result = [tv makeViewWithIdentifier:@"valueView" owner:self];
-      if ([simProxy simulatorState] != MOSSimulatorStatePaused) {
-        line = @"";
-      } else {
-        dump = [simProxy registerDump];
-        if (dump) {
-          value = [dump valueForKey:[rows objectAtIndex:row]];
-          if ([[rows objectAtIndex:row] isEqual:MOS68kRegisterSR])
-            line = [NSString stringWithFormat:@"%04X", [value intValue]];
-          else
-            line = [NSString stringWithFormat:@"%08X", [value intValue]];
-        } else
-          line = @"";
-      }
+      value = [rowobj objectForKey:@"string"];
       [[result textField] setFont:[self defaultMonospacedFont]];
-      [[result textField] setStringValue:line];
+      [[result textField] setStringValue:[rowobj objectForKey:@"string"]];
     }
   }
   return result;

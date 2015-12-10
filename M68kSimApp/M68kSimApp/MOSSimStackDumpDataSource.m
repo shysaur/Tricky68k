@@ -8,7 +8,7 @@
 
 #import "MOSSimStackDumpDataSource.h"
 #import "MOSSimulator.h"
-#import "MOS68kSimulator.h"
+#import "MOSSimulatorPresentation.h"
 
 
 @implementation MOSSimStackDumpDataSource
@@ -24,14 +24,12 @@
   uint8_t *dump;
   NSData *data;
   NSString *line;
-  NSDictionary *regs;
   id result;
   
   if ([simProxy simulatorState] != MOSSimulatorStatePaused) {
     line = @"";
   } else {
-    regs = [simProxy registerDump];
-    addr = [[regs objectForKey:MOS68kRegisterSP] unsignedIntValue];
+    addr = [[[simProxy presentation] stackPointer] unsignedIntValue];
     addr += row * 4;
     data = [simProxy rawDumpFromLocation:addr withSize:4];
     if (data) {

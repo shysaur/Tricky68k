@@ -16,4 +16,10 @@
 
 - (instancetype)initWithSimulator:(MOSSimulator *)s;
 
+- (NSNumber *)programCounter;
+- (NSNumber *)stackPointer;
+- (NSNumber *)statusRegister;
+- (NSString *)statusRegisterInterpretation;
+- (NSArray *)registerFileInterpretation;
+
 @end

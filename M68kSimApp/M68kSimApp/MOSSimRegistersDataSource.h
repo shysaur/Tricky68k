@@ -10,8 +10,6 @@
 #import "MOSSimTableViewDelegate.h"
 
 
-@interface MOSSimRegistersDataSource : MOSSimTableViewDelegate <NSTableViewDataSource> {
-  NSArray *rows;
-}
+@interface MOSSimRegistersDataSource : MOSSimTableViewDelegate <NSTableViewDataSource>
 
 @end

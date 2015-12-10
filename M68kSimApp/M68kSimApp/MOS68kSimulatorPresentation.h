@@ -15,6 +15,8 @@
 
 @interface MOS68kSimulatorPresentation : MOSSimulatorPresentation {
   __weak MOS68kSimulator *sim;
+  NSArray *regFileCache;
+  NSDictionary *regsCache;
 }
 
 @end
