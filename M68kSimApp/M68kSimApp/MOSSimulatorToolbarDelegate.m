@@ -204,7 +204,8 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
         [view setFont:[NSFont userFixedPitchFontOfSize:11]];
         [view sizeToFit];
         if (flag)
-          [view bind:@"objectValue" toObject:simulatorVc withKeyPath:@"flagsStatus" options:nil];
+          [view bind:@"objectValue" toObject:simulatorVc withKeyPath:@"flagsStatus"
+             options:@{NSConditionallySetsEditableBindingOption: @(NO)}];
       } else if ([itemIdentifier isEqual:MOSToolbarItemIdentifierClock]) {
         label = NSLocalizedString(@"Clock Frequency", @"Toolbar Item");
         [view setObjectValue:[self placeholderSpeed]];
@@ -212,7 +213,8 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
         [view setAlignment:NSTextAlignmentCenter];
         [view sizeToFit];
         if (flag)
-          [view bind:@"value" toObject:simulatorVc withKeyPath:@"clockFrequency" options:nil];
+          [view bind:@"value" toObject:simulatorVc withKeyPath:@"clockFrequency"
+             options:@{NSConditionallySetsEditableBindingOption: @(NO)}];
       }
       [view setBezeled:NO];
       [view setBordered:NO];
