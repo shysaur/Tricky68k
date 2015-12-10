@@ -17,12 +17,17 @@ typedef enum {
 } MOSSimulatorState;
 
 
+@class MOSSimulatorPresentation;
+
+
 @protocol MOSSimulatorProtocol <NSObject>
 
 @required
 
 - initWithExecutableURL:(NSURL*)url error:(NSError **)err;
 - (NSURL*)executableURL;
+
+- (MOSSimulatorPresentation *)presentation;
 
 - (BOOL)run;
 - (BOOL)stop;
@@ -38,6 +43,7 @@ typedef enum {
 - (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc;
 - (NSArray*)dump:(int)cnt linesFromLocation:(uint32_t)loc;
 - (NSData*)rawDumpFromLocation:(uint32_t)loc withSize:(uint32_t)size;
+
 - (NSDictionary*)registerDump;
 
 - (float)clockFrequency;
@@ -57,6 +63,8 @@ typedef enum {
 @end
 
 
-@interface MOSSimulator : NSObject <MOSSimulatorProtocol>
+@interface MOSSimulator : NSObject <MOSSimulatorProtocol> {
+  NSURL *exec;
+}
 
 @end

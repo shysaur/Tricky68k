@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOS68kSimulatorPresentation.h"
 #import "MOS68kSimulatorProxy.h"
 #import "MOS68kSimulator.h"
 #import "NSFileHandle+Strings.h"
@@ -142,6 +143,14 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 
 - (NSURL*)executableURL {
   return [proxy executableURL];
+}
+
+
+- (MOSSimulatorPresentation *)presentation {
+  if (!pres) {
+    pres = [[MOS68kSimulatorPresentation alloc] initWithSimulator:self];
+  }
+  return pres;
 }
 
 

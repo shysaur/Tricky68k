@@ -61,6 +61,8 @@
 		01864B901A51BED9005B2B0D /* MOS68kSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 01864B8F1A51BED9005B2B0D /* MOS68kSimulator.m */; };
 		01864B951A51CD23005B2B0D /* m68ksim in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 01864B921A51CCF6005B2B0D /* m68ksim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		018D72881C196063005DF500 /* MOSSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 018D72871C196063005DF500 /* MOSSimulator.m */; };
+		018D728B1C196958005DF500 /* MOSSimulatorPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 018D728A1C196958005DF500 /* MOSSimulatorPresentation.m */; };
+		018D728E1C196AEA005DF500 /* MOS68kSimulatorPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 018D728D1C196AEA005DF500 /* MOS68kSimulatorPresentation.m */; };
 		018F656F1A604B5C005BA00E /* MOS68kAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 018F656E1A604B5C005BA00E /* MOS68kAssembler.m */; };
 		018F65721A6053F4005BA00E /* MOSMonitoredTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 018F65711A6053F4005BA00E /* MOSMonitoredTask.m */; };
 		0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */; };
@@ -201,6 +203,10 @@
 		01864B921A51CCF6005B2B0D /* m68ksim */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = m68ksim; sourceTree = BUILT_PRODUCTS_DIR; };
 		018D72861C196063005DF500 /* MOSSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulator.h; sourceTree = "<group>"; };
 		018D72871C196063005DF500 /* MOSSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulator.m; sourceTree = "<group>"; };
+		018D72891C196958005DF500 /* MOSSimulatorPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorPresentation.h; sourceTree = "<group>"; };
+		018D728A1C196958005DF500 /* MOSSimulatorPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorPresentation.m; sourceTree = "<group>"; };
+		018D728C1C196AEA005DF500 /* MOS68kSimulatorPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kSimulatorPresentation.h; sourceTree = "<group>"; };
+		018D728D1C196AEA005DF500 /* MOS68kSimulatorPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kSimulatorPresentation.m; sourceTree = "<group>"; };
 		018F656D1A604B5C005BA00E /* MOS68kAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kAssembler.h; sourceTree = "<group>"; };
 		018F656E1A604B5C005BA00E /* MOS68kAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kAssembler.m; sourceTree = "<group>"; };
 		018F65701A6053F4005BA00E /* MOSMonitoredTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSMonitoredTask.h; sourceTree = "<group>"; };
@@ -416,6 +422,8 @@
 				013EB31D1B2B87490008180F /* MOS68kSimulatorProxy.m */,
 				01864B8E1A51BED9005B2B0D /* MOS68kSimulator.h */,
 				01864B8F1A51BED9005B2B0D /* MOS68kSimulator.m */,
+				018D728C1C196AEA005DF500 /* MOS68kSimulatorPresentation.h */,
+				018D728D1C196AEA005DF500 /* MOS68kSimulatorPresentation.m */,
 			);
 			name = "Simulator Client";
 			sourceTree = "<group>";
@@ -532,6 +540,8 @@
 				018F656C1A604989005BA00E /* Assembler Client */,
 				018D72861C196063005DF500 /* MOSSimulator.h */,
 				018D72871C196063005DF500 /* MOSSimulator.m */,
+				018D72891C196958005DF500 /* MOSSimulatorPresentation.h */,
+				018D728A1C196958005DF500 /* MOSSimulatorPresentation.m */,
 				016CD1651A51AF7A00D64892 /* Simulator Client */,
 			);
 			name = Platform;
@@ -672,6 +682,7 @@
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
 				014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */,
 				013EB31E1B2B87490008180F /* MOS68kSimulatorProxy.m in Sources */,
+				018D728B1C196958005DF500 /* MOSSimulatorPresentation.m in Sources */,
 				01EBAA261AB9D9140076AD02 /* MOSDocumentController.m in Sources */,
 				018D72881C196063005DF500 /* MOSSimulator.m in Sources */,
 				01F236F01AE5470E0039EB73 /* MOSFragariaPreferencesObserver.m in Sources */,
@@ -702,6 +713,7 @@
 				01509B141A52191300724F29 /* NSFileHandle+Strings.m in Sources */,
 				013D84C71BC06DF7003E4817 /* MOSAddressFormatter.m in Sources */,
 				014D85DC1A62D01900648B41 /* MOSJobStatusManager.m in Sources */,
+				018D728E1C196AEA005DF500 /* MOS68kSimulatorPresentation.m in Sources */,
 				01EBAA231AB973DF0076AD02 /* MOSDocument.m in Sources */,
 				014A08381BE6B25E00A8FA0F /* MOSViewValidatingToolbarItem.m in Sources */,
 				01A0AA3F1BB04027002CAD97 /* MOSJob.m in Sources */,

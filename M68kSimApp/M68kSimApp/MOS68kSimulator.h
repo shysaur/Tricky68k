@@ -50,6 +50,7 @@ extern NSString * const MOS68kRegisterCAAR;
   NSDictionary *symbolsCache;
   BOOL isSimDead;
   BOOL disableNotifications;
+  MOSSimulatorPresentation *pres;
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "MOSSimulator.h"
+#import "MOSSimulatorPresentation.h"
 
 
 #define SUBCLASS_MUST_IMPLEMENT(x) { \
@@ -18,9 +19,18 @@
 @implementation MOSSimulator
 
 
-- initWithExecutableURL:(NSURL*)url error:(NSError **)err
-  SUBCLASS_MUST_IMPLEMENT(nil);
-- (NSURL*)executableURL
+- initWithExecutableURL:(NSURL*)url error:(NSError **)err {
+  self = [super init];
+  exec = url;
+  return self;
+}
+
+
+- (NSURL*)executableURL {
+  return exec;
+}
+
+- (MOSSimulatorPresentation *)presentation
   SUBCLASS_MUST_IMPLEMENT(nil);
 
 - (BOOL)run SUBCLASS_MUST_IMPLEMENT(NO);
