@@ -7,13 +7,14 @@
 //
 
 #import "MOSSimDumpDataSource.h"
+#import "MOSSimulator.h"
 #import "MOS68kSimulator.h"
 
 
 @implementation MOSSimDumpDataSource
 
 
-- (void)setSimulatorProxy:(MOS68kSimulator*)sp {
+- (void)setSimulatorProxy:(MOSSimulator*)sp {
   NSUInteger pc;
   NSInteger rows;
   NSRect visibleRect;

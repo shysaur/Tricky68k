@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MOS68kSimulatorProxy.h"
+#import "MOSSimulator.h"
 
 
 extern NSString * const MOS68kRegisterD0;
@@ -38,7 +38,10 @@ extern NSString * const MOS68kRegisterCACR;
 extern NSString * const MOS68kRegisterCAAR;
 
 
-@interface MOS68kSimulator : NSObject {
+@class MOS68kSimulatorProxy;
+
+
+@interface MOS68kSimulator : MOSSimulator {
   NSError *lastError;
   MOSSimulatorState stateMirror;
   MOS68kSimulatorProxy *proxy;
@@ -48,40 +51,6 @@ extern NSString * const MOS68kRegisterCAAR;
   BOOL isSimDead;
   BOOL disableNotifications;
 }
-
-
-- initWithExecutableURL:(NSURL*)url error:(NSError **)err;
-- (NSURL*)executableURL;
-
-- (BOOL)run;
-- (BOOL)stop;
-- (BOOL)stepIn;
-- (BOOL)stepOver;
-- (void)kill;
-
-- (NSError *)lastSimulatorException;
-- (MOSSimulatorState)simulatorState;
-- (BOOL)isSimulatorRunning;
-- (BOOL)isSimulatorDead;
-
-- (NSArray*)disassemble:(int)cnt instructionsFromLocation:(uint32_t)loc;
-- (NSArray*)dump:(int)cnt linesFromLocation:(uint32_t)loc;
-- (NSData*)rawDumpFromLocation:(uint32_t)loc withSize:(uint32_t)size;
-- (NSDictionary*)registerDump;
-
-- (float)clockFrequency;
-- (void)setMaximumClockFrequency:(double)mhz;
-
-- (NSSet*)breakpointList;
-- (void)addBreakpoints:(NSSet*)addrs;
-- (void)removeAllBreakpoints;
-- (void)addBreakpointAtAddress:(uint32_t)addr;
-- (void)removeBreakpointAtAddress:(uint32_t)addr;
-
-- (NSDictionary *)symbolTable;
-
-- (void)setSendToTeletypeBlock:(void (^)(NSString *string))block;
-- (void)sendToSimulator:(NSString*)string;
 
 
 @end

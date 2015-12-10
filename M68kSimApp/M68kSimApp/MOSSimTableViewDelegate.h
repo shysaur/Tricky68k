@@ -10,17 +10,17 @@
 #import "MOSSimulatorSubviewDelegate.h"
 
 
-@class MOS68kSimulator;
+@class MOSSimulator;
 
 
 @interface MOSSimTableViewDelegate : MOSSimulatorSubviewDelegate {
   IBOutlet NSTableView *tableView;
-  MOS68kSimulator *simProxy;
+  MOSSimulator *simProxy;
   dispatch_source_t voidTimer;
 }
 
-- (void)setSimulatorProxy:(MOS68kSimulator*)sp;
-- (MOS68kSimulator*)simulatorProxy;
+- (void)setSimulatorProxy:(MOSSimulator*)sp;
+- (MOSSimulator*)simulatorProxy;
 
 - (void)dataHasChanged;
 - (void)simulatorStateHasChanged;

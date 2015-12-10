@@ -11,15 +11,15 @@
 #import "MOSSimulatorSubviewDelegate.h"
 
 
-@class MOS68kSimulator;
+@class MOSSimulator;
 
 
 @interface MOSTeletypeViewDelegate : MOSSimulatorSubviewDelegate <MOSTeletypeViewDelegate> {
-  MOS68kSimulator *simProxy;
+  MOSSimulator *simProxy;
   IBOutlet MOSTeletypeView *textView;
 }
 
-- (void)setSimulatorProxy:(MOS68kSimulator*)sp;
+- (void)setSimulatorProxy:(MOSSimulator*)sp;
 
 - (void)typedString:(NSString*)str;
 

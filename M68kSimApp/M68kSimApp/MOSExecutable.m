@@ -8,6 +8,7 @@
 
 #import "MOSExecutable.h"
 #import "MOSSimulatorViewController.h"
+#import "MOSSimulator.h"
 #import "MOS68kSimulator.h"
 
 

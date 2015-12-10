@@ -7,6 +7,7 @@
 //
 
 #import "MOSSimulatorViewController.h"
+#import "MOSSimulator.h"
 #import "MOS68kSimulator.h"
 #import "MOSSimDumpDataSource.h"
 #import "MOSSimDisasmDataSource.h"
@@ -102,8 +103,8 @@ static void *SimulatorState = &SimulatorState;
 
 
 - (NSError *)reloadSimulatedExecutable {
-  MOS68kSimulator *oldSimProxy;
-  MOS68kSimulator *newSimProxy;
+  MOSSimulator *oldSimProxy;
+  MOSSimulator *newSimProxy;
   NSSet *breakpoints;
   NSError *res;
   
@@ -119,7 +120,7 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (void)setSimulatorProxy:(MOS68kSimulator*)sp {
+- (void)setSimulatorProxy:(MOSSimulator*)sp {
   @try {
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
   } @finally {}
@@ -153,7 +154,7 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (MOS68kSimulator*)simulatorProxy {
+- (MOSSimulator*)simulatorProxy {
   return simProxy;
 }
 

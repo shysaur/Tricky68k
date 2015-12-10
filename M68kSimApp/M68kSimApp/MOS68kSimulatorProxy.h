@@ -7,14 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MOSSimulator.h"
 
-
-typedef enum {
-  MOSSimulatorStateRunning,
-  MOSSimulatorStatePaused,
-  MOSSimulatorStateUnknown,
-  MOSSimulatorStateDead
-} MOSSimulatorState;
 
 enum {
   MOSSimulatorErrorUnknown = -1,

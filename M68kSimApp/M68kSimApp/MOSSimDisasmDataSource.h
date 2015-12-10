@@ -10,9 +10,6 @@
 #import "MOSSimTableViewDelegate.h"
 
 
-@class MOS68kSimulator;
-
-
 @interface MOSSimDisasmDataSource : MOSSimTableViewDelegate <NSTableViewDataSource, NSTableViewDelegate> {
   NSInteger maxLines, cacheStart;
   uint32_t addrCacheStart, addrCacheEnd, centerAddr;

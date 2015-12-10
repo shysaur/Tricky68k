@@ -9,9 +9,6 @@
 #import <Cocoa/Cocoa.h>
 
 
-@class MOS68kSimulator;
-
-
 @interface MOSSimBrkptWindowController : NSWindowController {
   NSWindow *modalWindow;
   NSArray *breakpts;

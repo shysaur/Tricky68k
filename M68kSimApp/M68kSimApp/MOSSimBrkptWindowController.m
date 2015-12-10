@@ -7,7 +7,6 @@
 //
 
 #import "MOSSimBrkptWindowController.h"
-#import "MOS68kSimulator.h"
 #import "MOSMutableBreakpoint.h"
 
 
