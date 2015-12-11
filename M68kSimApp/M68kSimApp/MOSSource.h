@@ -17,6 +17,7 @@
 @class MOSSimulatorViewController;
 @class MOSFragariaPreferencesObserver;
 @class MOSJob;
+@class MOSPlatform;
 
 
 @interface MOSSource : MOSDocument {
@@ -31,6 +32,7 @@
   IBOutlet MGSFragariaView *fragaria;
   MOSFragariaPreferencesObserver *prefobs;
   
+  MOSPlatform *platform;
   IBOutlet MOSSimulatorViewController *simVc;
   NSView *simView;
   
@@ -50,6 +52,8 @@
 
 - (BOOL)simulatorModeSwitchAllowed;
 - (BOOL)sourceModeSwitchAllowed;
+
+- (MOSPlatform *)currentPlatform;
 
 @end
 

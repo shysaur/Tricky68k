@@ -13,12 +13,14 @@
 #import "NSUserDefaults+Archiver.h"
 #import "MOS68kAssembler.h"
 #import "MOS68kSimulator.h"
+#import "MOS68kSimulatorPresentation.h"
 #import "MOSJobStatusManager.h"
 #import "MOSJob.h"
 #import "MOSSimulatorViewController.h"
 #import "MOSAppDelegate.h"
 #import "MOSPrintingTextView.h"
 #import "MOSFragariaPreferencesObserver.h"
+#import "MOSPlatform.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -53,6 +55,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 @implementation MOSSource
 
 
+#pragma mark - Class Properties
+
+
 + (void)load {
   NSUserDefaults *ud;
   
@@ -71,6 +76,19 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 + (BOOL)preservesVersions {
   return YES;
+}
+
+
+#pragma mark - Initialization
+
+
+- (instancetype)init {
+  self = [super init];
+  platform = [MOSPlatform platformWithAssemblerClass:[MOS68kAssembler class]
+    simulatorClass:[MOS68kSimulator class]
+    presentationClass:[MOS68kSimulatorPresentation class]
+    localizedName:@"Motorola 68000"];
+  return self;
 }
 
 
@@ -117,6 +135,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
+#pragma mark - Document Management
+
+
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {
   NSRange allRange;
   NSDictionary *opts;
@@ -156,6 +177,14 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     return [self simulatorModeSwitchAllowed];
   return [super validateUserInterfaceItem:anItem];
 }
+
+
+- (MOSPlatform *)currentPlatform {
+  return platform;
+}
+
+
+#pragma mark - View Switch
 
 
 - (BOOL)simulatorModeSwitchAllowed {
@@ -203,6 +232,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSArray *constr;
   NSURL *oldSimExec;
   NSResponder *oldresp;
+  Class simType;
   
   if (![self simulatorModeSwitchAllowed]) return;
   
@@ -211,7 +241,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
   oldSimExec = [simVc simulatedExecutable];
   if (![oldSimExec isEqual:assemblyOutput]) {
-    if (![simVc setSimulatedExecutable:assemblyOutput simulatorType:[MOS68kSimulator class] error:&err]) {
+    simType = [platform simulatorClass];
+    if (![simVc setSimulatedExecutable:assemblyOutput simulatorType:simType error:&err]) {
       /* Keep simulator in limbo, and force re-assembly of new file for next time */
       [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
       assemblyOutput = nil;
@@ -282,6 +313,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
+#pragma mark - Assemblage
+
+
 - (IBAction)assembleAndRun:(id)sender {
   runWhenAssemblyComplete = YES;
   [self assembleInBackground];
@@ -326,7 +360,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
   
-  assembler = [[MOS68kAssembler alloc] init];
+  assembler = [[[platform assemblerClass] alloc] init];
   
   tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
   
@@ -420,6 +454,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
+#pragma mark - Print
+
+
 - (NSPrintInfo*)printInfo {
   NSPrintInfo *pi;
   
@@ -466,6 +503,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   return po;
 }
+
+
+#pragma mark - Finalization
 
 
 - (void)close {
