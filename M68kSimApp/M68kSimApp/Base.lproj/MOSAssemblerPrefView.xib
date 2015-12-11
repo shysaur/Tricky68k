@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSAssemblerPrefViewController">
@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="rWz-QZ-vlB">
-                    <rect key="frame" x="89" y="118" width="150" height="18"/>
+                    <rect key="frame" x="89" y="118" width="148" height="18"/>
                     <buttonCell key="cell" type="check" title="Use fixed entry point" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Hmd-pY-TtP">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -27,7 +27,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="FQH-av-kcw">
-                    <rect key="frame" x="89" y="54" width="151" height="18"/>
+                    <rect key="frame" x="89" y="54" width="148" height="18"/>
                     <buttonCell key="cell" type="check" title="Enable optimizations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="i8g-Dp-rYg">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
