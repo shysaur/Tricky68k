@@ -10,6 +10,9 @@
 #import "MOSSimulatorViewController.h"
 #import "MOSViewValidatingToolbarItem.h"
 #import "MOSSource.h"
+#import "MOSPlatform.h"
+#import "MOSSimulator.h"
+#import "MOSSimulatorPresentation.h"
 
 
 NSString * const MOSToolbarItemIdentifierPlay = @"MOSToolbarItemIdentifierPlay";
@@ -101,6 +104,17 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
   format = NSLocalizedString(@"%@ MHz", @"Clock frequency badge format (MHz)");
   cache = [NSString stringWithFormat:format, [nf stringFromNumber:@100.0]];
   return cache;
+}
+
+
+- (NSString *)placeholderFlags {
+  Class pres;
+  
+  if (sourceDocument)
+    pres = [[sourceDocument currentPlatform] presentationClass];
+  else
+    pres = [[[simulatorVc simulatorProxy] presentation] class];
+  return [pres statusRegisterInterpretationPlaceholder];
 }
 
 
@@ -200,7 +214,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
       view = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 100, 32)];
       if ([itemIdentifier isEqual:MOSToolbarItemIdentifierFlags]) {
         label = NSLocalizedString(@"Flags", @"Toolbar Item");
-        [view setObjectValue:@"X:0 N:0 Z:0 V:0 C:0"];
+        [view setObjectValue:[self placeholderFlags]];
         [view setFont:[NSFont userFixedPitchFontOfSize:11]];
         [view sizeToFit];
         if (flag)

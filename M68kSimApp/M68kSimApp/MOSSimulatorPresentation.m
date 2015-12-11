@@ -24,6 +24,10 @@
 }
 
 
++ (NSString *)statusRegisterInterpretationPlaceholder
+  SUBCLASS_MUST_IMPLEMENT(nil);
+
+
 - (NSNumber *)programCounter
   SUBCLASS_MUST_IMPLEMENT(nil);
 - (NSNumber *)stackPointer

@@ -90,6 +90,11 @@ static void MOSAddRegisterFileInterpSection(NSMutableArray *work, BOOL small,
 }
 
 
++ (NSString *)statusRegisterInterpretationPlaceholder {
+  return @"X:0 N:0 Z:0 V:0 C:0";
+}
+
+
 - (NSArray *)registerFileInterpretation {
   NSString *sr, *dr, *ar;
   NSMutableArray *work;
