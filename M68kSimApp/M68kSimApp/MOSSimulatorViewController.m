@@ -380,6 +380,7 @@ static void *SimulatorState = &SimulatorState;
 - (void)setSimulatorRunning:(BOOL)val {
   simRunning = val;
   [self broadcastSimulatorStateChangeToSubviewControllers];
+  [[[[self view] window] toolbar] validateVisibleItems];
 }
 
 
