@@ -53,21 +53,26 @@
 - (NSDictionary*)registerDump
   SUBCLASS_MUST_IMPLEMENT(nil);
 
-- (float)clockFrequency SUBCLASS_MUST_IMPLEMENT(0);
-- (void)setMaximumClockFrequency:(double)mhz SUBCLASS_MUST_IMPLEMENT();
-
 - (NSSet*)breakpointList SUBCLASS_MUST_IMPLEMENT(nil);
 - (void)addBreakpoints:(NSSet*)addrs SUBCLASS_MUST_IMPLEMENT();
 - (void)removeAllBreakpoints SUBCLASS_MUST_IMPLEMENT();
 - (void)addBreakpointAtAddress:(uint32_t)addr SUBCLASS_MUST_IMPLEMENT();
 - (void)removeBreakpointAtAddress:(uint32_t)addr SUBCLASS_MUST_IMPLEMENT();
 
-- (NSDictionary *)symbolTable SUBCLASS_MUST_IMPLEMENT(nil);
 
-- (void)setSendToTeletypeBlock:(void (^)(NSString *string))block
-  SUBCLASS_MUST_IMPLEMENT();
-- (void)sendToSimulator:(NSString*)string
-  SUBCLASS_MUST_IMPLEMENT();
+- (NSDictionary *)symbolTable {
+  return @{};
+}
+
+
+- (void)setSendToTeletypeBlock:(void (^)(NSString *string))block {
+  return;
+}
+
+
+- (void)sendToSimulator:(NSString*)string {
+  return;
+}
 
 
 @end

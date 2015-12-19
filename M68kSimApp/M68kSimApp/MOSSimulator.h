@@ -46,16 +46,18 @@ typedef enum {
 
 - (NSDictionary*)registerDump;
 
-- (float)clockFrequency;
-- (void)setMaximumClockFrequency:(double)mhz;
-
 - (NSSet*)breakpointList;
 - (void)addBreakpoints:(NSSet*)addrs;
 - (void)removeAllBreakpoints;
 - (void)addBreakpointAtAddress:(uint32_t)addr;
 - (void)removeBreakpointAtAddress:(uint32_t)addr;
 
+@optional
+
 - (NSDictionary *)symbolTable;
+
+- (float)clockFrequency;
+- (void)setMaximumClockFrequency:(double)mhz;
 
 - (void)setSendToTeletypeBlock:(void (^)(NSString *string))block;
 - (void)sendToSimulator:(NSString*)string;

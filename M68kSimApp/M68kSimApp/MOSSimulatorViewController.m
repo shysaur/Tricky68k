@@ -266,6 +266,9 @@ static void *SimulatorState = &SimulatorState;
 - (void)updateSimulatorMaxClockFrequency {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   
+  if (![simProxy respondsToSelector:@selector(setMaximumClockFrequency:)])
+    return;
+  
   if ([ud boolForKey:@"LimitClock"])
     [simProxy setMaximumClockFrequency:[ud doubleForKey:@"MaxClock"]];
   else
@@ -289,7 +292,7 @@ static void *SimulatorState = &SimulatorState;
     ghzFmt = NSLocalizedString(@"%@ GHz", @"Clock frequency badge format (GHz)");
   }
   
-  if (simRunning && !stepping) {
+  if (simRunning && !stepping && [simProxy respondsToSelector:@selector(clockFrequency)]) {
     f = [simProxy clockFrequency];
     fmt = mhzFmt;
     if (f >= 0) {
