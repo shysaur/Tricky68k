@@ -679,7 +679,7 @@
   NSInteger hmul, lineWidth;
   NSRect tr = [self textRect];
   
-  lineWidth = tr.size.width / charSize.width;
+  lineWidth = MAX(1, tr.size.width / charSize.width);
   line = [[lineRanges objectAtIndex:i] rangeValue];
   hmul = MAX(1, (((NSInteger)line.length - 1) / lineWidth) + 1);
   return hmul * charSize.height;
