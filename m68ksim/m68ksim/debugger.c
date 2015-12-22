@@ -22,15 +22,16 @@
 #define MAX_INSTR_LEN   10 /*bytes*/
 
 int skip_on = 0;
-uint32_t skip_addr;
+uint32_t skip_sp;
 
 
 void cpu_instrCallback(void) {
-  uint32_t pc;
+  uint32_t pc, sp;
   
   pc = m68k_get_reg(NULL, M68K_REG_PC);
   if (bp_find(pc)) debug_on = 1;
-  if (skip_on && pc == skip_addr) {
+  sp = m68k_get_reg(NULL, M68K_REG_SP);
+  if (skip_on && skip_sp <= sp) {
     skip_on = 0;
     debug_on = 1;
   }
@@ -175,8 +176,9 @@ void debug_dumpContext(void) {
 
 
 void debug_debugConsole(void) {
-  char cl[256], temp[80], *cp;
+  char cl[256], *cp;
   uint32_t pc, bpa, addr;
+  uint16_t nopc;
   long long spd;
   int cont, lines;
   
@@ -196,8 +198,14 @@ void debug_debugConsole(void) {
     switch (*cp) {
       /* flow control */
       case 'n':
-        skip_addr = pc + m68k_disassemble(temp, pc, M68K_CPU_TYPE_68000);
-        skip_on = 1;
+        nopc = m68k_read_disassembler_16(pc) & 0xFFC0;
+        if (nopc == 0x4E80 || (nopc & 0xFF00) == 0x6100) { /* BSR or JSR */
+          skip_sp = m68k_get_reg(NULL, M68K_REG_SP);
+          skip_on = 1;
+          debug_on = 0;
+        }
+        cont = 1;
+        break;
       case 'c':
         debug_on = 0;
       case 's':
