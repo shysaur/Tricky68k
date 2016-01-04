@@ -32,9 +32,7 @@
     [NSException raise:NSInvalidArgumentException
       format:@"Source file and output file not specified"];
   
-  [self willChangeValueForKey:@"assembling"];
-  running = YES;
-  [self didChangeValueForKey:@"assembling"];
+  [self setAssembling:YES];
   
   gotWarnings = NO;
   sections = [NSMutableArray array];
@@ -104,12 +102,8 @@
     unlink([unlinkedelf fileSystemRepresentation]);
     unlink([linkerfile fileSystemRepresentation]);
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self willChangeValueForKey:@"complete"];
-      completed = YES;
-      [self didChangeValueForKey:@"complete"];
-      [self willChangeValueForKey:@"assembling"];
-      running = NO;
-      [self didChangeValueForKey:@"assembling"];
+      [self setComplete:YES];
+      [self setAssembling:NO];
       
       [[self jobStatus] setStatus:MOSAsmResultToJobStat(asmResult)];
     });
@@ -276,8 +270,18 @@ returnAsIs:
 }
 
 
+- (void)setAssembling:(BOOL)a {
+  running = a;
+}
+
+
 - (BOOL)isAssembling {
   return running;
+}
+
+
+- (void)setComplete:(BOOL)c {
+  completed = c;
 }
 
 
