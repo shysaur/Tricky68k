@@ -53,7 +53,9 @@
       bufp = buf;
       c = 0;
     }
-    res = read(fildes, bufp, 1);
+    do {
+      res = read(fildes, bufp, 1);
+    } while (res < 0 && (errno == EAGAIN || errno == EINTR));
   }
   if (res < 0 && errno != EAGAIN && errno != EINTR) {
     readerr = [NSError errorWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
