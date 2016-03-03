@@ -30,7 +30,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </customView>
-                <splitView dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="hNR-P3-CgA">
+                <splitView autosaveName="MOSSimulatorMainSplitView" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="hNR-P3-CgA">
                     <rect key="frame" x="0.0" y="0.0" width="876" height="437"/>
                     <subviews>
                         <view placeholderIntrinsicWidth="876" placeholderIntrinsicHeight="255" id="AmM-Xx-HIr" customClass="MOSColoredView">
@@ -45,7 +45,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </customView>
-                                <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKZ-t0-AGi">
+                                <splitView arrangesAllSubviews="NO" autosaveName="MOSSimulatorStateSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKZ-t0-AGi">
                                     <rect key="frame" x="0.0" y="0.0" width="876" height="255"/>
                                     <subviews>
                                         <view placeholderIntrinsicWidth="146" placeholderIntrinsicHeight="255" id="e8h-0z-r5B">
@@ -171,7 +171,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </customView>
-                                                <splitView dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="bgh-D0-Fld">
+                                                <splitView autosaveName="MOSSimulatorRAMSplitView" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="bgh-D0-Fld">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="235"/>
                                                     <subviews>
                                                         <customView id="CEm-xb-Eag">
