@@ -41,6 +41,6 @@
 - (NSFont *)font;
 - (void)setFont:(NSFont *)font;
 
-@property (weak) id <MOSTeletypeViewDelegate> delegate;
+@property (weak) IBOutlet id <MOSTeletypeViewDelegate> delegate;
 
 @end
