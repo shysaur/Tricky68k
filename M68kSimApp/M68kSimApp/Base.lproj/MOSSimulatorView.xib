@@ -456,14 +456,14 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="235"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" rowSizeStyle="automatic" viewBased="YES" id="IWv-lc-kza">
-                                                                <rect key="frame" x="0.0" y="0.0" width="111" height="0.0"/>
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" rowSizeStyle="automatic" viewBased="YES" id="IWv-lc-kza">
+                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="235"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
-                                                                    <tableColumn identifier="nameColumn" width="35" minWidth="35" maxWidth="35" id="EUS-md-smr">
+                                                                    <tableColumn identifier="nameColumn" width="35" minWidth="20" maxWidth="1000" id="EUS-md-smr">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -474,6 +474,7 @@
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                         </textFieldCell>
+                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView identifier="nameView" id="XLP-Go-OrP">
                                                                                 <rect key="frame" x="1" y="1" width="35" height="14"/>
@@ -523,7 +524,7 @@
                                                                             </tableCellView>
                                                                         </prototypeCellViews>
                                                                     </tableColumn>
-                                                                    <tableColumn identifier="valueColumn" width="70" minWidth="70" maxWidth="70" id="RNI-ES-EUV">
+                                                                    <tableColumn identifier="valueColumn" width="87" minWidth="70" maxWidth="100000" id="RNI-ES-EUV">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Value">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -537,12 +538,12 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView identifier="valueView" id="9LL-Mz-sUq">
-                                                                                <rect key="frame" x="39" y="1" width="70" height="14"/>
+                                                                                <rect key="frame" x="39" y="1" width="87" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gD9-Rb-5he">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="14"/>
-                                                                                        <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="tvc" id="py1-6O-n4a">
+                                                                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="tvc" id="py1-6O-n4a">
                                                                                             <font key="font" metaFont="smallSystem"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
