@@ -142,12 +142,23 @@ static void *SimulatorState = &SimulatorState;
 
 
 - (void)setSimulatorForSubviewControllers {
-  if (!viewHasLoaded) return;
+  if (!viewHasLoaded)
+    return;
+  
   [dumpDs setSimulatorProxy:simProxy];
   [disasmDs setSimulatorProxy:simProxy];
   [regdumpDs setSimulatorProxy:simProxy];
   [stackDs setSimulatorProxy:simProxy];
   [ttyDelegate setSimulatorProxy:simProxy];
+  
+  if (teletypePanelConstraint)
+    [mainSplitView removeConstraint:teletypePanelConstraint];
+  teletypePanelConstraint = [NSLayoutConstraint
+    constraintWithItem:teletypePanel attribute:NSLayoutAttributeHeight
+    relatedBy:NSLayoutRelationGreaterThanOrEqual
+    toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+    multiplier:1.0 constant:165.0];
+  [mainSplitView addConstraint:teletypePanelConstraint];
 }
 
 

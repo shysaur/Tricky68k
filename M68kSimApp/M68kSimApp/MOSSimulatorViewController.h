@@ -47,6 +47,9 @@ enum {
   IBOutlet MOSSimRegistersDataSource *regdumpDs;
   IBOutlet MOSSimStackDumpDataSource *stackDs;
   IBOutlet MOSTeletypeViewDelegate *ttyDelegate;
+  IBOutlet NSSplitView *mainSplitView;
+  IBOutlet NSView *teletypePanel;
+  NSLayoutConstraint *teletypePanelConstraint;
   MOSSimBrkptWindowController *brkptWc;
 }
 

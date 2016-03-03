@@ -9,8 +9,10 @@
             <connections>
                 <outlet property="disasmDs" destination="whK-Je-a8a" id="vRL-Pj-MEB"/>
                 <outlet property="dumpDs" destination="OYl-Qf-zsd" id="PX9-6c-NnC"/>
+                <outlet property="mainSplitView" destination="hNR-P3-CgA" id="AIR-yp-3Fn"/>
                 <outlet property="regdumpDs" destination="d8D-mR-4Tk" id="57R-ef-ij9"/>
                 <outlet property="stackDs" destination="JVG-YD-Mo8" id="Wx0-nt-4gS"/>
+                <outlet property="teletypePanel" destination="5Fa-zy-YTz" id="ZHP-7R-g18"/>
                 <outlet property="ttyDelegate" destination="OaH-e5-S6R" id="Nzz-uK-v6H"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -692,7 +694,7 @@
                     </subviews>
                     <holdingPriorities>
                         <real value="250"/>
-                        <real value="250"/>
+                        <real value="251"/>
                     </holdingPriorities>
                 </splitView>
             </subviews>
