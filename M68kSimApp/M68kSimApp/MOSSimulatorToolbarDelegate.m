@@ -10,6 +10,7 @@
 #import "MOSSimulatorViewController.h"
 #import "MOSViewValidatingToolbarItem.h"
 #import "MOSSource.h"
+#import "MOSExecutable.h"
 #import "MOSPlatform.h"
 #import "MOSSimulator.h"
 #import "MOSSimulatorPresentation.h"
@@ -113,7 +114,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
   if (sourceDocument)
     pres = [[sourceDocument currentPlatform] presentationClass];
   else
-    pres = [[[simulatorVc simulatorProxy] presentation] class];
+    pres = [[executableDocument currentPlatform] presentationClass];
   return [pres statusRegisterInterpretationPlaceholder];
 }
 

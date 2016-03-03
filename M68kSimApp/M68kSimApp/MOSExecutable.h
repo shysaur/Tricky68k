@@ -12,13 +12,17 @@
 
 @class MOSSimulatorViewController;
 @class MOSSimulator;
+@class MOSPlatform;
 
 
 @interface MOSExecutable : MOSDocument {
   NSWindowController *wc;
   NSWindow *window;
   MOSSimulator *simProxy;
+  MOSPlatform *platform;
   IBOutlet MOSSimulatorViewController *simVc;
 }
+
+- (MOSPlatform *)currentPlatform;
 
 @end

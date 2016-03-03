@@ -37,6 +37,7 @@
         </window>
         <customObject id="QHg-kE-Jkz" customClass="MOSSimulatorToolbarDelegate">
             <connections>
+                <outlet property="executableDocument" destination="-2" id="HaI-OY-mXk"/>
                 <outlet property="simulatorVc" destination="amo-g3-g3r" id="DA1-tz-KrY"/>
             </connections>
         </customObject>
