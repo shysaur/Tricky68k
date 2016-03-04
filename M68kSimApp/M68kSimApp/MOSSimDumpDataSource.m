@@ -14,8 +14,30 @@
 @implementation MOSSimDumpDataSource
 
 
++ (void)load {
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
+  [ud registerDefaults:@{
+    @"RAMDumpSize": @16384
+  }];
+}
+
+
+- (instancetype)init {
+  NSUInteger maxKb;
+  
+  self = [super init];
+  
+  maxKb = [[NSUserDefaults standardUserDefaults] integerForKey:@"RAMDumpSize"];
+  maxLines = maxKb * 1024 / 16;
+  
+  return self;
+}
+
+
 - (void)setSimulatorProxy:(MOSSimulator*)sp {
-  NSUInteger pc;
+  NSUInteger pc, dest;
   NSInteger rows;
   NSRect visibleRect;
   MOSSimulatorPresentation *pres;
@@ -26,12 +48,13 @@
   
   visibleRect = [tableView visibleRect];
   rows = [tableView rowsInRect:visibleRect].length;
-  [tableView scrollRowToVisible:pc/16+rows*2/3];
+  dest = MIN(pc/16+rows*2/3, maxLines-1);
+  [tableView scrollRowToVisible:dest];
 }
 
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-  return 0x1000000 / 16;
+  return maxLines;
 }
 
 

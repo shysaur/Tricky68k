@@ -10,6 +10,8 @@
 #import "MOSSimTableViewDelegate.h"
 
 
-@interface MOSSimDumpDataSource : MOSSimTableViewDelegate <NSTableViewDataSource>
+@interface MOSSimDumpDataSource : MOSSimTableViewDelegate <NSTableViewDataSource> {
+  NSUInteger maxLines;
+}
 
 @end
