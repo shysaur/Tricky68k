@@ -391,6 +391,13 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+- (void)replaceBreakpoints:(NSSet *)newbps {
+  [simProxy removeAllBreakpoints];
+  [simProxy addBreakpoints:newbps];
+  [disasmDs dataHasChanged];
+}
+
+
 - (void)setSimulatorRunning:(BOOL)val {
   simRunning = val;
   [self broadcastSimulatorStateChangeToSubviewControllers];

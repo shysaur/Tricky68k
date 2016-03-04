@@ -18,6 +18,8 @@
 @class MOSFragariaPreferencesObserver;
 @class MOSJob;
 @class MOSPlatform;
+@class MOSSourceBreakpointDelegate;
+@class MOSListingDictionary;
 
 
 @interface MOSSource : MOSDocument {
@@ -31,16 +33,19 @@
   SMLTextView *textView;
   IBOutlet MGSFragariaView *fragaria;
   MOSFragariaPreferencesObserver *prefobs;
+  MOSSourceBreakpointDelegate *breakptdel;
   
   MOSPlatform *platform;
   IBOutlet MOSSimulatorViewController *simVc;
   NSView *simView;
   
   MOSAssembler *assembler;
+  MOSListingDictionary *lastListing;
   BOOL runWhenAssemblyComplete;
   MOSJob *lastJob;
   BOOL hadJob;
   NSURL *assemblyOutput;
+  NSURL *listingOutput;
   NSURL *tempSourceCopy;
 }
 

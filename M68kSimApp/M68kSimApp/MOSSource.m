@@ -21,6 +21,8 @@
 #import "MOSPrintingTextView.h"
 #import "MOSFragariaPreferencesObserver.h"
 #import "MOSPlatform.h"
+#import "MOSSourceBreakpointDelegate.h"
+#import "MOSListingDictionary.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -127,6 +129,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [textView setSelectedRange:NSMakeRange(0, 0)];
   }
   [[textView undoManager] removeAllActions];
+  
+  if ([[platform assemblerClass] instancesRespondToSelector:@selector(listingDictionary)])
+    breakptdel = [[MOSSourceBreakpointDelegate alloc] initWithFragaria:fragaria];
 }
 
 
@@ -233,8 +238,10 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSURL *oldSimExec;
   NSResponder *oldresp;
   Class simType;
+  NSSet *bp;
   
-  if (![self simulatorModeSwitchAllowed]) return;
+  if (![self simulatorModeSwitchAllowed])
+    return;
   
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
@@ -251,8 +258,15 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
       return;
     }
     
-    if (oldSimExec) unlink([oldSimExec fileSystemRepresentation]);
+    if (oldSimExec)
+      unlink([oldSimExec fileSystemRepresentation]);
   }
+  
+  if (lastListing) {
+    bp = [breakptdel breakpointAddressesWithListingDictionary:lastListing];
+    [simVc replaceBreakpoints:bp];
+  }
+  
   simView = [simVc view];
   
   constr = [fragaria constraints];
@@ -286,8 +300,15 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 - (IBAction)switchToEditor:(id)sender {
   NSView *contview;
   NSArray *constr;
+  NSSet *bp;
   
-  if (!simulatorMode) return;
+  if (!simulatorMode)
+    return;
+  
+  if (lastListing) {
+    bp = [[simVc simulatorProxy] breakpointList];
+    [breakptdel syncBreakpointsWithAddresses:bp listingDictionary:lastListing];
+  }
   
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
@@ -338,21 +359,24 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [sp beginSheetModalForWindow:docWindow completionHandler:^(NSInteger result){
     if (result == NSFileHandlingPanelOKButton) {
       runWhenAssemblyComplete = NO;
-      [self assembleInBackgroundToURL:[sp URL]];
+      [self assembleInBackgroundToURL:[sp URL] listingURL:nil];
     }
   }];
 }
 
 
 - (void)assembleInBackground {
-  NSURL *tmp;
+  assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+  if (breakptdel)
+    listingOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
+  else
+    listingOutput = nil;
   
-  tmp = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-  [self assembleInBackgroundToURL:tmp];
+  [self assembleInBackgroundToURL:assemblyOutput listingURL:listingOutput];
 }
 
 
-- (void)assembleInBackgroundToURL:(NSURL *)outurl {
+- (void)assembleInBackgroundToURL:(NSURL *)outurl listingURL:(NSURL *)listurl {
   if (assembler) return;
   
   [self setTransient:NO];
@@ -373,14 +397,14 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     
     if (err) {
       assembler = nil;
+      if (runWhenAssemblyComplete)
+        assemblyOutput = nil;
       return;
     }
     [assembler addObserver:self forKeyPath:@"complete" options:0 context:AssemblageComplete];
 
     ud = [NSUserDefaults standardUserDefaults];
     jsm = [MOSJobStatusManager sharedJobStatusManger];
-    
-    assemblyOutput = outurl;
     
     if (lastJob)
       [lastJob removeObserver:self forKeyPath:@"events" context:AssemblageEvent];
@@ -403,7 +427,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     opts = [ud boolForKey:@"FixedEntryPoint"] ? MOSAssemblageOptionEntryPointFixed : MOSAssemblageOptionEntryPointSymbolic;
     opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ? MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
     
-    [assembler setOutputFile:assemblyOutput];
+    [assembler setOutputFile:outurl];
+    if (listurl)
+      [assembler setOutputListingFile:listurl];
     [assembler setSourceFile:tempSourceCopy];
     [assembler setJobStatus:lastJob];
     [assembler setAssemblageOptions:opts];
@@ -424,6 +450,10 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
     [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
     asmres = [assembler assemblageResult];
+    if ([assembler respondsToSelector:@selector(listingDictionary)])
+      lastListing = [assembler listingDictionary];
+    else
+      lastListing = nil;
     [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
     assembler = nil;
     if (asmres == MOSAssemblageResultFailure) assemblyOutput = nil;
@@ -432,6 +462,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     
     if (asmres != MOSAssemblageResultFailure && runWhenAssemblyComplete) {
       unlink([tempSourceCopy fileSystemRepresentation]);
+      if (listingOutput)
+        unlink([listingOutput fileSystemRepresentation]);
       [self switchToSimulator:self];
       /* Since we are changing simulator executable, validation of toolbar
        * items will change, even if no events did occur. */
