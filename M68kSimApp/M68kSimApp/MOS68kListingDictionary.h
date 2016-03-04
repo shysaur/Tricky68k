@@ -12,6 +12,8 @@
 @interface MOS68kListingDictionary : MOSListingDictionary {
   NSDictionary *lineToAddress;
   NSDictionary *addressToLine;
+  NSUInteger firstSeenLine;
+  NSUInteger lastSeenLine;
 }
 
 @end
