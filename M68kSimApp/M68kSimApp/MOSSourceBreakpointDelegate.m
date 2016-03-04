@@ -27,12 +27,15 @@
   NSNumber *this, *a;
   
   res = [NSMutableSet set];
+  addressToOriginalLine = [NSMutableDictionary dictionary];
   for (this in breakpointList) {
     a = [ld addressForSourceLine:[this integerValue]];
     if (!a)
       NSLog(@"Address for line %@ not found.", this);
-    else
+    else {
       [res addObject:a];
+      [addressToOriginalLine setObject:this forKey:a];
+    }
   }
   
   return [res copy];
@@ -41,11 +44,16 @@
 
 - (void)syncBreakpointsWithAddresses:(NSSet *)as listingDictionary:(MOSListingDictionary *)ld {
   NSNumber *this;
+  NSNumber *ln;
   NSUInteger l;
   
   [breakpointList removeAllObjects];
   for (this in as) {
-    l = [ld sourceLineForAddress:this];
+    ln = [addressToOriginalLine objectForKey:this];
+    if (ln)
+      l = [ln integerValue];
+    else
+      l = [ld sourceLineForAddress:this];
     if (l == NSNotFound)
       NSLog(@"Line for address %@ not found.", this);
     else

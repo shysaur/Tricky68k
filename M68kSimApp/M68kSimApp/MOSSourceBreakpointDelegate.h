@@ -15,6 +15,7 @@
 
 @interface MOSSourceBreakpointDelegate : NSObject <MGSBreakpointDelegate> {
   NSMutableSet *breakpointList;
+  NSMutableDictionary *addressToOriginalLine;
   MGSFragariaView *fragaria;
 }
 
