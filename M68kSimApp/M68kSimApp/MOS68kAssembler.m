@@ -11,6 +11,7 @@
 #import "NSFileHandle+Strings.h"
 #import "MOSJob.h"
 #import "NSScanner+Shorteners.h"
+#import "MOS68kListingDictionary.h"
 
 
 @implementation MOS68kAssembler
@@ -43,6 +44,8 @@
     NSURL *unlinkedelf;
     NSURL *linkerfile;
     NSMutableArray *params;
+    NSError *lfe;
+    NSDictionary *lfevent;
     
     linking = NO;
     task = [[MOSMonitoredTask alloc] init];
@@ -89,7 +92,23 @@
     [task setDelegate:self];
     [task launch];
     [task waitUntilExit];
-    if ([task terminationStatus] != 0) goto fail;
+    if ([task terminationStatus] != 0)
+      goto fail;
+    
+    if ([self outputListingFile]) {
+      listingDict = [[MOS68kListingDictionary alloc]
+        initWithListingFile:[self outputListingFile] error:&lfe];
+      if (!listingDict) {
+        lfevent = @{MOSJobEventType: MOSJobEventTypeWarning,
+         MOSJobEventText: NSLocalizedString(@"Could not read the listing file",
+           @"Text of the event which occurs when failing to read a listing "
+           "file.")};
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [[self jobStatus] addEvent:lfevent];
+        });
+        gotWarnings = YES;
+      }
+    }
     
     if (gotWarnings)
       asmResult = MOSAssemblageResultSuccessWithWarning;
@@ -171,7 +190,8 @@
       event = [self parseVasmOutput:line];
     else
       event = [self parseLinkerOutput:line];
-    if (event) [[self jobStatus] addEvent:event];
+    if (event)
+      [[self jobStatus] addEvent:event];
   }
 }
 
@@ -295,6 +315,14 @@ returnAsIs:
     [NSException raise:NSInvalidArgumentException
       format:@"Assemblage is not complete yet."];
   return asmResult;
+}
+
+
+- (MOSListingDictionary *)listingDictionary {
+  if (!completed)
+    [NSException raise:NSInvalidArgumentException
+                format:@"Assemblage is not complete yet."];
+  return listingDict;
 }
 
 

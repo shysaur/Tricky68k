@@ -11,6 +11,9 @@
 #import "MOSAssembler.h"
 
 
+@class MOS68kListingDictionary;
+
+
 @interface MOS68kAssembler : MOSAssembler <MOSMonitoredTaskDelegate> {
   NSMutableArray *sections;
   MOSAssemblageResult asmResult;
@@ -18,6 +21,7 @@
   BOOL running;
   BOOL linking;
   BOOL completed;
+  MOS68kListingDictionary *listingDict;
 }
 
 @end

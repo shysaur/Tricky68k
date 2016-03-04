@@ -27,15 +27,12 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
 
 
 @class MOSJob;
+@class MOSListingDictionary;
 
 
-@interface MOSAssembler : NSObject {
-  MOSJob *jobStatus;
-  NSURL *sourceFile;
-  NSURL *outputFile;
-  NSURL *listingFile;
-  MOSAssemblageOptions options;
-}
+@protocol MOSAssemblerProtocol <NSObject>
+
+@required
 
 - (void)setJobStatus:(MOSJob *)js;
 - (MOSJob *)jobStatus;
@@ -44,8 +41,6 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
 - (NSURL*)sourceFile;
 - (void)setOutputFile:(NSURL*)of;
 - (NSURL*)outputFile;
-- (void)setOutputListingFile:(NSURL*)lf;
-- (NSURL*)outputListingFile;
 - (void)setAssemblageOptions:(MOSAssemblageOptions)opts;
 - (MOSAssemblageOptions)assemblageOptions;
 
@@ -53,5 +48,24 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
 - (BOOL)isAssembling;
 - (BOOL)isComplete;
 - (MOSAssemblageResult)assemblageResult;
+
+@optional
+
+- (void)setOutputListingFile:(NSURL*)lf;
+- (NSURL*)outputListingFile;
+
+/* Implies -setOutputListingFile: */
+- (MOSListingDictionary *)listingDictionary;
+
+@end
+
+
+@interface MOSAssembler : NSObject <MOSAssemblerProtocol> {
+  MOSJob *jobStatus;
+  NSURL *sourceFile;
+  NSURL *outputFile;
+  NSURL *listingFile;
+  MOSAssemblageOptions options;
+}
 
 @end
