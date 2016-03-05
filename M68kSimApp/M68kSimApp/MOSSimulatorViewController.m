@@ -37,6 +37,9 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+#pragma mark - Initialization
+
+
 - (instancetype)initWithCoder:(NSCoder*)coder {
   self = [super initWithCoder:coder];
   [self finishInitialization];
@@ -77,6 +80,20 @@ static void *SimulatorState = &SimulatorState;
   dispatch_source_set_timer(clockUpdateTimer, DISPATCH_TIME_FOREVER, 0, 0);
   dispatch_resume(clockUpdateTimer);
 }
+
+
+- (void)loadView {
+  [super loadView];
+  viewHasLoaded = YES;
+  
+  if (!simProxy)
+    [NSException raise:NSInvalidArgumentException format:@"Simulator view "
+     "can't load if no executable is associated with it."];
+  [self setSimulatorForSubviewControllers];
+}
+
+
+#pragma mark - Simulator Change
 
 
 - (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st error:(NSError**)outerr {
@@ -141,6 +158,11 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+- (MOSSimulator*)simulatorProxy {
+  return simProxy;
+}
+
+
 - (void)setSimulatorForSubviewControllers {
   if (!viewHasLoaded)
     return;
@@ -162,16 +184,14 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+#pragma mark - Simulator State Changes
+
+
 - (void)broadcastSimulatorStateChangeToSubviewControllers {
   [dumpDs simulatorStateHasChanged];
   [disasmDs simulatorStateHasChanged];
   [regdumpDs simulatorStateHasChanged];
   [stackDs simulatorStateHasChanged];
-}
-
-
-- (MOSSimulator*)simulatorProxy {
-  return simProxy;
 }
 
 
@@ -225,14 +245,15 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (void)loadView {
-  [super loadView];
-  viewHasLoaded = YES;
-  
-  if (!simProxy)
-    [NSException raise:NSInvalidArgumentException format:@"Simulator view "
-      "can't load if no executable is associated with it."];
-  [self setSimulatorForSubviewControllers];
+- (void)setSimulatorRunning:(BOOL)val {
+  simRunning = val;
+  [self broadcastSimulatorStateChangeToSubviewControllers];
+  [[[[self view] window] toolbar] validateVisibleItems];
+}
+
+
+- (BOOL)isSimulatorRunning {
+  return simRunning;
 }
 
 
@@ -272,6 +293,9 @@ static void *SimulatorState = &SimulatorState;
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
+
+
+#pragma mark - Clock Display
 
 
 - (void)updateSimulatorMaxClockFrequency {
@@ -338,6 +362,9 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+#pragma mark - Simulator Actions
+
+
 - (IBAction)run:(id)sender {
   [simProxy run];
 }
@@ -363,6 +390,9 @@ static void *SimulatorState = &SimulatorState;
 - (IBAction)restart:(id)sender {
   [self reloadSimulatedExecutable];
 }
+
+
+#pragma mark - Breakpoints
 
 
 - (IBAction)openBreakpointsWindow:(id)sender {
@@ -398,16 +428,7 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (void)setSimulatorRunning:(BOOL)val {
-  simRunning = val;
-  [self broadcastSimulatorStateChangeToSubviewControllers];
-  [[[[self view] window] toolbar] validateVisibleItems];
-}
-
-
-- (BOOL)isSimulatorRunning {
-  return simRunning;
-}
+#pragma mark - NSResponder Methods
 
 
 - (BOOL)validateUserInterfaceItem:(id)anItem {
@@ -428,6 +449,9 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+#pragma mark - Flags Display
+
+
 + (NSSet *)keyPathsForValuesAffectingFlagsStatus {
   return [NSSet setWithObject:@"simulatorRunning"];
 }
@@ -438,6 +462,9 @@ static void *SimulatorState = &SimulatorState;
     return @"";
   return [[simProxy presentation] statusRegisterInterpretation];
 }
+
+
+#pragma mark - Finalization
 
 
 - (void)dealloc {
