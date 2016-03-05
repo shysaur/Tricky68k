@@ -40,13 +40,15 @@
   NSView *simView;
   
   MOSAssembler *assembler;
-  MOSListingDictionary *lastListing;
+  BOOL assembleForSaveOnly;
   BOOL runWhenAssemblyComplete;
+  NSURL *tempSourceCopy;
   MOSJob *lastJob;
   BOOL hadJob;
+  /* Following ivars must not be modified if runWhenAssemblyComplete == NO: */
+  MOSListingDictionary *lastListing;
   NSURL *assemblyOutput;
   NSURL *listingOutput;
-  NSURL *tempSourceCopy;
 }
 
 - (IBAction)assemble:(id)sender;

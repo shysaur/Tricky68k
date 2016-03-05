@@ -357,6 +357,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [sp beginSheetModalForWindow:docWindow completionHandler:^(NSInteger result){
     if (result == NSFileHandlingPanelOKButton) {
       runWhenAssemblyComplete = NO;
+      assembleForSaveOnly = YES;
       [self assembleInBackgroundToURL:[sp URL] listingURL:nil];
     }
   }];
@@ -364,6 +365,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (void)assembleInBackground {
+  assembleForSaveOnly = NO;
+  unlink([assemblyOutput fileSystemRepresentation]);
   assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
   if (breakptdel)
     listingOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
@@ -395,7 +398,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     
     if (err) {
       assembler = nil;
-      if (runWhenAssemblyComplete)
+      if (assembleForSaveOnly)
         assemblyOutput = nil;
       return;
     }
@@ -407,23 +410,28 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     if (lastJob)
       [lastJob removeObserver:self forKeyPath:@"events" context:AssemblageEvent];
     lastJob = [[MOSJob alloc] init];
-    [lastJob addObserver:self forKeyPath:@"events" options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
+    [lastJob addObserver:self forKeyPath:@"events"
+      options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
     
     if ([self fileURL]) {
       label = [[self fileURL] lastPathComponent];
-      title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@", @"Assembler job name"), label];
+      title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@",
+        @"Assembler job name"), label];
       [lastJob setAssociatedFile:[self fileURL]];
     } else {
       label = [docWindow title];
-      title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@", @"Assembler job name"), label];
+      title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@",
+        @"Assembler job name"), label];
     }
     [lastJob setVisibleDescription:title];
     
     [jsm addJob:lastJob];
     hadJob = YES;
     
-    opts = [ud boolForKey:@"FixedEntryPoint"] ? MOSAssemblageOptionEntryPointFixed : MOSAssemblageOptionEntryPointSymbolic;
-    opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ? MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
+    opts = [ud boolForKey:@"FixedEntryPoint"] ?
+      MOSAssemblageOptionEntryPointFixed : MOSAssemblageOptionEntryPointSymbolic;
+    opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ?
+      MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
     
     [assembler setOutputFile:outurl];
     if (listurl)
@@ -447,21 +455,34 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (context == AssemblageComplete) {
     [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
     [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
+    
     asmres = [assembler assemblageResult];
-    if ([assembler respondsToSelector:@selector(listingDictionary)])
-      lastListing = [assembler listingDictionary];
-    else
-      lastListing = nil;
+    
+    if (!assembleForSaveOnly) {
+      if (asmres == MOSAssemblageResultFailure) {
+        assemblyOutput = nil;
+        lastListing = nil;
+      } else {
+        if ([assembler respondsToSelector:@selector(listingDictionary)])
+          lastListing = [assembler listingDictionary];
+        else
+          lastListing = nil;
+      }
+    }
+    
     [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
     assembler = nil;
-    if (asmres == MOSAssemblageResultFailure) assemblyOutput = nil;
+    
     [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
     [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
     
+    unlink([tempSourceCopy fileSystemRepresentation]);
+    if (listingOutput) {
+      unlink([listingOutput fileSystemRepresentation]);
+      listingOutput = nil;
+    }
+    
     if (asmres != MOSAssemblageResultFailure && runWhenAssemblyComplete) {
-      unlink([tempSourceCopy fileSystemRepresentation]);
-      if (listingOutput)
-        unlink([listingOutput fileSystemRepresentation]);
       [self switchToSimulator:self];
       /* Since we are changing simulator executable, validation of toolbar
        * items will change, even if no events did occur. */
@@ -469,8 +490,10 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     } else {
       [(MOSAppDelegate*)[NSApp delegate] openJobsWindow:self];
     }
+    
   } else if (context == AssemblageEvent) {
-    if (!hadJob) return;
+    if (!hadJob || assembleForSaveOnly)
+      return;
     
     events = [lastJob events];
     if (!events) {
@@ -566,6 +589,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [simVc pause:self];
   simView = nil;
   simVc = nil;
+  
+  if (assemblyOutput)
+    unlink([assemblyOutput fileSystemRepresentation]);
   
   [super close];
 }
