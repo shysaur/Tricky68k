@@ -419,7 +419,7 @@ static void *SimulatorState = &SimulatorState;
     return !simRunning && !exceptionOccurred;
   
   if ([anItem action] == @selector(openBreakpointsWindow:))
-    return !exceptionOccurred;
+    return !exceptionOccurred && [[self view] window];
   
   if ([anItem action] == @selector(pause:))
     return simRunning && !exceptionOccurred;

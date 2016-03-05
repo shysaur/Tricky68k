@@ -296,6 +296,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 - (IBAction)switchToEditor:(id)sender {
   NSView *contview;
   NSSet *bp;
+  id oldresp;
   
   if (!simulatorMode)
     return;
@@ -317,6 +318,15 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(fragaria)]];
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[fragaria]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(fragaria)]];
+  
+  oldresp = [fragaria nextResponder];
+  if (oldresp != simVc) {
+    /* Put the simulator view controller back in the responder chain to keep
+     * simulator-related menu items working */
+    [fragaria setNextResponder:simVc];
+    [simVc setNextResponder:oldresp];
+  }
+  
   [docWindow makeFirstResponder:textView];
   
   simulatorMode = NO;
