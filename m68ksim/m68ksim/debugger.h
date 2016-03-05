@@ -10,8 +10,13 @@
 #define __m68ksim__debugger__
 
 
+#define DEBUG_REASON_BREAK       ( 0)
+#define DEBUG_REASON_BREAKPOINT  ( 1)
+#define DEBUG_REASON_SKIP        ( 2)
+#define DEBUG_REASON_STEP        ( 3)
+
 void cpu_instrCallback(void);
-void debug_debugConsole(void);
+void debug_debugConsole(int reason);
 
 
 #endif

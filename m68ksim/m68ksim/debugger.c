@@ -23,20 +23,31 @@
 
 int skip_on = 0;
 uint32_t skip_sp;
+int step_on = 0;
 
 
 void cpu_instrCallback(void) {
   uint32_t pc, sp;
+  int reason = DEBUG_REASON_BREAK;
   
   pc = m68k_get_reg(NULL, M68K_REG_PC);
-  if (bp_find(pc)) debug_on = 1;
+  if (bp_find(pc)) {
+    debug_on = 1;
+    reason = DEBUG_REASON_BREAKPOINT;
+  }
   sp = m68k_get_reg(NULL, M68K_REG_SP);
   if (skip_on && skip_sp <= sp) {
     skip_on = 0;
     debug_on = 1;
+    reason = DEBUG_REASON_SKIP;
+  }
+  if (step_on) {
+    step_on = 0;
+    debug_on = 1;
+    reason = DEBUG_REASON_STEP;
   }
   if (debug_on) {
-    debug_debugConsole();
+    debug_debugConsole(reason);
   }
 }
 
@@ -175,7 +186,7 @@ void debug_dumpContext(void) {
 }
 
 
-void debug_debugConsole(void) {
+void debug_debugConsole(int reason) {
   char cl[256], *cp;
   uint32_t pc, bpa, addr;
   uint16_t nopc;
@@ -184,6 +195,10 @@ void debug_debugConsole(void) {
   
   cont = 0;
   pc = m68k_get_reg(NULL, M68K_REG_PC);
+  if (servermode_on && reason > 0) {
+    printf("reason. %d\n", reason);
+    fflush(stdout);
+  }
   
   while (!cont) {
     error_drainPool();
@@ -193,6 +208,7 @@ void debug_debugConsole(void) {
       fflush(stdout);
     }
     fgets(cl, 256, stdin);
+    debug_on = 0;
     
     for (cp=cl; isblank(*cp) && (*cp) != '\0'; cp++);
     switch (*cp) {
@@ -202,13 +218,13 @@ void debug_debugConsole(void) {
         if (nopc == 0x4E80 || (nopc & 0xFF00) == 0x6100) { /* BSR or JSR */
           skip_sp = m68k_get_reg(NULL, M68K_REG_SP);
           skip_on = 1;
-          debug_on = 0;
-        }
+        } else
+          step_on = 1;
         cont = 1;
         break;
-      case 'c':
-        debug_on = 0;
       case 's':
+        step_on = 1;
+      case 'c':
         cont = 1;
         break;
         

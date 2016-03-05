@@ -74,7 +74,7 @@ static inline segment_desc *mem_getSegmentAndCheck(uint32_t address, int as) {
   this = mem_getSegmentAndCheckSilent(address, as);
   if (!this) {
     error_print(error_new(299, "Access to unmapped address %#010x", address));
-    if (sim_on) debug_debugConsole();
+    if (sim_on) debug_debugConsole(DEBUG_REASON_BREAK);
     exit(1);
   }
   return this;
