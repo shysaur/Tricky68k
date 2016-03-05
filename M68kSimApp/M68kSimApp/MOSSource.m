@@ -234,7 +234,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 - (IBAction)switchToSimulator:(id)sender {
   NSError *err;
   NSView *contview;
-  NSArray *constr;
   NSURL *oldSimExec;
   NSResponder *oldresp;
   Class simType;
@@ -269,9 +268,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   simView = [simVc view];
   
-  constr = [fragaria constraints];
-  [fragaria removeConstraints:constr];
-  
   contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
   [[contview animator] replaceSubview:fragaria with:simView];
@@ -299,7 +295,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (IBAction)switchToEditor:(id)sender {
   NSView *contview;
-  NSArray *constr;
   NSSet *bp;
   
   if (!simulatorMode)
@@ -312,9 +307,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
-  
-  constr = [fragaria constraints];
-  [simView removeConstraints:constr];
   
   contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
