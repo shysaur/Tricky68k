@@ -333,12 +333,16 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (IBAction)assembleAndRun:(id)sender {
   runWhenAssemblyComplete = YES;
+  if (simulatorMode)
+    [self switchToEditor:nil];
   [self assembleInBackground];
 }
 
 
 - (IBAction)assemble:(id)sender {
   runWhenAssemblyComplete = NO;
+  if (simulatorMode)
+    [self switchToEditor:nil];
   [self assembleInBackground];
 }
 
