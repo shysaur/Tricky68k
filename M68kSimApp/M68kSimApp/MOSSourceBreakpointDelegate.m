@@ -23,18 +23,23 @@
 
 
 - (NSSet *)breakpointAddressesWithListingDictionary:(MOSListingDictionary *)ld {
-  NSMutableSet *res;
+  NSMutableSet *res, *tmp;
   NSNumber *this, *a;
   
   res = [NSMutableSet set];
-  addressToOriginalLine = [NSMutableDictionary dictionary];
+  addressToOriginalLines = [NSMutableDictionary dictionary];
   for (this in breakpointList) {
     a = [ld addressForSourceLine:[this integerValue]];
     if (!a)
       NSLog(@"Address for line %@ not found.", this);
     else {
       [res addObject:a];
-      [addressToOriginalLine setObject:this forKey:a];
+      tmp = [addressToOriginalLines objectForKey:a];
+      if (!tmp) {
+        tmp = [NSMutableSet setWithObject:this];
+        [addressToOriginalLines setObject:tmp forKey:a];
+      } else
+        [tmp addObject:this];
     }
   }
   
@@ -44,20 +49,21 @@
 
 - (void)syncBreakpointsWithAddresses:(NSSet *)as listingDictionary:(MOSListingDictionary *)ld {
   NSNumber *this;
-  NSNumber *ln;
+  NSSet *lines;
   NSUInteger l;
   
   [breakpointList removeAllObjects];
   for (this in as) {
-    ln = [addressToOriginalLine objectForKey:this];
-    if (ln)
-      l = [ln integerValue];
-    else
+    lines = [addressToOriginalLines objectForKey:this];
+    if (!lines) {
       l = [ld sourceLineForAddress:this];
-    if (l == NSNotFound)
-      NSLog(@"Line for address %@ not found.", this);
-    else
-      [breakpointList addObject:@(l)];
+      if (l == NSNotFound) {
+        NSLog(@"Line for address %@ not found.", this);
+        continue;
+      }
+      lines = [NSSet setWithObject:@(l)];
+    }
+    [breakpointList unionSet:lines];
   }
   [fragaria reloadBreakpointData];
 }
