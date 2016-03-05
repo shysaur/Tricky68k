@@ -49,6 +49,7 @@ enum {
   IBOutlet MOSTeletypeViewDelegate *ttyDelegate;
   IBOutlet NSSplitView *mainSplitView;
   IBOutlet NSView *teletypePanel;
+  __weak IBOutlet NSWindow *fallbackWindow;
   NSLayoutConstraint *teletypePanelConstraint;
   MOSSimBrkptWindowController *brkptWc;
 }

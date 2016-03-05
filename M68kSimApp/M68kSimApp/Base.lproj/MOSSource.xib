@@ -54,7 +54,11 @@
                 <outlet property="sourceDocument" destination="-2" id="JSP-hR-J9D"/>
             </connections>
         </customObject>
-        <viewController nibName="MOSSimulatorView" id="aXJ-fz-zD2" customClass="MOSSimulatorViewController"/>
+        <viewController nibName="MOSSimulatorView" id="aXJ-fz-zD2" customClass="MOSSimulatorViewController">
+            <connections>
+                <outlet property="fallbackWindow" destination="xOd-HO-29H" id="WFE-9X-KHf"/>
+            </connections>
+        </viewController>
         <userDefaultsController representsSharedInstance="YES" id="0Qe-Gk-rVY"/>
     </objects>
 </document>

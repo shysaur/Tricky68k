@@ -199,6 +199,7 @@ static void *SimulatorState = &SimulatorState;
   NSAlert *alert;
   NSWindow *pw;
   NSError *err;
+  void (^respb)(NSModalResponse resp);
   
   if ((err = [simProxy lastSimulatorException])) {
     alert = [NSAlert alertWithError:err];
@@ -214,8 +215,8 @@ static void *SimulatorState = &SimulatorState;
   [alert addButtonWithTitle:NSLocalizedString(@"Restart", @"Restart (simulator)")];
   [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel")];
   
-  pw = [[self view] window];
-  [alert beginSheetModalForWindow:pw completionHandler:^(NSModalResponse resp){
+  pw = [self window];
+  respb = ^(NSModalResponse resp){
     if (resp == NSAlertFirstButtonReturn)
       [self reloadSimulatedExecutable];
     else
@@ -226,7 +227,14 @@ static void *SimulatorState = &SimulatorState;
         } else
           [pw performClose:self];
       });
-  }];
+  };
+  
+  if (pw)
+    [alert beginSheetModalForWindow:pw completionHandler:respb];
+  else {
+    NSLog(@"No window where to display simulator death alert!");
+    respb([alert runModal]);
+  }
 }
 
 
@@ -240,15 +248,20 @@ static void *SimulatorState = &SimulatorState;
   [alert addButtonWithTitle:NSLocalizedString(@"Debug", @"Debug (after "
     "segmentation fault)")];
   
-  pw = [[self view] window];
-  [alert beginSheetModalForWindow:pw completionHandler:nil];
+  pw = [self window];
+  if (pw)
+    [alert beginSheetModalForWindow:pw completionHandler:nil];
+  else {
+    NSLog(@"No window where to display simulator error alert! Error: %@", err);
+    [alert runModal];
+  }
 }
 
 
 - (void)setSimulatorRunning:(BOOL)val {
   simRunning = val;
   [self broadcastSimulatorStateChangeToSubviewControllers];
-  [[[[self view] window] toolbar] validateVisibleItems];
+  [[[self window] toolbar] validateVisibleItems];
 }
 
 
@@ -392,6 +405,19 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+#pragma mark - UI
+
+
+- (NSWindow *)window {
+  NSWindow *res;
+  
+  res = [[self view] window];
+  if (!res)
+    return fallbackWindow;
+  return res;
+}
+
+
 #pragma mark - Breakpoints
 
 
@@ -404,7 +430,7 @@ static void *SimulatorState = &SimulatorState;
   [brkptWc setSymbolTable:[simProxy symbolTable]];
   [brkptWc setBreakpointsFromSet:[simProxy breakpointList]];
   
-  w = [[self view] window];
+  w = [self window];
   [brkptWc beginSheetModalForWindow:w completionHandler:^(NSModalResponse res) {
     NSArray *bpts;
     MOSMutableBreakpoint *mb;
@@ -440,7 +466,7 @@ static void *SimulatorState = &SimulatorState;
     return !simRunning && !exceptionOccurred;
   
   if ([anItem action] == @selector(openBreakpointsWindow:))
-    return !exceptionOccurred && [[self view] window];
+    return !exceptionOccurred && [self window];
   
   if ([anItem action] == @selector(pause:))
     return simRunning && !exceptionOccurred;
