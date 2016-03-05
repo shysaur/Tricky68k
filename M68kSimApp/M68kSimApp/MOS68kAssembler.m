@@ -138,7 +138,7 @@
   NSFileHandle *nfh;
   BOOL isAbsolute, res;
   
-  fh = open([ld fileSystemRepresentation], O_WRONLY | O_CREAT, 0666);
+  fh = open([ld fileSystemRepresentation], O_WRONLY | O_CREAT | O_EXCL, 0666);
   if (fh < 0) return NO;
   nfh = [[NSFileHandle alloc] initWithFileDescriptor:fh closeOnDealloc:YES];
   if (!nfh) return NO;
