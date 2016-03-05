@@ -154,6 +154,18 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 }
 
 
+- (void)disableStateNotifications {
+  disableNotifications = YES;
+}
+
+
+- (void)enableStateNotifications {
+  disableNotifications = NO;
+  if ([self simulatorState] != [proxy simulatorState])
+    [self setSimulatorState:[proxy simulatorState]];
+}
+
+
 - (BOOL)run {
   NSError *tmp;
   BOOL res;
@@ -283,8 +295,11 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   uint32_t addr;
   
   if ([proxy simulatorState] == MOSSimulatorStateDead) return nil;
+  
+  [self disableStateNotifications];
   list = [proxy sendCommandToDebugger:@"p" error:&err];
   lastError = err;
+  [self enableStateNotifications];
   
   res = [[NSMutableSet alloc] init];
   for (obj in list) {
@@ -305,8 +320,10 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   if ([proxy simulatorState] == MOSSimulatorStateDead) return;
   
   com = [NSString stringWithFormat:@"b 0x%X", addr];
+  [self disableStateNotifications];
   [proxy sendCommandToDebugger:com error:&err];
   lastError = err;
+  [self enableStateNotifications];
 }
 
 
@@ -316,9 +333,11 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   
   if ([proxy simulatorState] == MOSSimulatorStateDead) return;
   
+  [self disableStateNotifications];
   com = [NSString stringWithFormat:@"x 0x%X", addr];
   [proxy sendCommandToDebugger:com error:&err];
   lastError = err;
+  [self enableStateNotifications];
 }
 
 
@@ -408,12 +427,10 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   
   if ([proxy simulatorState] == MOSSimulatorStateDead) return -1;
   
-  disableNotifications = YES;
+  [self disableStateNotifications];
   line = [proxy sendCommandToDebugger:@"f" error:&err];
   lastError = err;
-  disableNotifications = NO;
-  if ([self simulatorState] != [proxy simulatorState])
-    [self setSimulatorState:[proxy simulatorState]];
+  [self enableStateNotifications];
   
   tmp = [line firstObject];
   if (!tmp)
@@ -436,12 +453,10 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   khz = mhz * 1000.0;
   com = [NSString stringWithFormat:@"F %lld", khz];
   
-  disableNotifications = YES;
+  [self disableStateNotifications];
   [proxy sendCommandToDebugger:com error:&err];
   lastError = err;
-  disableNotifications = NO;
-  if ([self simulatorState] != [proxy simulatorState])
-    [self setSimulatorState:[proxy simulatorState]];
+  [self enableStateNotifications];
 }
 
 

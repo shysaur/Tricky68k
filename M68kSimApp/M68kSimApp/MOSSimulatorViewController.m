@@ -415,10 +415,11 @@ static void *SimulatorState = &SimulatorState;
   
   if ([anItem action] == @selector(run:) ||
       [anItem action] == @selector(stepIn:) ||
-      [anItem action] == @selector(stepOver:) ||
-      [anItem action] == @selector(openBreakpointsWindow:)
-     )
+      [anItem action] == @selector(stepOver:))
     return !simRunning && !exceptionOccurred;
+  
+  if ([anItem action] == @selector(openBreakpointsWindow:))
+    return !exceptionOccurred;
   
   if ([anItem action] == @selector(pause:))
     return simRunning && !exceptionOccurred;
