@@ -8,14 +8,16 @@
 
 #import "MOSSourceBreakpointDelegate.h"
 #import "MOSListingDictionary.h"
+#import "MOSSource.h"
 
 
 @implementation MOSSourceBreakpointDelegate
 
 
-- (instancetype)initWithFragaria:(MGSFragariaView *)f {
+- (instancetype)initWithFragaria:(MGSFragariaView *)f source:(MOSSource *)s {
   self = [super init];
   fragaria = f;
+  source = s;
   [fragaria setBreakpointDelegate:self];
   breakpointList = [[NSMutableSet alloc] init];
   return self;
@@ -88,6 +90,7 @@
     [breakpointList removeObject:@(line)];
   else
     [breakpointList addObject:@(line)];
+  [source breakpointsShouldSyncToSimulator:self];
 }
 
 

@@ -30,6 +30,9 @@ enum {
 
 - (void)simulatorModeShouldTerminate:(id)sender;
 
+- (void)breakpointsShouldSyncFromSimulator:(id)sender;
+- (void)breakpointsShouldSyncToSimulator:(id)sender;
+
 @end
 
 

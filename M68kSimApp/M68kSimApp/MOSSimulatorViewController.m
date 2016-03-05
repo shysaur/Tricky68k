@@ -434,6 +434,7 @@ static void *SimulatorState = &SimulatorState;
   [brkptWc beginSheetModalForWindow:w completionHandler:^(NSModalResponse res) {
     NSArray *bpts;
     MOSMutableBreakpoint *mb;
+    id wd;
     
     if (res == NSModalResponseOK) {
       [simProxy removeAllBreakpoints];
@@ -442,6 +443,10 @@ static void *SimulatorState = &SimulatorState;
         [simProxy addBreakpointAtAddress:[mb rawAddress]];
       }
       [disasmDs dataHasChanged];
+      
+      wd = [w delegate];
+      if ([wd respondsToSelector:@selector(breakpointsShouldSyncFromSimulator:)])
+        [wd breakpointsShouldSyncFromSimulator:self];
     }
   }];
 }

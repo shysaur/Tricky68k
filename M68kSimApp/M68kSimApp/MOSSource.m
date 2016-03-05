@@ -131,7 +131,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [[textView undoManager] removeAllActions];
   
   if ([[platform assemblerClass] instancesRespondToSelector:@selector(listingDictionary)])
-    breakptdel = [[MOSSourceBreakpointDelegate alloc] initWithFragaria:fragaria];
+    breakptdel = [[MOSSourceBreakpointDelegate alloc] initWithFragaria:fragaria source:self];
 }
 
 
@@ -237,7 +237,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSURL *oldSimExec;
   NSResponder *oldresp;
   Class simType;
-  NSSet *bp;
   
   if (![self simulatorModeSwitchAllowed])
     return;
@@ -261,10 +260,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
       unlink([oldSimExec fileSystemRepresentation]);
   }
   
-  if (lastListing) {
-    bp = [breakptdel breakpointAddressesWithListingDictionary:lastListing];
-    [simVc replaceBreakpoints:bp];
-  }
+  [self breakpointsShouldSyncToSimulator:nil];
   
   simView = [simVc view];
   
@@ -295,16 +291,12 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (IBAction)switchToEditor:(id)sender {
   NSView *contview;
-  NSSet *bp;
   id oldresp;
   
   if (!simulatorMode)
     return;
   
-  if (lastListing) {
-    bp = [[simVc simulatorProxy] breakpointList];
-    [breakptdel syncBreakpointsWithAddresses:bp listingDictionary:lastListing];
-  }
+  [self breakpointsShouldSyncFromSimulator:nil];
   
   [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
   [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
@@ -485,6 +477,29 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [fragaria setSyntaxErrors:MOSSyntaxErrorsFromEvents(events)];
   } else
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+
+#pragma mark - Breakpoints
+
+
+- (void)breakpointsShouldSyncFromSimulator:(id)sender {
+  NSSet *bp;
+  
+  if (lastListing) {
+    bp = [[simVc simulatorProxy] breakpointList];
+    [breakptdel syncBreakpointsWithAddresses:bp listingDictionary:lastListing];
+  }
+}
+
+
+- (void)breakpointsShouldSyncToSimulator:(id)sender {
+  NSSet *bp;
+  
+  if (lastListing) {
+    bp = [breakptdel breakpointAddressesWithListingDictionary:lastListing];
+    [simVc replaceBreakpoints:bp];
+  }
 }
 
 

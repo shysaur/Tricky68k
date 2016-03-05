@@ -11,15 +11,17 @@
 
 
 @class MOSListingDictionary;
+@class MOSSource;
 
 
 @interface MOSSourceBreakpointDelegate : NSObject <MGSBreakpointDelegate> {
   NSMutableSet *breakpointList;
   NSMutableDictionary *addressToOriginalLines;
   MGSFragariaView *fragaria;
+  __weak MOSSource *source;
 }
 
-- (instancetype)initWithFragaria:(MGSFragariaView *)f;
+- (instancetype)initWithFragaria:(MGSFragariaView *)f source:(MOSSource *)s;
 
 - (NSSet *)breakpointAddressesWithListingDictionary:(MOSListingDictionary *)ld;
 - (void)syncBreakpointsWithAddresses:(NSSet *)as listingDictionary:(MOSListingDictionary *)ld;

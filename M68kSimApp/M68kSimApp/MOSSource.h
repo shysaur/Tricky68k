@@ -55,8 +55,12 @@
 - (IBAction)switchToSimulator:(id)sender;
 - (IBAction)switchToEditor:(id)editor;
 
+- (void)simulatorModeShouldTerminate:(id)sender;
 - (BOOL)simulatorModeSwitchAllowed;
 - (BOOL)sourceModeSwitchAllowed;
+
+- (void)breakpointsShouldSyncFromSimulator:(id)sender;
+- (void)breakpointsShouldSyncToSimulator:(id)sender;
 
 - (MOSPlatform *)currentPlatform;
 
