@@ -54,6 +54,17 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
+@interface MOSSource ()
+
+@property (nonatomic) BOOL simulatorMode;
+
+@property (nonatomic) MOSAssembler *assembler;
+@property (nonatomic) NSURL *assemblyOutput;
+@property (nonatomic) NSURL *listingOutput;
+
+@end
+
+
 @implementation MOSSource
 
 
@@ -102,7 +113,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [super windowControllerDidLoadNib:aController];
 
   hadJob = NO;
-  simulatorMode = NO;
+  self.simulatorMode = NO;
   
   if (!text) {
     template = [[NSBundle mainBundle] URLForResource:@"VasmTemplate" withExtension:@"s"];
@@ -175,7 +186,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 - (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)anItem {
   if ([anItem action] == @selector(assembleAndRun:) ||
       [anItem action] == @selector(assemble:))
-    return !assembler;
+    return !self.assembler;
   if ([anItem action] == @selector(switchToEditor:))
     return [self sourceModeSwitchAllowed];
   if ([anItem action] == @selector(switchToSimulator:))
@@ -192,25 +203,33 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 #pragma mark - View Switch
 
 
++ (NSSet *)keyPathsForValuesAffectingSimulatorModeSwitchAllowed {
+  return [NSSet setWithObjects:@"simulatorMode", @"assembler", @"assemblyOutput", nil];
+}
+
+
 - (BOOL)simulatorModeSwitchAllowed {
-  return !simulatorMode      /* mustn't be in simulator mode */
-          && !assembler      /* mustn't be assembling */
-          && assemblyOutput; /* must have assembled at least once */
+  return !self.simulatorMode      /* mustn't be in simulator mode */
+          && !self.assembler      /* mustn't be assembling */
+          && self.assemblyOutput; /* must have assembled at least once */
+}
+
+
++ (NSSet *)keyPathsForValuesAffectingSourceModeSwitchAllowed {
+  return [NSSet setWithObjects:@"simulatorMode", @"assembler", nil];
 }
 
 
 - (BOOL)sourceModeSwitchAllowed {
-  return simulatorMode
-          && !assembler;
+  return self.simulatorMode
+          && !self.assembler;
 }
 
 
 - (void)simulatorModeShouldTerminate:(id)sender {
   [self switchToEditor:sender];
   /* Keep simulator in limbo, and force re-assembly of new file for next time */
-  [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
-  assemblyOutput = nil;
-  [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
+  self.assemblyOutput = nil;
   [[docWindow toolbar] validateVisibleItems];
 }
 
@@ -221,7 +240,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   res = [[CATransition alloc] init];
   [res setType:kCATransitionPush];
-  if (simulatorMode)
+  if (self.simulatorMode)
     [res setSubtype:kCATransitionFromLeft];
   else
     [res setSubtype:kCATransitionFromRight];
@@ -240,18 +259,13 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   if (![self simulatorModeSwitchAllowed])
     return;
-  
-  [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
-  [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
 
   oldSimExec = [simVc simulatedExecutable];
-  if (![oldSimExec isEqual:assemblyOutput]) {
+  if (![oldSimExec isEqual:self.assemblyOutput]) {
     simType = [platform simulatorClass];
-    if (![simVc setSimulatedExecutable:assemblyOutput simulatorType:simType error:&err]) {
+    if (![simVc setSimulatedExecutable:self.assemblyOutput simulatorType:simType error:&err]) {
       /* Keep simulator in limbo, and force re-assembly of new file for next time */
-      [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
-      assemblyOutput = nil;
-      [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
+      self.assemblyOutput = nil;
       [self presentError:err];
       return;
     }
@@ -282,10 +296,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
   [docWindow makeFirstResponder:simView];
   
-  simulatorMode = YES;
-  
-  [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
-  [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
+  self.simulatorMode = YES;
 }
 
 
@@ -293,13 +304,10 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSView *contview;
   id oldresp;
   
-  if (!simulatorMode)
+  if (!self.simulatorMode)
     return;
   
   [self breakpointsShouldSyncFromSimulator:nil];
-  
-  [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
-  [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
   
   contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
@@ -321,10 +329,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   [docWindow makeFirstResponder:textView];
   
-  simulatorMode = NO;
-  
-  [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
-  [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
+  self.simulatorMode = NO;
 }
 
 
@@ -333,7 +338,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (IBAction)assembleAndRun:(id)sender {
   runWhenAssemblyComplete = YES;
-  if (simulatorMode)
+  if (self.simulatorMode)
     [self switchToEditor:nil];
   [self assembleInBackground];
 }
@@ -341,7 +346,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (IBAction)assemble:(id)sender {
   runWhenAssemblyComplete = NO;
-  if (simulatorMode)
+  if (self.simulatorMode)
     [self switchToEditor:nil];
   [self assembleInBackground];
 }
@@ -366,26 +371,24 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (void)assembleInBackground {
   assembleForSaveOnly = NO;
-  unlink([assemblyOutput fileSystemRepresentation]);
-  assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+  unlink([self.assemblyOutput fileSystemRepresentation]);
+  self.assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
   if (breakptdel)
-    listingOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
+    self.listingOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
   else
-    listingOutput = nil;
+    self.listingOutput = nil;
   
-  [self assembleInBackgroundToURL:assemblyOutput listingURL:listingOutput];
+  [self assembleInBackgroundToURL:self.assemblyOutput listingURL:self.listingOutput];
 }
 
 
 - (void)assembleInBackgroundToURL:(NSURL *)outurl listingURL:(NSURL *)listurl {
-  if (assembler) return;
+  if (self.assembler)
+    return;
   
   [self setTransient:NO];
   
-  [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
-  [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
-  
-  assembler = [[[platform assemblerClass] alloc] init];
+  self.assembler = [[[platform assemblerClass] alloc] init];
   
   tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
   
@@ -397,12 +400,13 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     NSString *title, *label;
     
     if (err) {
-      assembler = nil;
+      self.assembler = nil;
       if (assembleForSaveOnly)
-        assemblyOutput = nil;
+        self.assemblyOutput = nil;
       return;
     }
-    [assembler addObserver:self forKeyPath:@"complete" options:0 context:AssemblageComplete];
+    [self.assembler addObserver:self forKeyPath:@"complete" options:0
+      context:AssemblageComplete];
 
     ud = [NSUserDefaults standardUserDefaults];
     jsm = [MOSJobStatusManager sharedJobStatusManger];
@@ -433,17 +437,14 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ?
       MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
     
-    [assembler setOutputFile:outurl];
+    [self.assembler setOutputFile:outurl];
     if (listurl)
-      [assembler setOutputListingFile:listurl];
-    [assembler setSourceFile:tempSourceCopy];
-    [assembler setJobStatus:lastJob];
-    [assembler setAssemblageOptions:opts];
-    [assembler assemble];
+      [self.assembler setOutputListingFile:listurl];
+    [self.assembler setSourceFile:tempSourceCopy];
+    [self.assembler setJobStatus:lastJob];
+    [self.assembler setAssemblageOptions:opts];
+    [self.assembler assemble];
   }];
-  
-  [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
-  [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
 }
 
 
@@ -453,33 +454,27 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSArray *events;
   
   if (context == AssemblageComplete) {
-    [self willChangeValueForKey:@"simulatorModeSwitchAllowed"];
-    [self willChangeValueForKey:@"sourceModeSwitchAllowed"];
-    
-    asmres = [assembler assemblageResult];
+    asmres = [self.assembler assemblageResult];
     
     if (!assembleForSaveOnly) {
       if (asmres == MOSAssemblageResultFailure) {
-        assemblyOutput = nil;
+        self.assemblyOutput = nil;
         lastListing = nil;
       } else {
-        if ([assembler respondsToSelector:@selector(listingDictionary)])
-          lastListing = [assembler listingDictionary];
+        if ([self.assembler respondsToSelector:@selector(listingDictionary)])
+          lastListing = [self.assembler listingDictionary];
         else
           lastListing = nil;
       }
     }
     
-    [assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
-    assembler = nil;
-    
-    [self didChangeValueForKey:@"simulatorModeSwitchAllowed"];
-    [self didChangeValueForKey:@"sourceModeSwitchAllowed"];
+    [self.assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
+    self.assembler = nil;
     
     unlink([tempSourceCopy fileSystemRepresentation]);
-    if (listingOutput) {
-      unlink([listingOutput fileSystemRepresentation]);
-      listingOutput = nil;
+    if (self.listingOutput) {
+      unlink([self.listingOutput fileSystemRepresentation]);
+      self.listingOutput = nil;
     }
     
     if (asmres != MOSAssemblageResultFailure && runWhenAssemblyComplete) {
@@ -590,8 +585,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   simView = nil;
   simVc = nil;
   
-  if (assemblyOutput)
-    unlink([assemblyOutput fileSystemRepresentation]);
+  if (self.assemblyOutput)
+    unlink([self.assemblyOutput fileSystemRepresentation]);
   
   [super close];
 }

@@ -27,7 +27,6 @@
    * because NSDocument also supports multiple windows for the same document.
    * But, since we don't support that, it's just an annoyance. */
   __weak IBOutlet NSWindow *docWindow;
-  BOOL simulatorMode;
   
   NSTextStorage *text;
   SMLTextView *textView;
@@ -39,7 +38,6 @@
   IBOutlet MOSSimulatorViewController *simVc;
   NSView *simView;
   
-  MOSAssembler *assembler;
   BOOL assembleForSaveOnly;
   BOOL runWhenAssemblyComplete;
   NSURL *tempSourceCopy;
@@ -47,8 +45,6 @@
   BOOL hadJob;
   /* Following ivars must not be modified if runWhenAssemblyComplete == NO: */
   MOSListingDictionary *lastListing;
-  NSURL *assemblyOutput;
-  NSURL *listingOutput;
 }
 
 - (IBAction)assemble:(id)sender;
