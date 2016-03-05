@@ -29,7 +29,7 @@ extern NSString * const MOSSimulatorErrorDomain;
 @interface MOS68kSimulatorProxy : NSObject {
   NSTask *simTask;
   NSURL *exec;
-  NSError *lastErrorOnSimReenter;
+  NSError *_lastSimulationException;
   dispatch_semaphore_t waitingForDebugger;
   dispatch_semaphore_t enteredDebugger;
   dispatch_queue_t sendQueue;

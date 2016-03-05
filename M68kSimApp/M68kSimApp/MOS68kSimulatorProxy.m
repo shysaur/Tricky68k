@@ -31,6 +31,14 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 }
 
 
+@interface MOS68kSimulatorProxy ()
+
+@property (atomic) NSError *lastErrorOnSimReenter;
+@property (atomic) NSInteger lastSimReenterReason;
+
+@end
+
+
 @implementation MOS68kSimulatorProxy
 
 
@@ -234,12 +242,8 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   }
   if (err) *err = nil;
   
-  if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW)) {
-    if (err) *err = lastErrorOnSimReenter;
-    lastErrorOnSimReenter = nil;
-    [self setSimulatorState:MOSSimulatorStatePaused];
-    return YES;
-  }
+  if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW))
+    goto done;
   
   dispatch_semaphore_signal(waitingForDebugger);
   [simTask interrupt];
@@ -250,9 +254,8 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     return NO;
   }
   
-  if (err) *err = lastErrorOnSimReenter;
-  lastErrorOnSimReenter = nil;
-  [self setSimulatorState:MOSSimulatorStatePaused];
+done:
+  [self finishTransitionIntoDebuggerWithError:err setProperty:NO];
   return YES;
 }
 
@@ -278,11 +281,14 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     NSError *reenterError;
     NSString *tmp;
     BOOL first = YES;
+    NSInteger reentReas = 0;
     
     tmp = [[fromSim fileHandleForReading] readLine];
     while (tmp && ![tmp isEqual:@"debug? "]) {
       if (first && [tmp hasPrefix:@"error! "])
         reenterError = [self errorFromLine:tmp];
+      else if (first && [tmp hasPrefix:@"reason. "])
+        sscanf([tmp UTF8String]+8, "%ld", &reentReas);
       else
         MOSSimLog(simTask, @"received %@ on debugger reenter", tmp);
       tmp = [[fromSim fileHandleForReading] readLine];
@@ -290,22 +296,36 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     }
     if (!tmp) return; /* EOF => sim dead */
     
+    self.lastErrorOnSimReenter = reenterError;
+    self.lastSimReenterReason = reentReas;
     dispatch_semaphore_signal(enteredDebugger);
     
     if (dispatch_semaphore_wait(waitingForDebugger, DISPATCH_TIME_NOW)) {
+      /* Nobody is waiting for the enteredDebugger signal. */
       dispatch_async(dispatch_get_main_queue(), ^{
         if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW)) {
-          lastErrorOnSimReenter = reenterError;
+          /* Nobody else has acknowledge entrance into the debugger, so we
+           * do it ourselves. */
           if ([self simulatorState] != MOSSimulatorStatePaused)
-            [self setSimulatorState:MOSSimulatorStatePaused];
+            [self finishTransitionIntoDebuggerWithError:nil setProperty:YES];
         }
       });
     }
   });
   
   [self setSimulatorState:MOSSimulatorStateRunning];
-  lastErrorOnSimReenter = nil;
   return YES;
+}
+
+
+- (void)finishTransitionIntoDebuggerWithError:(NSError **)err setProperty:(BOOL)sp  {
+  if (err)
+    *err = self.lastErrorOnSimReenter;
+  if (sp)
+    _lastSimulationException = self.lastErrorOnSimReenter;
+  else
+    _lastSimulationException = nil;
+  [self setSimulatorState:MOSSimulatorStatePaused];
 }
 
 
@@ -318,13 +338,18 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     hasToRestart = YES;
     [self enterDebuggerWithError:&tmpe];
     if (tmpe) {
-      MOSSimLog(simTask, @"-sendCommandToDebugger:error: can't enter "
-                "new state. %@", tmpe);
+      MOSSimLog(simTask, @"-sendCommandToDebugger:error: error during "
+        "transition to debug mode: %@", tmpe);
       if (err) *err = tmpe;
+      return nil;
+    } else if (self.lastSimReenterReason != 0) {
+      /* A breakpoint hit, a step ended, or something like that happened on
+       * the simulator state, so we want to stay paused afterwards. */
+      hasToRestart = NO;
     }
-  } else if ([self simulatorState] == MOSSimulatorStatePaused)
+  } else if ([self simulatorState] == MOSSimulatorStatePaused) {
     hasToRestart = NO;
-  else {
+  } else {
     if (err) *err = NSERROR_SIM(MOSSimulatorErrorBrokenConnection);
     return nil;
   }
@@ -339,7 +364,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   if (hasToRestart) {
     if (![self exitDebuggerWithCommand:@"c" error:&tmpe]) {
       MOSSimLog(simTask, @"-sendCommandToDebugger:error: can't reenter "
-        "previous state. %@", tmpe);
+        "running mode! %@", tmpe);
       [self kill];
     }
   }
@@ -348,7 +373,9 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 
 
 - (NSError*)lastSimulationException {
-  return lastErrorOnSimReenter;
+  if ([self simulatorState] == MOSSimulatorStateRunning)
+    return nil;
+  return _lastSimulationException;
 }
 
 
