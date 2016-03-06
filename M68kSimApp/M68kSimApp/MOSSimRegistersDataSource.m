@@ -31,7 +31,6 @@
 
 
 - (NSView *)tableView:(NSTableView *)tv viewForTableColumn:(NSTableColumn *)tc row:(NSInteger)row {
-  NSNumber *value;
   NSArray *rfi;
   id rowobj;
   id result;
@@ -48,7 +47,6 @@
       [[result textField] setStringValue:[rowobj objectForKey:@"label"]];
     } else {
       result = [tv makeViewWithIdentifier:@"valueView" owner:self];
-      value = [rowobj objectForKey:@"string"];
       [[result textField] setFont:[self defaultMonospacedFont]];
       [[result textField] setStringValue:[rowobj objectForKey:@"string"]];
     }
