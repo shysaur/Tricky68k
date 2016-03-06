@@ -15,7 +15,7 @@
 
 
 @interface MOSSourceBreakpointDelegate : NSObject <MGSBreakpointDelegate> {
-  NSMutableSet *breakpointList;
+  NSMutableIndexSet *breakpointList;
   NSMutableDictionary *addressToOriginalLines;
   MGSFragariaView *fragaria;
   __weak MOSSource *source;

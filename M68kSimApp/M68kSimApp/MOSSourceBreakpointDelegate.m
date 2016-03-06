@@ -18,32 +18,35 @@
   self = [super init];
   fragaria = f;
   source = s;
+  breakpointList = [[NSMutableIndexSet alloc] init];
   [fragaria setBreakpointDelegate:self];
-  breakpointList = [[NSMutableSet alloc] init];
   return self;
 }
 
 
 - (NSSet *)breakpointAddressesWithListingDictionary:(MOSListingDictionary *)ld {
-  NSMutableSet *res, *tmp;
-  NSNumber *this, *a;
+  NSMutableSet *res;
   
   res = [NSMutableSet set];
   addressToOriginalLines = [NSMutableDictionary dictionary];
-  for (this in breakpointList) {
-    a = [ld addressForSourceLine:[this integerValue]];
+  
+  [breakpointList enumerateIndexesUsingBlock:^(NSUInteger l, BOOL *stop) {
+    NSNumber *a;
+    NSMutableIndexSet *tmp;
+    
+    a = [ld addressForSourceLine:l];
     if (!a)
-      NSLog(@"Address for line %@ not found.", this);
+      NSLog(@"Address for line %ld not found.", l);
     else {
       [res addObject:a];
       tmp = [addressToOriginalLines objectForKey:a];
       if (!tmp) {
-        tmp = [NSMutableSet setWithObject:this];
+        tmp = [NSMutableIndexSet indexSetWithIndex:l];
         [addressToOriginalLines setObject:tmp forKey:a];
       } else
-        [tmp addObject:this];
+        [tmp addIndex:l];
     }
-  }
+  }];
   
   return [res copy];
 }
@@ -51,10 +54,10 @@
 
 - (void)syncBreakpointsWithAddresses:(NSSet *)as listingDictionary:(MOSListingDictionary *)ld {
   NSNumber *this;
-  NSSet *lines;
+  NSIndexSet *lines;
   NSUInteger l;
   
-  [breakpointList removeAllObjects];
+  [breakpointList removeAllIndexes];
   for (this in as) {
     lines = [addressToOriginalLines objectForKey:this];
     if (!lines) {
@@ -63,15 +66,15 @@
         NSLog(@"Line for address %@ not found.", this);
         continue;
       }
-      lines = [NSSet setWithObject:@(l)];
+      lines = [NSIndexSet indexSetWithIndex:l];
     }
-    [breakpointList unionSet:lines];
+    [breakpointList addIndexes:lines];
   }
   [fragaria reloadBreakpointData];
 }
 
 
-- (NSSet *)breakpointsForFragaria:(MGSFragariaView *)sender {
+- (NSIndexSet *)breakpointsForFragaria:(MGSFragariaView *)sender {
   return [breakpointList copy];
 }
 
@@ -86,11 +89,44 @@
 
 
 - (void)toggleBreakpointForFragaria:(MGSFragariaView *)sender onLine:(NSUInteger)line {
-  if ([breakpointList containsObject:@(line)])
-    [breakpointList removeObject:@(line)];
+  if ([breakpointList containsIndex:line])
+    [breakpointList removeIndex:line];
   else
-    [breakpointList addObject:@(line)];
+    [breakpointList addIndex:line];
   [source breakpointsShouldSyncToSimulator:self];
+}
+
+
+- (void)fixBreakpointsOfAddedLines:(NSInteger)delta inLineRange:(NSRange)newRange ofFragaria:(MGSFragariaView *)sender
+{
+  NSRange oldRange;
+  BOOL changed = NO;
+  NSUInteger tmp, minAffectedIdx;
+  
+  oldRange = newRange;
+  oldRange.length -= delta;
+  
+  if (delta < 0) {
+    tmp = [breakpointList indexLessThanIndex:NSMaxRange(oldRange)];
+    if (tmp != NSNotFound && tmp >= NSMaxRange(newRange)) {
+      /* Move all breakpoints that were located in deleted lines to the
+       * end of the new range. */
+      [breakpointList addIndex:NSMaxRange(newRange)-1];
+      changed = YES;
+    }
+    minAffectedIdx = NSMaxRange(newRange);
+  } else {
+    minAffectedIdx = NSMaxRange(oldRange);
+  }
+  
+  if ([breakpointList indexGreaterThanOrEqualToIndex:minAffectedIdx] != NSNotFound) {
+    [breakpointList shiftIndexesStartingAtIndex:NSMaxRange(oldRange) by:delta];
+    changed = YES;
+  }
+  if (changed) {
+    [fragaria reloadBreakpointData];
+    [source breakpointsShouldSyncToSimulator:self];
+  }
 }
 
 
