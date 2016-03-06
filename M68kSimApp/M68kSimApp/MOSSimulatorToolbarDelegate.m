@@ -124,7 +124,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
   id view;
   NSString *label;
   NSImage *image;
-  SEL action;
+  SEL action = NULL;
   CGFloat minsize;
   NSRect rect;
   NSArray *system = @[

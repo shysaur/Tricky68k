@@ -318,7 +318,7 @@ done:
 }
 
 
-- (void)finishTransitionIntoDebuggerWithError:(NSError **)err setProperty:(BOOL)sp  {
+- (BOOL)finishTransitionIntoDebuggerWithError:(NSError **)err setProperty:(BOOL)sp  {
   if (err)
     *err = self.lastErrorOnSimReenter;
   if (sp)
@@ -326,6 +326,7 @@ done:
   else
     _lastSimulationException = nil;
   [self setSimulatorState:MOSSimulatorStatePaused];
+  return !!self.lastErrorOnSimReenter;
 }
 
 
