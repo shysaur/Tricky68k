@@ -14,7 +14,8 @@
 
 - (BOOL)knowsPageRange:(NSRangePointer)range {
   NSSize pageSize;
-  NSRange crange, grange, wrange;
+  NSUInteger len;
+  NSRange wrange;
   NSLayoutManager *lm;
   NSPrintInfo *printInfo;
   
@@ -26,15 +27,12 @@
   [self setFrame:NSMakeRect(0, 0, pageSize.width, pageSize.height)];
   
   /* Force re-layout of the view */
-  if ([[self textStorage] length] > 0) {
-    crange = NSMakeRange([[self textStorage] length]-1, 1);
-    wrange = NSMakeRange(0, [[self textStorage] length]);
+  len = self.textStorage.length;
+  if (len > 0) {
+    wrange = NSMakeRange(0, len);
     lm = [self layoutManager];
     [lm invalidateLayoutForCharacterRange:wrange actualCharacterRange:NULL];
-    grange = [lm glyphRangeForCharacterRange:crange actualCharacterRange:NULL];
-    if (grange.location) {
-      (void)[lm textContainerForGlyphAtIndex:grange.location-1 effectiveRange:NULL];
-    }
+    [lm ensureLayoutForCharacterRange:wrange];
   }
 
   return [super knowsPageRange:range];
