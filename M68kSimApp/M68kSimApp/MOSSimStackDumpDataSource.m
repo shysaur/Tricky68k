@@ -14,8 +14,30 @@
 @implementation MOSSimStackDumpDataSource
 
 
++ (void)load {
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
+  [ud registerDefaults:@{
+    @"StackDumpSize": @(0x800000 / 1024)
+  }];
+}
+
+
+- (instancetype)init {
+  NSUInteger maxKb;
+  
+  self = [super init];
+  
+  maxKb = [[NSUserDefaults standardUserDefaults] integerForKey:@"StackDumpSize"];
+  maxLines = maxKb * 1024 / 4;
+  
+  return self;
+}
+
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-  return 0x1000000 / 16;
+  return maxLines;
 }
 
 
