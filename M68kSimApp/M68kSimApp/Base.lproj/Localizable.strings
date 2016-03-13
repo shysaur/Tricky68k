@@ -13,11 +13,17 @@
 /* Assembler job name */
 "Assemble %@" = "Assemble %@";
 
+/* Toolbar Item */
+"Assemble and Run" = "Assemble and Run";
+
 /* Description for generic simulator IPC errors */
 "Can't connect to the simulator" = "Can't connect to the simulator";
 
 /* Cancel */
 "Cancel" = "Cancel";
+
+/* Toolbar Item */
+"Clock Frequency" = "Clock Frequency";
 
 /* Copy (teletype view menu) */
 "Copy" = "Copy";
@@ -25,11 +31,17 @@
 /* Text of the event which occurs when creating a linker file failed. */
 "Could not create a linker file." = "Could not create a linker file.";
 
+/* Text of the event which occurs when failing to read a listing file. */
+"Could not read the listing file" = "Could not read the listing file";
+
 /* Register table header for Dx */
 "Data Registers" = "Data Registers";
 
 /* Debug (after segmentation fault) */
 "Debug" = "Debug";
+
+/* Toolbar Item */
+"Flags" = "Flags";
 
 /* Error description when the simulator can't load a file */
 "Impossible to load this executable" = "Impossible to load this executable";
@@ -46,17 +58,42 @@
 /* Paste (teletype view menu) */
 "Paste" = "Paste";
 
-/* Restart (simulator) */
+/* Toolbar Item */
+"Pause" = "Pause";
+
+/* Restart (simulator)
+   Toolbar Item */
 "Restart" = "Restart";
+
+/* Toolbar Item */
+"Running" = "Running";
 
 /* Error description when the user program segmentation faults */
 "Segmentation fault!" = "Segmentation fault!";
 
+/* Toolbar Item */
+"Simulator" = "Simulator";
+
+/* Toolbar Item */
+"Source" = "Source";
+
+/* Toolbar Item */
+"Start" = "Start";
+
 /* Register table header for SR */
 "Status Register" = "Status Register";
 
+/* Toolbar Item */
+"Step In" = "Step In";
+
+/* Toolbar Item */
+"Step Over" = "Step Over";
+
 /* Error description when the breakpoint formula parser does not find what it expected. */
 "Symbol or numerical constant expected" = "Symbol or numerical constant expected";
+
+/* Print panel summary title for the font used for printing. */
+"Text Font" = "Text Font";
 
 /* Info about what happens when assembler optimizations are disabled */
 "The assembler output will contain exactly the instructions you specified in the source file." = "The assembler output will contain exactly the instructions you specified in the source file.";
