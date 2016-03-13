@@ -9,8 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MOSDescribeArchivedFontTransformer : NSValueTransformer {
-  NSNumberFormatter *ptSizeFormatter;
-}
+@interface MOSDescribeFontTransformer : NSValueTransformer
 
 @end
+
+
+@interface MOSDescribeArchivedFontTransformer : MOSDescribeFontTransformer
+
+@end
+

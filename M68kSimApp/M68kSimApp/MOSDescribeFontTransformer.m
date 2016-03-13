@@ -6,10 +6,13 @@
 //  Copyright (c) 2015 Daniele Cattaneo. 
 //
 
-#import "MOSDescribeArchivedFontTransformer.h"
+#import "MOSDescribeFontTransformer.h"
 
 
-@implementation MOSDescribeArchivedFontTransformer
+static NSNumberFormatter *ptSizeFormatter;
+
+
+@implementation MOSDescribeFontTransformer
 
 
 + (Class)transformedValueClass {
@@ -23,20 +26,22 @@
 
 
 - (instancetype)init {
+  static dispatch_once_t onceToken;
+  
   self = [super init];
-  ptSizeFormatter = [[NSNumberFormatter alloc] init];
-  [ptSizeFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+  dispatch_once(&onceToken, ^{
+    ptSizeFormatter = [[NSNumberFormatter alloc] init];
+    [ptSizeFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+  });
   return self;
 }
 
 
-- (id)transformedValue:(NSData *)value {
+- (id)transformedValue:(NSFont *)font {
   NSNumber *size;
   NSString *sizeString;
   NSString *name;
-  NSFont *font;
   
-  font = [NSUnarchiver unarchiveObjectWithData:value];
   size = [NSNumber numberWithFloat:[font pointSize]];
   sizeString = [ptSizeFormatter stringFromNumber:size];
   name = [font displayName];
@@ -45,3 +50,16 @@
 
 
 @end
+
+
+@implementation MOSDescribeArchivedFontTransformer
+
+
+- (id)transformedValue:(NSData *)font {
+  return [super transformedValue:[NSUnarchiver unarchiveObjectWithData:font]];
+}
+
+
+@end
+
+
