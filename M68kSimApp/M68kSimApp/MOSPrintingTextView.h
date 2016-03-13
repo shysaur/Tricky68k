@@ -8,7 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MOSPrintingTextView : NSTextView
+
+extern NSString * const MOSPrintFont;
+
+
+@interface MOSPrintingTextView : NSTextView {
+  NSInteger _tabWidth;
+}
 
 - (void)setTabWidth:(NSInteger)tabWidth;
 

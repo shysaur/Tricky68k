@@ -9,7 +9,17 @@
 #import "MOSPrintingTextView.h"
 
 
+NSString * const MOSPrintFont = @"MOSFont";
+
+
 @implementation MOSPrintingTextView
+
+
+- (instancetype)initWithFrame:(NSRect)frameRect {
+  self = [super initWithFrame:frameRect];
+  [self setTabWidth:4];
+  return self;
+}
 
 
 - (BOOL)knowsPageRange:(NSRangePointer)range {
@@ -20,6 +30,7 @@
   NSPrintInfo *printInfo;
   
   printInfo = [[NSPrintOperation currentOperation] printInfo];
+  [self setFont:[printInfo.dictionary objectForKey:MOSPrintFont]];
   
   pageSize = [printInfo paperSize];
   pageSize.width -= [printInfo rightMargin] + [printInfo leftMargin];
@@ -47,6 +58,7 @@
   NSTextStorage *ts;
   NSRange wholeRange;
   
+  _tabWidth = tabWidth;
   ta = [[self typingAttributes] mutableCopy];
   style = [[ta objectForKey:NSParagraphStyleAttributeName] mutableCopy];
   if (!style)
@@ -66,6 +78,12 @@
   wholeRange = NSMakeRange(0, [[self string] length]);
   [self setTypingAttributes:ta];
   [ts addAttribute:NSParagraphStyleAttributeName value:style range:wholeRange];
+}
+
+
+- (void)setFont:(NSFont *)font {
+  [super setFont:font];
+  [self setTabWidth:_tabWidth];
 }
 
 

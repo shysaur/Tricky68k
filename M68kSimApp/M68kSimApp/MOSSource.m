@@ -23,6 +23,7 @@
 #import "MOSPlatform.h"
 #import "MOSSourceBreakpointDelegate.h"
 #import "MOSListingDictionary.h"
+#import "MOSPrintAccessoryViewController.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -530,6 +531,10 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (NSPrintInfo*)printInfo {
   NSPrintInfo *pi;
+  NSFont *font;
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
   
   pi = [super printInfo];
   [pi setHorizontalPagination:NSFitPagination];
@@ -540,6 +545,12 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [pi setRightMargin:(72.0/2.54)*1.5];
   [pi setTopMargin:(72.0/2.54)*2.0];
   [pi setBottomMargin:(72.0/2.54)*2.0];
+  
+  font = [ud unarchivedObjectForKey:MOSDefaultsPrintFont];
+  if (!font)
+    font = [ud unarchivedObjectForKey:MGSFragariaPrefsTextFont];
+  [pi.dictionary setObject:font forKey:@"MOSFont"];
+  
   return pi;
 }
 
@@ -549,21 +560,22 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSPrintOperation *po;
   MOSPrintingTextView *printView;
   NSPrintInfo *printInfo;
-  NSFont *font;
   NSPrintPanel *printPanel;
   NSPrintPanelOptions opts;
   NSUserDefaults *ud;
+  MOSPrintAccessoryViewController *pa;
   
   ud = [NSUserDefaults standardUserDefaults];
   
   printInfo = [self printInfo];
   [[printInfo dictionary] addEntriesFromDictionary:printSettings];
-  font = [ud unarchivedObjectForKey:MGSFragariaPrefsTextFont];
   
   printView = [[MOSPrintingTextView alloc] init];
   [printView setString:[fragaria string]];
-  [printView setFont:font];
   [printView setTabWidth:[ud integerForKey:MGSFragariaPrefsTabWidth]];
+  
+  pa = [[MOSPrintAccessoryViewController alloc] init];
+  [pa setRepresentedObject:printInfo];
   
   po = [NSPrintOperation printOperationWithView:printView printInfo:printInfo];
   [po setShowsPrintPanel:YES];
@@ -571,6 +583,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   printPanel = [po printPanel];
   opts = [printPanel options] | NSPrintPanelShowsPaperSize | NSPrintPanelShowsOrientation;
   [printPanel setOptions:opts];
+  [printPanel addAccessoryController:pa];
   
   return po;
 }

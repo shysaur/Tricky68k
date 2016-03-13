@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MOSPrintAccessoryViewController">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="431" height="59"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JUk-TP-Hab">
+                    <rect key="frame" x="337" y="25" width="81" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="V9o-l1-nR2"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" title="Set Font..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7iZ-mn-Stj">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="changeTextFont:" target="-2" id="KbC-cW-qZm"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ah7-Sn-ev5">
+                    <rect key="frame" x="99" y="9" width="235" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="235" id="RNx-uQ-sBb"/>
+                        <constraint firstAttribute="height" constant="40" id="gFe-cx-zRo"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="2MN-mT-Gwx">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="textFont" id="buP-Te-ptq">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">MOSDescribeFontTransformer</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="-2" name="font" keyPath="textFont" id="fAM-WG-gjy"/>
+                    </connections>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CO3-Ad-d6T">
+                    <rect key="frame" x="58" y="32" width="35" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="LZ2-2v-U6z"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Font:" id="m2f-03-YZ4">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="JUk-TP-Hab" firstAttribute="top" secondItem="ah7-Sn-ev5" secondAttribute="top" id="BqV-8d-6DL"/>
+                <constraint firstItem="JUk-TP-Hab" firstAttribute="leading" secondItem="ah7-Sn-ev5" secondAttribute="trailing" constant="8" id="L0F-OR-Fwx"/>
+                <constraint firstAttribute="centerX" secondItem="CO3-Ad-d6T" secondAttribute="trailing" constant="125" id="VpE-Zc-2kH"/>
+                <constraint firstItem="ah7-Sn-ev5" firstAttribute="top" secondItem="CO3-Ad-d6T" secondAttribute="top" id="aBV-n6-MTZ"/>
+                <constraint firstItem="ah7-Sn-ev5" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="b7o-rL-Ze2"/>
+                <constraint firstItem="ah7-Sn-ev5" firstAttribute="leading" secondItem="CO3-Ad-d6T" secondAttribute="trailing" constant="8" id="efx-EA-8q6"/>
+            </constraints>
+            <point key="canvasLocation" x="267.5" y="224.5"/>
+        </view>
+    </objects>
+</document>

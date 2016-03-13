@@ -15,6 +15,7 @@
 		0108A2AF1AE6FE4500085E5F /* MOSDescribeFontTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0108A2AE1AE6FE4500085E5F /* MOSDescribeFontTransformer.m */; };
 		010AACAB1B1CDEA0005D9984 /* Fragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010AACAA1B1CDEA0005D9984 /* Fragaria.framework */; };
 		010AACAC1B1CDEA0005D9984 /* Fragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 010AACAA1B1CDEA0005D9984 /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01113DEB1C94F7E7007EC178 /* MOSPrintAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01113DED1C94F7E7007EC178 /* MOSPrintAccessoryView.xib */; };
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
 		011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */; };
 		0124CF161B2F5EF800DD0A5C /* MOSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 0124CF151B2F5EF800DD0A5C /* MOSError.m */; };
@@ -76,6 +77,7 @@
 		01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */; };
 		01C20CA41A6726D600057D6B /* MOSPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */; };
 		01DA7A091C163AAC00E34AE0 /* MOSAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */; };
+		01E6A2781C946640002FA51A /* MOSPrintAccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E6A2761C946640002FA51A /* MOSPrintAccessoryViewController.m */; };
 		01E93C6F1A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C711A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib */; };
 		01E93C721A6D48F3004BE3C4 /* MOSPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C741A6D48F3004BE3C4 /* MOSPreferencesWindow.xib */; };
 		01E93C751A6D4906004BE3C4 /* MOSJobWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C771A6D4906004BE3C4 /* MOSJobWindow.xib */; };
@@ -130,6 +132,7 @@
 		0108A2AD1AE6FE4500085E5F /* MOSDescribeFontTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSDescribeFontTransformer.h; sourceTree = "<group>"; };
 		0108A2AE1AE6FE4500085E5F /* MOSDescribeFontTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSDescribeFontTransformer.m; sourceTree = "<group>"; };
 		010AACAA1B1CDEA0005D9984 /* Fragaria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Fragaria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		01113DEC1C94F7E7007EC178 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSPrintAccessoryView.xib; sourceTree = "<group>"; };
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		011D72D81AD0382900368CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSEditorPrefView.xib; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 		01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPreferencesWindowController.m; sourceTree = "<group>"; };
 		01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAssembler.h; sourceTree = "<group>"; };
 		01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSAssembler.m; sourceTree = "<group>"; };
+		01E6A2751C946640002FA51A /* MOSPrintAccessoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPrintAccessoryViewController.h; sourceTree = "<group>"; };
+		01E6A2761C946640002FA51A /* MOSPrintAccessoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPrintAccessoryViewController.m; sourceTree = "<group>"; };
 		01E93C701A6D48E9004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSimulatorPrefView.xib; sourceTree = "<group>"; };
 		01E93C731A6D48F3004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSPreferencesWindow.xib; sourceTree = "<group>"; };
 		01E93C761A6D4906004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSJobWindow.xib; sourceTree = "<group>"; };
@@ -414,6 +419,9 @@
 				016CD1421A51A10F00D64892 /* MOSSource.xib */,
 				016F94EF1A8559D200770684 /* MOSPrintingTextView.h */,
 				016F94F01A8559D200770684 /* MOSPrintingTextView.m */,
+				01E6A2751C946640002FA51A /* MOSPrintAccessoryViewController.h */,
+				01E6A2761C946640002FA51A /* MOSPrintAccessoryViewController.m */,
+				01113DED1C94F7E7007EC178 /* MOSPrintAccessoryView.xib */,
 			);
 			name = "Source Editor";
 			sourceTree = "<group>";
@@ -658,6 +666,7 @@
 				012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */,
 				013A6AF91A718458007C053B /* Localizable.strings in Resources */,
 				01E93C781A6D490F004BE3C4 /* MOSExecutable.xib in Resources */,
+				01113DEB1C94F7E7007EC178 /* MOSPrintAccessoryView.xib in Resources */,
 				01E93C7B1A6D491D004BE3C4 /* MOSSimulatorView.xib in Resources */,
 				0105F3E91A86A8310045BDD3 /* ExamplesList.plist in Resources */,
 				0105F3EC1A86A8350045BDD3 /* expression.s in Resources */,
@@ -700,6 +709,7 @@
 				016CD1411A51A10E00D64892 /* MOSSource.m in Sources */,
 				01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */,
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
+				01E6A2781C946640002FA51A /* MOSPrintAccessoryViewController.m in Sources */,
 				014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */,
 				013EB31E1B2B87490008180F /* MOS68kSimulatorProxy.m in Sources */,
 				018D728B1C196958005DF500 /* MOSSimulatorPresentation.m in Sources */,
@@ -772,6 +782,14 @@
 			);
 			name = reverser.s;
 			path = ../Examples;
+			sourceTree = "<group>";
+		};
+		01113DED1C94F7E7007EC178 /* MOSPrintAccessoryView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01113DEC1C94F7E7007EC178 /* Base */,
+			);
+			name = MOSPrintAccessoryView.xib;
 			sourceTree = "<group>";
 		};
 		011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */ = {
