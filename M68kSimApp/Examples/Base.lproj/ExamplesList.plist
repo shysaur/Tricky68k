@@ -39,6 +39,12 @@
 		<string>String Reverser</string>
 	</dict>
 	<dict>
+		<key>fileName</key>
+		<string>fibonacci.s</string>
+		<key>localizedTitle</key>
+		<string>Recursive Fibonacci</string>
+	</dict>
+	<dict>
 		<key>kind</key>
 		<string>separator</string>
 	</dict>

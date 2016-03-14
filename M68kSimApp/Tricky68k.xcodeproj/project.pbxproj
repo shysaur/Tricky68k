@@ -75,6 +75,7 @@
 		01A0AA3F1BB04027002CAD97 /* MOSJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A0AA3E1BB04027002CAD97 /* MOSJob.m */; };
 		01A2ABB61BBC86FF008BBC59 /* MOSSimBrkptWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2ABB41BBC86FF008BBC59 /* MOSSimBrkptWindowController.m */; };
 		01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */; };
+		01BBDED21C962D4100B404D8 /* fibonacci.s in Resources */ = {isa = PBXBuildFile; fileRef = 01BBDED01C962D0600B404D8 /* fibonacci.s */; };
 		01C20CA41A6726D600057D6B /* MOSPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */; };
 		01DA7A091C163AAC00E34AE0 /* MOSAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */; };
 		01E6A2781C946640002FA51A /* MOSPrintAccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E6A2761C946640002FA51A /* MOSPrintAccessoryViewController.m */; };
@@ -236,6 +237,7 @@
 		01A2ABB41BBC86FF008BBC59 /* MOSSimBrkptWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimBrkptWindowController.m; sourceTree = "<group>"; };
 		01A419431A57382900D9BD02 /* MOSSimStackDumpDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimStackDumpDataSource.h; sourceTree = "<group>"; };
 		01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimStackDumpDataSource.m; sourceTree = "<group>"; };
+		01BBDED11C962D0600B404D8 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Examples/Base.lproj/fibonacci.s; sourceTree = SOURCE_ROOT; };
 		01C20CA11A6726D600057D6B /* MOSPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPreferencesWindowController.h; sourceTree = "<group>"; };
 		01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPreferencesWindowController.m; sourceTree = "<group>"; };
 		01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAssembler.h; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				01EB0DAA1A8BF4C000428082 /* tic-tac-toe.s */,
 				017D25221ACC755400F74869 /* digits.s */,
 				017D25281ACC8DFC00F74869 /* selection-sort.s */,
+				01BBDED01C962D0600B404D8 /* fibonacci.s */,
 			);
 			indentWidth = 4;
 			name = Examples;
@@ -656,6 +659,7 @@
 				016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */,
 				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
 				015094761A6DBF1A0024D28F /* Acknowledgments.md in Resources */,
+				01BBDED21C962D4100B404D8 /* fibonacci.s in Resources */,
 				01E93C6F1A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib in Resources */,
 				01E93C751A6D4906004BE3C4 /* MOSJobWindow.xib in Resources */,
 				017D700F1A731E68003DCAF3 /* MOSAssemblerPrefView.xib in Resources */,
@@ -848,6 +852,14 @@
 				017D70101A731E68003DCAF3 /* Base */,
 			);
 			name = MOSAssemblerPrefView.xib;
+			sourceTree = "<group>";
+		};
+		01BBDED01C962D0600B404D8 /* fibonacci.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01BBDED11C962D0600B404D8 /* Base */,
+			);
+			name = fibonacci.s;
 			sourceTree = "<group>";
 		};
 		01E93C711A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib */ = {
