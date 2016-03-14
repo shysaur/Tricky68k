@@ -54,6 +54,12 @@
 	</dict>
 	<dict>
 		<key>fileName</key>
+		<string>mastermind.s</string>
+		<key>localizedTitle</key>
+		<string>Mastermind</string>
+	</dict>
+	<dict>
+		<key>fileName</key>
 		<string>expression.s</string>
 		<key>localizedTitle</key>
 		<string>Expression Calculator</string>

@@ -18,6 +18,7 @@
 		01113DEB1C94F7E7007EC178 /* MOSPrintAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01113DED1C94F7E7007EC178 /* MOSPrintAccessoryView.xib */; };
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
 		011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */; };
+		011E2AF91C9762210090D552 /* mastermind.s in Resources */ = {isa = PBXBuildFile; fileRef = 011E2AF71C9761FF0090D552 /* mastermind.s */; };
 		0124CF161B2F5EF800DD0A5C /* MOSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 0124CF151B2F5EF800DD0A5C /* MOSError.m */; };
 		012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; };
 		012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -137,6 +138,7 @@
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		011D72D81AD0382900368CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSEditorPrefView.xib; sourceTree = "<group>"; };
+		011E2AF81C9761FF0090D552 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Examples/Base.lproj/mastermind.s; sourceTree = SOURCE_ROOT; };
 		0124CF141B2F5EF800DD0A5C /* MOSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSError.h; sourceTree = "<group>"; };
 		0124CF151B2F5EF800DD0A5C /* MOSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSError.m; sourceTree = "<group>"; };
 		012AEB1A1A703F5A00906B25 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +296,7 @@
 				017D25221ACC755400F74869 /* digits.s */,
 				017D25281ACC8DFC00F74869 /* selection-sort.s */,
 				01BBDED01C962D0600B404D8 /* fibonacci.s */,
+				011E2AF71C9761FF0090D552 /* mastermind.s */,
 			);
 			indentWidth = 4;
 			name = Examples;
@@ -659,6 +662,7 @@
 				016CD1441A51A10F00D64892 /* MOSSource.xib in Resources */,
 				016CD1461A51A10F00D64892 /* Images.xcassets in Resources */,
 				015094761A6DBF1A0024D28F /* Acknowledgments.md in Resources */,
+				011E2AF91C9762210090D552 /* mastermind.s in Resources */,
 				01BBDED21C962D4100B404D8 /* fibonacci.s in Resources */,
 				01E93C6F1A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib in Resources */,
 				01E93C751A6D4906004BE3C4 /* MOSJobWindow.xib in Resources */,
@@ -802,6 +806,14 @@
 				011D72D81AD0382900368CBB /* Base */,
 			);
 			name = MOSEditorPrefView.xib;
+			sourceTree = "<group>";
+		};
+		011E2AF71C9761FF0090D552 /* mastermind.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				011E2AF81C9761FF0090D552 /* Base */,
+			);
+			name = mastermind.s;
 			sourceTree = "<group>";
 		};
 		013A6AFB1A718458007C053B /* Localizable.strings */ = {
