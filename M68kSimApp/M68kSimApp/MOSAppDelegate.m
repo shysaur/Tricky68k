@@ -89,7 +89,10 @@
   exampleName = [[examplesData objectAtIndex:i] objectForKey:@"fileName"];
   exampleName = [exampleName stringByDeletingPathExtension];
   example = [bundle URLForResource:exampleName withExtension:@"s"];
-  if (!example) return;
+  if (!example) {
+    NSLog(@"Couldn't find the example file %@", exampleName);
+    return;
+  }
   
   exampleTitle = [[examplesData objectAtIndex:i] objectForKey:@"localizedTitle"];
   sdc = [NSDocumentController sharedDocumentController];
