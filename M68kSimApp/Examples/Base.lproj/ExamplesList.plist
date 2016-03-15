@@ -14,6 +14,12 @@
 	</dict>
 	<dict>
 		<key>fileName</key>
+		<string>exponentiation.s</string>
+		<key>localizedTitle</key>
+		<string>Exponentiation</string>
+	</dict>
+	<dict>
+		<key>fileName</key>
 		<string>helloworld.s</string>
 		<key>localizedTitle</key>
 		<string>Hello World</string>
