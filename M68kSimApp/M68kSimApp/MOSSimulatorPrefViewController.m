@@ -37,6 +37,7 @@
   fm = [NSFontManager sharedFontManager];
   baseFont = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
   [fm setSelectedFont:baseFont isMultiple:NO];
+  [self.view.window makeFirstResponder:self.view];
   [fm orderFrontFontPanel:self];
 }
 

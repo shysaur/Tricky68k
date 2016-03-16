@@ -26,6 +26,7 @@
 {
   NSFontManager *fontManager = [NSFontManager sharedFontManager];
   [fontManager setSelectedFont:editorFont isMultiple:NO];
+  [self.view.window makeFirstResponder:self.view];
   [fontManager orderFrontFontPanel:nil];
 }
 
