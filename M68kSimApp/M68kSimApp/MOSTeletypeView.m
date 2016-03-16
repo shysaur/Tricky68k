@@ -91,7 +91,7 @@
   charSize.height = ceil(ascent + descent + leading);
   baselineOffset = descent;
   [lineLocationCache removeAllObjects];
-  [self updateViewHeight];
+  [self sizeToFit];
 }
 
 
@@ -430,7 +430,7 @@
   [self setNeedsDisplayOfLastLine];
   [storage appendString:text];
   [self cacheLineRanges];
-  [self updateViewHeight];
+  [self sizeToFit];
   [self scrollToEndOfDocument:nil];
   [self setNeedsDisplayOfLastLine];
 }
@@ -450,7 +450,7 @@
   [storage deleteCharactersInRange:NSMakeRange([storage length]-1, 1)];
   [lineBuffer deleteCharactersInRange:NSMakeRange([lineBuffer length]-1, 1)];
   [self cacheLineRanges];
-  [self updateViewHeight];
+  [self sizeToFit];
   [self scrollToEndOfDocument:nil];
   [self setNeedsDisplayOfLastLine];
 }
@@ -511,7 +511,7 @@
   storage = [string mutableCopy];
   [lineLocationCache removeAllObjects];
   [self cacheLineRanges];
-  [self updateViewHeight];
+  [self sizeToFit];
   [self setNeedsDisplay:YES];
 }
 
@@ -565,7 +565,7 @@
 #pragma mark - View Height
 
 
-- (void)updateViewHeight {
+- (void)sizeToFit {
   NSUInteger i;
   CGFloat h;
   
@@ -585,9 +585,15 @@
   [super setFrame:frame];
   if (oldFrame.size.width != frame.size.width) {
     [lineLocationCache removeAllObjects];
-    [self updateViewHeight];
+    [self sizeToFit];
     [self setNeedsDisplay:YES];
   }
+}
+
+
+- (void)resizeWithOldSuperviewSize:(NSSize)oldSize {
+  [super resizeWithOldSuperviewSize:oldSize];
+  [self sizeToFit];
 }
 
 
