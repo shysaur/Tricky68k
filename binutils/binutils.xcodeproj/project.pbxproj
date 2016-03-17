@@ -6,78 +6,76 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		0179F60A1C9AFFEB007BED1B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 018F65361A60167E005BA00E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 018F65501A602050005BA00E;
+			remoteInfo = ld;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0179F6021C9AFFD1007BED1B /* m68k-elf-ld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "m68k-elf-ld"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018F65451A601C6A005BA00E /* binutils-gdb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "binutils-gdb"; sourceTree = "<group>"; };
 		018F65561A6036E1005BA00E /* buildscript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = buildscript.sh; sourceTree = "<group>"; };
-		018F65581A60396B005BA00E /* m68k-elf-addr2line */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-addr2line"; path = "bin/m68k-elf-addr2line"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65591A60396B005BA00E /* m68k-elf-ar */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-ar"; path = "bin/m68k-elf-ar"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F655A1A60396C005BA00E /* m68k-elf-as */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-as"; path = "bin/m68k-elf-as"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F655B1A60396C005BA00E /* m68k-elf-c++filt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-c++filt"; path = "bin/m68k-elf-c++filt"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F655C1A60396D005BA00E /* m68k-elf-elfedit */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-elfedit"; path = "bin/m68k-elf-elfedit"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F655D1A60396D005BA00E /* m68k-elf-gdb */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-gdb"; path = "bin/m68k-elf-gdb"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F655E1A60396E005BA00E /* m68k-elf-gprof */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-gprof"; path = "bin/m68k-elf-gprof"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F655F1A60396F005BA00E /* m68k-elf-ld */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-ld"; path = "bin/m68k-elf-ld"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65611A603970005BA00E /* m68k-elf-nm */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-nm"; path = "bin/m68k-elf-nm"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65621A603970005BA00E /* m68k-elf-objcopy */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-objcopy"; path = "bin/m68k-elf-objcopy"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65631A603971005BA00E /* m68k-elf-objdump */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-objdump"; path = "bin/m68k-elf-objdump"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65641A603971005BA00E /* m68k-elf-ranlib */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-ranlib"; path = "bin/m68k-elf-ranlib"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65651A603972005BA00E /* m68k-elf-readelf */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-readelf"; path = "bin/m68k-elf-readelf"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65661A603972005BA00E /* m68k-elf-size */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-size"; path = "bin/m68k-elf-size"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65671A603973005BA00E /* m68k-elf-strings */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-strings"; path = "bin/m68k-elf-strings"; sourceTree = BUILT_PRODUCTS_DIR; };
-		018F65681A603973005BA00E /* m68k-elf-strip */ = {isa = PBXFileReference; lastKnownFileType = text; name = "m68k-elf-strip"; path = "bin/m68k-elf-strip"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		0179F6031C9AFFD1007BED1B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0179F6021C9AFFD1007BED1B /* m68k-elf-ld */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		018F65351A60167E005BA00E = {
 			isa = PBXGroup;
 			children = (
 				018F65561A6036E1005BA00E /* buildscript.sh */,
 				018F65451A601C6A005BA00E /* binutils-gdb */,
-				018F656B1A6039A5005BA00E /* Products */,
+				0179F6031C9AFFD1007BED1B /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		018F656B1A6039A5005BA00E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				018F65581A60396B005BA00E /* m68k-elf-addr2line */,
-				018F65591A60396B005BA00E /* m68k-elf-ar */,
-				018F655A1A60396C005BA00E /* m68k-elf-as */,
-				018F655B1A60396C005BA00E /* m68k-elf-c++filt */,
-				018F655C1A60396D005BA00E /* m68k-elf-elfedit */,
-				018F655D1A60396D005BA00E /* m68k-elf-gdb */,
-				018F655E1A60396E005BA00E /* m68k-elf-gprof */,
-				018F655F1A60396F005BA00E /* m68k-elf-ld */,
-				018F65611A603970005BA00E /* m68k-elf-nm */,
-				018F65621A603970005BA00E /* m68k-elf-objcopy */,
-				018F65631A603971005BA00E /* m68k-elf-objdump */,
-				018F65641A603971005BA00E /* m68k-elf-ranlib */,
-				018F65651A603972005BA00E /* m68k-elf-readelf */,
-				018F65661A603972005BA00E /* m68k-elf-size */,
-				018F65671A603973005BA00E /* m68k-elf-strings */,
-				018F65681A603973005BA00E /* m68k-elf-strip */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXLegacyTarget section */
-		018F65501A602050005BA00E /* binutils */ = {
+		018F65501A602050005BA00E /* ld */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "--target=m68k-elf --prefix=$(BUILT_PRODUCTS_DIR)";
-			buildConfigurationList = 018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "binutils" */;
+			buildArgumentsString = "--target=m68k-elf";
+			buildConfigurationList = 018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "ld" */;
 			buildPhases = (
 			);
 			buildToolPath = "$(SRCROOT)/buildscript.sh";
 			buildWorkingDirectory = "$(BUILDROOT)";
 			dependencies = (
 			);
-			name = binutils;
+			name = ld;
 			passBuildSettingsInEnvironment = 1;
 			productName = binutils;
 		};
 /* End PBXLegacyTarget section */
+
+/* Begin PBXNativeTarget section */
+		0179F6011C9AFFD1007BED1B /* m68k-elf-ld */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0179F6071C9AFFD2007BED1B /* Build configuration list for PBXNativeTarget "m68k-elf-ld" */;
+			buildPhases = (
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0179F60B1C9AFFEB007BED1B /* PBXTargetDependency */,
+			);
+			name = "m68k-elf-ld";
+			productName = "m68k-elf-ld";
+			productReference = 0179F6021C9AFFD1007BED1B /* m68k-elf-ld */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		018F65361A60167E005BA00E /* Project object */ = {
@@ -86,6 +84,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = FSF;
 				TargetAttributes = {
+					0179F6011C9AFFD1007BED1B = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					018F65501A602050005BA00E = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -99,15 +100,104 @@
 				en,
 			);
 			mainGroup = 018F65351A60167E005BA00E;
+			productRefGroup = 0179F6031C9AFFD1007BED1B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				018F65501A602050005BA00E /* binutils */,
+				018F65501A602050005BA00E /* ld */,
+				0179F6011C9AFFD1007BED1B /* m68k-elf-ld */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXTargetDependency section */
+		0179F60B1C9AFFEB007BED1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 018F65501A602050005BA00E /* ld */;
+			targetProxy = 0179F60A1C9AFFEB007BED1B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		0179F6081C9AFFD2007BED1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0179F6091C9AFFD2007BED1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		018F653B1A60167E005BA00E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -125,18 +215,30 @@
 		018F65521A602050005BA00E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CFLAGS = "-g -O0";
+				CXXFLAGS = "-g -O0";
 			};
 			name = Debug;
 		};
 		018F65531A602050005BA00E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CFLAGS = "-O3";
+				CXXFLAGS = "-O3";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0179F6071C9AFFD2007BED1B /* Build configuration list for PBXNativeTarget "m68k-elf-ld" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0179F6081C9AFFD2007BED1B /* Debug */,
+				0179F6091C9AFFD2007BED1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		018F65391A60167E005BA00E /* Build configuration list for PBXProject "binutils" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -146,7 +248,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "binutils" */ = {
+		018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "ld" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				018F65521A602050005BA00E /* Debug */,
