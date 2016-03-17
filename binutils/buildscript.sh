@@ -3,7 +3,6 @@
 set -ek
 DESTDIR="$DSTROOT"
 export DESTDIR
-env
 
 mkdir -p "$CONFIGURATION_TEMP_DIR"
 mkdir -p "$CONFIGURATION_BUILD_DIR"
