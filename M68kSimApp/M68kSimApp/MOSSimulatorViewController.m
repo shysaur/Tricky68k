@@ -380,6 +380,7 @@ static void *SimulatorState = &SimulatorState;
 
 - (IBAction)run:(id)sender {
   [simProxy run];
+  [self.view.window makeFirstResponder:ttyView];
 }
 
 

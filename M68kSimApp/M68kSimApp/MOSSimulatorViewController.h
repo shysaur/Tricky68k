@@ -50,6 +50,7 @@ enum {
   IBOutlet MOSSimRegistersDataSource *regdumpDs;
   IBOutlet MOSSimStackDumpDataSource *stackDs;
   IBOutlet MOSTeletypeViewDelegate *ttyDelegate;
+  IBOutlet NSView *ttyView;
   IBOutlet NSSplitView *mainSplitView;
   IBOutlet NSView *teletypePanel;
   __weak IBOutlet NSWindow *fallbackWindow;

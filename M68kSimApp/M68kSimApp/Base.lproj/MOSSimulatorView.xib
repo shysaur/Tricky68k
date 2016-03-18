@@ -14,6 +14,7 @@
                 <outlet property="stackDs" destination="JVG-YD-Mo8" id="Wx0-nt-4gS"/>
                 <outlet property="teletypePanel" destination="5Fa-zy-YTz" id="ZHP-7R-g18"/>
                 <outlet property="ttyDelegate" destination="OaH-e5-S6R" id="Nzz-uK-v6H"/>
+                <outlet property="ttyView" destination="AOZ-Q3-4wE" id="Z0p-kY-AzS"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -457,7 +458,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="14" rowSizeStyle="automatic" viewBased="YES" id="IWv-lc-kza">
-                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="235"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="0.0"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
