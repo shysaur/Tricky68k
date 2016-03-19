@@ -7,6 +7,32 @@
         <language>en</language>
         
         <item>
+            <title>Release 1.2.0</title>
+            <description><![CDATA[ <ul>
+              <li><strong>New!</strong> Added three new examples!</li>
+              <li><strong>New!</strong> You can now set breakpoints directly in the source!</li>
+              <li><strong>New!</strong> The step over function now properly follows branches and returns.</li>
+              <li>You can now resize all the simulator panels.</li>
+              <li>Window sizes and layouts are now preserved.</li>
+              <li>It's now possible to show only a small part of the simulated RAM in the simulator.</li>
+              <li>Added an option to select a different font for printing.</li>
+              <li>Fixed crashes when editing the last line of the file.</li>
+              <li>Improved handling of big files.</li>
+              <li>Cosmetic improvements.</li>
+              <li>Other speed and stability improvements.</li>
+              </ul> ]]>
+            </description>
+            <pubDate>Sat, 19 March 2016 15:20:59 +0100</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_1.2.0/Tricky68k_120.tar.bz2" 
+              sparkle:version="1825" 
+              sparkle:shortVersionString="1.2.0"
+              length="3726604" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC0CFDQMOHSPjkP4Qk+IEnKotJ0zikBDAhUAvTYhUa5TBMkcrT8d7clj1+VO9F4=" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 1.1.0</title>
             <description><![CDATA[ <ul>
               <li><strong>New!</strong> Added a clock frequency gauge in the simulator.</li>
