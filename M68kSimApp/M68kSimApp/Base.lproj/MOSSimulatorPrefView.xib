@@ -49,7 +49,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B4M-ix-0r4">
+                <textField toolTip="Minimum is 25 lines." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B4M-ix-0r4">
                     <rect key="frame" x="208" y="166" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="6WA-0B-djN"/>
@@ -79,7 +79,7 @@
                         </binding>
                     </connections>
                 </stepper>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fpO-yO-bRB">
+                <textField toolTip="Minimum: 16 KiB, maximum: 16384 KiB" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fpO-yO-bRB">
                     <rect key="frame" x="208" y="135" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="INm-up-ILp"/>
@@ -155,7 +155,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sfx-Tb-vb0">
+                <textField toolTip="Minimum: 16 KiB, maximum: 8192 KiB" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sfx-Tb-vb0">
                     <rect key="frame" x="208" y="103" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="Zro-oZ-UxD"/>
@@ -248,7 +248,7 @@
                         <binding destination="0sm-Rh-b5P" name="enabled" keyPath="values.LimitClock" id="tCz-9j-AM4"/>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AcD-Ip-FOB">
+                <textField toolTip="Minimum is 4 MHz." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AcD-Ip-FOB">
                     <rect key="frame" x="208" y="42" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="e7a-Om-UQB"/>
@@ -317,18 +317,18 @@
             </constraints>
             <point key="canvasLocation" x="258" y="294"/>
         </view>
-        <numberFormatter formatterBehavior="default10_4" usesGroupingSeparator="NO" minimumIntegerDigits="0" maximumIntegerDigits="42" id="wzj-mj-gTz">
+        <numberFormatter formatterBehavior="default10_4" usesGroupingSeparator="NO" minimumIntegerDigits="0" maximumIntegerDigits="42" id="wzj-mj-gTz" userLabel="Disassembly LOC Formatter">
             <real key="minimum" value="25"/>
             <real key="maximum" value="16777216"/>
         </numberFormatter>
-        <numberFormatter formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="uWd-E0-nbv">
+        <numberFormatter formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="uWd-E0-nbv" userLabel="Clock MHz Formatter">
             <real key="minimum" value="4"/>
         </numberFormatter>
-        <numberFormatter formatterBehavior="custom10_4" allowsFloats="NO" usesGroupingSeparator="NO" roundingMode="floor" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="6hv-GW-O9s">
+        <numberFormatter formatterBehavior="custom10_4" allowsFloats="NO" usesGroupingSeparator="NO" roundingMode="floor" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="6hv-GW-O9s" userLabel="KiB of RAM Formatter">
             <real key="minimum" value="16"/>
             <real key="maximum" value="16384"/>
         </numberFormatter>
-        <numberFormatter formatterBehavior="custom10_4" allowsFloats="NO" usesGroupingSeparator="NO" roundingMode="floor" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="1B9-f1-Lf0">
+        <numberFormatter formatterBehavior="custom10_4" allowsFloats="NO" usesGroupingSeparator="NO" roundingMode="floor" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="1B9-f1-Lf0" userLabel="KiB of Stack Formatter">
             <real key="minimum" value="16"/>
             <real key="maximum" value="8192"/>
         </numberFormatter>
