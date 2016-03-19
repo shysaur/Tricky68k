@@ -32,7 +32,7 @@ static void *SimulatorState = &SimulatorState;
   ud = [NSUserDefaults standardUserDefaults];
   [ud registerDefaults:@{
     @"MaxClock": @4.0,
-    @"LimitClock": @NO
+    @"LimitClock": @YES
   }];
 }
 
