@@ -167,7 +167,7 @@
                     </textFieldCell>
                     <connections>
                         <binding destination="0sm-Rh-b5P" name="value" keyPath="values.StackDumpSize" id="IrR-T3-5M6"/>
-                        <outlet property="delegate" destination="1B9-f1-Lf0" id="W1O-az-mR1"/>
+                        <outlet property="formatter" destination="1B9-f1-Lf0" id="CeI-j0-Pjw"/>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o2q-b1-b4m">
@@ -188,7 +188,7 @@
                 </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ho8-4N-W1f">
                     <rect key="frame" x="269" y="101" width="19" height="27"/>
-                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="1892" doubleValue="16" id="JcE-TD-Nen"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="8192" doubleValue="16" id="JcE-TD-Nen"/>
                     <connections>
                         <binding destination="0sm-Rh-b5P" name="value" keyPath="values.StackDumpSize" id="LXP-fy-SxG"/>
                     </connections>
