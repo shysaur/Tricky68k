@@ -29,6 +29,7 @@
   
   NSInteger dragPivot;
   NSRange selection;
+  BOOL isActive;
 }
 
 - (void)insertOutputText:(NSString *)text;

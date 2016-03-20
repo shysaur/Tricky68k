@@ -499,6 +499,20 @@
 }
 
 
+- (BOOL)becomeFirstResponder {
+  isActive = YES;
+  [self setNeedsDisplayOfLastLine];
+  return YES;
+}
+
+
+- (BOOL)resignFirstResponder {
+  isActive = NO;
+  [self setNeedsDisplayOfLastLine];
+  return YES;
+}
+
+
 #pragma mark - Text storage methods
 
 
@@ -771,12 +785,25 @@
 
 - (void)drawCursor {
   NSRect cursor;
+  NSBezierPath *bp;
   
   cursor.origin = [self originOfCharacterAtIndex:[storage length] outputLine:nil];
   cursor.size = charSize;
   if ([self needsToDrawRect:cursor]) {
-    [[NSColor grayColor] set];
-    NSRectFill(cursor);
+    if (isActive) {
+      [[NSColor grayColor] set];
+      NSRectFill(cursor);
+    } else {
+      cursor.origin.x += .5;
+      cursor.origin.y += .5;
+      cursor.size.width -= 1;
+      cursor.size.height -= 1;
+      bp = [NSBezierPath bezierPathWithRect:cursor];
+      [[NSColor whiteColor] setFill];
+      [bp fill];
+      [[NSColor grayColor] setStroke];
+      [bp stroke];
+    }
   }
 }
 
