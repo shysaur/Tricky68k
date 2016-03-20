@@ -279,6 +279,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   simView = [simVc view];
   
+  [docWindow makeFirstResponder:nil];
   contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
   [[contview animator] replaceSubview:fragaria with:simView];
@@ -290,12 +291,15 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [simView setNextResponder:simVc];
     [simVc setNextResponder:oldresp];
   }
+  if (!lastSimViewFirstResponder)
+    [docWindow makeFirstResponder:simView];
+  else
+    [docWindow makeFirstResponder:lastSimViewFirstResponder];
   
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[simView]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
   [contview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[simView]|"
     options:0 metrics:nil views:NSDictionaryOfVariableBindings(simView)]];
-  [docWindow makeFirstResponder:simView];
   
   self.simulatorMode = YES;
 }
@@ -310,6 +314,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   [self breakpointsShouldSyncFromSimulator:nil];
   
+  lastSimViewFirstResponder = [docWindow firstResponder];
+  [docWindow makeFirstResponder:nil];
   contview = [docWindow contentView];
   [contview setAnimations:@{@"subviews": [self transitionForViewSwitch]}];
   [[contview animator] replaceSubview:simView with:fragaria];
@@ -327,7 +333,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     [fragaria setNextResponder:simVc];
     [simVc setNextResponder:oldresp];
   }
-  
   [docWindow makeFirstResponder:textView];
   
   self.simulatorMode = NO;

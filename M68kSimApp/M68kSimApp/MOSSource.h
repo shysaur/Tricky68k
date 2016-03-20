@@ -37,6 +37,7 @@
   MOSPlatform *platform;
   IBOutlet MOSSimulatorViewController *simVc;
   NSView *simView;
+  __weak NSResponder *lastSimViewFirstResponder;
   
   BOOL assembleForSaveOnly;
   BOOL runWhenAssemblyComplete;
