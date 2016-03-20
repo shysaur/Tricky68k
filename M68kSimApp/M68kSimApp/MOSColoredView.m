@@ -12,11 +12,6 @@
 @implementation MOSColoredView
 
 
-- (BOOL)becomeFirstResponder {
-  return NO;
-}
-
-
 - (void)setBackgroundColor:(NSColor*)color {
   bgcolor = color;
 }
