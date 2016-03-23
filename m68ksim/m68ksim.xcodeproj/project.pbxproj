@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		012AE3931B2E291A0057D0B2 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 012AE3911B2E291A0057D0B2 /* error.c */; };
-		019091281BB1B5FF00D2610D /* symbols.c in Sources */ = {isa = PBXBuildFile; fileRef = 019091261BB1B5FF00D2610D /* symbols.c */; settings = {ASSET_TAGS = (); }; };
-		0190912B1BB1B6FA00D2610D /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 019091291BB1B6FA00D2610D /* hashtable.c */; settings = {ASSET_TAGS = (); }; };
+		019091281BB1B5FF00D2610D /* symbols.c in Sources */ = {isa = PBXBuildFile; fileRef = 019091261BB1B5FF00D2610D /* symbols.c */; };
+		0190912B1BB1B6FA00D2610D /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 019091291BB1B6FA00D2610D /* hashtable.c */; };
 		01B1B8BD1A503F810016F319 /* addrspace.c in Sources */ = {isa = PBXBuildFile; fileRef = 01B1B8BB1A503F810016F319 /* addrspace.c */; };
 		01B1B8C11A503FC90016F319 /* libMusashi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B1B8C01A503FC90016F319 /* libMusashi.a */; };
 		01B1B8C61A5056C50016F319 /* m68ksim.c in Sources */ = {isa = PBXBuildFile; fileRef = 01B1B8C51A5056C50016F319 /* m68ksim.c */; };
@@ -199,7 +199,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -240,7 +239,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
