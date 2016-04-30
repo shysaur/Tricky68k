@@ -45,7 +45,7 @@
 /* Begin PBXLegacyTarget section */
 		018F65501A602050005BA00E /* ld */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "--target=m68k-elf";
+			buildArgumentsString = "--target=m68k-elf --disable-werror";
 			buildConfigurationList = 018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "ld" */;
 			buildPhases = (
 			);
@@ -238,6 +238,7 @@
 				0179F6091C9AFFD2007BED1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		018F65391A60167E005BA00E /* Build configuration list for PBXProject "binutils" */ = {
 			isa = XCConfigurationList;
