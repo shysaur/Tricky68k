@@ -7,7 +7,16 @@
     ; algorithm (b*b*b*b...)
     ;
     ; Since the 68k only supports 16-bit by 16-bit multiplication, to take
-    ; advantage of all the 32 bits in the registers, we multiply 
+    ; advantage of the 32-bit register size, 16-bit by 32-bit multiplications
+    ; implemented in software are needed. They are implemented by taking advan-
+    ; tage of the fact that:
+    ;
+    ;    (a * 2^n_bits + b) * c = (a * c) * 2^n_bits + (b * c)
+    ;
+    ; a and b represent the upper and lower half of a 32-bit number, n_bits is
+    ; 16, and c is the 16-bit multiplier. Thus, a and b are 16-bit quantities.
+    ; We need to do a multiplication by 2^16, but that is easily done using the
+    ; swap instruction.
     ;
 
 
