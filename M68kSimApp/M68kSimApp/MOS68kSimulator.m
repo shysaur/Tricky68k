@@ -479,7 +479,8 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
     }
     if ([proxy simulatorState] == MOSSimulatorStateDead) {
       dispatch_async(dispatch_get_main_queue(), ^{
-        [self setSimulatorState:MOSSimulatorStateDead];
+        if (self.simulatorState != MOSSimulatorStateDead)
+          [self setSimulatorState:MOSSimulatorStateDead];
       });
     } else if (!disableNotifications) {
       [self setSimulatorState:[proxy simulatorState]];
