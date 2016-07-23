@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 
 
-NSString * const MOSJobStatusWorking;
-NSString * const MOSJobStatusSuccess;
-NSString * const MOSJobStatusSuccessWithWarning;
-NSString * const MOSJobStatusFailure;
+extern NSString * const MOSJobStatusWorking;
+extern NSString * const MOSJobStatusSuccess;
+extern NSString * const MOSJobStatusSuccessWithWarning;
+extern NSString * const MOSJobStatusFailure;
 
-NSString * const MOSJobEventText;
-NSString * const MOSJobEventAssociatedLine;
-NSString * const MOSJobEventType;
-NSString * const MOSJobEventTypeMessage;
-NSString * const MOSJobEventTypeWarning;
-NSString * const MOSJobEventTypeError;
+extern NSString * const MOSJobEventText;
+extern NSString * const MOSJobEventAssociatedLine;
+extern NSString * const MOSJobEventType;
+extern NSString * const MOSJobEventTypeMessage;
+extern NSString * const MOSJobEventTypeWarning;
+extern NSString * const MOSJobEventTypeError;
 
 
 @interface MOSJob : NSObject {
