@@ -65,9 +65,7 @@ NSString * const MOSDefaultsPrintFont = @"PrintFont";
 
 - (IBAction)changeTextFont:(id)sender {
   NSFontManager *fm;
-  NSUserDefaults *ud;
   
-  ud = [NSUserDefaults standardUserDefaults];
   fm = [NSFontManager sharedFontManager];
   baseFont = self.textFont;
   [fm setSelectedFont:baseFont isMultiple:NO];
