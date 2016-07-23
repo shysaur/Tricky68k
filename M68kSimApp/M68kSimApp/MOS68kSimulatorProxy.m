@@ -12,7 +12,7 @@
 #import "MOSError.h"
 
 
-#define RESPONSE_TIMEOUT dispatch_time(DISPATCH_TIME_NOW, 1000000000)
+#define RESPONSE_TIMEOUT dispatch_time(DISPATCH_TIME_NOW, 10000000000)
 #define NSERROR_SIM(c) [MOSError errorWithDomain:MOSSimulatorErrorDomain \
   code:((c)) userInfo:nil]
 
