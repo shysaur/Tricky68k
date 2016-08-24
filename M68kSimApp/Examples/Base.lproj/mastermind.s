@@ -170,7 +170,7 @@ printLine:
 
 
     ;Read a string (like gets). Note that we exploit the I/O cycle to waste
-    ;some PRNG states, to gather some entropy. It's easily manipulated, but it's
+    ;some PRNG states, to gather some entropy. It's easily manipulated, but
     ;it's still better than nothing, and we don't have many alternatives.
     ;input: A0 address of buffer
     ;output: A0 address of terminating '\0'
