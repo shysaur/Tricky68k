@@ -10,6 +10,13 @@
 #import <objc/objc-runtime.h>
 
 
+static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
+  if (a < b)
+    return NSMakeRange(a, b - a);
+  return NSMakeRange(b, a - b);
+}
+
+
 @implementation MOSTeletypeView
 
 
@@ -228,6 +235,12 @@
 }
 
 
+- (NSUInteger)characterIndexForMousePosition:(NSPoint)aPoint {
+  aPoint.x += charSize.width / 2;
+  return [self characterIndexForPoint:aPoint];
+}
+
+
 /* Always returns a valid line index. */
 - (NSInteger)lineIndexForPoint:(NSPoint)aPoint {
   NSInteger guess, lines, sb, se;
@@ -325,15 +338,26 @@
 
 - (void)mouseDown:(NSEvent *)theEvent {
   NSPoint localPoint, evloc;
+  NSUInteger charidx;
+  NSRange extrarange;
   
   evloc = [theEvent locationInWindow];
   localPoint = [self convertPoint:evloc fromView:nil];
-  localPoint.x += charSize.width / 2;
-  dragPivot = [self characterIndexForPoint:localPoint];
+  charidx = [self characterIndexForMousePosition:localPoint];
   
   [self setNeedsDisplayOfSelection];
-  selection.location = dragPivot;
-  selection.length = 0;
+  
+  if ([theEvent modifierFlags] & NSShiftKeyMask) {
+    extrarange = MOSMakeIndexRange(dragPivot, charidx);
+    selection = NSUnionRange(selection, extrarange);
+    dragPivot = selection.location;
+  } else {
+    dragPivot = charidx;
+    selection.location = dragPivot;
+    selection.length = 0;
+  }
+  
+  [self setNeedsDisplayOfSelection];
 }
 
 
@@ -347,16 +371,9 @@
   
   evloc = [theEvent locationInWindow];
   localPoint = [self convertPoint:evloc fromView:nil];
-  localPoint.x += charSize.width / 2;
-  tochar = [self characterIndexForPoint:localPoint];
+  tochar = [self characterIndexForMousePosition:localPoint];
   
-  if (tochar <= dragPivot) {
-    selection.location = tochar;
-    selection.length = dragPivot - tochar;
-  } else {
-    selection.location = dragPivot;
-    selection.length = tochar - dragPivot;
-  }
+  selection = MOSMakeIndexRange(dragPivot, tochar);
 
   if (localPoint.y < [self visibleRect].origin.y + charSize.height)
     [self scrollLineUp:nil];
