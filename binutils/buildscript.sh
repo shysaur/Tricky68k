@@ -2,6 +2,7 @@
 
 set -ek
 DESTDIR="$DSTROOT"
+NCPUS=$(sysctl -n hw.ncpu)
 export DESTDIR
 
 mkdir -p "$CONFIGURATION_TEMP_DIR"
@@ -28,7 +29,7 @@ fi
 if [ ! -e Makefile ]; then
   "$PROJECT_TEMP_DIR/binutils-gdb/configure" $@;
 fi
-make "all-$TARGET_NAME"
+make -j $NCPUS "all-$TARGET_NAME"
 if [ "$ACTION" == "install" ]; then
   make "install-$TARGET_NAME"
 fi
