@@ -5,6 +5,11 @@ DESTDIR="$DSTROOT"
 NCPUS=$(sysctl -n hw.ncpu)
 export DESTDIR
 
+# remove /usr/local/* from PATH because there might be some nonstandard stuff
+# there that influences the build.
+PATH=$(printf %s $PATH | sed -E 's/:\/usr\/local[^:]*(:|$)/\1/g')
+echo $PATH
+
 mkdir -p "$CONFIGURATION_TEMP_DIR"
 mkdir -p "$CONFIGURATION_BUILD_DIR"
 cd "$CONFIGURATION_TEMP_DIR"
