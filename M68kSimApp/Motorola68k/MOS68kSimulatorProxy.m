@@ -146,7 +146,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
 - (NSURL*)simulatorURL {
   NSBundle *cb;
   
-  cb = [NSBundle mainBundle];
+  cb = [NSBundle bundleForClass:[self class]];
   return [cb URLForAuxiliaryExecutable:@"m68ksim"];
 }
 

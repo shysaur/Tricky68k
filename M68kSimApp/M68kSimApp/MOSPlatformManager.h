@@ -13,7 +13,7 @@
 
 
 @interface MOSPlatformManager : NSObject {
-  NSArray<MOSPlatform *> *platforms;
+  NSMutableArray<MOSPlatform *> *platforms;
 }
 
 + (MOSPlatformManager *)sharedManager;

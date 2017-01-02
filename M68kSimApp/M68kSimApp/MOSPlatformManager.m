@@ -8,7 +8,6 @@
 
 #import "MOSPlatformManager.h"
 #import "MOSPlatform.h"
-#import "MOS68kPlatform.h"
 
 
 @implementation MOSPlatformManager
@@ -26,7 +25,23 @@
 
 
 - (BOOL)loadPlatformsWithError:(NSError **)err {
-  platforms = @[[[MOS68kPlatform alloc] init]];
+  NSBundle *mb;
+  NSDirectoryEnumerator *de;
+  NSURL *pluginurl;
+  NSBundle *plugin;
+  
+  platforms = [[NSMutableArray alloc] init];
+  
+  mb = [NSBundle mainBundle];
+  
+  de = [[NSFileManager defaultManager] enumeratorAtURL:[mb builtInPlugInsURL] includingPropertiesForKeys:nil options:0 errorHandler:nil];
+  while (pluginurl = [de nextObject]) {
+    if (![[pluginurl pathExtension] isEqual:@"mosplatform"])
+      continue;
+    plugin = [NSBundle bundleWithURL:pluginurl];
+    [plugin load];
+    [platforms addObject:[[[plugin principalClass] alloc] init]];
+  }
   return YES;
 }
 

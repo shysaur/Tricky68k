@@ -49,7 +49,7 @@
     
     linking = NO;
     task = [[MOSMonitoredTask alloc] init];
-    execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
+    execurl = [[NSBundle bundleForClass:[self class]] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
     [task setLaunchURL:execurl];
     unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
     
@@ -68,7 +68,7 @@
     
     linking = YES;
     task = [[MOSMonitoredTask alloc] init];
-    execurl = [[NSBundle mainBundle] URLForAuxiliaryExecutable:@"m68k-elf-ld"];
+    execurl = [[NSBundle bundleForClass:[self class]] URLForAuxiliaryExecutable:@"m68k-elf-ld"];
     [task setLaunchURL:execurl];
     linkerfile = [NSURL URLWithTemporaryFilePathWithExtension:@"ld"];
     if (![self makeLinkerFile:linkerfile]) {
