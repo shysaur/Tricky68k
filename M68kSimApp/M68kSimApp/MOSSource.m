@@ -11,9 +11,9 @@
 #import "MOSFragariaPreferencesObserver.h"
 #import "NSURL+TemporaryFile.h"
 #import "NSUserDefaults+Archiver.h"
-#import "MOS68kAssembler.h"
-#import "MOS68kSimulator.h"
-#import "MOS68kSimulatorPresentation.h"
+#import "MOSAssembler.h"
+#import "MOSSimulator.h"
+#import "MOSSimulatorPresentation.h"
 #import "MOSJobStatusManager.h"
 #import "MOSJob.h"
 #import "MOSSimulatorViewController.h"
@@ -24,6 +24,7 @@
 #import "MOSSourceBreakpointDelegate.h"
 #import "MOSListingDictionary.h"
 #import "MOSPrintAccessoryViewController.h"
+#import "MOSPlatformManager.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -98,10 +99,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (instancetype)init {
   self = [super init];
-  platform = [MOSPlatform platformWithAssemblerClass:[MOS68kAssembler class]
-    simulatorClass:[MOS68kSimulator class]
-    presentationClass:[MOS68kSimulatorPresentation class]
-    localizedName:@"Motorola 68000"];
+  platform = [[MOSPlatformManager sharedManager] defaultPlatform];
   return self;
 }
 

@@ -9,10 +9,8 @@
 #import "MOSExecutable.h"
 #import "MOSSimulatorViewController.h"
 #import "MOSSimulator.h"
-#import "MOS68kSimulator.h"
-#import "MOS68kAssembler.h"
-#import "MOS68kSimulatorPresentation.h"
 #import "MOSPlatform.h"
+#import "MOSPlatformManager.h"
 
 
 @implementation MOSExecutable
@@ -54,11 +52,9 @@
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError {
   NSError *tmpe;
   
-  simProxy = [[MOS68kSimulator alloc] initWithExecutableURL:url error:&tmpe];
-  platform = [MOSPlatform platformWithAssemblerClass:[MOS68kAssembler class]
-    simulatorClass:[MOS68kSimulator class]
-    presentationClass:[MOS68kSimulatorPresentation class]
-    localizedName:@"Motorola 68000"];
+  platform = [[MOSPlatformManager sharedManager] defaultPlatform];
+  simProxy = [[[platform simulatorClass] alloc]
+              initWithExecutableURL:url error:&tmpe];
   if (tmpe) {
     if (outError) *outError = tmpe;
     return NO;

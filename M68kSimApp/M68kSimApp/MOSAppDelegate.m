@@ -9,9 +9,20 @@
 #import "MOSAppDelegate.h"
 #import "MOSJobWindowController.h"
 #import "MOSPreferencesWindowController.h"
+#import "MOSPlatformManager.h"
 
 
 @implementation MOSAppDelegate
+
+
+- (void)applicationWillFinishLaunching:(NSNotification *)notification {
+  NSError *err;
+  
+  if (![[MOSPlatformManager sharedManager] loadPlatformsWithError:&err]) {
+    [NSApp presentError:err];
+    [NSApp terminate:nil];
+  }
+}
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {

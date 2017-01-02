@@ -11,11 +11,6 @@
 
 @interface MOSPlatform : NSObject
 
-+ (instancetype)platformWithAssemblerClass:(Class)a simulatorClass:(Class)s
-                         presentationClass:(Class)p localizedName:(NSString *)d;
-- (instancetype)initWithAssemblerClass:(Class)a simulatorClass:(Class)s
-                     presentationClass:(Class)p localizedName:(NSString *)d;
-
 @property (readonly) Class assemblerClass;
 @property (readonly) Class simulatorClass;
 @property (readonly) Class presentationClass;
