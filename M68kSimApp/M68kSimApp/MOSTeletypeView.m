@@ -106,8 +106,14 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 
 
 - (void)insertText:(id)aString replacementRange:(NSRange)replacementRange {
-  if (replacementRange.length == 0 && replacementRange.location >= [storage length])
-    [self insertText:aString];
+  NSUInteger i;
+  
+  if (NSMaxRange(replacementRange) < [storage length])
+    return;
+  
+  for (i=0; i<replacementRange.length; i++)
+    [self deleteBackward:nil];
+  [self insertText:aString];
 }
 
 
@@ -155,8 +161,17 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   return [[NSAttributedString alloc] initWithString:res];
 }
 
+/* Returned rect is in SCREEN coordinates! */
+- (NSRect)firstRectForCharacterRange:(NSRange)range actualRange:(NSRangePointer)actualRange {
+  NSRect viewc, winc;
+  
+  viewc = [self firstViewRectForCharacterRange:range actualRange:actualRange];
+  winc = [self convertRect:viewc toView:nil];
+  return [[self window] convertRectToScreen:winc];
+}
 
-- (NSRect)firstRectForCharacterRange:(NSRange)aRange actualRange:(NSRangePointer)actualRange {
+
+- (NSRect)firstViewRectForCharacterRange:(NSRange)aRange actualRange:(NSRangePointer)actualRange {
   NSInteger l0, i, w;
   unichar lastchar;
   CGFloat lastcharwidth;
@@ -794,7 +809,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   if (!range.length)
     return;
   
-  selRect = [self firstRectForCharacterRange:range actualRange:NULL];
+  selRect = [self firstViewRectForCharacterRange:range actualRange:NULL];
   [[NSColor selectedTextBackgroundColor] set];
   NSRectFill(selRect);
 }
