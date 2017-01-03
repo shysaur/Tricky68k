@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -ek
-DESTDIR="$DSTROOT"
+DESTDIR="$DSTROOT";
 NCPUS=$(sysctl -n hw.ncpu)
 export DESTDIR
 
@@ -35,7 +35,14 @@ if [ ! -e Makefile ]; then
   "$PROJECT_TEMP_DIR/binutils-gdb/configure" $@;
 fi
 make -j $NCPUS "all-$TARGET_NAME"
-if [ "$ACTION" == "install" ]; then
+if [ "$ACTION" == "install" ] && [ "$SKIP_INSTALL" == "NO" ]; then
   make "install-$TARGET_NAME"
 fi
 cp "$CONFIGURATION_TEMP_DIR/ld/ld-new" "$CONFIGURATION_BUILD_DIR/m68k-elf-ld"
+
+if [ "$ACTION" == "install" ] && [ "$SKIP_INSTALL" == "YES" ]; then
+  # I hope this doesn't break because it's not documented anywhere.
+  UNINST_DIR="$TEMP_ROOT/UninstalledProducts/$PLATFORM_NAME"
+  mkdir -p "$UNINST_DIR"
+  cp "$CONFIGURATION_TEMP_DIR/ld/ld-new" "$UNINST_DIR/m68k-elf-ld";
+fi
