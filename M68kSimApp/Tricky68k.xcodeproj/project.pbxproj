@@ -756,6 +756,7 @@
 				014F9C7D1E1ABC5C00E74EBB /* Frameworks */,
 				014F9C7E1E1ABC5C00E74EBB /* Resources */,
 				014F9C901E1ABE3500E74EBB /* Install Supporting Executables */,
+				0129881D1E1C031B00864D68 /* Write Build Number */,
 			);
 			buildRules = (
 			);
@@ -774,6 +775,7 @@
 				014F9C961E1AC70900E74EBB /* Frameworks */,
 				014F9C971E1AC70900E74EBB /* Headers */,
 				014F9C981E1AC70900E74EBB /* Resources */,
+				0129881E1E1C034000864D68 /* Write Build Number */,
 			);
 			buildRules = (
 			);
@@ -791,9 +793,9 @@
 				016CD1311A51A10E00D64892 /* Sources */,
 				016CD1321A51A10E00D64892 /* Frameworks */,
 				016CD1331A51A10E00D64892 /* Resources */,
+				0112028E1A55BA1100F61E42 /* Write Build Number */,
 				015525811A5EFE2C00096023 /* Install Frameworks */,
 				014F9C881E1ABDF900E74EBB /* Install Platform Plugins */,
-				0112028E1A55BA1100F61E42 /* Advance Build Number */,
 			);
 			buildRules = (
 			);
@@ -900,19 +902,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0112028E1A55BA1100F61E42 /* Advance Build Number */ = {
+		0112028E1A55BA1100F61E42 /* Write Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Advance Build Number";
+			name = "Write Build Number";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "VERNO=$(/usr/libexec/PlistBuddy -c \"Print :CFBundleVersion\" \"$INFOPLIST_FILE\")\necho $VERNO\nVERNO=$((VERNO+1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $VERNO\" \"$INFOPLIST_FILE\"";
+			shellScript = "VERNO=$(git rev-list HEAD --count)\nif [ $? -ne 0 ]; then\n  VERNO='1';\nelse\n  VERNO=$(($VERNO + 4884 - 449));\nfi\necho $VERNO\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $VERNO\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"";
+		};
+		0129881D1E1C031B00864D68 /* Write Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Write Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "VERNO=$(git rev-list HEAD --count)\nif [ $? -ne 0 ]; then\n  VERNO='1';\nelse\n  VERNO=$(($VERNO + 4884 - 449));\nfi\necho $VERNO\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $VERNO\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"";
+		};
+		0129881E1E1C034000864D68 /* Write Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Write Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "VERNO=$(git rev-list HEAD --count)\nif [ $? -ne 0 ]; then\n  VERNO='1';\nelse\n  VERNO=$(($VERNO + 4884 - 449));\nfi\necho $VERNO\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $VERNO\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1217,7 +1247,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = Motorola68k/Info.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielecattaneo.Motorola68k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1233,7 +1263,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = Motorola68k/Info.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielecattaneo.Motorola68k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1258,7 +1288,7 @@
 				INFOPLIST_FILE = MOSPlatformSupport/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielecattaneo.MOSPlatformSupport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1284,7 +1314,7 @@
 				INFOPLIST_FILE = MOSPlatformSupport/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielecattaneo.MOSPlatformSupport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1423,6 +1453,7 @@
 				014F9C851E1ABC5C00E74EBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		014F9CA31E1AC70900E74EBB /* Build configuration list for PBXNativeTarget "MOSPlatformSupport" */ = {
 			isa = XCConfigurationList;
@@ -1431,6 +1462,7 @@
 				014F9CA51E1AC70900E74EBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		016CD1301A51A10E00D64892 /* Build configuration list for PBXProject "Tricky68k" */ = {
 			isa = XCConfigurationList;
