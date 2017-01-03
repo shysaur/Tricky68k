@@ -43,30 +43,30 @@
 		014F9C911E1ABE6400E74EBB /* vasmm68k-mot in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 015708A41A618BEE005D08DB /* vasmm68k-mot */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		014F9C921E1ABE6400E74EBB /* m68k-elf-ld in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 0179F60E1C9B017C007BED1B /* m68k-elf-ld */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		014F9C931E1ABE6400E74EBB /* m68ksim in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 01864B921A51CCF6005B2B0D /* m68ksim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		014F9C9E1E1AC70900E74EBB /* MOSPlatformSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 014F9C9C1E1AC70900E74EBB /* MOSPlatformSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CA11E1AC70900E74EBB /* MOSPlatformSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014F9C9A1E1AC70900E74EBB /* MOSPlatformSupport.framework */; };
-		014F9CA21E1AC70900E74EBB /* MOSPlatformSupport.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 014F9C9A1E1AC70900E74EBB /* MOSPlatformSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		014F9CA61E1ACE7C00E74EBB /* MOSPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152A3301C1B5FA100721666 /* MOSPlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CA71E1ACE8000E74EBB /* MOSAssembler.h in Headers */ = {isa = PBXBuildFile; fileRef = 01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CA81E1ACE8400E74EBB /* MOSListingDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 0153EED61C89D82C00AA29C0 /* MOSListingDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CA91E1ACE8700E74EBB /* MOSSimulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 018D72861C196063005DF500 /* MOSSimulator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CAA1E1ACE8B00E74EBB /* MOSSimulatorPresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = 018D72891C196958005DF500 /* MOSSimulatorPresentation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		014F9C9E1E1AC70900E74EBB /* PlatformSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 014F9C9C1E1AC70900E74EBB /* PlatformSupport.h */; };
+		014F9CA11E1AC70900E74EBB /* PlatformSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014F9C9A1E1AC70900E74EBB /* PlatformSupport.framework */; };
+		014F9CA21E1AC70900E74EBB /* PlatformSupport.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 014F9C9A1E1AC70900E74EBB /* PlatformSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		014F9CA61E1ACE7C00E74EBB /* MOSPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0152A3301C1B5FA100721666 /* MOSPlatform.h */; };
+		014F9CA71E1ACE8000E74EBB /* MOSAssembler.h in Headers */ = {isa = PBXBuildFile; fileRef = 01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */; };
+		014F9CA81E1ACE8400E74EBB /* MOSListingDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 0153EED61C89D82C00AA29C0 /* MOSListingDictionary.h */; };
+		014F9CA91E1ACE8700E74EBB /* MOSSimulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 018D72861C196063005DF500 /* MOSSimulator.h */; };
+		014F9CAA1E1ACE8B00E74EBB /* MOSSimulatorPresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = 018D72891C196958005DF500 /* MOSSimulatorPresentation.h */; };
 		014F9CAB1E1ACE9900E74EBB /* MOSPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0152A3311C1B5FA100721666 /* MOSPlatform.m */; };
 		014F9CAC1E1ACE9900E74EBB /* MOSAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */; };
 		014F9CAD1E1ACE9900E74EBB /* MOSListingDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 0153EED71C89D82C00AA29C0 /* MOSListingDictionary.m */; };
 		014F9CAE1E1ACE9900E74EBB /* MOSSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 018D72871C196063005DF500 /* MOSSimulator.m */; };
 		014F9CAF1E1ACE9900E74EBB /* MOSSimulatorPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 018D728A1C196958005DF500 /* MOSSimulatorPresentation.m */; };
-		014F9CB01E1ACEEF00E74EBB /* MOSPlatformSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014F9C9A1E1AC70900E74EBB /* MOSPlatformSupport.framework */; };
-		014F9CB11E1ACFA900E74EBB /* MOSJob.h in Headers */ = {isa = PBXBuildFile; fileRef = 01A0AA3D1BB04027002CAD97 /* MOSJob.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		014F9CB01E1ACEEF00E74EBB /* PlatformSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014F9C9A1E1AC70900E74EBB /* PlatformSupport.framework */; };
+		014F9CB11E1ACFA900E74EBB /* MOSJob.h in Headers */ = {isa = PBXBuildFile; fileRef = 01A0AA3D1BB04027002CAD97 /* MOSJob.h */; };
 		014F9CB21E1ACFAD00E74EBB /* MOSJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A0AA3E1BB04027002CAD97 /* MOSJob.m */; };
-		014F9CB61E1AD1BF00E74EBB /* MOSNamedPipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CB71E1AD1BF00E74EBB /* MOSError.h in Headers */ = {isa = PBXBuildFile; fileRef = 0124CF141B2F5EF800DD0A5C /* MOSError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		014F9CB61E1AD1BF00E74EBB /* MOSNamedPipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 014A3C681A5D3B1900F73FC5 /* MOSNamedPipe.h */; };
+		014F9CB71E1AD1BF00E74EBB /* MOSError.h in Headers */ = {isa = PBXBuildFile; fileRef = 0124CF141B2F5EF800DD0A5C /* MOSError.h */; };
 		014F9CB81E1AD1C300E74EBB /* MOSNamedPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3C691A5D3B1900F73FC5 /* MOSNamedPipe.m */; };
 		014F9CB91E1AD1C300E74EBB /* MOSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 0124CF151B2F5EF800DD0A5C /* MOSError.m */; };
-		014F9CBA1E1AD2B000E74EBB /* NSFileHandle+Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 01509B121A52191300724F29 /* NSFileHandle+Strings.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CBB1E1AD2B000E74EBB /* NSURL+TemporaryFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 015708AB1A618E8B005D08DB /* NSURL+TemporaryFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CBC1E1AD2B000E74EBB /* NSScanner+Shorteners.h in Headers */ = {isa = PBXBuildFile; fileRef = 01000A4F1A65AD130080AC5F /* NSScanner+Shorteners.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		014F9CBD1E1AD2B000E74EBB /* NSUserDefaults+Archiver.h in Headers */ = {isa = PBXBuildFile; fileRef = 017D70021A72DF35003DCAF3 /* NSUserDefaults+Archiver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		014F9CBA1E1AD2B000E74EBB /* NSFileHandle+Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 01509B121A52191300724F29 /* NSFileHandle+Strings.h */; };
+		014F9CBB1E1AD2B000E74EBB /* NSURL+TemporaryFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 015708AB1A618E8B005D08DB /* NSURL+TemporaryFile.h */; };
+		014F9CBC1E1AD2B000E74EBB /* NSScanner+Shorteners.h in Headers */ = {isa = PBXBuildFile; fileRef = 01000A4F1A65AD130080AC5F /* NSScanner+Shorteners.h */; };
+		014F9CBD1E1AD2B000E74EBB /* NSUserDefaults+Archiver.h in Headers */ = {isa = PBXBuildFile; fileRef = 017D70021A72DF35003DCAF3 /* NSUserDefaults+Archiver.h */; };
 		014F9CBE1E1AD2B700E74EBB /* NSFileHandle+Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = 01509B131A52191300724F29 /* NSFileHandle+Strings.m */; };
 		014F9CBF1E1AD2B700E74EBB /* NSURL+TemporaryFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 015708AC1A618E8B005D08DB /* NSURL+TemporaryFile.m */; };
 		014F9CC01E1AD2B700E74EBB /* NSScanner+Shorteners.m in Sources */ = {isa = PBXBuildFile; fileRef = 01000A501A65AD130080AC5F /* NSScanner+Shorteners.m */; };
@@ -156,7 +156,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				014F9CA21E1AC70900E74EBB /* MOSPlatformSupport.framework in Install Frameworks */,
+				014F9CA21E1AC70900E74EBB /* PlatformSupport.framework in Install Frameworks */,
 				012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */,
 				010AACAC1B1CDEA0005D9984 /* Fragaria.framework in Install Frameworks */,
 			);
@@ -214,8 +214,8 @@
 		014F9C7A1E1AA71800E74EBB /* MOSPlatformManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPlatformManager.m; sourceTree = "<group>"; };
 		014F9C801E1ABC5C00E74EBB /* Motorola68k.mosplatform */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Motorola68k.mosplatform; sourceTree = BUILT_PRODUCTS_DIR; };
 		014F9C821E1ABC5C00E74EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		014F9C9A1E1AC70900E74EBB /* MOSPlatformSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MOSPlatformSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		014F9C9C1E1AC70900E74EBB /* MOSPlatformSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSPlatformSupport.h; sourceTree = "<group>"; };
+		014F9C9A1E1AC70900E74EBB /* PlatformSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlatformSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		014F9C9C1E1AC70900E74EBB /* PlatformSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformSupport.h; sourceTree = "<group>"; };
 		014F9C9D1E1AC70900E74EBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		015094721A6DA7050024D28F /* MOSProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSProgressIndicator.h; sourceTree = "<group>"; };
 		015094731A6DA7050024D28F /* MOSProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSProgressIndicator.m; sourceTree = "<group>"; };
@@ -321,7 +321,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014F9CB01E1ACEEF00E74EBB /* MOSPlatformSupport.framework in Frameworks */,
+				014F9CB01E1ACEEF00E74EBB /* PlatformSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +336,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				014F9CA11E1AC70900E74EBB /* MOSPlatformSupport.framework in Frameworks */,
+				014F9CA11E1AC70900E74EBB /* PlatformSupport.framework in Frameworks */,
 				012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */,
 				010AACAB1B1CDEA0005D9984 /* Fragaria.framework in Frameworks */,
 			);
@@ -407,15 +407,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		014F9C9B1E1AC70900E74EBB /* MOSPlatformSupport */ = {
+		014F9C9B1E1AC70900E74EBB /* PlatformSupport */ = {
 			isa = PBXGroup;
 			children = (
-				014F9C9C1E1AC70900E74EBB /* MOSPlatformSupport.h */,
+				014F9C9C1E1AC70900E74EBB /* PlatformSupport.h */,
 				014F9CB51E1AD17800E74EBB /* Foundation */,
 				014F9CB31E1AD14C00E74EBB /* Platform */,
 				014F9CB41E1AD15600E74EBB /* Job Manager */,
 				014F9CC21E1AD34600E74EBB /* Supporting Files */,
 			);
+			name = PlatformSupport;
 			path = MOSPlatformSupport;
 			sourceTree = "<group>";
 		};
@@ -522,7 +523,7 @@
 			isa = PBXGroup;
 			children = (
 				016CD1371A51A10E00D64892 /* M68kSimApp */,
-				014F9C9B1E1AC70900E74EBB /* MOSPlatformSupport */,
+				014F9C9B1E1AC70900E74EBB /* PlatformSupport */,
 				014F9C811E1ABC5C00E74EBB /* Motorola68k Plugin */,
 				01864B941A51CD10005B2B0D /* Dependencies */,
 				016CD1361A51A10E00D64892 /* Products */,
@@ -534,7 +535,7 @@
 			children = (
 				016CD1351A51A10E00D64892 /* Tricky68k.app */,
 				014F9C801E1ABC5C00E74EBB /* Motorola68k.mosplatform */,
-				014F9C9A1E1AC70900E74EBB /* MOSPlatformSupport.framework */,
+				014F9C9A1E1AC70900E74EBB /* PlatformSupport.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -730,7 +731,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				014F9CBB1E1AD2B000E74EBB /* NSURL+TemporaryFile.h in Headers */,
-				014F9C9E1E1AC70900E74EBB /* MOSPlatformSupport.h in Headers */,
+				014F9C9E1E1AC70900E74EBB /* PlatformSupport.h in Headers */,
 				014F9CB71E1AD1BF00E74EBB /* MOSError.h in Headers */,
 				014F9CBC1E1AD2B000E74EBB /* NSScanner+Shorteners.h in Headers */,
 				014F9CBA1E1AD2B000E74EBB /* NSFileHandle+Strings.h in Headers */,
@@ -767,9 +768,9 @@
 			productReference = 014F9C801E1ABC5C00E74EBB /* Motorola68k.mosplatform */;
 			productType = "com.apple.product-type.bundle";
 		};
-		014F9C991E1AC70900E74EBB /* MOSPlatformSupport */ = {
+		014F9C991E1AC70900E74EBB /* PlatformSupport */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 014F9CA31E1AC70900E74EBB /* Build configuration list for PBXNativeTarget "MOSPlatformSupport" */;
+			buildConfigurationList = 014F9CA31E1AC70900E74EBB /* Build configuration list for PBXNativeTarget "PlatformSupport" */;
 			buildPhases = (
 				014F9C951E1AC70900E74EBB /* Sources */,
 				014F9C961E1AC70900E74EBB /* Frameworks */,
@@ -781,9 +782,9 @@
 			);
 			dependencies = (
 			);
-			name = MOSPlatformSupport;
+			name = PlatformSupport;
 			productName = MOSPlatformSupport;
-			productReference = 014F9C9A1E1AC70900E74EBB /* MOSPlatformSupport.framework */;
+			productReference = 014F9C9A1E1AC70900E74EBB /* PlatformSupport.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		016CD1341A51A10E00D64892 /* Tricky68k */ = {
@@ -845,7 +846,7 @@
 			targets = (
 				016CD1341A51A10E00D64892 /* Tricky68k */,
 				014F9C7F1E1ABC5C00E74EBB /* Motorola68k */,
-				014F9C991E1AC70900E74EBB /* MOSPlatformSupport */,
+				014F9C991E1AC70900E74EBB /* PlatformSupport */,
 			);
 		};
 /* End PBXProject section */
@@ -1028,7 +1029,7 @@
 /* Begin PBXTargetDependency section */
 		014F9CA01E1AC70900E74EBB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 014F9C991E1AC70900E74EBB /* MOSPlatformSupport */;
+			target = 014F9C991E1AC70900E74EBB /* PlatformSupport */;
 			targetProxy = 014F9C9F1E1AC70900E74EBB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1455,7 +1456,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		014F9CA31E1AC70900E74EBB /* Build configuration list for PBXNativeTarget "MOSPlatformSupport" */ = {
+		014F9CA31E1AC70900E74EBB /* Build configuration list for PBXNativeTarget "PlatformSupport" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				014F9CA41E1AC70900E74EBB /* Debug */,
