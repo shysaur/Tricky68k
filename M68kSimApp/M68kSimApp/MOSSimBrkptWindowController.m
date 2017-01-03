@@ -10,6 +10,9 @@
 #import "MOSMutableBreakpoint.h"
 
 
+static void *CanRemoveContext = &CanRemoveContext;
+
+
 @implementation MOSSimBrkptWindowController
 
 
@@ -23,6 +26,8 @@
   [self setSortDescriptors:@[
       [NSSortDescriptor sortDescriptorWithKey:@"address" ascending:YES]
     ]];
+  [bptsController addObserver:self forKeyPath:@"canRemove"
+    options:NSKeyValueObservingOptionInitial context:CanRemoveContext];
 }
 
 
@@ -61,6 +66,21 @@
       [bptsController remove:sender];
       break;
   }
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+    change:(NSDictionary *)change context:(void *)context {
+  if (context == CanRemoveContext) {
+    [self updateAddRemoveButtons];
+  }
+}
+
+
+- (void)updateAddRemoveButtons
+{
+  [addRemoveButtons setEnabled:[bptsController canRemove] forSegment:1];
+  [addRemoveButtons setEnabled:YES forSegment:0];
 }
 
 
@@ -107,6 +127,11 @@
     symbolLocator = [[st allKeys] sortedArrayUsingSelector:@selector(compare:)];
     symbolTable = st;
   }
+}
+
+
+- (void)dealloc {
+  [bptsController removeObserver:self forKeyPath:@"canRemove"];
 }
 
 

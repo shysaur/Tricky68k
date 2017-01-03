@@ -16,6 +16,7 @@
   NSDictionary *symbolTable;
   NSArray *sortDesc;
   IBOutlet NSArrayController *bptsController;
+  IBOutlet NSSegmentedControl *addRemoveButtons;
 }
   
 - (instancetype)init;
