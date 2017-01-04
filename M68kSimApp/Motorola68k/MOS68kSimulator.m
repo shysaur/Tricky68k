@@ -10,8 +10,6 @@
 #import "MOS68kSimulatorPresentation.h"
 #import "MOS68kSimulatorProxy.h"
 #import "MOS68kSimulator.h"
-#import "NSFileHandle+Strings.h"
-#import "MOSError.h"
 
 
 NSString * const MOS68kRegisterD0    = @"D0";
@@ -52,17 +50,17 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   NSDictionary *userinfo, *notelf, *simissue;
   NSString *invalidex;
   
-  invalidex = NSLocalizedString(@"Impossible to load this executable",
+  invalidex = MOSPlatformLocalized(@"Impossible to load this executable",
     @"Error description when the simulator can't load a file");
   simissue = @{
-    NSLocalizedDescriptionKey: NSLocalizedString(@"Can't connect to the "
+    NSLocalizedDescriptionKey: MOSPlatformLocalized(@"Can't connect to the "
       "simulator", @"Description for generic simulator IPC errors"),
-    NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"The "
+    NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"The "
       "simulator's process is not responding.", @"Recovery suggestion for "
       "generic simulator IPC errors (no options are given)")};
   notelf = @{
     NSLocalizedDescriptionKey: invalidex,
-    NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"The file you're "
+    NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"The file you're "
       "trying to open is not a valid Motorola 68000 32-bit big-endian "
       "executable ELF file. It has probably been made for another "
       "architecture.", @"Recovery suggestion for not opening a valid ELF")};
@@ -71,9 +69,9 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
     @(MOSSimulatorErrorTimeout): simissue,
     @(MOSSimulatorErrorPipeOpeningFailure): simissue,
     @(299): @{
-      NSLocalizedDescriptionKey: NSLocalizedString(@"Segmentation fault!",
+      NSLocalizedDescriptionKey: MOSPlatformLocalized(@"Segmentation fault!",
         @"Error description when the user program segmentation faults"),
-      NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Your program "
+      NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"Your program "
         "has accessed a memory area not declared with a DS or DC directive, or "
         "a stack overflow occurred.", @"Recovery suggestion for a segmentation "
         "fault in the simulated program")},
@@ -81,17 +79,17 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
     @(502): notelf,
     @(503): notelf,
     @(504): @{
-      NSLocalizedDescriptionKey: NSLocalizedString(@"The entry point is "
+      NSLocalizedDescriptionKey: MOSPlatformLocalized(@"The entry point is "
         "missing", @"Error description when the ELF file's entry point is "
         "NULL"),
-      NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"To make the "
+      NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"To make the "
         "entry point available, declare it as a public symbol using the "
         "\"public\" directive, or select \"Use fixed entry point\" in the "
         "assembler preferences.", @"Recovery suggestion for fixing a missing "
         "entry point")},
     @(512): @{
       NSLocalizedDescriptionKey: invalidex,
-      NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"This file "
+      NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"This file "
         "is a dynamic library.", @"Recovery suggestion for opening a dylib")}
   };
   

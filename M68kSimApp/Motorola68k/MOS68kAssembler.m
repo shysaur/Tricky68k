@@ -7,11 +7,8 @@
 //
 
 #import "MOS68kAssembler.h"
-#import "NSURL+TemporaryFile.h"
-#import "NSFileHandle+Strings.h"
-#import "MOSJob.h"
-#import "NSScanner+Shorteners.h"
 #import "MOS68kListingDictionary.h"
+#import "MOSMonitoredTask.h"
 
 
 @implementation MOS68kAssembler
@@ -74,7 +71,7 @@
     if (![self makeLinkerFile:linkerfile]) {
       [[self jobStatus] addEvent:@{
         MOSJobEventType: MOSJobEventTypeError,
-        MOSJobEventText: NSLocalizedString(@"Could not create a linker file.",
+        MOSJobEventText: MOSPlatformLocalized(@"Could not create a linker file.",
           @"Text of the event which occurs when creating a linker file failed.")
         }];
       goto fail;
@@ -100,7 +97,7 @@
         initWithListingFile:[self outputListingFile] error:&lfe];
       if (!listingDict) {
         lfevent = @{MOSJobEventType: MOSJobEventTypeWarning,
-         MOSJobEventText: NSLocalizedString(@"Could not read the listing file",
+         MOSJobEventText: MOSPlatformLocalized(@"Could not read the listing file",
            @"Text of the event which occurs when failing to read a listing "
            "file.")};
         dispatch_async(dispatch_get_main_queue(), ^{

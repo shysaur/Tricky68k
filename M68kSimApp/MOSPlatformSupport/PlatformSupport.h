@@ -23,3 +23,8 @@
 #import "NSUserDefaults+Archiver.h"
 #import "MOSError.h"
 
+
+#define MOSPlatformLocalized(text, desc) \
+  [[NSBundle bundleForClass:[self class]] localizedStringForKey:text value:nil table:nil]
+
+

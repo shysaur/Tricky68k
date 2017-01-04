@@ -6,7 +6,7 @@
 //  Copyright © 2016 Daniele Cattaneo. All rights reserved.
 //
 
-#import "MOSListingDictionary.h"
+#import "PlatformSupport.h"
 
 
 @interface MOS68kListingDictionary : MOSListingDictionary {

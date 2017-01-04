@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MOSSimulatorPresentation.h"
+#import "PlatformSupport.h"
 
 
 @class MOS68kSimulator;

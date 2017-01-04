@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MOSSimulator.h"
+#import "PlatformSupport.h"
 
 
 enum {

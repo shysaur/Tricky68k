@@ -7,9 +7,6 @@
 //
 
 #import "MOS68kSimulatorProxy.h"
-#import "MOSNamedPipe.h"
-#import "NSFileHandle+Strings.h"
-#import "MOSError.h"
 
 
 #define RESPONSE_TIMEOUT dispatch_time(DISPATCH_TIME_NOW, 10000000000)

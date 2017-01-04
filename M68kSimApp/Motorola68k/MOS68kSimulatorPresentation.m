@@ -111,9 +111,9 @@ static void MOSAddRegisterFileInterpSection(NSMutableArray *work, BOOL small,
   }
   
   if (!regFileCache) {
-    sr = NSLocalizedString(@"Status Register", @"Register table header for SR");
-    dr = NSLocalizedString(@"Data Registers", @"Register table header for Dx");
-    ar = NSLocalizedString(@"Address Registers", @"Register table header for Ax, SP, PC");
+    sr = MOSPlatformLocalized(@"Status Register", @"Register table header for SR");
+    dr = MOSPlatformLocalized(@"Data Registers", @"Register table header for Dx");
+    ar = MOSPlatformLocalized(@"Address Registers", @"Register table header for Ax, SP, PC");
     work = [NSMutableArray array];
     
     MOSAddRegisterFileInterpSection(work, YES, sr, regsCache, @[@"SR"]);

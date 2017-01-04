@@ -1,0 +1,42 @@
+/* Register table header for Ax, SP, PC */
+"Address Registers" = "Address Registers";
+
+/* Description for generic simulator IPC errors */
+"Can't connect to the simulator" = "Can't connect to the simulator";
+
+/* Text of the event which occurs when creating a linker file failed. */
+"Could not create a linker file." = "Could not create a linker file.";
+
+/* Text of the event which occurs when failing to read a listing file. */
+"Could not read the listing file" = "Could not read the listing file";
+
+/* Register table header for Dx */
+"Data Registers" = "Data Registers";
+
+/* Error description when the simulator can't load a file */
+"Impossible to load this executable" = "Impossible to load this executable";
+
+/* Error description when the user program segmentation faults */
+"Segmentation fault!" = "Segmentation fault!";
+
+/* Register table header for SR */
+"Status Register" = "Status Register";
+
+/* Error description when the ELF file's entry point is NULL */
+"The entry point is missing" = "The entry point is missing";
+
+/* Recovery suggestion for not opening a valid ELF */
+"The file you're trying to open is not a valid Motorola 68000 32-bit big-endian executable ELF file. It has probably been made for another architecture." = "The file you're trying to open is not a valid Motorola 68000 32-bit big-endian executable ELF file. It has probably been made for another architecture.";
+
+/* Recovery suggestion for generic simulator IPC errors (no options are given) */
+"The simulator's process is not responding." = "The simulator's process is not responding.";
+
+/* Recovery suggestion for opening a dylib */
+"This file is a dynamic library." = "This file is a dynamic library.";
+
+/* Recovery suggestion for fixing a missing entry point */
+"To make the entry point available, declare it as a public symbol using the \"public\" directive, or select \"Use fixed entry point\" in the assembler preferences." = "To make the entry point available, declare it as a public symbol using the \"public\" directive, or select \"Use fixed entry point\" in the assembler preferences.";
+
+/* Recovery suggestion for a segmentation fault in the simulated program */
+"Your program has accessed a memory area not declared with a DS or DC directive, or a stack overflow occurred." = "Your program has accessed a memory area not declared with a DS or DC directive, or a stack overflow occurred.";
+
