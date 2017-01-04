@@ -12,6 +12,11 @@
 @implementation MOSPlatform
 
 
+- (NSBundle *)bundle {
+  return [NSBundle bundleForClass:[self class]];
+}
+
+
 - (NSString *)description {
   return [NSString stringWithFormat:
     @"<MOSPlatform %p name: %@ assembler: %@ simulator: %@>",

@@ -115,7 +115,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   self.simulatorMode = NO;
   
   if (!text) {
-    template = [[NSBundle mainBundle] URLForResource:@"VasmTemplate" withExtension:@"s"];
+    template = [platform editorTemplate];
     tmp = [NSString stringWithContentsOfURL:template encoding:NSUTF8StringEncoding error:nil];
     text = [[NSTextStorage alloc] initWithString:tmp];
     fixtabs = YES;
@@ -126,7 +126,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   prefobs = [[MOSFragariaPreferencesObserver alloc] initWithFragaria:fragaria];
   
-  [fragaria setSyntaxDefinitionName:@"ASM-m68k"];
+  [fragaria setSyntaxDefinitionName:[platform syntaxDefinitionName]];
   [fragaria setSyntaxColoured:YES];
   [fragaria setShowsLineNumbers:YES];
   

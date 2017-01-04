@@ -11,9 +11,14 @@
 
 @interface MOSPlatform : NSObject
 
+@property (readonly) NSBundle *bundle;
+
 @property (readonly) Class assemblerClass;
 @property (readonly) Class simulatorClass;
 @property (readonly) Class presentationClass;
 @property (readonly) NSString *localizedName;
+
+@property (readonly) NSString *syntaxDefinitionName;
+@property (readonly) NSURL *editorTemplate;
 
 @end

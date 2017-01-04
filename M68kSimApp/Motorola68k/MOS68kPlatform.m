@@ -35,4 +35,14 @@
 }
 
 
+- (NSString *)syntaxDefinitionName {
+  return @"ASM-m68k";
+}
+
+
+- (NSURL *)editorTemplate {
+  return [[self bundle] URLForResource:@"VasmTemplate" withExtension:@"s"];
+}
+
+
 @end
