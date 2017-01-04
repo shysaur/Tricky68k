@@ -181,7 +181,7 @@
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		011D72D81AD0382900368CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSEditorPrefView.xib; sourceTree = "<group>"; };
-		011E2AF81C9761FF0090D552 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Examples/Base.lproj/mastermind.s; sourceTree = SOURCE_ROOT; };
+		011E2AF81C9761FF0090D552 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/mastermind.s; sourceTree = "<group>"; };
 		0124CF141B2F5EF800DD0A5C /* MOSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSError.h; sourceTree = "<group>"; };
 		0124CF151B2F5EF800DD0A5C /* MOSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSError.m; sourceTree = "<group>"; };
 		012988271E1C76E500864D68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 		016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorViewController.m; sourceTree = "<group>"; };
 		016F94EF1A8559D200770684 /* MOSPrintingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPrintingTextView.h; sourceTree = "<group>"; };
 		016F94F01A8559D200770684 /* MOSPrintingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPrintingTextView.m; sourceTree = "<group>"; };
-		0178EA9E1C9898B300F37A51 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Examples/Base.lproj/exponentiation.s; sourceTree = SOURCE_ROOT; };
+		0178EA9E1C9898B300F37A51 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/exponentiation.s; sourceTree = "<group>"; };
 		0179F60E1C9B017C007BED1B /* m68k-elf-ld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = "m68k-elf-ld"; sourceTree = BUILT_PRODUCTS_DIR; };
 		017D25211ACC755400F74869 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/digits.s; sourceTree = "<group>"; };
 		017D25271ACC8DFC00F74869 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = "Base.lproj/selection-sort.s"; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 		01A419431A57382900D9BD02 /* MOSSimStackDumpDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimStackDumpDataSource.h; sourceTree = "<group>"; };
 		01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimStackDumpDataSource.m; sourceTree = "<group>"; };
 		01ABE5C41E1D9D6C002E425E /* Base */ = {isa = PBXFileReference; explicitFileType = text; indentWidth = 4; lineEnding = 0; name = Base; path = Base.lproj/VasmTemplate.s; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; wrapsLines = 1; };
-		01BBDED11C962D0600B404D8 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Examples/Base.lproj/fibonacci.s; sourceTree = SOURCE_ROOT; };
+		01BBDED11C962D0600B404D8 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/fibonacci.s; sourceTree = "<group>"; };
 		01C20CA11A6726D600057D6B /* MOSPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPreferencesWindowController.h; sourceTree = "<group>"; };
 		01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPreferencesWindowController.m; sourceTree = "<group>"; };
 		01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAssembler.h; sourceTree = "<group>"; };
@@ -308,7 +308,7 @@
 		01E93C7C1A6D491D004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSimulatorView.xib; sourceTree = "<group>"; };
 		01E93C7F1A6D4927004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Credits.rtf; sourceTree = "<group>"; };
 		01E974C81BE8021C002E91B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSimBrkptWindow.xib; sourceTree = "<group>"; };
-		01EB0DAB1A8BF4C100428082 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = "Examples/Base.lproj/tic-tac-toe.s"; sourceTree = SOURCE_ROOT; };
+		01EB0DAB1A8BF4C100428082 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = "Base.lproj/tic-tac-toe.s"; sourceTree = "<group>"; };
 		01EBAA1E1AB96E670076AD02 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/helloworld.s; sourceTree = "<group>"; };
 		01EBAA211AB973DF0076AD02 /* MOSDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSDocument.h; sourceTree = "<group>"; };
 		01EBAA221AB973DF0076AD02 /* MOSDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSDocument.m; sourceTree = "<group>"; };
