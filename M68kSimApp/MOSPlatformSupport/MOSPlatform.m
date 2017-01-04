@@ -24,4 +24,9 @@
 }
 
 
+- (NSURL *)URLForExampleFile:(NSString *)fn {
+  return nil;
+}
+
+
 @end

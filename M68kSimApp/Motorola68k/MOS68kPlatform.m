@@ -45,4 +45,21 @@
 }
 
 
+- (NSArray<NSDictionary *> *)examplesList {
+  NSBundle *bundle;
+  NSURL *examplesDirPlist;
+  
+  bundle = [self bundle];
+  examplesDirPlist = [bundle URLForResource:@"ExamplesList" withExtension:@"plist"];
+  return [NSArray arrayWithContentsOfURL:examplesDirPlist];
+}
+
+
+- (NSURL *)URLForExampleFile:(NSString *)fn {
+  NSString *ext = [fn pathExtension];
+  NSString *name = [fn stringByDeletingPathExtension];
+  return [[self bundle] URLForResource:fn withExtension:nil];
+}
+
+
 @end

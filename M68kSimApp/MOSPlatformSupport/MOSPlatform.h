@@ -21,4 +21,7 @@
 @property (readonly) NSString *syntaxDefinitionName;
 @property (readonly) NSURL *editorTemplate;
 
+@property (readonly) NSArray<NSDictionary *> *examplesList;
+- (NSURL *)URLForExampleFile:(NSString *)fn;
+
 @end

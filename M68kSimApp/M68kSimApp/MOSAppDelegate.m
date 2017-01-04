@@ -10,6 +10,7 @@
 #import "MOSJobWindowController.h"
 #import "MOSPreferencesWindowController.h"
 #import "MOSPlatformManager.h"
+#import "MOSPlatform.h"
 
 
 @implementation MOSAppDelegate
@@ -52,16 +53,12 @@
 
 
 - (void)populateExamplesMenu {
-  NSBundle *bundle;
-  NSURL *examplesDirPlist;
   NSDictionary *example;
   NSString *exampleName;
   NSMenuItem *tempMenuItem;
   NSInteger i;
   
-  bundle = [NSBundle mainBundle];
-  examplesDirPlist = [bundle URLForResource:@"ExamplesList" withExtension:@"plist"];
-  examplesData = [NSArray arrayWithContentsOfURL:examplesDirPlist];
+  examplesData = [[[MOSPlatformManager sharedManager] defaultPlatform] examplesList];
   
   i = 0;
   for (example in examplesData) {
@@ -88,18 +85,17 @@
 
 
 - (IBAction)openExample:(id)sender {
-  NSBundle *bundle;
   NSString *exampleName, *exampleTitle;
   NSURL *example;
   NSDocumentController *sdc;
   NSError *err;
+  MOSPlatform *platf;
   NSInteger i;
   
   i = [sender tag];
-  bundle = [NSBundle mainBundle];
+  platf = [[MOSPlatformManager sharedManager] defaultPlatform];
   exampleName = [[examplesData objectAtIndex:i] objectForKey:@"fileName"];
-  exampleName = [exampleName stringByDeletingPathExtension];
-  example = [bundle URLForResource:exampleName withExtension:@"s"];
+  example = [platf URLForExampleFile:exampleName];
   if (!example) {
     NSLog(@"Couldn't find the example file %@", exampleName);
     return;
