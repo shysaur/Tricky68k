@@ -34,4 +34,9 @@
 }
 
 
+- (NSViewController *)simulatorPreferencesViewController {
+  return nil;
+}
+
+
 @end

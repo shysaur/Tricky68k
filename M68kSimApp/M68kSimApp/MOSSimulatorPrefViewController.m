@@ -8,13 +8,30 @@
 
 #import "MOSSimulatorPrefViewController.h"
 #import "NSUserDefaults+Archiver.h"
+#import "MOSPlatformManager.h"
+#import "PlatformSupport.h"
 
 
 @implementation MOSSimulatorPrefViewController
 
 
 - init {
+  childVcs = [[NSMutableArray alloc] init];
   return [super initWithNibName:@"MOSSimulatorPrefView" bundle:[NSBundle mainBundle]];
+}
+
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  
+  MOSPlatform *p = [[MOSPlatformManager sharedManager] defaultPlatform];
+  NSViewController *vc = [p simulatorPreferencesViewController];
+  NSStackView *sv = [self pluginPrefsView];
+  if (vc) {
+    [childVcs addObject:vc];
+    [sv addView:[self separatorView] inGravity:NSStackViewGravityCenter];
+    [sv addView:[vc view] inGravity:NSStackViewGravityCenter];
+  }
 }
 
 

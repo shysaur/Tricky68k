@@ -11,6 +11,7 @@
 #import "MOS68kSimulator.h"
 #import "MOS68kSimulatorPresentation.h"
 #import "MOS68kAssemblerPrefViewController.h"
+#import "MOS68kSimulatorPrefViewController.h"
 
 
 @implementation MOS68kPlatform
@@ -65,6 +66,11 @@
 
 - (NSViewController *)assemblerPreferencesViewController {
   return [[MOS68kAssemblerPrefViewController alloc] init];
+}
+
+
+- (NSViewController *)simulatorPreferencesViewController {
+  return [[MOS68kSimulatorPrefViewController alloc] init];
 }
 
 

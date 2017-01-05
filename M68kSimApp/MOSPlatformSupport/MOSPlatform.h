@@ -25,5 +25,6 @@
 - (NSURL *)URLForExampleFile:(NSString *)fn;
 
 - (NSViewController *)assemblerPreferencesViewController;
+- (NSViewController *)simulatorPreferencesViewController;
 
 @end

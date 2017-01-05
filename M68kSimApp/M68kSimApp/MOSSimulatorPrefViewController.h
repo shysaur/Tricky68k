@@ -11,8 +11,12 @@
 
 @interface MOSSimulatorPrefViewController : NSViewController {
   NSFont *baseFont;
+  NSMutableArray<NSViewController *> *childVcs;
 }
 
 - (IBAction)changeDebuggerFont:(id)sender;
+
+@property (nonatomic) IBOutlet NSView *separatorView;
+@property (nonatomic, weak) IBOutlet NSStackView *pluginPrefsView;
 
 @end
