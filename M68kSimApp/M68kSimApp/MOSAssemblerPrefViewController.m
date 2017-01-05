@@ -7,71 +7,34 @@
 //
 
 #import "MOSAssemblerPrefViewController.h"
+#import "MOSPlatformManager.h"
+#import "PlatformSupport.h"
 
 
-@implementation MOSAssemblerPrefViewController
+@implementation MOSAssemblerPrefViewController {
+  NSMutableArray<NSViewController *> *childVcs;
+}
 
 
 - init {
+  childVcs = [[NSMutableArray alloc] init];
   return [super initWithNibName:@"MOSAssemblerPrefView" bundle:[NSBundle mainBundle]];
 }
 
 
-@end
-
-
-@implementation MOSAssemblerPrefViewEntryPointInfoValueTransformer
-
-
-+ (Class)transformedValueClass {
-  return [NSString class];
-}
-
-
-+ (BOOL)allowsReverseTransformation {
-  return NO;
-}
-
-
-- (id)transformedValue:(id)beforeObject {
-  if (beforeObject == nil) return nil;
-  if ([beforeObject boolValue])
-    return NSLocalizedString(@"The entry point of the program will always be "
-      "located at $2000, regardless of the location of your start label.",
-      @"Info about what happens when entry point is fixed");
-  else
-    return NSLocalizedString(@"The entry point of the program will be located "
-      "where you place a global label named \"start\".", @"Info about what "
-      "happens when entry point is not fixed (uses start symbol)");
-}
-
+- (void)viewDidLoad {
+  [super viewDidLoad];
   
-@end
-
-
-@implementation MOSAssemblerPrefViewOptimizationInfoValueTransformer
-
-
-+ (Class)transformedValueClass {
-  return [NSString class];
-}
-
-
-+ (BOOL)allowsReverseTransformation {
-  return NO;
-}
-
-
-- (id)transformedValue:(id)beforeObject {
-  if (beforeObject == nil) return nil;
-  if (![beforeObject boolValue])
-    return NSLocalizedString(@"The assembler output will contain exactly the "
-      "instructions you specified in the source file.",  @"Info about what "
-      "happens when assembler optimizations are disabled");
-  else
-    return NSLocalizedString(@"The assembler will replace your instructions "
-      "with shorter or faster equivalents, if available.", @"Info about what "
-      "happens when assembler optimizations are enabled");
+  MOSPlatform *p = [[MOSPlatformManager sharedManager] defaultPlatform];
+  NSViewController *vc = [p assemblerPreferencesViewController];
+  if (vc) {
+    [childVcs addObject:vc];
+    [[self outerStackView] addView:[vc view] inGravity:NSStackViewGravityCenter];
+  }
+  
+  if ([childVcs count] == 0) {
+    [[self outerStackView] addView:[self placeholderView] inGravity:NSStackViewGravityCenter];
+  }
 }
 
 

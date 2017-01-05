@@ -11,14 +11,8 @@
 
 @interface MOSAssemblerPrefViewController : NSViewController
 
-@end
-
-
-@interface MOSAssemblerPrefViewEntryPointInfoValueTransformer : NSValueTransformer
+@property (nonatomic, weak) IBOutlet NSStackView *outerStackView;
+@property (nonatomic) IBOutlet NSView *placeholderView;
 
 @end
 
-
-@interface MOSAssemblerPrefViewOptimizationInfoValueTransformer : NSValueTransformer
-
-@end

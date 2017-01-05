@@ -6,7 +6,7 @@
 //  Copyright © 2015 Daniele Cattaneo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 
 @interface MOSPlatform : NSObject
@@ -23,5 +23,7 @@
 
 @property (readonly) NSArray<NSDictionary *> *examplesList;
 - (NSURL *)URLForExampleFile:(NSString *)fn;
+
+- (NSViewController *)assemblerPreferencesViewController;
 
 @end

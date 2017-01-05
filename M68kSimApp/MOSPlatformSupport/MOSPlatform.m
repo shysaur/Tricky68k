@@ -29,4 +29,9 @@
 }
 
 
+- (NSViewController *)assemblerPreferencesViewController {
+  return nil;
+}
+
+
 @end

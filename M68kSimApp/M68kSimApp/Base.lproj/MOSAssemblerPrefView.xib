@@ -1,96 +1,61 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSAssemblerPrefViewController">
             <connections>
-                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+                <outlet property="outerStackView" destination="lV8-VU-R6E" id="Xdw-OL-Hy5"/>
+                <outlet property="placeholderView" destination="GQp-z5-sCg" id="P96-gC-Uas"/>
+                <outlet property="view" destination="c22-O7-iKe" id="di1-AT-vyc"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <view id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="154"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="rWz-QZ-vlB">
-                    <rect key="frame" x="89" y="118" width="148" height="18"/>
-                    <buttonCell key="cell" type="check" title="Use fixed entry point" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Hmd-pY-TtP">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <binding destination="Tkm-qm-owb" name="value" keyPath="values.FixedEntryPoint" id="nQo-xV-qmv"/>
-                    </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="FQH-av-kcw">
-                    <rect key="frame" x="89" y="54" width="148" height="18"/>
-                    <buttonCell key="cell" type="check" title="Enable optimizations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="i8g-Dp-rYg">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <binding destination="Tkm-qm-owb" name="value" keyPath="values.UseAssemblyTimeOptimization" id="kMK-8r-yup"/>
-                    </connections>
-                </button>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGC-Xj-iT6">
-                    <rect key="frame" x="107" y="20" width="404" height="28"/>
+                <stackView orientation="vertical" alignment="leading" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="lV8-VU-R6E">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="28" id="Kut-XL-Fdh"/>
-                        <constraint firstAttribute="width" constant="400" id="dV4-Dl-hTT"/>
+                        <constraint firstAttribute="width" constant="600" id="1BG-qd-x8R"/>
                     </constraints>
-                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Information and information and information and information and information and information and information" id="xcs-JT-dDd">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="lV8-VU-R6E" secondAttribute="trailing" id="6Qy-Pd-8ya"/>
+                <constraint firstItem="lV8-VU-R6E" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="TSm-Lq-CcJ"/>
+                <constraint firstAttribute="bottom" secondItem="lV8-VU-R6E" secondAttribute="bottom" id="iKQ-5p-Oxu"/>
+                <constraint firstItem="lV8-VU-R6E" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="mbQ-Lr-sO8"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="132"/>
+        </customView>
+        <customView id="GQp-z5-sCg">
+            <rect key="frame" x="0.0" y="0.0" width="450" height="59"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yt9-qm-KpO">
+                    <rect key="frame" x="133" y="20" width="185" height="19"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="No Preferences Available" id="cyf-oV-rah">
+                        <font key="font" metaFont="system" size="16"/>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
-                    <connections>
-                        <binding destination="Tkm-qm-owb" name="value" keyPath="values.UseAssemblyTimeOptimization" id="MfI-Z0-LZ8">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">MOSAssemblerPrefViewOptimizationInfoValueTransformer</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </textField>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Apu-nl-ZC6">
-                    <rect key="frame" x="107" y="84" width="404" height="28"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="400" id="GfX-YL-DdR"/>
-                        <constraint firstAttribute="height" constant="28" id="ixX-5K-YVw"/>
-                    </constraints>
-                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Information and information and information and information and information and information and information" id="mfM-Hz-riP">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="Tkm-qm-owb" name="value" keyPath="values.FixedEntryPoint" id="Qgc-Q3-tyS">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">MOSAssemblerPrefViewEntryPointInfoValueTransformer</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="EGC-Xj-iT6" firstAttribute="top" secondItem="FQH-av-kcw" secondAttribute="bottom" constant="8" id="0P2-k5-V18"/>
-                <constraint firstItem="EGC-Xj-iT6" firstAttribute="top" secondItem="FQH-av-kcw" secondAttribute="bottom" constant="8" id="6I0-NH-vE0"/>
-                <constraint firstItem="rWz-QZ-vlB" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="Ad7-1b-qZT"/>
-                <constraint firstAttribute="centerX" secondItem="EGC-Xj-iT6" secondAttribute="centerX" constant="-9" id="AhA-DN-P2T"/>
-                <constraint firstItem="Apu-nl-ZC6" firstAttribute="top" secondItem="rWz-QZ-vlB" secondAttribute="bottom" constant="8" id="VG9-KP-jjy"/>
-                <constraint firstItem="Apu-nl-ZC6" firstAttribute="top" secondItem="rWz-QZ-vlB" secondAttribute="bottom" constant="8" id="YzT-NC-FFJ"/>
-                <constraint firstItem="FQH-av-kcw" firstAttribute="top" secondItem="Apu-nl-ZC6" secondAttribute="bottom" constant="14" id="c3N-l9-Y0C"/>
-                <constraint firstItem="FQH-av-kcw" firstAttribute="top" secondItem="Apu-nl-ZC6" secondAttribute="bottom" constant="14" id="inC-Kn-UNP"/>
-                <constraint firstItem="Apu-nl-ZC6" firstAttribute="leading" secondItem="rWz-QZ-vlB" secondAttribute="leading" constant="18" id="m5t-0V-Kjo"/>
-                <constraint firstAttribute="bottom" secondItem="EGC-Xj-iT6" secondAttribute="bottom" constant="20" id="pV5-y8-UyE"/>
-                <constraint firstAttribute="centerX" secondItem="Apu-nl-ZC6" secondAttribute="centerX" constant="-9" id="qm0-dH-wH4"/>
-                <constraint firstItem="FQH-av-kcw" firstAttribute="leading" secondItem="EGC-Xj-iT6" secondAttribute="leading" constant="-18" id="w0F-Qa-aNc"/>
+                <constraint firstAttribute="bottom" secondItem="yt9-qm-KpO" secondAttribute="bottom" constant="20" symbolic="YES" id="4TW-OT-UA2"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yt9-qm-KpO" secondAttribute="trailing" constant="20" symbolic="YES" id="8V9-DW-lyt"/>
+                <constraint firstItem="yt9-qm-KpO" firstAttribute="top" secondItem="GQp-z5-sCg" secondAttribute="top" constant="20" symbolic="YES" id="9jf-Up-Y0Y"/>
+                <constraint firstItem="yt9-qm-KpO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GQp-z5-sCg" secondAttribute="leading" constant="20" symbolic="YES" id="g6e-LD-iWb"/>
+                <constraint firstItem="yt9-qm-KpO" firstAttribute="centerX" secondItem="GQp-z5-sCg" secondAttribute="centerX" id="gbS-q8-NJ9"/>
+                <constraint firstItem="yt9-qm-KpO" firstAttribute="centerY" secondItem="GQp-z5-sCg" secondAttribute="centerY" id="lZs-hg-hx3"/>
             </constraints>
-            <point key="canvasLocation" x="265" y="241"/>
-        </view>
-        <userDefaultsController representsSharedInstance="YES" id="Tkm-qm-owb"/>
+            <point key="canvasLocation" x="176" y="250"/>
+        </customView>
     </objects>
 </document>

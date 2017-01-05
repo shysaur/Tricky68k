@@ -10,6 +10,7 @@
 #import "MOS68kAssembler.h"
 #import "MOS68kSimulator.h"
 #import "MOS68kSimulatorPresentation.h"
+#import "MOS68kAssemblerPrefViewController.h"
 
 
 @implementation MOS68kPlatform
@@ -59,6 +60,11 @@
   NSString *ext = [fn pathExtension];
   NSString *name = [fn stringByDeletingPathExtension];
   return [[self bundle] URLForResource:fn withExtension:nil];
+}
+
+
+- (NSViewController *)assemblerPreferencesViewController {
+  return [[MOS68kAssemblerPrefViewController alloc] init];
 }
 
 
