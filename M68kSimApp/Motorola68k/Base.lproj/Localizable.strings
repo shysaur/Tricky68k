@@ -22,8 +22,20 @@
 /* Register table header for SR */
 "Status Register" = "Status Register";
 
+/* Info about what happens when assembler optimizations are disabled */
+"The assembler output will contain exactly the instructions you specified in the source file." = "The assembler output will contain exactly the instructions you specified in the source file.";
+
+/* Info about what happens when assembler optimizations are enabled */
+"The assembler will replace your instructions with shorter or faster equivalents, if available." = "The assembler will replace your instructions with shorter or faster equivalents, if available.";
+
 /* Error description when the ELF file's entry point is NULL */
 "The entry point is missing" = "The entry point is missing";
+
+/* Info about what happens when entry point is fixed */
+"The entry point of the program will always be located at $2000, regardless of the location of your start label." = "The entry point of the program will always be located at $2000, regardless of the location of your start label.";
+
+/* Info about what happens when entry point is not fixed (uses start symbol) */
+"The entry point of the program will be located where you place a global label named \"start\"." = "The entry point of the program will be located where you place a global label named \"start\".";
 
 /* Recovery suggestion for not opening a valid ELF */
 "The file you're trying to open is not a valid Motorola 68000 32-bit big-endian executable ELF file. It has probably been made for another architecture." = "The file you're trying to open is not a valid Motorola 68000 32-bit big-endian executable ELF file. It has probably been made for another architecture.";

@@ -71,18 +71,6 @@
 /* Print panel summary title for the font used for printing. */
 "Text Font" = "Text Font";
 
-/* Info about what happens when assembler optimizations are disabled */
-"The assembler output will contain exactly the instructions you specified in the source file." = "The assembler output will contain exactly the instructions you specified in the source file.";
-
-/* Info about what happens when assembler optimizations are enabled */
-"The assembler will replace your instructions with shorter or faster equivalents, if available." = "The assembler will replace your instructions with shorter or faster equivalents, if available.";
-
-/* Info about what happens when entry point is fixed */
-"The entry point of the program will always be located at $2000, regardless of the location of your start label." = "The entry point of the program will always be located at $2000, regardless of the location of your start label.";
-
-/* Info about what happens when entry point is not fixed (uses start symbol) */
-"The entry point of the program will be located where you place a global label named \"start\"." = "The entry point of the program will be located where you place a global label named \"start\".";
-
 /* Title of simulator death alert */
 "The simulator has died" = "The simulator has died";
 
