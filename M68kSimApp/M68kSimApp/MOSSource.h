@@ -44,7 +44,8 @@
   NSURL *tempSourceCopy;
   MOSJob *lastJob;
   BOOL hadJob;
-  /* Following ivars must not be modified if runWhenAssemblyComplete == NO: */
+  /* Following ivars must not be modified if assembleForSaveOnly == YES: */
+  NSTextStorage *lastSource;
   MOSListingDictionary *lastListing;
 }
 

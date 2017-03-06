@@ -262,7 +262,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   oldSimExec = [simVc simulatedExecutable];
   if (![oldSimExec isEqual:self.assemblyOutput]) {
     simType = [platform simulatorClass];
-    if (![simVc setSimulatedExecutable:self.assemblyOutput simulatorType:simType error:&err]) {
+    if (![simVc setSimulatedExecutable:self.assemblyOutput simulatorType:simType withSourceCode:lastSource assembledToListing:lastListing error:&err]) {
       /* Keep simulator in limbo, and force re-assembly of new file for next time */
       self.assemblyOutput = nil;
       [self presentError:err];
@@ -395,6 +395,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   self.assembler = [[[platform assemblerClass] alloc] init];
   
   tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
+  if (!assembleForSaveOnly)
+    lastSource = [[NSTextStorage alloc] initWithAttributedString:text];
   
   [self saveToURL:tempSourceCopy ofType:@"public.plain-text"
   forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
