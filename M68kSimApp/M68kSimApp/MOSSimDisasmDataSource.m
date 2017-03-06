@@ -9,6 +9,9 @@
 #import "MOSSimDisasmDataSource.h"
 #import "MOSSimulatorPresentation.h"
 #import "MOSSimulator.h"
+#import "MOSListingDictionary.h"
+#import "Fragaria/NSTextStorage+Fragaria.h"
+#import "Fragaria/MGSMutableSubstring.h"
 
 
 @implementation MOSSimDisasmDataSource
@@ -38,15 +41,21 @@
 }
 
 
-- (void)setSimulatorProxy:(MOSSimulator*)sp {
-  NSInteger rows;
-  NSRect visibleRect;
-  
-  [super setSimulatorProxy:sp];
-  
-  visibleRect = [tableView visibleRect];
-  rows = [tableView rowsInRect:visibleRect].length;
-  [tableView scrollRowToVisible:[self programCounterRow]+rows/2];
+- (void)showSource:(NSTextStorage *)src mappedFromListing:(MOSListingDictionary*)ld
+{
+  source = src;
+  srclisting = ld;
+  [self dataHasChanged];
+  [self centerTableViewOnProgramCounter];
+}
+
+
+- (void)showDisassembly
+{
+  source = nil;
+  srclisting = nil;
+  [self dataHasChanged];
+  [self centerTableViewOnProgramCounter];
 }
 
 
@@ -66,6 +75,23 @@
     }
     [self dataHasChanged];
   }
+}
+
+
+- (void)centerTableViewOnProgramCounter {
+  NSInteger rows;
+  NSRect visibleRect;
+  
+  visibleRect = [tableView visibleRect];
+  rows = [tableView rowsInRect:visibleRect].length;
+  [tableView scrollRowToVisible:[self programCounterRow]+rows/3];
+  [tableView scrollRowToVisible:[self programCounterRow]-rows/3];
+}
+
+
+- (void)simulatorStateHasChanged {
+  [super simulatorStateHasChanged];
+  [self centerTableViewOnProgramCounter];
 }
 
 
@@ -89,7 +115,10 @@
 
 
 - (NSInteger)programCounterRow {
-  return (maxLines-1)/2+1;
+  if (!source)
+    return (maxLines - 1) / 2;
+  
+  return [srclisting sourceLineForAddress:@(centerAddr)] - 1;
 }
 
 
@@ -118,7 +147,9 @@
 
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-  return maxLines;
+  if (!source)
+    return maxLines;
+  return [source mgs_lineCount];
 }
 
 
@@ -126,6 +157,16 @@
   NSInteger linestodo;
   NSArray *add;
   NSMutableArray *newcache;
+  
+  if (source) {
+    NSMutableString *s = [source mutableString];
+    NSRange range;
+    range.location = [source mgs_firstCharacterInRow:row];
+    range.length = 0;
+    [s getLineStart:NULL end:NULL contentsEnd:&range.length forRange:range];
+    range.length -= range.location;
+    return [s substringWithRange:range];
+  }
   
   if (row < cacheStart) {
     linestodo = row - cacheStart;
@@ -143,7 +184,7 @@
     [lineCache addObjectsFromArray:newcache];
     [self updateCacheEndAddress];
   }
-  return [lineCache objectAtIndex:row - cacheStart];
+  return [[lineCache objectAtIndex:row - cacheStart] substringFromIndex:1];
 }
 
 
@@ -167,8 +208,11 @@
   NSString *line;
   uint32_t addr;
   
+  if (source)
+    return [[srclisting addressForSourceLine:row+1] unsignedIntValue];
+  
   line = [self getLine:row];
-  sscanf([line UTF8String]+2, "%X", &addr);
+  sscanf([line UTF8String]+1, "%X", &addr);
   return addr;
 }
 
@@ -188,14 +232,17 @@
   } else {
     addr = [self getAddressForLine:row];
     hasBrkpt = [breakpoints containsObject:[NSNumber numberWithUnsignedInt:addr]];
+    if (source) {
+      hasBrkpt = hasBrkpt && [srclisting sourceLineForAddress:@(addr)]-1 == row;
+    }
     line = [self getLine:row];
-    if ([line characterAtIndex:0] != '>')
+    if ([self programCounterRow] != row)
       result = [tv makeViewWithIdentifier:@"normalView" owner:self];
     else
       result = [tv makeViewWithIdentifier:@"pcmarkedView" owner:self];
     [[result imageView] setHidden:!hasBrkpt];
     [[result textField] setFont:[self defaultMonospacedFont]];
-    [[result textField] setStringValue:[line substringFromIndex:1]];
+    [[result textField] setStringValue:line];
   }
   
   return result;

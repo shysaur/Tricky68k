@@ -9,13 +9,21 @@
 #import <Cocoa/Cocoa.h>
 #import "MOSSimTableViewDelegate.h"
 
+@class MOSListingDictionary;
+
 
 @interface MOSSimDisasmDataSource : MOSSimTableViewDelegate <NSTableViewDataSource, NSTableViewDelegate> {
   NSInteger maxLines, cacheStart;
   uint32_t addrCacheStart, addrCacheEnd, centerAddr;
   NSSet *breakpoints;
   NSMutableArray *lineCache;
+  
+  NSTextStorage *source;
+  MOSListingDictionary *srclisting;
 }
+
+- (void)showSource:(NSTextStorage *)src mappedFromListing:(MOSListingDictionary*)ld;
+- (void)showDisassembly;
 
 - (NSInteger)programCounterRow;
 - (IBAction)clickedTableView:(id)sender;
