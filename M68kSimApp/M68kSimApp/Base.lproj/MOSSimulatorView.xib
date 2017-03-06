@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -12,6 +12,7 @@
                 <outlet property="dumpDs" destination="OYl-Qf-zsd" id="PX9-6c-NnC"/>
                 <outlet property="mainSplitView" destination="hNR-P3-CgA" id="AIR-yp-3Fn"/>
                 <outlet property="regdumpDs" destination="d8D-mR-4Tk" id="57R-ef-ij9"/>
+                <outlet property="sourcePopup" destination="M1U-ra-Hz5" id="Y6p-c4-Qjd"/>
                 <outlet property="stackDs" destination="JVG-YD-Mo8" id="Wx0-nt-4gS"/>
                 <outlet property="teletypePanel" destination="5Fa-zy-YTz" id="ZHP-7R-g18"/>
                 <outlet property="ttyDelegate" destination="OaH-e5-S6R" id="Nzz-uK-v6H"/>
@@ -413,23 +414,59 @@
                                                         <real value="250"/>
                                                     </holdingPriorities>
                                                 </splitView>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SMC-kp-VLw">
-                                                    <rect key="frame" x="223" y="237" width="154" height="14"/>
-                                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Disassembly and RAM dump" id="hiv-TR-oa6">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
+                                                <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="ph3-es-cfC">
+                                                    <rect key="frame" x="0.0" y="235" width="600" height="20"/>
+                                                    <middleViews>
+                                                        <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1U-ra-Hz5">
+                                                            <rect key="frame" x="212" y="1" width="88" height="18"/>
+                                                            <popUpButtonCell key="cell" type="check" title="Disassembly" bezelStyle="regularSquare" imagePosition="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="bezel" inset="2" selectedItem="Z3C-kP-AFF" id="vAD-2H-Uzi">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <menu key="menu" id="pn4-Et-JQX">
+                                                                    <items>
+                                                                        <menuItem title="Disassembly" state="on" id="Z3C-kP-AFF">
+                                                                            <connections>
+                                                                                <action selector="showDisassembly:" target="-2" id="Bs0-0n-xTe"/>
+                                                                            </connections>
+                                                                        </menuItem>
+                                                                        <menuItem title="Source" id="Nrg-UL-4fV">
+                                                                            <connections>
+                                                                                <action selector="showSource:" target="-2" id="xrf-aF-yB8"/>
+                                                                            </connections>
+                                                                        </menuItem>
+                                                                    </items>
+                                                                </menu>
+                                                            </popUpButtonCell>
+                                                        </popUpButton>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMC-kp-VLw">
+                                                            <rect key="frame" x="304" y="3" width="84" height="14"/>
+                                                            <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="and RAM dump" id="hiv-TR-oa6">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </middleViews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="ph3-es-cfC" firstAttribute="top" secondItem="MUf-J3-k2W" secondAttribute="top" id="168-8i-GD5"/>
                                                 <constraint firstItem="vWf-QX-V7z" firstAttribute="leading" secondItem="MUf-J3-k2W" secondAttribute="leading" id="3ps-Un-WT9"/>
-                                                <constraint firstItem="bgh-D0-Fld" firstAttribute="top" secondItem="SMC-kp-VLw" secondAttribute="bottom" constant="2" id="5Po-x8-5uT"/>
                                                 <constraint firstItem="bgh-D0-Fld" firstAttribute="leading" secondItem="MUf-J3-k2W" secondAttribute="leading" id="6oz-Zk-lmj"/>
                                                 <constraint firstAttribute="bottom" secondItem="bgh-D0-Fld" secondAttribute="bottom" id="7k0-q0-t8E"/>
-                                                <constraint firstItem="SMC-kp-VLw" firstAttribute="centerX" secondItem="bgh-D0-Fld" secondAttribute="centerX" id="BUO-wd-pdp"/>
+                                                <constraint firstAttribute="trailing" secondItem="ph3-es-cfC" secondAttribute="trailing" id="CSU-D1-tY7"/>
+                                                <constraint firstItem="bgh-D0-Fld" firstAttribute="top" secondItem="ph3-es-cfC" secondAttribute="bottom" id="Ejt-MS-cZV"/>
                                                 <constraint firstItem="bgh-D0-Fld" firstAttribute="top" secondItem="MUf-J3-k2W" secondAttribute="top" constant="20" id="Hh3-2v-kM2"/>
                                                 <constraint firstAttribute="trailing" secondItem="bgh-D0-Fld" secondAttribute="trailing" id="U2N-0I-J5U"/>
+                                                <constraint firstItem="ph3-es-cfC" firstAttribute="leading" secondItem="MUf-J3-k2W" secondAttribute="leading" id="Wya-Or-Rnm"/>
                                                 <constraint firstItem="bgh-D0-Fld" firstAttribute="top" secondItem="vWf-QX-V7z" secondAttribute="bottom" id="dCY-xV-gy7"/>
                                                 <constraint firstAttribute="trailing" secondItem="vWf-QX-V7z" secondAttribute="trailing" id="x46-zF-Oqd"/>
                                             </constraints>

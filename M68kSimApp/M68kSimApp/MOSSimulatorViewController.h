@@ -24,6 +24,7 @@ enum {
 @class MOSSimStackDumpDataSource;
 @class MOSTeletypeViewDelegate;
 @class MOSSimBrkptWindowController;
+@class MOSListingDictionary;
 
 
 @protocol MOSSimulatorViewParentWindowDelegate <NSWindowDelegate>
@@ -39,12 +40,17 @@ enum {
 @interface MOSSimulatorViewController : NSViewController {
   MOSSimulator *simProxy;
   NSURL *simExec;
+  NSTextStorage *source;
+  MOSListingDictionary *listing;
+  
   NSString *clockFreq;
   BOOL simRunning;
   BOOL viewHasLoaded;
   BOOL exceptionOccurred;
   BOOL stepping;
   dispatch_source_t clockUpdateTimer;
+  BOOL showingSource;
+  
   IBOutlet MOSSimDumpDataSource *dumpDs;
   IBOutlet MOSSimDisasmDataSource *disasmDs;
   IBOutlet MOSSimRegistersDataSource *regdumpDs;
@@ -54,12 +60,17 @@ enum {
   IBOutlet NSSplitView *mainSplitView;
   IBOutlet NSView *teletypePanel;
   __weak IBOutlet NSWindow *fallbackWindow;
+  IBOutlet NSPopUpButton *sourcePopup;
+  
   NSLayoutConstraint *teletypePanelConstraint;
   MOSSimBrkptWindowController *brkptWc;
 }
 
 - (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st
     error:(NSError**)outerr;
+- (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st
+    withSourceCode:(NSTextStorage*)src
+    assembledToListing:(MOSListingDictionary*)ld error:(NSError**)outerr;
 - (NSURL*)simulatedExecutable;
 - (void)setSimulatorProxy:(MOSSimulator*)sp;
 - (MOSSimulator*)simulatorProxy;
@@ -74,6 +85,9 @@ enum {
 
 - (IBAction)openBreakpointsWindow:(id)sender;
 - (void)replaceBreakpoints:(NSSet *)newbps;
+
+- (IBAction)showSource:(id)sender;
+- (IBAction)showDisassembly:(id)sender;
 
 - (BOOL)isSimulatorRunning;
 - (NSString *)flagsStatus;

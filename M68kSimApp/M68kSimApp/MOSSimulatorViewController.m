@@ -16,6 +16,7 @@
 #import "MOSTeletypeViewDelegate.h"
 #import "MOSSimBrkptWindowController.h"
 #import "MOSMutableBreakpoint.h"
+#import "MOSListingDictionary.h"
 
 
 NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
@@ -96,10 +97,30 @@ static void *SimulatorState = &SimulatorState;
 #pragma mark - Simulator Change
 
 
+- (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st
+    withSourceCode:(NSTextStorage*)src
+    assembledToListing:(MOSListingDictionary*)ld error:(NSError**)outerr {
+  BOOL res, restoreSrc;
+  
+  restoreSrc = showingSource;
+  res = [self setSimulatedExecutable:url simulatorType:st error:outerr];
+  if (res) {
+    source = src;
+    listing = ld;
+    if (restoreSrc)
+      [self showSource:nil];
+  }
+  return res;
+}
+
+
 - (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st error:(NSError**)outerr {
   NSError *tmpe;
   
   simExec = url;
+  source = nil;
+  listing = nil;
+  [self showDisassembly:nil];
   
   [simProxy removeAllBreakpoints];
   tmpe = [self reloadSimulatedExecutableWithSimulatorType:st];
@@ -419,6 +440,27 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+#pragma mark - Source Code Display
+
+
+- (IBAction)showSource:(id)sender
+{
+  if (!(source && listing))
+    return;
+  [disasmDs showSource:source mappedFromListing:listing];
+  [sourcePopup selectItemAtIndex:1];
+  showingSource = YES;
+}
+
+
+- (IBAction)showDisassembly:(id)sender
+{
+  [disasmDs showDisassembly];
+  [sourcePopup selectItemAtIndex:0];
+  showingSource = NO;
+}
+
+
 #pragma mark - Breakpoints
 
 
@@ -476,6 +518,9 @@ static void *SimulatorState = &SimulatorState;
   
   if ([anItem action] == @selector(pause:))
     return simRunning && !exceptionOccurred;
+  
+  if ([anItem action] == @selector(showSource:))
+    return source && listing;
   
   return YES;
 }
