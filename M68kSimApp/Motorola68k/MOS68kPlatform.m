@@ -58,8 +58,6 @@
 
 
 - (NSURL *)URLForExampleFile:(NSString *)fn {
-  NSString *ext = [fn pathExtension];
-  NSString *name = [fn stringByDeletingPathExtension];
   return [[self bundle] URLForResource:fn withExtension:nil];
 }
 
