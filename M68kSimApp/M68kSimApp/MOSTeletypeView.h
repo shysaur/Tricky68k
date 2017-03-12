@@ -16,6 +16,12 @@
 @end
 
 
+typedef NS_ENUM(NSInteger, MOSSelectionGranularity) {
+    MOSSelectionGranularityCharacter = 1,
+    MOSSelectionGranularityWord,
+    MOSSelectionGranularityLine
+};
+
 @interface MOSTeletypeView : NSView <NSTextInputClient> {
   NSMutableString *storage;
   NSMutableString *lineBuffer;
@@ -30,6 +36,7 @@
   NSInteger dragPivot;
   NSRange selection;
   BOOL isActive;
+  MOSSelectionGranularity selGranularity;
 }
 
 - (void)insertOutputText:(NSString *)text;

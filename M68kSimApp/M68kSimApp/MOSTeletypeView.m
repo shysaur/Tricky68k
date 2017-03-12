@@ -250,12 +250,6 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 }
 
 
-- (NSUInteger)characterIndexForMousePosition:(NSPoint)aPoint {
-  aPoint.x += charSize.width / 2;
-  return [self characterIndexForPoint:aPoint];
-}
-
-
 /* Always returns a valid line index. */
 - (NSInteger)lineIndexForPoint:(NSPoint)aPoint {
   NSInteger guess, lines, sb, se;
@@ -353,12 +347,21 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 
 - (void)mouseDown:(NSEvent *)theEvent {
   NSPoint localPoint, evloc;
-  NSUInteger charidx;
+  NSUInteger charidx, clicks;
   NSRange extrarange;
+  
+  clicks = [theEvent clickCount];
+  if (clicks <= 1)
+    selGranularity = MOSSelectionGranularityCharacter;
+  else if (clicks == 2)
+    selGranularity = MOSSelectionGranularityWord;
+  else
+    selGranularity = MOSSelectionGranularityLine;
   
   evloc = [theEvent locationInWindow];
   localPoint = [self convertPoint:evloc fromView:nil];
-  charidx = [self characterIndexForMousePosition:localPoint];
+  localPoint = [self adjustPointForSelection:localPoint pivot:YES];
+  charidx = [self characterIndexForPoint:localPoint];
   
   [self setNeedsDisplayOfSelection];
   
@@ -371,6 +374,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
     selection.location = dragPivot;
     selection.length = 0;
   }
+  [self snapSelectionToGranularity];
   
   [self setNeedsDisplayOfSelection];
 }
@@ -386,9 +390,11 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   
   evloc = [theEvent locationInWindow];
   localPoint = [self convertPoint:evloc fromView:nil];
-  tochar = [self characterIndexForMousePosition:localPoint];
+  localPoint = [self adjustPointForSelection:localPoint pivot:NO];
+  tochar = [self characterIndexForPoint:localPoint];
   
   selection = MOSMakeIndexRange(dragPivot, tochar);
+  [self snapSelectionToGranularity];
 
   if (localPoint.y < [self visibleRect].origin.y + charSize.height)
     [self scrollLineUp:nil];
@@ -396,6 +402,78 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
     [self scrollLineDown:nil];
   
   [self setNeedsDisplayOfSelection];
+}
+
+
+- (NSPoint)adjustPointForSelection:(NSPoint)p pivot:(BOOL)pivot {
+  NSInteger c;
+  
+  switch (selGranularity) {
+    case MOSSelectionGranularityCharacter:
+      p.x += charSize.width / 2.0;
+      break;
+      
+    case MOSSelectionGranularityWord:
+      break;
+    
+    case MOSSelectionGranularityLine:
+      if (!pivot) {
+        c = [self characterIndexForPoint:p];
+        p.x = 0;
+        if (c > dragPivot)
+          p.y += charSize.height;
+      }
+  }
+  return p;
+}
+
+
+- (void)snapSelectionToGranularity {
+  NSInteger start, end;
+  
+  if (selGranularity == MOSSelectionGranularityCharacter)
+    return;
+  
+  start = selection.location;
+  end = NSMaxRange(selection);
+  
+  if (selGranularity == MOSSelectionGranularityWord) {
+    start = [self moveIndex:start toWordBoundaryWithDirection:-1];
+    end = [self moveIndex:end toWordBoundaryWithDirection:+1];
+    selection = MOSMakeIndexRange(start, end);
+    
+  } else if (selGranularity == MOSSelectionGranularityLine) {
+    selection = [storage lineRangeForRange:selection];
+  }
+}
+
+
+- (NSInteger)moveIndex:(NSInteger)i toWordBoundaryWithDirection:(NSInteger)d {
+  NSCharacterSet *charset;
+  unichar initialc;
+  NSInteger nextc;
+  BOOL initial;
+  
+  if ([storage length] == 0)
+    return i;
+  if (i < 0 || i >= [storage length])
+    return i;
+  
+  initialc = [storage characterAtIndex:i];
+  if ([[NSCharacterSet newlineCharacterSet] characterIsMember:initialc])
+    return i;
+  
+  charset = [NSCharacterSet whitespaceCharacterSet];
+  initial = [charset characterIsMember:initialc];
+  
+  nextc = i + d;
+  while (nextc >= 0 && nextc < [storage length] &&
+    [charset characterIsMember:[storage characterAtIndex:nextc]] == initial) {
+    i += d;
+    nextc += d;
+  }
+  
+  return d > 0 ? i+d : i;
 }
 
 
