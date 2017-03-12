@@ -846,7 +846,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 }
 
 
-/* Line rects must not have no gaps between them and must be coherent with
+/* Line rects must have no gaps between them and must be coherent with
  * the values returned by -heightForLine: and -locationForLine:, otherwise
  * -lineIndexForPoint: will enter an infinite loop. */
 - (NSRect)rectForLine:(NSInteger)line {
@@ -912,14 +912,20 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 
 - (void)drawSelectionInRange:(NSRange)range {
   NSRect selRect;
+  NSRange actRange;
   
   range = NSIntersectionRange(range, selection);
   if (!range.length)
     return;
   
-  selRect = [self firstViewRectForCharacterRange:range actualRange:NULL];
-  [[NSColor selectedTextBackgroundColor] set];
-  NSRectFill(selRect);
+  while (range.length > 0) {
+    selRect = [self firstViewRectForCharacterRange:range actualRange:&actRange];
+    [[NSColor selectedTextBackgroundColor] set];
+    NSRectFill(selRect);
+    
+    range.length = NSMaxRange(range) - NSMaxRange(actRange);
+    range.location = NSMaxRange(actRange);
+  }
 }
 
 
