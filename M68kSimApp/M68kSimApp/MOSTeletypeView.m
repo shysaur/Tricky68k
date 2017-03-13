@@ -379,6 +379,22 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 }
 
 
+- (void)rightMouseDown:(NSEvent *)event {
+  NSPoint localPoint;
+  NSInteger charUnder;
+  
+  localPoint = [self convertPoint:[event locationInWindow] fromView:nil];
+  charUnder = [self characterIndexForPoint:localPoint];
+  if (!NSLocationInRange(charUnder, selection)) {
+    [self startNewSelectionFromPoint:localPoint
+      withGranularity:MOSSelectionGranularityWord mergeWithPrevious:NO];
+    [self endSelection];
+  }
+  
+  [super rightMouseDown:event];
+}
+
+
 - (void)scrollLineUp:(id)sender {
   id clipview;
   NSRect cvb;
