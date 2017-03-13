@@ -150,6 +150,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   NSRange allText;
   static NSRange adj;
   NSString *res;
+  NSDictionary *attr;
   
   allText = NSMakeRange(0, [storage length]);
   
@@ -158,7 +159,8 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
     *actualRange = adj;
   
   res = [storage substringWithRange:adj];
-  return [[NSAttributedString alloc] initWithString:res];
+  attr = @{NSFontAttributeName: [self font]};
+  return [[NSAttributedString alloc] initWithString:res attributes:attr];
 }
 
 /* Returned rect is in SCREEN coordinates! */
@@ -220,12 +222,23 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 }
 
 
+- (NSUInteger)characterIndexForPoint:(NSPoint)point {
+  NSRect tmp;
+  
+  tmp.origin = point;
+  tmp.size = NSMakeSize(0, 0);
+  tmp = [[self window] convertRectFromScreen:tmp];
+  tmp.origin = [self convertPoint:tmp.origin fromView:nil];
+  return [self characterIndexForViewPoint:tmp.origin];
+}
+
+
 #pragma mark - Hit Testing
 
 
 /* Returns [storage length] if the cursor points outside the contents.
  * Otherwise, always returns a valid character index. */
-- (NSUInteger)characterIndexForPoint:(NSPoint)aPoint  {
+- (NSUInteger)characterIndexForViewPoint:(NSPoint)aPoint  {
   NSInteger guess, startchar, c, lineWidth;
   NSRange lineRange;
   NSRect lineRect, tr = [self textRect];
@@ -383,8 +396,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   NSPoint localPoint;
   NSInteger charUnder;
   
-  localPoint = [self convertPoint:[event locationInWindow] fromView:nil];
-  charUnder = [self characterIndexForPoint:localPoint];
+  charUnder = [self characterIndexForPoint:[event locationInWindow]];
   if (!NSLocationInRange(charUnder, selection)) {
     [self startNewSelectionFromPoint:localPoint
       withGranularity:MOSSelectionGranularityWord mergeWithPrevious:NO];
@@ -551,7 +563,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   
   selGranularity = g;
   localPoint = [self adjustPointForSelection:localPoint pivot:YES];
-  charidx = [self characterIndexForPoint:localPoint];
+  charidx = [self characterIndexForViewPoint:localPoint];
   
   [self setNeedsDisplayOfSelection];
   
@@ -578,7 +590,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   [self setNeedsDisplayOfSelection];
   
   localPoint = [self adjustPointForSelection:localPoint pivot:NO];
-  tochar = [self characterIndexForPoint:localPoint];
+  tochar = [self characterIndexForViewPoint:localPoint];
   
   selection = MOSMakeIndexRange(dragPivot, tochar);
   [self snapSelectionToGranularity];
@@ -610,7 +622,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
     
     case MOSSelectionGranularityLine:
       if (!pivot) {
-        c = [self characterIndexForPoint:p];
+        c = [self characterIndexForViewPoint:p];
         p.x = 0;
         if (c > dragPivot)
           p.y += charSize.height;
