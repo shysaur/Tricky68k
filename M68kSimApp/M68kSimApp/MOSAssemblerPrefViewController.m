@@ -17,8 +17,9 @@
 
 
 - init {
+  self = [super initWithNibName:@"MOSAssemblerPrefView" bundle:[NSBundle mainBundle]];
   childVcs = [[NSMutableArray alloc] init];
-  return [super initWithNibName:@"MOSAssemblerPrefView" bundle:[NSBundle mainBundle]];
+  return self;
 }
 
 

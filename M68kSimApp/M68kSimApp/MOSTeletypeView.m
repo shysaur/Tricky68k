@@ -398,6 +398,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   
   charUnder = [self characterIndexForPoint:[event locationInWindow]];
   if (!NSLocationInRange(charUnder, selection)) {
+    localPoint = [self convertPoint:[event locationInWindow] fromView:nil];
     [self startNewSelectionFromPoint:localPoint
       withGranularity:MOSSelectionGranularityWord mergeWithPrevious:NO];
     [self endSelection];

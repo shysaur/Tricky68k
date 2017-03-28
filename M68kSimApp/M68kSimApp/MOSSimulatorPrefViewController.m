@@ -15,9 +15,10 @@
 @implementation MOSSimulatorPrefViewController
 
 
-- init {
+- (instancetype)init {
+  self = [super initWithNibName:@"MOSSimulatorPrefView" bundle:[NSBundle mainBundle]];
   childVcs = [[NSMutableArray alloc] init];
-  return [super initWithNibName:@"MOSSimulatorPrefView" bundle:[NSBundle mainBundle]];
+  return self;
 }
 
 
