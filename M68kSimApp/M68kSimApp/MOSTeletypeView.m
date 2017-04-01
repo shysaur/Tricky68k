@@ -17,7 +17,21 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 }
 
 
-@implementation MOSTeletypeView
+@implementation MOSTeletypeView {
+  NSMutableString *storage;
+  NSMutableString *lineBuffer;
+  NSMutableArray *lineRanges; // <- no newlines!
+  NSMutableDictionary *lineLocationCache;
+  
+  NSSize viewPadding;
+  NSSize charSize;
+  CGFloat baselineOffset;
+  
+  NSInteger dragPivot;
+  NSRange selection;
+  BOOL isActive;
+  MOSSelectionGranularity selGranularity;
+}
 
 
 #pragma mark - Initialization
@@ -38,7 +52,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   [lineRanges addObject:[NSValue valueWithRange:NSMakeRange(0, 0)]];
   lineLocationCache = [[NSMutableDictionary alloc] init];
   
-  dispFont = [NSFont userFixedPitchFontOfSize:11.0];
+  _font = [NSFont userFixedPitchFontOfSize:11.0];
   [self reloadFontInfo];
 }
 
@@ -64,20 +78,15 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 #pragma mark - Appearance properties
 
 
-- (NSFont *)font {
-  return dispFont;
-}
-
-
 - (void)setFont:(NSFont *)font {
-  dispFont = font;
+  _font = font;
   [self reloadFontInfo];
   [self setNeedsDisplay:YES];
 }
 
 
 - (void)reloadFontInfo {
-  CTFontRef font = (__bridge CTFontRef)(dispFont);
+  CTFontRef font = (__bridge CTFontRef)([self font]);
   NSInteger i;
   CGFloat ascent, descent, leading, advance;
   UniChar test[4] = {' ', '0', '8', 'W'};
@@ -984,7 +993,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 
 
 - (void)drawTextInRange:(NSRange)range atPoint:(NSPoint)point {
-  CTFontRef font = (__bridge CTFontRef)(dispFont);
+  CTFontRef font = (__bridge CTFontRef)([self font]);
   CGContextRef cgc = [[NSGraphicsContext currentContext] graphicsPort];
   static UniChar *string = NULL;
   static CGGlyph *glyphs = NULL;

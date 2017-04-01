@@ -17,37 +17,20 @@
 
 
 typedef NS_ENUM(NSInteger, MOSSelectionGranularity) {
-    MOSSelectionGranularityCharacter = 1,
-    MOSSelectionGranularityWord,
-    MOSSelectionGranularityLine
+  MOSSelectionGranularityCharacter = 1,
+  MOSSelectionGranularityWord,
+  MOSSelectionGranularityLine
 };
 
-@interface MOSTeletypeView : NSView <NSTextInputClient> {
-  NSMutableString *storage;
-  NSMutableString *lineBuffer;
-  NSMutableArray *lineRanges; // <- no newlines!
-  NSMutableDictionary *lineLocationCache;
-  
-  NSSize viewPadding;
-  NSFont *dispFont;
-  NSSize charSize;
-  CGFloat baselineOffset;
-  
-  NSInteger dragPivot;
-  NSRange selection;
-  BOOL isActive;
-  MOSSelectionGranularity selGranularity;
-}
+@interface MOSTeletypeView : NSView <NSTextInputClient>
 
 - (void)insertOutputText:(NSString *)text;
 
 - (void)copy:(id)sender;
 - (void)paste:(id)sender;
 
-- (NSString *)string;
-- (void)setString:(NSString *)string;
-- (NSFont *)font;
-- (void)setFont:(NSFont *)font;
+@property (nonatomic) NSString *string;
+@property (nonatomic) NSFont *font;
 
 @property (weak) IBOutlet id <MOSTeletypeViewDelegate> delegate;
 
