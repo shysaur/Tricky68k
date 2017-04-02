@@ -31,6 +31,9 @@ typedef NS_ENUM(NSInteger, MOSSelectionGranularity) {
 
 @property (nonatomic) NSString *string;
 @property (nonatomic) NSFont *font;
+@property (nonatomic) NSColor *textColor;
+@property (nonatomic) NSColor *backgroundColor;
+@property (nonatomic) NSColor *cursorColor;
 
 @property (weak) IBOutlet id <MOSTeletypeViewDelegate> delegate;
 

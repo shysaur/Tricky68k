@@ -53,6 +53,9 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   lineLocationCache = [[NSMutableDictionary alloc] init];
   
   _font = [NSFont userFixedPitchFontOfSize:11.0];
+  _textColor = [NSColor blackColor];
+  _backgroundColor = [NSColor whiteColor];
+  _cursorColor = [NSColor grayColor];
   [self reloadFontInfo];
 }
 
@@ -108,6 +111,24 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   baselineOffset = descent;
   [lineLocationCache removeAllObjects];
   [self sizeToFit];
+}
+
+
+- (void)setTextColor:(NSColor *)textColor {
+  _textColor = textColor;
+  [self setNeedsDisplay:YES];
+}
+
+
+- (void)setBackgroundColor:(NSColor *)backgroundColor {
+  _backgroundColor = backgroundColor;
+  [self setNeedsDisplay:YES];
+}
+
+
+- (void)setCursorColor:(NSColor *)cursorColor {
+  _cursorColor = cursorColor;
+  [self setNeedsDisplay:YES];
 }
 
 
@@ -171,6 +192,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   attr = @{NSFontAttributeName: [self font]};
   return [[NSAttributedString alloc] initWithString:res attributes:attr];
 }
+
 
 /* Returned rect is in SCREEN coordinates! */
 - (NSRect)firstRectForCharacterRange:(NSRange)range actualRange:(NSRangePointer)actualRange {
@@ -927,7 +949,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   CGContextSetTextDrawingMode(cgc, kCGTextFill);
   CGContextSetTextMatrix(cgc, cga);
   
-  [[NSColor whiteColor] set];
+  [[self backgroundColor] set];
   NSRectFill(dirtyRect);
   
   i = [self lineIndexForPoint:dirtyRect.origin];
@@ -975,17 +997,15 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   cursor.size = charSize;
   if ([self needsToDrawRect:cursor]) {
     if (isActive) {
-      [[NSColor grayColor] set];
-      NSRectFill(cursor);
+      [[self cursorColor] set];
+      NSRectFillUsingOperation(cursor, NSCompositeSourceOver);
     } else {
       cursor.origin.x += .5;
       cursor.origin.y += .5;
       cursor.size.width -= 1;
       cursor.size.height -= 1;
       bp = [NSBezierPath bezierPathWithRect:cursor];
-      [[NSColor whiteColor] setFill];
-      [bp fill];
-      [[NSColor grayColor] setStroke];
+      [[self cursorColor] setStroke];
       [bp stroke];
     }
   }
@@ -1002,7 +1022,7 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   NSInteger lineWidth, i, c, j;
   NSRect tr = [self textRect];
   
-  [[NSColor blackColor] set];
+  [[self textColor] set];
   
   c = range.length;
   if (bufsize < c) {
@@ -1034,6 +1054,12 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
       j = lineWidth;
     }
   }
+}
+
+
+- (void)drawBackgroundOverhangInRect:(NSRect)rect {
+  [[self backgroundColor] set];
+  NSRectFill(rect);
 }
 
 
