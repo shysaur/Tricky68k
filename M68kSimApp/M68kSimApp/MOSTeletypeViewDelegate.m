@@ -17,7 +17,7 @@
   MOSTeletypeView *tty;
   
   [textView setString:@""];
-  [self defaultMonospacedFontHasChanged];
+  [textView setFont:[self defaultMonospacedFont]];
   tty = textView;
   
   simProxy = sp;
@@ -27,7 +27,8 @@
 }
 
 
-- (void)defaultMonospacedFontHasChanged {
+- (void)setDefaultMonospacedFont:(NSFont *)defaultMonospacedFont {
+  [super setDefaultMonospacedFont:defaultMonospacedFont];
   [textView setFont:[self defaultMonospacedFont]];
 }
 

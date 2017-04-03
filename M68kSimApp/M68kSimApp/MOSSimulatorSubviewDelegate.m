@@ -10,6 +10,9 @@
 #import "NSUserDefaults+Archiver.h"
 
 
+static void *DebuggerTextFontDefaultContext = &DebuggerTextFontDefaultContext;
+
+
 @implementation MOSSimulatorSubviewDelegate
 
 
@@ -27,56 +30,44 @@
 
 - (instancetype)init {
   NSUserDefaults *ud;
-  NSNotificationCenter *nc;
   
   self = [super init];
   
   ud = [NSUserDefaults standardUserDefaults];
-  nc = [NSNotificationCenter defaultCenter];
-  [nc addObserver:self selector:@selector(userDefaultsDidChangeNotification:)
-    name:NSUserDefaultsDidChangeNotification object:ud];
-  [self reloadDefaultMonospacedFont];
-  
+  [ud addObserver:self forKeyPath:@"DebuggerTextFont"
+    options:NSKeyValueObservingOptionInitial
+    context:DebuggerTextFontDefaultContext];
   return self;
 }
 
 
 - (void)dealloc {
   NSUserDefaults *ud;
-  NSNotificationCenter *nc;
-  
+
   ud = [NSUserDefaults standardUserDefaults];
-  nc = [NSNotificationCenter defaultCenter];
-  [nc removeObserver:self name:NSUserDefaultsDidChangeNotification object:ud];
+  [ud removeObserver:self forKeyPath:@"DebuggerTextFont"];
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+  change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+  if (context == DebuggerTextFontDefaultContext) {
+    [self reloadDefaultMonospacedFont];
+  } else {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
 }
 
 
 - (void)reloadDefaultMonospacedFont {
   NSUserDefaults *ud;
-  NSData *archivedFont;
+  NSFont *f;
   
   ud = [NSUserDefaults standardUserDefaults];
-  archivedFont = [ud dataForKey:@"DebuggerTextFont"];
-  if (archivedFont && oldArchivedFont && [archivedFont isEqual:oldArchivedFont])
-    return;
-  
-  oldArchivedFont = archivedFont;
-  viewFont = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
-  [self defaultMonospacedFontHasChanged];
+  f = [ud unarchivedObjectForKey:@"DebuggerTextFont" class:[NSFont class]];
+  [self setDefaultMonospacedFont:f];
 }
-
-
-- (void)userDefaultsDidChangeNotification:(NSNotification*)not {
-  [self reloadDefaultMonospacedFont];
-}
-
-
-- (NSFont*)defaultMonospacedFont {
-  return viewFont;
-}
-
-
-- (void)defaultMonospacedFontHasChanged {}
 
 
 @end

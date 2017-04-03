@@ -57,10 +57,12 @@ static void *ReloadTableView = &ReloadTableView;
 }
 
 
-- (void)defaultMonospacedFontHasChanged {
+- (void)setDefaultMonospacedFont:(NSFont *)f {
   CGFloat rowHeight;
   
-  rowHeight = round([[self defaultMonospacedFont] boundingRectForFont].size.height);
+  [super setDefaultMonospacedFont:f];
+  
+  rowHeight = round([f boundingRectForFont].size.height);
   [tableView setRowHeight:rowHeight];
   [tableView reloadData];
 }

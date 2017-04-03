@@ -9,12 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MOSSimulatorSubviewDelegate : NSObject {
-  NSFont *viewFont;
-  NSData *oldArchivedFont;
-}
+@interface MOSSimulatorSubviewDelegate : NSObject
 
-- (NSFont*)defaultMonospacedFont;
-- (void)defaultMonospacedFontHasChanged; /* override */
+@property (nonatomic) NSFont *defaultMonospacedFont;
 
 @end
