@@ -14,6 +14,7 @@
 #define DEBUG_REASON_BREAKPOINT  ( 1)
 #define DEBUG_REASON_SKIP        ( 2)
 #define DEBUG_REASON_STEP        ( 3)
+#define DEBUG_REASON_STEPOUT     ( 4)
 
 void cpu_instrCallback(void);
 void debug_debugConsole(int reason);

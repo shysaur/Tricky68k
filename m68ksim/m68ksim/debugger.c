@@ -24,10 +24,13 @@
 int skip_on = 0;
 uint32_t skip_sp;
 int step_on = 0;
+uint32_t out_sp;
+int out_on = 0;
 
 
 void cpu_instrCallback(void) {
   uint32_t pc, sp;
+  uint16_t opcode;
   int reason = DEBUG_REASON_BREAK;
   
   pc = m68k_get_reg(NULL, M68K_REG_PC);
@@ -36,6 +39,18 @@ void cpu_instrCallback(void) {
     reason = DEBUG_REASON_BREAKPOINT;
   }
   sp = m68k_get_reg(NULL, M68K_REG_SP);
+  if (out_on && out_sp <= sp) {
+    if (out_on != 2) {
+      pc = m68k_get_reg(NULL, M68K_REG_PC);
+      opcode = m68k_read_disassembler_16(pc);
+      if (opcode == 0x4E75 /* RTS */)
+        out_on = 2;
+    } else {
+      out_on = 0;
+      debug_on = 1;
+      reason = DEBUG_REASON_STEPOUT;
+    }
+  }
   if (skip_on && skip_sp <= sp) {
     skip_on = 0;
     debug_on = 1;
@@ -220,6 +235,11 @@ void debug_debugConsole(int reason) {
           skip_on = 1;
         } else
           step_on = 1;
+        cont = 1;
+        break;
+      case 'o':
+        out_sp = m68k_get_reg(NULL, M68K_REG_SP);
+        out_on = 1;
         cont = 1;
         break;
       case 's':
