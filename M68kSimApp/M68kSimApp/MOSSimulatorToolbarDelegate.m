@@ -19,7 +19,7 @@
 NSString * const MOSToolbarItemIdentifierPlay = @"MOSToolbarItemIdentifierPlay";
 NSString * const MOSToolbarItemIdentifierPause = @"MOSToolbarItemIdentifierPause";
 NSString * const MOSToolbarItemIdentifierStepIn = @"MOSToolbarItemIdentifierStepIn";
-NSString * const MOSToolbarItemIdentifierStepOut = @"MOSToolbarItemIdentifierStepOut";
+NSString * const MOSToolbarItemIdentifierStepOver = @"MOSToolbarItemIdentifierStepOver";
 NSString * const MOSToolbarItemIdentifierFlags = @"MOSToolbarItemIdentifierFlags";
 NSString * const MOSToolbarItemIdentifierRunning = @"MOSToolbarItemIdentifierRunning";
 NSString * const MOSToolbarItemIdentifierClock = @"MOSToolbarItemIdentifierClock";
@@ -41,7 +41,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
     MOSToolbarItemIdentifierPlay,
     MOSToolbarItemIdentifierPause,
     MOSToolbarItemIdentifierStepIn,
-    MOSToolbarItemIdentifierStepOut,
+    MOSToolbarItemIdentifierStepOver,
     MOSToolbarItemIdentifierFlags,
     MOSToolbarItemIdentifierRunning,
     MOSToolbarItemIdentifierClock,
@@ -61,7 +61,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
       MOSToolbarItemIdentifierPlay,
       MOSToolbarItemIdentifierPause,
       MOSToolbarItemIdentifierStepIn,
-      MOSToolbarItemIdentifierStepOut,
+      MOSToolbarItemIdentifierStepOver,
       MOSToolbarItemIdentifierFlags,
       NSToolbarFlexibleSpaceItemIdentifier,
       MOSToolbarItemIdentifierClock,
@@ -73,7 +73,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
     MOSToolbarItemIdentifierPlay,
     MOSToolbarItemIdentifierPause,
     MOSToolbarItemIdentifierStepIn,
-    MOSToolbarItemIdentifierStepOut,
+    MOSToolbarItemIdentifierStepOver,
     MOSToolbarItemIdentifierFlags,
     NSToolbarFlexibleSpaceItemIdentifier,
     MOSToolbarItemIdentifierClock,
@@ -134,7 +134,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
     MOSToolbarItemIdentifierPlay,
     MOSToolbarItemIdentifierPause,
     MOSToolbarItemIdentifierStepIn,
-    MOSToolbarItemIdentifierStepOut,
+    MOSToolbarItemIdentifierStepOver,
     MOSToolbarItemIdentifierReset,
     MOSToolbarItemIdentifierGoSource,
     MOSToolbarItemIdentifierGoSimulator,
@@ -189,7 +189,7 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
           image = [NSImage imageNamed:@"MOSStepIn"];
           label = NSLocalizedString(@"Step In", @"Toolbar Item");
           action = @selector(stepIn:);
-        } else if ([itemIdentifier isEqual:MOSToolbarItemIdentifierStepOut]) {
+        } else if ([itemIdentifier isEqual:MOSToolbarItemIdentifierStepOver]) {
           image = [NSImage imageNamed:@"MOSStepOver"];
           label = NSLocalizedString(@"Step Over", @"Toolbar Item");
           action = @selector(stepOver:);
