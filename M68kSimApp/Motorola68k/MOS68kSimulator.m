@@ -412,6 +412,18 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 }
 
 
+- (BOOL)stepOut {
+  NSError *err;
+  BOOL res;
+  
+  if ([proxy simulatorState] == MOSSimulatorStateDead) return NO;
+  
+  res = [proxy exitDebuggerWithCommand:@"o" error:&err];
+  lastError = err;
+  return res;
+}
+
+
 - (void)kill {
   [proxy kill];
 }

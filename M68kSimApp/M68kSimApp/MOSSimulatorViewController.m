@@ -422,6 +422,12 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
+- (IBAction)stepOut:(id)sender {
+  stepping = YES;
+  [simProxy stepOut];
+}
+
+
 - (IBAction)restart:(id)sender {
   [self reloadSimulatedExecutable];
 }
@@ -512,6 +518,10 @@ static void *SimulatorState = &SimulatorState;
       [anItem action] == @selector(stepIn:) ||
       [anItem action] == @selector(stepOver:))
     return !simRunning && !exceptionOccurred;
+  
+  if ([anItem action] == @selector(stepOut:))
+    return [simProxy respondsToSelector:@selector(stepOut)] &&
+           !simRunning && !exceptionOccurred;
   
   if ([anItem action] == @selector(openBreakpointsWindow:))
     return !exceptionOccurred && [self window];

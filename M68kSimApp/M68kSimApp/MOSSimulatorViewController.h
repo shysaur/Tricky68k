@@ -82,6 +82,7 @@ enum {
 - (IBAction)restart:(id)sender;
 - (IBAction)stepIn:(id)sender;
 - (IBAction)stepOver:(id)sender;
+- (IBAction)stepOut:(id)sender;
 
 - (IBAction)openBreakpointsWindow:(id)sender;
 - (void)replaceBreakpoints:(NSSet *)newbps;

@@ -54,6 +54,8 @@ typedef enum {
 
 @optional
 
+- (BOOL)stepOut;
+
 - (NSDictionary *)symbolTable;
 
 - (float)clockFrequency;
