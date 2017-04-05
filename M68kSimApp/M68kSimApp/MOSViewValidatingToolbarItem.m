@@ -27,7 +27,7 @@
     return;
   if (![view respondsToSelector:@selector(action)])
     return;
-  if (![view respondsToSelector:@selector(tag)])
+  if (![view respondsToSelector:@selector(target)])
     return;
   
   target = [view target];
