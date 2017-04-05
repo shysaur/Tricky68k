@@ -87,9 +87,13 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
+				<string>public.item</string>
+				<string>public.content</string>
 				<string>public.data</string>
+				<string>public.text</string>
 				<string>public.plain-text</string>
 				<string>public.source-code</string>
+				<string>public.assembly-source</string>
 			</array>
 			<key>UTTypeIdentifier</key>
 			<string>com.danielecattaneo.assembly-source</string>
@@ -98,6 +102,7 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>asm</string>
+					<string>s</string>
 				</array>
 			</dict>
 		</dict>

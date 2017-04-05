@@ -153,6 +153,14 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 #pragma mark - Document Management
 
 
+- (NSArray<NSString *> *)writableTypesForSaveOperation:(NSSaveOperationType)so {
+  if (so == NSSaveAsOperation || so == NSSaveToOperation) {
+    return @[@"com.danielecattaneo.assembly-source", @"public.plain-text"];
+  }
+  return [super writableTypesForSaveOperation:so];
+}
+
+
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {
   NSRange allRange;
   NSDictionary *opts;
