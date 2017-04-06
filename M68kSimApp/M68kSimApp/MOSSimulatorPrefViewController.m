@@ -33,6 +33,7 @@
     [sv addView:[self separatorView] inGravity:NSStackViewGravityCenter];
     [sv addView:[vc view] inGravity:NSStackViewGravityCenter];
   }
+  [[self view] layoutSubtreeIfNeeded];
 }
 
 
