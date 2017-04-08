@@ -9,11 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MOSDocument : NSDocument {
-  BOOL transient;
-}
+@interface MOSDocument : NSDocument
 
-- (BOOL)isTransient;
-- (void)setTransient:(BOOL)t;
+@property (nonatomic, getter=isTransient) BOOL transient;
+
+- (NSTouchBar *)makeTouchBar;
 
 @end
