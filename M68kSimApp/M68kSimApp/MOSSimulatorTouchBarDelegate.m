@@ -74,6 +74,7 @@ NSString * const MOSTouchBarItemIdentifierBuildAndRun = @"MOSTouchBarItemIdentif
 - (NSTouchBarItem *)touchBar:(NSTouchBar *)touchBar makeItemForIdentifier:(NSTouchBarItemIdentifier)identifier
 {
   NSString *imgname;
+  NSString *label;
   SEL action;
   id target;
   
@@ -85,26 +86,33 @@ NSString * const MOSTouchBarItemIdentifierBuildAndRun = @"MOSTouchBarItemIdentif
     target = self.sourceDocument;
     imgname = @"MOSBuildAndRun";
     action = @selector(assembleAndRun:);
+    label = NSLocalizedString(@"Assemble and Run", @"Toolbar Item");
   } else {
     target = self.simulatorViewController;
     if ([identifier isEqual:MOSTouchBarItemIdentifierReset]) {
       imgname = @"MOSRestart";
       action = @selector(restart:);
+      label = NSLocalizedString(@"Restart", @"Toolbar Item");
     } else if ([identifier isEqual:MOSTouchBarItemIdentifierPlay]) {
       imgname = @"MOSStart";
       action = @selector(run:);
+      label = NSLocalizedString(@"Start", @"Toolbar Item");
     } else if ([identifier isEqual:MOSTouchBarItemIdentifierPause]) {
       imgname = @"MOSPause";
       action = @selector(pause:);
+      label = NSLocalizedString(@"Pause", @"Toolbar Item");
     } else if ([identifier isEqual:MOSTouchBarItemIdentifierStepIn]) {
       imgname = @"MOSStepIn";
       action = @selector(stepIn:);
+      label = NSLocalizedString(@"Step In", @"Toolbar Item");
     } else if ([identifier isEqual:MOSTouchBarItemIdentifierStepOver]) {
       imgname = @"MOSStepOver";
       action = @selector(stepOver:);
+      label = NSLocalizedString(@"Step Over", @"Toolbar Item");
     } else if ([identifier isEqual:MOSTouchBarItemIdentifierStepOut]) {
       imgname = @"MOSStepOut";
       action = @selector(stepOut:);
+      label = NSLocalizedString(@"Step Out", @"Toolbar Item");
     } else {
       return nil;
     }
@@ -118,6 +126,7 @@ NSString * const MOSTouchBarItemIdentifierBuildAndRun = @"MOSTouchBarItemIdentif
   [b setAction:action];
   
   [i setView:b];
+  [i setCustomizationLabel:label];
   return i;
 }
 
