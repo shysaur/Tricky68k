@@ -107,6 +107,7 @@
 		01ABE5CE1E1DA39D002E425E /* mastermind.s in Resources */ = {isa = PBXBuildFile; fileRef = 011E2AF71C9761FF0090D552 /* mastermind.s */; };
 		01ABE5CF1E1DA39D002E425E /* exponentiation.s in Resources */ = {isa = PBXBuildFile; fileRef = 0178EA9D1C9898B300F37A51 /* exponentiation.s */; };
 		01C20CA41A6726D600057D6B /* MOSPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */; };
+		01DE189F1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE189E1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m */; };
 		01E6A2781C946640002FA51A /* MOSPrintAccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E6A2761C946640002FA51A /* MOSPrintAccessoryViewController.m */; };
 		01E93C6F1A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C711A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib */; };
 		01E93C721A6D48F3004BE3C4 /* MOSPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C741A6D48F3004BE3C4 /* MOSPreferencesWindow.xib */; };
@@ -309,6 +310,8 @@
 		01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPreferencesWindowController.m; sourceTree = "<group>"; };
 		01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAssembler.h; sourceTree = "<group>"; };
 		01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSAssembler.m; sourceTree = "<group>"; };
+		01DE189D1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorTouchBarDelegate.h; sourceTree = "<group>"; };
+		01DE189E1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorTouchBarDelegate.m; sourceTree = "<group>"; };
 		01E6A2751C946640002FA51A /* MOSPrintAccessoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPrintAccessoryViewController.h; sourceTree = "<group>"; };
 		01E6A2761C946640002FA51A /* MOSPrintAccessoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPrintAccessoryViewController.m; sourceTree = "<group>"; };
 		01E93C701A6D48E9004BE3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSimulatorPrefView.xib; sourceTree = "<group>"; };
@@ -531,6 +534,8 @@
 				01A2ABB81BBC8711008BBC59 /* Breakpoint Window */,
 				014A08301BE69E5D00A8FA0F /* MOSSimulatorToolbarDelegate.h */,
 				014A08311BE69E5D00A8FA0F /* MOSSimulatorToolbarDelegate.m */,
+				01DE189D1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.h */,
+				01DE189E1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m */,
 				016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */,
 				016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */,
 				01E93C7D1A6D491D004BE3C4 /* MOSSimulatorView.xib */,
@@ -726,7 +731,7 @@
 				015094731A6DA7050024D28F /* MOSProgressIndicator.m */,
 				0108A2AD1AE6FE4500085E5F /* MOSDescribeFontTransformer.h */,
 				0108A2AE1AE6FE4500085E5F /* MOSDescribeFontTransformer.m */,
-				01EBAA271AB9F9490076AD02 /* Transient Documents */,
+				01EBAA271AB9F9490076AD02 /* Transient Documents & TouchBar */,
 			);
 			name = AppKit;
 			sourceTree = "<group>";
@@ -740,7 +745,7 @@
 			name = Platform;
 			sourceTree = "<group>";
 		};
-		01EBAA271AB9F9490076AD02 /* Transient Documents */ = {
+		01EBAA271AB9F9490076AD02 /* Transient Documents & TouchBar */ = {
 			isa = PBXGroup;
 			children = (
 				01EBAA211AB973DF0076AD02 /* MOSDocument.h */,
@@ -748,7 +753,7 @@
 				01EBAA241AB9D9140076AD02 /* MOSDocumentController.h */,
 				01EBAA251AB9D9140076AD02 /* MOSDocumentController.m */,
 			);
-			name = "Transient Documents";
+			name = "Transient Documents & TouchBar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1024,6 +1029,7 @@
 				017D700D1A72FA9D003DCAF3 /* MOSAssemblerPrefViewController.m in Sources */,
 				016CD1411A51A10E00D64892 /* MOSSource.m in Sources */,
 				01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */,
+				01DE189F1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m in Sources */,
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
 				01E6A2781C946640002FA51A /* MOSPrintAccessoryViewController.m in Sources */,
 				014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */,

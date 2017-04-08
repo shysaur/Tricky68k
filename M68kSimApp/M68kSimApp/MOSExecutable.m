@@ -11,6 +11,14 @@
 #import "MOSSimulator.h"
 #import "MOSPlatform.h"
 #import "MOSPlatformManager.h"
+#import "MOSSimulatorTouchBarDelegate.h"
+
+
+@interface MOSExecutable ()
+
+@property (nonatomic) MOSSimulatorTouchBarDelegate *touchBarDelegate;
+
+@end
 
 
 @implementation MOSExecutable
@@ -46,6 +54,15 @@
   }
   
   [super windowControllerDidLoadNib:aController];
+}
+
+
+- (NSTouchBar *)makeTouchBar {
+  if (self.touchBarDelegate == nil) {
+    [self setTouchBarDelegate:[[MOSSimulatorTouchBarDelegate alloc] init]];
+    [self.touchBarDelegate setSimulatorViewController:simVc];
+  }
+  return [self.touchBarDelegate makeExecutableDocumentTouchBar];
 }
 
 

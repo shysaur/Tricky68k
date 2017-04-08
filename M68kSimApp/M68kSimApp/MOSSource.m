@@ -25,6 +25,7 @@
 #import "MOSListingDictionary.h"
 #import "MOSPrintAccessoryViewController.h"
 #import "MOSPlatformManager.h"
+#import "MOSSimulatorTouchBarDelegate.h"
 
 
 static void *AssemblageComplete = &AssemblageComplete;
@@ -63,6 +64,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 @property (nonatomic) MOSAssembler *assembler;
 @property (nonatomic) NSURL *assemblyOutput;
 @property (nonatomic) NSURL *listingOutput;
+
+@property (nonatomic) MOSSimulatorTouchBarDelegate *touchBarDelegate;
 
 @end
 
@@ -133,6 +136,12 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   textView = [fragaria textView];
   [self setUndoManager:[textView undoManager]];
   
+  if ([textView respondsToSelector:@selector(setTouchBar:)]) {
+    NSTouchBar *dummytb = [[NSTouchBar alloc] init];
+    dummytb.defaultItemIdentifiers = @[];
+    [textView setTouchBar:dummytb];
+  }
+  
   if (fixtabs && [fragaria indentWithSpaces]) {
     [textView selectAll:self];
     [textView performDetabWithNumberOfSpaces:[fragaria tabWidth]];
@@ -147,6 +156,15 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 - (NSString *)windowNibName {
   return @"MOSSource";
+}
+
+
+- (NSTouchBar *)makeTouchBar {
+  if (self.touchBarDelegate == nil) {
+    [self setTouchBarDelegate:[[MOSSimulatorTouchBarDelegate alloc] init]];
+    [self.touchBarDelegate setSimulatorViewController:simVc];
+  }
+  return [self.touchBarDelegate makeSourceDocumentTouchBar];
 }
 
 
