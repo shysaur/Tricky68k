@@ -14,7 +14,7 @@ static void *TouchBarVisibilityContext = &TouchBarVisibilityContext;
 
 @interface MOSDocument ()
 
-@property (nonatomic, weak) NSTouchBar *touchBar;
+@property (nonatomic) NSTouchBar *touchBar;
 
 @end
 
