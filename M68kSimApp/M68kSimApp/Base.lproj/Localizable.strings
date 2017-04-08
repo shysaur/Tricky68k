@@ -63,6 +63,9 @@
 "Step In" = "Step In";
 
 /* Toolbar Item */
+"Step Out" = "Step Out";
+
+/* Toolbar Item */
 "Step Over" = "Step Over";
 
 /* Error description when the breakpoint formula parser does not find what it expected. */
