@@ -8,12 +8,20 @@
 
 #import "MOSSimulatorTouchBarDelegate.h"
 #import "MOSSimulatorViewController.h"
+#import "MOSSource.h"
 
 
 NSString * const MOSSourceDocumentTouchBarId = @"MOSSourceDocumentTouchBarId";
 NSString * const MOSExecutableDocumentTouchBarId = @"MOSExecutableDocumentTouchBarId";
 
 NSString * const MOSTouchBarItemIdentifierReset = @"MOSTouchBarItemIdentifierReset";
+NSString * const MOSTouchBarItemIdentifierPlay = @"MOSTouchBarItemIdentifierPlay";
+NSString * const MOSTouchBarItemIdentifierPause = @"MOSTouchBarItemIdentifierPause";
+NSString * const MOSTouchBarItemIdentifierStepIn = @"MOSTouchBarItemIdentifierStepIn";
+NSString * const MOSTouchBarItemIdentifierStepOver = @"MOSTouchBarItemIdentifierStepOver";
+NSString * const MOSTouchBarItemIdentifierStepOut = @"MOSTouchBarItemIdentifierStepOut";
+NSString * const MOSTouchBarItemIdentifierBuildAndRun = @"MOSTouchBarItemIdentifierBuildAndRun";
+
 
 
 @implementation MOSSimulatorTouchBarDelegate
@@ -25,8 +33,18 @@ NSString * const MOSTouchBarItemIdentifierReset = @"MOSTouchBarItemIdentifierRes
   [tb setDelegate:self];
   [tb setCustomizationIdentifier:MOSSourceDocumentTouchBarId];
   [tb setDefaultItemIdentifiers:@[
+    MOSTouchBarItemIdentifierPlay,
+    MOSTouchBarItemIdentifierPause,
+    NSTouchBarItemIdentifierFixedSpaceSmall,
     MOSTouchBarItemIdentifierReset,
-    NSTouchBarItemIdentifierOtherItemsProxy
+    NSTouchBarItemIdentifierFixedSpaceSmall,
+    MOSTouchBarItemIdentifierBuildAndRun,
+    NSTouchBarItemIdentifierFlexibleSpace,
+    NSTouchBarItemIdentifierOtherItemsProxy,
+    NSTouchBarItemIdentifierFlexibleSpace,
+    MOSTouchBarItemIdentifierStepIn,
+    MOSTouchBarItemIdentifierStepOver,
+    MOSTouchBarItemIdentifierStepOut
   ]];
   return tb;
 }
@@ -38,8 +56,16 @@ NSString * const MOSTouchBarItemIdentifierReset = @"MOSTouchBarItemIdentifierRes
   [tb setDelegate:self];
   [tb setCustomizationIdentifier:MOSSourceDocumentTouchBarId];
   [tb setDefaultItemIdentifiers:@[
+    MOSTouchBarItemIdentifierPlay,
+    MOSTouchBarItemIdentifierPause,
+    NSTouchBarItemIdentifierFixedSpaceSmall,
     MOSTouchBarItemIdentifierReset,
-    NSTouchBarItemIdentifierOtherItemsProxy
+    NSTouchBarItemIdentifierFlexibleSpace,
+    NSTouchBarItemIdentifierOtherItemsProxy,
+    NSTouchBarItemIdentifierFlexibleSpace,
+    MOSTouchBarItemIdentifierStepIn,
+    MOSTouchBarItemIdentifierStepOver,
+    MOSTouchBarItemIdentifierStepOut
   ]];
   return tb;
 }
@@ -47,19 +73,52 @@ NSString * const MOSTouchBarItemIdentifierReset = @"MOSTouchBarItemIdentifierRes
 
 - (NSTouchBarItem *)touchBar:(NSTouchBar *)touchBar makeItemForIdentifier:(NSTouchBarItemIdentifier)identifier
 {
-  if ([identifier isEqual:MOSTouchBarItemIdentifierReset]) {
-    NSCustomTouchBarItem *i = [[NSCustomTouchBarItem alloc] initWithIdentifier:identifier];
-    NSButton *b = [[NSButton alloc] init];
-    NSImage *img = [NSImage imageNamed:@"MOSRestart"];
-    [img setTemplate:YES];
-    [b setImage:img];
-    [b setBezelStyle:NSBezelStyleRounded];
-    [b setTarget:self.simulatorViewController];
-    [b setAction:@selector(restart:)];
-    [i setView:b];
-    return i;
+  NSString *imgname;
+  SEL action;
+  id target;
+  
+  NSCustomTouchBarItem *i = [[NSCustomTouchBarItem alloc] initWithIdentifier:identifier];
+  NSButton *b = [[NSButton alloc] init];
+  [b setBezelStyle:NSBezelStyleRounded];
+  
+  if ([identifier isEqual:MOSTouchBarItemIdentifierBuildAndRun]) {
+    target = self.sourceDocument;
+    imgname = @"MOSBuildAndRun";
+    action = @selector(assembleAndRun:);
+  } else {
+    target = self.simulatorViewController;
+    if ([identifier isEqual:MOSTouchBarItemIdentifierReset]) {
+      imgname = @"MOSRestart";
+      action = @selector(restart:);
+    } else if ([identifier isEqual:MOSTouchBarItemIdentifierPlay]) {
+      imgname = @"MOSStart";
+      action = @selector(run:);
+    } else if ([identifier isEqual:MOSTouchBarItemIdentifierPause]) {
+      imgname = @"MOSPause";
+      action = @selector(pause:);
+    } else if ([identifier isEqual:MOSTouchBarItemIdentifierStepIn]) {
+      imgname = @"MOSStepIn";
+      action = @selector(stepIn:);
+    } else if ([identifier isEqual:MOSTouchBarItemIdentifierStepOver]) {
+      imgname = @"MOSStepOver";
+      action = @selector(stepOver:);
+    } else if ([identifier isEqual:MOSTouchBarItemIdentifierStepOut]) {
+      imgname = @"MOSStepOut";
+      action = @selector(stepOut:);
+    } else {
+      return nil;
+    }
   }
-  return nil;
+
+  NSImage *img = [[NSImage imageNamed:imgname] copy];
+  [img setTemplate:YES];
+  [img setSize:NSMakeSize(20, 20)];
+  [b setImage:img];
+  [b setTarget:target];
+  [b setAction:action];
+  
+  [i setView:b];
+  return i;
 }
 
 

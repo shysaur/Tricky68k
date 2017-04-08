@@ -163,6 +163,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   if (self.touchBarDelegate == nil) {
     [self setTouchBarDelegate:[[MOSSimulatorTouchBarDelegate alloc] init]];
     [self.touchBarDelegate setSimulatorViewController:simVc];
+    [self.touchBarDelegate setSourceDocument:self];
   }
   return [self.touchBarDelegate makeSourceDocumentTouchBar];
 }

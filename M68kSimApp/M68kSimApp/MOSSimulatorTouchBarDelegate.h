@@ -10,11 +10,13 @@
 
 
 @class MOSSimulatorViewController;
+@class MOSSource;
 
 
 @interface MOSSimulatorTouchBarDelegate : NSObject <NSTouchBarDelegate>
 
 @property (nonatomic, weak) MOSSimulatorViewController *simulatorViewController;
+@property (nonatomic, weak) MOSSource *sourceDocument;
 
 - (NSTouchBar *)makeSourceDocumentTouchBar;
 - (NSTouchBar *)makeExecutableDocumentTouchBar;
