@@ -23,8 +23,8 @@
 }
 
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
+- (void)loadView {
+  [super loadView];
   
   MOSPlatform *p = [[MOSPlatformManager sharedManager] defaultPlatform];
   NSViewController *vc = [p assemblerPreferencesViewController];
