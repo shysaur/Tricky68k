@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12118"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,9 +16,8 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <view id="Hz6-mo-xeY">
+        <view translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="600" height="205"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bTV-SL-ELI">
                     <rect key="frame" x="446" y="161" width="81" height="28"/>
@@ -33,7 +32,7 @@
                         <action selector="changeDebuggerFont:" target="-2" id="2Mb-nK-6CD"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P4n-eH-KsK">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P4n-eH-KsK">
                     <rect key="frame" x="106" y="168" width="96" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="uRC-e0-mIC"/>
@@ -44,7 +43,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UOZ-81-jhQ">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UOZ-81-jhQ">
                     <rect key="frame" x="88" y="108" width="114" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Disassemble only:" id="YGJ-eg-KHt">
                         <font key="font" metaFont="system"/>
@@ -52,7 +51,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField toolTip="Minimum is 25 lines." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B4M-ix-0r4">
+                <textField toolTip="Minimum is 25 lines." verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B4M-ix-0r4">
                     <rect key="frame" x="208" y="105" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="6WA-0B-djN"/>
@@ -82,7 +81,7 @@
                         </binding>
                     </connections>
                 </stepper>
-                <textField toolTip="Minimum: 16 KiB, maximum: 16384 KiB" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fpO-yO-bRB">
+                <textField toolTip="Minimum: 16 KiB, maximum: 16384 KiB" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fpO-yO-bRB">
                     <rect key="frame" x="208" y="74" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="INm-up-ILp"/>
@@ -104,7 +103,7 @@
                         <binding destination="0sm-Rh-b5P" name="value" keyPath="values.RAMDumpSize" id="Dlj-4D-5LN"/>
                     </connections>
                 </stepper>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmC-7D-yka">
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmC-7D-yka">
                     <rect key="frame" x="208" y="145" width="235" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="B1D-Lk-Wff"/>
@@ -131,7 +130,7 @@
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="T5E-GR-Icn">
                     <rect key="frame" x="20" y="134" width="560" height="5"/>
                 </box>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lIx-3S-4Xf">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIx-3S-4Xf">
                     <rect key="frame" x="80" y="77" width="122" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only show the first:" id="9jH-XQ-7po">
                         <font key="font" metaFont="system"/>
@@ -139,7 +138,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oeQ-BB-fMN">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oeQ-BB-fMN">
                     <rect key="frame" x="291" y="77" width="72" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="KiB of RAM" id="zIR-YT-hYO">
                         <font key="font" metaFont="system"/>
@@ -147,7 +146,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jnr-43-J7v">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jnr-43-J7v">
                     <rect key="frame" x="291" y="108" width="82" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="lines of code" id="V32-af-2lN">
@@ -156,7 +155,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField toolTip="Minimum: 16 KiB, maximum: 8192 KiB" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sfx-Tb-vb0">
+                <textField toolTip="Minimum: 16 KiB, maximum: 8192 KiB" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sfx-Tb-vb0">
                     <rect key="frame" x="208" y="42" width="60" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="Zro-oZ-UxD"/>
@@ -171,7 +170,7 @@
                         <outlet property="formatter" destination="1B9-f1-Lf0" id="CeI-j0-Pjw"/>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o2q-b1-b4m">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2q-b1-b4m">
                     <rect key="frame" x="84" y="45" width="118" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only show the top:" id="ep8-Or-Cmn">
                         <font key="font" metaFont="system"/>
@@ -179,7 +178,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hAT-QG-ks9">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAT-QG-ks9">
                     <rect key="frame" x="291" y="45" width="106" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="KiB of stack area" id="OCO-4u-dLu">
                         <font key="font" metaFont="system"/>
@@ -194,7 +193,7 @@
                         <binding destination="0sm-Rh-b5P" name="value" keyPath="values.StackDumpSize" id="LXP-fy-SxG"/>
                     </connections>
                 </stepper>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-CP-Tmx">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5E8-CP-Tmx">
                     <rect key="frame" x="206" y="20" width="252" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="These setting will apply at the next file opened." id="Oqf-7S-hN1">
                         <font key="font" metaFont="smallSystem"/>
@@ -262,9 +261,8 @@
             <real key="maximum" value="8192"/>
         </numberFormatter>
         <userDefaultsController representsSharedInstance="YES" id="0sm-Rh-b5P"/>
-        <customView id="DZs-it-Rxr">
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="DZs-it-Rxr">
             <rect key="frame" x="0.0" y="0.0" width="163" height="9"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="JMu-aG-lAK">
                     <rect key="frame" x="20" y="-2" width="123" height="5"/>
