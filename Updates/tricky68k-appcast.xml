@@ -7,6 +7,32 @@
         <language>en</language>
         
         <item>
+            <title>Release 1.3.0</title>
+            <description><![CDATA[ 
+              <ul>
+                <li><strong>New!</strong> Now it's possible to show the source code when debugging!</li>
+                <li><strong>New!</strong> In the debugger you can now <em>step out</em> from the current function!</li>
+                <li><strong>New!</strong> The Touch Bar is now supported!</li>
+                <li>Usability improvements and bugfixes to the simulator teletype.</li>
+                <li>Minor improvements to the examples.</li>
+                <li>Fixed some file type matching issues.</li> 
+                <li>Better handling of some error conditions.</li>
+                <li>Minor emulation accuracy improvements in the simulator.</li> 
+                <li>Cosmetic improvements.</li>
+                <li>Other speed and stability improvements.</li> 
+              </ul> ]]>
+            </description>
+            <pubDate>Sun, 09 April 2017 18:12:12 +0200</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_1.3.0/Tricky68k_130.tar.bz2" 
+              sparkle:version="1935" 
+              sparkle:shortVersionString="1.3.0"
+              length="3844519" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC0CFFNt8dO+BfZ1KJVQ6fes64liR5CMAhUAvHDLeJwLoEC8K5MEVc2giWhAB80=" />
+            <sparkle:minimumSystemVersion>10.9</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 1.2.1</title>
             <description><![CDATA[ 
               <h3>Bug fixes in 1.2.1</h3>
