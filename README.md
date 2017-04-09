@@ -1,5 +1,5 @@
 # Tricky68k
-####[Download Here!](https://github.com/shysaur/Tricky68k/releases)
+### [Download Here!](https://github.com/shysaur/Tricky68k/releases)
 
 Tricky68k is a Motorola 68000 simulator for Mac OS X, based on Volker  
 Barthelmann's [VASM](http://sun.hasenbraten.de/vasm/) assembler, the 
@@ -9,7 +9,7 @@ Barthelmann's [VASM](http://sun.hasenbraten.de/vasm/) assembler, the
 
 Tricky68k currently runs on Mavericks and higher.
 
-###About the Teletype
+### About the Teletype
 The simulator implements a single I/O device (the teletype), mapped from
 0xFFE000 to 0xFFFFFF inclusive.
  - You write a (16 bit) word to that range to output a character to the 
