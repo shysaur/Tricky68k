@@ -143,10 +143,10 @@ void cpu_run(void) {
   pthread_t timer;
   long long khz;
   
+  mach_timebase_info(&td_info);
   pthread_mutex_init(&cpu_timerMut, NULL);
   pthread_cond_init(&cpu_timer, NULL);
   pthread_create(&timer, NULL, cpu_timerThread, NULL);
-  mach_timebase_info(&td_info);
   
   m68k_pulse_reset();
   cpu_resetClockMeasurement(0);
