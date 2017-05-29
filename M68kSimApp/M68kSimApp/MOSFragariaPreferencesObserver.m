@@ -69,31 +69,34 @@ NSString * const MGSFragariaPrefsTextFont = @"FragariaTextFont";
 
 
 /* KVO context constants */
-static char kcBackgroundColorChanged;
-static char kcColoursChanged;
-static char kcFragariaInvisibleCharactersColourWellChanged;
-static char kcFragariaTabWidthChanged;
-static char kcFragariaTextFontChanged;
-static char kcGutterGutterTextColourWell;
-static char kcGutterWidthPrefChanged;
-static char kcInvisibleCharacterValueChanged;
-static char kcLineHighlightingChanged;
-static char kcLineNumberPrefChanged;
-static char kcLineWrapPrefChanged;
-static char kcMultiLineChanged;
-static char kcPageGuideChanged;
-static char kcSyntaxColourPrefChanged;
-static char kcTextColorChanged;
-static char kcShowMatchingBracesChanged;
-static char kcAutoInsertionPrefsChanged;
-static char kcIndentingPrefsChanged;
-static char kcAutoCompletePrefsChanged;
+static const char kc_ContextStart[19];
+#define kcBackgroundColorChanged (kc_ContextStart[0])
+#define kcColoursChanged (kc_ContextStart[1])
+#define kcFragariaInvisibleCharactersColourWellChanged (kc_ContextStart[2])
+#define kcFragariaTabWidthChanged (kc_ContextStart[3])
+#define kcFragariaTextFontChanged (kc_ContextStart[4])
+#define kcGutterGutterTextColourWell (kc_ContextStart[5])
+#define kcGutterWidthPrefChanged (kc_ContextStart[6])
+#define kcInvisibleCharacterValueChanged (kc_ContextStart[7])
+#define kcLineHighlightingChanged (kc_ContextStart[8])
+#define kcLineNumberPrefChanged (kc_ContextStart[9])
+#define kcLineWrapPrefChanged (kc_ContextStart[10])
+#define kcMultiLineChanged (kc_ContextStart[11])
+#define kcPageGuideChanged (kc_ContextStart[12])
+#define kcSyntaxColourPrefChanged (kc_ContextStart[13])
+#define kcTextColorChanged (kc_ContextStart[14])
+#define kcShowMatchingBracesChanged (kc_ContextStart[15])
+#define kcAutoInsertionPrefsChanged (kc_ContextStart[16])
+#define kcIndentingPrefsChanged (kc_ContextStart[17])
+#define kcAutoCompletePrefsChanged (kc_ContextStart[18])
+#define kc_ContextEnd (kc_ContextStart[19])
 
 
 @implementation MOSFragariaPreferencesObserver
 
 
-- (instancetype)initWithFragaria:(MGSFragariaView *)fragaria {
+- (instancetype)initWithFragaria:(MGSFragariaView *)fragaria
+{
   static dispatch_once_t onceToken;
   
   self = [super init];
@@ -109,13 +112,14 @@ static char kcAutoCompletePrefsChanged;
 }
 
 
-- (void)dealloc {
-  NSUserDefaultsController *defaultsController;
+- (void)dealloc
+{
+  NSUserDefaults *ud;
   NSString *keyPath;
   
-  defaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+  ud = [NSUserDefaults standardUserDefaults];
   for (keyPath in registeredKeyPaths) {
-    [defaultsController removeObserver:self forKeyPath:keyPath];
+    [ud removeObserver:self forKeyPath:keyPath];
   }
 }
 
@@ -123,22 +127,12 @@ static char kcAutoCompletePrefsChanged;
 #pragma mark - Standard defaults
 
 
-- (void)registerFragariaDefaults {
+- (void)registerFragariaDefaults
+{
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  NSUserDefaultsController *udc = [NSUserDefaultsController sharedUserDefaultsController];
   NSDictionary *defaults;
-  NSMutableDictionary *tmp;
   
   defaults = [MOSFragariaPreferencesObserver fragariaDefaultsDictionary];
-  
-  tmp = [[udc initialValues] mutableCopy];
-  if (tmp) {
-    [tmp addEntriesFromDictionary:defaults];
-    [udc setInitialValues:tmp];
-  } else {
-    [udc setInitialValues:defaults];
-  }
-  
   [ud registerDefaults:defaults];
 }
 
@@ -147,7 +141,8 @@ static char kcAutoCompletePrefsChanged;
 [NSColor colorWithCalibratedRed:rd green:gr blue:bl alpha:1.0f]]
 #define ARCHIVED_OBJECT(obj) [NSArchiver archivedDataWithRootObject:obj]
 
-+ (NSDictionary *)fragariaDefaultsDictionary {
++ (NSDictionary *)fragariaDefaultsDictionary
+{
   return @{
     MGSFragariaPrefsCommandsColourWell: ARCHIVED_COLOR(0.031f, 0.0f, 0.855f),
     MGSFragariaPrefsCommentsColourWell: ARCHIVED_COLOR(0.0f, 0.45f, 0.0f),
@@ -210,20 +205,16 @@ static char kcAutoCompletePrefsChanged;
 
 - (void)observeDefaults:(NSArray*)arry context:(void*)ctxt
 {
-  NSUserDefaultsController *dc = [NSUserDefaultsController sharedUserDefaultsController];
+  NSUserDefaults *dc = [NSUserDefaults standardUserDefaults];
   NSString *keyPath;
-  NSUInteger i;
-  NSKeyValueObservingOptions opts;
   
-  i = 1;
   for (NSString *prop in arry) {
-    keyPath = [NSString stringWithFormat:@"values.%@", prop];
+    keyPath = [NSString stringWithFormat:@"%@", prop];
     
-    opts = (i == [arry count]) ? NSKeyValueObservingOptionInitial : 0;
-    [dc addObserver:self forKeyPath:keyPath options:opts context:ctxt];
+    [dc addObserver:self forKeyPath:keyPath options:0 context:ctxt];
     [registeredKeyPaths addObject:keyPath];
-    i++;
   }
+  [self updateDefaults:ctxt];
 }
 
 
@@ -279,14 +270,27 @@ static char kcAutoCompletePrefsChanged;
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-  change:(NSDictionary *)change context:(void *)context {
+  change:(NSDictionary *)change context:(void *)context
+{
+  if (context >= (void*)&kc_ContextStart && context < (void*)&kc_ContextEnd) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self updateDefaults:context];
+    });
+  } else {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
+}
+
+
+- (void)updateDefaults:(void*)context
+{
   BOOL boolValue;
   NSColor *colorValue;
   NSFont *fontValue;
   MGSFragariaView *f = _fragaria;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 #define UNAR(x) [NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:x]]
-  
+
   if (context == &kcGutterWidthPrefChanged) {
     f.minimumGutterWidth = [defaults doubleForKey:MGSFragariaPrefsGutterWidth];
     
@@ -377,8 +381,6 @@ static char kcAutoCompletePrefsChanged;
     f.colourForStrings = UNAR(MGSFragariaPrefsStringsColourWell);
     f.colourForVariables = UNAR(MGSFragariaPrefsVariablesColourWell);
   
-  } else {
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
   }
 }
 
