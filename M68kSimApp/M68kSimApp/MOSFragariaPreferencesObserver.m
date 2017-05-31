@@ -69,7 +69,7 @@ NSString * const MGSFragariaPrefsTextFont = @"FragariaTextFont";
 
 
 /* KVO context constants */
-static const char kc_ContextStart[19];
+static char kc_ContextStart[19];
 #define kcBackgroundColorChanged (kc_ContextStart[0])
 #define kcColoursChanged (kc_ContextStart[1])
 #define kcFragariaInvisibleCharactersColourWellChanged (kc_ContextStart[2])
