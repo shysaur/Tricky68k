@@ -51,10 +51,9 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
 
 @optional
 
-- (void)setOutputListingFile:(NSURL*)lf;
-- (NSURL*)outputListingFile;
+- (BOOL)produceListingDictionary;
+- (void)setProduceListingDictionary:(BOOL)ld;
 
-/* Implies -setOutputListingFile: */
 - (MOSListingDictionary *)listingDictionary;
 
 @end
@@ -64,7 +63,6 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
   MOSJob *jobStatus;
   NSURL *sourceFile;
   NSURL *outputFile;
-  NSURL *listingFile;
   MOSAssemblageOptions options;
 }
 

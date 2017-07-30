@@ -63,7 +63,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 @property (nonatomic) MOSAssembler *assembler;
 @property (nonatomic) NSURL *assemblyOutput;
-@property (nonatomic) NSURL *listingOutput;
 
 @property (nonatomic) MOSSimulatorTouchBarDelegate *touchBarDelegate;
 
@@ -394,7 +393,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     if (result == NSFileHandlingPanelOKButton) {
       runWhenAssemblyComplete = NO;
       assembleForSaveOnly = YES;
-      [self assembleInBackgroundToURL:[sp URL] listingURL:nil];
+      [self assembleInBackgroundToURL:[sp URL] withListing:YES];
     }
   }];
 }
@@ -404,16 +403,12 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   assembleForSaveOnly = NO;
   unlink([self.assemblyOutput fileSystemRepresentation]);
   self.assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-  if (breakptdel)
-    self.listingOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
-  else
-    self.listingOutput = nil;
   
-  [self assembleInBackgroundToURL:self.assemblyOutput listingURL:self.listingOutput];
+  [self assembleInBackgroundToURL:self.assemblyOutput withListing:!!breakptdel];
 }
 
 
-- (void)assembleInBackgroundToURL:(NSURL *)outurl listingURL:(NSURL *)listurl {
+- (void)assembleInBackgroundToURL:(NSURL *)outurl withListing:(BOOL)wlist {
   if (self.assembler)
     return;
   
@@ -471,8 +466,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
       MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
     
     [self.assembler setOutputFile:outurl];
-    if (listurl)
-      [self.assembler setOutputListingFile:listurl];
+    [self.assembler setProduceListingDictionary:wlist];
     [self.assembler setSourceFile:tempSourceCopy];
     [self.assembler setJobStatus:lastJob];
     [self.assembler setAssemblageOptions:opts];
@@ -505,10 +499,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     self.assembler = nil;
     
     unlink([tempSourceCopy fileSystemRepresentation]);
-    if (self.listingOutput) {
-      unlink([self.listingOutput fileSystemRepresentation]);
-      self.listingOutput = nil;
-    }
     
     if (asmres != MOSAssemblageResultFailure && runWhenAssemblyComplete) {
       [self switchToSimulator:self];

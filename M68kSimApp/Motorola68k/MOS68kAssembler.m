@@ -40,6 +40,7 @@
     NSURL *execurl;
     NSURL *unlinkedelf;
     NSURL *linkerfile;
+    NSURL *listingfile;
     NSMutableArray *params;
     NSError *lfe;
     NSDictionary *lfevent;
@@ -54,8 +55,10 @@
     if (!([self assemblageOptions] & MOSAssemblageOptionOptimizationOn))
       [params addObject:@"-no-opt"];
     [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [[self sourceFile] path]]];
-    if ([self outputListingFile])
-      [params addObjectsFromArray:@[@"-L", [[self outputListingFile] path]]];
+    if (self.produceListingDictionary) {
+      listingfile = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
+      [params addObjectsFromArray:@[@"-L", [listingfile path]]];
+    }
     
     [task setArguments:params];
     [task setDelegate:self];
@@ -92,9 +95,9 @@
     if ([task terminationStatus] != 0)
       goto fail;
     
-    if ([self outputListingFile]) {
+    if (self.produceListingDictionary) {
       listingDict = [[MOS68kListingDictionary alloc]
-        initWithListingFile:[self outputListingFile] error:&lfe];
+        initWithListingFile:listingfile error:&lfe];
       if (!listingDict) {
         lfevent = @{MOSJobEventType: MOSJobEventTypeWarning,
          MOSJobEventText: MOSPlatformLocalized(@"Could not read the listing file",
@@ -117,6 +120,7 @@
   finish:
     unlink([unlinkedelf fileSystemRepresentation]);
     unlink([linkerfile fileSystemRepresentation]);
+    unlink([listingfile fileSystemRepresentation]);
     dispatch_async(dispatch_get_main_queue(), ^{
       [self setComplete:YES];
       [self setAssembling:NO];
@@ -320,6 +324,15 @@ returnAsIs:
     [NSException raise:NSInvalidArgumentException
                 format:@"Assemblage is not complete yet."];
   return listingDict;
+}
+
+
+- (void)setProduceListingDictionary:(BOOL)pl
+{
+  if ([self isAssembling] | [self isComplete])
+    [NSException raise:NSInvalidArgumentException
+                format:@"Can't change parameters after assembling."];
+  _produceListingDictionary = pl;
 }
 
 

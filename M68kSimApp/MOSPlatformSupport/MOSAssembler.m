@@ -75,22 +75,6 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
-- (void)setOutputListingFile:(NSURL*)lf {
-  if ([self isAssembling] | [self isComplete])
-    [NSException raise:NSInvalidArgumentException
-                format: @"Can't change parameters after assembling."];
-  if (![lf isFileURL])
-    [NSException raise:NSInvalidArgumentException
-                format:@"Assembler source file must be a local URL"];
-  listingFile = lf;
-}
-
-
-- (NSURL*)outputListingFile {
-  return listingFile;
-}
-
-
 - (void)setAssemblageOptions:(MOSAssemblageOptions)opts {
   options = opts;
 }

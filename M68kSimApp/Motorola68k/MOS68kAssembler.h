@@ -24,4 +24,6 @@
   MOS68kListingDictionary *listingDict;
 }
 
+@property (nonatomic) BOOL produceListingDictionary;
+
 @end
