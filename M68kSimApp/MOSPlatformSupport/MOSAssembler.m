@@ -23,6 +23,15 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
+@interface MOSAssembler ()
+
+@property (atomic, getter=isAssembling) BOOL assembling;
+@property (atomic, getter=isComplete) BOOL complete;
+@property (nonatomic) MOSAssemblageResult assemblageResult;
+
+@end
+
+
 @implementation MOSAssembler
 
 
@@ -86,25 +95,58 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 
 
 - (void)assemble {
-  [NSException raise:NSGenericException format:@"MOSAssembler is an abstract "
-    "class; please implement -assemble in your subclass."];
+  if (self.isAssembling || self.isComplete)
+    [NSException raise:NSInvalidArgumentException
+      format:@"Already assembled once."];
+  if (![self sourceFile] || ![self outputFile])
+    [NSException raise:NSInvalidArgumentException
+      format:@"Source file and output file not specified"];
+  
+  [self setAssembling:YES];
+  
+  if (![self prepareForAssembling]) {
+    [self terminateAssemblingWithResult:MOSAssemblageResultFailure];
+    return;
+  }
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    MOSAssemblageResult res = [self assembleThread];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self terminateAssemblingWithResult:res];
+    });
+  });
 }
 
 
-- (BOOL)isAssembling {
-  return NO;
+- (BOOL)prepareForAssembling
+{
+  return YES;
 }
 
 
-- (BOOL)isComplete {
-  return NO;
+- (MOSAssemblageResult)assembleThread
+{
+  NSLog(@"MOSAssembler is an abstract class; please implement -assembleThread "
+         "in your subclass.");
+  return MOSAssemblageResultFailure;
+}
+
+
+- (void)terminateAssemblingWithResult:(MOSAssemblageResult)res
+{
+  [self setAssemblageResult:res];
+  [[self jobStatus] setStatus:MOSAsmResultToJobStat(res)];
+  
+  [self setComplete:YES];
+  [self setAssembling:NO];
 }
 
 
 - (MOSAssemblageResult)assemblageResult {
-  [NSException raise:NSInvalidArgumentException
-              format:@"Assemblage is not complete yet."];
-  return MOSAssemblageResultFailure;
+  if (!self.isComplete)
+    [NSException raise:NSInvalidArgumentException
+                format:@"Assemblage is not complete yet."];
+  return _assemblageResult;
 }
 
 

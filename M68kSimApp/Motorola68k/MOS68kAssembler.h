@@ -16,11 +16,8 @@
 
 @interface MOS68kAssembler : MOSAssembler <MOSMonitoredTaskDelegate> {
   NSMutableArray *sections;
-  MOSAssemblageResult asmResult;
   BOOL gotWarnings;
-  BOOL running;
   BOOL linking;
-  BOOL completed;
   MOS68kListingDictionary *listingDict;
 }
 

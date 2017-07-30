@@ -14,120 +14,104 @@
 @implementation MOS68kAssembler
 
 
-- (instancetype)init {
-  self = [super init];
-  running = NO;
-  completed = NO;
-  return self;
+- (BOOL)prepareForAssembling
+{
+  gotWarnings = NO;
+  sections = [NSMutableArray array];
+  return [super prepareForAssembling];
 }
 
 
-- (void)assemble {
-  if (running || completed)
-    [NSException raise:NSInvalidArgumentException
-      format:@"Already assembled once."];
-  if (![self sourceFile] || ![self outputFile])
-    [NSException raise:NSInvalidArgumentException
-      format:@"Source file and output file not specified"];
+- (MOSAssemblageResult)assembleThread
+{
+  MOSAssemblageResult asmResult;
+  MOSMonitoredTask *task;
+  NSURL *execurl;
+  NSURL *unlinkedelf;
+  NSURL *linkerfile;
+  NSURL *listingfile;
+  NSMutableArray *params;
+  NSError *lfe;
+  NSDictionary *lfevent;
   
-  [self setAssembling:YES];
+  linking = NO;
+  task = [[MOSMonitoredTask alloc] init];
+  execurl = [[NSBundle bundleForClass:[self class]] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
+  [task setLaunchURL:execurl];
+  unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
   
-  gotWarnings = NO;
-  sections = [NSMutableArray array];
+  params = [@[@"-Felf", @"-spaces"] mutableCopy];
+  if (!([self assemblageOptions] & MOSAssemblageOptionOptimizationOn))
+    [params addObject:@"-no-opt"];
+  [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [[self sourceFile] path]]];
+  if (self.produceListingDictionary) {
+    listingfile = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
+    [params addObjectsFromArray:@[@"-L", [listingfile path]]];
+  }
   
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    MOSMonitoredTask *task;
-    NSURL *execurl;
-    NSURL *unlinkedelf;
-    NSURL *linkerfile;
-    NSURL *listingfile;
-    NSMutableArray *params;
-    NSError *lfe;
-    NSDictionary *lfevent;
-    
-    linking = NO;
-    task = [[MOSMonitoredTask alloc] init];
-    execurl = [[NSBundle bundleForClass:[self class]] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
-    [task setLaunchURL:execurl];
-    unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
-    
-    params = [@[@"-Felf", @"-spaces"] mutableCopy];
-    if (!([self assemblageOptions] & MOSAssemblageOptionOptimizationOn))
-      [params addObject:@"-no-opt"];
-    [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [[self sourceFile] path]]];
-    if (self.produceListingDictionary) {
-      listingfile = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
-      [params addObjectsFromArray:@[@"-L", [listingfile path]]];
+  [task setArguments:params];
+  [task setDelegate:self];
+  [task launch];
+  [task waitUntilExit];
+  if ([task terminationStatus] != 0) goto fail;
+  
+  linking = YES;
+  task = [[MOSMonitoredTask alloc] init];
+  execurl = [[NSBundle bundleForClass:[self class]] URLForAuxiliaryExecutable:@"m68k-elf-ld"];
+  [task setLaunchURL:execurl];
+  linkerfile = [NSURL URLWithTemporaryFilePathWithExtension:@"ld"];
+  if (![self makeLinkerFile:linkerfile]) {
+    [[self jobStatus] addEvent:@{
+      MOSJobEventType: MOSJobEventTypeError,
+      MOSJobEventText: MOSPlatformLocalized(@"Could not create a linker file.",
+        @"Text of the event which occurs when creating a linker file failed.")
+      }];
+    goto fail;
+  }
+  
+  params = [NSMutableArray array];
+  if (!([self assemblageOptions] & MOSAssemblageOptionEntryPointSymbolic))
+    [params addObject:@"--entry=0x2000"];
+  else
+    [params addObject:@"--entry=start"];
+  [params addObjectsFromArray:@[@"-o", [[self outputFile] path], @"-T", [linkerfile path]]];
+  [params addObjectsFromArray:@[[unlinkedelf path]]];
+  
+  [task setArguments:params];
+  [task setDelegate:self];
+  [task launch];
+  [task waitUntilExit];
+  if ([task terminationStatus] != 0)
+    goto fail;
+  
+  if (self.produceListingDictionary) {
+    listingDict = [[MOS68kListingDictionary alloc]
+      initWithListingFile:listingfile error:&lfe];
+    if (!listingDict) {
+      lfevent = @{MOSJobEventType: MOSJobEventTypeWarning,
+       MOSJobEventText: MOSPlatformLocalized(@"Could not read the listing file",
+         @"Text of the event which occurs when failing to read a listing "
+         "file.")};
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [[self jobStatus] addEvent:lfevent];
+      });
+      gotWarnings = YES;
     }
-    
-    [task setArguments:params];
-    [task setDelegate:self];
-    [task launch];
-    [task waitUntilExit];
-    if ([task terminationStatus] != 0) goto fail;
-    
-    linking = YES;
-    task = [[MOSMonitoredTask alloc] init];
-    execurl = [[NSBundle bundleForClass:[self class]] URLForAuxiliaryExecutable:@"m68k-elf-ld"];
-    [task setLaunchURL:execurl];
-    linkerfile = [NSURL URLWithTemporaryFilePathWithExtension:@"ld"];
-    if (![self makeLinkerFile:linkerfile]) {
-      [[self jobStatus] addEvent:@{
-        MOSJobEventType: MOSJobEventTypeError,
-        MOSJobEventText: MOSPlatformLocalized(@"Could not create a linker file.",
-          @"Text of the event which occurs when creating a linker file failed.")
-        }];
-      goto fail;
-    }
-    
-    params = [NSMutableArray array];
-    if (!([self assemblageOptions] & MOSAssemblageOptionEntryPointSymbolic))
-      [params addObject:@"--entry=0x2000"];
-    else
-      [params addObject:@"--entry=start"];
-    [params addObjectsFromArray:@[@"-o", [[self outputFile] path], @"-T", [linkerfile path]]];
-    [params addObjectsFromArray:@[[unlinkedelf path]]];
-    
-    [task setArguments:params];
-    [task setDelegate:self];
-    [task launch];
-    [task waitUntilExit];
-    if ([task terminationStatus] != 0)
-      goto fail;
-    
-    if (self.produceListingDictionary) {
-      listingDict = [[MOS68kListingDictionary alloc]
-        initWithListingFile:listingfile error:&lfe];
-      if (!listingDict) {
-        lfevent = @{MOSJobEventType: MOSJobEventTypeWarning,
-         MOSJobEventText: MOSPlatformLocalized(@"Could not read the listing file",
-           @"Text of the event which occurs when failing to read a listing "
-           "file.")};
-        dispatch_async(dispatch_get_main_queue(), ^{
-          [[self jobStatus] addEvent:lfevent];
-        });
-        gotWarnings = YES;
-      }
-    }
-    
-    if (gotWarnings)
-      asmResult = MOSAssemblageResultSuccessWithWarning;
-    else
-      asmResult = MOSAssemblageResultSuccess;
-    goto finish;
-  fail:
-    asmResult = MOSAssemblageResultFailure;
-  finish:
-    unlink([unlinkedelf fileSystemRepresentation]);
-    unlink([linkerfile fileSystemRepresentation]);
-    unlink([listingfile fileSystemRepresentation]);
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self setComplete:YES];
-      [self setAssembling:NO];
-      
-      [[self jobStatus] setStatus:MOSAsmResultToJobStat(asmResult)];
-    });
-  });
+  }
+  
+  if (gotWarnings)
+    asmResult = MOSAssemblageResultSuccessWithWarning;
+  else
+    asmResult = MOSAssemblageResultSuccess;
+  goto finish;
+fail:
+  asmResult = MOSAssemblageResultFailure;
+finish:
+  unlink([unlinkedelf fileSystemRepresentation]);
+  unlink([linkerfile fileSystemRepresentation]);
+  unlink([listingfile fileSystemRepresentation]);
+  
+  return asmResult;
 }
 
 
@@ -291,36 +275,8 @@ returnAsIs:
 }
 
 
-- (void)setAssembling:(BOOL)a {
-  running = a;
-}
-
-
-- (BOOL)isAssembling {
-  return running;
-}
-
-
-- (void)setComplete:(BOOL)c {
-  completed = c;
-}
-
-
-- (BOOL)isComplete {
-  return completed;
-}
-
-
-- (MOSAssemblageResult)assemblageResult {
-  if (!completed)
-    [NSException raise:NSInvalidArgumentException
-      format:@"Assemblage is not complete yet."];
-  return asmResult;
-}
-
-
 - (MOSListingDictionary *)listingDictionary {
-  if (!completed)
+  if (!self.isComplete)
     [NSException raise:NSInvalidArgumentException
                 format:@"Assemblage is not complete yet."];
   return listingDict;

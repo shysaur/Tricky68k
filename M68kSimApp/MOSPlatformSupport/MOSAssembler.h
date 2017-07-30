@@ -66,4 +66,11 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
   MOSAssemblageOptions options;
 }
 
+/* run on main thread */
+- (BOOL)prepareForAssembling;
+/* run on background thread; to be implemented by a subclass */
+- (MOSAssemblageResult)assembleThread;
+/* run on main thread */
+- (void)terminateAssemblingWithResult:(MOSAssemblageResult)res;
+
 @end
