@@ -41,7 +41,6 @@
   
   BOOL assembleForSaveOnly;
   BOOL runWhenAssemblyComplete;
-  NSURL *tempSourceCopy;
   MOSJob *lastJob;
   BOOL hadJob;
   /* Following ivars must not be modified if assembleForSaveOnly == YES: */

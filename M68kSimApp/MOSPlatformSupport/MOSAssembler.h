@@ -37,8 +37,8 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
 - (void)setJobStatus:(MOSJob *)js;
 - (MOSJob *)jobStatus;
 
-- (void)setSourceFile:(NSURL*)sf;
-- (NSURL*)sourceFile;
+- (void)setSourceCode:(NSString*)sf;
+- (NSString*)sourceCode;
 - (void)setOutputFile:(NSURL*)of;
 - (NSURL*)outputFile;
 - (void)setAssemblageOptions:(MOSAssemblageOptions)opts;
@@ -61,7 +61,6 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
 
 @interface MOSAssembler : NSObject <MOSAssemblerProtocol> {
   MOSJob *jobStatus;
-  NSURL *sourceFile;
   NSURL *outputFile;
   MOSAssemblageOptions options;
 }

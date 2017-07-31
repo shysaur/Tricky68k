@@ -25,6 +25,8 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 
 @interface MOSAssembler ()
 
+@property (nonatomic) NSString *sourceCode;
+
 @property (atomic, getter=isAssembling) BOOL assembling;
 @property (atomic, getter=isComplete) BOOL complete;
 @property (nonatomic) MOSAssemblageResult assemblageResult;
@@ -52,24 +54,16 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
-- (void)setSourceFile:(NSURL*)sf {
-  if ([self isAssembling] | [self isComplete])
+- (void)setSourceCode:(NSString *)sc {
+  if ([self isAssembling] || [self isComplete])
     [NSException raise:NSInvalidArgumentException
                 format: @"Can't change parameters after assembling."];
-  if (![sf isFileURL])
-    [NSException raise:NSInvalidArgumentException
-                format:@"Assembler source file must be a local URL"];
-  sourceFile = sf;
-}
-
-
-- (NSURL*)sourceFile {
-  return sourceFile;
+  _sourceCode = sc;
 }
 
 
 - (void)setOutputFile:(NSURL*)of {
-  if ([self isAssembling] | [self isComplete])
+  if ([self isAssembling] || [self isComplete])
     [NSException raise:NSInvalidArgumentException
                 format: @"Can't change parameters after assembling."];
   if (![of isFileURL])
@@ -98,7 +92,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
   if (self.isAssembling || self.isComplete)
     [NSException raise:NSInvalidArgumentException
       format:@"Already assembled once."];
-  if (![self sourceFile] || ![self outputFile])
+  if (![self sourceCode] || ![self outputFile])
     [NSException raise:NSInvalidArgumentException
       format:@"Source file and output file not specified"];
   

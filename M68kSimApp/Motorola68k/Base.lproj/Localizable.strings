@@ -10,6 +10,9 @@
 /* Text of the event which occurs when failing to read a listing file. */
 "Could not read the listing file" = "Could not read the listing file";
 
+/* Text of the event which occurs when failing to write a temporary file while assembling. Concatenated with the reason for the error. */
+"Could not write the temporary source code file. " = "Could not write the temporary source code file. ";
+
 /* Register table header for Dx */
 "Data Registers" = "Data Registers";
 

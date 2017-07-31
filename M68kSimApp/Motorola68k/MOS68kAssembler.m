@@ -27,23 +27,40 @@
   MOSAssemblageResult asmResult;
   MOSMonitoredTask *task;
   NSURL *execurl;
-  NSURL *unlinkedelf;
   NSURL *linkerfile;
   NSURL *listingfile;
   NSMutableArray *params;
-  NSError *lfe;
+  NSError *terr;
   NSDictionary *lfevent;
   
   linking = NO;
+  
   task = [[MOSMonitoredTask alloc] init];
   execurl = [[NSBundle bundleForClass:[self class]] URLForAuxiliaryExecutable:@"vasmm68k-mot"];
   [task setLaunchURL:execurl];
-  unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+  
+  NSURL *unlinkedelf = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+  
+  NSURL *sourcefile = [NSURL URLWithTemporaryFilePathWithExtension:@"asm"];
+  NSData *sourcedata = [self.sourceCode dataUsingEncoding:NSUTF8StringEncoding];
+  if (![sourcedata writeToURL:sourcefile options:0 error:&terr]) {
+    NSString *basee = MOSPlatformLocalized(@"Could not write the temporary "
+      "source code file. ", @"Text of the event which occurs when failing to "
+      "write a temporary file while assembling. Concatenated with the reason "
+      "for the error.");
+    NSString *errs = [basee stringByAppendingString:[terr localizedDescription]];
+    NSDictionary *sfevent = @{MOSJobEventType: MOSJobEventTypeError,
+                              MOSJobEventText: errs};
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [[self jobStatus] addEvent:sfevent];
+    });
+    return MOSAssemblageResultFailure;
+  }
   
   params = [@[@"-Felf", @"-spaces"] mutableCopy];
   if (!([self assemblageOptions] & MOSAssemblageOptionOptimizationOn))
     [params addObject:@"-no-opt"];
-  [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [[self sourceFile] path]]];
+  [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [sourcefile path]]];
   if (self.produceListingDictionary) {
     listingfile = [NSURL URLWithTemporaryFilePathWithExtension:@"lst"];
     [params addObjectsFromArray:@[@"-L", [listingfile path]]];
@@ -86,7 +103,7 @@
   
   if (self.produceListingDictionary) {
     listingDict = [[MOS68kListingDictionary alloc]
-      initWithListingFile:listingfile error:&lfe];
+      initWithListingFile:listingfile error:&terr];
     if (!listingDict) {
       lfevent = @{MOSJobEventType: MOSJobEventTypeWarning,
        MOSJobEventText: MOSPlatformLocalized(@"Could not read the listing file",
@@ -107,6 +124,7 @@
 fail:
   asmResult = MOSAssemblageResultFailure;
 finish:
+  unlink([sourcefile fileSystemRepresentation]);
   unlink([unlinkedelf fileSystemRepresentation]);
   unlink([linkerfile fileSystemRepresentation]);
   unlink([listingfile fileSystemRepresentation]);

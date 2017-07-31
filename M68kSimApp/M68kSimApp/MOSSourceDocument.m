@@ -409,6 +409,11 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (void)assembleInBackgroundToURL:(NSURL *)outurl withListing:(BOOL)wlist {
+  NSUserDefaults *ud;
+  MOSAssemblageOptions opts;
+  MOSJobStatusManager *jsm;
+  NSString *title, *label;
+  
   if (self.assembler)
     return;
   
@@ -416,62 +421,52 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   self.assembler = [[[platform assemblerClass] alloc] init];
   
-  tempSourceCopy = [NSURL URLWithTemporaryFilePathWithExtension:@"s"];
-  if (!assembleForSaveOnly)
+  NSString *sourceToAssemble;
+  if (!assembleForSaveOnly) {
     lastSource = [[NSTextStorage alloc] initWithAttributedString:text];
+    sourceToAssemble = [lastSource mutableString];
+  } else {
+    sourceToAssemble = [[text string] copy];
+  }
   
-  [self saveToURL:tempSourceCopy ofType:@"public.plain-text"
-  forSaveOperation:NSSaveToOperation completionHandler:^(NSError *err){
-    NSUserDefaults *ud;
-    MOSAssemblageOptions opts;
-    MOSJobStatusManager *jsm;
-    NSString *title, *label;
-    
-    if (err) {
-      self.assembler = nil;
-      if (assembleForSaveOnly)
-        self.assemblyOutput = nil;
-      return;
-    }
-    [self.assembler addObserver:self forKeyPath:@"complete" options:0
-      context:AssemblageComplete];
+  [self.assembler addObserver:self forKeyPath:@"complete" options:0
+    context:AssemblageComplete];
 
-    ud = [NSUserDefaults standardUserDefaults];
-    jsm = [MOSJobStatusManager sharedJobStatusManger];
-    
-    if (lastJob)
-      [lastJob removeObserver:self forKeyPath:@"events" context:AssemblageEvent];
-    lastJob = [[MOSJob alloc] init];
-    [lastJob addObserver:self forKeyPath:@"events"
-      options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
-    
-    if ([self fileURL]) {
-      label = [[self fileURL] lastPathComponent];
-      title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@",
-        @"Assembler job name"), label];
-      [lastJob setAssociatedFile:[self fileURL]];
-    } else {
-      label = [docWindow title];
-      title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@",
-        @"Assembler job name"), label];
-    }
-    [lastJob setVisibleDescription:title];
-    
-    [jsm addJob:lastJob];
-    hadJob = YES;
-    
-    opts = [ud boolForKey:@"FixedEntryPoint"] ?
-      MOSAssemblageOptionEntryPointFixed : MOSAssemblageOptionEntryPointSymbolic;
-    opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ?
-      MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
-    
-    [self.assembler setOutputFile:outurl];
-    [self.assembler setProduceListingDictionary:wlist];
-    [self.assembler setSourceFile:tempSourceCopy];
-    [self.assembler setJobStatus:lastJob];
-    [self.assembler setAssemblageOptions:opts];
-    [self.assembler assemble];
-  }];
+  ud = [NSUserDefaults standardUserDefaults];
+  jsm = [MOSJobStatusManager sharedJobStatusManger];
+  
+  if (lastJob)
+    [lastJob removeObserver:self forKeyPath:@"events" context:AssemblageEvent];
+  lastJob = [[MOSJob alloc] init];
+  [lastJob addObserver:self forKeyPath:@"events"
+    options:NSKeyValueObservingOptionInitial context:AssemblageEvent];
+  
+  if ([self fileURL]) {
+    label = [[self fileURL] lastPathComponent];
+    title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@",
+      @"Assembler job name"), label];
+    [lastJob setAssociatedFile:[self fileURL]];
+  } else {
+    label = [docWindow title];
+    title = [NSString stringWithFormat:NSLocalizedString(@"Assemble %@",
+      @"Assembler job name"), label];
+  }
+  [lastJob setVisibleDescription:title];
+  
+  [jsm addJob:lastJob];
+  hadJob = YES;
+  
+  opts = [ud boolForKey:@"FixedEntryPoint"] ?
+    MOSAssemblageOptionEntryPointFixed : MOSAssemblageOptionEntryPointSymbolic;
+  opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ?
+    MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
+  
+  [self.assembler setOutputFile:outurl];
+  [self.assembler setProduceListingDictionary:wlist];
+  [self.assembler setSourceCode:sourceToAssemble];
+  [self.assembler setJobStatus:lastJob];
+  [self.assembler setAssemblageOptions:opts];
+  [self.assembler assemble];
 }
 
 
@@ -497,8 +492,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     
     [self.assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
     self.assembler = nil;
-    
-    unlink([tempSourceCopy fileSystemRepresentation]);
     
     if (asmres != MOSAssemblageResultFailure && runWhenAssemblyComplete) {
       [self switchToSimulator:self];
