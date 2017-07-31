@@ -8,13 +8,13 @@
 
 #import "MOSSourceBreakpointDelegate.h"
 #import "MOSListingDictionary.h"
-#import "MOSSource.h"
+#import "MOSSourceDocument.h"
 
 
 @implementation MOSSourceBreakpointDelegate
 
 
-- (instancetype)initWithFragaria:(MGSFragariaView *)f source:(MOSSource *)s {
+- (instancetype)initWithFragaria:(MGSFragariaView *)f source:(MOSSourceDocument *)s {
   self = [super init];
   fragaria = f;
   source = s;

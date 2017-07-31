@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Daniele Cattaneo. 
 //
 
-#import "MOSSource.h"
+#import "MOSSourceDocument.h"
 #import <Fragaria/Fragaria.h>
 #import "MOSFragariaPreferencesObserver.h"
 #import "NSURL+TemporaryFile.h"
@@ -57,7 +57,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 }
 
 
-@interface MOSSource ()
+@interface MOSSourceDocument ()
 
 @property (nonatomic) BOOL simulatorMode;
 
@@ -69,7 +69,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 @end
 
 
-@implementation MOSSource
+@implementation MOSSourceDocument
 
 
 #pragma mark - Class Properties
@@ -154,7 +154,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (NSString *)windowNibName {
-  return @"MOSSource";
+  return @"MOSSourceDocument";
 }
 
 

@@ -10,14 +10,14 @@
 
 
 @class MOSSimulatorViewController;
-@class MOSSource;
-@class MOSExecutable;
+@class MOSSourceDocument;
+@class MOSExecutableDocument;
 
 
 @interface MOSSimulatorToolbarDelegate : NSObject <NSToolbarDelegate> {
   IBOutlet MOSSimulatorViewController *simulatorVc;
-  IBOutlet MOSSource *sourceDocument;
-  IBOutlet MOSExecutable *executableDocument;
+  IBOutlet MOSSourceDocument *sourceDocument;
+  IBOutlet MOSExecutableDocument *executableDocument;
 }
 
 @end

@@ -1,12 +1,12 @@
 //
-//  MOSExecutable.m
+//  MOSExecutableDocument.m
 //  M68kSimApp
 //
 //  Created by Daniele Cattaneo on 29/12/14.
 //  Copyright (c) 2014 Daniele Cattaneo. 
 //
 
-#import "MOSExecutable.h"
+#import "MOSExecutableDocument.h"
 #import "MOSSimulatorViewController.h"
 #import "MOSSimulator.h"
 #import "MOSPlatform.h"
@@ -14,14 +14,14 @@
 #import "MOSSimulatorTouchBarDelegate.h"
 
 
-@interface MOSExecutable ()
+@interface MOSExecutableDocument ()
 
 @property (nonatomic) MOSSimulatorTouchBarDelegate *touchBarDelegate;
 
 @end
 
 
-@implementation MOSExecutable
+@implementation MOSExecutableDocument
 
 
 + (NSArray *)writableTypes {
@@ -30,7 +30,7 @@
 
 
 - (NSString *)windowNibName {
-  return @"MOSExecutable";
+  return @"MOSExecutableDocument";
 }
 
 

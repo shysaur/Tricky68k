@@ -16,7 +16,7 @@
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
 			<key>NSDocumentClass</key>
-			<string>MOSExecutable</string>
+			<string>MOSExecutableDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeIconFile</key>
@@ -33,7 +33,7 @@
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
 			<key>NSDocumentClass</key>
-			<string>MOSSource</string>
+			<string>MOSSourceDocument</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
@@ -47,7 +47,7 @@
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
 			<key>NSDocumentClass</key>
-			<string>MOSSource</string>
+			<string>MOSSourceDocument</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>

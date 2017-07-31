@@ -8,7 +8,7 @@
 
 #import "MOSSimulatorTouchBarDelegate.h"
 #import "MOSSimulatorViewController.h"
-#import "MOSSource.h"
+#import "MOSSourceDocument.h"
 
 
 NSString * const MOSSourceDocumentTouchBarId = @"MOSSourceDocumentTouchBarId";

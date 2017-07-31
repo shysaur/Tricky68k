@@ -1,5 +1,5 @@
 //
-//  MOSExecutable.h
+//  MOSExecutableDocument.h
 //  M68kSimApp
 //
 //  Created by Daniele Cattaneo on 29/12/14.
@@ -15,7 +15,7 @@
 @class MOSPlatform;
 
 
-@interface MOSExecutable : MOSDocument {
+@interface MOSExecutableDocument : MOSDocument {
   NSWindowController *wc;
   NSWindow *window;
   MOSSimulator *simProxy;
