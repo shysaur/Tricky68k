@@ -8,19 +8,13 @@
 
 #import "MOSSourceDocument.h"
 #import <Fragaria/Fragaria.h>
+#import "PlatformSupport.h"
 #import "MOSFragariaPreferencesObserver.h"
-#import "NSURL+TemporaryFile.h"
-#import "NSUserDefaults+Archiver.h"
-#import "MOSAssembler.h"
-#import "MOSSimulator.h"
-#import "MOSSimulatorPresentation.h"
 #import "MOSJobStatusManager.h"
-#import "MOSJob.h"
 #import "MOSSimulatorViewController.h"
 #import "MOSAppDelegate.h"
 #import "MOSPrintingTextView.h"
 #import "MOSFragariaPreferencesObserver.h"
-#import "MOSPlatform.h"
 #import "MOSSourceBreakpointDelegate.h"
 #import "MOSListingDictionary.h"
 #import "MOSPrintAccessoryViewController.h"
@@ -28,7 +22,6 @@
 #import "MOSSimulatorTouchBarDelegate.h"
 
 
-static void *AssemblageComplete = &AssemblageComplete;
 static void *AssemblageEvent = &AssemblageEvent;
 
 
@@ -428,9 +421,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   } else {
     sourceToAssemble = [[text string] copy];
   }
-  
-  [self.assembler addObserver:self forKeyPath:@"complete" options:0
-    context:AssemblageComplete];
 
   ud = [NSUserDefaults standardUserDefaults];
   jsm = [MOSJobStatusManager sharedJobStatusManger];
@@ -461,22 +451,19 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ?
     MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
   
-  [self.assembler setOutputFile:outurl];
   [self.assembler setProduceListingDictionary:wlist];
   [self.assembler setSourceCode:sourceToAssemble];
   [self.assembler setJobStatus:lastJob];
   [self.assembler setAssemblageOptions:opts];
-  [self.assembler assemble];
-}
-
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-    change:(NSDictionary *)change context:(void *)context {
-  MOSAssemblageResult asmres;
-  NSArray *events;
   
-  if (context == AssemblageComplete) {
+  [self.assembler assembleWithCompletionHandler:^{
+    MOSAssemblageResult asmres;
+    
     asmres = [self.assembler assemblageResult];
+    MOSExecutable *exc = [self.assembler output];
+    if (exc) {
+      [exc writeToURL:outurl withError:nil];
+    }
     
     if (!assembleForSaveOnly) {
       if (asmres == MOSAssemblageResultFailure) {
@@ -490,7 +477,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
       }
     }
     
-    [self.assembler removeObserver:self forKeyPath:@"complete" context:AssemblageComplete];
     self.assembler = nil;
     
     if (asmres != MOSAssemblageResultFailure && runWhenAssemblyComplete) {
@@ -501,8 +487,15 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     } else {
       [(MOSAppDelegate*)[NSApp delegate] openJobsWindow:self];
     }
-    
-  } else if (context == AssemblageEvent) {
+  }];
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+    change:(NSDictionary *)change context:(void *)context {
+  NSArray *events;
+  
+  if (context == AssemblageEvent) {
     if (!hadJob || assembleForSaveOnly)
       return;
     

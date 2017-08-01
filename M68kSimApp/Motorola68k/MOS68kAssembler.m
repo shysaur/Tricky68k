@@ -11,6 +11,13 @@
 #import "MOSMonitoredTask.h"
 
 
+@interface MOS68kAssembler ()
+
+@property (nonatomic) MOSExecutable *output;
+
+@end
+
+
 @implementation MOS68kAssembler
 
 
@@ -29,6 +36,7 @@
   NSURL *execurl;
   NSURL *linkerfile;
   NSURL *listingfile;
+  NSURL *outputfile;
   NSMutableArray *params;
   NSError *terr;
   NSDictionary *lfevent;
@@ -86,12 +94,14 @@
     goto fail;
   }
   
+  outputfile = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+  
   params = [NSMutableArray array];
   if (!([self assemblageOptions] & MOSAssemblageOptionEntryPointSymbolic))
     [params addObject:@"--entry=0x2000"];
   else
     [params addObject:@"--entry=start"];
-  [params addObjectsFromArray:@[@"-o", [[self outputFile] path], @"-T", [linkerfile path]]];
+  [params addObjectsFromArray:@[@"-o", [outputfile path], @"-T", [linkerfile path]]];
   [params addObjectsFromArray:@[[unlinkedelf path]]];
   
   [task setArguments:params];
@@ -115,6 +125,8 @@
       gotWarnings = YES;
     }
   }
+  
+  self.output = [[MOSFileBackedExecutable alloc] initWithPersistentURL:outputfile withError:nil];
   
   if (gotWarnings)
     asmResult = MOSAssemblageResultSuccessWithWarning;

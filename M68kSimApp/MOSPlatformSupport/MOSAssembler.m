@@ -62,19 +62,8 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
-- (void)setOutputFile:(NSURL*)of {
-  if ([self isAssembling] || [self isComplete])
-    [NSException raise:NSInvalidArgumentException
-                format: @"Can't change parameters after assembling."];
-  if (![of isFileURL])
-    [NSException raise:NSInvalidArgumentException
-                format:@"Assembler source file must be a local URL"];
-  outputFile = of;
-}
-
-
-- (NSURL*)outputFile {
-  return outputFile;
+- (NSURL*)output {
+  return nil;
 }
 
 
@@ -88,13 +77,13 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
-- (void)assemble {
+- (void)assembleWithCompletionHandler:(void (^)(void))done {
   if (self.isAssembling || self.isComplete)
     [NSException raise:NSInvalidArgumentException
       format:@"Already assembled once."];
-  if (![self sourceCode] || ![self outputFile])
+  if (![self sourceCode])
     [NSException raise:NSInvalidArgumentException
-      format:@"Source file and output file not specified"];
+      format:@"Source code not specified"];
   
   [self setAssembling:YES];
   
@@ -107,6 +96,8 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
     MOSAssemblageResult res = [self assembleThread];
     dispatch_async(dispatch_get_main_queue(), ^{
       [self terminateAssemblingWithResult:res];
+      if (done)
+        done();
     });
   });
 }
