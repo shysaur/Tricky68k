@@ -107,6 +107,10 @@
 		01ABE5CE1E1DA39D002E425E /* mastermind.s in Resources */ = {isa = PBXBuildFile; fileRef = 011E2AF71C9761FF0090D552 /* mastermind.s */; };
 		01ABE5CF1E1DA39D002E425E /* exponentiation.s in Resources */ = {isa = PBXBuildFile; fileRef = 0178EA9D1C9898B300F37A51 /* exponentiation.s */; };
 		01C20CA41A6726D600057D6B /* MOSPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */; };
+		01D231901F30B49300182DD2 /* MOSExecutable.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D2318E1F30B49300182DD2 /* MOSExecutable.h */; };
+		01D231911F30B49300182DD2 /* MOSExecutable.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D2318F1F30B49300182DD2 /* MOSExecutable.m */; };
+		01D231941F30B6DE00182DD2 /* MOSFileBackedExecutable.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D231921F30B6DE00182DD2 /* MOSFileBackedExecutable.h */; };
+		01D231951F30B6DE00182DD2 /* MOSFileBackedExecutable.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D231931F30B6DE00182DD2 /* MOSFileBackedExecutable.m */; };
 		01DE189F1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE189E1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m */; };
 		01E6A2781C946640002FA51A /* MOSPrintAccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E6A2761C946640002FA51A /* MOSPrintAccessoryViewController.m */; };
 		01E93C6F1A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C711A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib */; };
@@ -308,6 +312,10 @@
 		01BBDED11C962D0600B404D8 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/fibonacci.s; sourceTree = "<group>"; };
 		01C20CA11A6726D600057D6B /* MOSPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPreferencesWindowController.h; sourceTree = "<group>"; };
 		01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSPreferencesWindowController.m; sourceTree = "<group>"; };
+		01D2318E1F30B49300182DD2 /* MOSExecutable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSExecutable.h; sourceTree = "<group>"; };
+		01D2318F1F30B49300182DD2 /* MOSExecutable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSExecutable.m; sourceTree = "<group>"; };
+		01D231921F30B6DE00182DD2 /* MOSFileBackedExecutable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSFileBackedExecutable.h; sourceTree = "<group>"; };
+		01D231931F30B6DE00182DD2 /* MOSFileBackedExecutable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSFileBackedExecutable.m; sourceTree = "<group>"; };
 		01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAssembler.h; sourceTree = "<group>"; };
 		01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSAssembler.m; sourceTree = "<group>"; };
 		01DE189D1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorTouchBarDelegate.h; sourceTree = "<group>"; };
@@ -450,6 +458,10 @@
 				0152A3311C1B5FA100721666 /* MOSPlatform.m */,
 				01DA7A071C163AAC00E34AE0 /* MOSAssembler.h */,
 				01DA7A081C163AAC00E34AE0 /* MOSAssembler.m */,
+				01D2318E1F30B49300182DD2 /* MOSExecutable.h */,
+				01D2318F1F30B49300182DD2 /* MOSExecutable.m */,
+				01D231921F30B6DE00182DD2 /* MOSFileBackedExecutable.h */,
+				01D231931F30B6DE00182DD2 /* MOSFileBackedExecutable.m */,
 				0153EED61C89D82C00AA29C0 /* MOSListingDictionary.h */,
 				0153EED71C89D82C00AA29C0 /* MOSListingDictionary.m */,
 				018D72861C196063005DF500 /* MOSSimulator.h */,
@@ -771,6 +783,8 @@
 				014F9CA61E1ACE7C00E74EBB /* MOSPlatform.h in Headers */,
 				014F9CA71E1ACE8000E74EBB /* MOSAssembler.h in Headers */,
 				014F9CAA1E1ACE8B00E74EBB /* MOSSimulatorPresentation.h in Headers */,
+				01D231941F30B6DE00182DD2 /* MOSFileBackedExecutable.h in Headers */,
+				01D231901F30B49300182DD2 /* MOSExecutable.h in Headers */,
 				014F9CA81E1ACE8400E74EBB /* MOSListingDictionary.h in Headers */,
 				014F9CA91E1ACE8700E74EBB /* MOSSimulator.h in Headers */,
 				014F9CBD1E1AD2B000E74EBB /* NSUserDefaults+Archiver.h in Headers */,
@@ -1004,6 +1018,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01D231911F30B49300182DD2 /* MOSExecutable.m in Sources */,
 				014F9CBE1E1AD2B700E74EBB /* NSFileHandle+Strings.m in Sources */,
 				014F9CAE1E1ACE9900E74EBB /* MOSSimulator.m in Sources */,
 				014F9CAD1E1ACE9900E74EBB /* MOSListingDictionary.m in Sources */,
@@ -1014,6 +1029,7 @@
 				014F9CAF1E1ACE9900E74EBB /* MOSSimulatorPresentation.m in Sources */,
 				014F9CB81E1AD1C300E74EBB /* MOSNamedPipe.m in Sources */,
 				014F9CB91E1AD1C300E74EBB /* MOSError.m in Sources */,
+				01D231951F30B6DE00182DD2 /* MOSFileBackedExecutable.m in Sources */,
 				014F9CAB1E1ACE9900E74EBB /* MOSPlatform.m in Sources */,
 				014F9CC01E1AD2B700E74EBB /* NSScanner+Shorteners.m in Sources */,
 			);

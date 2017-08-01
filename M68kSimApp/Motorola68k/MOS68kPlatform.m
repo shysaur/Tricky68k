@@ -17,6 +17,11 @@
 @implementation MOS68kPlatform
 
 
+- (Class)executableClass {
+  return [MOSFileBackedExecutable class];
+}
+
+
 - (Class)assemblerClass {
   return [MOS68kAssembler class];
 }

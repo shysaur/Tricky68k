@@ -13,6 +13,7 @@
 
 @property (readonly) NSBundle *bundle;
 
+@property (readonly) Class executableClass;
 @property (readonly) Class assemblerClass;
 @property (readonly) Class simulatorClass;
 @property (readonly) Class presentationClass;

@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 #import "MOSPlatform.h"
+#import "MOSExecutable.h"
+#import "MOSFileBackedExecutable.h"
 #import "MOSAssembler.h"
 #import "MOSListingDictionary.h"
 #import "MOSSimulator.h"
