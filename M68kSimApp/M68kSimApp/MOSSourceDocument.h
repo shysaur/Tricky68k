@@ -40,7 +40,6 @@
   __weak NSResponder *lastSimViewFirstResponder;
   
   BOOL assembleForSaveOnly;
-  BOOL runWhenAssemblyComplete;
   MOSJob *lastJob;
   BOOL hadJob;
   /* Following ivars must not be modified if assembleForSaveOnly == YES: */

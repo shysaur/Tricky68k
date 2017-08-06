@@ -95,13 +95,14 @@ static void *SimulatorState = &SimulatorState;
 #pragma mark - Simulator Change
 
 
-- (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st
-    withSourceCode:(NSTextStorage*)src
-    assembledToListing:(MOSListingDictionary*)ld error:(NSError**)outerr {
+- (BOOL)setSimulatedExecutable:(MOSExecutable *)exc simulatorType:(Class)st
+  withSourceCode:(NSTextStorage*)src
+  assembledToListing:(MOSListingDictionary*)ld error:(NSError**)outerr
+{
   BOOL res, restoreSrc;
   
   restoreSrc = showingSource;
-  res = [self setSimulatedExecutable:url simulatorType:st error:outerr];
+  res = [self setSimulatedExecutable:exc simulatorType:st error:outerr];
   if (res) {
     source = src;
     listing = ld;
@@ -112,12 +113,12 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st error:(NSError**)outerr {
+- (BOOL)setSimulatedExecutable:(MOSExecutable *)exc simulatorType:(Class)st
+  error:(NSError**)outerr
+{
   NSError *tmpe;
   
-  simExec = [[MOSFileBackedExecutable alloc] initWithPersistentURL:url withError:outerr];
-  if (!simExec)
-    return NO;
+  simExec = exc;
   source = nil;
   listing = nil;
   [self showDisassembly:nil];
@@ -135,8 +136,8 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (NSURL*)simulatedExecutable {
-  return [simExec executableFile];
+- (MOSExecutable *)simulatedExecutable {
+  return simExec;
 }
 
 

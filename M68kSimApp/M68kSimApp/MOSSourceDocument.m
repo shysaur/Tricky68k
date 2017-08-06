@@ -55,7 +55,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 @property (nonatomic) BOOL simulatorMode;
 
 @property (nonatomic) MOSAssembler *assembler;
-@property (nonatomic) NSURL *assemblyOutput;
+@property (nonatomic) MOSExecutable *assemblyOutput;
 
 @property (nonatomic) MOSSimulatorTouchBarDelegate *touchBarDelegate;
 
@@ -271,25 +271,21 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 - (IBAction)switchToSimulator:(id)sender {
   NSError *err;
   NSView *contview;
-  NSURL *oldSimExec;
   NSResponder *oldresp;
   Class simType;
   
   if (![self simulatorModeSwitchAllowed])
     return;
 
-  oldSimExec = [simVc simulatedExecutable];
-  if (![oldSimExec isEqual:self.assemblyOutput]) {
+  if ([simVc simulatedExecutable] != self.assemblyOutput) {
     simType = [platform simulatorClass];
-    if (![simVc setSimulatedExecutable:self.assemblyOutput simulatorType:simType withSourceCode:lastSource assembledToListing:lastListing error:&err]) {
+    if (![simVc setSimulatedExecutable:self.assemblyOutput simulatorType:simType
+          withSourceCode:lastSource assembledToListing:lastListing error:&err]) {
       /* Keep simulator in limbo, and force re-assembly of new file for next time */
       self.assemblyOutput = nil;
       [self presentError:err];
       return;
     }
-    
-    if (oldSimExec)
-      unlink([oldSimExec fileSystemRepresentation]);
   }
   
   [self breakpointsShouldSyncToSimulator:nil];
@@ -360,18 +356,27 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 
 
 - (IBAction)assembleAndRun:(id)sender {
-  runWhenAssemblyComplete = YES;
   if (self.simulatorMode)
     [self switchToEditor:nil];
-  [self assembleInBackground];
+  [self assembleInBackgroundWithCompletionHandler:^(MOSAssemblageResult asmres) {
+    if (asmres != MOSAssemblageResultFailure) {
+      [self switchToSimulator:self];
+      /* Since we are changing simulator executable, validation of toolbar
+       * items will change, even if no events did occur. */
+      [[docWindow toolbar] validateVisibleItems];
+    } else {
+      [(MOSAppDelegate*)[NSApp delegate] openJobsWindow:self];
+    }
+  }];
 }
 
 
 - (IBAction)assemble:(id)sender {
-  runWhenAssemblyComplete = NO;
   if (self.simulatorMode)
     [self switchToEditor:nil];
-  [self assembleInBackground];
+  [self assembleInBackgroundWithCompletionHandler:^(MOSAssemblageResult asmres) {
+    [(MOSAppDelegate*)[NSApp delegate] openJobsWindow:self];
+  }];
 }
 
 
@@ -382,26 +387,44 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [sp setAllowedFileTypes:@[@"o"]];
   [sp setAllowsOtherFileTypes:YES];
   [sp setCanSelectHiddenExtension:YES];
-  [sp beginSheetModalForWindow:docWindow completionHandler:^(NSInteger result){
+  [sp beginSheetModalForWindow:docWindow completionHandler:^(NSInteger result) {
     if (result == NSFileHandlingPanelOKButton) {
-      runWhenAssemblyComplete = NO;
       assembleForSaveOnly = YES;
-      [self assembleInBackgroundToURL:[sp URL] withListing:YES];
+      
+      [self assembleInBackgroundWithListing:NO completionHandler:^void
+      (MOSAssemblageResult asmres, MOSExecutable *exc, MOSListingDictionary *ld) {
+        if (!exc) {
+          [(MOSAppDelegate*)[NSApp delegate] openJobsWindow:self];
+          return;
+        }
+        NSError *err;
+        if (![exc writeToURL:sp.URL withError:&err])
+          [self presentError:err];
+      }];
     }
   }];
 }
 
 
-- (void)assembleInBackground {
+- (void)assembleInBackgroundWithCompletionHandler:(void(^)(MOSAssemblageResult
+  asmres))completionHandler
+{
   assembleForSaveOnly = NO;
-  unlink([self.assemblyOutput fileSystemRepresentation]);
-  self.assemblyOutput = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
+  self.assemblyOutput = nil;
   
-  [self assembleInBackgroundToURL:self.assemblyOutput withListing:!!breakptdel];
+  [self assembleInBackgroundWithListing:!!breakptdel completionHandler:^void
+  (MOSAssemblageResult asmres, MOSExecutable *exc, MOSListingDictionary *ld) {
+    self.assemblyOutput = exc;
+    lastListing = ld;
+    completionHandler(asmres);
+  }];
 }
 
 
-- (void)assembleInBackgroundToURL:(NSURL *)outurl withListing:(BOOL)wlist {
+- (void)assembleInBackgroundWithListing:(BOOL)wlist completionHandler:(void (^)
+  (MOSAssemblageResult result, MOSExecutable *exc, MOSListingDictionary *ld))
+  completionHandler
+{
   NSUserDefaults *ud;
   MOSAssemblageOptions opts;
   MOSJobStatusManager *jsm;
@@ -451,42 +474,27 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ?
     MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
   
-  [self.assembler setProduceListingDictionary:wlist];
+  if ([self.assembler respondsToSelector:@selector(listingDictionary)])
+    [self.assembler setProduceListingDictionary:wlist];
   [self.assembler setSourceCode:sourceToAssemble];
   [self.assembler setJobStatus:lastJob];
   [self.assembler setAssemblageOptions:opts];
   
   [self.assembler assembleWithCompletionHandler:^{
-    MOSAssemblageResult asmres;
+    MOSAssemblageResult asmres = [self.assembler assemblageResult];
     
-    asmres = [self.assembler assemblageResult];
-    MOSExecutable *exc = [self.assembler output];
-    if (exc) {
-      [exc writeToURL:outurl withError:nil];
-    }
-    
-    if (!assembleForSaveOnly) {
-      if (asmres == MOSAssemblageResultFailure) {
-        self.assemblyOutput = nil;
-        lastListing = nil;
-      } else {
-        if ([self.assembler respondsToSelector:@selector(listingDictionary)])
-          lastListing = [self.assembler listingDictionary];
-        else
-          lastListing = nil;
-      }
+    MOSExecutable *exc;
+    MOSListingDictionary *list;
+    if (asmres != MOSAssemblageResultFailure) {
+      exc = [self.assembler output];
+      if ([self.assembler respondsToSelector:@selector(listingDictionary)] && wlist)
+        list = [self.assembler listingDictionary];
+      else
+        list = nil;
     }
     
     self.assembler = nil;
-    
-    if (asmres != MOSAssemblageResultFailure && runWhenAssemblyComplete) {
-      [self switchToSimulator:self];
-      /* Since we are changing simulator executable, validation of toolbar
-       * items will change, even if no events did occur. */
-      [[docWindow toolbar] validateVisibleItems];
-    } else {
-      [(MOSAppDelegate*)[NSApp delegate] openJobsWindow:self];
-    }
+    completionHandler(asmres, exc, list);
   }];
 }
 
@@ -605,10 +613,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [simVc pause:self];
   simView = nil;
   simVc = nil;
-  
-  if (self.assemblyOutput)
-    unlink([self.assemblyOutput fileSystemRepresentation]);
-  
   [super close];
 }
 

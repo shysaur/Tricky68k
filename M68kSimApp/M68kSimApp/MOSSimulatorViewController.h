@@ -25,7 +25,7 @@ enum {
 @class MOSTeletypeViewDelegate;
 @class MOSSimBrkptWindowController;
 @class MOSListingDictionary;
-@class MOSFileBackedExecutable;
+@class MOSExecutable;
 
 
 @protocol MOSSimulatorViewParentWindowDelegate <NSWindowDelegate>
@@ -40,7 +40,7 @@ enum {
 
 @interface MOSSimulatorViewController : NSViewController {
   MOSSimulator *simProxy;
-  MOSFileBackedExecutable *simExec;
+  MOSExecutable *simExec;
   NSTextStorage *source;
   MOSListingDictionary *listing;
   
@@ -67,12 +67,12 @@ enum {
   MOSSimBrkptWindowController *brkptWc;
 }
 
-- (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st
+- (BOOL)setSimulatedExecutable:(MOSExecutable *)exc simulatorType:(Class)st
     error:(NSError**)outerr;
-- (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st
+- (BOOL)setSimulatedExecutable:(MOSExecutable *)exc simulatorType:(Class)st
     withSourceCode:(NSTextStorage*)src
     assembledToListing:(MOSListingDictionary*)ld error:(NSError**)outerr;
-- (NSURL*)simulatedExecutable;
+- (MOSExecutable *)simulatedExecutable;
 - (void)setSimulatorProxy:(MOSSimulator*)sp;
 - (MOSSimulator*)simulatorProxy;
 
