@@ -7,7 +7,7 @@
 //
 
 #import "MOSFileBackedExecutable.h"
-#import "NSURL+TemporaryFile.h"
+#import "PlatformSupport.h"
 
 
 @implementation MOSFileBackedExecutable
@@ -17,6 +17,7 @@
 {
   self = [super init];
   _executableFile = rep;
+  MOSDbgLog(@"MOSFileBackedExecutable: acquired %@", rep);
   return self;
 }
 
@@ -27,8 +28,10 @@
   NSFileManager *fm = [NSFileManager defaultManager];
   _executableFile = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
   BOOL res = [fm copyItemAtURL:rep toURL:_executableFile error:errptr];
-  if (res)
+  if (res) {
+    MOSDbgLog(@"MOSFileBackedExecutable: created %@ (from %@)", _executableFile, rep);
     return self;
+  }
   return nil;
 }
 
@@ -49,6 +52,7 @@
 - (void)dealloc
 {
   unlink([self.executableFile fileSystemRepresentation]);
+  MOSDbgLog(@"MOSFileBackedExecutable: deleted %@", self.executableFile);
 }
 
 
