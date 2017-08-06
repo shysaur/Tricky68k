@@ -60,8 +60,8 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
       "generic simulator IPC errors (no options are given)")};
   notelf = @{
     NSLocalizedDescriptionKey: invalidex,
-    NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"The file you're "
-      "trying to open is not a valid Motorola 68000 32-bit big-endian "
+    NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"The file "
+      "you're trying to open is not a valid Motorola 68000 32-bit big-endian "
       "executable ELF file. It has probably been made for another "
       "architecture.", @"Recovery suggestion for not opening a valid ELF")};
   
@@ -71,10 +71,10 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
     @(299): @{
       NSLocalizedDescriptionKey: MOSPlatformLocalized(@"Segmentation fault!",
         @"Error description when the user program segmentation faults"),
-      NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"Your program "
-        "has accessed a memory area not declared with a DS or DC directive, or "
-        "a stack overflow occurred.", @"Recovery suggestion for a segmentation "
-        "fault in the simulated program")},
+      NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"Your "
+        "program has accessed a memory area not declared with a DS or DC "
+        "directive, or a stack overflow occurred.", @"Recovery suggestion for "
+        "a segmentation fault in the simulated program")},
     @(501): notelf,
     @(502): notelf,
     @(503): notelf,
@@ -82,8 +82,8 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
       NSLocalizedDescriptionKey: MOSPlatformLocalized(@"The entry point is "
         "missing", @"Error description when the ELF file's entry point is "
         "NULL"),
-      NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"To make the "
-        "entry point available, declare it as a public symbol using the "
+      NSLocalizedRecoverySuggestionErrorKey: MOSPlatformLocalized(@"To make "
+        "the entry point available, declare it as a public symbol using the "
         "\"public\" directive, or select \"Use fixed entry point\" in the "
         "assembler preferences.", @"Recovery suggestion for fixing a missing "
         "entry point")},
