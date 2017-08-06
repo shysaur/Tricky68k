@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Daniele Cattaneo. 
 //
 
+#import "PlatformSupport.h"
 #import "MOSSimulatorViewController.h"
-#import "MOSSimulator.h"
-#import "MOSSimulatorPresentation.h"
 #import "MOSSimDumpDataSource.h"
 #import "MOSSimDisasmDataSource.h"
 #import "MOSSimRegistersDataSource.h"
@@ -16,7 +15,6 @@
 #import "MOSTeletypeViewDelegate.h"
 #import "MOSSimBrkptWindowController.h"
 #import "MOSMutableBreakpoint.h"
-#import "MOSListingDictionary.h"
 
 
 NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
@@ -117,7 +115,9 @@ static void *SimulatorState = &SimulatorState;
 - (BOOL)setSimulatedExecutable:(NSURL*)url simulatorType:(Class)st error:(NSError**)outerr {
   NSError *tmpe;
   
-  simExec = url;
+  simExec = [[MOSFileBackedExecutable alloc] initWithPersistentURL:url withError:outerr];
+  if (!simExec)
+    return NO;
   source = nil;
   listing = nil;
   [self showDisassembly:nil];
@@ -136,7 +136,7 @@ static void *SimulatorState = &SimulatorState;
 
 
 - (NSURL*)simulatedExecutable {
-  return simExec;
+  return [simExec executableFile];
 }
 
 
@@ -153,7 +153,7 @@ static void *SimulatorState = &SimulatorState;
   
   breakpoints = [simProxy breakpointList];
   oldSimProxy = simProxy;
-  newSimProxy = [[st alloc] initWithExecutableURL:simExec error:&res];
+  newSimProxy = [[st alloc] initWithExecutable:simExec error:&res];
   [newSimProxy addBreakpoints:breakpoints];
   [self setSimulatorProxy:newSimProxy];
   [oldSimProxy kill];
@@ -169,7 +169,7 @@ static void *SimulatorState = &SimulatorState;
   } @finally {}
   
   simProxy = sp;
-  simExec = [simProxy executableURL];
+  simExec = (MOSFileBackedExecutable *)[simProxy executable];
   [self updateSimulatorMaxClockFrequency];
   
   [simProxy addObserver:self forKeyPath:@"simulatorState"

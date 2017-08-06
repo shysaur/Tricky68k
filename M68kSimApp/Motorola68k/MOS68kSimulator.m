@@ -97,13 +97,22 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
 }
 
 
-- initWithExecutableURL:(NSURL*)url error:(NSError **)err {
+- (instancetype)initWithExecutable:(MOSExecutable *)exec error:(NSError **)err {
   NSFileHandle *fromSim;
   __weak MOS68kSimulator *weakSelf;
   NSError *tmpe;
   
-  weakSelf = self = [super init];
-  if (!self) return nil;
+  weakSelf = self = [super initWithExecutable:exec error:err];
+  if (!self)
+    return nil;
+  if (![exec isKindOfClass:[MOSFileBackedExecutable class]]) {
+    if (err)
+      *err = [NSError errorWithDomain:NSPOSIXErrorDomain code:EINVAL userInfo:nil];
+    return nil;
+  }
+  
+  MOSFileBackedExecutable *e = (MOSFileBackedExecutable *)exec;
+  NSURL *url = [e executableFile];
   
   proxy = [[MOS68kSimulatorProxy alloc] initWithExecutableURL:url error:&tmpe];
   if (err) *err = tmpe;
@@ -136,11 +145,6 @@ static void * SimulatorStateChanged = &SimulatorStateChanged;
   }
   
   return self;
-}
-
-
-- (NSURL*)executableURL {
-  return [proxy executableURL];
 }
 
 

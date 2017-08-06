@@ -18,14 +18,15 @@ typedef enum {
 
 
 @class MOSSimulatorPresentation;
+@class MOSExecutable;
 
 
 @protocol MOSSimulatorProtocol <NSObject>
 
 @required
 
-- initWithExecutableURL:(NSURL*)url error:(NSError **)err;
-- (NSURL*)executableURL;
+- (instancetype)initWithExecutable:(MOSExecutable *)exec error:(NSError **)err;
+- (MOSExecutable *)executable;
 
 - (MOSSimulatorPresentation *)presentation;
 
@@ -67,8 +68,6 @@ typedef enum {
 @end
 
 
-@interface MOSSimulator : NSObject <MOSSimulatorProtocol> {
-  NSURL *exec;
-}
+@interface MOSSimulator : NSObject <MOSSimulatorProtocol>
 
 @end

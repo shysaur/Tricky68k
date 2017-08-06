@@ -16,19 +16,22 @@
 }
 
 
+@interface MOSSimulator ()
+
+@property (readonly) MOSExecutable *executable;
+
+@end
+
+
 @implementation MOSSimulator
 
 
-- initWithExecutableURL:(NSURL*)url error:(NSError **)err {
+- (instancetype)initWithExecutable:(MOSExecutable *)exec error:(NSError *__autoreleasing *)err {
   self = [super init];
-  exec = url;
+  _executable = exec;
   return self;
 }
 
-
-- (NSURL*)executableURL {
-  return exec;
-}
 
 - (MOSSimulatorPresentation *)presentation
   SUBCLASS_MUST_IMPLEMENT(nil);

@@ -25,6 +25,7 @@ enum {
 @class MOSTeletypeViewDelegate;
 @class MOSSimBrkptWindowController;
 @class MOSListingDictionary;
+@class MOSFileBackedExecutable;
 
 
 @protocol MOSSimulatorViewParentWindowDelegate <NSWindowDelegate>
@@ -39,7 +40,7 @@ enum {
 
 @interface MOSSimulatorViewController : NSViewController {
   MOSSimulator *simProxy;
-  NSURL *simExec;
+  MOSFileBackedExecutable *simExec;
   NSTextStorage *source;
   MOSListingDictionary *listing;
   

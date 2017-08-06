@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Daniele Cattaneo. 
 //
 
+#import "PlatformSupport.h"
 #import "MOSExecutableDocument.h"
 #import "MOSSimulatorViewController.h"
-#import "MOSSimulator.h"
-#import "MOSPlatform.h"
 #import "MOSPlatformManager.h"
 #import "MOSSimulatorTouchBarDelegate.h"
 
@@ -70,8 +69,12 @@
   NSError *tmpe;
   
   platform = [[MOSPlatformManager sharedManager] defaultPlatform];
+  MOSExecutable *exc = [[[platform executableClass] alloc]
+                        initWithURL:url withError:outError];
+  if (!exc)
+    return NO;
   simProxy = [[[platform simulatorClass] alloc]
-              initWithExecutableURL:url error:&tmpe];
+              initWithExecutable:exc error:&tmpe];
   if (tmpe) {
     if (outError) *outError = tmpe;
     return NO;
