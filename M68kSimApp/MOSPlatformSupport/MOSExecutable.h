@@ -11,7 +11,7 @@
 
 @interface MOSExecutable : NSObject
 
-- (instancetype)initWithURL:(NSURL *)rep withError:(NSError **)errptr;
-- (BOOL)writeToURL:(NSURL *)outf withError:(NSError **)errptr;
+- (instancetype)initWithURL:(NSURL *)rep error:(NSError **)errptr;
+- (BOOL)writeToURL:(NSURL *)outf error:(NSError **)errptr;
 
 @end

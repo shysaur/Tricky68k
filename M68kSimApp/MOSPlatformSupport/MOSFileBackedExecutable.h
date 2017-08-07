@@ -11,7 +11,7 @@
 
 @interface MOSFileBackedExecutable : MOSExecutable
 
-- (instancetype)initWithPersistentURL:(NSURL *)rep withError:(NSError **)errptr;
+- (instancetype)initWithPersistentURL:(NSURL *)rep error:(NSError **)errptr;
 
 @property (nonatomic, readonly) NSURL *executableFile;
 

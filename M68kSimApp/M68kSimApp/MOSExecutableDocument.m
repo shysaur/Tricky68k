@@ -70,7 +70,7 @@
   
   platform = [[MOSPlatformManager sharedManager] defaultPlatform];
   MOSExecutable *exc = [[[platform executableClass] alloc]
-                        initWithURL:url withError:outError];
+                        initWithURL:url error:outError];
   if (!exc)
     return NO;
   simProxy = [[[platform simulatorClass] alloc]

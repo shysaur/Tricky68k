@@ -126,7 +126,7 @@
     }
   }
   
-  self.output = [[MOSFileBackedExecutable alloc] initWithPersistentURL:outputfile withError:nil];
+  self.output = [[MOSFileBackedExecutable alloc] initWithPersistentURL:outputfile error:nil];
   
   if (gotWarnings)
     asmResult = MOSAssemblageResultSuccessWithWarning;

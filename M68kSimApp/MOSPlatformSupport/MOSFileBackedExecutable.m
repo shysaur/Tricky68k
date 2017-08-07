@@ -13,7 +13,7 @@
 @implementation MOSFileBackedExecutable
 
 
-- (instancetype)initWithPersistentURL:(NSURL *)rep withError:(NSError **)errptr
+- (instancetype)initWithPersistentURL:(NSURL *)rep error:(NSError **)errptr
 {
   self = [super init];
   _executableFile = rep;
@@ -22,7 +22,7 @@
 }
 
 
-- (instancetype)initWithURL:(NSURL *)rep withError:(NSError **)errptr
+- (instancetype)initWithURL:(NSURL *)rep error:(NSError **)errptr
 {
   self = [super init];
   NSFileManager *fm = [NSFileManager defaultManager];
@@ -36,7 +36,7 @@
 }
 
 
-- (BOOL)writeToURL:(NSURL *)outf withError:(NSError **)errptr
+- (BOOL)writeToURL:(NSURL *)outf error:(NSError **)errptr
 {
   /* Q: Why are you using NSData instead of NSFileManager or copyfile(3)? This
    *    way you are missing out on all the APFS awesomeness!

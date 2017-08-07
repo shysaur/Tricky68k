@@ -12,13 +12,13 @@
 @implementation MOSExecutable
 
 
-- (instancetype)initWithURL:(NSURL *)rep withError:(NSError **)errptr
+- (instancetype)initWithURL:(NSURL *)rep error:(NSError **)errptr
 {
   return [super init];
 }
 
 
-- (BOOL)writeToURL:(NSURL *)outf withError:(NSError **)errptr
+- (BOOL)writeToURL:(NSURL *)outf error:(NSError **)errptr
 {
   [NSException raise:NSGenericException format:@"MOSExecutable is an abstract class"];
   if (errptr)
