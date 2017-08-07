@@ -124,4 +124,14 @@ static void *TouchBarVisibilityContext = &TouchBarVisibilityContext;
 }
 
 
+#pragma mark - Error Presentation
+
+
+- (void)presentDocumentModalError:(NSError *)e
+{
+  [self presentError:e modalForWindow:[self windowForSheet]
+    delegate:nil didPresentSelector:nil contextInfo:NULL];
+}
+
+
 @end

@@ -15,4 +15,6 @@
 
 - (NSTouchBar *)makeTouchBar;
 
+- (void)presentDocumentModalError:(NSError *)e;
+
 @end

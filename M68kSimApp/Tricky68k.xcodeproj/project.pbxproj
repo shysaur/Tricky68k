@@ -743,7 +743,7 @@
 				015094731A6DA7050024D28F /* MOSProgressIndicator.m */,
 				0108A2AD1AE6FE4500085E5F /* MOSDescribeFontTransformer.h */,
 				0108A2AE1AE6FE4500085E5F /* MOSDescribeFontTransformer.m */,
-				01EBAA271AB9F9490076AD02 /* Transient Documents & TouchBar */,
+				01EBAA271AB9F9490076AD02 /* MOSDocument */,
 			);
 			name = AppKit;
 			sourceTree = "<group>";
@@ -757,7 +757,7 @@
 			name = Platform;
 			sourceTree = "<group>";
 		};
-		01EBAA271AB9F9490076AD02 /* Transient Documents & TouchBar */ = {
+		01EBAA271AB9F9490076AD02 /* MOSDocument */ = {
 			isa = PBXGroup;
 			children = (
 				01EBAA211AB973DF0076AD02 /* MOSDocument.h */,
@@ -765,7 +765,7 @@
 				01EBAA241AB9D9140076AD02 /* MOSDocumentController.h */,
 				01EBAA251AB9D9140076AD02 /* MOSDocumentController.m */,
 			);
-			name = "Transient Documents & TouchBar";
+			name = MOSDocument;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

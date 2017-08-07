@@ -283,7 +283,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
           withSourceCode:lastSource assembledToListing:lastListing error:&err]) {
       /* Keep simulator in limbo, and force re-assembly of new file for next time */
       self.assemblyOutput = nil;
-      [self presentError:err];
+      [self presentDocumentModalError:err];
       return;
     }
   }
@@ -398,8 +398,8 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
           return;
         }
         NSError *err;
-        if (![exc writeToURL:sp.URL withError:&err])
-          [self presentError:err];
+        if (![exc writeToURL:sp.URL error:&err])
+          [self presentDocumentModalError:err];
       }];
     }
   }];
