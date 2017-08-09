@@ -6,20 +6,15 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXContainerItemProxy section */
-		0179F60A1C9AFFEB007BED1B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 018F65361A60167E005BA00E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 018F65501A602050005BA00E;
-			remoteInfo = ld;
-		};
-/* End PBXContainerItemProxy section */
+/* Begin PBXBuildFile section */
+		01F18AA01F38DFB6008AA98F /* dummy.c in Sources */ = {isa = PBXBuildFile; fileRef = 01F18A9E1F38DFB5008AA98F /* dummy.c */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0179F6021C9AFFD1007BED1B /* m68k-elf-ld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "m68k-elf-ld"; sourceTree = BUILT_PRODUCTS_DIR; };
 		018F65451A601C6A005BA00E /* binutils-gdb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "binutils-gdb"; sourceTree = "<group>"; };
 		018F65561A6036E1005BA00E /* buildscript.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = buildscript.sh; sourceTree = "<group>"; };
+		01F18A9E1F38DFB5008AA98F /* dummy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = dummy.c; path = "m68k-elf-ld/dummy.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -34,6 +29,7 @@
 		018F65351A60167E005BA00E = {
 			isa = PBXGroup;
 			children = (
+				01F18A9E1F38DFB5008AA98F /* dummy.c */,
 				018F65561A6036E1005BA00E /* buildscript.sh */,
 				018F65451A601C6A005BA00E /* binutils-gdb */,
 				0179F6031C9AFFD1007BED1B /* Products */,
@@ -42,33 +38,17 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXLegacyTarget section */
-		018F65501A602050005BA00E /* ld */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "--target=m68k-elf --disable-werror";
-			buildConfigurationList = 018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "ld" */;
-			buildPhases = (
-			);
-			buildToolPath = "$(SRCROOT)/buildscript.sh";
-			buildWorkingDirectory = "$(BUILDROOT)";
-			dependencies = (
-			);
-			name = ld;
-			passBuildSettingsInEnvironment = 1;
-			productName = binutils;
-		};
-/* End PBXLegacyTarget section */
-
 /* Begin PBXNativeTarget section */
 		0179F6011C9AFFD1007BED1B /* m68k-elf-ld */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0179F6071C9AFFD2007BED1B /* Build configuration list for PBXNativeTarget "m68k-elf-ld" */;
 			buildPhases = (
+				01F18A9D1F38DF78008AA98F /* Sources */,
+				01F18AA11F38E059008AA98F /* Overwrite Dummy With Real Product */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0179F60B1C9AFFEB007BED1B /* PBXTargetDependency */,
 			);
 			name = "m68k-elf-ld";
 			productName = "m68k-elf-ld";
@@ -87,9 +67,6 @@
 					0179F6011C9AFFD1007BED1B = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
-					018F65501A602050005BA00E = {
-						CreatedOnToolsVersion = 6.1.1;
-					};
 				};
 			};
 			buildConfigurationList = 018F65391A60167E005BA00E /* Build configuration list for PBXProject "binutils" */;
@@ -104,19 +81,38 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				018F65501A602050005BA00E /* ld */,
 				0179F6011C9AFFD1007BED1B /* m68k-elf-ld */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXTargetDependency section */
-		0179F60B1C9AFFEB007BED1B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 018F65501A602050005BA00E /* ld */;
-			targetProxy = 0179F60A1C9AFFEB007BED1B /* PBXContainerItemProxy */;
+/* Begin PBXShellScriptBuildPhase section */
+		01F18AA11F38E059008AA98F /* Overwrite Dummy With Real Product */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Overwrite Dummy With Real Product";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "cd \"$BUILDROOT\"\necho Calling buildscript.sh\n\"$SRCROOT\"/buildscript.sh --target=m68k-elf --disable-werror\n";
 		};
-/* End PBXTargetDependency section */
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		01F18A9D1F38DF78008AA98F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01F18AA01F38DFB6008AA98F /* dummy.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		0179F6081C9AFFD2007BED1B /* Debug */ = {
@@ -248,22 +244,6 @@
 			};
 			name = Release;
 		};
-		018F65521A602050005BA00E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CFLAGS = "-g -O0";
-				CXXFLAGS = "-g -O0";
-			};
-			name = Debug;
-		};
-		018F65531A602050005BA00E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CFLAGS = "-O3";
-				CXXFLAGS = "-O3";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -281,15 +261,6 @@
 			buildConfigurations = (
 				018F653B1A60167E005BA00E /* Debug */,
 				018F653C1A60167E005BA00E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		018F65511A602050005BA00E /* Build configuration list for PBXLegacyTarget "ld" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				018F65521A602050005BA00E /* Debug */,
-				018F65531A602050005BA00E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
