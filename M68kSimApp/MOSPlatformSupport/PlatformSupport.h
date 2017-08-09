@@ -29,7 +29,11 @@
 #define MOSPlatformLocalized(text, desc) \
   [[NSBundle bundleForClass:[self class]] localizedStringForKey:text value:nil table:nil]
 
-#define MOSDbgLog(format, ...) { \
-  if (DEBUG) NSLog((format), __VA_ARGS__); }
+#ifdef DEBUG
+#define MOSDbgLog(format, ...) NSLog((format), __VA_ARGS__)
+#else
+#define MOSDbgLog(format, ...)
+#endif
+
 
 
