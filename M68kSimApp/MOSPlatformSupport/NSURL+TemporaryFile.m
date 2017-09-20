@@ -30,7 +30,7 @@
   do {
     uuid = [[NSUUID UUID] UUIDString];
     path = [NSString stringWithFormat:@"%@/%@.%@.%@", tempdir, bundleid, uuid, ext];
-  } while ([fm fileExistsAtPath:path isDirectory:NO]);
+  } while ([fm fileExistsAtPath:path isDirectory:nil]);
   return [[NSURL alloc] initFileURLWithPath:path isDirectory:NO];
 }
 
