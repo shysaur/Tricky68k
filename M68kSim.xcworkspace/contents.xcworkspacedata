@@ -8,19 +8,10 @@
       location = "group:M68kSimApp/Tricky68k.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Motorola68kPlatform/Motorola68kPlatform.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Fragaria/Fragaria.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:binutils/binutils.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:vasm/vasm.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:m68ksim/m68ksim.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Musashi/Musashi.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Sparkle/Sparkle.xcodeproj">

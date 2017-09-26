@@ -7,7 +7,7 @@
 //
 
 #import "MOSMonitoredTask.h"
-#import "NSFileHandle+Strings.h"
+#import "PlatformSupport.h"
 
 
 @implementation MOSMonitoredTask

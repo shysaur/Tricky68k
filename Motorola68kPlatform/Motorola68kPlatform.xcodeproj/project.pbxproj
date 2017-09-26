@@ -1,0 +1,747 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01D74E971F7A561000BD52A0 /* MOS68kPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E621F7A561000BD52A0 /* MOS68kPlatform.m */; };
+		01D74E981F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E641F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.m */; };
+		01D74E991F7A561000BD52A0 /* MOS68kAssemblerPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E661F7A561000BD52A0 /* MOS68kAssemblerPrefView.xib */; };
+		01D74E9A1F7A561000BD52A0 /* MOS68kSimulatorPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E681F7A561000BD52A0 /* MOS68kSimulatorPrefViewController.m */; };
+		01D74E9B1F7A561000BD52A0 /* MOS68kSimulatorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E6A1F7A561000BD52A0 /* MOS68kSimulatorPrefView.xib */; };
+		01D74E9C1F7A561000BD52A0 /* MOS68kAssembler.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E6D1F7A561000BD52A0 /* MOS68kAssembler.m */; };
+		01D74E9D1F7A561000BD52A0 /* MOSMonitoredTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E6F1F7A561000BD52A0 /* MOSMonitoredTask.m */; };
+		01D74E9E1F7A561000BD52A0 /* MOS68kListingDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E711F7A561000BD52A0 /* MOS68kListingDictionary.m */; };
+		01D74E9F1F7A561000BD52A0 /* MOS68kSimulatorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E741F7A561000BD52A0 /* MOS68kSimulatorProxy.m */; };
+		01D74EA01F7A561000BD52A0 /* MOS68kSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E761F7A561000BD52A0 /* MOS68kSimulator.m */; };
+		01D74EA11F7A561000BD52A0 /* MOS68kSimulatorPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E781F7A561000BD52A0 /* MOS68kSimulatorPresentation.m */; };
+		01D74EA31F7A561000BD52A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E7C1F7A561000BD52A0 /* Localizable.strings */; };
+		01D74EA41F7A561000BD52A0 /* VasmTemplate.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E7E1F7A561000BD52A0 /* VasmTemplate.s */; };
+		01D74EA51F7A561000BD52A0 /* ExamplesList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E811F7A561000BD52A0 /* ExamplesList.plist */; };
+		01D74EA61F7A561000BD52A0 /* helloworld.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E831F7A561000BD52A0 /* helloworld.s */; };
+		01D74EA71F7A561000BD52A0 /* expression.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E851F7A561000BD52A0 /* expression.s */; };
+		01D74EA81F7A561000BD52A0 /* reverser.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E871F7A561000BD52A0 /* reverser.s */; };
+		01D74EA91F7A561000BD52A0 /* tic-tac-toe.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E891F7A561000BD52A0 /* tic-tac-toe.s */; };
+		01D74EAA1F7A561000BD52A0 /* digits.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E8B1F7A561000BD52A0 /* digits.s */; };
+		01D74EAB1F7A561000BD52A0 /* selection-sort.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E8D1F7A561000BD52A0 /* selection-sort.s */; };
+		01D74EAC1F7A561000BD52A0 /* fibonacci.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E8F1F7A561000BD52A0 /* fibonacci.s */; };
+		01D74EAD1F7A561000BD52A0 /* mastermind.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E911F7A561000BD52A0 /* mastermind.s */; };
+		01D74EAE1F7A561000BD52A0 /* exponentiation.s in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E931F7A561000BD52A0 /* exponentiation.s */; };
+		01D74EB11F7A571900BD52A0 /* PlatformSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D74EB01F7A571900BD52A0 /* PlatformSupport.framework */; };
+		01D74EED1F7A69F100BD52A0 /* m68ksim in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 01D74EE41F7A5D7600BD52A0 /* m68ksim */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		01D74EEE1F7A69F100BD52A0 /* m68k-elf-ld in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 01D74ED91F7A5D2F00BD52A0 /* m68k-elf-ld */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		01D74EEF1F7A69F100BD52A0 /* vasmm68k-mot in Install Supporting Executables */ = {isa = PBXBuildFile; fileRef = 01D74EDE1F7A5D3800BD52A0 /* vasmm68k-mot */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		01D74ED81F7A5D2F00BD52A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01D74EB71F7A586400BD52A0 /* binutils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0179F6021C9AFFD1007BED1B;
+			remoteInfo = "m68k-elf-ld";
+		};
+		01D74EDD1F7A5D3800BD52A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01D74EBA1F7A586400BD52A0 /* vasm.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 015526A61A5F320D00096023;
+			remoteInfo = "vasmm68k-mot";
+		};
+		01D74EE31F7A5D7600BD52A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01D74EDF1F7A5D7400BD52A0 /* m68ksim.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01263D231A503D4F00996230;
+			remoteInfo = m68ksim;
+		};
+		01D74EE91F7A5D9000BD52A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01D74EC01F7A586400BD52A0 /* Musashi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01705D391A4F2B0D00EE05B2;
+			remoteInfo = Musashi;
+		};
+		01D74EEB1F7A5D9000BD52A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01D74EC01F7A586400BD52A0 /* Musashi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01705D461A4F3BB700EE05B2;
+			remoteInfo = m68kmake;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		01D74EB21F7A578400BD52A0 /* Install Supporting Executables */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				01D74EED1F7A69F100BD52A0 /* m68ksim in Install Supporting Executables */,
+				01D74EEE1F7A69F100BD52A0 /* m68k-elf-ld in Install Supporting Executables */,
+				01D74EEF1F7A69F100BD52A0 /* vasmm68k-mot in Install Supporting Executables */,
+			);
+			name = "Install Supporting Executables";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		014553131F7A559500BA1060 /* Motorola68k.mosplatform */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Motorola68k.mosplatform; sourceTree = BUILT_PRODUCTS_DIR; };
+		01D74E611F7A561000BD52A0 /* MOS68kPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kPlatform.h; sourceTree = "<group>"; };
+		01D74E621F7A561000BD52A0 /* MOS68kPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kPlatform.m; sourceTree = "<group>"; };
+		01D74E631F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kAssemblerPrefViewController.h; sourceTree = "<group>"; };
+		01D74E641F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kAssemblerPrefViewController.m; sourceTree = "<group>"; };
+		01D74E651F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOS68kAssemblerPrefView.xib; sourceTree = "<group>"; };
+		01D74E671F7A561000BD52A0 /* MOS68kSimulatorPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kSimulatorPrefViewController.h; sourceTree = "<group>"; };
+		01D74E681F7A561000BD52A0 /* MOS68kSimulatorPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kSimulatorPrefViewController.m; sourceTree = "<group>"; };
+		01D74E691F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOS68kSimulatorPrefView.xib; sourceTree = "<group>"; };
+		01D74E6C1F7A561000BD52A0 /* MOS68kAssembler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kAssembler.h; sourceTree = "<group>"; };
+		01D74E6D1F7A561000BD52A0 /* MOS68kAssembler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kAssembler.m; sourceTree = "<group>"; };
+		01D74E6E1F7A561000BD52A0 /* MOSMonitoredTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSMonitoredTask.h; sourceTree = "<group>"; };
+		01D74E6F1F7A561000BD52A0 /* MOSMonitoredTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSMonitoredTask.m; sourceTree = "<group>"; };
+		01D74E701F7A561000BD52A0 /* MOS68kListingDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kListingDictionary.h; sourceTree = "<group>"; };
+		01D74E711F7A561000BD52A0 /* MOS68kListingDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kListingDictionary.m; sourceTree = "<group>"; };
+		01D74E731F7A561000BD52A0 /* MOS68kSimulatorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kSimulatorProxy.h; sourceTree = "<group>"; };
+		01D74E741F7A561000BD52A0 /* MOS68kSimulatorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kSimulatorProxy.m; sourceTree = "<group>"; };
+		01D74E751F7A561000BD52A0 /* MOS68kSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kSimulator.h; sourceTree = "<group>"; };
+		01D74E761F7A561000BD52A0 /* MOS68kSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MOS68kSimulator.m; sourceTree = "<group>"; };
+		01D74E771F7A561000BD52A0 /* MOS68kSimulatorPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kSimulatorPresentation.h; sourceTree = "<group>"; };
+		01D74E781F7A561000BD52A0 /* MOS68kSimulatorPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MOS68kSimulatorPresentation.m; sourceTree = "<group>"; };
+		01D74E7A1F7A561000BD52A0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01D74E7B1F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		01D74E7D1F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; lineEnding = 0; name = Base; path = Base.lproj/VasmTemplate.s; sourceTree = "<group>"; };
+		01D74E801F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ExamplesList.plist; sourceTree = "<group>"; };
+		01D74E821F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/helloworld.s; sourceTree = "<group>"; };
+		01D74E841F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/expression.s; sourceTree = "<group>"; };
+		01D74E861F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/reverser.s; sourceTree = "<group>"; };
+		01D74E881F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = "Base.lproj/tic-tac-toe.s"; sourceTree = "<group>"; };
+		01D74E8A1F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/digits.s; sourceTree = "<group>"; };
+		01D74E8C1F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = "Base.lproj/selection-sort.s"; sourceTree = "<group>"; };
+		01D74E8E1F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/fibonacci.s; sourceTree = "<group>"; };
+		01D74E901F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/mastermind.s; sourceTree = "<group>"; };
+		01D74E921F7A561000BD52A0 /* Base */ = {isa = PBXFileReference; explicitFileType = text; name = Base; path = Base.lproj/exponentiation.s; sourceTree = "<group>"; };
+		01D74EB01F7A571900BD52A0 /* PlatformSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PlatformSupport.framework; sourceTree = "<group>"; };
+		01D74EB71F7A586400BD52A0 /* binutils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = binutils.xcodeproj; path = binutils/binutils.xcodeproj; sourceTree = "<group>"; };
+		01D74EBA1F7A586400BD52A0 /* vasm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = vasm.xcodeproj; path = vasm/vasm.xcodeproj; sourceTree = "<group>"; };
+		01D74EC01F7A586400BD52A0 /* Musashi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Musashi.xcodeproj; path = Musashi/Musashi.xcodeproj; sourceTree = "<group>"; };
+		01D74EDF1F7A5D7400BD52A0 /* m68ksim.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = m68ksim.xcodeproj; path = m68ksim/m68ksim.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		014553101F7A559500BA1060 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01D74EB11F7A571900BD52A0 /* PlatformSupport.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0145530A1F7A559500BA1060 = {
+			isa = PBXGroup;
+			children = (
+				01D74EDF1F7A5D7400BD52A0 /* m68ksim.xcodeproj */,
+				01D74EB71F7A586400BD52A0 /* binutils.xcodeproj */,
+				01D74EBA1F7A586400BD52A0 /* vasm.xcodeproj */,
+				01D74EC01F7A586400BD52A0 /* Musashi.xcodeproj */,
+				01D74E961F7A561000BD52A0 /* Motorola68k Plugin */,
+				014553141F7A559500BA1060 /* Products */,
+				01D74EAF1F7A56DB00BD52A0 /* Dependencies */,
+			);
+			sourceTree = "<group>";
+		};
+		014553141F7A559500BA1060 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				014553131F7A559500BA1060 /* Motorola68k.mosplatform */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01D74E6B1F7A561000BD52A0 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				01D74E631F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.h */,
+				01D74E641F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.m */,
+				01D74E661F7A561000BD52A0 /* MOS68kAssemblerPrefView.xib */,
+				01D74E671F7A561000BD52A0 /* MOS68kSimulatorPrefViewController.h */,
+				01D74E681F7A561000BD52A0 /* MOS68kSimulatorPrefViewController.m */,
+				01D74E6A1F7A561000BD52A0 /* MOS68kSimulatorPrefView.xib */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		01D74E721F7A561000BD52A0 /* Assembler Client */ = {
+			isa = PBXGroup;
+			children = (
+				01D74E6C1F7A561000BD52A0 /* MOS68kAssembler.h */,
+				01D74E6D1F7A561000BD52A0 /* MOS68kAssembler.m */,
+				01D74E6E1F7A561000BD52A0 /* MOSMonitoredTask.h */,
+				01D74E6F1F7A561000BD52A0 /* MOSMonitoredTask.m */,
+				01D74E701F7A561000BD52A0 /* MOS68kListingDictionary.h */,
+				01D74E711F7A561000BD52A0 /* MOS68kListingDictionary.m */,
+			);
+			name = "Assembler Client";
+			sourceTree = "<group>";
+		};
+		01D74E791F7A561000BD52A0 /* Simulator Client */ = {
+			isa = PBXGroup;
+			children = (
+				01D74E731F7A561000BD52A0 /* MOS68kSimulatorProxy.h */,
+				01D74E741F7A561000BD52A0 /* MOS68kSimulatorProxy.m */,
+				01D74E751F7A561000BD52A0 /* MOS68kSimulator.h */,
+				01D74E761F7A561000BD52A0 /* MOS68kSimulator.m */,
+				01D74E771F7A561000BD52A0 /* MOS68kSimulatorPresentation.h */,
+				01D74E781F7A561000BD52A0 /* MOS68kSimulatorPresentation.m */,
+			);
+			name = "Simulator Client";
+			sourceTree = "<group>";
+		};
+		01D74E7F1F7A561000BD52A0 /* Assembler Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				01D74E7E1F7A561000BD52A0 /* VasmTemplate.s */,
+			);
+			name = "Assembler Stuff";
+			sourceTree = "<group>";
+		};
+		01D74E941F7A561000BD52A0 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				01D74E811F7A561000BD52A0 /* ExamplesList.plist */,
+				01D74E831F7A561000BD52A0 /* helloworld.s */,
+				01D74E851F7A561000BD52A0 /* expression.s */,
+				01D74E871F7A561000BD52A0 /* reverser.s */,
+				01D74E891F7A561000BD52A0 /* tic-tac-toe.s */,
+				01D74E8B1F7A561000BD52A0 /* digits.s */,
+				01D74E8D1F7A561000BD52A0 /* selection-sort.s */,
+				01D74E8F1F7A561000BD52A0 /* fibonacci.s */,
+				01D74E911F7A561000BD52A0 /* mastermind.s */,
+				01D74E931F7A561000BD52A0 /* exponentiation.s */,
+			);
+			name = Examples;
+			path = ../Examples;
+			sourceTree = "<group>";
+		};
+		01D74E951F7A561000BD52A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				01D74E7A1F7A561000BD52A0 /* Info.plist */,
+				01D74E7C1F7A561000BD52A0 /* Localizable.strings */,
+				01D74E7F1F7A561000BD52A0 /* Assembler Stuff */,
+				01D74E941F7A561000BD52A0 /* Examples */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01D74E961F7A561000BD52A0 /* Motorola68k Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				01D74E611F7A561000BD52A0 /* MOS68kPlatform.h */,
+				01D74E621F7A561000BD52A0 /* MOS68kPlatform.m */,
+				01D74E6B1F7A561000BD52A0 /* Preferences */,
+				01D74E721F7A561000BD52A0 /* Assembler Client */,
+				01D74E791F7A561000BD52A0 /* Simulator Client */,
+				01D74E951F7A561000BD52A0 /* Supporting Files */,
+			);
+			name = "Motorola68k Plugin";
+			path = Motorola68k;
+			sourceTree = "<group>";
+		};
+		01D74EAF1F7A56DB00BD52A0 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				01D74EB01F7A571900BD52A0 /* PlatformSupport.framework */,
+			);
+			name = Dependencies;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01D74ED51F7A5D2F00BD52A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01D74ED91F7A5D2F00BD52A0 /* m68k-elf-ld */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01D74EDA1F7A5D3800BD52A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01D74EDE1F7A5D3800BD52A0 /* vasmm68k-mot */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01D74EE01F7A5D7400BD52A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01D74EE41F7A5D7600BD52A0 /* m68ksim */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01D74EE51F7A5D8F00BD52A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01D74EEA1F7A5D9000BD52A0 /* libMusashi.a */,
+				01D74EEC1F7A5D9000BD52A0 /* m68kmake */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		014553121F7A559500BA1060 /* Motorola68k */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 014553191F7A559500BA1060 /* Build configuration list for PBXNativeTarget "Motorola68k" */;
+			buildPhases = (
+				0145530F1F7A559500BA1060 /* Sources */,
+				014553101F7A559500BA1060 /* Frameworks */,
+				014553111F7A559500BA1060 /* Resources */,
+				01D74EB21F7A578400BD52A0 /* Install Supporting Executables */,
+				01D74EB31F7A57AB00BD52A0 /* Write Build Number */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Motorola68k;
+			productName = Motorola68kPlatform;
+			productReference = 014553131F7A559500BA1060 /* Motorola68k.mosplatform */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0145530B1F7A559500BA1060 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = danielecattaneo;
+				TargetAttributes = {
+					014553121F7A559500BA1060 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0145530E1F7A559500BA1060 /* Build configuration list for PBXProject "Motorola68kPlatform" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0145530A1F7A559500BA1060;
+			productRefGroup = 014553141F7A559500BA1060 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 01D74ED51F7A5D2F00BD52A0 /* Products */;
+					ProjectRef = 01D74EB71F7A586400BD52A0 /* binutils.xcodeproj */;
+				},
+				{
+					ProductGroup = 01D74EE01F7A5D7400BD52A0 /* Products */;
+					ProjectRef = 01D74EDF1F7A5D7400BD52A0 /* m68ksim.xcodeproj */;
+				},
+				{
+					ProductGroup = 01D74EE51F7A5D8F00BD52A0 /* Products */;
+					ProjectRef = 01D74EC01F7A586400BD52A0 /* Musashi.xcodeproj */;
+				},
+				{
+					ProductGroup = 01D74EDA1F7A5D3800BD52A0 /* Products */;
+					ProjectRef = 01D74EBA1F7A586400BD52A0 /* vasm.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				014553121F7A559500BA1060 /* Motorola68k */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		01D74ED91F7A5D2F00BD52A0 /* m68k-elf-ld */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "m68k-elf-ld";
+			remoteRef = 01D74ED81F7A5D2F00BD52A0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01D74EDE1F7A5D3800BD52A0 /* vasmm68k-mot */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "vasmm68k-mot";
+			remoteRef = 01D74EDD1F7A5D3800BD52A0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01D74EE41F7A5D7600BD52A0 /* m68ksim */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = m68ksim;
+			remoteRef = 01D74EE31F7A5D7600BD52A0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01D74EEA1F7A5D9000BD52A0 /* libMusashi.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libMusashi.a;
+			remoteRef = 01D74EE91F7A5D9000BD52A0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		01D74EEC1F7A5D9000BD52A0 /* m68kmake */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = m68kmake;
+			remoteRef = 01D74EEB1F7A5D9000BD52A0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		014553111F7A559500BA1060 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01D74EA91F7A561000BD52A0 /* tic-tac-toe.s in Resources */,
+				01D74EA41F7A561000BD52A0 /* VasmTemplate.s in Resources */,
+				01D74EA51F7A561000BD52A0 /* ExamplesList.plist in Resources */,
+				01D74EAD1F7A561000BD52A0 /* mastermind.s in Resources */,
+				01D74EAA1F7A561000BD52A0 /* digits.s in Resources */,
+				01D74EAB1F7A561000BD52A0 /* selection-sort.s in Resources */,
+				01D74E9B1F7A561000BD52A0 /* MOS68kSimulatorPrefView.xib in Resources */,
+				01D74EA31F7A561000BD52A0 /* Localizable.strings in Resources */,
+				01D74EAC1F7A561000BD52A0 /* fibonacci.s in Resources */,
+				01D74EAE1F7A561000BD52A0 /* exponentiation.s in Resources */,
+				01D74EA81F7A561000BD52A0 /* reverser.s in Resources */,
+				01D74EA61F7A561000BD52A0 /* helloworld.s in Resources */,
+				01D74EA71F7A561000BD52A0 /* expression.s in Resources */,
+				01D74E991F7A561000BD52A0 /* MOS68kAssemblerPrefView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01D74EB31F7A57AB00BD52A0 /* Write Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Write Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "VERNO=$(git rev-list HEAD --count)\nif [ $? -ne 0 ]; then\n  VERNO='1';\nelse\n  VERNO=$(($VERNO + 4884 - 449));\nfi\necho $VERNO\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $VERNO\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0145530F1F7A559500BA1060 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01D74E981F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.m in Sources */,
+				01D74E9A1F7A561000BD52A0 /* MOS68kSimulatorPrefViewController.m in Sources */,
+				01D74E9D1F7A561000BD52A0 /* MOSMonitoredTask.m in Sources */,
+				01D74E9C1F7A561000BD52A0 /* MOS68kAssembler.m in Sources */,
+				01D74EA01F7A561000BD52A0 /* MOS68kSimulator.m in Sources */,
+				01D74EA11F7A561000BD52A0 /* MOS68kSimulatorPresentation.m in Sources */,
+				01D74E9E1F7A561000BD52A0 /* MOS68kListingDictionary.m in Sources */,
+				01D74E971F7A561000BD52A0 /* MOS68kPlatform.m in Sources */,
+				01D74E9F1F7A561000BD52A0 /* MOS68kSimulatorProxy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		01D74E661F7A561000BD52A0 /* MOS68kAssemblerPrefView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E651F7A561000BD52A0 /* Base */,
+			);
+			name = MOS68kAssemblerPrefView.xib;
+			sourceTree = "<group>";
+		};
+		01D74E6A1F7A561000BD52A0 /* MOS68kSimulatorPrefView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E691F7A561000BD52A0 /* Base */,
+			);
+			name = MOS68kSimulatorPrefView.xib;
+			sourceTree = "<group>";
+		};
+		01D74E7C1F7A561000BD52A0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E7B1F7A561000BD52A0 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		01D74E7E1F7A561000BD52A0 /* VasmTemplate.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E7D1F7A561000BD52A0 /* Base */,
+			);
+			name = VasmTemplate.s;
+			sourceTree = "<group>";
+		};
+		01D74E811F7A561000BD52A0 /* ExamplesList.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E801F7A561000BD52A0 /* Base */,
+			);
+			name = ExamplesList.plist;
+			path = ../Examples;
+			sourceTree = "<group>";
+		};
+		01D74E831F7A561000BD52A0 /* helloworld.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E821F7A561000BD52A0 /* Base */,
+			);
+			name = helloworld.s;
+			sourceTree = "<group>";
+		};
+		01D74E851F7A561000BD52A0 /* expression.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E841F7A561000BD52A0 /* Base */,
+			);
+			name = expression.s;
+			sourceTree = "<group>";
+		};
+		01D74E871F7A561000BD52A0 /* reverser.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E861F7A561000BD52A0 /* Base */,
+			);
+			name = reverser.s;
+			sourceTree = "<group>";
+		};
+		01D74E891F7A561000BD52A0 /* tic-tac-toe.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E881F7A561000BD52A0 /* Base */,
+			);
+			name = "tic-tac-toe.s";
+			sourceTree = "<group>";
+		};
+		01D74E8B1F7A561000BD52A0 /* digits.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E8A1F7A561000BD52A0 /* Base */,
+			);
+			name = digits.s;
+			sourceTree = "<group>";
+		};
+		01D74E8D1F7A561000BD52A0 /* selection-sort.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E8C1F7A561000BD52A0 /* Base */,
+			);
+			name = "selection-sort.s";
+			sourceTree = "<group>";
+		};
+		01D74E8F1F7A561000BD52A0 /* fibonacci.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E8E1F7A561000BD52A0 /* Base */,
+			);
+			name = fibonacci.s;
+			sourceTree = "<group>";
+		};
+		01D74E911F7A561000BD52A0 /* mastermind.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E901F7A561000BD52A0 /* Base */,
+			);
+			name = mastermind.s;
+			sourceTree = "<group>";
+		};
+		01D74E931F7A561000BD52A0 /* exponentiation.s */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01D74E921F7A561000BD52A0 /* Base */,
+			);
+			name = exponentiation.s;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		014553171F7A559500BA1060 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		014553181F7A559500BA1060 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		0145531A1F7A559500BA1060 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/../M68kSimApp/MOSPlatformSupport";
+				INFOPLIST_FILE = Motorola68k/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielecattaneo.Motorola68k;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mosplatform;
+			};
+			name = Debug;
+		};
+		0145531B1F7A559500BA1060 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/../M68kSimApp/MOSPlatformSupport";
+				INFOPLIST_FILE = Motorola68k/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielecattaneo.Motorola68k;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mosplatform;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0145530E1F7A559500BA1060 /* Build configuration list for PBXProject "Motorola68kPlatform" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				014553171F7A559500BA1060 /* Debug */,
+				014553181F7A559500BA1060 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		014553191F7A559500BA1060 /* Build configuration list for PBXNativeTarget "Motorola68k" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0145531A1F7A559500BA1060 /* Debug */,
+				0145531B1F7A559500BA1060 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0145530B1F7A559500BA1060 /* Project object */;
+}

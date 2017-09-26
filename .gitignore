@@ -207,10 +207,10 @@ xcuserdata
 # pull your cahnges to other's repo"
 #
 #*.xccheckout
-m68ksim/test
-m68ksim/test.ld
-m68ksim/test.o
-m68ksim/test.s
+Motorola68kPlatform/m68ksim/test
+Motorola68kPlatform/m68ksim/test.ld
+Motorola68kPlatform/m68ksim/test.o
+Motorola68kPlatform/m68ksim/test.s
 Untitled.s
 *.o
 broken.s
