@@ -10,10 +10,4 @@
    <FileRef
       location = "group:Motorola68kPlatform/Motorola68kPlatform.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Fragaria/Fragaria.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Sparkle/Sparkle.xcodeproj">
-   </FileRef>
 </Workspace>

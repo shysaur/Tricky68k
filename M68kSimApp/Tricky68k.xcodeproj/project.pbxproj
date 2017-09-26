@@ -9,13 +9,9 @@
 /* Begin PBXBuildFile section */
 		01000A5C1A65BB330080AC5F /* MOSJobStatusStringTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01000A5B1A65BB330080AC5F /* MOSJobStatusStringTransformer.m */; };
 		0108A2AF1AE6FE4500085E5F /* MOSDescribeFontTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0108A2AE1AE6FE4500085E5F /* MOSDescribeFontTransformer.m */; };
-		010AACAB1B1CDEA0005D9984 /* Fragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010AACAA1B1CDEA0005D9984 /* Fragaria.framework */; };
-		010AACAC1B1CDEA0005D9984 /* Fragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 010AACAA1B1CDEA0005D9984 /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01113DEB1C94F7E7007EC178 /* MOSPrintAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01113DED1C94F7E7007EC178 /* MOSPrintAccessoryView.xib */; };
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
 		011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */; };
-		012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; };
-		012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 012AEB1A1A703F5A00906B25 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 012AEB1D1A7045E400906B25 /* dsa_pub.pem */; };
 		013A6AF91A718458007C053B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013A6AFB1A718458007C053B /* Localizable.strings */; };
 		013D84C71BC06DF7003E4817 /* MOSAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 013D84C61BC06DF7003E4817 /* MOSAddressFormatter.m */; };
@@ -86,6 +82,10 @@
 		01D74EB51F7A581300BD52A0 /* Motorola68k.mosplatform in Resources */ = {isa = PBXBuildFile; fileRef = 01D74EB41F7A581300BD52A0 /* Motorola68k.mosplatform */; };
 		01D74EB61F7A583E00BD52A0 /* Motorola68k.mosplatform in Install Platform Plugins */ = {isa = PBXBuildFile; fileRef = 01D74EB41F7A581300BD52A0 /* Motorola68k.mosplatform */; };
 		01DE189F1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE189E1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m */; };
+		01E234C11F7ABF7D00BDD6AE /* Fragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0148C27A1F7ABE46006AB682 /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01E234CD1F7ABF8200BDD6AE /* Sparkle.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0148C28B1F7ABE56006AB682 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01E234CF1F7ABFF500BDD6AE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0148C28B1F7ABE56006AB682 /* Sparkle.framework */; };
+		01E234D01F7ABFFB00BDD6AE /* Fragaria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0148C27A1F7ABE46006AB682 /* Fragaria.framework */; };
 		01E6A2781C946640002FA51A /* MOSPrintAccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E6A2761C946640002FA51A /* MOSPrintAccessoryViewController.m */; };
 		01E93C6F1A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C711A6D48E9004BE3C4 /* MOSSimulatorPrefView.xib */; };
 		01E93C721A6D48F3004BE3C4 /* MOSPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E93C741A6D48F3004BE3C4 /* MOSPreferencesWindow.xib */; };
@@ -100,6 +100,111 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0148C26F1F7ABE46006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AB648E2A11FB385700AEF7BD;
+			remoteInfo = "Fragaria Doc";
+		};
+		0148C2711F7ABE46006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ABCA4DAF16137FC000E4849B;
+			remoteInfo = "Fragaria Simple";
+		};
+		0148C2731F7ABE46006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0C1464C1A87196200DDE90A;
+			remoteInfo = "Fragaria Complex";
+		};
+		0148C2751F7ABE46006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0718B501AB551460073493A;
+			remoteInfo = "Fragaria Prefs";
+		};
+		0148C2771F7ABE46006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01F0D6FC1C120F7D000A08B6;
+			remoteInfo = "Fragaria Swift";
+		};
+		0148C2791F7ABE46006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AB69B62B118B745700903D1D;
+			remoteInfo = Fragaria;
+		};
+		0148C27B1F7ABE46006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0E5210D1A90E34F005CB80B;
+			remoteInfo = "Fragaria Tests";
+		};
+		0148C28A1F7ABE56006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = Sparkle;
+		};
+		0148C28C1F7ABE56006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 61B5F90209C4CEE200B25A18;
+			remoteInfo = "Sparkle Test App";
+		};
+		0148C28E1F7ABE56006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 612279D90DB5470200AB99EA;
+			remoteInfo = "Sparkle Unit Tests";
+		};
+		0148C2901F7ABE56006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D06E8D00FD68C7C005AE3F6;
+			remoteInfo = BinaryDelta;
+		};
+		0148C2921F7ABE56006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55C14BB7136EEF1500649790;
+			remoteInfo = Autoupdate;
+		};
+		0148C2941F7ABE56006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 726B2B5D1C645FC900388755;
+			remoteInfo = "UI Tests";
+		};
+		0148C2961F7ABE56006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 722954B41D04ADAF00ECF9CA;
+			remoteInfo = fileop;
+		};
+		0148C2981F7ABE56006AB682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5AE13FB31E0D9E07000D2C2C;
+			remoteInfo = generate_appcast;
+		};
 		014F9C9F1E1AC70900E74EBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 016CD12D1A51A10E00D64892 /* Project object */;
@@ -127,9 +232,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				01E234CD1F7ABF8200BDD6AE /* Sparkle.framework in Install Frameworks */,
+				01E234C11F7ABF7D00BDD6AE /* Fragaria.framework in Install Frameworks */,
 				014F9CA21E1AC70900E74EBB /* PlatformSupport.framework in Install Frameworks */,
-				012AEB1C1A703F7100906B25 /* Sparkle.framework in Install Frameworks */,
-				010AACAC1B1CDEA0005D9984 /* Fragaria.framework in Install Frameworks */,
 			);
 			name = "Install Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,20 +248,20 @@
 		01000A5B1A65BB330080AC5F /* MOSJobStatusStringTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJobStatusStringTransformer.m; sourceTree = "<group>"; };
 		0108A2AD1AE6FE4500085E5F /* MOSDescribeFontTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSDescribeFontTransformer.h; sourceTree = "<group>"; };
 		0108A2AE1AE6FE4500085E5F /* MOSDescribeFontTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSDescribeFontTransformer.m; sourceTree = "<group>"; };
-		010AACAA1B1CDEA0005D9984 /* Fragaria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Fragaria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01113DEC1C94F7E7007EC178 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSPrintAccessoryView.xib; sourceTree = "<group>"; };
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		011D72D81AD0382900368CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSEditorPrefView.xib; sourceTree = "<group>"; };
 		0124CF141B2F5EF800DD0A5C /* MOSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSError.h; sourceTree = "<group>"; };
 		0124CF151B2F5EF800DD0A5C /* MOSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSError.m; sourceTree = "<group>"; };
-		012AEB1A1A703F5A00906B25 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		012AEB1D1A7045E400906B25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../../Updates/dsa_pub.pem; sourceTree = "<group>"; };
 		013A6AFA1A718458007C053B /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		013D84C51BC06DF7003E4817 /* MOSAddressFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAddressFormatter.h; sourceTree = "<group>"; };
 		013D84C61BC06DF7003E4817 /* MOSAddressFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSAddressFormatter.m; sourceTree = "<group>"; };
 		013D84C81BC0A594003E4817 /* MOSMutableBreakpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSMutableBreakpoint.h; sourceTree = "<group>"; };
 		013D84C91BC0A594003E4817 /* MOSMutableBreakpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSMutableBreakpoint.m; sourceTree = "<group>"; };
+		0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Fragaria.xcodeproj; path = Fragaria/Fragaria.xcodeproj; sourceTree = "<group>"; };
+		0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
 		014A08301BE69E5D00A8FA0F /* MOSSimulatorToolbarDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorToolbarDelegate.h; sourceTree = "<group>"; };
 		014A08311BE69E5D00A8FA0F /* MOSSimulatorToolbarDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorToolbarDelegate.m; sourceTree = "<group>"; };
 		014A08331BE69F4800A8FA0F /* MOSLargeToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSLargeToolbar.h; sourceTree = "<group>"; };
@@ -277,14 +382,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				014F9CA11E1AC70900E74EBB /* PlatformSupport.framework in Frameworks */,
-				012AEB1B1A703F5A00906B25 /* Sparkle.framework in Frameworks */,
-				010AACAB1B1CDEA0005D9984 /* Fragaria.framework in Frameworks */,
+				01E234CF1F7ABFF500BDD6AE /* Sparkle.framework in Frameworks */,
+				01E234D01F7ABFFB00BDD6AE /* Fragaria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0148C2651F7ABE46006AB682 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0148C2701F7ABE46006AB682 /* Fragaria Doc.app */,
+				0148C2721F7ABE46006AB682 /* Fragaria Simple.app */,
+				0148C2741F7ABE46006AB682 /* Fragaria Complex.app */,
+				0148C2761F7ABE46006AB682 /* Fragaria Prefs.app */,
+				0148C2781F7ABE46006AB682 /* Fragaria Swift.app */,
+				0148C27A1F7ABE46006AB682 /* Fragaria.framework */,
+				0148C27C1F7ABE46006AB682 /* Fragaria Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0148C27D1F7ABE55006AB682 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0148C28B1F7ABE56006AB682 /* Sparkle.framework */,
+				0148C28D1F7ABE56006AB682 /* Sparkle Test App.app */,
+				0148C28F1F7ABE56006AB682 /* Sparkle Unit Tests.xctest */,
+				0148C2911F7ABE56006AB682 /* BinaryDelta */,
+				0148C2931F7ABE56006AB682 /* Autoupdate.app */,
+				0148C2951F7ABE56006AB682 /* UI Tests.xctest */,
+				0148C2971F7ABE56006AB682 /* fileop */,
+				0148C2991F7ABE56006AB682 /* generate_appcast */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		014D85D91A62CF2D00648B41 /* Job Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,10 +553,13 @@
 		016CD12C1A51A10E00D64892 = {
 			isa = PBXGroup;
 			children = (
+				0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */,
+				0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */,
 				016CD1371A51A10E00D64892 /* M68kSimApp */,
 				014F9C9B1E1AC70900E74EBB /* PlatformSupport */,
 				01864B941A51CD10005B2B0D /* Dependencies */,
 				016CD1361A51A10E00D64892 /* Products */,
+				01E234CE1F7ABFF500BDD6AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -499,8 +636,6 @@
 			isa = PBXGroup;
 			children = (
 				01D74EB41F7A581300BD52A0 /* Motorola68k.mosplatform */,
-				010AACAA1B1CDEA0005D9984 /* Fragaria.framework */,
-				012AEB1A1A703F5A00906B25 /* Sparkle.framework */,
 			);
 			name = Dependencies;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -573,6 +708,13 @@
 				014F9C7A1E1AA71800E74EBB /* MOSPlatformManager.m */,
 			);
 			name = Platform;
+			sourceTree = "<group>";
+		};
+		01E234CE1F7ABFF500BDD6AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		01EBAA271AB9F9490076AD02 /* MOSDocument */ = {
@@ -684,6 +826,16 @@
 			mainGroup = 016CD12C1A51A10E00D64892;
 			productRefGroup = 016CD1361A51A10E00D64892 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0148C2651F7ABE46006AB682 /* Products */;
+					ProjectRef = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+				},
+				{
+					ProductGroup = 0148C27D1F7ABE55006AB682 /* Products */;
+					ProjectRef = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				016CD1341A51A10E00D64892 /* Tricky68k */,
@@ -691,6 +843,114 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0148C2701F7ABE46006AB682 /* Fragaria Doc.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Fragaria Doc.app";
+			remoteRef = 0148C26F1F7ABE46006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2721F7ABE46006AB682 /* Fragaria Simple.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Fragaria Simple.app";
+			remoteRef = 0148C2711F7ABE46006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2741F7ABE46006AB682 /* Fragaria Complex.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Fragaria Complex.app";
+			remoteRef = 0148C2731F7ABE46006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2761F7ABE46006AB682 /* Fragaria Prefs.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Fragaria Prefs.app";
+			remoteRef = 0148C2751F7ABE46006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2781F7ABE46006AB682 /* Fragaria Swift.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Fragaria Swift.app";
+			remoteRef = 0148C2771F7ABE46006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C27A1F7ABE46006AB682 /* Fragaria.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Fragaria.framework;
+			remoteRef = 0148C2791F7ABE46006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C27C1F7ABE46006AB682 /* Fragaria Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Fragaria Tests.xctest";
+			remoteRef = 0148C27B1F7ABE46006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C28B1F7ABE56006AB682 /* Sparkle.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Sparkle.framework;
+			remoteRef = 0148C28A1F7ABE56006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C28D1F7ABE56006AB682 /* Sparkle Test App.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Sparkle Test App.app";
+			remoteRef = 0148C28C1F7ABE56006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C28F1F7ABE56006AB682 /* Sparkle Unit Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Sparkle Unit Tests.xctest";
+			remoteRef = 0148C28E1F7ABE56006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2911F7ABE56006AB682 /* BinaryDelta */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = BinaryDelta;
+			remoteRef = 0148C2901F7ABE56006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2931F7ABE56006AB682 /* Autoupdate.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Autoupdate.app;
+			remoteRef = 0148C2921F7ABE56006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2951F7ABE56006AB682 /* UI Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "UI Tests.xctest";
+			remoteRef = 0148C2941F7ABE56006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2971F7ABE56006AB682 /* fileop */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = fileop;
+			remoteRef = 0148C2961F7ABE56006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0148C2991F7ABE56006AB682 /* generate_appcast */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = generate_appcast;
+			remoteRef = 0148C2981F7ABE56006AB682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		014F9C981E1AC70900E74EBB /* Resources */ = {
