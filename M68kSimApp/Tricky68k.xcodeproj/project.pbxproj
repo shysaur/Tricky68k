@@ -79,7 +79,6 @@
 		01D231911F30B49300182DD2 /* MOSExecutable.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D2318F1F30B49300182DD2 /* MOSExecutable.m */; };
 		01D231941F30B6DE00182DD2 /* MOSFileBackedExecutable.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D231921F30B6DE00182DD2 /* MOSFileBackedExecutable.h */; };
 		01D231951F30B6DE00182DD2 /* MOSFileBackedExecutable.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D231931F30B6DE00182DD2 /* MOSFileBackedExecutable.m */; };
-		01D74EB51F7A581300BD52A0 /* Motorola68k.mosplatform in Resources */ = {isa = PBXBuildFile; fileRef = 01D74EB41F7A581300BD52A0 /* Motorola68k.mosplatform */; };
 		01D74EB61F7A583E00BD52A0 /* Motorola68k.mosplatform in Install Platform Plugins */ = {isa = PBXBuildFile; fileRef = 01D74EB41F7A581300BD52A0 /* Motorola68k.mosplatform */; };
 		01DE189F1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE189E1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m */; };
 		01E234C11F7ABF7D00BDD6AE /* Fragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0148C27A1F7ABE46006AB682 /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -974,7 +973,6 @@
 				016CD1491A51A10F00D64892 /* MainMenu.xib in Resources */,
 				011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */,
 				01E974C71BE8021C002E91B5 /* MOSSimBrkptWindow.xib in Resources */,
-				01D74EB51F7A581300BD52A0 /* Motorola68k.mosplatform in Resources */,
 				012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */,
 				013A6AF91A718458007C053B /* Localizable.strings in Resources */,
 				018132291E1EACED008A959D /* MOSAssemblerPrefView.xib in Resources */,
