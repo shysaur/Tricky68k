@@ -297,6 +297,7 @@
 				OTHER_CFLAGS = "-DM68K_COMPILE_FOR_MAME=OPT_OFF";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$PROJECT_DIR/../Musashi/**";
+				USE_HEADERMAP = NO;
 			};
 			name = Debug;
 		};
@@ -311,6 +312,7 @@
 				OTHER_CFLAGS = "-DM68K_COMPILE_FOR_MAME=OPT_OFF";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$PROJECT_DIR/../Musashi/**";
+				USE_HEADERMAP = NO;
 			};
 			name = Release;
 		};
