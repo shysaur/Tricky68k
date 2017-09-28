@@ -313,8 +313,8 @@
 		016CD1431A51A10F00D64892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSSourceDocument.xib; sourceTree = "<group>"; };
 		016CD1451A51A10F00D64892 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		016CD1481A51A10F00D64892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		016CD15F1A51AC7600D64892 /* MOSExecutableDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MOSExecutableDocument.h; path = M68kSimApp/MOSExecutableDocument.h; sourceTree = "<group>"; };
-		016CD1601A51AC7600D64892 /* MOSExecutableDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MOSExecutableDocument.m; path = M68kSimApp/MOSExecutableDocument.m; sourceTree = "<group>"; };
+		016CD15F1A51AC7600D64892 /* MOSExecutableDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSExecutableDocument.h; sourceTree = "<group>"; };
+		016CD1601A51AC7600D64892 /* MOSExecutableDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSExecutableDocument.m; sourceTree = "<group>"; };
 		016CD1661A51B27900D64892 /* MOSSimulatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorViewController.h; sourceTree = "<group>"; };
 		016CD1671A51B27900D64892 /* MOSSimulatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorViewController.m; sourceTree = "<group>"; };
 		016F94EF1A8559D200770684 /* MOSPrintingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSPrintingTextView.h; sourceTree = "<group>"; };
@@ -628,7 +628,6 @@
 				01E93C7A1A6D490F004BE3C4 /* MOSExecutableDocument.xib */,
 			);
 			name = "Standalone Simulator";
-			path = ..;
 			sourceTree = "<group>";
 		};
 		01864B941A51CD10005B2B0D /* Dependencies */ = {
@@ -1170,7 +1169,6 @@
 				01E93C791A6D490F004BE3C4 /* Base */,
 			);
 			name = MOSExecutableDocument.xib;
-			path = M68kSimApp;
 			sourceTree = "<group>";
 		};
 		01E93C7D1A6D491D004BE3C4 /* MOSSimulatorView.xib */ = {
