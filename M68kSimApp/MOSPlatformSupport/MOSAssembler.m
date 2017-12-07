@@ -39,7 +39,6 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 
 - (instancetype)init {
   self = [super init];
-  options = 0;
   return self;
 }
 
@@ -67,14 +66,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar) {
 }
 
 
-- (void)setAssemblageOptions:(MOSAssemblageOptions)opts {
-  options = opts;
-}
-
-
-- (MOSAssemblageOptions)assemblageOptions {
-  return options;
-}
+@synthesize assemblageOptions;
 
 
 - (void)assembleWithCompletionHandler:(void (^)(void))done {

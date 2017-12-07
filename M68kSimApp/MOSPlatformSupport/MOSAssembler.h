@@ -39,8 +39,7 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
 - (void)setSourceCode:(NSString*)sf;
 - (NSString*)sourceCode;
 - (MOSExecutable*)output;
-- (void)setAssemblageOptions:(MOSAssemblageOptions)opts;
-- (MOSAssemblageOptions)assemblageOptions;
+@property (nonatomic) MOSAssemblageOptions assemblageOptions;
 
 - (void)assembleWithCompletionHandler:(void (^)(void))done;
 - (BOOL)isAssembling;
@@ -59,7 +58,6 @@ NSString *MOSAsmResultToJobStat(MOSAssemblageResult ar);
 
 @interface MOSAssembler : NSObject <MOSAssemblerProtocol> {
   MOSJob *jobStatus;
-  MOSAssemblageOptions options;
 }
 
 /* run on main thread */
