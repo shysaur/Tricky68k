@@ -12,30 +12,41 @@
 @implementation MOSPlatform
 
 
-- (NSBundle *)bundle {
+- (NSBundle *)bundle
+{
   return [NSBundle bundleForClass:[self class]];
 }
 
 
-- (NSString *)description {
+- (NSString *)description
+{
   return [NSString stringWithFormat:
     @"<MOSPlatform %p name: %@ assembler: %@ simulator: %@>",
     self, _localizedName, _assemblerClass, _simulatorClass];
 }
 
 
-- (NSURL *)URLForExampleFile:(NSString *)fn {
+- (NSURL *)URLForExampleFile:(NSString *)fn
+{
   return nil;
 }
 
 
-- (NSViewController *)assemblerPreferencesViewController {
+- (NSViewController *)assemblerPreferencesViewController
+{
   return nil;
 }
 
 
-- (NSViewController *)simulatorPreferencesViewController {
+- (NSViewController *)simulatorPreferencesViewController
+{
   return nil;
+}
+
+
+- (MOSAssemblageOptions)currentAssemblageOptions
+{
+  return 0;
 }
 
 

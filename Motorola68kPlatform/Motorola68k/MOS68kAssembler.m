@@ -66,7 +66,7 @@
   }
   
   params = [@[@"-Felf", @"-spaces"] mutableCopy];
-  if (!([self assemblageOptions] & MOSAssemblageOptionOptimizationOn))
+  if (!([self assemblageOptions] & MOS68kAssemblageOptionOptimizationOn))
     [params addObject:@"-no-opt"];
   [params addObjectsFromArray:@[@"-o", [unlinkedelf path], [sourcefile path]]];
   if (self.produceListingDictionary) {
@@ -97,7 +97,7 @@
   outputfile = [NSURL URLWithTemporaryFilePathWithExtension:@"o"];
   
   params = [NSMutableArray array];
-  if (!([self assemblageOptions] & MOSAssemblageOptionEntryPointSymbolic))
+  if (!([self assemblageOptions] & MOS68kAssemblageOptionEntryPointSymbolic))
     [params addObject:@"--entry=0x2000"];
   else
     [params addObject:@"--entry=start"];

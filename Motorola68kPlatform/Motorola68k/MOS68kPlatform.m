@@ -17,6 +17,17 @@
 @implementation MOS68kPlatform
 
 
++ (void)load {
+  NSUserDefaults *ud;
+  
+  ud = [NSUserDefaults standardUserDefaults];
+  [ud registerDefaults:@{
+    @"FixedEntryPoint": @YES,
+    @"UseAssemblyTimeOptimization": @NO
+  }];
+}
+
+
 - (Class)executableClass {
   return [MOSFileBackedExecutable class];
 }
@@ -74,6 +85,20 @@
 
 - (NSViewController *)simulatorPreferencesViewController {
   return [[MOS68kSimulatorPrefViewController alloc] init];
+}
+
+
+- (MOSAssemblageOptions)currentAssemblageOptions
+{
+  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+  MOSAssemblageOptions opts;
+  
+  opts = [ud boolForKey:@"FixedEntryPoint"] ?
+    MOS68kAssemblageOptionEntryPointFixed : MOS68kAssemblageOptionEntryPointSymbolic;
+  opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ?
+    MOS68kAssemblageOptionOptimizationOn : MOS68kAssemblageOptionOptimizationOff;
+  
+  return opts;
 }
 
 

@@ -68,17 +68,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 #pragma mark - Class Properties
 
 
-+ (void)load {
-  NSUserDefaults *ud;
-  
-  ud = [NSUserDefaults standardUserDefaults];
-  [ud registerDefaults:@{
-    @"FixedEntryPoint": @YES,
-    @"UseAssemblyTimeOptimization": @NO
-  }];
-}
-
-
 + (BOOL)autosavesInPlace {
   return YES;
 }
@@ -436,6 +425,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [self setTransient:NO];
   
   self.assembler = [[[platform assemblerClass] alloc] init];
+  opts = [platform currentAssemblageOptions];
   
   NSString *sourceToAssemble;
   if (!assembleForSaveOnly) {
@@ -468,11 +458,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   
   [jsm addJob:lastJob];
   hadJob = YES;
-  
-  opts = [ud boolForKey:@"FixedEntryPoint"] ?
-    MOSAssemblageOptionEntryPointFixed : MOSAssemblageOptionEntryPointSymbolic;
-  opts |= [ud boolForKey:@"UseAssemblyTimeOptimization"] ?
-    MOSAssemblageOptionOptimizationOn : MOSAssemblageOptionOptimizationOff;
   
   if ([self.assembler respondsToSelector:@selector(listingDictionary)])
     [self.assembler setProduceListingDictionary:wlist];

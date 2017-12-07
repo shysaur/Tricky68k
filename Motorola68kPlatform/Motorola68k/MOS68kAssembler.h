@@ -14,6 +14,14 @@
 @class MOS68kListingDictionary;
 
 
+typedef NS_OPTIONS(MOSAssemblageOptions, MOS68kAssemblageOptions) {
+  MOS68kAssemblageOptionOptimizationOff = 0,
+  MOS68kAssemblageOptionOptimizationOn = 1 << 16,
+  MOS68kAssemblageOptionEntryPointFixed = 0,
+  MOS68kAssemblageOptionEntryPointSymbolic = 1 << 17,
+};
+
+
 @interface MOS68kAssembler : MOSAssembler <MOSMonitoredTaskDelegate> {
   NSMutableArray *sections;
   BOOL gotWarnings;

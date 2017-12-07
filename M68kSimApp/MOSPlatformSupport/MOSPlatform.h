@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MOSAssembler.h"
 
 
 @interface MOSPlatform : NSObject
@@ -27,5 +28,7 @@
 
 - (NSViewController *)assemblerPreferencesViewController;
 - (NSViewController *)simulatorPreferencesViewController;
+
+- (MOSAssemblageOptions)currentAssemblageOptions;
 
 @end

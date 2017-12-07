@@ -15,11 +15,9 @@ typedef enum {
   MOSAssemblageResultSuccessWithWarning,
 } MOSAssemblageResult;
 
-typedef NS_OPTIONS(NSUInteger, MOSAssemblageOptions) {
-  MOSAssemblageOptionOptimizationOff = 0,
-  MOSAssemblageOptionOptimizationOn = 1 << 0,
-  MOSAssemblageOptionEntryPointFixed = 0,
-  MOSAssemblageOptionEntryPointSymbolic = 1 << 1,
+typedef NSInteger MOSAssemblageOptions;
+enum {
+  MOSAssemblageOptionFirstPlatformSpecificOption = 1 << 16
 };
 
 
