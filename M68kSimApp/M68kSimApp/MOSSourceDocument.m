@@ -352,7 +352,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
       [self switchToSimulator:self];
       /* Since we are changing simulator executable, validation of toolbar
        * items will change, even if no events did occur. */
-      [[docWindow toolbar] validateVisibleItems];
+      [[self->docWindow toolbar] validateVisibleItems];
     } else {
       [(MOSAppDelegate*)[NSApp delegate] openJobsWindow:self];
     }
@@ -378,7 +378,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [sp setCanSelectHiddenExtension:YES];
   [sp beginSheetModalForWindow:docWindow completionHandler:^(NSInteger result) {
     if (result == NSFileHandlingPanelOKButton) {
-      assembleForSaveOnly = YES;
+      self->assembleForSaveOnly = YES;
       
       [self assembleInBackgroundWithListing:NO completionHandler:^void
       (MOSAssemblageResult asmres, MOSExecutable *exc, MOSListingDictionary *ld) {
@@ -404,7 +404,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [self assembleInBackgroundWithListing:!!breakptdel completionHandler:^void
   (MOSAssemblageResult asmres, MOSExecutable *exc, MOSListingDictionary *ld) {
     self.assemblyOutput = exc;
-    lastListing = ld;
+    self->lastListing = ld;
     completionHandler(asmres);
   }];
 }

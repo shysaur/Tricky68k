@@ -95,19 +95,19 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   ttyOpenSem = dispatch_semaphore_create(0);
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    while (![fromSimTty fileHandleForReading]);
+    while (![self->fromSimTty fileHandleForReading]);
     dispatch_semaphore_signal(ttyOpenSem);
   });
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    while (![toSimTty fileHandleForWriting]);
+    while (![self->toSimTty fileHandleForWriting]);
     dispatch_semaphore_signal(ttyOpenSem);
   });
   dispatch_async(receiveQueue, ^{
-    while (![fromSim fileHandleForReading]);
+    while (![self->fromSim fileHandleForReading]);
     dispatch_semaphore_signal(ttyOpenSem);
   });
   dispatch_async(sendQueue, ^{
-    while (![toSim fileHandleForWriting]);
+    while (![self->toSim fileHandleForWriting]);
     dispatch_semaphore_signal(ttyOpenSem);
   });
   
@@ -168,7 +168,7 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
   
   complete = dispatch_semaphore_create(0);
   dispatch_async(sendQueue, ^{
-    [[toSim fileHandleForWriting] writeLine:com];
+    [[self->toSim fileHandleForWriting] writeLine:com];
     dispatch_semaphore_signal(complete);
   });
   
@@ -195,13 +195,13 @@ void MOSSimLog(NSTask *proc, NSString *fmt, ...) {
     NSString *prompt = s ? @"continuing." : @"debug? ";
     BOOL first = YES;
     
-    tmp = [[fromSim fileHandleForReading] readLine];
+    tmp = [[self->fromSim fileHandleForReading] readLine];
     while (tmp && ![tmp isEqual:prompt]) {
       if (first && [tmp hasPrefix:@"error! "])
         simerr = [self errorFromLine:tmp];
       else
         [res addObject:tmp];
-      tmp = [[fromSim fileHandleForReading] readLine];
+      tmp = [[self->fromSim fileHandleForReading] readLine];
       first = NO;
     }
     dispatch_semaphore_signal(complete);
@@ -280,27 +280,27 @@ done:
     BOOL first = YES;
     NSInteger reentReas = 0;
     
-    tmp = [[fromSim fileHandleForReading] readLine];
+    tmp = [[self->fromSim fileHandleForReading] readLine];
     while (tmp && ![tmp isEqual:@"debug? "]) {
       if (first && [tmp hasPrefix:@"error! "])
         reenterError = [self errorFromLine:tmp];
       else if (first && [tmp hasPrefix:@"reason. "])
         sscanf([tmp UTF8String]+8, "%ld", &reentReas);
       else
-        MOSSimLog(simTask, @"received %@ on debugger reenter", tmp);
-      tmp = [[fromSim fileHandleForReading] readLine];
+        MOSSimLog(self->simTask, @"received %@ on debugger reenter", tmp);
+      tmp = [[self->fromSim fileHandleForReading] readLine];
       first = NO;
     }
     if (!tmp) return; /* EOF => sim dead */
     
     self.lastErrorOnSimReenter = reenterError;
     self.lastSimReenterReason = reentReas;
-    dispatch_semaphore_signal(enteredDebugger);
+    dispatch_semaphore_signal(self->enteredDebugger);
     
-    if (dispatch_semaphore_wait(waitingForDebugger, DISPATCH_TIME_NOW)) {
+    if (dispatch_semaphore_wait(self->waitingForDebugger, DISPATCH_TIME_NOW)) {
       /* Nobody is waiting for the enteredDebugger signal. */
       dispatch_async(dispatch_get_main_queue(), ^{
-        if (!dispatch_semaphore_wait(enteredDebugger, DISPATCH_TIME_NOW)) {
+        if (!dispatch_semaphore_wait(self->enteredDebugger, DISPATCH_TIME_NOW)) {
           /* Nobody else has acknowledge entrance into the debugger, so we
            * do it ourselves. */
           if ([self simulatorState] != MOSSimulatorStatePaused)

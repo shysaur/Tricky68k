@@ -39,10 +39,10 @@
       NSLog(@"Address for line %ld not found.", l);
     else {
       [res addObject:a];
-      tmp = [addressToOriginalLines objectForKey:a];
+      tmp = [self->addressToOriginalLines objectForKey:a];
       if (!tmp) {
         tmp = [NSMutableIndexSet indexSetWithIndex:l];
-        [addressToOriginalLines setObject:tmp forKey:a];
+        [self->addressToOriginalLines setObject:tmp forKey:a];
       } else
         [tmp addIndex:l];
     }

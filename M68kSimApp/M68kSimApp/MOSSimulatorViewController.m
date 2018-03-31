@@ -487,12 +487,12 @@ static void *SimulatorState = &SimulatorState;
     id wd;
     
     if (res == NSModalResponseOK) {
-      [simProxy removeAllBreakpoints];
-      bpts = [brkptWc displayedBreakpoints];
+      [self->simProxy removeAllBreakpoints];
+      bpts = [self->brkptWc displayedBreakpoints];
       for (mb in bpts) {
-        [simProxy addBreakpointAtAddress:[mb rawAddress]];
+        [self->simProxy addBreakpointAtAddress:[mb rawAddress]];
       }
-      [disasmDs dataHasChanged];
+      [self->disasmDs dataHasChanged];
       
       wd = [w delegate];
       if ([wd respondsToSelector:@selector(breakpointsShouldSyncFromSimulator:)])

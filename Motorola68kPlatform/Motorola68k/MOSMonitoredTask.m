@@ -126,32 +126,32 @@
   [task launch];
   running = YES;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-    [task waitUntilExit];
+    [self->task waitUntilExit];
     
     dispatch_sync(dispatch_get_main_queue(), ^{
       [self willChangeValueForKey:@"running"];
-      running = NO;
+      self->running = NO;
       [self didChangeValueForKey:@"running"];
     });
-    dispatch_semaphore_signal(exitSem);
+    dispatch_semaphore_signal(self->exitSem);
   });
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
     NSFileHandle *outFh;
     NSString *line;
     
-    outFh = [outputPipe fileHandleForReading];
+    outFh = [self->outputPipe fileHandleForReading];
     line = [outFh readLine];
     while (line) {
       dispatch_async(dispatch_get_main_queue(), ^{
         [self willChangeValueForKey:@"taskOutput"];
-        [lines addObject:line];
+        [self->lines addObject:line];
         [self didChangeValueForKey:@"taskOutput"];
-        [delegate receivedTaskOutput:line];
+        [self->delegate receivedTaskOutput:line];
       });
       line = [outFh readLine];
     }
-    dispatch_semaphore_signal(pipeClosedSem);
+    dispatch_semaphore_signal(self->pipeClosedSem);
   });
 }
 
