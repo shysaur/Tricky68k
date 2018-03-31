@@ -30,7 +30,8 @@
 }
 
 
-- (id)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)disp error:(NSError **)err {
+- (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)disp completionHandler:(nonnull void (^)(NSDocument * _Nullable, BOOL, NSError * _Nullable))completionHandler
+{
   MOSDocument *firstDoc;
   
   [transientClose lock];
@@ -41,7 +42,7 @@
   }
   [transientClose unlock];
   
-  return [super openDocumentWithContentsOfURL:url display:disp error:err];
+  [super openDocumentWithContentsOfURL:url display:disp completionHandler:completionHandler];
 }
 
 
