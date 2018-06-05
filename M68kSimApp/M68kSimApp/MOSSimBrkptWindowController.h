@@ -11,10 +11,8 @@
 
 @interface MOSSimBrkptWindowController : NSWindowController {
   NSWindow *modalWindow;
-  NSArray *breakpts;
   NSArray *symbolLocator;
   NSDictionary *symbolTable;
-  NSArray *sortDesc;
   NSUndoManager *undoManager;
   IBOutlet NSArrayController *bptsController;
   IBOutlet NSSegmentedControl *addRemoveButtons;
@@ -30,8 +28,9 @@
 - (IBAction)addOrRemove:(id)sender;
 
 - (void)setBreakpointsFromSet:(NSSet*)b;
-- (void)setDisplayedBreakpoints:(NSArray *)b;
-- (NSArray *)displayedBreakpoints;
+@property NSArray *displayedBreakpoints;
+
+@property NSArray *sortDescriptors;
 
 - (void)setSymbolTable:(NSDictionary*)st;
 

@@ -44,16 +44,6 @@ static void *CanRemoveContext = &CanRemoveContext;
 }
 
 
-- (void)setSortDescriptors:(NSArray*)sd {
-  sortDesc = sd;
-}
-
-
-- (NSArray *)sortDescriptors {
-  return sortDesc;
-}
-
-
 - (IBAction)cancel:(id)sender {
   [modalWindow endSheet:[self window] returnCode:NSModalResponseCancel];
   modalWindow = nil;
@@ -146,16 +136,6 @@ static void *CanRemoveContext = &CanRemoveContext;
     [conv addObject:bp];
   }
   [self setDisplayedBreakpoints:[conv copy]];
-}
-
-
-- (void)setDisplayedBreakpoints:(NSArray *)b {
-  breakpts = b;
-}
-
-
-- (NSArray *)displayedBreakpoints {
-  return breakpts;
 }
 
 
