@@ -74,7 +74,11 @@ static void *CanRemoveContext = &CanRemoveContext;
 - (void)add:(id)sender
 {
   NSArray *oldbps = [self.displayedBreakpoints copy];
-  [[undoManager prepareWithInvocationTarget:self] setDisplayedBreakpoints:oldbps];
+  NSIndexSet *oldselection = [bptsController selectionIndexes];
+  [undoManager registerUndoWithTarget:self handler:^(MOSSimBrkptWindowController* _Nonnull target) {
+    [target setDisplayedBreakpoints:oldbps];
+    [target->bptsController setSelectionIndexes:oldselection];
+  }];
   [undoManager setActionName:NSLocalizedString(@"Add", @"Add breakpoint undo label")];
   
   MOSUndoableMutableBreakpoint *bp;
@@ -88,7 +92,11 @@ static void *CanRemoveContext = &CanRemoveContext;
 - (void)remove:(id)sender
 {
   NSArray *oldbps = [self.displayedBreakpoints copy];
-  [[undoManager prepareWithInvocationTarget:self] setDisplayedBreakpoints:oldbps];
+  NSIndexSet *oldselection = [bptsController selectionIndexes];
+  [undoManager registerUndoWithTarget:self handler:^(MOSSimBrkptWindowController* _Nonnull target) {
+    [target setDisplayedBreakpoints:oldbps];
+    [target->bptsController setSelectionIndexes:oldselection];
+  }];
   [undoManager setActionName:NSLocalizedString(@"Remove", @"Remove breakpoint undo label")];
   
   [bptsController remove:sender];
