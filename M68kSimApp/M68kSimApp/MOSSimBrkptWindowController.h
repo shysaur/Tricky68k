@@ -15,6 +15,7 @@
   NSArray *symbolLocator;
   NSDictionary *symbolTable;
   NSArray *sortDesc;
+  NSUndoManager *undoManager;
   IBOutlet NSArrayController *bptsController;
   IBOutlet NSSegmentedControl *addRemoveButtons;
 }

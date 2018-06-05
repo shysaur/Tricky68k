@@ -25,5 +25,6 @@
 - (uint32_t)rawAddress;
 
 - (NSString *)symbolicLocation;
+- (void)setSymbolicLocation:(NSString *)str;
 
 @end

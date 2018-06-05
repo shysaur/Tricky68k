@@ -7,7 +7,7 @@
 //
 
 #import "MOSSimBrkptWindowController.h"
-#import "MOSMutableBreakpoint.h"
+#import "MOSUndoableMutableBreakpoint.h"
 
 
 static void *CanRemoveContext = &CanRemoveContext;
@@ -18,6 +18,7 @@ static void *CanRemoveContext = &CanRemoveContext;
 
 - (instancetype)init {
   self = [super initWithWindowNibName:@"MOSSimBrkptWindow"];
+  undoManager = [[NSUndoManager alloc] init];
   return self;
 }
 
@@ -28,6 +29,18 @@ static void *CanRemoveContext = &CanRemoveContext;
     ]];
   [bptsController addObserver:self forKeyPath:@"canRemove"
     options:NSKeyValueObservingOptionInitial context:CanRemoveContext];
+}
+
+
+- (NSUndoManager *)undoManager
+{
+  return undoManager;
+}
+
+
+- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window
+{
+  return self.undoManager;
 }
 
 
@@ -59,13 +72,36 @@ static void *CanRemoveContext = &CanRemoveContext;
   
   switch ([sender selectedSegment]) {
     case 0:
-      [bptsController addObject:[[MOSMutableBreakpoint alloc] initWithAddress:0
-        symbolTable:symbolTable symbolLocator:symbolLocator]];
+      [self add:sender];
       break;
     case 1:
-      [bptsController remove:sender];
+      [self remove:sender];
       break;
   }
+}
+
+
+- (void)add:(id)sender
+{
+  NSArray *oldbps = [self.displayedBreakpoints copy];
+  [[undoManager prepareWithInvocationTarget:self] setDisplayedBreakpoints:oldbps];
+  [undoManager setActionName:NSLocalizedString(@"Add", @"Add breakpoint undo label")];
+  
+  MOSUndoableMutableBreakpoint *bp;
+  bp = [[MOSUndoableMutableBreakpoint alloc] initWithAddress:0
+        symbolTable:symbolTable symbolLocator:symbolLocator];
+  [bp setUndoManager:self.undoManager];
+  [bptsController addObject:bp];
+}
+
+
+- (void)remove:(id)sender
+{
+  NSArray *oldbps = [self.displayedBreakpoints copy];
+  [[undoManager prepareWithInvocationTarget:self] setDisplayedBreakpoints:oldbps];
+  [undoManager setActionName:NSLocalizedString(@"Remove", @"Remove breakpoint undo label")];
+  
+  [bptsController remove:sender];
 }
 
 
@@ -100,12 +136,13 @@ static void *CanRemoveContext = &CanRemoveContext;
 - (void)setBreakpointsFromSet:(NSSet*)b {
   NSMutableArray *conv;
   NSNumber *n;
-  MOSMutableBreakpoint *bp;
+  MOSUndoableMutableBreakpoint *bp;
   
   conv = [[NSMutableArray alloc] init];
   for (n in b) {
-    bp = [[MOSMutableBreakpoint alloc] initWithAddress:[n unsignedIntValue]
+    bp = [[MOSUndoableMutableBreakpoint alloc] initWithAddress:[n unsignedIntValue]
          symbolTable:symbolTable symbolLocator:symbolLocator];
+    [bp setUndoManager:self.undoManager];
     [conv addObject:bp];
   }
   [self setDisplayedBreakpoints:[conv copy]];

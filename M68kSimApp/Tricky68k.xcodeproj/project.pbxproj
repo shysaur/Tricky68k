@@ -58,6 +58,7 @@
 		0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */; };
 		0161F7F21A6ADF0200848C0D /* MOSSimulatorSubviewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F7F11A6ADF0200848C0D /* MOSSimulatorSubviewDelegate.m */; };
 		0161F7F61A6AFD2600848C0D /* MOSSimulatorPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F7F41A6AFD2600848C0D /* MOSSimulatorPrefViewController.m */; };
+		0166743820C1F6E4004A8C7F /* MOSUndoableMutableBreakpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0166743720C1F6E4004A8C7F /* MOSUndoableMutableBreakpoint.m */; };
 		016CD13C1A51A10E00D64892 /* MOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13B1A51A10E00D64892 /* MOSAppDelegate.m */; };
 		016CD13E1A51A10E00D64892 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD13D1A51A10E00D64892 /* main.m */; };
 		016CD1411A51A10E00D64892 /* MOSSourceDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CD1401A51A10E00D64892 /* MOSSourceDocument.m */; };
@@ -303,6 +304,8 @@
 		0161F7F11A6ADF0200848C0D /* MOSSimulatorSubviewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorSubviewDelegate.m; sourceTree = "<group>"; };
 		0161F7F31A6AFD2600848C0D /* MOSSimulatorPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorPrefViewController.h; sourceTree = "<group>"; };
 		0161F7F41A6AFD2600848C0D /* MOSSimulatorPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimulatorPrefViewController.m; sourceTree = "<group>"; };
+		0166743620C1F6E4004A8C7F /* MOSUndoableMutableBreakpoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSUndoableMutableBreakpoint.h; sourceTree = "<group>"; };
+		0166743720C1F6E4004A8C7F /* MOSUndoableMutableBreakpoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOSUndoableMutableBreakpoint.m; sourceTree = "<group>"; };
 		016CD1351A51A10E00D64892 /* Tricky68k.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tricky68k.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016CD1391A51A10E00D64892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016CD13A1A51A10E00D64892 /* MOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSAppDelegate.h; sourceTree = "<group>"; };
@@ -653,6 +656,8 @@
 				013D84C61BC06DF7003E4817 /* MOSAddressFormatter.m */,
 				013D84C81BC0A594003E4817 /* MOSMutableBreakpoint.h */,
 				013D84C91BC0A594003E4817 /* MOSMutableBreakpoint.m */,
+				0166743620C1F6E4004A8C7F /* MOSUndoableMutableBreakpoint.h */,
+				0166743720C1F6E4004A8C7F /* MOSUndoableMutableBreakpoint.m */,
 				01A2ABB31BBC86FF008BBC59 /* MOSSimBrkptWindowController.h */,
 				01A2ABB41BBC86FF008BBC59 /* MOSSimBrkptWindowController.m */,
 				01E974C91BE8021C002E91B5 /* MOSSimBrkptWindow.xib */,
@@ -1049,6 +1054,7 @@
 				01DE189F1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m in Sources */,
 				014A3C6D1A5D432300F73FC5 /* MOSTeletypeView.m in Sources */,
 				01E6A2781C946640002FA51A /* MOSPrintAccessoryViewController.m in Sources */,
+				0166743820C1F6E4004A8C7F /* MOSUndoableMutableBreakpoint.m in Sources */,
 				014D85D71A62CF2100648B41 /* MOSJobWindowController.m in Sources */,
 				01EBAA261AB9D9140076AD02 /* MOSDocumentController.m in Sources */,
 				01F236F01AE5470E0039EB73 /* MOSFragariaPreferencesObserver.m in Sources */,
