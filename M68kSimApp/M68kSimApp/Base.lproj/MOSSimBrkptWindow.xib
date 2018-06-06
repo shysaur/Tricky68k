@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14269.12"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="340" height="291"/>
@@ -50,25 +50,12 @@
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="Id5-C5-gok"/>
                         </constraints>
-                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="W4X-Yr-OYG">
+                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="W4X-Yr-OYG">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="ok:" target="-2" id="eMh-He-u7l"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7nM-4X-E4e">
-                        <rect key="frame" x="162" y="13" width="82" height="32"/>
-                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2c6-t3-mNR">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="cancel:" target="-2" id="ozV-Kx-oBP"/>
                         </connections>
                     </button>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLj-3Z-ert">
@@ -104,7 +91,7 @@ Gw
                                                 <binding destination="Fd8-K6-G5R" name="value" keyPath="arrangedObjects.address" id="cex-5l-wDh"/>
                                             </connections>
                                         </tableColumn>
-                                        <tableColumn identifier="" width="202" minWidth="10" maxWidth="3.4028234663852886e+38" id="Hgs-KT-PrI">
+                                        <tableColumn width="202" minWidth="10" maxWidth="3.4028234663852886e+38" id="Hgs-KT-PrI">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Location">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -147,20 +134,22 @@ Gw
                             <rect key="frame" x="0.0" y="0.0" width="298" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
+                        <connections>
+                            <outlet property="menu" destination="vTu-VE-T3Y" id="7KJ-4L-odq"/>
+                        </connections>
                     </scrollView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="zCI-oM-uPP" firstAttribute="leading" secondItem="7nM-4X-E4e" secondAttribute="trailing" constant="12" id="HNp-jM-CPQ"/>
+                    <constraint firstItem="zCI-oM-uPP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="5mA-hm-OnI"/>
+                    <constraint firstItem="zCI-oM-uPP" firstAttribute="top" secondItem="dFM-1d-RIL" secondAttribute="bottom" constant="10" id="Cel-Hl-NuN"/>
                     <constraint firstItem="ZLj-3Z-ert" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="LkV-HS-kcK"/>
+                    <constraint firstAttribute="bottom" secondItem="zCI-oM-uPP" secondAttribute="bottom" constant="20" id="MLn-Pd-Yka"/>
                     <constraint firstItem="dFM-1d-RIL" firstAttribute="top" secondItem="ZLj-3Z-ert" secondAttribute="bottom" constant="-1" id="NAa-DT-TXd"/>
                     <constraint firstAttribute="trailing" secondItem="dFM-1d-RIL" secondAttribute="trailing" constant="20" id="TN2-sx-VP0"/>
                     <constraint firstAttribute="trailing" secondItem="zCI-oM-uPP" secondAttribute="trailing" constant="20" id="TR4-KN-MAu"/>
                     <constraint firstItem="dFM-1d-RIL" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="XZU-WA-saZ"/>
-                    <constraint firstAttribute="bottom" secondItem="7nM-4X-E4e" secondAttribute="bottom" constant="20" id="dlT-kh-i8S"/>
-                    <constraint firstItem="zCI-oM-uPP" firstAttribute="bottom" secondItem="7nM-4X-E4e" secondAttribute="bottom" id="oGU-Qs-GAx"/>
                     <constraint firstItem="ZLj-3Z-ert" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="pRr-ds-KML"/>
                     <constraint firstAttribute="trailing" secondItem="ZLj-3Z-ert" secondAttribute="trailing" constant="20" id="rVU-2t-Z4l"/>
-                    <constraint firstItem="7nM-4X-E4e" firstAttribute="top" secondItem="dFM-1d-RIL" secondAttribute="bottom" constant="10" id="wrg-kz-WWi"/>
                 </constraints>
             </view>
             <connections>
@@ -176,6 +165,36 @@ Gw
             </connections>
         </arrayController>
         <customFormatter id="HL0-Su-EuZ" customClass="MOSAddressFormatter"/>
+        <menu id="vTu-VE-T3Y">
+            <items>
+                <menuItem title="Undo" id="AfS-VR-5hk">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="undo:" target="-1" id="adB-Jn-ync"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Redo" id="Anm-nO-AWg">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="redo:" target="-1" id="jIH-f0-KfZ"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="ahx-k5-shy"/>
+                <menuItem title="Add" id="paJ-hS-SF5">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="add:" target="-2" id="mac-Rh-Awh"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Remove" id="770-ke-7eN">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="remove:" target="-2" id="rOo-qp-y5L"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="195" y="13"/>
+        </menu>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>

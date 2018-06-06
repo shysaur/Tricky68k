@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MOSSimBrkptWindowController : NSWindowController {
+@interface MOSSimBrkptWindowController : NSWindowController <NSUserInterfaceValidations> {
   NSWindow *modalWindow;
   NSArray *symbolLocator;
   NSDictionary *symbolTable;
@@ -26,6 +26,8 @@
 - (IBAction)cancel:(id)sender;
 - (IBAction)ok:(id)sender;
 - (IBAction)addOrRemove:(id)sender;
+- (IBAction)add:(id)sender;
+- (IBAction)remove:(id)sender;
 
 - (void)setBreakpointsFromSet:(NSSet*)b;
 @property NSArray *displayedBreakpoints;

@@ -71,7 +71,7 @@ static void *CanRemoveContext = &CanRemoveContext;
 }
 
 
-- (void)add:(id)sender
+- (IBAction)add:(id)sender
 {
   NSArray *oldbps = [self.displayedBreakpoints copy];
   NSIndexSet *oldselection = [bptsController selectionIndexes];
@@ -89,7 +89,7 @@ static void *CanRemoveContext = &CanRemoveContext;
 }
 
 
-- (void)remove:(id)sender
+- (IBAction)remove:(id)sender
 {
   NSArray *oldbps = [self.displayedBreakpoints copy];
   NSIndexSet *oldselection = [bptsController selectionIndexes];
@@ -115,6 +115,16 @@ static void *CanRemoveContext = &CanRemoveContext;
 {
   [addRemoveButtons setEnabled:[bptsController canRemove] forSegment:1];
   [addRemoveButtons setEnabled:YES forSegment:0];
+}
+
+
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)item
+{
+  if ([item action] == @selector(add:))
+    return YES;
+  if ([item action] == @selector(remove:))
+    return [bptsController canRemove];
+  return YES;
 }
 
 
