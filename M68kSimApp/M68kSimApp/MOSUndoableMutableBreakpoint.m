@@ -18,7 +18,10 @@
   if (![self.undoManager isUndoing]) {
     [self.undoManager setActionName:NSLocalizedString(@"Change Address", @"Change breakpoint Address undo action label")];
   }
+  
+  [self.undoManager disableUndoRegistration];
   [super setAddress:a];
+  [self.undoManager enableUndoRegistration];
 }
 
 
@@ -28,7 +31,10 @@
   if (![self.undoManager isUndoing]) {
     [self.undoManager setActionName:NSLocalizedString(@"Change Symbolic Location", @"Change breakpoint Symbolic Location undo action label")];
   }
+  
+  [self.undoManager disableUndoRegistration];
   [super setSymbolicLocation:str];
+  [self.undoManager enableUndoRegistration];
 }
 
 
