@@ -414,7 +414,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   (MOSAssemblageResult result, MOSExecutable *exc, MOSListingDictionary *ld))
   completionHandler
 {
-  NSUserDefaults *ud;
   MOSAssemblageOptions opts;
   MOSJobStatusManager *jsm;
   NSString *title, *label;
@@ -435,7 +434,6 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     sourceToAssemble = [[text string] copy];
   }
 
-  ud = [NSUserDefaults standardUserDefaults];
   jsm = [MOSJobStatusManager sharedJobStatusManger];
   
   if (lastJob)
