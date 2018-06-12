@@ -307,7 +307,7 @@ error_t *elf_loadSegments(const char *fn, FILE *fp, Elf32_Ehdr header) {
 }
 
 
-error_t *elf_getSection(const char *fn, FILE *fp, Elf32_Ehdr header, int *i,
+error_t *elf_getSection(const char *fn, FILE *fp, Elf32_Ehdr header, Elf32_Word *i, int *found,
                         Elf32_Shdr *section, Elf32_Word type) {
   for (; (*i)<SECT_HEADER_TBL_ITEM_COUNT; (*i)++) {
     fseek(fp, SECT_HEADER_TBL_OFFSET + *i*SECT_HEADER_TBL_ITEM_SIZE, SEEK_SET);
@@ -325,11 +325,13 @@ error_t *elf_getSection(const char *fn, FILE *fp, Elf32_Ehdr header, int *i,
     section->sh_addralign = BE_TO_LE_32(section->sh_addralign);
     section->sh_entsize = BE_TO_LE_32(section->sh_entsize);
     
-    if (section->sh_type == type)
+    if (section->sh_type == type) {
+      *found = 1;
       return NULL;
+    }
   }
   
-  *i = -1;
+  *found = 0;
   return NULL;
 }
 
@@ -340,18 +342,19 @@ error_t *elf_loadSymbols(const char *fn, FILE *fp, Elf32_Ehdr header) {
   size_t symo;
   Elf32_Sym sym;
   char *strings = NULL;
-  int i;
+  Elf32_Word i;
+  int found = 0;
   
   i = 0;
-  if ((tmpe = elf_getSection(fn, fp, header, &i, &symtab, SHT_SYMTAB)))
+  if ((tmpe = elf_getSection(fn, fp, header, &i, &found, &symtab, SHT_SYMTAB)))
     return tmpe;
-  if (i < 0 || symtab.sh_size == 0 || symtab.sh_link == 0)
+  if (!found || symtab.sh_size == 0 || symtab.sh_link == 0)
     return NULL;
   
   i = symtab.sh_link;
-  if ((tmpe = elf_getSection(fn, fp, header, &i, &strtab, SHT_STRTAB)))
+  if ((tmpe = elf_getSection(fn, fp, header, &i, &found, &strtab, SHT_STRTAB)))
     return tmpe;
-  if (i != symtab.sh_link)
+  if (!found || i != symtab.sh_link)
     return error_new(520, "Missing string table section at index %d", i);
   
   if (strtab.sh_size) {
