@@ -53,9 +53,9 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
   lineLocationCache = [[NSMutableDictionary alloc] init];
   
   _font = [NSFont userFixedPitchFontOfSize:11.0];
-  _textColor = [NSColor blackColor];
-  _backgroundColor = [NSColor whiteColor];
-  _cursorColor = [NSColor grayColor];
+  _textColor = [NSColor textColor];
+  _backgroundColor = [NSColor textBackgroundColor];
+  _cursorColor = [NSColor systemGrayColor];
   [self reloadFontInfo];
 }
 
@@ -135,7 +135,8 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 #pragma mark - NSTextInputClient
 
 
-- (void)insertText:(id)aString replacementRange:(NSRange)replacementRange {
+- (void)insertText:(id)aString replacementRange:(NSRange)replacementRange
+{
   NSUInteger i;
   
   if (NSMaxRange(replacementRange) < [storage length])
