@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,7 +30,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="876" height="417"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                            <color key="value" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                            <color key="value" name="separatorColor" catalog="System" colorSpace="catalog"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </customView>
@@ -44,7 +45,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="876" height="236"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                            <color key="value" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="value" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </customView>
@@ -62,7 +63,7 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="value" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </customView>
@@ -96,7 +97,7 @@
                                                                                 <rect key="frame" x="1" y="1" width="143" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
-                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="hKg-ju-WHL">
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKg-ju-WHL">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="95" height="14"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="MEP-eN-ZMO">
                                                                                             <font key="font" metaFont="fixedUser"/>
@@ -127,16 +128,16 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="146" id="SaI-Ug-StY"/>
                                                     </constraints>
-                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="pWm-Jx-WY0">
+                                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="pWm-Jx-WY0">
                                                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
-                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="zdc-uw-XnN">
+                                                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="zdc-uw-XnN">
                                                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                 </scrollView>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IfM-JC-G8z">
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IfM-JC-G8z">
                                                     <rect key="frame" x="56" y="237" width="34" height="14"/>
                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Stack" id="qJ2-Gr-pID">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -169,7 +170,7 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="value" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </customView>
@@ -218,7 +219,7 @@
                                                                                                         </constraints>
                                                                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="MOSBreakpointMarker" id="edt-1q-y4D"/>
                                                                                                     </imageView>
-                                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Km5-iY-9Ft">
+                                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Km5-iY-9Ft">
                                                                                                         <rect key="frame" x="20" y="0.0" width="95" height="14"/>
                                                                                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ig6-KF-66J">
                                                                                                             <font key="font" metaFont="fixedUser"/>
@@ -266,7 +267,7 @@
                                                                                                         </constraints>
                                                                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="MOSBreakpointMarker" id="h2e-Gu-5aG"/>
                                                                                                     </imageView>
-                                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="jqt-MV-4NT">
+                                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jqt-MV-4NT">
                                                                                                         <rect key="frame" x="20" y="0.0" width="95" height="14"/>
                                                                                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="XjR-w8-6R3">
                                                                                                             <font key="font" metaFont="fixedUser"/>
@@ -309,11 +310,11 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="600" id="yUZ-Sk-yV7"/>
                                                                     </constraints>
-                                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="2fX-aJ-hwZ">
+                                                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="2fX-aJ-hwZ">
                                                                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
-                                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="eBc-iC-dY9">
+                                                                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="eBc-iC-dY9">
                                                                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
@@ -360,7 +361,7 @@
                                                                                                 <rect key="frame" x="1" y="1" width="597" height="14"/>
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                 <subviews>
-                                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rvp-Yt-wBD">
+                                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rvp-Yt-wBD">
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="95" height="14"/>
                                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="WhV-NI-fW0">
                                                                                                             <font key="font" metaFont="fixedUser"/>
@@ -391,11 +392,11 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="500" id="Ahs-YS-Bsx"/>
                                                                     </constraints>
-                                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="tCm-Cc-K32">
+                                                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="tCm-Cc-K32">
                                                                         <rect key="frame" x="1" y="109" width="220" height="16"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
-                                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="idL-WZ-gJD">
+                                                                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="idL-WZ-gJD">
                                                                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
@@ -418,7 +419,7 @@
                                                     <rect key="frame" x="0.0" y="235" width="600" height="20"/>
                                                     <middleViews>
                                                         <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1U-ra-Hz5">
-                                                            <rect key="frame" x="212" y="1" width="88" height="18"/>
+                                                            <rect key="frame" x="211" y="1" width="90" height="18"/>
                                                             <popUpButtonCell key="cell" type="check" title="Disassembly" bezelStyle="regularSquare" imagePosition="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="bezel" inset="2" selectedItem="Z3C-kP-AFF" id="vAD-2H-Uzi">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="smallSystem"/>
@@ -438,8 +439,8 @@
                                                                 </menu>
                                                             </popUpButtonCell>
                                                         </popUpButton>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMC-kp-VLw">
-                                                            <rect key="frame" x="304" y="3" width="84" height="14"/>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMC-kp-VLw">
+                                                            <rect key="frame" x="305" y="3" width="84" height="14"/>
                                                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="and RAM dump" id="hiv-TR-oa6">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -482,7 +483,7 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                            <color key="value" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="value" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </customView>
@@ -516,7 +517,7 @@
                                                                                 <rect key="frame" x="1" y="1" width="35" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
-                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="dD8-QY-sFC">
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dD8-QY-sFC">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="14"/>
                                                                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="tvc" id="eUU-9s-vdW">
                                                                                             <font key="font" metaFont="smallSystem"/>
@@ -538,7 +539,7 @@
                                                                                 <rect key="frame" x="1" y="17" width="35" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
-                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8OV-5i-vba">
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8OV-5i-vba">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="14"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="height" constant="14" id="vfy-zh-yEB"/>
@@ -577,7 +578,7 @@
                                                                                 <rect key="frame" x="39" y="1" width="87" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
-                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gD9-Rb-5he">
+                                                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gD9-Rb-5he">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="21" height="14"/>
                                                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="tvc" id="py1-6O-n4a">
                                                                                             <font key="font" metaFont="smallSystem"/>
@@ -608,16 +609,16 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="wz8-fo-sCA"/>
                                                     </constraints>
-                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ttX-Gz-W8m">
+                                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="ttX-Gz-W8m">
                                                         <rect key="frame" x="-100" y="-100" width="223" height="15"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
-                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="g3T-6r-TzA">
+                                                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="g3T-6r-TzA">
                                                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </scroller>
                                                 </scrollView>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HcW-EI-646">
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HcW-EI-646">
                                                     <rect key="frame" x="37" y="237" width="54" height="14"/>
                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Registers" id="qQ1-oB-9ep">
                                                         <font key="font" metaFont="smallSystem"/>
@@ -668,7 +669,7 @@
                             <rect key="frame" x="0.0" y="256" width="876" height="181"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A2I-xr-YFv">
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A2I-xr-YFv">
                                     <rect key="frame" x="414" y="163" width="49" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Teletype" id="Uum-A7-Dt9">
                                         <font key="font" metaFont="smallSystem"/>
@@ -683,7 +684,7 @@
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                            <color key="value" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="value" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </customView>
@@ -703,11 +704,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </clipView>
-                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="u4I-VV-dfR">
+                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="u4I-VV-dfR">
                                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
-                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0yF-cm-2uI">
+                                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0yF-cm-2uI">
                                         <rect key="frame" x="860" y="0.0" width="16" height="162"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
@@ -753,7 +754,7 @@
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="canDrawSubviewsIntoLayer" value="YES"/>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="518" y="282.5"/>
+            <point key="canvasLocation" x="555" y="282"/>
         </view>
         <customObject id="OYl-Qf-zsd" customClass="MOSSimDumpDataSource">
             <connections>
