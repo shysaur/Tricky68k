@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -251,7 +252,7 @@
                                                                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="14"/>
                                                                                                         <userDefinedRuntimeAttributes>
                                                                                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                                                                                <color key="value" red="0.76096385720000004" green="0.94956070179999996" blue="0.6118307114" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                                <color key="value" name="MOSCurrentInstructionBackgroundColor"/>
                                                                                                             </userDefinedRuntimeAttribute>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </customView>
@@ -792,5 +793,8 @@
     <resources>
         <image name="MOSBreakpointMarker" width="15" height="14"/>
         <image name="MOSPCMarker" width="8" height="14"/>
+        <namedColor name="MOSCurrentInstructionBackgroundColor">
+            <color red="0.80699998140335083" green="0.94999998807907104" blue="0.67400002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
