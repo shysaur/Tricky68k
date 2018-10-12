@@ -258,6 +258,8 @@ NSString * const MOSToolbarItemIdentifierGoSimulator= @"MOSToolbarItemIdentifier
     [res setView:view];
     [res setLabel:label];
     [res setPaletteLabel:label];
+    [res setMaxSize:[view bounds].size];
+    [res setMinSize:[view bounds].size];
   }
   return res;
 }
