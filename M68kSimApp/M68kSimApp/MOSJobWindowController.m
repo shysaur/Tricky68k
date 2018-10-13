@@ -13,43 +13,48 @@
 @implementation MOSJobWindowController
 
 
-- (void)windowDidLoad {
+- (void)windowDidLoad
+{
   NSNotificationCenter *nc;
   
   nc = [NSNotificationCenter defaultCenter];
   
   [super windowDidLoad];
   [[self window] setExcludedFromWindowsMenu:YES];
-#if __MAC_OS_X_VERSION_MAX_ALLOWED > __MAC_10_9
-  if (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_9) {
+
+  if (@available(macOS 10.14.0, *)) {
+    [[self window] setTitleVisibility: NSWindowTitleHidden];
+    [fakeTitle setTextColor:[NSColor windowFrameTextColor]];
+  } else if (@available(macOS 10.10.0, *)) {
     [[self window] setTitleVisibility: NSWindowTitleHidden];
     [nc addObserver:self selector:@selector(windowDidBecomeMainWindow) name:NSWindowDidBecomeMainNotification object:[self window]];
     [nc addObserver:self selector:@selector(windowDidResignMainWindow) name:NSWindowDidResignMainNotification object:[self window]];
   } else {
     [fakeTitle removeFromSuperview];
   }
-#else
-  [fakeTitle removeFromSuperview];
-#endif
 }
 
 
-- (void)windowDidBecomeMainWindow {
+- (void)windowDidBecomeMainWindow
+{
   [fakeTitle setTextColor:[NSColor colorWithCalibratedWhite:0 alpha:0.77]];
 }
 
 
-- (void)windowDidResignMainWindow {
+- (void)windowDidResignMainWindow
+{
   [fakeTitle setTextColor:[NSColor colorWithCalibratedWhite:0.612 alpha:1]];
 }
 
 
-- (IBAction)clearJobList:(id)sender {
+- (IBAction)clearJobList:(id)sender
+{
   [[MOSJobStatusManager sharedJobStatusManger] clearJobList];
 }
 
 
-- (void)dealloc {
+- (void)dealloc
+{
   NSNotificationCenter *nc;
   
   nc = [NSNotificationCenter defaultCenter];
