@@ -302,7 +302,7 @@
 		015525941A5F2A9000096023 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Volker Barthelmann";
 				TargetAttributes = {
 					015526A51A5F320D00096023 = {
@@ -312,10 +312,11 @@
 			};
 			buildConfigurationList = 015525971A5F2A9000096023 /* Build configuration list for PBXProject "vasm" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 015525931A5F2A9000096023;
 			productRefGroup = 0155259D1A5F2A9000096023 /* Products */;
@@ -360,6 +361,7 @@
 		015525A11A5F2A9000096023 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -395,6 +397,7 @@
 		015525A21A5F2A9000096023 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
