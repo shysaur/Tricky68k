@@ -12,7 +12,7 @@
 
 
 @class MGSFragariaView;
-@class SMLTextView;
+@class MGSTextView;
 @class MOSAssembler;
 @class MOSSimulatorViewController;
 @class MOSFragariaPreferencesObserver;
@@ -29,7 +29,7 @@
   __weak IBOutlet NSWindow *docWindow;
   
   NSTextStorage *text;
-  SMLTextView *textView;
+  MGSTextView *textView;
   IBOutlet MGSFragariaView *fragaria;
   MOSFragariaPreferencesObserver *prefobs;
   MOSSourceBreakpointDelegate *breakptdel;

@@ -14,6 +14,7 @@
 		011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */; };
 		012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 012AEB1D1A7045E400906B25 /* dsa_pub.pem */; };
 		013A6AF91A718458007C053B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013A6AFB1A718458007C053B /* Localizable.strings */; };
+		013D07612273CD400017A4AA /* asm-m68k.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 013D075F2273CD120017A4AA /* asm-m68k.plist */; };
 		013D84C71BC06DF7003E4817 /* MOSAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 013D84C61BC06DF7003E4817 /* MOSAddressFormatter.m */; };
 		013D84CA1BC0A594003E4817 /* MOSMutableBreakpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 013D84C91BC0A594003E4817 /* MOSMutableBreakpoint.m */; };
 		014A08321BE69E5E00A8FA0F /* MOSSimulatorToolbarDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A08311BE69E5D00A8FA0F /* MOSSimulatorToolbarDelegate.m */; };
@@ -100,6 +101,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		013D074B2273B0AC0017A4AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01919E23217D20A800E26B9D;
+			remoteInfo = FragariaDefaultsCoordinator;
+		};
+		013D074D2273B0AC0017A4AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01919E2B217D20A800E26B9D;
+			remoteInfo = FragariaDefaultsCoordinatorTests;
+		};
+		013D07512273B0AC0017A4AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5AB8F19F214DA72000A1187F;
+			remoteInfo = generate_keys;
+		};
+		013D07532273B0AC0017A4AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5A5ADED7214EDE4900DF0099;
+			remoteInfo = sign_update;
+		};
 		0148C26F1F7ABE46006AB682 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
@@ -215,6 +244,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		013D07482273B0AC0017A4AA /* Copy Syntax Definitions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Syntax Definitions";
+			dstSubfolderSpec = 7;
+			files = (
+				013D07612273CD400017A4AA /* asm-m68k.plist in Copy Syntax Definitions */,
+			);
+			name = "Copy Syntax Definitions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		014F9C881E1ABDF900E74EBB /* Install Platform Plugins */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,6 +296,7 @@
 		0124CF151B2F5EF800DD0A5C /* MOSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSError.m; sourceTree = "<group>"; };
 		012AEB1D1A7045E400906B25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../../Updates/dsa_pub.pem; sourceTree = "<group>"; };
 		013A6AFA1A718458007C053B /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		013D075F2273CD120017A4AA /* asm-m68k.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "asm-m68k.plist"; path = "Fragaria/Fragaria/Additional Syntax Definitions/asm-m68k.plist"; sourceTree = SOURCE_ROOT; };
 		013D84C51BC06DF7003E4817 /* MOSAddressFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSAddressFormatter.h; sourceTree = "<group>"; };
 		013D84C61BC06DF7003E4817 /* MOSAddressFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSAddressFormatter.m; sourceTree = "<group>"; };
 		013D84C81BC0A594003E4817 /* MOSMutableBreakpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSMutableBreakpoint.h; sourceTree = "<group>"; };
@@ -392,6 +433,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		013D075A2273B17F0017A4AA /* Syntax Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				013D075F2273CD120017A4AA /* asm-m68k.plist */,
+			);
+			name = "Syntax Definitions";
+			sourceTree = "<group>";
+		};
 		0148C2651F7ABE46006AB682 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +451,8 @@
 				0148C2781F7ABE46006AB682 /* Fragaria Swift.app */,
 				0148C27A1F7ABE46006AB682 /* Fragaria.framework */,
 				0148C27C1F7ABE46006AB682 /* Fragaria Tests.xctest */,
+				013D074C2273B0AC0017A4AA /* FragariaDefaultsCoordinator.framework */,
+				013D074E2273B0AC0017A4AA /* FragariaDefaultsCoordinatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -417,6 +468,8 @@
 				0148C2951F7ABE56006AB682 /* UI Tests.xctest */,
 				0148C2971F7ABE56006AB682 /* fileop */,
 				0148C2991F7ABE56006AB682 /* generate_appcast */,
+				013D07522273B0AC0017A4AA /* generate_keys */,
+				013D07542273B0AC0017A4AA /* sign_update */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -595,6 +648,7 @@
 		016CD1381A51A10E00D64892 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				013D075A2273B17F0017A4AA /* Syntax Definitions */,
 				016CD1451A51A10F00D64892 /* Images.xcassets */,
 				013A6AFB1A718458007C053B /* Localizable.strings */,
 				01E93C801A6D4927004BE3C4 /* Credits.rtf */,
@@ -785,6 +839,7 @@
 				016CD1311A51A10E00D64892 /* Sources */,
 				016CD1321A51A10E00D64892 /* Frameworks */,
 				016CD1331A51A10E00D64892 /* Resources */,
+				013D07482273B0AC0017A4AA /* Copy Syntax Definitions */,
 				0112028E1A55BA1100F61E42 /* Write Build Number */,
 				015525811A5EFE2C00096023 /* Install Frameworks */,
 				014F9C881E1ABDF900E74EBB /* Install Platform Plugins */,
@@ -848,6 +903,34 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		013D074C2273B0AC0017A4AA /* FragariaDefaultsCoordinator.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FragariaDefaultsCoordinator.framework;
+			remoteRef = 013D074B2273B0AC0017A4AA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		013D074E2273B0AC0017A4AA /* FragariaDefaultsCoordinatorTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = FragariaDefaultsCoordinatorTests.xctest;
+			remoteRef = 013D074D2273B0AC0017A4AA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		013D07522273B0AC0017A4AA /* generate_keys */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = generate_keys;
+			remoteRef = 013D07512273B0AC0017A4AA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		013D07542273B0AC0017A4AA /* sign_update */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = sign_update;
+			remoteRef = 013D07532273B0AC0017A4AA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		0148C2701F7ABE46006AB682 /* Fragaria Doc.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;

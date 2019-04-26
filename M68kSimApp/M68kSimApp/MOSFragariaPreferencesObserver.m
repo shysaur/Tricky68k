@@ -72,7 +72,6 @@ NSString * const MGSFragariaPrefsTextFont = @"FragariaTextFont";
 static char kc_ContextStart[19];
 #define kcBackgroundColorChanged (kc_ContextStart[0])
 #define kcColoursChanged (kc_ContextStart[1])
-#define kcFragariaInvisibleCharactersColourWellChanged (kc_ContextStart[2])
 #define kcFragariaTabWidthChanged (kc_ContextStart[3])
 #define kcFragariaTextFontChanged (kc_ContextStart[4])
 #define kcGutterGutterTextColourWell (kc_ContextStart[5])
@@ -219,15 +218,13 @@ static char kc_ContextStart[19];
 
 
 - (void)registerKVO {
-  // SMLTextView
+  // MGSTextView
   [self observeDefault:MGSFragariaPrefsGutterWidth context:&kcGutterWidthPrefChanged];
   [self observeDefault:MGSFragariaPrefsSyntaxColourNewDocuments context:&kcSyntaxColourPrefChanged];
   [self observeDefault:MGSFragariaPrefsShowLineNumberGutter context:&kcLineNumberPrefChanged];
   [self observeDefault:MGSFragariaPrefsLineWrapNewDocuments context:&kcLineWrapPrefChanged];
   [self observeDefault:MGSFragariaPrefsGutterTextColourWell context:&kcGutterGutterTextColourWell];
   [self observeDefault:MGSFragariaPrefsTextFont context:&kcFragariaTextFontChanged];
-  [self observeDefault:MGSFragariaPrefsInvisibleCharactersColourWell
-    context:&kcFragariaInvisibleCharactersColourWellChanged];
   [self observeDefault:MGSFragariaPrefsShowInvisibleCharacters context:&kcInvisibleCharacterValueChanged];
   [self observeDefault:MGSFragariaPrefsTabWidth context:&kcFragariaTabWidthChanged];
   [self observeDefault:MGSFragariaPrefsBackgroundColourWell context:&kcBackgroundColorChanged];
@@ -236,7 +233,7 @@ static char kc_ContextStart[19];
   [self observeDefaults:@[MGSFragariaPrefsShowPageGuide, MGSFragariaPrefsShowPageGuideAtColumn]
      context:&kcPageGuideChanged];
   
-  [self observeDefaults:@[MGSFragariaPrefsHighlightCurrentLine, MGSFragariaPrefsHighlightLineColourWell]
+  [self observeDefault:MGSFragariaPrefsHighlightCurrentLine
     context:&kcLineHighlightingChanged];
   
   [self observeDefault:MGSFragariaPrefsShowMatchingBraces context:&kcShowMatchingBracesChanged];
@@ -252,8 +249,11 @@ static char kc_ContextStart[19];
     MGSFragariaPrefsAutocompleteAfterDelay, MGSFragariaPrefsAutocompleteIncludeStandardWords]
     context:&kcAutoCompletePrefsChanged];
   
-  /* SMLSyntaxColouring */
-  [self observeDefaults:@[MGSFragariaPrefsCommandsColourWell,
+  /* MGSColourScheme */
+  [self observeDefaults:@[
+    MGSFragariaPrefsInvisibleCharactersColourWell,
+    MGSFragariaPrefsHighlightLineColourWell,
+    MGSFragariaPrefsCommandsColourWell,
     MGSFragariaPrefsInstructionsColourWell, MGSFragariaPrefsKeywordsColourWell,
     MGSFragariaPrefsAutocompleteColourWell, MGSFragariaPrefsVariablesColourWell,
     MGSFragariaPrefsStringsColourWell,      MGSFragariaPrefsAttributesColourWell,
@@ -316,9 +316,6 @@ static char kc_ContextStart[19];
     fontValue = UNAR(MGSFragariaPrefsTextFont);
     f.textFont = fontValue;   
     f.gutterFont = fontValue;
-    
-  } else if (context == &kcFragariaInvisibleCharactersColourWellChanged) {
-    f.textInvisibleCharactersColour = UNAR(MGSFragariaPrefsInvisibleCharactersColourWell);
   
   } else if (context == &kcFragariaTabWidthChanged) {
     f.tabWidth = [defaults integerForKey:MGSFragariaPrefsTabWidth];
@@ -350,7 +347,6 @@ static char kc_ContextStart[19];
     
   } else if (context == &kcLineHighlightingChanged) {
     f.highlightsCurrentLine = [defaults boolForKey:MGSFragariaPrefsHighlightCurrentLine];
-    f.currentLineHighlightColour = UNAR(MGSFragariaPrefsHighlightLineColourWell);
     
   } else if (context == &kcMultiLineChanged) {
     f.coloursMultiLineStrings = [defaults boolForKey:MGSFragariaPrefsColourMultiLineStrings];
@@ -362,24 +358,28 @@ static char kc_ContextStart[19];
     f.autoCompleteWithKeywords = [defaults boolForKey:MGSFragariaPrefsAutocompleteIncludeStandardWords];
     
   } else if (context == &kcColoursChanged) {
-    f.coloursAttributes = [defaults boolForKey:MGSFragariaPrefsColourAttributes];
-    f.coloursAutocomplete = [defaults boolForKey:MGSFragariaPrefsColourAutocomplete];
-    f.coloursCommands = [defaults boolForKey:MGSFragariaPrefsColourCommands];
-    f.coloursComments = [defaults boolForKey:MGSFragariaPrefsColourComments];
-    f.coloursInstructions = [defaults boolForKey:MGSFragariaPrefsColourInstructions];
-    f.coloursKeywords = [defaults boolForKey:MGSFragariaPrefsColourKeywords];
-    f.coloursNumbers = [defaults boolForKey:MGSFragariaPrefsColourNumbers];
-    f.coloursStrings = [defaults boolForKey:MGSFragariaPrefsColourStrings];
-    f.coloursVariables = [defaults boolForKey:MGSFragariaPrefsColourVariables];
-    f.colourForAttributes = UNAR(MGSFragariaPrefsAttributesColourWell);
-    f.colourForAutocomplete = UNAR(MGSFragariaPrefsAutocompleteColourWell);
-    f.colourForCommands = UNAR(MGSFragariaPrefsCommandsColourWell);
-    f.colourForComments = UNAR(MGSFragariaPrefsCommentsColourWell);
-    f.colourForInstructions = UNAR(MGSFragariaPrefsInstructionsColourWell);
-    f.colourForKeywords = UNAR(MGSFragariaPrefsKeywordsColourWell);
-    f.colourForNumbers = UNAR(MGSFragariaPrefsNumbersColourWell);
-    f.colourForStrings = UNAR(MGSFragariaPrefsStringsColourWell);
-    f.colourForVariables = UNAR(MGSFragariaPrefsVariablesColourWell);
+    MGSMutableColourScheme *cs = [f.colourScheme mutableCopy];
+    cs.currentLineHighlightColour = UNAR(MGSFragariaPrefsHighlightLineColourWell);
+    cs.textInvisibleCharactersColour = UNAR(MGSFragariaPrefsInvisibleCharactersColourWell);
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourAttributes] syntaxGroup:MGSSyntaxGroupAttribute];
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourAutocomplete] syntaxGroup:MGSSyntaxGroupAutoComplete];
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourCommands] syntaxGroup:MGSSyntaxGroupCommand];
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourComments] syntaxGroup:MGSSyntaxGroupComment];
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourInstructions] syntaxGroup:MGSSyntaxGroupInstruction];
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourKeywords] syntaxGroup:MGSSyntaxGroupKeyword];
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourNumbers] syntaxGroup:MGSSyntaxGroupNumber];
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourStrings] syntaxGroup:MGSSyntaxGroupString];
+    [cs setColours:[defaults boolForKey:MGSFragariaPrefsColourVariables] syntaxGroup:MGSSyntaxGroupVariable];
+    [cs setColour:UNAR(MGSFragariaPrefsAttributesColourWell) forSyntaxGroup:MGSSyntaxGroupAttribute];
+    [cs setColour:UNAR(MGSFragariaPrefsAutocompleteColourWell) forSyntaxGroup:MGSSyntaxGroupAutoComplete];
+    [cs setColour:UNAR(MGSFragariaPrefsCommandsColourWell) forSyntaxGroup:MGSSyntaxGroupCommand];
+    [cs setColour:UNAR(MGSFragariaPrefsCommentsColourWell) forSyntaxGroup:MGSSyntaxGroupComment];
+    [cs setColour:UNAR(MGSFragariaPrefsInstructionsColourWell) forSyntaxGroup:MGSSyntaxGroupInstruction];
+    [cs setColour:UNAR(MGSFragariaPrefsKeywordsColourWell) forSyntaxGroup:MGSSyntaxGroupKeyword];
+    [cs setColour:UNAR(MGSFragariaPrefsNumbersColourWell) forSyntaxGroup:MGSSyntaxGroupNumber];
+    [cs setColour:UNAR(MGSFragariaPrefsStringsColourWell) forSyntaxGroup:MGSSyntaxGroupString];
+    [cs setColour:UNAR(MGSFragariaPrefsVariablesColourWell) forSyntaxGroup:MGSSyntaxGroupVariable];
+    f.colourScheme = cs;
   
   }
 }

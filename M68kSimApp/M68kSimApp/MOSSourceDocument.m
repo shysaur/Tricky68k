@@ -27,7 +27,7 @@ static void *AssemblageEvent = &AssemblageEvent;
 
 NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   NSDictionary *event;
-  SMLSyntaxError *serror;
+  MGSSyntaxError *serror;
   NSMutableArray *serrors;
   
   serrors = [NSMutableArray array];
@@ -35,7 +35,7 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
     if ([[event objectForKey:MOSJobEventType] isEqual:MOSJobEventTypeMessage]) continue;
     if (![event objectForKey:MOSJobEventAssociatedLine]) continue;
     
-    serror = [[SMLSyntaxError alloc] init];
+    serror = [[MGSSyntaxError alloc] init];
     [serror setErrorDescription:[event objectForKey:MOSJobEventText]];
     [serror setLine:[[event objectForKey:MOSJobEventAssociatedLine] intValue]];
     
