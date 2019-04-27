@@ -6,6 +6,7 @@
 //  Copyright © 2017 Daniele Cattaneo. All rights reserved.
 //
 
+#import <Fragaria/Fragaria.h>
 #import "MOSPlatformManager.h"
 #import "MOSPlatform.h"
 
@@ -41,6 +42,9 @@
     plugin = [NSBundle bundleWithURL:pluginurl];
     [plugin load];
     [platforms addObject:[[[plugin principalClass] alloc] init]];
+    
+    MGSClassicFragariaParserFactory *pf = [[MGSClassicFragariaParserFactory alloc] initWithSyntaxDefinitionsInBundles:@[plugin]];
+    [[MGSSyntaxController sharedInstance] registerParserFactory:pf];
   }
   return YES;
 }

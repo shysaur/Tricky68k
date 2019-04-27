@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		017CBBF12274B65A0061B4BF /* asm-m68k.plist in Copy Syntax Definitions */ = {isa = PBXBuildFile; fileRef = 017CBBEE2274B6090061B4BF /* asm-m68k.plist */; };
 		01D74E971F7A561000BD52A0 /* MOS68kPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E621F7A561000BD52A0 /* MOS68kPlatform.m */; };
 		01D74E981F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D74E641F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.m */; };
 		01D74E991F7A561000BD52A0 /* MOS68kAssemblerPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D74E661F7A561000BD52A0 /* MOS68kAssemblerPrefView.xib */; };
@@ -75,6 +76,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		017CBBF02274B6380061B4BF /* Copy Syntax Definitions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Syntax Definitions";
+			dstSubfolderSpec = 7;
+			files = (
+				017CBBF12274B65A0061B4BF /* asm-m68k.plist in Copy Syntax Definitions */,
+			);
+			name = "Copy Syntax Definitions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01D74EB21F7A578400BD52A0 /* Install Supporting Executables */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -92,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		014553131F7A559500BA1060 /* Motorola68k.mosplatform */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Motorola68k.mosplatform; sourceTree = BUILT_PRODUCTS_DIR; };
+		017CBBEE2274B6090061B4BF /* asm-m68k.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "asm-m68k.plist"; path = "../M68kSimApp/Fragaria/Fragaria/Additional Syntax Definitions/asm-m68k.plist"; sourceTree = SOURCE_ROOT; };
 		01D74E611F7A561000BD52A0 /* MOS68kPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kPlatform.h; sourceTree = "<group>"; };
 		01D74E621F7A561000BD52A0 /* MOS68kPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOS68kPlatform.m; sourceTree = "<group>"; };
 		01D74E631F7A561000BD52A0 /* MOS68kAssemblerPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOS68kAssemblerPrefViewController.h; sourceTree = "<group>"; };
@@ -165,6 +178,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		017CBBE82274B5E20061B4BF /* Syntax Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				017CBBEE2274B6090061B4BF /* asm-m68k.plist */,
+			);
+			name = "Syntax Definitions";
+			sourceTree = "<group>";
+		};
 		01D74E6B1F7A561000BD52A0 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +256,7 @@
 			children = (
 				01D74E7A1F7A561000BD52A0 /* Info.plist */,
 				01D74E7C1F7A561000BD52A0 /* Localizable.strings */,
+				017CBBE82274B5E20061B4BF /* Syntax Definitions */,
 				01D74E7F1F7A561000BD52A0 /* Assembler Stuff */,
 				01D74E941F7A561000BD52A0 /* Examples */,
 			);
@@ -306,6 +328,7 @@
 				0145530F1F7A559500BA1060 /* Sources */,
 				014553101F7A559500BA1060 /* Frameworks */,
 				014553111F7A559500BA1060 /* Resources */,
+				017CBBF02274B6380061B4BF /* Copy Syntax Definitions */,
 				01D74EB21F7A578400BD52A0 /* Install Supporting Executables */,
 				01D74EB31F7A57AB00BD52A0 /* Write Build Number */,
 			);
