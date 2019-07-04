@@ -63,6 +63,9 @@ extern NSString * const MGSFragariaPrefsAutocompleteAfterDelay;
 
 extern NSString * const MGSFragariaPrefsTextFont;
 
+extern NSString * const MGSFragariaPrefsLightColourScheme;
+extern NSString * const MGSFragariaPrefsDarkColourScheme;
+
 
 @interface MOSFragariaPreferencesObserver : NSObject {
   NSMutableArray *registeredKeyPaths;

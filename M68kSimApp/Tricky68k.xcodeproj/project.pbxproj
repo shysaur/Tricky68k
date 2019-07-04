@@ -81,6 +81,8 @@
 		01D231941F30B6DE00182DD2 /* MOSFileBackedExecutable.h in Headers */ = {isa = PBXBuildFile; fileRef = 01D231921F30B6DE00182DD2 /* MOSFileBackedExecutable.h */; };
 		01D231951F30B6DE00182DD2 /* MOSFileBackedExecutable.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D231931F30B6DE00182DD2 /* MOSFileBackedExecutable.m */; };
 		01D74EB61F7A583E00BD52A0 /* Motorola68k.mosplatform in Install Platform Plugins */ = {isa = PBXBuildFile; fileRef = 01D74EB41F7A581300BD52A0 /* Motorola68k.mosplatform */; };
+		01D9741F22CC2D24003C41FA /* FragariaDefaultsCoordinator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013D074C2273B0AC0017A4AA /* FragariaDefaultsCoordinator.framework */; };
+		01D9742022CC2D24003C41FA /* FragariaDefaultsCoordinator.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 013D074C2273B0AC0017A4AA /* FragariaDefaultsCoordinator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01DE189F1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE189E1E96BCA600AC5EF4 /* MOSSimulatorTouchBarDelegate.m */; };
 		01E234C11F7ABF7D00BDD6AE /* Fragaria.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0148C27A1F7ABE46006AB682 /* Fragaria.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01E234CD1F7ABF8200BDD6AE /* Sparkle.framework in Install Frameworks */ = {isa = PBXBuildFile; fileRef = 0148C28B1F7ABE56006AB682 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -240,6 +242,13 @@
 			remoteGlobalIDString = 014F9C991E1AC70900E74EBB;
 			remoteInfo = MOSPlatformSupport;
 		};
+		01D9742122CC2D24003C41FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 01919E22217D20A800E26B9D;
+			remoteInfo = FragariaDefaultsCoordinator;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -262,6 +271,7 @@
 			files = (
 				01E234CD1F7ABF8200BDD6AE /* Sparkle.framework in Install Frameworks */,
 				01E234C11F7ABF7D00BDD6AE /* Fragaria.framework in Install Frameworks */,
+				01D9742022CC2D24003C41FA /* FragariaDefaultsCoordinator.framework in Install Frameworks */,
 				014F9CA21E1AC70900E74EBB /* PlatformSupport.framework in Install Frameworks */,
 			);
 			name = "Install Frameworks";
@@ -413,6 +423,7 @@
 			files = (
 				014F9CA11E1AC70900E74EBB /* PlatformSupport.framework in Frameworks */,
 				01E234CF1F7ABFF500BDD6AE /* Sparkle.framework in Frameworks */,
+				01D9741F22CC2D24003C41FA /* FragariaDefaultsCoordinator.framework in Frameworks */,
 				01E234D01F7ABFFB00BDD6AE /* Fragaria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -825,6 +836,7 @@
 			);
 			dependencies = (
 				014F9CA01E1AC70900E74EBB /* PBXTargetDependency */,
+				01D9742222CC2D24003C41FA /* PBXTargetDependency */,
 			);
 			name = Tricky68k;
 			productName = M68kSimApp;
@@ -1154,6 +1166,11 @@
 			isa = PBXTargetDependency;
 			target = 014F9C991E1AC70900E74EBB /* PlatformSupport */;
 			targetProxy = 014F9C9F1E1AC70900E74EBB /* PBXContainerItemProxy */;
+		};
+		01D9742222CC2D24003C41FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FragariaDefaultsCoordinator;
+			targetProxy = 01D9742122CC2D24003C41FA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

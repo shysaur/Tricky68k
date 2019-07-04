@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSEditorPrefViewController">
             <connections>
+                <outlet property="colorSchemeController" destination="3JW-ap-5El" id="swy-Wh-PXe"/>
+                <outlet property="colourSchemeTableViewDs" destination="GPC-sX-b8e" id="k5E-vN-sVj"/>
+                <outlet property="userDefaultsController" destination="mPc-ao-FuK" id="AXu-z4-wEQ"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -66,7 +68,7 @@
                                                 <decimal key="maximum" value="999"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -118,7 +120,7 @@
                                                 <decimal key="maximum" value="10000"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -178,7 +180,7 @@
                                                 <decimal key="maximum" value="99"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -215,7 +217,7 @@
                                                 <decimal key="maximum" value="99"/>
                                             </numberFormatter>
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -317,11 +319,7 @@
                                         </constraints>
                                         <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaTextColourWell" id="YmN-vC-DKn">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
+                                            <binding destination="3JW-ap-5El" name="value" keyPath="selection.textColor" id="jgg-jB-cXc"/>
                                         </connections>
                                     </colorWell>
                                     <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Nuo-vQ-R6Q">
@@ -331,11 +329,7 @@
                                         </constraints>
                                         <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaBackgroundColourWell" id="L2m-FS-xkd">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
+                                            <binding destination="3JW-ap-5El" name="value" keyPath="selection.backgroundColor" id="cBy-lI-QeJ"/>
                                         </connections>
                                     </colorWell>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="qHG-Pm-VcU">
@@ -355,7 +349,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zL6-9L-Hx3">
-                                        <rect key="frame" x="440" y="267" width="81" height="28"/>
+                                        <rect key="frame" x="440" y="267" width="81" height="27"/>
                                         <buttonCell key="cell" type="push" title="Set Font..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="9mL-Dm-QZN">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
@@ -372,12 +366,8 @@
                                         </constraints>
                                         <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <binding destination="3JW-ap-5El" name="value" keyPath="selection.currentLineHighlightColour" id="sCF-Gr-LsJ"/>
                                             <binding destination="mPc-ao-FuK" name="enabled" keyPath="values.FragariaHighlightCurrentLine" id="GG7-JT-Wjx"/>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaHighlightLineColourWell" id="vP7-5F-fXp">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
                                         </connections>
                                     </colorWell>
                                     <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="OrH-7w-MpD">
@@ -387,11 +377,7 @@
                                         </constraints>
                                         <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaInvisibleCharactersColourWell" id="apI-EA-y7L">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
+                                            <binding destination="3JW-ap-5El" name="value" keyPath="selection.textInvisibleCharactersColour" id="8tU-H9-AEr"/>
                                         </connections>
                                     </colorWell>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="A2V-ei-6nE">
@@ -488,214 +474,56 @@
                                 <rect key="frame" x="10" y="33" width="554" height="306"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="DPU-O6-rn0">
-                                        <rect key="frame" x="459" y="176" width="54" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="54" id="Fe6-As-Kc8"/>
-                                            <constraint firstAttribute="height" constant="26" id="uMx-ns-69l"/>
-                                        </constraints>
-                                        <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaKeywordsColourWell" id="IiZ-aU-Mj0">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </colorWell>
-                                    <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="mK3-5i-Jz7">
-                                        <rect key="frame" x="459" y="210" width="54" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="Snj-KQ-ui6"/>
-                                            <constraint firstAttribute="width" constant="54" id="q4R-5M-KNm"/>
-                                        </constraints>
-                                        <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaCommentsColourWell" id="IXg-rZ-ZzR">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </colorWell>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="led-L4-AiF">
-                                        <rect key="frame" x="319" y="215" width="74" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Comments:" id="i7m-k0-5JB">
+                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bab-6F-QUQ">
+                                        <rect key="frame" x="127" y="17" width="410" height="220"/>
+                                        <clipView key="contentView" drawsBackground="NO" id="KZI-4B-RrL">
+                                            <rect key="frame" x="1" y="1" width="408" height="218"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="53K-PR-I6g">
+                                                    <rect key="frame" x="0.0" y="0.0" width="408" height="218"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <size key="intercellSpacing" width="3" height="2"/>
+                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                    <tableColumns>
+                                                        <tableColumn width="405" minWidth="40" maxWidth="1000" id="W10-aL-ojL">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                            </tableHeaderCell>
+                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="nFo-Zu-7OW">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
+                                                        </tableColumn>
+                                                    </tableColumns>
+                                                </tableView>
+                                            </subviews>
+                                            <nil key="backgroundColor"/>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="K7l-I5-Dxl">
+                                            <rect key="frame" x="1" y="203" width="408" height="16"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="JXV-Uv-0OP">
+                                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bIv-0G-qqW">
+                                        <rect key="frame" x="28" y="220" width="93" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Color Scheme:" id="rHV-ij-kjZ">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="36Z-7w-r6d">
-                                        <rect key="frame" x="324" y="181" width="69" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Directives:" id="QF2-at-6nh">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="gPt-Dh-5A6">
-                                        <rect key="frame" x="41" y="215" width="80" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Instructions:" id="KNN-wI-WTp">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="dx6-tU-zX3">
-                                        <rect key="frame" x="187" y="210" width="54" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="54" id="gbe-dx-cxE"/>
-                                            <constraint firstAttribute="height" constant="26" id="qeY-D5-VNn"/>
-                                        </constraints>
-                                        <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaInstructionsColourWell" id="XAg-Vo-JyB">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </colorWell>
-                                    <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="H62-Hd-bBg">
-                                        <rect key="frame" x="187" y="244" width="54" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="WOR-KP-04R"/>
-                                            <constraint firstAttribute="width" constant="54" id="uwQ-DS-xrC"/>
-                                        </constraints>
-                                        <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaStringsColourWell" id="eeS-B5-3Gp">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </colorWell>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="5Gm-bu-KgZ">
-                                        <rect key="frame" x="70" y="249" width="51" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Strings:" id="eag-hW-xCH">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="A2e-cN-mrR">
-                                        <rect key="frame" x="199" y="283" width="30" height="13"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Color" id="HqT-Mi-iug">
-                                            <font key="font" metaFont="label"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="G8N-jk-7Pm">
-                                        <rect key="frame" x="137" y="283" width="34" height="13"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Active" id="tSD-Ww-7j3">
-                                            <font key="font" metaFont="label"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="H94-q0-7MC">
-                                        <rect key="frame" x="119" y="276" width="128" height="5"/>
-                                    </box>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="mEI-xX-E0b">
-                                        <rect key="frame" x="471" y="283" width="30" height="13"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Color" id="CQk-QS-XGh">
-                                            <font key="font" metaFont="label"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="MZ0-LE-A8e">
-                                        <rect key="frame" x="409" y="283" width="34" height="13"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Active" id="UPz-Kd-piF">
-                                            <font key="font" metaFont="label"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="fLy-UF-gIN">
-                                        <rect key="frame" x="391" y="276" width="128" height="5"/>
-                                    </box>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="aQX-91-k4S">
-                                        <rect key="frame" x="145" y="248" width="18" height="18"/>
-                                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="only" alignment="left" inset="2" id="DJy-ot-Pal">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaColourStrings" id="5kp-xE-Rwb"/>
-                                        </connections>
-                                    </button>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="e5h-8t-M35">
-                                        <rect key="frame" x="417" y="180" width="18" height="18"/>
-                                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="only" alignment="left" inset="2" id="FPK-U1-3wB">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaColourKeywords" id="61J-Wa-LhD"/>
-                                        </connections>
-                                    </button>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="vHR-3S-hMs">
-                                        <rect key="frame" x="417" y="214" width="18" height="18"/>
-                                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="only" alignment="left" inset="2" id="yOg-66-ELq">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaColourComments" id="88G-E3-1LZ"/>
-                                        </connections>
-                                    </button>
-                                    <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="xwj-Em-3AO">
-                                        <rect key="frame" x="459" y="244" width="54" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="mKD-9D-2TM"/>
-                                            <constraint firstAttribute="width" constant="54" id="x7b-eA-RDb"/>
-                                        </constraints>
-                                        <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaNumbersColourWell" id="FgE-gG-75O">
-                                                <dictionary key="options">
-                                                    <string key="NSValueTransformerName">NSUnarchiveFromData</string>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </colorWell>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="aIw-GV-amh">
-                                        <rect key="frame" x="330" y="249" width="63" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Numbers:" id="eeo-Xd-3c0">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="geZ-W0-Ais">
-                                        <rect key="frame" x="417" y="248" width="18" height="18"/>
-                                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="only" alignment="left" inset="2" id="cML-R9-txA">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaColourNumbers" id="Ixz-Bd-ZWO"/>
-                                        </connections>
-                                    </button>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="eWp-nT-Mtq">
-                                        <rect key="frame" x="145" y="214" width="18" height="18"/>
-                                        <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="only" alignment="left" inset="2" id="xC9-kz-cBI">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <binding destination="mPc-ao-FuK" name="value" keyPath="values.FragariaColourInstructions" id="yQW-pO-Qof"/>
-                                        </connections>
-                                    </button>
-                                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="yn2-Sq-lBE">
-                                        <rect key="frame" x="20" y="153" width="514" height="5"/>
-                                    </box>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Ak3-jU-Dyz">
-                                        <rect key="frame" x="58" y="99" width="161" height="18"/>
+                                        <rect key="frame" x="125" y="255" width="161" height="18"/>
                                         <buttonCell key="cell" type="check" title="Color multi-line strings" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Py7-aX-P8U">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -705,7 +533,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="h12-YC-RcF">
-                                        <rect key="frame" x="58" y="119" width="181" height="18"/>
+                                        <rect key="frame" x="125" y="275" width="181" height="18"/>
                                         <buttonCell key="cell" type="check" title="Enable syntax highlighting" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="eag-31-OG0">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -716,65 +544,18 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="36Z-7w-r6d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H62-Hd-bBg" secondAttribute="trailing" constant="8" symbolic="YES" id="0b2-kD-9YO"/>
-                                    <constraint firstItem="gPt-Dh-5A6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oeb-Ja-dgN" secondAttribute="leading" constant="20" symbolic="YES" id="2rj-5w-rja"/>
-                                    <constraint firstItem="MZ0-LE-A8e" firstAttribute="top" secondItem="G8N-jk-7Pm" secondAttribute="top" id="4Pa-sf-mH4"/>
-                                    <constraint firstItem="e5h-8t-M35" firstAttribute="centerY" secondItem="DPU-O6-rn0" secondAttribute="centerY" id="8DM-LG-oCo"/>
-                                    <constraint firstItem="h12-YC-RcF" firstAttribute="leading" secondItem="oeb-Ja-dgN" secondAttribute="leading" constant="60" id="8N3-DP-xPK"/>
+                                    <constraint firstItem="h12-YC-RcF" firstAttribute="top" secondItem="oeb-Ja-dgN" secondAttribute="top" constant="15" id="2jf-uI-UB0"/>
                                     <constraint firstItem="Ak3-jU-Dyz" firstAttribute="top" secondItem="h12-YC-RcF" secondAttribute="bottom" constant="6" id="9SA-9z-cfG"/>
-                                    <constraint firstItem="eWp-nT-Mtq" firstAttribute="centerX" secondItem="aQX-91-k4S" secondAttribute="centerX" id="DXp-eC-Ra4"/>
                                     <constraint firstItem="h12-YC-RcF" firstAttribute="leading" secondItem="Ak3-jU-Dyz" secondAttribute="leading" id="DhG-ur-Lhc"/>
-                                    <constraint firstItem="eWp-nT-Mtq" firstAttribute="centerX" secondItem="G8N-jk-7Pm" secondAttribute="centerX" id="Dn0-wy-5Oz"/>
-                                    <constraint firstItem="yn2-Sq-lBE" firstAttribute="centerX" secondItem="oeb-Ja-dgN" secondAttribute="centerX" id="DsF-wj-abW"/>
-                                    <constraint firstItem="mK3-5i-Jz7" firstAttribute="centerY" secondItem="vHR-3S-hMs" secondAttribute="centerY" id="ENe-KA-blo"/>
-                                    <constraint firstItem="H94-q0-7MC" firstAttribute="top" secondItem="G8N-jk-7Pm" secondAttribute="bottom" constant="4" id="FCq-Cp-p9F"/>
-                                    <constraint firstItem="fLy-UF-gIN" firstAttribute="leading" secondItem="MZ0-LE-A8e" secondAttribute="leading" constant="-20" id="FMw-Hm-lUM"/>
-                                    <constraint firstItem="aQX-91-k4S" firstAttribute="centerY" secondItem="H62-Hd-bBg" secondAttribute="centerY" id="Fxp-bm-AGA"/>
-                                    <constraint firstItem="vHR-3S-hMs" firstAttribute="centerX" secondItem="e5h-8t-M35" secondAttribute="centerX" id="IRL-3D-HPV"/>
-                                    <constraint firstAttribute="centerX" secondItem="A2e-cN-mrR" secondAttribute="centerX" constant="63.5" id="Ike-Ig-nzy"/>
-                                    <constraint firstItem="gPt-Dh-5A6" firstAttribute="trailing" secondItem="5Gm-bu-KgZ" secondAttribute="trailing" id="InV-I4-Nez"/>
-                                    <constraint firstItem="vHR-3S-hMs" firstAttribute="centerX" secondItem="geZ-W0-Ais" secondAttribute="centerX" id="K5w-MI-933"/>
-                                    <constraint firstItem="36Z-7w-r6d" firstAttribute="baseline" secondItem="e5h-8t-M35" secondAttribute="baseline" id="KUL-qk-dWi"/>
-                                    <constraint firstItem="xwj-Em-3AO" firstAttribute="centerX" secondItem="DPU-O6-rn0" secondAttribute="centerX" id="Kge-Ul-bnx"/>
-                                    <constraint firstItem="mEI-xX-E0b" firstAttribute="trailing" secondItem="fLy-UF-gIN" secondAttribute="trailing" constant="-20" id="LSV-gi-bMO"/>
-                                    <constraint firstItem="xwj-Em-3AO" firstAttribute="top" secondItem="fLy-UF-gIN" secondAttribute="bottom" constant="8" id="Mxy-2Z-hpE"/>
-                                    <constraint firstItem="G8N-jk-7Pm" firstAttribute="leading" secondItem="5Gm-bu-KgZ" secondAttribute="trailing" constant="20" id="OY8-wp-Ttm"/>
+                                    <constraint firstItem="bIv-0G-qqW" firstAttribute="leading" secondItem="oeb-Ja-dgN" secondAttribute="leading" constant="30" id="EqZ-Nd-lWO"/>
+                                    <constraint firstAttribute="trailing" secondItem="bab-6F-QUQ" secondAttribute="trailing" constant="17" id="KLE-fU-OFC"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h12-YC-RcF" secondAttribute="trailing" constant="20" symbolic="YES" id="Ozh-Br-Lx7"/>
-                                    <constraint firstItem="DPU-O6-rn0" firstAttribute="top" secondItem="mK3-5i-Jz7" secondAttribute="bottom" constant="8" id="Q0v-Uy-Bhz"/>
-                                    <constraint firstItem="G8N-jk-7Pm" firstAttribute="centerX" secondItem="A2e-cN-mrR" secondAttribute="centerX" constant="-60" id="Qmp-Gg-28M"/>
-                                    <constraint firstItem="led-L4-AiF" firstAttribute="trailing" secondItem="aIw-GV-amh" secondAttribute="trailing" id="RX9-Bb-5yU"/>
-                                    <constraint firstItem="MZ0-LE-A8e" firstAttribute="leading" secondItem="aIw-GV-amh" secondAttribute="trailing" constant="20" id="TtS-tT-o4J"/>
-                                    <constraint firstItem="dx6-tU-zX3" firstAttribute="centerX" secondItem="A2e-cN-mrR" secondAttribute="centerX" id="WVc-2k-mKD"/>
-                                    <constraint firstItem="xwj-Em-3AO" firstAttribute="centerX" secondItem="mEI-xX-E0b" secondAttribute="centerX" id="XX7-eH-spY"/>
-                                    <constraint firstItem="H94-q0-7MC" firstAttribute="leading" secondItem="G8N-jk-7Pm" secondAttribute="leading" constant="-20" id="Y2W-OF-9Su"/>
-                                    <constraint firstItem="H94-q0-7MC" firstAttribute="trailing" secondItem="A2e-cN-mrR" secondAttribute="trailing" constant="20" id="Z7f-ae-Lpp"/>
-                                    <constraint firstItem="5Gm-bu-KgZ" firstAttribute="baseline" secondItem="aQX-91-k4S" secondAttribute="baseline" id="aAn-mE-IMk"/>
-                                    <constraint firstItem="vHR-3S-hMs" firstAttribute="baseline" secondItem="led-L4-AiF" secondAttribute="baseline" id="aFp-fD-VF0"/>
-                                    <constraint firstItem="H62-Hd-bBg" firstAttribute="top" secondItem="H94-q0-7MC" secondAttribute="bottom" constant="8" id="bLY-Vn-CDq"/>
-                                    <constraint firstItem="A2e-cN-mrR" firstAttribute="baseline" secondItem="G8N-jk-7Pm" secondAttribute="baseline" id="cem-eu-T4j"/>
-                                    <constraint firstItem="dx6-tU-zX3" firstAttribute="centerX" secondItem="H62-Hd-bBg" secondAttribute="centerX" id="dAk-hP-3jC"/>
+                                    <constraint firstItem="bab-6F-QUQ" firstAttribute="top" secondItem="Ak3-jU-Dyz" secondAttribute="bottom" constant="20" id="Q2g-QY-udY"/>
+                                    <constraint firstItem="bab-6F-QUQ" firstAttribute="leading" secondItem="bIv-0G-qqW" secondAttribute="trailing" constant="8" id="Y8g-oh-zv3"/>
+                                    <constraint firstAttribute="bottom" secondItem="bab-6F-QUQ" secondAttribute="bottom" constant="17" id="dpa-Md-NOb"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ak3-jU-Dyz" secondAttribute="trailing" constant="20" symbolic="YES" id="eSh-b2-unx"/>
-                                    <constraint firstItem="vHR-3S-hMs" firstAttribute="centerX" secondItem="MZ0-LE-A8e" secondAttribute="centerX" id="i8G-YK-wuM"/>
-                                    <constraint firstItem="eWp-nT-Mtq" firstAttribute="baseline" secondItem="gPt-Dh-5A6" secondAttribute="baseline" id="jTf-Iq-PKZ"/>
-                                    <constraint firstItem="led-L4-AiF" firstAttribute="trailing" secondItem="36Z-7w-r6d" secondAttribute="trailing" id="jht-AT-hi0"/>
-                                    <constraint firstItem="fLy-UF-gIN" firstAttribute="top" secondItem="MZ0-LE-A8e" secondAttribute="bottom" constant="4" id="koI-Ge-gZ8"/>
-                                    <constraint firstItem="xwj-Em-3AO" firstAttribute="centerX" secondItem="mK3-5i-Jz7" secondAttribute="centerX" id="l4f-VS-Uow"/>
-                                    <constraint firstAttribute="centerX" secondItem="MZ0-LE-A8e" secondAttribute="centerX" constant="-148.5" id="lHu-7f-D2h"/>
-                                    <constraint firstItem="aIw-GV-amh" firstAttribute="baseline" secondItem="geZ-W0-Ais" secondAttribute="baseline" id="mHE-dG-dzk"/>
-                                    <constraint firstItem="dx6-tU-zX3" firstAttribute="top" secondItem="H62-Hd-bBg" secondAttribute="bottom" constant="8" id="o2W-tL-sBQ"/>
-                                    <constraint firstItem="h12-YC-RcF" firstAttribute="top" secondItem="yn2-Sq-lBE" secondAttribute="bottom" constant="20" id="oYi-Db-leR"/>
-                                    <constraint firstItem="5Gm-bu-KgZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oeb-Ja-dgN" secondAttribute="leading" constant="20" symbolic="YES" id="oZp-fs-h4W"/>
-                                    <constraint firstItem="yn2-Sq-lBE" firstAttribute="top" secondItem="DPU-O6-rn0" secondAttribute="bottom" constant="20" id="onb-Tr-7G3"/>
-                                    <constraint firstItem="aIw-GV-amh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H62-Hd-bBg" secondAttribute="trailing" constant="8" symbolic="YES" id="pzu-2y-5iI"/>
-                                    <constraint firstItem="mEI-xX-E0b" firstAttribute="baseline" secondItem="MZ0-LE-A8e" secondAttribute="baseline" id="q1X-pX-FOJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="yn2-Sq-lBE" secondAttribute="trailing" constant="20" id="rcu-9u-CGf"/>
-                                    <constraint firstItem="yn2-Sq-lBE" firstAttribute="leading" secondItem="oeb-Ja-dgN" secondAttribute="leading" constant="20" id="tMb-gS-IrC"/>
-                                    <constraint firstItem="G8N-jk-7Pm" firstAttribute="top" secondItem="oeb-Ja-dgN" secondAttribute="top" constant="10" id="taG-Pd-tzM"/>
-                                    <constraint firstItem="mEI-xX-E0b" firstAttribute="centerX" secondItem="MZ0-LE-A8e" secondAttribute="centerX" constant="60" id="w92-ur-cjs"/>
-                                    <constraint firstItem="mK3-5i-Jz7" firstAttribute="top" secondItem="xwj-Em-3AO" secondAttribute="bottom" constant="8" id="wNc-JH-GnA"/>
-                                    <constraint firstItem="eWp-nT-Mtq" firstAttribute="centerY" secondItem="dx6-tU-zX3" secondAttribute="centerY" id="wPL-PG-PTX"/>
-                                    <constraint firstItem="led-L4-AiF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dx6-tU-zX3" secondAttribute="trailing" constant="8" symbolic="YES" id="yYF-4J-NOZ"/>
-                                    <constraint firstItem="geZ-W0-Ais" firstAttribute="centerY" secondItem="xwj-Em-3AO" secondAttribute="centerY" id="ynp-gZ-kts"/>
+                                    <constraint firstItem="bab-6F-QUQ" firstAttribute="leading" secondItem="h12-YC-RcF" secondAttribute="leading" id="kn4-oE-VWE"/>
+                                    <constraint firstItem="bab-6F-QUQ" firstAttribute="top" secondItem="bIv-0G-qqW" secondAttribute="top" id="tK5-a2-bBf"/>
                                 </constraints>
                             </view>
                         </tabViewItem>
@@ -790,5 +571,26 @@
             <point key="canvasLocation" x="535" y="179"/>
         </view>
         <userDefaultsController representsSharedInstance="YES" id="mPc-ao-FuK" userLabel="Shared Defaults"/>
+        <objectController objectClassName="MGSMutableColourScheme" id="3JW-ap-5El">
+            <declaredKeys>
+                <string>textColor</string>
+                <string>backgroundColor</string>
+                <string>textInvisibleCharactersColour</string>
+                <string>currentLineHighlightColour</string>
+            </declaredKeys>
+            <connections>
+                <binding destination="mPc-ao-FuK" name="contentObject" keyPath="values.FragariaColourScheme_Light" id="8sv-cQ-MAe">
+                    <dictionary key="options">
+                        <bool key="NSHandlesContentAsCompoundValue" value="YES"/>
+                        <string key="NSValueTransformerName">MGSMutableColourSchemeFromPlistTransformer</string>
+                    </dictionary>
+                </binding>
+            </connections>
+        </objectController>
+        <customObject id="GPC-sX-b8e" customClass="MGSColourSchemeTableViewDataSource">
+            <connections>
+                <outlet property="tableView" destination="53K-PR-I6g" id="Zig-md-lBw"/>
+            </connections>
+        </customObject>
     </objects>
 </document>
