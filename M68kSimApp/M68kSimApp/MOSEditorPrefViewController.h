@@ -10,12 +10,17 @@
 #import <FragariaDefaultsCoordinator/FragariaDefaultsCoordinator.h>
 
 
+@interface MOSColourSchemeTableViewDataSource: MGSColourSchemeTableViewDataSource
+
+@end
+
+
 @interface MOSEditorPrefViewController : NSViewController {
   NSFont *editorFont;
 }
 
 @property (nonatomic) IBOutlet NSUserDefaultsController *userDefaultsController;
 @property (nonatomic) IBOutlet NSObjectController *colorSchemeController;
-@property (nonatomic) IBOutlet MGSColourSchemeTableViewDataSource *colourSchemeTableViewDs;
+@property (nonatomic) IBOutlet MOSColourSchemeTableViewDataSource *colourSchemeTableViewDs;
 
 @end

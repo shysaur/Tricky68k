@@ -24,6 +24,9 @@ static void *AppearanceChangedContext = &AppearanceChangedContext;
   [self view];
   editorFont = [[NSUserDefaults standardUserDefaults] unarchivedObjectForKey:MGSFragariaPrefsTextFont];
   [NSApp addObserver:self forKeyPath:@"effectiveAppearance" options:NSKeyValueObservingOptionInitial context:AppearanceChangedContext];
+  [self.colourSchemeTableViewDs bind:@"showGroupProperties" toObject:self.userDefaultsController withKeyPath:@"values.FragariaSyntaxColourNewDocuments" options:nil];
+  [self.colourSchemeTableViewDs setShowGroupGlobalProperties:YES];
+  [self.colourSchemeTableViewDs setShowHeaders:YES];
   [self resetColorSchemeBindings];
   return self;
 }
@@ -75,6 +78,49 @@ static void *AppearanceChangedContext = &AppearanceChangedContext;
   NSFontManager *fontManager = sender;
   NSFont *panelFont = [fontManager convertFont:editorFont];
   [[NSUserDefaults standardUserDefaults] setObjectByArchiving:panelFont forKey:MGSFragariaPrefsTextFont];
+}
+
+
+@end
+
+
+@implementation MOSColourSchemeTableViewDataSource
+
+
+- (NSArray <NSString *> *)globalProperties
+{
+  static NSArray<NSString *> *cache;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    cache = @[
+      NSStringFromSelector(@selector(textColor)),
+      NSStringFromSelector(@selector(backgroundColor)),
+      NSStringFromSelector(@selector(textInvisibleCharactersColour)),
+      NSStringFromSelector(@selector(currentLineHighlightColour)),
+    ];
+  });
+  return cache;
+}
+
+
+- (void)updateView:(MGSColourSchemeTableCellView *)theView
+{
+  [super updateView:theView];
+  if (![theView.globalPropertyKeyPath isEqual:NSStringFromSelector(@selector(currentLineHighlightColour))])
+    return;
+  theView.enabled.hidden = NO;
+  [theView.enabled bind:NSValueBinding toObject:[NSUserDefaultsController sharedUserDefaultsController] withKeyPath:@"values.FragariaHighlightCurrentLine" options:nil];
+  [theView.colorWell bind:NSEnabledBinding toObject:[NSUserDefaultsController sharedUserDefaultsController] withKeyPath:@"values.FragariaHighlightCurrentLine" options:nil];
+}
+
+
+- (void)prepareForReuseView:(MGSColourSchemeTableCellView *)theView
+{
+  [super prepareForReuseView:theView];
+  if (![theView.globalPropertyKeyPath isEqual:NSStringFromSelector(@selector(currentLineHighlightColour))])
+    return;
+  [theView.enabled unbind:NSValueBinding];
+  [theView.colorWell unbind:NSEnabledBinding];
 }
 
 
