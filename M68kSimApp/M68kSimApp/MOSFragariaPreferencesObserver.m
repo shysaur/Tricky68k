@@ -239,15 +239,28 @@ static char kc_ContextStart[19];
 
 + (NSDictionary *)fragariaDefaultsDictionary
 {
+  NSURL *lightDefaultURL = [[NSBundle mainBundle] URLForResource:@"Default (Light)" withExtension:@"plist" subdirectory:@"Colour Schemes"];
+  MGSColourScheme *lightDefault;
+  if (lightDefaultURL)
+    lightDefault = [[MGSColourScheme alloc] initWithSchemeFileURL:lightDefaultURL error:nil];
+  if (!lightDefault)
+    lightDefault = [[MGSColourScheme alloc] init];
+  
+  NSURL *darkDefaultURL = [[NSBundle mainBundle] URLForResource:@"Default (Dark)" withExtension:@"plist" subdirectory:@"Colour Schemes"];
   MGSColourScheme *darkDefault;
-  if (@available(macOS 10.14, *)) {
-    darkDefault = [MGSColourScheme defaultColorSchemeForAppearance:[NSAppearance appearanceNamed:NSAppearanceNameDarkAqua]];
-  } else {
-    darkDefault = [[MGSColourScheme alloc] init];
+  if (darkDefaultURL)
+    darkDefault = [[MGSColourScheme alloc] initWithSchemeFileURL:darkDefaultURL error:nil];
+  if (!darkDefault) {
+    if (@available(macOS 10.14, *)) {
+      darkDefault = [MGSColourScheme defaultColorSchemeForAppearance:[NSAppearance appearanceNamed:NSAppearanceNameDarkAqua]];
+    } else {
+      darkDefault = [[MGSColourScheme alloc] init];
+    }
   }
+
   return @{
     MGSFragariaPrefsGutterTextColourWell: ARCHIVED_COLOR(0.42f, 0.42f, 0.42f),
-    MGSFragariaPrefsLightColourScheme: [[MGSColourScheme defaultColorSchemeForAppearance:[NSAppearance appearanceNamed:NSAppearanceNameAqua]] propertyListRepresentation],
+    MGSFragariaPrefsLightColourScheme: [lightDefault propertyListRepresentation],
     MGSFragariaPrefsDarkColourScheme: [darkDefault propertyListRepresentation],
     MGSFragariaPrefsGutterWidth: @(40),
     MGSFragariaPrefsTabWidth: @(4),

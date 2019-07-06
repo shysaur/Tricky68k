@@ -73,6 +73,19 @@
 		01843FF91AC9A0AE00FF3BC7 /* MOSColoredView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01843FF81AC9A0AE00FF3BC7 /* MOSColoredView.m */; };
 		0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */; };
 		0196535F1A54D353002B3C39 /* MOSSimDisasmDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */; };
+		0199382622D154270087C9E5 /* Basic.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937F522D1533B0087C9E5 /* Basic.plist */; };
+		0199382722D154270087C9E5 /* Civic.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937F622D1533B0087C9E5 /* Civic.plist */; };
+		0199382822D154270087C9E5 /* Default (Light).plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937F722D1533B0087C9E5 /* Default (Light).plist */; };
+		0199382922D154270087C9E5 /* Spartan.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937F822D1533B0087C9E5 /* Spartan.plist */; };
+		0199382A22D154270087C9E5 /* Printing.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937F922D1533B0087C9E5 /* Printing.plist */; };
+		0199382B22D154270087C9E5 /* Sunset.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937FA22D1533B0087C9E5 /* Sunset.plist */; };
+		0199382C22D154270087C9E5 /* Bare.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937FB22D1533B0087C9E5 /* Bare.plist */; };
+		0199382D22D154270087C9E5 /* Solarized Dark.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937FC22D1533B0087C9E5 /* Solarized Dark.plist */; };
+		0199382E22D154270087C9E5 /* Solarized Light.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937FD22D1533B0087C9E5 /* Solarized Light.plist */; };
+		0199382F22D154270087C9E5 /* Midnight.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937FE22D1533B0087C9E5 /* Midnight.plist */; };
+		0199383022D154270087C9E5 /* Default (Dark).plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 019937FF22D1533B0087C9E5 /* Default (Dark).plist */; };
+		0199383122D154270087C9E5 /* Dusk.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0199380022D1533B0087C9E5 /* Dusk.plist */; };
+		0199383222D154270087C9E5 /* Low Key.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0199380122D1533B0087C9E5 /* Low Key.plist */; };
 		01A2ABB61BBC86FF008BBC59 /* MOSSimBrkptWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2ABB41BBC86FF008BBC59 /* MOSSimBrkptWindowController.m */; };
 		01A419451A57382900D9BD02 /* MOSSimStackDumpDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A419441A57382900D9BD02 /* MOSSimStackDumpDataSource.m */; };
 		01C20CA41A6726D600057D6B /* MOSPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C20CA21A6726D600057D6B /* MOSPreferencesWindowController.m */; };
@@ -277,6 +290,28 @@
 			name = "Install Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0199382522D154140087C9E5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "Colour Schemes";
+			dstSubfolderSpec = 7;
+			files = (
+				0199382622D154270087C9E5 /* Basic.plist in CopyFiles */,
+				0199382722D154270087C9E5 /* Civic.plist in CopyFiles */,
+				0199382822D154270087C9E5 /* Default (Light).plist in CopyFiles */,
+				0199382922D154270087C9E5 /* Spartan.plist in CopyFiles */,
+				0199382A22D154270087C9E5 /* Printing.plist in CopyFiles */,
+				0199382B22D154270087C9E5 /* Sunset.plist in CopyFiles */,
+				0199382C22D154270087C9E5 /* Bare.plist in CopyFiles */,
+				0199382D22D154270087C9E5 /* Solarized Dark.plist in CopyFiles */,
+				0199382E22D154270087C9E5 /* Solarized Light.plist in CopyFiles */,
+				0199382F22D154270087C9E5 /* Midnight.plist in CopyFiles */,
+				0199383022D154270087C9E5 /* Default (Dark).plist in CopyFiles */,
+				0199383122D154270087C9E5 /* Dusk.plist in CopyFiles */,
+				0199383222D154270087C9E5 /* Low Key.plist in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -375,6 +410,19 @@
 		0196535B1A543A04002B3C39 /* MOSSimDumpDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimDumpDataSource.m; sourceTree = "<group>"; };
 		0196535D1A54D353002B3C39 /* MOSSimDisasmDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimDisasmDataSource.h; sourceTree = "<group>"; };
 		0196535E1A54D353002B3C39 /* MOSSimDisasmDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimDisasmDataSource.m; sourceTree = "<group>"; };
+		019937F522D1533B0087C9E5 /* Basic.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Basic.plist; sourceTree = "<group>"; };
+		019937F622D1533B0087C9E5 /* Civic.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Civic.plist; sourceTree = "<group>"; };
+		019937F722D1533B0087C9E5 /* Default (Light).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Default (Light).plist"; sourceTree = "<group>"; };
+		019937F822D1533B0087C9E5 /* Spartan.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Spartan.plist; sourceTree = "<group>"; };
+		019937F922D1533B0087C9E5 /* Printing.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Printing.plist; sourceTree = "<group>"; };
+		019937FA22D1533B0087C9E5 /* Sunset.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sunset.plist; sourceTree = "<group>"; };
+		019937FB22D1533B0087C9E5 /* Bare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Bare.plist; sourceTree = "<group>"; };
+		019937FC22D1533B0087C9E5 /* Solarized Dark.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Solarized Dark.plist"; sourceTree = "<group>"; };
+		019937FD22D1533B0087C9E5 /* Solarized Light.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Solarized Light.plist"; sourceTree = "<group>"; };
+		019937FE22D1533B0087C9E5 /* Midnight.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Midnight.plist; sourceTree = "<group>"; };
+		019937FF22D1533B0087C9E5 /* Default (Dark).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Default (Dark).plist"; sourceTree = "<group>"; };
+		0199380022D1533B0087C9E5 /* Dusk.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Dusk.plist; sourceTree = "<group>"; };
+		0199380122D1533B0087C9E5 /* Low Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Low Key.plist"; sourceTree = "<group>"; };
 		01A0AA3D1BB04027002CAD97 /* MOSJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSJob.h; sourceTree = "<group>"; };
 		01A0AA3E1BB04027002CAD97 /* MOSJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSJob.m; sourceTree = "<group>"; };
 		01A2ABB31BBC86FF008BBC59 /* MOSSimBrkptWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimBrkptWindowController.h; sourceTree = "<group>"; };
@@ -638,6 +686,7 @@
 		016CD1381A51A10E00D64892 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				019937F422D1533B0087C9E5 /* Colour Schemes */,
 				016CD1451A51A10F00D64892 /* Images.xcassets */,
 				013A6AFB1A718458007C053B /* Localizable.strings */,
 				01E93C801A6D4927004BE3C4 /* Credits.rtf */,
@@ -690,6 +739,26 @@
 				01D31B6E1ACB10BC00753A3B /* AppKit */,
 			);
 			name = Utility;
+			sourceTree = "<group>";
+		};
+		019937F422D1533B0087C9E5 /* Colour Schemes */ = {
+			isa = PBXGroup;
+			children = (
+				019937F522D1533B0087C9E5 /* Basic.plist */,
+				019937F622D1533B0087C9E5 /* Civic.plist */,
+				019937F722D1533B0087C9E5 /* Default (Light).plist */,
+				019937F822D1533B0087C9E5 /* Spartan.plist */,
+				019937F922D1533B0087C9E5 /* Printing.plist */,
+				019937FA22D1533B0087C9E5 /* Sunset.plist */,
+				019937FB22D1533B0087C9E5 /* Bare.plist */,
+				019937FC22D1533B0087C9E5 /* Solarized Dark.plist */,
+				019937FD22D1533B0087C9E5 /* Solarized Light.plist */,
+				019937FE22D1533B0087C9E5 /* Midnight.plist */,
+				019937FF22D1533B0087C9E5 /* Default (Dark).plist */,
+				0199380022D1533B0087C9E5 /* Dusk.plist */,
+				0199380122D1533B0087C9E5 /* Low Key.plist */,
+			);
+			path = "Colour Schemes";
 			sourceTree = "<group>";
 		};
 		01A2ABB81BBC8711008BBC59 /* Breakpoint Window */ = {
@@ -831,6 +900,7 @@
 				0112028E1A55BA1100F61E42 /* Write Build Number */,
 				015525811A5EFE2C00096023 /* Install Frameworks */,
 				014F9C881E1ABDF900E74EBB /* Install Platform Plugins */,
+				0199382522D154140087C9E5 /* CopyFiles */,
 			);
 			buildRules = (
 			);

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>backgroundColor</key>
+	<string>1.000000 0.988000 0.898000</string>
+	<key>currentLineHighlightColour</key>
+	<string>0.994000 0.960000 0.827000</string>
+	<key>defaultSyntaxErrorHighlightingColour</key>
+	<string>1.000000 1.000000 0.700000</string>
+	<key>displayName</key>
+	<string>Sunset</string>
+	<key>insertionPointColor</key>
+	<string>0.000000 0.000000 0.000000</string>
+	<key>syntaxGroupOptions</key>
+	<dict>
+		<key>comments</key>
+		<dict>
+			<key>colour</key>
+			<string>0.765000 0.455000 0.110000</string>
+			<key>enabled</key>
+			<true/>
+		</dict>
+		<key>instruction</key>
+		<dict>
+			<key>colour</key>
+			<string>0.161000 0.259000 0.467000</string>
+			<key>enabled</key>
+			<true/>
+		</dict>
+		<key>keyword</key>
+		<dict>
+			<key>colour</key>
+			<string>0.392000 0.391000 0.520000</string>
+			<key>enabled</key>
+			<true/>
+		</dict>
+		<key>number</key>
+		<dict>
+			<key>colour</key>
+			<string>0.161000 0.259000 0.467000</string>
+			<key>enabled</key>
+			<true/>
+		</dict>
+		<key>strings</key>
+		<dict>
+			<key>colour</key>
+			<string>0.875000 0.027000 0.000000</string>
+			<key>enabled</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>textColor</key>
+	<string>0.000000 0.000000 0.000000</string>
+	<key>textInvisibleCharactersColour</key>
+	<string>0.819600 0.772500 0.643100</string>
+</dict>
+</plist>

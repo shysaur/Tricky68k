@@ -15,6 +15,11 @@
 @end
 
 
+@interface MOSColourSchemeListController: MGSColourSchemeListController
+
+@end
+
+
 @interface MOSEditorPrefViewController : NSViewController {
   NSFont *editorFont;
 }

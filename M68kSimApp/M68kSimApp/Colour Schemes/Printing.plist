@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>backgroundColor</key>
+	<string>1.000000 1.000000 1.000000</string>
+	<key>currentLineHighlightColour</key>
+	<string>0.901961 0.901961 0.901961</string>
+	<key>defaultSyntaxErrorHighlightingColour</key>
+	<string>1.000000 1.000000 0.700000</string>
+	<key>displayName</key>
+	<string>Printing</string>
+	<key>insertionPointColor</key>
+	<string>0.000000 0.000000 0.000000</string>
+	<key>syntaxGroupOptions</key>
+	<dict>
+		<key>comments</key>
+		<dict>
+			<key>colour</key>
+			<string>0.501961 0.501961 0.501961</string>
+			<key>enabled</key>
+			<true/>
+			<key>fontVariant</key>
+			<integer>2</integer>
+		</dict>
+		<key>instruction</key>
+		<dict>
+			<key>colour</key>
+			<string>0.000000 0.000000 0.000000</string>
+			<key>enabled</key>
+			<true/>
+			<key>fontVariant</key>
+			<integer>1</integer>
+		</dict>
+		<key>keyword</key>
+		<dict>
+			<key>colour</key>
+			<string>0.000000 0.000000 0.000000</string>
+			<key>enabled</key>
+			<true/>
+			<key>fontVariant</key>
+			<integer>4</integer>
+		</dict>
+		<key>number</key>
+		<dict>
+			<key>colour</key>
+			<string>0.000000 0.000000 0.000000</string>
+			<key>enabled</key>
+			<true/>
+			<key>fontVariant</key>
+			<integer>2</integer>
+		</dict>
+		<key>strings</key>
+		<dict>
+			<key>colour</key>
+			<string>0.000000 0.000000 0.000000</string>
+			<key>enabled</key>
+			<true/>
+			<key>fontVariant</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>textColor</key>
+	<string>0.000000 0.000000 0.000000</string>
+	<key>textInvisibleCharactersColour</key>
+	<string>0.800000 0.800000 0.800000</string>
+</dict>
+</plist>

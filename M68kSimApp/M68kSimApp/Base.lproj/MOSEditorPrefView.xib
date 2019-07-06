@@ -515,7 +515,7 @@
         </view>
         <userDefaultsController representsSharedInstance="YES" id="mPc-ao-FuK" userLabel="Shared Defaults"/>
         <objectController id="erj-7d-ylB"/>
-        <arrayController automaticallyRearrangesObjects="YES" id="LCa-Vx-402" customClass="MGSColourSchemeListController">
+        <arrayController automaticallyRearrangesObjects="YES" id="LCa-Vx-402" customClass="MOSColourSchemeListController">
             <connections>
                 <outlet property="colourSchemeController" destination="erj-7d-ylB" id="ueD-qX-66U"/>
             </connections>
