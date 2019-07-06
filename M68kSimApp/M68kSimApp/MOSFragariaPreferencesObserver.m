@@ -435,7 +435,8 @@ static char kc_ContextStart[19];
       colourSchemePlist = [defaults objectForKey:MGSFragariaPrefsLightColourScheme];
     }
   
-    MGSColourScheme *cs = [[MGSColourScheme alloc] initWithPropertyList:colourSchemePlist error:nil];
+    MGSMutableColourScheme *cs = [[MGSMutableColourScheme alloc] initWithPropertyList:colourSchemePlist error:nil];
+    cs.insertionPointColor = cs.textColor;
     if (cs)
       f.colourScheme = cs;
   }
