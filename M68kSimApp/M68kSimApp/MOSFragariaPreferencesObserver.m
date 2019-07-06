@@ -81,7 +81,6 @@ NSString * const MGSFragariaPrefsColourAttributes = @"FragariaColourAttributes";
 
 /* KVO context constants */
 static char kc_ContextStart[19];
-#define kcBackgroundColorChanged (kc_ContextStart[0])
 #define kcColoursChanged (kc_ContextStart[1])
 #define kcFragariaTabWidthChanged (kc_ContextStart[3])
 #define kcFragariaTextFontChanged (kc_ContextStart[4])
@@ -94,7 +93,6 @@ static char kc_ContextStart[19];
 #define kcMultiLineChanged (kc_ContextStart[11])
 #define kcPageGuideChanged (kc_ContextStart[12])
 #define kcSyntaxColourPrefChanged (kc_ContextStart[13])
-#define kcTextColorChanged (kc_ContextStart[14])
 #define kcShowMatchingBracesChanged (kc_ContextStart[15])
 #define kcAutoInsertionPrefsChanged (kc_ContextStart[16])
 #define kcIndentingPrefsChanged (kc_ContextStart[17])
@@ -313,8 +311,6 @@ static char kc_ContextStart[19];
   [self observeDefault:MGSFragariaPrefsTextFont context:&kcFragariaTextFontChanged];
   [self observeDefault:MGSFragariaPrefsShowInvisibleCharacters context:&kcInvisibleCharacterValueChanged];
   [self observeDefault:MGSFragariaPrefsTabWidth context:&kcFragariaTabWidthChanged];
-  [self observeDefault:MGSFragariaPrefsBackgroundColourWell context:&kcBackgroundColorChanged];
-  [self observeDefault:MGSFragariaPrefsTextColourWell context:&kcTextColorChanged];
   
   [self observeDefaults:@[MGSFragariaPrefsShowPageGuide, MGSFragariaPrefsShowPageGuideAtColumn]
      context:&kcPageGuideChanged];
@@ -364,11 +360,10 @@ static char kc_ContextStart[19];
 - (void)updateDefaults:(void*)context
 {
   BOOL boolValue;
-  NSColor *colorValue;
   NSFont *fontValue;
   MGSFragariaView *f = _fragaria;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-#define UNAR(x) [NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:x]]
+  #define UNAR(x) [NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:x]]
 
   if (context == &kcGutterWidthPrefChanged) {
     f.minimumGutterWidth = [defaults doubleForKey:MGSFragariaPrefsGutterWidth];
@@ -412,14 +407,6 @@ static char kc_ContextStart[19];
     f.indentNewLinesAutomatically = [defaults boolForKey:MGSFragariaPrefsIndentNewLinesAutomatically];
     f.indentBracesAutomatically = [defaults boolForKey:MGSFragariaPrefsAutomaticallyIndentBraces];
     
-  } else if (context == &kcBackgroundColorChanged) {
-    f.textView.backgroundColor = UNAR(MGSFragariaPrefsBackgroundColourWell);
-    
-  } else if (context == &kcTextColorChanged) {
-    colorValue = UNAR(MGSFragariaPrefsTextColourWell);
-    f.textView.insertionPointColor = colorValue;
-    f.textView.textColor = colorValue;
-    
   } else if (context == &kcPageGuideChanged) {
     f.pageGuideColumn = [defaults integerForKey:MGSFragariaPrefsShowPageGuideAtColumn];
     f.showsPageGuide = [defaults boolForKey:MGSFragariaPrefsShowPageGuide];
@@ -452,6 +439,7 @@ static char kc_ContextStart[19];
     if (cs)
       f.colourScheme = cs;
   }
+  #undef UNAR
 }
 
 
