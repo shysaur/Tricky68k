@@ -11,6 +11,7 @@
 
 
 NSString * const MOSPrintFont = @"MOSFont";
+NSString * const MOSPrintColorScheme = @"MOSPrintColorScheme";
 
 
 @implementation MOSPrintingTextView
@@ -36,11 +37,9 @@ NSString * const MOSPrintFont = @"MOSFont";
   [self setFont:[printInfo.dictionary objectForKey:MOSPrintFont]];
   
   if (self.highlightingParser) {
-    NSURL *schemeUrl = [[NSBundle mainBundle] URLForResource:@"Printing" withExtension:@"plist" subdirectory:@"Colour Schemes"];
-    if (schemeUrl) {
-      MGSColourScheme *scheme = [[MGSColourScheme alloc] initWithSchemeFileURL:schemeUrl error:nil];
-      MGSHighlightAttributedString(self.textStorage, self.highlightingParser, scheme);
-    }
+    MGSColourScheme *scheme = [printInfo.dictionary objectForKey:MOSPrintColorScheme];
+    MGSHighlightAttributedString(self.textStorage, self.highlightingParser, scheme);
+    self.backgroundColor = scheme.backgroundColor;
   }
   
   pageSize = [printInfo paperSize];

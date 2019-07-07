@@ -8,14 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import <FragariaDefaultsCoordinator/FragariaDefaultsCoordinator.h>
+#import "MOSColourSchemeListController.h"
 
 
 @interface MOSColourSchemeTableViewDataSource: MGSColourSchemeTableViewDataSource
-
-@end
-
-
-@interface MOSColourSchemeListController: MGSColourSchemeListController
 
 @end
 

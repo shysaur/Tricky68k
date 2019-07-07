@@ -12,6 +12,7 @@
 		01113DEB1C94F7E7007EC178 /* MOSPrintAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01113DED1C94F7E7007EC178 /* MOSPrintAccessoryView.xib */; };
 		011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */; };
 		011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */; };
+		011DD2DE22D23D1200FA26D1 /* MOSColourSchemeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011DD2DD22D23D1200FA26D1 /* MOSColourSchemeListController.m */; };
 		012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 012AEB1D1A7045E400906B25 /* dsa_pub.pem */; };
 		013A6AF91A718458007C053B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 013A6AFB1A718458007C053B /* Localizable.strings */; };
 		013D84C71BC06DF7003E4817 /* MOSAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 013D84C61BC06DF7003E4817 /* MOSAddressFormatter.m */; };
@@ -325,6 +326,8 @@
 		0112028F1A55CDF200F61E42 /* MOSSimRegistersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimRegistersDataSource.h; sourceTree = "<group>"; };
 		011202901A55CDF300F61E42 /* MOSSimRegistersDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimRegistersDataSource.m; sourceTree = "<group>"; };
 		011D72D81AD0382900368CBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MOSEditorPrefView.xib; sourceTree = "<group>"; };
+		011DD2DC22D23D1200FA26D1 /* MOSColourSchemeListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MOSColourSchemeListController.h; sourceTree = "<group>"; };
+		011DD2DD22D23D1200FA26D1 /* MOSColourSchemeListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MOSColourSchemeListController.m; sourceTree = "<group>"; };
 		0124CF141B2F5EF800DD0A5C /* MOSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSError.h; sourceTree = "<group>"; };
 		0124CF151B2F5EF800DD0A5C /* MOSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSError.m; sourceTree = "<group>"; };
 		012AEB1D1A7045E400906B25 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = ../../Updates/dsa_pub.pem; sourceTree = "<group>"; };
@@ -788,6 +791,8 @@
 				0181322B1E1EACED008A959D /* MOSAssemblerPrefView.xib */,
 				01F236ED1AE5470E0039EB73 /* MOSFragariaPreferencesObserver.h */,
 				01F236EE1AE5470E0039EB73 /* MOSFragariaPreferencesObserver.m */,
+				011DD2DC22D23D1200FA26D1 /* MOSColourSchemeListController.h */,
+				011DD2DD22D23D1200FA26D1 /* MOSColourSchemeListController.m */,
 				015D18BC1AB6427B00F2A41A /* MOSEditorPrefViewController.h */,
 				015D18BD1AB6427B00F2A41A /* MOSEditorPrefViewController.m */,
 				011D72D91AD0382900368CBB /* MOSEditorPrefView.xib */,
@@ -1208,6 +1213,7 @@
 				016CD13E1A51A10E00D64892 /* main.m in Sources */,
 				0196535C1A543A04002B3C39 /* MOSSimDumpDataSource.m in Sources */,
 				014A08321BE69E5E00A8FA0F /* MOSSimulatorToolbarDelegate.m in Sources */,
+				011DD2DE22D23D1200FA26D1 /* MOSColourSchemeListController.m in Sources */,
 				016CD1691A51B27900D64892 /* MOSSimulatorViewController.m in Sources */,
 				011202911A55CDF300F61E42 /* MOSSimRegistersDataSource.m in Sources */,
 				015094741A6DA7050024D28F /* MOSProgressIndicator.m in Sources */,

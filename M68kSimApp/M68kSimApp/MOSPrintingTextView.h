@@ -11,6 +11,7 @@
 
 
 extern NSString * const MOSPrintFont;
+extern NSString * const MOSPrintColorScheme;
 
 
 @interface MOSPrintingTextView : NSTextView

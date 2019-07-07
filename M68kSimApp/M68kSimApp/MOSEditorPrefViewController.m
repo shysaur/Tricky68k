@@ -126,16 +126,3 @@ static void *AppearanceChangedContext = &AppearanceChangedContext;
 
 @end
 
-
-@implementation MOSColourSchemeListController
-
-
-- (NSArray <MGSColourSchemeOption *> *)loadColourSchemes
-{
-  /* only show application-specific schemes */
-  return [self loadApplicationColourSchemes];
-}
-
-
-@end
-

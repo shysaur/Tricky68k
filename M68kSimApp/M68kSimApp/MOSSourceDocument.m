@@ -528,9 +528,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
 #pragma mark - Print
 
 
-- (NSPrintInfo*)printInfo {
+- (NSPrintInfo*)printInfo
+{
   NSPrintInfo *pi;
-  NSFont *font;
   NSUserDefaults *ud;
   
   ud = [NSUserDefaults standardUserDefaults];
@@ -545,17 +545,26 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [pi setTopMargin:(72.0/2.54)*2.0];
   [pi setBottomMargin:(72.0/2.54)*2.0];
   
-  font = [ud unarchivedObjectForKey:MOSDefaultsPrintFont];
+  NSFont *font = [ud unarchivedObjectForKey:MOSDefaultsPrintFont];
   if (!font)
     font = [ud unarchivedObjectForKey:MGSFragariaPrefsTextFont];
-  [pi.dictionary setObject:font forKey:@"MOSFont"];
+  [pi.dictionary setObject:font forKey:MOSPrintFont];
+  
+  NSDictionary *schemeDict = [ud objectForKey:MOSDefaultsPrintColorScheme];
+  MGSColourScheme *scheme = [[MGSColourScheme alloc] initWithPropertyList:schemeDict error:nil];
+  if (!scheme) {
+    NSURL *schemeUrl = [[NSBundle mainBundle] URLForResource:@"Printing" withExtension:@"plist" subdirectory:@"Colour Schemes"];
+    scheme = [[MGSColourScheme alloc] initWithSchemeFileURL:schemeUrl error:nil];
+  }
+  [pi.dictionary setObject:scheme forKey:MOSPrintColorScheme];
   
   return pi;
 }
 
 
 - (NSPrintOperation *)printOperationWithSettings:(NSDictionary *)printSettings
-  error:(NSError **)outError {
+  error:(NSError **)outError
+{
   NSPrintOperation *po;
   MOSPrintingTextView *printView;
   NSPrintInfo *printInfo;

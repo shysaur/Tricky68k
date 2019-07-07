@@ -13,28 +13,41 @@
 
 
 NSString * const MOSDefaultsPrintFont = @"PrintFont";
+NSString * const MOSDefaultsPrintColorScheme = @"PrintColorScheme";
 
 
 @implementation MOSPrintAccessoryViewController
 
 
-- (instancetype)init {
+- (instancetype)init
+{
   NSBundle *b;
   
   b = [NSBundle bundleForClass:[self class]];
   self = [self initWithNibName:@"MOSPrintAccessoryView" bundle:b];
+  
   _textFont = [NSFont userFixedPitchFontOfSize:11.0];
+  _colorScheme = [[MGSColourScheme alloc] init];
+  
   return self;
 }
 
 
-- (void)setView:(NSView *)view {
+- (void)setView:(NSView *)view
+{
   NSPrintInfo *pi;
   id prevResp;
   
   [super setView:view];
+  
+  NSURL *schemeUrl = [[NSBundle mainBundle] URLForResource:@"Printing" withExtension:@"plist" subdirectory:@"Colour Schemes"];
+  MGSColourScheme *scheme = [[MGSColourScheme alloc] initWithSchemeFileURL:schemeUrl error:nil];
+  self.colourSchemeListController.disableCustomSchemes = YES;
+  self.colourSchemeListController.defaultScheme = scheme;
+  
   pi = self.representedObject;
   self.textFont = [pi.dictionary objectForKey:MOSPrintFont];
+  self.colorScheme = [pi.dictionary objectForKey:MOSPrintColorScheme];
   
   if ([view nextResponder] != self) {
     prevResp = [view nextResponder];
@@ -44,18 +57,32 @@ NSString * const MOSDefaultsPrintFont = @"PrintFont";
 }
 
 
-- (void)setTextFont:(NSFont *)textFont {
-  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  NSPrintInfo *pi;
-  
+- (void)setTextFont:(NSFont *)textFont
+{
   _textFont = textFont;
-  pi = self.representedObject;
+  
+  NSPrintInfo *pi = self.representedObject;
   [pi.dictionary setObject:_textFont forKey:MOSPrintFont];
+  
+  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   [ud setObjectByArchiving:textFont forKey:MOSDefaultsPrintFont];
 }
 
 
-- (void)changeFont:(id)sender {
+- (void)setColorScheme:(MGSColourScheme *)colorScheme
+{
+  _colorScheme = colorScheme;
+  
+  NSPrintInfo *pi = self.representedObject;
+  [pi.dictionary setObject:_colorScheme forKey:MOSPrintColorScheme];
+  
+  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+  [ud setObject:[colorScheme propertyListRepresentation] forKey:MOSDefaultsPrintColorScheme];
+}
+
+
+- (void)changeFont:(id)sender
+{
   NSFontManager *fm;
   
   fm = [NSFontManager sharedFontManager];
@@ -63,7 +90,8 @@ NSString * const MOSDefaultsPrintFont = @"PrintFont";
 }
 
 
-- (IBAction)changeTextFont:(id)sender {
+- (IBAction)changeTextFont:(id)sender
+{
   NSFontManager *fm;
   
   fm = [NSFontManager sharedFontManager];
@@ -74,7 +102,8 @@ NSString * const MOSDefaultsPrintFont = @"PrintFont";
 }
 
 
-- (NSArray *)localizedSummaryItems {
+- (NSArray *)localizedSummaryItems
+{
   MOSDescribeFontTransformer *dft;
   NSString *fontDesc;
   
@@ -87,8 +116,9 @@ NSString * const MOSDefaultsPrintFont = @"PrintFont";
 }
 
 
-- (NSSet *)keyPathsForValuesAffectingPreview {
-  return [NSSet setWithObject:@"textFont"];
+- (NSSet *)keyPathsForValuesAffectingPreview
+{
+  return [NSSet setWithObjects:@"textFont", @"colorScheme", nil];
 }
 
 
