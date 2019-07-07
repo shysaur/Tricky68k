@@ -7,15 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Fragaria/Fragaria.h>
 
 
 extern NSString * const MOSPrintFont;
 
 
-@interface MOSPrintingTextView : NSTextView {
-  NSInteger _tabWidth;
-}
+@interface MOSPrintingTextView : NSTextView
 
-- (void)setTabWidth:(NSInteger)tabWidth;
+@property (nonatomic) NSInteger tabWidth;
+@property (nonatomic) MGSSyntaxParser *highlightingParser;
 
 @end

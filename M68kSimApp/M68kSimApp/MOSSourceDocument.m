@@ -573,6 +573,9 @@ NSArray *MOSSyntaxErrorsFromEvents(NSArray *events) {
   [printView setString:[fragaria string]];
   [printView setTabWidth:[ud integerForKey:MGSFragariaPrefsTabWidth]];
   
+  MGSSyntaxParser *parser = [[MGSSyntaxController sharedInstance] parserForSyntaxDefinitionName:[platform syntaxDefinitionName]];
+  [printView setHighlightingParser:parser];
+  
   pa = [[MOSPrintAccessoryViewController alloc] init];
   [pa setRepresentedObject:printInfo];
   

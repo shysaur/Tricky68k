@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Daniele Cattaneo. 
 //
 
+#import <Fragaria/Fragaria.h>
 #import "MOSPrintingTextView.h"
 
 
@@ -15,14 +16,16 @@ NSString * const MOSPrintFont = @"MOSFont";
 @implementation MOSPrintingTextView
 
 
-- (instancetype)initWithFrame:(NSRect)frameRect {
+- (instancetype)initWithFrame:(NSRect)frameRect
+{
   self = [super initWithFrame:frameRect];
   [self setTabWidth:4];
   return self;
 }
 
 
-- (BOOL)knowsPageRange:(NSRangePointer)range {
+- (BOOL)knowsPageRange:(NSRangePointer)range
+{
   NSSize pageSize;
   NSUInteger len;
   NSRange wrange;
@@ -31,6 +34,14 @@ NSString * const MOSPrintFont = @"MOSFont";
   
   printInfo = [[NSPrintOperation currentOperation] printInfo];
   [self setFont:[printInfo.dictionary objectForKey:MOSPrintFont]];
+  
+  if (self.highlightingParser) {
+    NSURL *schemeUrl = [[NSBundle mainBundle] URLForResource:@"Printing" withExtension:@"plist" subdirectory:@"Colour Schemes"];
+    if (schemeUrl) {
+      MGSColourScheme *scheme = [[MGSColourScheme alloc] initWithSchemeFileURL:schemeUrl error:nil];
+      MGSHighlightAttributedString(self.textStorage, self.highlightingParser, scheme);
+    }
+  }
   
   pageSize = [printInfo paperSize];
   pageSize.width -= [printInfo rightMargin] + [printInfo leftMargin];
@@ -50,7 +61,8 @@ NSString * const MOSPrintFont = @"MOSFont";
 }
 
 
-- (void)setTabWidth:(NSInteger)tabWidth {
+- (void)setTabWidth:(NSInteger)tabWidth
+{
   CGFloat sizeOfTab;
   NSMutableParagraphStyle *style;
   NSMutableDictionary *ta;
@@ -81,7 +93,8 @@ NSString * const MOSPrintFont = @"MOSFont";
 }
 
 
-- (void)setFont:(NSFont *)font {
+- (void)setFont:(NSFont *)font
+{
   [super setFont:font];
   [self setTabWidth:_tabWidth];
 }
