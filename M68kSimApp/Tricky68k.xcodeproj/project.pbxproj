@@ -56,6 +56,8 @@
 		015094761A6DBF1A0024D28F /* Acknowledgments.md in Resources */ = {isa = PBXBuildFile; fileRef = 015094751A6DBF1A0024D28F /* Acknowledgments.md */; };
 		0153EEDE1C89FD0A00AA29C0 /* MOSSourceBreakpointDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0153EEDD1C89FD0A00AA29C0 /* MOSSourceBreakpointDelegate.m */; };
 		015D18BF1AB6427B00F2A41A /* MOSEditorPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015D18BD1AB6427B00F2A41A /* MOSEditorPrefViewController.m */; };
+		015D55D922D54B56000D84C4 /* AssemblySource.icns in Resources */ = {isa = PBXBuildFile; fileRef = 015D55D722D54B56000D84C4 /* AssemblySource.icns */; };
+		015D55DA22D54B56000D84C4 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 015D55D822D54B56000D84C4 /* AppIcon.icns */; };
 		0161BB741A5AF7560007548E /* MOSSimTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */; };
 		0161F7F21A6ADF0200848C0D /* MOSSimulatorSubviewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F7F11A6ADF0200848C0D /* MOSSimulatorSubviewDelegate.m */; };
 		0161F7F61A6AFD2600848C0D /* MOSSimulatorPrefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161F7F41A6AFD2600848C0D /* MOSSimulatorPrefViewController.m */; };
@@ -374,6 +376,8 @@
 		015708AC1A618E8B005D08DB /* NSURL+TemporaryFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+TemporaryFile.m"; sourceTree = "<group>"; };
 		015D18BC1AB6427B00F2A41A /* MOSEditorPrefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSEditorPrefViewController.h; sourceTree = "<group>"; };
 		015D18BD1AB6427B00F2A41A /* MOSEditorPrefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSEditorPrefViewController.m; sourceTree = "<group>"; };
+		015D55D722D54B56000D84C4 /* AssemblySource.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AssemblySource.icns; sourceTree = "<group>"; };
+		015D55D822D54B56000D84C4 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		0161BB721A5AF7560007548E /* MOSSimTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimTableViewDelegate.h; sourceTree = "<group>"; };
 		0161BB731A5AF7560007548E /* MOSSimTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSSimTableViewDelegate.m; sourceTree = "<group>"; };
 		0161F7F01A6ADF0200848C0D /* MOSSimulatorSubviewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSSimulatorSubviewDelegate.h; sourceTree = "<group>"; };
@@ -691,6 +695,8 @@
 			children = (
 				019937F422D1533B0087C9E5 /* Colour Schemes */,
 				016CD1451A51A10F00D64892 /* Images.xcassets */,
+				015D55D822D54B56000D84C4 /* AppIcon.icns */,
+				015D55D722D54B56000D84C4 /* AssemblySource.icns */,
 				013A6AFB1A718458007C053B /* Localizable.strings */,
 				01E93C801A6D4927004BE3C4 /* Credits.rtf */,
 				015094751A6DBF1A0024D28F /* Acknowledgments.md */,
@@ -1125,7 +1131,9 @@
 				011D72D71AD0382900368CBB /* MOSEditorPrefView.xib in Resources */,
 				01E974C71BE8021C002E91B5 /* MOSSimBrkptWindow.xib in Resources */,
 				012AEB1E1A7045E400906B25 /* dsa_pub.pem in Resources */,
+				015D55DA22D54B56000D84C4 /* AppIcon.icns in Resources */,
 				013A6AF91A718458007C053B /* Localizable.strings in Resources */,
+				015D55D922D54B56000D84C4 /* AssemblySource.icns in Resources */,
 				018132291E1EACED008A959D /* MOSAssemblerPrefView.xib in Resources */,
 				01E93C781A6D490F004BE3C4 /* MOSExecutableDocument.xib in Resources */,
 				01113DEB1C94F7E7007EC178 /* MOSPrintAccessoryView.xib in Resources */,
@@ -1514,7 +1522,6 @@
 		016CD1591A51A10F00D64892 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1531,7 +1538,6 @@
 		016CD15A1A51A10F00D64892 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
