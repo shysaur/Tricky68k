@@ -48,6 +48,7 @@ NSString * const MGSFragariaPrefsTextFont = @"FragariaTextFont";
 /* colour scheme plist */
 NSString * const MGSFragariaPrefsLightColourScheme = @"FragariaColourScheme_Light";
 NSString * const MGSFragariaPrefsDarkColourScheme = @"FragariaColourScheme_Dark";
+NSString * const MGSFragariaMigratedColorProperties = @"MigratedToFragariaColourScheme";
 
 
 /** OLD **/
@@ -139,12 +140,12 @@ static char kc_ContextStart[19];
 
 + (void)registerFragariaDefaults
 {
-  [self attemptDefaultsMigration];
-  
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  NSDictionary *defaults;
   
-  defaults = [self fragariaDefaultsDictionary];
+  [self attemptDefaultsMigration];
+  [ud setBool:YES forKey:MGSFragariaMigratedColorProperties];
+  
+  NSDictionary *defaults = [self fragariaDefaultsDictionary];
   [ud registerDefaults:defaults];
 }
 
@@ -153,6 +154,8 @@ static char kc_ContextStart[19];
 {
   NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
   if ([ud objectForKey:MGSFragariaPrefsLightColourScheme])
+    return;
+  if ([ud boolForKey:MGSFragariaMigratedColorProperties])
     return;
   
   const NSArray *legacyPropertyList = @[
@@ -230,6 +233,7 @@ static char kc_ContextStart[19];
   #undef HANDLE_KEY
   
   [ud setObject:newScheme.propertyListRepresentation forKey:MGSFragariaPrefsLightColourScheme];
+  [ud setBool:YES forKey:MGSFragariaMigratedColorProperties];
 }
 
 
