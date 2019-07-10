@@ -490,7 +490,7 @@
                                     <constraint firstItem="osF-6F-TkG" firstAttribute="leading" secondItem="V6B-Qm-BZO" secondAttribute="leading" constant="17" id="h7C-rw-OrB"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zL6-9L-Hx3" secondAttribute="trailing" constant="20" symbolic="YES" id="hNL-Xw-w2a"/>
                                     <constraint firstItem="osF-6F-TkG" firstAttribute="leading" secondItem="bIv-0G-qqW" secondAttribute="leading" id="ipw-Ml-Ebm"/>
-                                    <constraint firstItem="h12-YC-RcF" firstAttribute="firstBaseline" secondItem="bIv-0G-qqW" secondAttribute="firstBaseline" id="ngk-MI-hya"/>
+                                    <constraint firstItem="h12-YC-RcF" firstAttribute="baseline" secondItem="bIv-0G-qqW" secondAttribute="baseline" id="ngk-MI-hya"/>
                                     <constraint firstItem="h12-YC-RcF" firstAttribute="leading" secondItem="IAQ-ok-B8u" secondAttribute="leading" id="p0j-X5-0eC"/>
                                     <constraint firstItem="bab-6F-QUQ" firstAttribute="leading" secondItem="h12-YC-RcF" secondAttribute="leading" id="pjb-SQ-Msu"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h12-YC-RcF" secondAttribute="trailing" constant="20" symbolic="YES" id="u8w-wb-noF"/>
