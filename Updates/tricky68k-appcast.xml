@@ -7,6 +7,29 @@
         <language>en</language>
         
         <item>
+            <title>Release 1.4.0</title>
+            <description><![CDATA[ 
+              <ul>
+                <li><strong>New!</strong> Support for Dark Mode!</li>
+                <li><strong>New!</strong> Redesigned handling of color schemes!</li>
+                <li>Color schemes can now be used to highlight code printouts.</li>
+                <li>Minor improvements to the breakpoint editor.</li>
+                <li>Minor emulation accuracy improvements in the simulator.</li> 
+                <li>Other speed and stability improvements.</li>
+                <li>Dropped support for OS X 10.9 Mavericks.</li> 
+              </ul> ]]>
+            </description>
+            <pubDate>Thu, 11 July 2019 01:25:40 +0200</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_1.4.0/Tricky68k_140.tar.bz2" 
+              sparkle:version="2010" 
+              sparkle:shortVersionString="1.4.0"
+              length="3845765" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC0CFHqsIMqXmSxIRj+fsg4ZzrEyT7THAhUA4GY8E6r4skrSw/8iK2kb0BgJXVk=" />
+            <sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 1.3.0</title>
             <description><![CDATA[ 
               <ul>
