@@ -48,8 +48,8 @@ pthread_mutex_t cpu_timerMut;
 
 void printVersion(FILE *fp) {
   const char *ver =
-    "m68ksim, version 1.2.0, using Musashi version 3.4 (15a51d1)\n"
-    "(c) 2014-17 Daniele Cattaneo; (c) 1998-2016 Karl Stenerud.\n";
+    "m68ksim, version 1.2.1, using Musashi version 3.4 (c641acd)\n"
+    "(c) 2014-19 Daniele Cattaneo; (c) 1998-2019 Karl Stenerud.\n";
   fputs(ver, fp);
 }
 
