@@ -157,6 +157,17 @@ void cpu_run(void) {
     if (khz_capEnable)
       pthread_cond_wait(&cpu_timer, &cpu_timerMut);
     
+    /* ctrl-c breaks are ordinarily checked every time a new instruction starts
+     * executing
+     * however, some instructions (like STOP) suspend the M68k until an
+     * interrupt occurs, and since in this simulator nothing fires any interrupt,
+     * they cause ctrl-c breaks to be ignored.
+     * so we check if we should enter the debugger on every execution loop
+     * iteration as well */
+    if (debug_on && !debug_happened) {
+      debug_debugConsole(DEBUG_REASON_BREAK);
+    }
+    
     /* debug_on might be set when pthread_cond_wait was interrupted early
      * because SIGINT happened while in it.
      * debug_happened means m68k_execute took longer to execute because
