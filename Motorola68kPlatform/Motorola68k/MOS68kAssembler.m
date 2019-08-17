@@ -101,7 +101,7 @@
     [params addObject:@"--entry=0x2000"];
   else
     [params addObject:@"--entry=start"];
-  [params addObjectsFromArray:@[@"-o", [outputfile path], @"-T", [linkerfile path]]];
+  [params addObjectsFromArray:@[@"-o", [outputfile path], @"-T", [linkerfile path], @"-n"]];
   [params addObjectsFromArray:@[[unlinkedelf path]]];
   
   [task setArguments:params];

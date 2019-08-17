@@ -418,11 +418,16 @@ error_t *elf_load(const char *fn) {
   if ((tmpe = elf_loadSymbols(fn, fp, header)))
     goto cleanup;
   
-  ram_install(0, SEGM_GRANULARITY, &tmpe);
+  segment_desc *seg = mem_peekSegment(0);
+  if (!seg)
+    ram_install(0, SEGM_GRANULARITY, &tmpe);
+  else if (!mem_isRamSegment(seg))
+    tmpe = error_new(530, "Interrupt vector area allocated to an invalid device");
   if (tmpe)
     goto cleanup;
   
-  m68k_write_memory_32(4, header.e_entry);
+  if (m68k_read_memory_32(4) == 0)
+    m68k_write_memory_32(4, header.e_entry);
   
 cleanup:
   fclose(fp);

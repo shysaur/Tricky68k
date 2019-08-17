@@ -11,9 +11,11 @@
 
 #include <stdint.h>
 #include "error.h"
+#include "addrspace.h"
 
 
 void *ram_install(uint32_t base, uint32_t size, error_t **err);
+int mem_isRamSegment(segment_desc *seg);
 
 
 #endif
