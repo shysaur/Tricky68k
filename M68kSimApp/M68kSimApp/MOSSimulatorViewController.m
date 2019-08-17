@@ -130,6 +130,7 @@ static void *SimulatorState = &SimulatorState;
     if (outerr) *outerr = tmpe;
     [simProxy removeObserver:self forKeyPath:@"simulatorState"];
     simProxy = nil;
+    [self setSimulatorRunning:NO];
     return NO;
   }
   return YES;
