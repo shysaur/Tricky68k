@@ -50,6 +50,7 @@ enum {
   BOOL exceptionOccurred;
   BOOL stepping;
   dispatch_source_t clockUpdateTimer;
+  dispatch_source_t voidTimer;
   BOOL showingSource;
   
   IBOutlet MOSSimDumpDataSource *dumpDs;
@@ -60,6 +61,7 @@ enum {
   IBOutlet NSView *ttyView;
   IBOutlet NSSplitView *mainSplitView;
   IBOutlet NSView *teletypePanel;
+  IBOutlet NSView *runningOverlayView;
   __weak IBOutlet NSWindow *fallbackWindow;
   IBOutlet NSPopUpButton *sourcePopup;
   

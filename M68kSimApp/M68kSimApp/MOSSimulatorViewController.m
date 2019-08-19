@@ -15,6 +15,7 @@
 #import "MOSTeletypeViewDelegate.h"
 #import "MOSSimBrkptWindowController.h"
 #import "MOSMutableBreakpoint.h"
+#import "MOSColoredView.h"
 
 
 NSString * const MOSSimulatorViewErrorDomain = @"MOSSimulatorViewErrorDomain";
@@ -210,7 +211,24 @@ static void *SimulatorState = &SimulatorState;
 #pragma mark - Simulator State Changes
 
 
-- (void)broadcastSimulatorStateChangeToSubviewControllers {
+- (void)broadcastSimulatorStateChangeToSubviewControllers
+{
+  if (!simRunning) {
+    MOSColoredView *parent = [[mainSplitView arrangedSubviews] objectAtIndex:0];
+    [runningOverlayView removeFromSuperview];
+    [parent setDisableHitTesting:NO];
+  } else {
+    MOSColoredView *parent = [[mainSplitView arrangedSubviews] objectAtIndex:0];
+    [parent addSubview:runningOverlayView positioned:NSWindowAbove relativeTo:nil];
+    [parent setDisableHitTesting:YES];
+    [parent addConstraints:@[
+      [NSLayoutConstraint constraintWithItem:runningOverlayView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:parent attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0],
+      [NSLayoutConstraint constraintWithItem:runningOverlayView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:parent attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0],
+      [NSLayoutConstraint constraintWithItem:runningOverlayView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:parent attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0],
+      [NSLayoutConstraint constraintWithItem:runningOverlayView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:parent attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0],
+    ]];
+  }
+  
   [dumpDs simulatorStateHasChanged];
   [disasmDs simulatorStateHasChanged];
   [regdumpDs simulatorStateHasChanged];
@@ -281,9 +299,29 @@ static void *SimulatorState = &SimulatorState;
 }
 
 
-- (void)setSimulatorRunning:(BOOL)val {
+- (void)setSimulatorRunning:(BOOL)val
+{
+  if (!voidTimer) {
+    __weak MOSSimulatorViewController *weakself = self;
+      voidTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_timer(voidTimer, DISPATCH_TIME_FOREVER, DISPATCH_TIME_FOREVER, 0);
+    dispatch_source_set_event_handler(voidTimer, ^{
+      MOSSimulatorViewController *strongself = weakself;
+      [strongself broadcastSimulatorStateChangeToSubviewControllers];
+    });
+    dispatch_resume(voidTimer);
+  }
+  
   simRunning = val;
-  [self broadcastSimulatorStateChangeToSubviewControllers];
+  
+  if (!simRunning) {
+    dispatch_source_set_timer(voidTimer, DISPATCH_TIME_FOREVER, 0, 0);
+    [self broadcastSimulatorStateChangeToSubviewControllers];
+  } else {
+    dispatch_time_t somet = dispatch_time(DISPATCH_TIME_NOW, 50000000);
+    dispatch_source_set_timer(voidTimer, somet, DISPATCH_TIME_FOREVER, 5000000);
+  }
+
   [[[self window] toolbar] validateVisibleItems];
 }
 
@@ -564,6 +602,7 @@ static void *SimulatorState = &SimulatorState;
   } @finally {}
   [nc removeObserver:self];
   clockUpdateTimer = nil;
+  voidTimer = nil;
   [simProxy kill];
 }
 

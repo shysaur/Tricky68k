@@ -37,4 +37,12 @@
 }
 
 
+- (NSView *)hitTest:(NSPoint)point
+{
+  if (self.disableHitTesting)
+    return self;
+  return [super hitTest:point];
+}
+
+
 @end

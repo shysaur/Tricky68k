@@ -16,4 +16,6 @@
 - (void)setBackgroundColor:(NSColor*)color;
 - (NSColor*)backgroundColor;
 
+@property (nonatomic) BOOL disableHitTesting;
+
 @end

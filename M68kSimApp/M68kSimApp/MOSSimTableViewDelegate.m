@@ -17,24 +17,8 @@ static void *ReloadTableView = &ReloadTableView;
 
 
 - (instancetype)init {
-  __weak MOSSimTableViewDelegate *weakself;
-  
-  weakself = self = [super init];
-  
-  voidTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-  dispatch_source_set_timer(voidTimer, DISPATCH_TIME_FOREVER, DISPATCH_TIME_FOREVER, 0);
-  dispatch_source_set_event_handler(voidTimer, ^{
-    MOSSimTableViewDelegate *strongself = weakself;
-    [strongself->tableView reloadData];
-  });
-  dispatch_resume(voidTimer);
-  
+  self = [super init];
   return self;
-}
-
-
-- (void)dealloc {
-  voidTimer = nil;
 }
 
 
@@ -74,15 +58,7 @@ static void *ReloadTableView = &ReloadTableView;
 
 
 - (void)simulatorStateHasChanged {
-  dispatch_time_t somet;
-  
-  if (![simProxy isSimulatorRunning]) {
-    dispatch_source_set_timer(voidTimer, DISPATCH_TIME_FOREVER, 0, 0);
-    [self dataHasChanged];
-  } else {
-    somet = dispatch_time(DISPATCH_TIME_NOW, 50000000);
-    dispatch_source_set_timer(voidTimer, somet, DISPATCH_TIME_FOREVER, 5000000);
-  }
+  [self dataHasChanged];
 }
 
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,6 +14,7 @@
                 <outlet property="dumpDs" destination="OYl-Qf-zsd" id="PX9-6c-NnC"/>
                 <outlet property="mainSplitView" destination="hNR-P3-CgA" id="AIR-yp-3Fn"/>
                 <outlet property="regdumpDs" destination="d8D-mR-4Tk" id="57R-ef-ij9"/>
+                <outlet property="runningOverlayView" destination="HVJ-pD-bfl" id="Z5V-FM-zou"/>
                 <outlet property="sourcePopup" destination="M1U-ra-Hz5" id="Y6p-c4-Qjd"/>
                 <outlet property="stackDs" destination="JVG-YD-Mo8" id="Wx0-nt-4gS"/>
                 <outlet property="teletypePanel" destination="5Fa-zy-YTz" id="ZHP-7R-g18"/>
@@ -789,12 +790,48 @@
                 <outlet property="textView" destination="AOZ-Q3-4wE" id="uW8-M6-w8e"/>
             </connections>
         </customObject>
+        <box boxType="custom" borderType="none" borderWidth="0.0" title="Running" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="HVJ-pD-bfl">
+            <rect key="frame" x="0.0" y="0.0" width="468" height="299"/>
+            <view key="contentView" id="gWT-wz-vIl">
+                <rect key="frame" x="0.0" y="0.0" width="468" height="299"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rX2-4t-7c3">
+                        <rect key="frame" x="140" y="139" width="188" height="21"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="The simulator is running" id="6fz-jz-s8g">
+                            <font key="font" metaFont="system" size="17"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9cu-bh-iEI">
+                        <rect key="frame" x="66" y="114" width="336" height="17"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Pause the simulation to view the current machine state" id="1Oy-UW-PUG">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="9cu-bh-iEI" firstAttribute="centerX" secondItem="gWT-wz-vIl" secondAttribute="centerX" id="73i-l1-Hy3"/>
+                    <constraint firstItem="9cu-bh-iEI" firstAttribute="top" secondItem="rX2-4t-7c3" secondAttribute="bottom" constant="8" id="D0W-Xd-ypi"/>
+                    <constraint firstItem="rX2-4t-7c3" firstAttribute="centerY" secondItem="gWT-wz-vIl" secondAttribute="centerY" id="kNi-PB-6Ch"/>
+                    <constraint firstItem="rX2-4t-7c3" firstAttribute="centerX" secondItem="gWT-wz-vIl" secondAttribute="centerX" id="rMF-5U-Eiy"/>
+                </constraints>
+            </view>
+            <color key="fillColor" name="MOSSimulatorRunningOverlayColor"/>
+            <point key="canvasLocation" x="498" y="690.5"/>
+        </box>
     </objects>
     <resources>
         <image name="MOSBreakpointMarker" width="15" height="14"/>
         <image name="MOSPCMarker" width="8" height="14"/>
         <namedColor name="MOSCurrentInstructionBackgroundColor">
             <color red="0.80699998140335083" green="0.94999998807907104" blue="0.67400002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MOSSimulatorRunningOverlayColor">
+            <color red="0.92500001192092896" green="0.92500001192092896" blue="0.92500001192092896" alpha="0.64999997615814209" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
