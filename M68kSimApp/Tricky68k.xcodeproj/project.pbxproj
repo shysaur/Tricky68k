@@ -931,7 +931,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MOS;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Daniele Cattaneo";
 				TargetAttributes = {
 					014F9C991E1AC70900E74EBB = {
