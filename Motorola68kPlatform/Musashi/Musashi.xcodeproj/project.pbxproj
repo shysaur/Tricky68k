@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,15 +22,15 @@
 			compilerSpec = com.apple.compilers.proxy.script;
 			filePatterns = "*_in.c";
 			fileType = pattern.proxy;
+			inputFiles = (
+				"$(BUILT_PRODUCTS_DIR)/m68kmake",
+			);
 			isEditable = 1;
 			outputFiles = (
-				"$(DERIVED_FILE_DIR)/m68kopnz.c",
-				"$(DERIVED_FILE_DIR)/m68kopdm.c",
-				"$(DERIVED_FILE_DIR)/m68kopac.c",
 				"$(DERIVED_FILE_DIR)/m68kops.c",
 				"$(DERIVED_FILE_DIR)/m68kops.h",
 			);
-			script = "while [[ ! ( -e \"$BUILT_PRODUCTS_DIR/m68kmake\" ) ]]; do\n    sleep 1;\ndone\n\"$BUILT_PRODUCTS_DIR/m68kmake\" \"$DERIVED_FILE_DIR\" \"$INPUT_FILE_PATH\"\n";
+			script = "\"$BUILT_PRODUCTS_DIR/m68kmake\" \"$DERIVED_FILE_DIR\" \"$INPUT_FILE_PATH\"\n";
 		};
 /* End PBXBuildRule section */
 
