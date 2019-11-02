@@ -214,11 +214,11 @@ static void *SimulatorState = &SimulatorState;
 - (void)broadcastSimulatorStateChangeToSubviewControllers
 {
   if (!simRunning) {
-    MOSColoredView *parent = [[mainSplitView arrangedSubviews] objectAtIndex:0];
+    MOSColoredView *parent = [[mainSplitView subviews] objectAtIndex:0];
     [runningOverlayView removeFromSuperview];
     [parent setDisableHitTesting:NO];
   } else {
-    MOSColoredView *parent = [[mainSplitView arrangedSubviews] objectAtIndex:0];
+    MOSColoredView *parent = [[mainSplitView subviews] objectAtIndex:0];
     [parent addSubview:runningOverlayView positioned:NSWindowAbove relativeTo:nil];
     [parent setDisableHitTesting:YES];
     [parent addConstraints:@[
