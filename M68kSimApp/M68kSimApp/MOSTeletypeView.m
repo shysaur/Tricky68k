@@ -572,6 +572,20 @@ static NSRange MOSMakeIndexRange(NSUInteger a, NSUInteger b) {
 }
 
 
+- (void)resignKeyWindow
+{
+  isActive = NO;
+  [self setNeedsDisplayOfLastLine];
+}
+
+
+- (void)becomeKeyWindow
+{
+  isActive = YES;
+  [self setNeedsDisplayOfLastLine];
+}
+
+
 - (BOOL)becomeFirstResponder {
   isActive = YES;
   [self setNeedsDisplayOfLastLine];
