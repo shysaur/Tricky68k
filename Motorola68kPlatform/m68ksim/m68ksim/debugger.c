@@ -28,12 +28,11 @@ uint32_t out_sp;
 int out_on = 0;
 
 
-void cpu_instrCallback(void) {
-  uint32_t pc, sp;
+void cpu_instrCallback(unsigned int pc) {
+  uint32_t sp;
   uint16_t opcode;
   int reason = DEBUG_REASON_BREAK;
   
-  pc = m68k_get_reg(NULL, M68K_REG_PC);
   if (bp_find(pc)) {
     debug_on = 1;
     reason = DEBUG_REASON_BREAKPOINT;

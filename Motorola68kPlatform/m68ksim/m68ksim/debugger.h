@@ -16,7 +16,7 @@
 #define DEBUG_REASON_STEP        ( 3)
 #define DEBUG_REASON_STEPOUT     ( 4)
 
-void cpu_instrCallback(void);
+void cpu_instrCallback(unsigned int pc);
 void debug_debugConsole(int reason);
 
 
