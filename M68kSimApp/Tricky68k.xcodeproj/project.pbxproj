@@ -118,6 +118,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0117639923B10C9600F592A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA4311EA229D651300A5503D;
+			remoteInfo = bsdiff;
+		};
+		0117639B23B10C9600F592A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0148C22F1F7ABDBF006AB682 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA4311A0229D5FBC00A5503D;
+			remoteInfo = ed25519;
+		};
 		013D074B2273B0AC0017A4AA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0148C22C1F7ABDBF006AB682 /* Fragaria.xcodeproj */;
@@ -515,6 +529,8 @@
 				0148C2991F7ABE56006AB682 /* generate_appcast */,
 				013D07522273B0AC0017A4AA /* generate_keys */,
 				013D07542273B0AC0017A4AA /* sign_update */,
+				0117639A23B10C9600F592A5 /* libbsdiff.a */,
+				0117639C23B10C9600F592A5 /* libed25519.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -931,7 +947,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MOS;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Daniele Cattaneo";
 				TargetAttributes = {
 					014F9C991E1AC70900E74EBB = {
@@ -973,6 +989,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		0117639A23B10C9600F592A5 /* libbsdiff.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libbsdiff.a;
+			remoteRef = 0117639923B10C9600F592A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0117639C23B10C9600F592A5 /* libed25519.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libed25519.a;
+			remoteRef = 0117639B23B10C9600F592A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		013D074C2273B0AC0017A4AA /* FragariaDefaultsCoordinator.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
