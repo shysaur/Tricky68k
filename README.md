@@ -1,13 +1,13 @@
 # Tricky68k
 ### [Download Here!](https://github.com/shysaur/Tricky68k/releases)
 
-Tricky68k is a Motorola 68000 simulator for Mac OS X, based on Volker  
+Tricky68k is a Motorola 68000 simulator for macOS, based on Volker  
 Barthelmann's [VASM](http://sun.hasenbraten.de/vasm/) assembler, the 
 [GNU binutils](http://www.gnu.org/software/binutils/) package, Karl Stenerud's 
 [Musashi](https://github.com/kstenerud/Musashi) emulator, and the
 [Fragaria](https://github.com/shysaur/Fragaria) editor.
 
-Tricky68k currently runs on Mavericks and higher.
+Tricky68k was tested on OS X Yosemite and later, up to macOS Catalina.
 
 ### About the Teletype
 The simulator implements a single I/O device (the teletype), mapped from
