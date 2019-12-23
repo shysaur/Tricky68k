@@ -1559,6 +1559,7 @@
 				);
 				INFOPLIST_FILE = M68kSimApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danielecattaneo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Tricky68k;
 				SDKROOT = macosx;
@@ -1576,6 +1577,7 @@
 				);
 				INFOPLIST_FILE = M68kSimApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danielecattaneo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Tricky68k;
 				SDKROOT = macosx;
