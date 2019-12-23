@@ -7,6 +7,26 @@
         <language>en</language>
         
         <item>
+            <title>Release 1.4.1</title>
+            <description><![CDATA[ 
+              <ul>
+                <li>Minor UX fixes</li>
+                <li>Implemented support for entry points at addresses lower than $2000</li>
+                <li>Fixed lock-ups when executing STOP instructions</li>
+                <li>Other minor bug fixes</li>
+              </ul> ]]>
+            </description>
+            <pubDate>Mon, 23 December 2019 19:21:02 +0100</pubDate>
+            <enclosure url="https://github.com/shysaur/Tricky68k/releases/download/release_1.4.1/Tricky68k_141.tar.bz2" 
+              sparkle:version="2028" 
+              sparkle:shortVersionString="1.4.1"
+              length="3933370" 
+              type="application/octet-stream" 
+              sparkle:dsaSignature="MC0CFGrsSgim/twpg0vHtmcpkAAnP6RhAhUA5Z2duAg3SF1YIPNuC29rLhRFEYw=" />
+            <sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
+        </item>
+        
+        <item>
             <title>Release 1.4.0</title>
             <description><![CDATA[ 
               <ul>
