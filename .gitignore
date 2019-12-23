@@ -225,3 +225,4 @@ invalidaccess
 test.lst
 infinitework.s
 crash-after-some-time.s
+test_noalign

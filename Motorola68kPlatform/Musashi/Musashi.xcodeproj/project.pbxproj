@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011763A623B12B7400F592A5 /* m68kmmu.h in Headers */ = {isa = PBXBuildFile; fileRef = 011763A523B12B7300F592A5 /* m68kmmu.h */; };
+		011763A923B12BBB00F592A5 /* softfloat.c in Sources */ = {isa = PBXBuildFile; fileRef = 0117639F23B12B3D00F592A5 /* softfloat.c */; };
+		011763AA23B12BE700F592A5 /* mamesf.h in Headers */ = {isa = PBXBuildFile; fileRef = 0117639E23B12B3D00F592A5 /* mamesf.h */; };
+		011763AB23B12BED00F592A5 /* softfloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 011763A323B12B3D00F592A5 /* softfloat.h */; };
+		011763AC23B12BF500F592A5 /* milieu.h in Headers */ = {isa = PBXBuildFile; fileRef = 011763A123B12B3D00F592A5 /* milieu.h */; };
 		01705D4E1A4F3BDE00EE05B2 /* m68kmake.c in Sources */ = {isa = PBXBuildFile; fileRef = 01705D4D1A4F3BDE00EE05B2 /* m68kmake.c */; };
 		01705D561A4F3BEF00EE05B2 /* m68k.h in Headers */ = {isa = PBXBuildFile; fileRef = 01705D501A4F3BEF00EE05B2 /* m68k.h */; };
 		01705D581A4F3BEF00EE05B2 /* m68kcpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 01705D521A4F3BEF00EE05B2 /* m68kcpu.c */; };
@@ -57,6 +62,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0117639E23B12B3D00F592A5 /* mamesf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mamesf.h; sourceTree = "<group>"; };
+		0117639F23B12B3D00F592A5 /* softfloat.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = softfloat.c; sourceTree = "<group>"; };
+		011763A023B12B3D00F592A5 /* softfloat-macros */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = "softfloat-macros"; sourceTree = "<group>"; };
+		011763A123B12B3D00F592A5 /* milieu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = milieu.h; sourceTree = "<group>"; };
+		011763A323B12B3D00F592A5 /* softfloat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = softfloat.h; sourceTree = "<group>"; };
+		011763A423B12B3D00F592A5 /* softfloat-specialize */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = "softfloat-specialize"; sourceTree = "<group>"; };
+		011763A523B12B7300F592A5 /* m68kmmu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = m68kmmu.h; path = musashi/m68kmmu.h; sourceTree = "<group>"; };
+		011763A723B12B8600F592A5 /* m68kfpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m68kfpu.c; path = musashi/m68kfpu.c; sourceTree = "<group>"; };
 		01705D391A4F2B0D00EE05B2 /* libMusashi.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMusashi.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		01705D461A4F3BB700EE05B2 /* m68kmake */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = m68kmake; sourceTree = BUILT_PRODUCTS_DIR; };
 		01705D4D1A4F3BDE00EE05B2 /* m68kmake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = m68kmake.c; path = musashi/m68kmake.c; sourceTree = "<group>"; };
@@ -86,6 +99,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0117639D23B12B3D00F592A5 /* softfloat */ = {
+			isa = PBXGroup;
+			children = (
+				0117639E23B12B3D00F592A5 /* mamesf.h */,
+				0117639F23B12B3D00F592A5 /* softfloat.c */,
+				011763A023B12B3D00F592A5 /* softfloat-macros */,
+				011763A123B12B3D00F592A5 /* milieu.h */,
+				011763A323B12B3D00F592A5 /* softfloat.h */,
+				011763A423B12B3D00F592A5 /* softfloat-specialize */,
+			);
+			name = softfloat;
+			path = musashi/softfloat;
+			sourceTree = "<group>";
+		};
 		01705D301A4F2B0D00EE05B2 = {
 			isa = PBXGroup;
 			children = (
@@ -111,10 +138,13 @@
 		01705D401A4F3B0600EE05B2 /* musashi */ = {
 			isa = PBXGroup;
 			children = (
+				0117639D23B12B3D00F592A5 /* softfloat */,
 				01705D4F1A4F3BEF00EE05B2 /* m68k_in.c */,
 				01705D501A4F3BEF00EE05B2 /* m68k.h */,
 				01705D521A4F3BEF00EE05B2 /* m68kcpu.c */,
+				011763A723B12B8600F592A5 /* m68kfpu.c */,
 				01705D531A4F3BEF00EE05B2 /* m68kcpu.h */,
+				011763A523B12B7300F592A5 /* m68kmmu.h */,
 				01705D541A4F3BEF00EE05B2 /* m68kdasm.c */,
 			);
 			name = musashi;
@@ -135,7 +165,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				011763A623B12B7400F592A5 /* m68kmmu.h in Headers */,
+				011763AA23B12BE700F592A5 /* mamesf.h in Headers */,
+				011763AC23B12BF500F592A5 /* milieu.h in Headers */,
 				01B1B8C41A5041370016F319 /* m68kconf.h in Headers */,
+				011763AB23B12BED00F592A5 /* softfloat.h in Headers */,
 				01705D591A4F3BEF00EE05B2 /* m68kcpu.h in Headers */,
 				01705D561A4F3BEF00EE05B2 /* m68k.h in Headers */,
 			);
@@ -224,6 +258,7 @@
 				01705D581A4F3BEF00EE05B2 /* m68kcpu.c in Sources */,
 				01705D5E1A4F3F4100EE05B2 /* m68k_in.c in Sources */,
 				01705D5A1A4F3BEF00EE05B2 /* m68kdasm.c in Sources */,
+				011763A923B12BBB00F592A5 /* softfloat.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
