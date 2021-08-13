@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MOSPreferencesWindowController">
@@ -13,30 +14,36 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" toolbarStyle="preference" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="480" width="395" height="196"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="395" height="196"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             </view>
             <toolbar key="toolbar" implicitIdentifier="45631712-654C-422E-89E9-DB985127807C" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="IWy-Ps-0UK">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="nPc-lm-kzE"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="kAX-I0-4PP"/>
                     <toolbarItem implicitItemIdentifier="FB94D5A2-9946-43B8-8E53-894C303DBD9A" explicitItemIdentifier="2" label="Editing" paletteLabel="Editing" tag="-1" image="MOSEditorPrefs" selectable="YES" id="2xn-yq-TYF">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="UXb-3t-mmb"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="8C4823D5-8A99-435B-BEC4-4ADC63C87227" explicitItemIdentifier="1" label="Simulator" paletteLabel="Simulator" tag="-1" image="MOSSimulatorPrefs" selectable="YES" id="bog-L9-HV1">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="YKU-Wj-lJV"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="8EF43F9D-8372-428D-9B86-34FD59005A30" explicitItemIdentifier="0" label="Assembler" paletteLabel="Assembler" tag="-1" image="MOSAssemblerPrefs" selectable="YES" id="dkF-4T-CZO">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
                         <connections>
                             <action selector="clickedPreferenceTab:" target="-2" id="6FP-ae-KQB"/>
                         </connections>
